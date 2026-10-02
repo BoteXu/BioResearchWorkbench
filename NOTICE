@@ -1,0 +1,5 @@
+Biomni direct-tool bridge additions.
+Uses the official Biomni project: https://github.com/snap-stanford/Biomni
+Upstream revision: 400c1f366b96a35ca253e13c9b06c5076af41d65
+Upstream source is fetched separately during installation. Its license and notices must be retained.
+Bridge additions are distributed under Apache-2.0; see LICENSE.

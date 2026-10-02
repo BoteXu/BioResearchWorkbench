@@ -1,0 +1,27 @@
+# Runtime data, machine configuration and credentials
+.venv*/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.sqlite*
+*.log
+*.receipt.json
+AGENTS.generated.md
+install_receipt.json
+.upstream/
+bridge/results/
+bridge/jobs/
+bridge/outputs/
+bridge/sources/
+bridge/source_snapshots/
+bridge/evidence/
+bridge/data/
+bridge/downloads/
+bridge/articles/
+bridge/supplements/
+*.pem
+*.key
+*.pfx
+*.p12
