@@ -2,129 +2,134 @@
   "bridge_version": "2.1",
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
       "path": ".gitignore",
-      "bytes": 416,
-      "sha256": "c1ee551a5466ab11c3518ee674ae499eef4fba0482c7615654290ba94f0f8924"
+      "bytes": 389,
+      "sha256": "2dfb2f5fa239832fd95b49fe12169211614174b78670be27cf45a8be24cbf5ca"
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 1738,
-      "sha256": "99832dc25cca3deffc606f3e114ad0327d3bdcc16885665d21687cdd70bc2c45"
+      "bytes": 1727,
+      "sha256": "61a885d91cf88117434dc0a44b66f603ed1577aa5366e3ab998e220535cf87b7"
     },
     {
       "path": "bootstrap_upstream.py",
-      "bytes": 1810,
-      "sha256": "f675f163645cac9e2d20391f03d152e4cb67161c074e23965131c8ec5550a3a7"
+      "bytes": 1766,
+      "sha256": "a18553df3079e9960dbff5b3c21f56bea7c5d78a54ea20ffbb89c3a2e40e07d2"
     },
     {
       "path": "bridge/atlas_ext.py",
-      "bytes": 4417,
-      "sha256": "62767b70ba853fbcf5e20e5b3966affd63acbe33a56049b04258483888796177"
+      "bytes": 4363,
+      "sha256": "7b20c011b99c19960d1937ec29c92d41a2f4694170920df65fb4f8c06a1ad147"
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 21315,
-      "sha256": "bbf42c9ea0d2c75ea4b1b573dc5d19877444bad2bd36fe1144f57ed90d7fd509"
+      "bytes": 20886,
+      "sha256": "6c49d23a1511813c5c11b004829dcef1f50e6859164ccc3b428b78e7dc6f40a5"
     },
     {
       "path": "bridge/database_ext.py",
-      "bytes": 6974,
-      "sha256": "cb1cffa30b3cd28222b4bb2d78829ff9fab64df58f0a69e1de2c819e7b2550ac"
+      "bytes": 6858,
+      "sha256": "a4b07feaf9f011ae365c72bd7e7ed4f6e22355bd873dab0ac34fb3e29492dc10"
     },
     {
       "path": "bridge/evidence.py",
-      "bytes": 5948,
-      "sha256": "6dac393146ccdcbd875effa7bd70d3765a3b90113195893722e9e84088fd0d44"
+      "bytes": 5833,
+      "sha256": "055894161423c4921c8921401e42aba1c6d69e18a07213b504f02107185a36ed"
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 1985,
-      "sha256": "01f696630944b71a821b8c54704e409a500aeebad59163a72d79bdd9e4a1477e"
+      "bytes": 1955,
+      "sha256": "25e1c55c444883440008d7e2c2184f61d26656b12ebb1516cbb5b04555ae2682"
     },
     {
       "path": "bridge/http_client.py",
-      "bytes": 3984,
-      "sha256": "944a820a1467352d1bb49fa42e4cfc4c302513b1315a439a4b4a78b0c5e9f784"
+      "bytes": 3896,
+      "sha256": "5bc734e8a5bb9c4964e74e1a958592211bad475c22a1dd369d6d0c0a697c1f4f"
     },
     {
       "path": "bridge/job_manager.py",
-      "bytes": 5983,
-      "sha256": "4fe677f548160f7bdf4741139e6cedaaeb20a599ca996e90ded6e218ebca6213"
+      "bytes": 5857,
+      "sha256": "7d9bbcf6dc64766e0c1a2091a97388fc0ed5d43e076156e003ed47c148c3459d"
     },
     {
       "path": "bridge/job_worker.py",
-      "bytes": 2848,
-      "sha256": "597b93c1592bc967eab32f3da8a066358952cbf6672a62fa561f58076c3d34d6"
+      "bytes": 2789,
+      "sha256": "77a21812529eff92ca27df8bfb5855245227604ffb099d405dec6ba9a71d91ec"
     },
     {
       "path": "bridge/lazy_genomics.py",
-      "bytes": 2575,
-      "sha256": "af53e99f8b3f11ce76747decbf5c5d2de610f90b88bbdffd27221b097f4f41f8"
+      "bytes": 2515,
+      "sha256": "6d27cb4ebc5a400ac7572ff8c86d76bd5a84a1df5e9c1d1bc1239986989b3a4e"
     },
     {
       "path": "bridge/literature_ext.py",
-      "bytes": 11776,
-      "sha256": "2e3ed9033acd55d68e0840472cade77bceb50b67c2539432a4d61e686fbb990e"
+      "bytes": 11575,
+      "sha256": "ff281c4d9ae9b0f813a18ccf40f7cde5f9a6aa466748712f515c1effd89ece93"
     },
     {
       "path": "bridge/mcp_server.py",
-      "bytes": 3549,
-      "sha256": "0acb930c5e4582bd56bc0612a5c5ffecb429a271f2a46cddcd46d3bb8d9f0b3d"
+      "bytes": 3468,
+      "sha256": "bc90b1695107decdbb5eb7db5e2049f4aba79a3783b4948b581b4076d1806cf5"
     },
     {
       "path": "bridge/omics_ext.py",
-      "bytes": 18327,
-      "sha256": "a72ea5949eda4b40e6f558d6863953f150f8db1a543243e1d4290583baa7148a"
+      "bytes": 18051,
+      "sha256": "51d7bcd81ab87cb766cd8ee350e06e5337ba79dc23666543813ef890db9ae7cf"
     },
     {
       "path": "bridge/remote_runner.py",
-      "bytes": 3217,
-      "sha256": "de2fc3910f8f4a97aa3d377dbe930e5e23502edd6f9188aba77821f57f31b749"
+      "bytes": 3144,
+      "sha256": "efa2b3253b4f101d3e8a0134c8c972ccb01718e6215f9e33a456356948a3153f"
     },
     {
       "path": "bridge/server_probe.py",
-      "bytes": 1894,
-      "sha256": "948d0f31c2f98b7cd86edf32316dbc961855fef02a45b2b2a729f7e732a819d0"
+      "bytes": 1867,
+      "sha256": "ca1f19df90a51e62c777e9e215e8c8a0dcbc18422dac0160a0a6c2aa08a620b2"
     },
     {
       "path": "bridge/smoke_mcp.py",
-      "bytes": 3858,
-      "sha256": "501d08cd405e2039773162d75e40983c1fbe6a2cf71cbe727c619796c6a54a66"
+      "bytes": 3784,
+      "sha256": "1248e057c5e2d9f9d8ae2c1cfe6bd265fb70bf2fab4ff144c4c11aab94c21c0d"
     },
     {
       "path": "bridge/workflow_ext.py",
-      "bytes": 16223,
-      "sha256": "75d88e8ae57e6a23fcff6c948ec6060c6d39b1652fb1c8d5fa3b51932e062b7e"
+      "bytes": 16001,
+      "sha256": "95b6dca9f3ee353b7cd2ff1935f564016e939a45b5039845b1cfc34505eefe98"
     },
     {
       "path": "Install.ps1",
-      "bytes": 3581,
-      "sha256": "c05bd260022acbf2dda010f37b77145d1d6ea661de5147655a31531a316925d6"
+      "bytes": 3525,
+      "sha256": "238a2bbf19807da503aa7062ab24d0b12daf60f0090c671303cc0b9340a61452"
     },
     {
       "path": "LICENSE",
-      "bytes": 11558,
-      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
     },
     {
       "path": "NOTICE",
-      "bytes": 341,
-      "sha256": "48a0da0cd9675addbaa0a7bc04eac3ef4b3597fa0e0aa2f434acc11c2cccdfa8"
+      "bytes": 336,
+      "sha256": "7cccc61d8605af72aa490074af25e6afe65cc38ec5cfb439b7d30aa431657701"
     },
     {
       "path": "README.md",
-      "bytes": 4411,
-      "sha256": "8b11775cea23a0cf202da9b9a090266db484077d18a72f1b6132b6e65dbe6a99"
+      "bytes": 4355,
+      "sha256": "be19a1cf086cef1be67c38994b625e64eacaa17cb19d47611f544424c23acdd2"
     },
     {
       "path": "requirements.windows-py311.lock.txt",
-      "bytes": 2326,
-      "sha256": "b13c6cdcd531a9a266d56e0037682b135fc739ac2747260a96ffea86722be131"
+      "bytes": 2204,
+      "sha256": "f8e96623e02e97558006e8632f6a15d90e6d40ea9c3f795be01e690776a453c6"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",
-      "bytes": 836,
-      "sha256": "d3a5e7703eabbab6507c4907fba34e9d24ce464c8b3f529f2d6db0dc8102ddea"
+      "bytes": 827,
+      "sha256": "52ff299705dcfd8580e2c96ad77920ed39dc01311678b89886f39a37d0135bb7"
     }
   ]
 }
