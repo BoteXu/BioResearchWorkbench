@@ -1,5 +1,5 @@
 {
-  "bridge_version": "2.2",
+  "bridge_version": "2.3",
   "files": [
     {
       "path": ".gitattributes",
@@ -8,8 +8,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 1370,
-      "sha256": "975ce71ac6e95ddff8579858d9d79e0075b83f20ba70b3f028a0f6378feebb08"
+      "bytes": 1663,
+      "sha256": "039fdf6aaae0e47ca436bacd05e4ba49d5097667613457e25ceadf045dbd206e"
     },
     {
       "path": ".gitignore",
@@ -18,8 +18,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 1966,
-      "sha256": "c4e4adbe4abcd21a80f8515fa97947df2fca72ab5aaf58cd3f1073d89a50cbde"
+      "bytes": 2546,
+      "sha256": "1ede2e4631f489fbdba48c799637751b19a3e123845af4b77292e3119c9dd452"
     },
     {
       "path": "Install.ps1",
@@ -43,8 +43,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6810,
-      "sha256": "e5bf72edd142523ec47846204781abaf8d0d6aa6c37755eb3169736316a8d885"
+      "bytes": 9458,
+      "sha256": "63686b4f7d948ad9ebbaf7b532f267bc4a2926955a1b94d025950851ef76df97"
     },
     {
       "path": "audit_release.py",
@@ -64,7 +64,7 @@
     {
       "path": "bridge/bridge.py",
       "bytes": 22350,
-      "sha256": "0806c0e1f5843901b08915a6654127945a7a73af65289ad38be17671d472fd1b"
+      "sha256": "2be737d98d07c79e67bc1bd51f3880f51eff3cc2c3cef461116976ccd579be7f"
     },
     {
       "path": "bridge/database_ext.py",
@@ -78,8 +78,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 2375,
-      "sha256": "607bb74fe72e7ab854740a740e86a5e3eff01e9a2aac9950b611dfd47486249b"
+      "bytes": 2477,
+      "sha256": "6e8c71ba94d8feacbd020369ba46e47f212bba16bff0f4b689876c2748773205"
     },
     {
       "path": "bridge/http_client.py",
@@ -127,14 +127,19 @@
       "sha256": "efa2b3253b4f101d3e8a0134c8c972ccb01718e6215f9e33a456356948a3153f"
     },
     {
+      "path": "bridge/research_ext.py",
+      "bytes": 14309,
+      "sha256": "e32a816d5ddd6e14833fdfbdd93cf5c246087ecf4152ab85c36d8849d98415aa"
+    },
+    {
       "path": "bridge/server_probe.py",
       "bytes": 1867,
       "sha256": "ca1f19df90a51e62c777e9e215e8c8a0dcbc18422dac0160a0a6c2aa08a620b2"
     },
     {
       "path": "bridge/smoke_mcp.py",
-      "bytes": 4435,
-      "sha256": "9a00ea835abb50dd0a1fd29239acc6adf0a8b5117316ba87e445e72f1678d9f9"
+      "bytes": 4773,
+      "sha256": "b3897f41ca8dd1df74cc60c56d8f2b86ac6fb08206555d36f3eaa8acf824541a"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -167,19 +172,29 @@
       "sha256": "f8e96623e02e97558006e8632f6a15d90e6d40ea9c3f795be01e690776a453c6"
     },
     {
+      "path": "run_acceptance.py",
+      "bytes": 3576,
+      "sha256": "d941eaefcc6da27639e15b7bd7c21fd31410628f4b03c2730182403ddb8e3363"
+    },
+    {
       "path": "tests/test_core.py",
       "bytes": 6621,
       "sha256": "b2e7342640fef8a9a160efc8e24dbfe9401789a9606d5fc1215676d0596356dc"
     },
     {
+      "path": "tests/test_research.py",
+      "bytes": 5360,
+      "sha256": "c84d40be62028cae3ce802935f42dc90fa497c69e9f2ba33120f4b9cdfb56a9c"
+    },
+    {
       "path": "update_manifest.py",
       "bytes": 760,
-      "sha256": "7a13a7f76b38e81abd0f9f01e151e1259d231ab36d4528285bd679e7146320bd"
+      "sha256": "68287c3315a156db9b26e0ae8a1ac1159fd2b182a297595d4f42b35e0e95902d"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",
-      "bytes": 1552,
-      "sha256": "a544a0393e1ace587671184ebe58463ac952820d4bccd4a94671db4430f02884"
+      "bytes": 2312,
+      "sha256": "a28294926232e00c67ede5691bed49e51590464dab3d0c67db15712012fb578a"
     }
   ]
 }

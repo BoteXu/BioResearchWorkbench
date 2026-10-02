@@ -238,7 +238,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
         "implementation": implementation,
         "sources": TRACE.get() or [],
         "input_files": _input_files(parameters),
-        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.2"},
+        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.3"},
         "bridge_source_manifest": _source_manifest(),
     }
     receipt_path = path.with_suffix(".receipt.json")
@@ -320,7 +320,7 @@ def readiness() -> dict:
         "database_module_ready": database_ready,
         "database_import_error": database_error,
         "available_tools": sorted(DATABASE_TOOLS),
-        "bridge_version": "2.2",
+        "bridge_version": "2.3",
         "compute_placement": "Large calculations and data downloads run on the server. Local scope: retrieval, task preparation, command handoff, status/receipt and result auditing.",
         "runtime_health": health(),
         "extensions": sorted({category for category, name in extension_registry()}),

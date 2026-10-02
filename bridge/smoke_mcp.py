@@ -42,11 +42,14 @@ async def main(network=False):
             assert not catalog.isError, catalog
             payload = catalog.structuredContent or json.loads(next(item.text for item in catalog.content if item.type == "text"))
             assert payload["total_matches"] == 7, payload
-            for category, expected in [('atlas', 4), ('workflow', 8)]:
+            for category, expected in [('atlas', 4), ('workflow', 8), ('research', 3)]:
                 discovered = await session.call_tool('biomni_tool_catalog', {'category':category, 'limit':30})
                 assert not discovered.isError, discovered
                 data = discovered.structuredContent or json.loads(next(x.text for x in discovered.content if x.type == 'text'))
                 assert data['total_matches'] == expected, data
+            plan = await session.call_tool('biomni_run_tool', {'category':'research','name':'select_tools','parameters':{'intent':'result_audit'}})
+            plan_result = checked_receipt(plan, 'biomni.tool.research.select_tools')
+            assert plan_result['state'] == 'plan_only' and not plan_result['submitted']
             if shutil.which('ssh'):
                 route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'server'}})
                 route_result = checked_receipt(route, 'biomni.tool.workflow.inspect_ssh_route')

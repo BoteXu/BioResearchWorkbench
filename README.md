@@ -1,6 +1,6 @@
 # Biomni Direct Tools
 
-Version 2.2 adds lightweight installation profiles, client configuration generation, clean Windows CI and publication privacy checks.
+Version 2.3 adds explicit task routing, official identifier resolution, local mapping audits and a fixed research engineering acceptance suite. Lightweight profiles, client configuration generation and privacy checks remain available.
 
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 
@@ -62,6 +62,18 @@ Import readiness does not establish runtime readiness. Table formatting, caller-
 Tool catalog descriptions are read without importing a scientific/model stack. Upstream `import_ready: null` means its import was deferred. Pass `check_imports=true` for an explicit import check, and inspect optional dependency checks separately. Observed runtime passes remain distinct from dependency presence.
 
 ## Verification
+
+### Research helpers
+
+Use `research.select_tools` through `biomni_run_tool` with one of twelve explicit intents: `literature`, `identifier`, `genetics`, `target`, `protein`, `structure`, `expression_metadata`, `sequencing_metadata`, `sample_audit`, `result_audit`, `server_task`, or `small_omics`. It returns catalog parameters, optional dependency checks and observed runtime state. It only prepares a plan. Set `large_computation=true` to select server preparation; `sensitive_data=true` blocks recommendations that would transmit the data to a public endpoint until specific authorization is obtained. These flags guide planning; they do not replace access controls or user consent.
+
+`research.resolve_identifier` checks a single explicit public gene symbol, Ensembl gene ID, UniProt accession, rsID, PDB entry, PubChem CID or ChEMBL molecule ID. Gene/protein/variant queries require a supported species; rsID queries also require an assembly. Ambiguous candidates and source records are retained. Version mismatches, wrong species and unavailable assemblies are reported. Isoform lookups and genome build conversion are not silently substituted. PDB entry checks do not verify chain identity.
+
+`research.audit_identifier_mapping` accepts a small local list of rows with `source_namespace`, `source_id`, `target_namespace`, `target_id`, `species`, `assembly` and `evidence_reference`. It detects malformed IDs, missing context, duplicate mappings, version suffixes and one-to-many/many-to-one joins. It makes no public queries and does not verify caller-supplied source assertions. Keep ambiguous relationships; do not select the first match merely to make a join work.
+
+Official API contracts: [Ensembl symbol cross-references](https://rest.ensembl.org/documentation/info/xref_external), [Ensembl identifier lookup](https://rest.ensembl.org/documentation/info/lookup), [UniProt API](https://www.uniprot.org/help/api_queries), [RCSB Data API](https://data.rcsb.org/), [PubChem PUG REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest), and [ChEMBL web services](https://www.ebi.ac.uk/chembl/api/data/docs).
+
+Run `python run_acceptance.py` for fixed offline checks. In an installed core environment, add `--network` to test six tiny public identifier cases and save their standard bridge receipts. Optional `--output-file` saves a private report and refuses overwriting. An offline pass explicitly says the network suite was not requested. A pass measures the listed engineering checks, not general biomedical reasoning or scientific validity.
 
 `python -m unittest discover -s tests -v` verifies synthetic sample/result audits, client formats, stale outputs and privacy gates. `bridge/smoke_mcp.py` verifies MCP discovery and a tiny result-table fixture; add `--network` for a real public database query.
 
