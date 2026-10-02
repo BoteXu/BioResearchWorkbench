@@ -1,6 +1,7 @@
 """Discover bridge extensions without duplicating external skills."""
 import importlib
 import inspect
+from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
@@ -26,5 +27,9 @@ def registry():
                 else:
                     item["default"] = parameter.default
                     optional.append(item)
-            entries[(category, name)] = {"function": function, "name": name, "description": inspect.getdoc(function) or "", "required_parameters": required, "optional_parameters": optional, "implementation": f"bridge extension: {module_name}"}
+            dependencies = []
+            if category == 'omics' and name != 'map_orthologs':
+                dependencies = ['numpy', 'pandas', 'scipy']
+                dependencies += {'audit_h5ad':['anndata'], 'preranked_gsea':['gseapy'], 'transfer_cell_labels':['sklearn']}.get(name, [])
+            entries[(category, name)] = {"function": function, "name": name, "description": inspect.getdoc(function) or "", "required_parameters": required, "optional_parameters": optional, "implementation": f"bridge extension: {module_name}", "dependency_check": {package: find_spec(package) is not None for package in dependencies}}
     return entries

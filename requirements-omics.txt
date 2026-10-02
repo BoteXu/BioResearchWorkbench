@@ -1,0 +1,7 @@
+-r requirements-core.windows-py311.lock.txt
+numpy==2.4.6
+pandas==2.3.3
+scipy==1.17.1
+scikit-learn==1.9.1
+anndata==0.12.19
+gseapy==1.1.13

@@ -10,6 +10,9 @@ __pycache__/
 *.receipt.json
 AGENTS.generated.md
 install_receipt.json
+client_configs/
+test-output/
+privacy-deny.local.txt
 .upstream/
 bridge/results/
 bridge/jobs/

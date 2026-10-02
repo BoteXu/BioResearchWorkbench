@@ -2,10 +2,11 @@
 import json
 import uuid
 from pathlib import Path
-import numpy as np
-import pandas as pd
-from scipy import sparse
-from scipy.stats import hypergeom
+from lazy_database import LazyModule, LazyAttribute
+np = LazyModule('numpy')
+pd = LazyModule('pandas')
+sparse = LazyModule('scipy.sparse')
+hypergeom = LazyAttribute('scipy.stats', 'hypergeom')
 
 HERE = Path(__file__).resolve().parent
 

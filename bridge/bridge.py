@@ -1,6 +1,7 @@
 """Call selected Biomni biomedical tools directly, without a second LLM."""
 
 import argparse
+import ast
 import hashlib
 import importlib
 import json
@@ -48,9 +49,17 @@ OFFICIAL_HOSTS = {
 
 @lru_cache(maxsize=1)
 def _registry() -> dict:
-    from biomni.utils import read_module2api
-
-    return read_module2api()
+    import biomni
+    folder = Path(biomni.__file__).parent / 'tool' / 'tool_description'
+    entries = {}
+    for path in sorted(folder.glob('*.py')):
+        if path.name == '__init__.py':
+            continue
+        tree = ast.parse(path.read_text(encoding='utf8'))
+        assignment = next((n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'description' for t in n.targets)), None)
+        if assignment is not None:
+            entries['biomni.tool.' + path.stem] = ast.literal_eval(assignment.value)
+    return entries
 
 
 def _validate_parameters(parameters: dict) -> None:
@@ -71,7 +80,7 @@ def _validate_endpoint(name: str, endpoint: str) -> None:
         raise ValueError("endpoint must be an API path or official HTTPS URL")
 
 
-def tool_catalog(category: str | None = None, search: str | None = None, limit: int = 30) -> dict:
+def tool_catalog(category: str | None = None, search: str | None = None, limit: int = 30, check_imports: bool = False) -> dict:
     """Browse Biomni's registered tools and distinguish imports from actual execution."""
     matches = []
     extensions = extension_registry()
@@ -83,7 +92,12 @@ def tool_catalog(category: str | None = None, search: str | None = None, limit: 
         if category and short_name != category:
             continue
         try:
-            if short_name == "genomics":
+            if short_name == "database":
+                from lazy_database import load
+                module = load()
+            elif not check_imports:
+                module = None
+            elif short_name == "genomics":
                 from lazy_genomics import load
                 module = load()
             else:
@@ -106,7 +120,8 @@ def tool_catalog(category: str | None = None, search: str | None = None, limit: 
                     "required": [p["name"] for p in schema.get("required_parameters", [])],
                     "required_parameters": schema.get("required_parameters", []),
                     "optional_parameters": schema.get("optional_parameters", []),
-                    "import_ready": module is not None and hasattr(module, name),
+                    "import_ready": module is not None and hasattr(module, name) if check_imports or short_name == 'database' else None,
+                    "import_check": 'checked' if check_imports or short_name == 'database' else 'deferred',
                     "import_error": import_error,
                     "implementation": "Biomni pinned source" + (" with deferred optional imports" if short_name == "genomics" else ""),
                     "callable_route": "biomni_run_tool",
@@ -144,7 +159,7 @@ def tool_catalog(category: str | None = None, search: str | None = None, limit: 
         matches.append({"category": "database", "name": spec[0], "direct_name": direct_name, "description": f"Explicit {direct_name} query adapter; use its official API parameters.", "required": [spec[2]] if spec[2] else [], "required_parameters": [{"name": spec[2], "type": "str"}] if spec[2] else [], "optional_parameters": [{"name": key, "type": "dict" if key in {"params", "variables"} else "str"} for key in sorted(spec[1]) if key != spec[2]], "implementation": "bridge adapter", "import_ready": True, "import_error": None, "callable_route": "biomni_database_query", **observed.get(f"database.{spec[0]}", {"runtime_state": "untested"})})
     return {
         "total_matches": len(matches),
-        "import_ready_matches": sum(item["import_ready"] for item in matches),
+        "import_ready_matches": sum(item["import_ready"] is True for item in matches),
         "runtime_passed_matches": sum(item["runtime_state"] == "passed" for item in matches),
         "tools": matches[: max(1, min(limit, 100))],
     }
@@ -183,7 +198,7 @@ def _source_manifest():
     manifest = []
     folder = HERE / "source_snapshots"
     folder.mkdir(exist_ok=True)
-    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "job_manager.py", "job_worker.py", "mcp_server.py"):
+    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py"):
         raw = (HERE / name).read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         path = folder / (digest + ".py")
@@ -223,7 +238,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
         "implementation": implementation,
         "sources": TRACE.get() or [],
         "input_files": _input_files(parameters),
-        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.1"},
+        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.2"},
         "bridge_source_manifest": _source_manifest(),
     }
     receipt_path = path.with_suffix(".receipt.json")
@@ -254,7 +269,12 @@ def run_tool(category: str, name: str, parameters: dict) -> dict:
     extension = extension_registry().get((category, name))
     if extension:
         inspect.signature(extension["function"]).bind(**parameters)
-        return _execute(category, name, parameters, lambda: extension["function"](**parameters), extension["implementation"])
+        def call_extension():
+            missing = [package for package, available in extension.get('dependency_check', {}).items() if not available]
+            if missing:
+                raise RuntimeError('Optional dependencies missing: ' + ', '.join(missing) + '. Use the omics profile for these local helpers; keep large analyses on the server.')
+            return extension['function'](**parameters)
+        return _execute(category, name, parameters, call_extension, extension["implementation"])
     if category == "literature" and name == "advanced_web_search_claude" or category == "genomics" and name == "annotate_celltype_scRNA":
         raise ValueError("This upstream function invokes a separate model; use the direct bridge extensions")
     if category in EXCLUDED_MODULES or category == "database":
@@ -285,7 +305,8 @@ def run_tool(category: str, name: str, parameters: dict) -> dict:
 
 def readiness() -> dict:
     try:
-        importlib.import_module("biomni.tool.database")
+        from lazy_database import load
+        load()
         database_ready = True
         database_error = None
     except Exception as exc:
@@ -299,7 +320,7 @@ def readiness() -> dict:
         "database_module_ready": database_ready,
         "database_import_error": database_error,
         "available_tools": sorted(DATABASE_TOOLS),
-        "bridge_version": "2.1",
+        "bridge_version": "2.2",
         "compute_placement": "Large calculations and data downloads run on the server. Local scope: retrieval, task preparation, command handoff, status/receipt and result auditing.",
         "runtime_health": health(),
         "extensions": sorted({category for category, name in extension_registry()}),
@@ -338,7 +359,8 @@ def _database_call(name, parameters):
         adapted = adapted_query(name, parameters)
         if adapted is not None:
             return adapted
-    from biomni.tool import database
+    from lazy_database import load
+    database = load()
 
     function = getattr(database, DATABASE_TOOLS[name][0])
 
@@ -378,6 +400,7 @@ def main() -> None:
     parser.add_argument("--status", action="store_true")
     parser.add_argument("--query", choices=sorted(DATABASE_TOOLS))
     parser.add_argument("--catalog", action="store_true")
+    parser.add_argument("--check-imports", action="store_true", help="Check optional upstream imports while listing the catalog")
     parser.add_argument("--category")
     parser.add_argument("--search")
     parser.add_argument("--limit", type=int, default=30)
@@ -398,7 +421,7 @@ def main() -> None:
         with redirect_stdout(sys.stderr):
             output = query_database(args.query, parameters)
     elif args.catalog:
-        output = tool_catalog(args.category, args.search, args.limit)
+        output = tool_catalog(args.category, args.search, args.limit, args.check_imports)
     elif args.run:
         if "." not in args.run:
             parser.error("--run must be category.name")

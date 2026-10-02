@@ -1,13 +1,13 @@
 """Local orchestration and result checks, without moving server computation locally."""
 import hashlib
 import json
+import csv
+import math
 import re
 import shutil
 import subprocess
 import uuid
 from pathlib import Path, PurePosixPath
-import numpy as np
-import pandas as pd
 from evidence import atomic_json
 
 HERE = Path(__file__).resolve().parent
@@ -37,7 +37,15 @@ def _table(path, max_bytes=100000000):
     p = Path(path).resolve(strict=True)
     if p.stat().st_size > max_bytes:
         raise ValueError('Result exceeds 100 MB; export a smaller server summary')
-    return pd.read_csv(p, sep='\t' if p.suffix.lower() == '.tsv' else ',', dtype=str, keep_default_na=False)
+    with p.open(encoding='utf-8-sig', newline='') as stream:
+        reader = csv.DictReader(stream, delimiter='\t' if p.suffix.lower() == '.tsv' else ',')
+        header = reader.fieldnames or []
+        if not header or len(header) != len(set(header)) or any(not x for x in header):
+            raise ValueError('Missing or duplicate table column names')
+        rows = list(reader)
+    if any(None in row or any(value is None for value in row.values()) for row in rows):
+        raise ValueError('Inconsistent table row width')
+    return header, rows
 
 
 def inspect_ssh_route(alias: str = 'server') -> dict:
@@ -131,21 +139,21 @@ def inspect_remote_task(task_file: str, remote_receipt_path: str) -> dict:
 
 def audit_sample_metadata(path: str, sample_key: str, unit_key: str, condition_key: str, case: str, control: str, paired: bool = False, min_units_per_group: int = 3) -> dict:
     """Check sample IDs and independent-unit counts; detect repeated units and incomplete pairing."""
-    frame = _table(path)
+    header, frame = _table(path)
     columns = [sample_key, unit_key, condition_key]
-    if not set(columns).issubset(frame.columns) or case == control or min_units_per_group < 2:
+    if not set(columns).issubset(header) or case == control or min_units_per_group < 2:
         raise ValueError('Provide valid metadata columns, distinct groups, and minimum independent units >=2')
-    data = frame[frame[condition_key].isin([case, control])]
+    data = [row for row in frame if row[condition_key] in {case, control}]
     issues = []
-    if (data[columns] == '').any().any() or data[sample_key].duplicated().any():
+    if any(not row[c] for row in data for c in columns) or len({row[sample_key] for row in data}) != len(data):
         issues.append('Empty identifiers or duplicate sample IDs')
-    counts = {group: int(data.loc[data[condition_key] == group, unit_key].nunique()) for group in (case, control)}
+    counts = {group: len({row[unit_key] for row in data if row[condition_key] == group and row[unit_key]}) for group in (case, control)}
     if any(n < min_units_per_group for n in counts.values()):
         issues.append('Insufficient independent units for the specified gate')
-    if data.duplicated([unit_key, condition_key]).any():
+    if len({(row[unit_key], row[condition_key]) for row in data}) != len(data):
         issues.append('Repeated observations per biological unit/condition require aggregation or an explicit repeated-measures model')
-    case_units = set(data.loc[data[condition_key] == case, unit_key])
-    control_units = set(data.loc[data[condition_key] == control, unit_key])
+    case_units = {row[unit_key] for row in data if row[condition_key] == case}
+    control_units = {row[unit_key] for row in data if row[condition_key] == control}
     if paired and case_units != control_units:
         issues.append('Incomplete or mismatched pairs')
     if not paired and case_units & control_units:
@@ -158,32 +166,41 @@ def audit_result_table(path: str, analysis: str, columns: dict, context: dict) -
     requirements = {'differential': ['feature', 'effect', 'p', 'q'], 'mr': ['feature', 'effect', 'se', 'p'], 'coloc': ['feature', 'pp_h4'], 'meta': ['feature', 'effect', 'se', 'p', 'studies', 'i2'], 'image': ['feature', 'measurement']}
     if analysis not in requirements or not set(requirements[analysis]).issubset(columns):
         raise ValueError('Provide a supported analysis and its column mapping')
-    frame = _table(path)
-    if not set(columns.values()).issubset(frame.columns):
+    header, frame = _table(path)
+    if not set(columns.values()).issubset(header):
         raise ValueError('Mapped columns missing from result table')
     issues, warnings = [], []
-    if frame.empty:
+    if not frame:
         issues.append('Empty results')
-    ids = frame[columns['feature']]
-    if (ids == '').any() or ids.duplicated().any():
+    ids = [row[columns['feature']] for row in frame]
+    if any(not identifier for identifier in ids) or len(ids) != len(set(ids)):
         issues.append('Missing or duplicate result identifiers; use an explicit composite feature ID for strata')
     for role in requirements[analysis]:
         if role == 'feature':
             continue
-        raw = frame[columns[role]]
-        missing = raw.isin(['', 'NA', 'NaN', 'nan'])
-        value = pd.to_numeric(raw, errors='coerce')
-        invalid = ~missing & ~np.isfinite(value)
-        if invalid.any():
-            issues.append(f'Non-numeric or nonfinite {role}: {int(invalid.sum())} rows')
-        if missing.any():
-            warnings.append(f'Missing {role}: {int(missing.sum())} rows; retain filtered/failed results in the audit')
+        values, invalid, missing = [], 0, 0
+        for row in frame:
+            raw = row[columns[role]].strip()
+            if raw in {'', 'NA', 'NaN', 'nan'}:
+                missing += 1
+                continue
+            try:
+                value = float(raw)
+                if not math.isfinite(value):
+                    raise ValueError('Nonfinite number')
+                values.append(value)
+            except ValueError:
+                invalid += 1
+        if invalid:
+            issues.append(f'Non-numeric or nonfinite {role}: {invalid} rows')
+        if missing:
+            warnings.append(f'Missing {role}: {missing} rows; retain filtered/failed results in the audit')
         bounds = (0, 1) if role in {'p', 'q', 'pp_h4'} else (0, 100) if role == 'i2' else None
-        if bounds and ((value < bounds[0]) | (value > bounds[1])).any():
+        if bounds and any(value < bounds[0] or value > bounds[1] for value in values):
             issues.append(f'{role} outside valid bounds')
-        if role == 'se' and (value <= 0).any():
+        if role == 'se' and any(value <= 0 for value in values):
             issues.append('Nonpositive standard error')
-        if role == 'studies' and ((value < 2) | (value % 1 != 0)).any():
+        if role == 'studies' and any(value < 2 or value % 1 != 0 for value in values):
             issues.append('Meta-analysis requires integer study count >=2')
     for name in ('species', 'model', 'assay', 'biological_unit', 'contrast', 'limitations'):
         if not context.get(name) or str(context[name]).lower() == 'unknown':

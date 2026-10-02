@@ -10,9 +10,8 @@ from bridge import query_database, readiness, run_tool, tool_catalog
 from evidence import record_claim
 from job_manager import submit, status, cancel, list_jobs
 
-# Import Biomni's scientific stack before MCP starts its worker threads.
+# Load descriptions and direct routing before worker threads, without a model stack.
 with redirect_stdout(sys.stderr):
-    from biomni.tool import database as _database  # noqa: F401
     tool_catalog(limit=1)
 
 
@@ -34,10 +33,10 @@ def biomni_database_query(name: str, parameters: dict) -> dict:
 
 
 @mcp.tool()
-def biomni_tool_catalog(category: str = "", search: str = "", limit: int = 30) -> dict:
+def biomni_tool_catalog(category: str = "", search: str = "", limit: int = 30, check_imports: bool = False) -> dict:
     """Find Biomni's registered specialist tools by category or keyword. import_ready means the module loads, not that every tool's optional runtime dependencies are present."""
     with _STDIO_LOCK, redirect_stdout(sys.stderr):
-        return tool_catalog(category or None, search or None, limit)
+        return tool_catalog(category or None, search or None, limit, check_imports)
 
 
 @mcp.tool()

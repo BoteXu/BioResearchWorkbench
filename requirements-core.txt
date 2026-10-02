@@ -1,0 +1,5 @@
+mcp==1.30.0
+requests==2.34.2
+psutil==7.2.2
+pypdf==6.19.0
+beautifulsoup4==4.15.0

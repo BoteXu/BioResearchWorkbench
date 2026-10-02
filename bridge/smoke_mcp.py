@@ -1,7 +1,9 @@
 import asyncio
+import argparse
 import hashlib
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -21,7 +23,7 @@ def checked_receipt(reply, expected_tool):
     return json.loads(raw)
 
 
-async def main():
+async def main(network=False):
     here = Path(__file__).resolve().parent
     params = StdioServerParameters(
         command=sys.executable,
@@ -45,25 +47,32 @@ async def main():
                 assert not discovered.isError, discovered
                 data = discovered.structuredContent or json.loads(next(x.text for x in discovered.content if x.type == 'text'))
                 assert data['total_matches'] == expected, data
-            route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'server'}})
-            route_result = checked_receipt(route, 'biomni.tool.workflow.inspect_ssh_route')
-            assert route_result['authenticated'] is False
+            if shutil.which('ssh'):
+                route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'server'}})
+                route_result = checked_receipt(route, 'biomni.tool.workflow.inspect_ssh_route')
+                assert route_result['authenticated'] is False
+            else:
+                print('MCP_SSH_ROUTE_SKIPPED_NOT_INSTALLED')
             print('MCP_THIN_CLIENT_CATALOG_AND_ROUTE_OK')
-            queried = await session.call_tool(
-                "biomni_database_query",
-                {"name": "uniprot", "parameters": {"endpoint": "uniprotkb/P01308?fields=accession"}},
-            )
-            uniprot_result = checked_receipt(queried, "biomni.tool.database.query_uniprot")
-            assert "P01308" in json.dumps(uniprot_result), uniprot_result
+            if network:
+                queried = await session.call_tool(
+                    "biomni_database_query",
+                    {"name": "uniprot", "parameters": {"endpoint": "uniprotkb/P01308?fields=accession"}},
+                )
+                uniprot_result = checked_receipt(queried, "biomni.tool.database.query_uniprot")
+                assert "P01308" in json.dumps(uniprot_result), uniprot_result
+                print('MCP_UNIPROT_QUERY_OK')
+            fixture = here / 'data' / 'smoke_result.csv'
+            fixture.parent.mkdir(exist_ok=True)
+            fixture.write_text('id,effect,p,q\nexample,0.2,0.05,0.1\n',encoding='utf8')
             specialist = await session.call_tool(
                 "biomni_run_tool",
-                {"category": "molecular_biology", "name": "annotate_open_reading_frames", "parameters": {"sequence": "ATGAAATAA", "min_length": 9}},
+                {"category": "workflow", "name": "audit_result_table", "parameters": {"path":str(fixture),'analysis':'differential','columns':{'feature':'id','effect':'effect','p':'p','q':'q'},'context':{}}},
             )
-            orf_result = checked_receipt(specialist, "biomni.tool.molecular_biology.annotate_open_reading_frames")
-            assert orf_result, orf_result
+            result = checked_receipt(specialist, "biomni.tool.workflow.audit_result_table")
+            assert result['table_format_pass'] and result['scientific_validity'] == 'not_established'
             print("MCP_TOOLS_OK", ", ".join(names))
             print("MCP_STATUS_OK")
-            print("MCP_UNIPROT_QUERY_OK")
             print("MCP_SPECIALIST_TOOL_OK")
             jobs = await session.call_tool("biomni_job_list", {"limit": 1})
             assert not jobs.isError, jobs
@@ -71,4 +80,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--network',action='store_true')
+    args = parser.parse_args()
+    asyncio.run(main(args.network))

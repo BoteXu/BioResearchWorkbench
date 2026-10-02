@@ -1,5 +1,7 @@
 # Biomni Direct Tools
 
+Version 2.2 adds lightweight installation profiles, client configuration generation, clean Windows CI and publication privacy checks.
+
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 
 ## Scope
@@ -13,7 +15,7 @@ Large calculations and large downloads belong on the recipient's own server. Reu
 
 ## Install on Windows
 
-Prerequisites: Windows x64, `uv`, OpenSSH, and an available `codex` command for automatic MCP registration. Installation downloads Python 3.11 if needed, the pinned official Biomni source and fixed Python dependencies.
+Prerequisites: Windows x64 and `uv`. The `codex` command is required only for automatic Codex registration. OpenSSH is required for SSH-specific helpers. Installation downloads Python 3.11 if needed, the pinned official Biomni source and Python dependencies.
 
 Download this repository, open PowerShell in its folder, and run:
 
@@ -22,6 +24,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1
 ```
 
 The default destination is a new `BiomniTools` folder under the current user's profile. Use `-InstallDir` to select another new folder. Use `-ValidateOnly` to check repository file hashes. The installer refuses to overwrite an existing directory or an existing `biomni` MCP entry. `-SkipRegistration` permits installing separately before choosing how to register it.
+
+### Profiles and other clients
+
+| Profile | Scope |
+|---|---|
+| `core` (default) | Retrieval, documents, evidence, tasks and CSV/TSV result checks. No numpy, pandas, scipy, torch or model SDK stack is needed. |
+| `omics` | Core plus optional matrix/H5AD, enrichment and label-transfer helpers. Large analysis still belongs on the server. |
+| `full` | Previous dependency snapshot for additional upstream specialist imports; this is not E1 or proof that every upstream function works. |
+
+Use `-Profile omics` or `-Profile full` only when those optional local helpers are required.
+
+For another client, use `-Client claude-desktop`, `-Client vscode` or `-Client portable`. These choices do not require the Codex CLI. The installer generates configuration snippets in a private `client_configs` folder; merge the appropriate snippet into that client's configuration. Existing client settings are never overwritten. Only the Codex choice performs automatic registration.
+
+The formats follow the documented [local MCP configuration](https://modelcontextprotocol.io/docs/develop/connect-local-servers) and [VS Code MCP configuration](https://code.visualstudio.com/docs/agent-customization/mcp-servers). The server protocol and generated JSON/TOML schemas are tested; individual client GUIs and models need their own connection validation. Provider login/API billing belongs to the chosen client and is separate from this tool layer.
 
 Merge the generated `AGENTS.generated.md` Biomni section into your own Codex instructions, then open a new chat. Check `biomni_status`, inspect `biomni_tool_catalog` and test a public query.
 
@@ -43,9 +59,15 @@ Runtime records may contain paths, hostnames, parameters and input hashes. Keep 
 
 Import readiness does not establish runtime readiness. Table formatting, caller-supplied context and file integrity do not establish scientific validity. Keep species, model, assay, independent biological unit, contrast and causal limits explicit. Do not send sensitive data to public endpoints without specific authorization.
 
+Tool catalog descriptions are read without importing a scientific/model stack. Upstream `import_ready: null` means its import was deferred. Pass `check_imports=true` for an explicit import check, and inspect optional dependency checks separately. Observed runtime passes remain distinct from dependency presence.
+
 ## Verification
 
-The source and bridge have been checked in a relocated environment. `bridge/smoke_mcp.py` verifies tool discovery, a public database query and a tiny specialist fixture. An installation on a new machine still needs its own smoke test. No claim of a complete independent-machine or HPC deployment is made.
+`python -m unittest discover -s tests -v` verifies synthetic sample/result audits, client formats, stale outputs and privacy gates. `bridge/smoke_mcp.py` verifies MCP discovery and a tiny result-table fixture; add `--network` for a real public database query.
+
+GitHub Actions runs privacy/history/manifest checks and unit tests, then installs the core profile on a clean hosted Windows runner and tests MCP over the network. Inspect the actual run result before claiming clean-install success. Other client GUI integrations, optional profiles and a real HPC deployment are not implied by a core CI pass.
+
+Before release, follow [PRIVACY.md](PRIVACY.md). The privacy gate scans current candidates and historical blobs, checks generic commit identities and avoids printing matched values. Names and research context still require manual review.
 
 ## Upstream and license
 
