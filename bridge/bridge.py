@@ -198,7 +198,7 @@ def _source_manifest():
     manifest = []
     folder = HERE / "source_snapshots"
     folder.mkdir(exist_ok=True)
-    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py"):
+    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py"):
         raw = (HERE / name).read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         path = folder / (digest + ".py")

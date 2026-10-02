@@ -20,6 +20,9 @@ def checked_receipt(reply, expected_tool):
     assert payload["success"] is True, payload
     raw = Path(payload["result_file"]).read_bytes()
     assert hashlib.sha256(raw).hexdigest() == payload["sha256"], payload
+    if expected_tool.startswith('biomni.tool.research.'):
+        source = next(x for x in payload['bridge_source_manifest'] if x['name'] == 'research_ext.py')
+        assert hashlib.sha256(Path(source['snapshot']).read_bytes()).hexdigest() == source['sha256']
     return json.loads(raw)
 
 

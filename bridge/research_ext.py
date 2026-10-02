@@ -81,9 +81,30 @@ def resolve_identifier(namespace: str, identifier: str, species: str = '', assem
     if not isinstance(assembly, str) or assembly and not re.fullmatch(r'[A-Za-z0-9_.-]{1,40}', assembly):
         raise ValueError('Invalid assembly')
     candidates, raw, issues = [], [], []
+    route, coverage_complete = 'primary_official_api', True
     if namespace in {'gene_symbol', 'ensembl_gene'}:
         if namespace == 'gene_symbol':
-            found = _get_json('https://rest.ensembl.org/xrefs/symbol/' + species + '/' + quote(normalized), {'object_type':'gene','content-type':'application/json'})
+            try:
+                found = _get_json('https://rest.ensembl.org/xrefs/symbol/' + species + '/' + quote(normalized), {'object_type':'gene','content-type':'application/json'})
+            except Exception as exc:
+                transient = type(exc).__name__ in {'ReadTimeout','ConnectTimeout','Timeout','TimeoutError','ConnectionError'}
+                transient = transient or (type(exc).__name__ == 'HTTPError' and getattr(getattr(exc,'response',None),'status_code',0) >= 500)
+                if not transient:
+                    raise
+                raw.append({'source':'Ensembl symbol cross-reference','failure_type':type(exc).__name__})
+                data = _get_json('https://rest.uniprot.org/uniprotkb/search',
+                                 {'query':'(gene_exact:' + normalized + ') AND (organism_id:' + str(SPECIES[species]) + ')','format':'json','size':100})
+                raw.append(data)
+                found = []
+                for protein in data.get('results', []):
+                    if protein.get('organism',{}).get('taxonId') != SPECIES[species]:
+                        continue
+                    for ref in protein.get('uniProtKBCrossReferences', []):
+                        if ref.get('database') == 'Ensembl':
+                            for prop in ref.get('properties', []):
+                                if prop.get('key') == 'GeneId':
+                                    found.append({'type':'gene','id':prop['value'].split('.')[0]})
+                route, coverage_complete = 'uniprot_cross_references_then_ensembl_lookup', False
             if not isinstance(found, list):
                 raise ValueError('Unexpected Ensembl symbol response')
             ids = sorted({r['id'] for r in found if r.get('type') == 'gene'})
@@ -161,9 +182,10 @@ def resolve_identifier(namespace: str, identifier: str, species: str = '', assem
     unique = {(c['namespace'], c['identifier']) for c in candidates}
     if not unique:
         issues.append('no_mapping_candidates')
-    status = 'context_mismatch' if issues else 'ambiguous' if len(unique) > 1 else 'resolved'
+    status = 'context_mismatch' if issues else 'ambiguous' if len(unique) > 1 else 'partial' if not coverage_complete else 'resolved'
     return {'input':{'namespace':namespace,'identifier':identifier,'normalized_identifier':normalized,'species':species,'assembly':assembly},
             'status':status,'identity_check_pass':not issues and bool(unique), 'ambiguous':len(unique)>1,
+            'resolution_route':route, 'candidate_coverage_complete':coverage_complete,
             'candidate_count':len(unique),'candidates':candidates,'issues':sorted(set(issues)), 'source_data':raw,
             'limitations':['Cross-references are source assertions, not sequence equivalence or orthology proof.',
                            'No genome build conversion is performed. A variant identifier alone is not a uniquely specified allele.',

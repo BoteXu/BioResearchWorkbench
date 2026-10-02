@@ -45,7 +45,9 @@ def main():
                 check = bool(receipt['success'] and data['identity_check_pass'] and
                              (expected is None or any(c['identifier'].split('.')[0] == expected for c in data['candidates'])) and
                              hashlib.sha256(raw).hexdigest() == receipt['sha256'])
-                report['network'].append({'case':name,'pass':check,'receipt_file':receipt['receipt_file']})
+                report['network'].append({'case':name,'pass':check,'receipt_file':receipt['receipt_file'],
+                                          'resolution_status':data.get('status'),
+                                          'candidate_coverage_complete':data.get('candidate_coverage_complete')})
             except Exception as exc:
                 report['network'].append({'case':name,'pass':False,'error_type':type(exc).__name__})
         report['network_state'] = 'completed'

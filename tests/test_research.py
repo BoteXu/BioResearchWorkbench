@@ -35,6 +35,21 @@ class ResearchChecks(unittest.TestCase):
         self.assertFalse(result['identity_check_pass'])
         self.assertEqual(set(result['issues']),{'species_mismatch','assembly_mismatch','requested_identifier_version_mismatch'})
 
+    def test_transient_symbol_fallback_preserves_partial_coverage(self):
+        def fixture(url, params=None):
+            if '/xrefs/' in url:
+                raise TimeoutError('Synthetic availability failure')
+            if '/search' in url:
+                return {'results':[{'organism':{'taxonId':9606},'uniProtKBCrossReferences':[
+                    {'database':'Ensembl','properties':[{'key':'GeneId','value':'ENSG000001.2'}]}]}]}
+            return {'id':'ENSG000001','object_type':'Gene','species':'homo_sapiens','assembly_name':'GRCh38','version':2}
+        with patch.object(research,'_get_json',side_effect=fixture):
+            result = research.resolve_identifier('gene_symbol','FIXTURE','homo_sapiens','GRCh38')
+        self.assertEqual(result['status'],'partial')
+        self.assertFalse(result['candidate_coverage_complete'])
+        self.assertTrue(result['identity_check_pass'])
+        self.assertEqual(result['source_data'][0]['failure_type'],'TimeoutError')
+
     def test_variant_build_is_never_silently_converted(self):
         data = {'name':'rs699','mappings':[{'assembly_name':'GRCh37','location':'8:1-1','allele_string':'A/G'}]}
         with patch.object(research,'_get_json',return_value=data):
