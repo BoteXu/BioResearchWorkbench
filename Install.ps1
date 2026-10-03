@@ -1,5 +1,6 @@
 param(
-    [string]$InstallDir = (Join-Path ([Environment]::GetFolderPath('UserProfile')) 'BiomniTools'),
+    [string]$InstallDir = '',
+    [string]$McpName = '',
     [ValidateSet('core','local','omics','full')][string]$Profile = '',
     [ValidateSet('codex','claude-desktop','vscode','portable')][string]$Client = 'codex',
     [switch]$SkipRegistration,
@@ -9,7 +10,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $Uv = (Get-Command uv -ErrorAction Stop).Source
-$InstallerArgs = @('run','--python','3.11','--no-project',(Join-Path $PSScriptRoot 'install.py'),'--install-dir',$InstallDir,'--client',$Client)
+$InstallerArgs = @('run','--python','3.11','--no-project',(Join-Path $PSScriptRoot 'install.py'),'--client',$Client)
+if ($InstallDir) { $InstallerArgs += @('--install-dir',$InstallDir) }
+if ($McpName) { $InstallerArgs += @('--mcp-name',$McpName) }
 if ($Profile) { $InstallerArgs += @('--profile',$Profile) }
 if ($SkipRegistration) { $InstallerArgs += '--skip-registration' }
 if ($TrustDnsProxy) { $InstallerArgs += '--trust-dns-proxy' }

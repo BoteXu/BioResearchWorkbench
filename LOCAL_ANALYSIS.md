@@ -11,9 +11,9 @@ The repository checkout defaults to the server edition. Both editions retain MCP
 
 ## Installation
 
-On macOS/Linux, extract the chosen release ZIP and run `sh ./Install.sh --client portable --skip-registration`. On Windows run `powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -Client portable -SkipRegistration`. The archive chooses its default profile. When installing from the repository, choose `--profile local` or `-Profile local` for local analysis. Use a fresh installation directory.
+On macOS/Linux, extract the chosen release ZIP and run `sh ./Install.sh --client portable --skip-registration`. On Windows run `powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1 -Client portable -SkipRegistration`. The archive chooses its default profile. When installing from the repository, choose `--profile local` or `-Profile local` for local analysis. Use a fresh installation directory. Defaults are `BiomniTools` / `biomni` for the server edition and `BiomniLocalTools` / `biomni-local` for the local edition, allowing both to coexist. Use `--mcp-name` or `-McpName` to choose another private client name.
 
-The local profile installs scientific Python packages, including PyDESeq2, Scanpy, RDKit and GSEApy. It excludes torch and a separate model stack. The installer does not install R, Open Babel, server alignment software or a data lake. Reuse existing compatible environments.
+The local profile installs scientific Python packages, including PyDESeq2, Scanpy, RDKit and GSEApy. It excludes torch and a separate model stack. RDKit is pinned to its compatible Intel macOS release on that platform; actual backend versions are recorded in results. The installer does not install R, Open Babel, server alignment software or a data lake. Reuse existing compatible environments.
 
 For docking add `--install-vina` (POSIX/Python) or `-InstallVina` (PowerShell). This downloads a fixed official Vina 1.2.7 executable with a checked SHA256 into the private installation. An existing Vina can instead be registered through `software.register_local_software`.
 

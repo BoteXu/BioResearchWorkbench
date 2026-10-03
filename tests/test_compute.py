@@ -14,9 +14,19 @@ import transcriptomics_ext as tx
 import molecular_ext as mx
 import software_ext as sw
 import systems_ext as sx
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+import client_config
 
 
 class ComputeGates(unittest.TestCase):
+    def test_two_editions_have_distinct_client_names(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);python=root/'.venv_tools'/('Scripts/python.exe' if os.name=='nt' else 'bin/python');server=root/'.local'/'mcp_server.py'
+            python.parent.mkdir(parents=True);server.parent.mkdir(parents=True);python.touch();server.touch()
+            data=client_config.generate(root,root/'configs',server_name='biomni-local')
+            self.assertIn('biomni-local',json.loads(data['portable.mcp.json'])['mcpServers'])
+            self.assertIn('[mcp_servers.biomni-local]',data['codex.config.toml'])
+            with self.assertRaises(ValueError): client_config.generate(root,root/'invalid',server_name='invalid.name')
     def test_server_edition_refuses_formal_local_execution(self):
         with patch.dict(os.environ,{'BIOMNI_COMPUTE_EDITION':'server'}):
             with self.assertRaises(ValueError): compute_policy.require_local()

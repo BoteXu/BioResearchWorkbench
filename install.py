@@ -36,7 +36,8 @@ def checked(argv, env=None):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--install-dir',default=str(Path.home()/'BiomniTools'))
+    parser.add_argument('--install-dir')
+    parser.add_argument('--mcp-name')
     default_profile = json.loads((ROOT/'edition.json').read_text(encoding='utf8'))['default_profile']
     parser.add_argument('--profile',choices=['core','local','omics','full'],default=default_profile)
     parser.add_argument('--client',choices=['codex','claude-desktop','vscode','portable'],default='codex')
@@ -46,6 +47,7 @@ def main():
     parser.add_argument('--install-vina',action='store_true',help='Download the fixed official Vina binary for this host')
     args = parser.parse_args()
     validate_package()
+    mcp_name = args.mcp_name or ('biomni-local' if args.profile=='local' else 'biomni')
     if args.validate_only:
         return
     if platform.system() not in {'Windows','Darwin','Linux'}:
@@ -58,9 +60,9 @@ def main():
         codex = shutil.which('codex')
         if not codex:
             raise ValueError('Codex CLI missing; choose --client portable or --skip-registration')
-        if subprocess.run([codex,'mcp','get','biomni'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
+        if subprocess.run([codex,'mcp','get',mcp_name],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
             raise ValueError('Existing biomni registration; inspect it first or use --skip-registration')
-    target = Path(args.install_dir).expanduser().resolve()
+    target = Path(args.install_dir or Path.home()/('BiomniLocalTools' if args.profile=='local' else 'BiomniTools')).expanduser().resolve()
     if target.exists():
         raise ValueError('Choose a new installation directory')
     target.parent.mkdir(parents=True,exist_ok=True)
@@ -90,9 +92,9 @@ def main():
     if placement=='local':
         text+='\nThis is the optional local analysis edition. Explicit bounded transcriptomics and single-ligand docking workflows may run locally after input/design/resource checks. Large computations still belong on the server. Use real local-job completion receipts.\n'
     (target/'AGENTS.generated.md').write_text(text,encoding='utf8',newline='\n')
-    generate(target,target/'client_configs',args.trust_dns_proxy)
+    generate(target,target/'client_configs',args.trust_dns_proxy,mcp_name)
     if codex:
-        command = [codex,'mcp','add','biomni','--env','PYTHONUTF8=1']
+        command = [codex,'mcp','add',mcp_name,'--env','PYTHONUTF8=1']
         if args.trust_dns_proxy:
             command.extend(['--env','BIOMNI_TRUST_DNS_PROXY=1'])
         checked(command+['--',python,local/'mcp_server.py'])

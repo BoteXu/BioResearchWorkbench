@@ -28,8 +28,8 @@
     },
     {
       "path": "Install.ps1",
-      "bytes": 1009,
-      "sha256": "1c225b69c58bd6206f901da51161301494f5bd1f4eee736c1243d9cde6a1a19e"
+      "bytes": 1070,
+      "sha256": "d9b20bc53d5b829a79ae3308cdc5bd303f49ed2db761af326099e1c4fbd0f0ec"
     },
     {
       "path": "Install.sh",
@@ -43,8 +43,8 @@
     },
     {
       "path": "LOCAL_ANALYSIS.md",
-      "bytes": 10122,
-      "sha256": "6749b95e92e4804f9aa71e6316cc5ff0de8fa3af5743d9af39a99f445f52f76c"
+      "bytes": 10463,
+      "sha256": "ec39ef6ec3cf78889f44d84d78601397656d1ce11095e02331d70449c2b7ab7a"
     },
     {
       "path": "NOTICE",
@@ -98,8 +98,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 22630,
-      "sha256": "3fea32dd102927106a9fa6fde2fbdf150c41c98b91df2defaa4ef579d825c319"
+      "bytes": 22706,
+      "sha256": "64f630dde81d6d76120817e4e1b619c5d8dfad2edcc19d82d8cbf464e64b2112"
     },
     {
       "path": "bridge/compute_policy.py",
@@ -233,8 +233,8 @@
     },
     {
       "path": "client_config.py",
-      "bytes": 2168,
-      "sha256": "344eb0f799af92e6f06c2699144c500284bf5fe34c47ef41573ecd49706dcdec"
+      "bytes": 2415,
+      "sha256": "08b1232eb38c6ffc6fe7a3c39c00bf4e10bd085519f7d53a3c2af27720637a71"
     },
     {
       "path": "edition.json",
@@ -253,8 +253,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 5350,
-      "sha256": "d771dd584f2eee76918abed683a6d4d78bc12006d864c8aa0e8c6ebfe499932d"
+      "bytes": 5526,
+      "sha256": "12d3fb187f1dab25698f6e2dcaeb7174217eaa7a0cd86cffc54b6f4063463c02"
     },
     {
       "path": "requirements-core.lock.txt",
@@ -278,8 +278,8 @@
     },
     {
       "path": "requirements-local.txt",
-      "bytes": 222,
-      "sha256": "c401163391470d0b597353a245ef7ff7a37c20b091768128e584f7bf1d8711b5"
+      "bytes": 356,
+      "sha256": "bd6aac892ea6731524be9fd800034f9bdb615b2998b8a9a5135e00c0f6611521"
     },
     {
       "path": "requirements-omics.txt",
@@ -318,8 +318,8 @@
     },
     {
       "path": "tests/test_compute.py",
-      "bytes": 3689,
-      "sha256": "0b32421e5682432bc5b3046ec76060848a3edafa80665a461b6574ff1ffea21a"
+      "bytes": 4528,
+      "sha256": "40a4a432b37d40d124499011b71d2f442e0bd1f6d234711478fbca40666c1c16"
     },
     {
       "path": "tests/test_core.py",

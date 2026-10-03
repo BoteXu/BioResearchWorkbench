@@ -220,7 +220,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
     preview = raw[:40000].decode("utf-8", errors="ignore")
     success = result.get("success", "error" not in result and not result.get("errors")) if isinstance(result, dict) else not (isinstance(result, str) and result.lower().startswith(("error", "an error occurred", "failed")))
     packages = {}
-    for package in ("biomni", "numpy", "pandas", "scanpy", "gseapy"):
+    for package in ("biomni", "numpy", "pandas", "scipy", "scanpy", "gseapy", "pydeseq2", "rdkit", "networkx", "anndata", "igraph", "leidenalg"):
         try:
             packages[package] = version(package)
         except PackageNotFoundError:
