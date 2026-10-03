@@ -16,6 +16,7 @@ import review_ext as review
 import collaboration_ext as collaboration
 import zotero_ext as zotero
 import evidence
+import personal_library_ext as personal
 
 
 class AcademicChecks(unittest.TestCase):
@@ -169,6 +170,42 @@ class AcademicChecks(unittest.TestCase):
         with self.assertRaises(ValueError):collaboration.prepare_reviewer_response(str(self.doc),[{'id':'a','comment':'Please revise','response':'Done','state':'completed'}])
     def test_response_planned_is_labeled(self):
         r=collaboration.prepare_reviewer_response(str(self.doc),[{'id':'a','comment':'Analyze more','response':'Analysis planned','state':'planned','rationale':'Requires new allocation'}]);self.assertEqual(r['responses'][0]['state'],'planned')
+
+
+class PersonalLibraryChecks(unittest.TestCase):
+    # Separate setup, not inherited test duplication in the acceptance suite.
+    def setUp(self):
+        AcademicChecks.setUp(self);self.personal_home=patch.object(personal,'HERE',self.root);self.personal_home.start()
+        self.lib=personal.create_personal_library('Synthetic library','Private research index',True)['library_id']
+    def tearDown(self):
+        self.personal_home.stop();AcademicChecks.tearDown(self)
+    def ingest(self,namespace='zotero:user'):
+        r=personal.prepare_personal_library_ingest(self.lib,str(self.refs),namespace,['cardiac']);p=Path(r['output_directory'])/'review.json'
+        receipt=personal.apply_personal_library_ingest(str(p),hashlib.sha256(p.read_bytes()).hexdigest(),True)
+        return p,receipt
+    def test_private_index_preview_and_ingest(self):
+        r=personal.prepare_personal_library_ingest(self.lib,str(self.refs),'zotero:user')
+        self.assertFalse(personal.inspect_personal_library()['reading_state_counts'])
+        self.ingest();self.assertEqual(personal.inspect_personal_library()['reading_state_counts'],{'unread':1})
+    def test_private_index_duplicate_plan_refused(self):
+        p,_=self.ingest()
+        with self.assertRaises(ValueError):personal.apply_personal_library_ingest(str(p),hashlib.sha256(p.read_bytes()).hexdigest(),True)
+    def test_private_index_note_search_and_conflict(self):
+        self.ingest();found=personal.search_personal_library(self.lib);ref=found['records'][0]
+        personal.annotate_personal_reference(self.lib,ref['id'],ref['fingerprint'],found['revision'],'reviewed',['mechanism'],'Private reading note')
+        result=personal.search_personal_library(self.lib,'reading note',reading_state='reviewed');self.assertEqual(len(result['records']),1)
+        with self.assertRaises(ValueError):personal.annotate_personal_reference(self.lib,ref['id'],ref['fingerprint'],found['revision'],'reading',[],'stale note')
+    def test_private_index_literal_wildcard_not_full_scan(self):
+        self.ingest();self.assertEqual(personal.search_personal_library(self.lib,'%')['total_results'],0)
+    def test_private_index_export_keeps_source_unchanged(self):
+        original=self.refs.read_bytes();self.ingest();r=personal.export_personal_library(self.lib,'ris')
+        records=library.load_library(str(Path(r['output_directory'])/'references.ris'))[0]
+        self.assertEqual(records[0]['id'],'zotero:user::alpha');self.assertEqual(self.refs.read_bytes(),original)
+    def test_private_index_namespaces_remain_distinct(self):
+        self.ingest('zotero:user');self.ingest('endnote:project')
+        self.assertEqual(personal.search_personal_library(self.lib)['total_results'],2)
+    def test_private_default_not_overwritten(self):
+        with self.assertRaises(ValueError):personal.create_personal_library('Other','Other purpose',True)
 
 
 class ZoteroProtocol(unittest.TestCase):

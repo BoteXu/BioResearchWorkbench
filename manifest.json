@@ -18,13 +18,13 @@
     },
     {
       "path": "ACADEMIC_WORKFLOWS.md",
-      "bytes": 10566,
-      "sha256": "2ca9cffadeace7a7a462a639afff7a4aed30577fc072c648bdff5321c8e682c6"
+      "bytes": 10967,
+      "sha256": "e659882f35d722825e181673fe8597724a91aa9490def59bccfbba39d1e8fa3b"
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 5631,
-      "sha256": "0d133995eaacc251c5eff1b6b3a4f639366ae057118b766ec4fbf413e73d507d"
+      "bytes": 6171,
+      "sha256": "a159343ef5a5507485d6f1cc0b09da4173a644d35bd774cfca776dd332e8f0eb"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -57,6 +57,11 @@
       "sha256": "7cccc61d8605af72aa490074af25e6afe65cc38ec5cfb439b7d30aa431657701"
     },
     {
+      "path": "PERSONAL_LIBRARY.md",
+      "bytes": 4633,
+      "sha256": "008beb9ebb8751cf8ecf3af3b55678eb58dac9682bb309891217e2a0552fa8e0"
+    },
+    {
       "path": "PLATFORMS.md",
       "bytes": 6262,
       "sha256": "4cc9f5099d1bd70574dd7fe5b24a0ba08ddb9f09387a52f90361d604574d3776"
@@ -73,8 +78,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 11284,
-      "sha256": "8bff9dec816bbf7ab56532ecd60ea430015fac16299a040c87d4f86ce0499c12"
+      "bytes": 11345,
+      "sha256": "c84ac7d407924104e22bc11d82c05fd038a7ed0be9df17147c2115ab56a6db31"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -133,8 +138,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 23671,
-      "sha256": "c4a0f7afb92b37491c3715a19b7a7580c689fb8b00e1d01b9ff97dda000d3461"
+      "bytes": 23698,
+      "sha256": "ec8e19dae9b360d12a7b2cc7059b69a9612029fc9493891a465f4a041841bc39"
     },
     {
       "path": "bridge/collaboration_ext.py",
@@ -173,8 +178,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 8214,
-      "sha256": "7aa5e1fe622e75453b629db673ebd50d81d45159fc2de1d0b4a32baab99460c3"
+      "bytes": 8474,
+      "sha256": "c32010b5aa627cb25cc66586d6cc7ff8eab000d9f0d11d9658e06e678ba86d11"
     },
     {
       "path": "bridge/http_client.py",
@@ -232,6 +237,11 @@
       "sha256": "702b7f80e304d4a2a350655196d7402492d4c3c30a8559c656fe2e301ec7fd58"
     },
     {
+      "path": "bridge/personal_library_ext.py",
+      "bytes": 13556,
+      "sha256": "13129a7718211bb243f683573b34a439a1fcb2ba1e2f4991f230258e1c660045"
+    },
+    {
       "path": "bridge/privacy_ext.py",
       "bytes": 3202,
       "sha256": "cb2b568ab9d3343d63cda3811207114f3dd5c5c4411a30ac2fe208e524d2a2f8"
@@ -253,8 +263,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 21247,
-      "sha256": "4c712a97d3ac5d176bc187e919a10098684cae54aeace174911e853620df9e3d"
+      "bytes": 21476,
+      "sha256": "3e1b86fa566a32a01468a0e0eec1afb9c68043aa4239dc127241aef9f6f9d390"
     },
     {
       "path": "bridge/review_ext.py",
@@ -308,8 +318,8 @@
     },
     {
       "path": "bridge/web_gateway.py",
-      "bytes": 12773,
-      "sha256": "bc7ae8c531bb05de257cc4bec81f637df7504c7b70027a319baf1236fa33b6d4"
+      "bytes": 12806,
+      "sha256": "977687a204fa97a01d462260d601180fcf948c79a3ba61945ee926867efa697b"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -418,8 +428,8 @@
     },
     {
       "path": "tests/test_academic.py",
-      "bytes": 24395,
-      "sha256": "d3887cadfe3d949a27c61b3a62d2834e54107e95a47ccfbf71cfa449681b0b78"
+      "bytes": 27321,
+      "sha256": "3eefb4861553ccb430eda06fa93cfde1471cbcedfdf4c24c02d55f72a4b0b30c"
     },
     {
       "path": "tests/test_biomedical.py",

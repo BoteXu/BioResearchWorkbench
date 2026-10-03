@@ -17,6 +17,7 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'personal_library':[('personal_library','inspect_personal_library'),('personal_library','prepare_personal_library_ingest'),('personal_library','apply_personal_library_ingest'),('personal_library','search_personal_library')],
     'reference_library':[('library','import_reference_library'),('library','audit_reference_duplicates'),('library','export_reference_library'),('review','audit_reference_metadata')],
     'zotero_read':[('zotero','inspect_zotero_connection'),('zotero','read_zotero_library')],
     'zotero_write':[('zotero','prepare_zotero_write'),('zotero','apply_zotero_write')],

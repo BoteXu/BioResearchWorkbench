@@ -5,6 +5,7 @@ from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "personal_library": ("personal_library_ext", ["create_personal_library", "inspect_personal_library", "prepare_personal_library_ingest", "apply_personal_library_ingest", "search_personal_library", "annotate_personal_reference", "export_personal_library"]),
     "library": ("library_ext", ["import_reference_library", "audit_reference_duplicates", "export_reference_library", "index_pdf_folder"]),
     "zotero": ("zotero_ext", ["inspect_zotero_connection", "read_zotero_library", "read_zotero_attachment", "prepare_zotero_write", "apply_zotero_write"]),
     "review": ("review_ext", ["inspect_manuscript", "audit_claim_evidence", "audit_paper", "audit_review", "audit_manuscript_format", "audit_terminology_units", "find_similar_studies", "check_publication_updates", "audit_reporting_checklist", "audit_reference_metadata"]),

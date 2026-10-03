@@ -1,6 +1,6 @@
 # Academic review and manuscript collaboration
 
-Version 2.8 adds 25 registered functions in `library`, `zotero`, `review` and `collaboration`. Both server/core and opt-in local editions expose these bounded workflows. No second model, cloud writing service, heavy analysis package or personal public endpoint is added. Codex supplies authored reasoning; functions extract, locate, compare, validate and save private artifacts.
+Version 2.8 adds 32 registered functions in `library`, `zotero`, `review`, `collaboration` and `personal_library`. Both server/core and opt-in local editions expose these bounded workflows. No second model, cloud writing service, heavy analysis package or personal public endpoint is added. Codex supplies authored reasoning; functions extract, locate, compare, validate and save private artifacts.
 
 ## Workflow and evidence boundaries
 
@@ -78,3 +78,7 @@ Synthetic tests cover format round trips, exact excerpt/hash failures, metadata/
 - [EQUATOR reporting guideline library](https://www.equator-network.org/library/)
 - [Crossref Retraction Watch metadata](https://www.crossref.org/documentation/retrieve-metadata/retraction-watch/)
 - [Paperpile export documentation](https://paperpile.com/h/export-library-data/)
+
+## Personal research index
+
+A persistent private metadata/reading-note index can sit beside Zotero. Source-scoped IDs, previewed ingest, atomic transactions, duplicate candidates, tags, reading queues, offline search and bounded exports are documented in [PERSONAL_LIBRARY.md](PERSONAL_LIBRARY.md). No entire Zotero library is automatically scanned and no source item is changed.
