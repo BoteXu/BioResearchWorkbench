@@ -108,8 +108,8 @@
     },
     {
       "path": "bridge/count_models.R",
-      "bytes": 1738,
-      "sha256": "d96d9afd312c2d4f6e2d2c17d750a156ad39f8d11dbe0a58f4281f8755b4b441"
+      "bytes": 1752,
+      "sha256": "b12d092baf248b8076cf6366179de9ee37b5af818217aa307d03630f8965325b"
     },
     {
       "path": "bridge/database_ext.py",
@@ -278,8 +278,8 @@
     },
     {
       "path": "requirements-local.txt",
-      "bytes": 356,
-      "sha256": "bd6aac892ea6731524be9fd800034f9bdb615b2998b8a9a5135e00c0f6611521"
+      "bytes": 635,
+      "sha256": "4d31481fcd779b2075f9afc2d84567c0b326f6e4bf1341c4b63990614593b608"
     },
     {
       "path": "requirements-omics.txt",

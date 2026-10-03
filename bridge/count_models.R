@@ -12,14 +12,14 @@ if (method=='edgeR_ql') {
   fit <- edgeR::glmQLFit(dge,design)
   test <- edgeR::glmQLFTest(fit,coef=ncol(design))
   tab <- edgeR::topTags(test,n=Inf,sort.by='none')$table
-  result <- data.frame(log2FoldChange=tab$logFC,baseMean=tab$logCPM,stat=sign(tab$logFC)*sqrt(tab$F),pvalue=tab$PValue,padj=tab$FDR,row.names=rownames(tab))
+  result <- data.frame(log2FoldChange=tab$logFC,mean_logCPM=tab$logCPM,stat=sign(tab$logFC)*sqrt(tab$F),pvalue=tab$PValue,padj=tab$FDR,row.names=rownames(tab))
   ver <- paste('edgeR',utils::packageVersion('edgeR'))
 } else if (method=='limma_voom') {
   if (!requireNamespace('limma',quietly=TRUE)) stop('Install limma')
   v <- limma::voom(dge,design,plot=FALSE)
   fit <- limma::eBayes(limma::lmFit(v,design))
   tab <- limma::topTable(fit,coef=ncol(design),number=Inf,sort.by='none')
-  result <- data.frame(log2FoldChange=tab$logFC,baseMean=tab$AveExpr,stat=tab$t,pvalue=tab$P.Value,padj=tab$adj.P.Val,row.names=rownames(tab))
+  result <- data.frame(log2FoldChange=tab$logFC,mean_log_expression=tab$AveExpr,stat=tab$t,pvalue=tab$P.Value,padj=tab$adj.P.Val,row.names=rownames(tab))
   ver <- paste('limma',utils::packageVersion('limma'),'edgeR',utils::packageVersion('edgeR'))
 } else stop('Unsupported count method')
 write.csv(result,file.path(folder,'differential_expression.csv'))
