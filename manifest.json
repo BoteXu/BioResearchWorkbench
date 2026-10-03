@@ -624,8 +624,8 @@
     },
     {
       "path": "tests/test_skills.py",
-      "bytes": 7198,
-      "sha256": "4e7954b8612b246a61d5682d675b83f1ff94a15aacccd5cfbfe99c954bdad5a1"
+      "bytes": 7182,
+      "sha256": "94d7626b116743b21fe2dd3a25226dc46db6576db9a711955897b06edea157db"
     },
     {
       "path": "tests/test_statistics.py",
