@@ -1,6 +1,6 @@
 # Biomni Direct Tools
 
-Version 2.4 adds ten biomedical evidence helpers for pharmacology, cohorts, genetics, evidence synthesis, structures, disease terms, cell annotations, enrichment and study passages. See [BIOMEDICAL.md](BIOMEDICAL.md) for contracts, examples and limits. Lightweight profiles, client configuration generation and privacy checks remain available.
+Version 2.5 adds a unified Windows/macOS/Linux installer and a private responsive browser gateway for HarmonyOS computers, phones and tablets. See [PLATFORMS.md](PLATFORMS.md) for installation and verification boundaries. The ten biomedical evidence helpers remain documented in [BIOMEDICAL.md](BIOMEDICAL.md).
 
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 
@@ -12,6 +12,10 @@ A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provi
 - Existing lightweight omics helpers with explicit limitations.
 
 Large calculations and large downloads belong on the recipient's own server. Reuse that server's analysis environment. This is not the full Biomni reasoning agent, E1 environment or data lake.
+
+## Cross-platform installation
+
+For macOS and Linux run `sh ./Install.sh`; for HarmonyOS use the compatible environment or browser route in [PLATFORMS.md](PLATFORMS.md). The same lightweight core profile is used across desktop platforms.
 
 ## Install on Windows
 
@@ -79,7 +83,7 @@ Run `python run_acceptance.py` for fixed offline checks. In an installed core en
 
 `python -m unittest discover -s tests -v` verifies synthetic sample/result audits, client formats, stale outputs and privacy gates. `bridge/smoke_mcp.py` verifies MCP discovery and a tiny result-table fixture; add `--network` for a real public database query.
 
-GitHub Actions runs privacy/history/manifest checks and unit tests, then installs the core profile on a clean hosted Windows runner and tests MCP over the network. Inspect the actual run result before claiming clean-install success. Other client GUI integrations, optional profiles and a real HPC deployment are not implied by a core CI pass.
+GitHub Actions runs privacy/history/manifest checks and unit tests, then installs the core profile on clean Windows, Linux, macOS ARM and macOS Intel runners and tests MCP over the network. A separate browser check uses synthetic data at desktop and mobile viewport sizes; this does not certify HarmonyOS hardware. Inspect the actual run result before claiming clean-install success. Other client GUI integrations, optional profiles and a real HPC deployment are not implied by a core CI pass.
 
 Before release, follow [PRIVACY.md](PRIVACY.md). The privacy gate scans current candidates and historical blobs, checks generic commit identities and avoids printing matched values. Names and research context still require manual review.
 

@@ -1,4 +1,4 @@
--r requirements-core.windows-py311.lock.txt
+-r requirements-core.lock.txt
 numpy==2.4.6
 pandas==2.3.3
 scipy==1.17.1

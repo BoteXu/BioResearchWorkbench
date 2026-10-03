@@ -28,3 +28,5 @@ bridge/supplements/
 *.key
 *.pfx
 *.p12
+browser-token.txt
+*.token

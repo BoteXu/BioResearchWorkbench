@@ -1,5 +1,5 @@
 {
-  "bridge_version": "2.4",
+  "bridge_version": "2.5",
   "files": [
     {
       "path": ".gitattributes",
@@ -8,18 +8,18 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 1663,
-      "sha256": "039fdf6aaae0e47ca436bacd05e4ba49d5097667613457e25ceadf045dbd206e"
+      "bytes": 2324,
+      "sha256": "337aebdf6fcd9ed08de14e55fc751691a05d0fbae11ac6e1594a5acb9e4e14c8"
     },
     {
       "path": ".gitignore",
-      "bytes": 441,
-      "sha256": "0ce23e128581d178d45b1095c9803b21ca8ae3a5d633bae39d070a2d3e0e70a4"
+      "bytes": 467,
+      "sha256": "9256b58b91684a5cd3211ec232322cd958aca914b3210a68c7bfc5837bf47c12"
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 3157,
-      "sha256": "643e6d5bda31645218f7e843a2a53f78b4c7b0e4071a5f8aa684b5674592b12a"
+      "bytes": 3487,
+      "sha256": "9ab534af15cbedfe6cedc06da87064b85b88294a7fefc159d5fc9e95b3809317"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -28,8 +28,13 @@
     },
     {
       "path": "Install.ps1",
-      "bytes": 4173,
-      "sha256": "fae80b7fa80f3dc113cc16eefab78d3335a2f1201777b5084edaeb32594b1d52"
+      "bytes": 883,
+      "sha256": "bf08aba1ac8b596a18fe733eb61bb8dbd5e2eb4ffefbf37cb51647df22bfc52a"
+    },
+    {
+      "path": "Install.sh",
+      "bytes": 254,
+      "sha256": "c052d729a353e1c4c6bc2cea1f17c6a58654316485a47e32e7d99bc16d534988"
     },
     {
       "path": "LICENSE",
@@ -42,14 +47,19 @@
       "sha256": "7cccc61d8605af72aa490074af25e6afe65cc38ec5cfb439b7d30aa431657701"
     },
     {
+      "path": "PLATFORMS.md",
+      "bytes": 6262,
+      "sha256": "4cc9f5099d1bd70574dd7fe5b24a0ba08ddb9f09387a52f90361d604574d3776"
+    },
+    {
       "path": "PRIVACY.md",
       "bytes": 1522,
       "sha256": "20e9c32d14d625a2bb82356a48e170b78431dbbd4af198a4b76927b724941ad9"
     },
     {
       "path": "README.md",
-      "bytes": 10009,
-      "sha256": "cca6c2c070e3460ec255774ab49e4780ddf11cb70b47014cd005ba3efc18edaf"
+      "bytes": 10366,
+      "sha256": "ef3b5af961dd06c7b1953907d78d50fd24365a0ada17721a25cbc5c6bbc4d965"
     },
     {
       "path": "audit_release.py",
@@ -73,8 +83,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 22390,
-      "sha256": "b21eca41e0ae1b5c46c0931c1de141aa64f034e26254a48d58e92850d37c4853"
+      "bytes": 22408,
+      "sha256": "2ec061281ac917e4d65b87270a6aa64c47d258bc1802dd9ebb601fd159ade4fc"
     },
     {
       "path": "bridge/database_ext.py",
@@ -152,6 +162,11 @@
       "sha256": "688ef3becbf872cf38d599d76b6a9b60cf934d13277aff41b81f0e184c502928"
     },
     {
+      "path": "bridge/web_gateway.py",
+      "bytes": 12097,
+      "sha256": "59076e89213de04aa339c27373af852d6636aebb6b37bd5352c36df09a4d8141"
+    },
+    {
       "path": "bridge/workflow_ext.py",
       "bytes": 16873,
       "sha256": "599f5acd7990c4c4a87aabe3dc61f2e8da8273a515c934beff6ae22bc1af6b13"
@@ -172,6 +187,16 @@
       "sha256": "b97e73980fa050f1261d0ce515bbf06618bce6e1ea648c9c4f8bf01900dda887"
     },
     {
+      "path": "install.py",
+      "bytes": 4300,
+      "sha256": "a2cd31ca3d6000f8299be42686dff6ef7df53ea4b9802789260c0c4744895d2b"
+    },
+    {
+      "path": "requirements-core.lock.txt",
+      "bytes": 699,
+      "sha256": "7d5bbecd9640fbbfaf58a96736e16e292513720c6f9a9965a85e62719555b738"
+    },
+    {
       "path": "requirements-core.txt",
       "bytes": 80,
       "sha256": "e85bb6d9defc07f39083fcefaca58ac4fc6996825ce35bab136e18133564577e"
@@ -182,9 +207,14 @@
       "sha256": "dceb27404c5d74200b941213cfc11c09702ff42d5a0637ed7a35d192df46e52f"
     },
     {
+      "path": "requirements-full.lock.txt",
+      "bytes": 2229,
+      "sha256": "4b395d855c10395c6f50be4a530e9ffc5e7a17da8b37f01a156c199e19e823b9"
+    },
+    {
       "path": "requirements-omics.txt",
-      "bytes": 137,
-      "sha256": "6bf151658a28cdc8cd79c99c0cf1a0ef5d53fcef5ae6fc20b4d1826ef675d05d"
+      "bytes": 123,
+      "sha256": "1c87f49fd9fd13fbebc3fa4d491b34f6eea6e7e0a3590e6c9b74673ae1b5598e"
     },
     {
       "path": "requirements.windows-py311.lock.txt",
@@ -197,6 +227,11 @@
       "sha256": "a10703786bd4706f67f6f67a4de13909a4e2f3c5a9f0c46d248fe9675875b819"
     },
     {
+      "path": "tests/browser_check.py",
+      "bytes": 2639,
+      "sha256": "08e088cd12e56a3ca9e821dc6a76cabfceef2ba9bdccc863875180c9d322f027"
+    },
+    {
       "path": "tests/test_biomedical.py",
       "bytes": 11047,
       "sha256": "86bf90cd19d5b23c061ec37afcd512dade62dd0e003770ec97793def08ba476b"
@@ -207,6 +242,11 @@
       "sha256": "b2e7342640fef8a9a160efc8e24dbfe9401789a9606d5fc1215676d0596356dc"
     },
     {
+      "path": "tests/test_platforms.py",
+      "bytes": 4994,
+      "sha256": "5fda5752d4f1824a91d97b059c40c0b34e7db1eca66214f11dbd5e7b322b02e0"
+    },
+    {
       "path": "tests/test_research.py",
       "bytes": 6346,
       "sha256": "2b13e240066178d7f33489966ab86213e519e50c799dfaf176e0f687bbcdabc0"
@@ -214,7 +254,7 @@
     {
       "path": "update_manifest.py",
       "bytes": 760,
-      "sha256": "5bbcc923590ca6f19c159a9266ce676f97717efc5cdbabbfc497bbf3b6eed753"
+      "sha256": "e5785282eaa3dd35cebffb330d6fa4dba76024857dc4d984c0d2f8f5813217bc"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",

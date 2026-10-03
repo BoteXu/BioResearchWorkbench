@@ -18,8 +18,23 @@ jobs:
           python-version: '3.11'
       - run: python audit_release.py --history --manifest
       - run: python run_acceptance.py
-  clean-windows-install:
-    runs-on: windows-latest
+  browser-interface:
+    runs-on: ubuntu-latest
+    needs: privacy-and-unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python tests/browser_check.py
+  clean-platform-install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
     needs: privacy-and-unit
     steps:
       - uses: actions/checkout@v4
@@ -27,19 +42,23 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install uv
+      - name: Validate platform wrapper
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            pwsh -NoProfile -File ./Install.ps1 -ValidateOnly
+          else
+            sh ./Install.sh --validate-only
+          fi
       - name: Fresh core installation and MCP network smoke
-        shell: pwsh
+        shell: bash
         run: |
-          ./Install.ps1 -Profile core -Client portable -SkipRegistration -InstallDir (Join-Path $env:RUNNER_TEMP 'BiomniCore')
+          python install.py --profile core --client portable --skip-registration --install-dir "$RUNNER_TEMP/BiomniCore"
       - name: Confirm core profile stays lightweight
-        shell: pwsh
+        shell: bash
         run: |
-          $python = Join-Path $env:RUNNER_TEMP 'BiomniCore/.venv_tools/Scripts/python.exe'
-          & $python -c "import importlib.util; assert all(importlib.util.find_spec(n) is None for n in ['numpy','pandas','scipy','torch','langchain'])"
-          if ($LASTEXITCODE -ne 0) { throw 'Unexpected scientific or model dependencies in core profile' }
+          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'-c',\"import importlib.util; assert all(importlib.util.find_spec(n) is None for n in ['numpy','pandas','scipy','torch','langchain'])\"],check=True)"
       - name: Fixed public identity acceptance suite
-        shell: pwsh
+        shell: bash
         run: |
-          $python = Join-Path $env:RUNNER_TEMP 'BiomniCore/.venv_tools/Scripts/python.exe'
-          & $python run_acceptance.py --network
-          if ($LASTEXITCODE -ne 0) { throw 'Public identity acceptance failed' }
+          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'run_acceptance.py','--network'],check=True)"
