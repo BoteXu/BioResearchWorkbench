@@ -37,11 +37,13 @@ def checked(argv, env=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--install-dir',default=str(Path.home()/'BiomniTools'))
-    parser.add_argument('--profile',choices=['core','omics','full'],default='core')
+    default_profile = json.loads((ROOT/'edition.json').read_text(encoding='utf8'))['default_profile']
+    parser.add_argument('--profile',choices=['core','local','omics','full'],default=default_profile)
     parser.add_argument('--client',choices=['codex','claude-desktop','vscode','portable'],default='codex')
     parser.add_argument('--skip-registration',action='store_true')
     parser.add_argument('--trust-dns-proxy',action='store_true')
     parser.add_argument('--validate-only',action='store_true')
+    parser.add_argument('--install-vina',action='store_true',help='Download the fixed official Vina binary for this host')
     args = parser.parse_args()
     validate_package()
     if args.validate_only:
@@ -66,19 +68,27 @@ def main():
     local = target/'.local'
     local.mkdir()
     for file in (ROOT/'bridge').iterdir():
-        if file.is_file() and file.suffix=='.py':
+        if file.is_file() and file.suffix in {'.py','.R'}:
             shutil.copy2(file,local/file.name)
+    (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')
     checked([uv,'venv','--python','3.11',target/'.venv_tools'])
     python = runtime_python(target)
-    requirements = {'core':'requirements-core.lock.txt','omics':'requirements-omics.txt','full':'requirements-full.lock.txt'}[args.profile]
+    requirements = {'core':'requirements-core.lock.txt','local':'requirements-local.txt','omics':'requirements-omics.txt','full':'requirements-full.lock.txt'}[args.profile]
     checked([uv,'pip','install','--python',python,'-r',ROOT/requirements])
     checked([uv,'pip','install','--python',python,'--no-deps','-e',target])
     env = {**os.environ,'PYTHONUTF8':'1'}
     if args.trust_dns_proxy:
         env['BIOMNI_TRUST_DNS_PROXY']='1'
+    if args.install_vina:
+        if args.profile!='local': raise ValueError('Vina installation is for the optional local edition')
+        from bootstrap_vina import fetch
+        fetch(local/'bin'/('vina.exe' if os.name=='nt' else 'vina'))
     checked([python,local/'bridge.py','--status'],env)
     checked([python,local/'smoke_mcp.py','--network'],env)
+    placement = 'server' if args.profile!='local' else 'local'
     text = (ROOT/'AGENTS.template.md').read_text(encoding='utf8').replace('{{INSTALL_DIR}}',target.as_posix()).replace('{{PYTHON}}',python.as_posix())
+    if placement=='local':
+        text+='\nThis is the optional local analysis edition. Explicit bounded transcriptomics and single-ligand docking workflows may run locally after input/design/resource checks. Large computations still belong on the server. Use real local-job completion receipts.\n'
     (target/'AGENTS.generated.md').write_text(text,encoding='utf8',newline='\n')
     generate(target,target/'client_configs',args.trust_dns_proxy)
     if codex:

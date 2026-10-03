@@ -1,0 +1,28 @@
+args <- commandArgs(trailingOnly=TRUE)
+stopifnot(length(args)==2)
+folder <- args[[1]]; method <- args[[2]]
+if (!requireNamespace('edgeR', quietly=TRUE)) stop('Install edgeR in the selected R environment')
+y <- as.matrix(read.csv(file.path(folder,'counts.csv'),row.names=1,check.names=FALSE))
+design <- as.matrix(read.csv(file.path(folder,'design_matrix.csv'),row.names=1,check.names=FALSE))
+stopifnot(identical(colnames(y),rownames(design)))
+dge <- edgeR::DGEList(counts=y)
+dge <- edgeR::calcNormFactors(dge)
+if (method=='edgeR_ql') {
+  dge <- edgeR::estimateDisp(dge,design)
+  fit <- edgeR::glmQLFit(dge,design)
+  test <- edgeR::glmQLFTest(fit,coef=ncol(design))
+  tab <- edgeR::topTags(test,n=Inf,sort.by='none')$table
+  result <- data.frame(log2FoldChange=tab$logFC,baseMean=tab$logCPM,stat=sign(tab$logFC)*sqrt(tab$F),pvalue=tab$PValue,padj=tab$FDR,row.names=rownames(tab))
+  ver <- paste('edgeR',utils::packageVersion('edgeR'))
+} else if (method=='limma_voom') {
+  if (!requireNamespace('limma',quietly=TRUE)) stop('Install limma')
+  v <- limma::voom(dge,design,plot=FALSE)
+  fit <- limma::eBayes(limma::lmFit(v,design))
+  tab <- limma::topTable(fit,coef=ncol(design),number=Inf,sort.by='none')
+  result <- data.frame(log2FoldChange=tab$logFC,baseMean=tab$AveExpr,stat=tab$t,pvalue=tab$P.Value,padj=tab$adj.P.Val,row.names=rownames(tab))
+  ver <- paste('limma',utils::packageVersion('limma'),'edgeR',utils::packageVersion('edgeR'))
+} else stop('Unsupported count method')
+write.csv(result,file.path(folder,'differential_expression.csv'))
+write.csv(edgeR::cpm(dge,log=TRUE,prior.count=1),file.path(folder,'log_cpm.csv'))
+write.csv(dge$samples,file.path(folder,'sample_qc.csv'))
+writeLines(ver,file.path(folder,'backend_version.txt'))

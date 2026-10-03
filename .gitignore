@@ -30,3 +30,7 @@ bridge/supplements/
 *.p12
 browser-token.txt
 *.token
+bridge/compute_config.json
+
+bridge/software_registry.json
+bridge/bin/

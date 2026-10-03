@@ -1,5 +1,5 @@
 {
-  "bridge_version": "2.5",
+  "bridge_version": "2.6",
   "files": [
     {
       "path": ".gitattributes",
@@ -8,18 +8,18 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 2324,
-      "sha256": "337aebdf6fcd9ed08de14e55fc751691a05d0fbae11ac6e1594a5acb9e4e14c8"
+      "bytes": 3546,
+      "sha256": "873e5adaf38484fc2646220b832273739c598a67fea4c0b0018a925afd16f7b0"
     },
     {
       "path": ".gitignore",
-      "bytes": 467,
-      "sha256": "9256b58b91684a5cd3211ec232322cd958aca914b3210a68c7bfc5837bf47c12"
+      "bytes": 537,
+      "sha256": "5d5d2131c478e157c26a1f9169b5f002998802c84e1892c597f217191da090d5"
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 3487,
-      "sha256": "9ab534af15cbedfe6cedc06da87064b85b88294a7fefc159d5fc9e95b3809317"
+      "bytes": 4166,
+      "sha256": "3d40011b0019c52719f84754d24b7e67c4fc5511512a5f3716758089747e8b2d"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -28,8 +28,8 @@
     },
     {
       "path": "Install.ps1",
-      "bytes": 883,
-      "sha256": "bf08aba1ac8b596a18fe733eb61bb8dbd5e2eb4ffefbf37cb51647df22bfc52a"
+      "bytes": 1009,
+      "sha256": "1c225b69c58bd6206f901da51161301494f5bd1f4eee736c1243d9cde6a1a19e"
     },
     {
       "path": "Install.sh",
@@ -40,6 +40,11 @@
       "path": "LICENSE",
       "bytes": 11357,
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "LOCAL_ANALYSIS.md",
+      "bytes": 10122,
+      "sha256": "6749b95e92e4804f9aa71e6316cc5ff0de8fa3af5743d9af39a99f445f52f76c"
     },
     {
       "path": "NOTICE",
@@ -58,8 +63,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 10366,
-      "sha256": "ef3b5af961dd06c7b1953907d78d50fd24365a0ada17721a25cbc5c6bbc4d965"
+      "bytes": 10703,
+      "sha256": "5cdda29fd293c88159dad1e5ffa0e8a2c06610a0d0e6dc824c1769f5494fe147"
+    },
+    {
+      "path": "SOFTWARE_INTERFACES.md",
+      "bytes": 3288,
+      "sha256": "77a708abc5ded78282af5863d27e5bc5597914bec6e5374a5f60f5db4d1b7c1c"
     },
     {
       "path": "audit_release.py",
@@ -70,6 +80,11 @@
       "path": "bootstrap_upstream.py",
       "bytes": 1766,
       "sha256": "a18553df3079e9960dbff5b3c21f56bea7c5d78a54ea20ffbb89c3a2e40e07d2"
+    },
+    {
+      "path": "bootstrap_vina.py",
+      "bytes": 1727,
+      "sha256": "eb178363e4f831e911324b58e847f7a8c039144670199a7a4890229b3d313d4a"
     },
     {
       "path": "bridge/atlas_ext.py",
@@ -83,8 +98,18 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 22408,
-      "sha256": "2ec061281ac917e4d65b87270a6aa64c47d258bc1802dd9ebb601fd159ade4fc"
+      "bytes": 22630,
+      "sha256": "3fea32dd102927106a9fa6fde2fbdf150c41c98b91df2defaa4ef579d825c319"
+    },
+    {
+      "path": "bridge/compute_policy.py",
+      "bytes": 704,
+      "sha256": "27de9fee0ffd42be45847c6d306e38841af8a60627459e1c8a1395db18d5b31d"
+    },
+    {
+      "path": "bridge/count_models.R",
+      "bytes": 1738,
+      "sha256": "d96d9afd312c2d4f6e2d2c17d750a156ad39f8d11dbe0a58f4281f8755b4b441"
     },
     {
       "path": "bridge/database_ext.py",
@@ -98,8 +123,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 2775,
-      "sha256": "8cc10ad16459e01d303f65ff4642d772f2cb610815471f3686dc07b6405a6fb4"
+      "bytes": 4609,
+      "sha256": "072bd9b3eb3bf7145e3059e7f26dc978252a8141dd1f35b8d1ee1748e2fd3552"
     },
     {
       "path": "bridge/http_client.py",
@@ -127,6 +152,11 @@
       "sha256": "6d27cb4ebc5a400ac7572ff8c86d76bd5a84a1df5e9c1d1bc1239986989b3a4e"
     },
     {
+      "path": "bridge/limma_pipeline.R",
+      "bytes": 1333,
+      "sha256": "9681bbef5d7d8c74e0e199a6395b10e2ade14c04631eb15ddc9549b25555a4aa"
+    },
+    {
       "path": "bridge/literature_ext.py",
       "bytes": 11575,
       "sha256": "ff281c4d9ae9b0f813a18ccf40f7cde5f9a6aa466748712f515c1effd89ece93"
@@ -137,9 +167,19 @@
       "sha256": "1974a031412a437346d8a11607f05f7e564eb89faa25504c69f422c9df4a3c5a"
     },
     {
+      "path": "bridge/molecular_ext.py",
+      "bytes": 8814,
+      "sha256": "2d0bab3676432bf1dd452c115b22e3794de2ba31a107947d4372e39901361484"
+    },
+    {
       "path": "bridge/omics_ext.py",
       "bytes": 18146,
       "sha256": "702b7f80e304d4a2a350655196d7402492d4c3c30a8559c656fe2e301ec7fd58"
+    },
+    {
+      "path": "bridge/qc_ext.py",
+      "bytes": 7240,
+      "sha256": "2a0952d8a6f9b55e52949e276efedaf58dbd89d3b51b7be7f196f21cbc71514c"
     },
     {
       "path": "bridge/remote_runner.py",
@@ -148,8 +188,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 16612,
-      "sha256": "52dcb4cf3c5d797101ebe1543889d31840d7dfa1e1f0ea1ea4090a8def382faa"
+      "bytes": 18028,
+      "sha256": "0b39de3de0cb9ac7df36a6c2ea1a02b6bc312b6038b7990d7e09faf1141229ec"
     },
     {
       "path": "bridge/server_probe.py",
@@ -162,9 +202,24 @@
       "sha256": "562df4c6220fa08ca4f27ba3494b4bfe1f23e4b029a46da5f51291812d324e4c"
     },
     {
+      "path": "bridge/software_ext.py",
+      "bytes": 8560,
+      "sha256": "7f6eaada9ec1b745f973b227cc016ff1e30ae8b4a786e66abd248be978b26c07"
+    },
+    {
+      "path": "bridge/systems_ext.py",
+      "bytes": 10283,
+      "sha256": "2d4d2d1aa682af06c8dacb83d42e1e4ebac21e9d0a9600f7a948ed9926f425f6"
+    },
+    {
+      "path": "bridge/transcriptomics_ext.py",
+      "bytes": 29579,
+      "sha256": "56de1402a50e25076e0642ac26cf76ac2f6faeaa8ce23cd89eaed123adf152f1"
+    },
+    {
       "path": "bridge/web_gateway.py",
-      "bytes": 12097,
-      "sha256": "59076e89213de04aa339c27373af852d6636aebb6b37bd5352c36df09a4d8141"
+      "bytes": 12223,
+      "sha256": "6d41c65a02df2e069c43057db01440c9594585c66660a353c8bc3709768442e0"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -172,9 +227,19 @@
       "sha256": "891d3a75b520ec77333683b0a3265074f20b2898248b2508ec6757bb12b0c9f6"
     },
     {
+      "path": "build_releases.py",
+      "bytes": 1926,
+      "sha256": "a29fcffe0d07d532f87704bc792e5b4e200d6e925453e4f6ec17dc1bdfa931d1"
+    },
+    {
       "path": "client_config.py",
       "bytes": 2168,
       "sha256": "344eb0f799af92e6f06c2699144c500284bf5fe34c47ef41573ecd49706dcdec"
+    },
+    {
+      "path": "edition.json",
+      "bytes": 46,
+      "sha256": "81b5b16fc62e3ce50bbd1113fa8c1547dcc6bc538b14b7fb39209fc4669f99a6"
     },
     {
       "path": "examples/biomedical_inputs.json",
@@ -188,8 +253,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 4300,
-      "sha256": "a2cd31ca3d6000f8299be42686dff6ef7df53ea4b9802789260c0c4744895d2b"
+      "bytes": 5350,
+      "sha256": "d771dd584f2eee76918abed683a6d4d78bc12006d864c8aa0e8c6ebfe499932d"
     },
     {
       "path": "requirements-core.lock.txt",
@@ -212,6 +277,11 @@
       "sha256": "4b395d855c10395c6f50be4a530e9ffc5e7a17da8b37f01a156c199e19e823b9"
     },
     {
+      "path": "requirements-local.txt",
+      "bytes": 222,
+      "sha256": "c401163391470d0b597353a245ef7ff7a37c20b091768128e584f7bf1d8711b5"
+    },
+    {
       "path": "requirements-omics.txt",
       "bytes": 123,
       "sha256": "1c87f49fd9fd13fbebc3fa4d491b34f6eea6e7e0a3590e6c9b74673ae1b5598e"
@@ -227,14 +297,29 @@
       "sha256": "a10703786bd4706f67f6f67a4de13909a4e2f3c5a9f0c46d248fe9675875b819"
     },
     {
+      "path": "tests/analysis_check.py",
+      "bytes": 8203,
+      "sha256": "98d2936f94bfd1fab950072c8a94e53f8517f4edc8aa3bc3367307a109881381"
+    },
+    {
       "path": "tests/browser_check.py",
       "bytes": 2601,
       "sha256": "595cacc2daf20630578286d958c9cb41bc10806512fef5dc58700b585d2ce8a1"
     },
     {
+      "path": "tests/ci_analysis.py",
+      "bytes": 609,
+      "sha256": "7f007fb53110022821a68e21741624571bb56095dc95cbbc6c08694ae13d4043"
+    },
+    {
       "path": "tests/test_biomedical.py",
       "bytes": 11047,
       "sha256": "86bf90cd19d5b23c061ec37afcd512dade62dd0e003770ec97793def08ba476b"
+    },
+    {
+      "path": "tests/test_compute.py",
+      "bytes": 3689,
+      "sha256": "0b32421e5682432bc5b3046ec76060848a3edafa80665a461b6574ff1ffea21a"
     },
     {
       "path": "tests/test_core.py",
@@ -254,7 +339,7 @@
     {
       "path": "update_manifest.py",
       "bytes": 760,
-      "sha256": "e5785282eaa3dd35cebffb330d6fa4dba76024857dc4d984c0d2f8f5813217bc"
+      "sha256": "b927d8f1b1a07c038a7a5f8b1bb64094958e913d8664daf54a46e34576bebf0d"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",

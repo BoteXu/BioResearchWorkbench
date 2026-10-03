@@ -1,0 +1,17 @@
+args <- commandArgs(trailingOnly=TRUE)
+stopifnot(length(args)==3)
+folder <- args[[1]]
+if (!requireNamespace('limma', quietly=TRUE)) stop('Install limma in your R environment before running this workflow')
+y <- as.matrix(read.csv(file.path(folder,'expression.csv'),row.names=1,check.names=FALSE))
+design <- as.matrix(read.csv(file.path(folder,'design_matrix.csv'),row.names=1,check.names=FALSE))
+contrast <- as.matrix(read.csv(file.path(folder,'contrast.csv'),row.names=1,check.names=FALSE))
+stopifnot(identical(colnames(y),rownames(design)),identical(colnames(design),rownames(contrast)))
+fit <- limma::lmFit(y,design)
+fit <- limma::contrasts.fit(fit,contrast)
+if (args[[2]]=='treat') {
+  fit <- limma::treat(fit,lfc=as.numeric(args[[3]]))
+} else if (args[[2]]=='ebayes') fit <- limma::eBayes(fit) else stop('Unknown test')
+if (args[[2]]=='treat') table <- limma::topTreat(fit,coef=1,number=Inf,sort.by='none',adjust.method='BH') else table <- limma::topTable(fit,coef=1,number=Inf,sort.by='none',adjust.method='BH')
+result <- data.frame(log2FoldChange=table$logFC,baseMean=table$AveExpr,stat=table$t,pvalue=table$P.Value,padj=table$adj.P.Val,row.names=rownames(table))
+write.csv(result,file.path(folder,'differential_expression.csv'))
+writeLines(as.character(utils::packageVersion('limma')),file.path(folder,'backend_version.txt'))

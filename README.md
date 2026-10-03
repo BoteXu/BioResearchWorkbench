@@ -1,6 +1,6 @@
 # Biomni Direct Tools
 
-Version 2.5 adds a unified Windows/macOS/Linux installer and a private responsive browser gateway for HarmonyOS computers, phones and tablets. See [PLATFORMS.md](PLATFORMS.md) for installation and verification boundaries. The ten biomedical evidence helpers remain documented in [BIOMEDICAL.md](BIOMEDICAL.md).
+Version 2.6 adds separately packaged server and local analysis editions. The local edition includes mandatory pre-analysis QC, three count-model backends, normalized-expression tests, small single-cell/pseudobulk workflows, pathway/PPI analysis, molecular descriptors, bounded Vina docking and persistent software interfaces. See [LOCAL_ANALYSIS.md](LOCAL_ANALYSIS.md) and [SOFTWARE_INTERFACES.md](SOFTWARE_INTERFACES.md). Platform access remains documented in [PLATFORMS.md](PLATFORMS.md).
 
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 
@@ -34,6 +34,7 @@ The default destination is a new `BiomniTools` folder under the current user's p
 | Profile | Scope |
 |---|---|
 | `core` (default) | Retrieval, documents, evidence, tasks and CSV/TSV result checks. No numpy, pandas, scipy, torch or model SDK stack is needed. |
+| `local` | Bounded local transcriptomics, pathways, PPI and molecular tools. R backends and external software require their own configured installations. |
 | `omics` | Core plus optional matrix/H5AD, enrichment and label-transfer helpers. Large analysis still belongs on the server. |
 | `full` | Previous dependency snapshot for additional upstream specialist imports; this is not E1 or proof that every upstream function works. |
 

@@ -62,3 +62,34 @@ jobs:
         shell: bash
         run: |
           python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'run_acceptance.py','--network'],check=True)"
+  local-analysis-install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    needs: privacy-and-unit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.4.3'
+          use-public-rspm: true
+      - name: Install missing R analysis backends in the CI environment
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace('BiocManager',quietly=TRUE)) install.packages('BiocManager',repos='https://cloud.r-project.org')
+          BiocManager::install(version='3.20',ask=FALSE)
+          BiocManager::install(c('limma','edgeR'),ask=FALSE,update=FALSE)
+      - run: python -m pip install uv
+      - name: Fresh local profile and pinned Vina
+        shell: bash
+        run: |
+          python install.py --profile local --client portable --skip-registration --install-vina --install-dir "$RUNNER_TEMP/BiomniLocal"
+      - name: Real optional backends on fixed synthetic data
+        shell: bash
+        run: |
+          python tests/ci_analysis.py

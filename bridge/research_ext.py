@@ -17,6 +17,20 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'preanalysis_qc':[('qc','preflight_transcriptomics')],
+    'method_comparison':[('qc','compare_analysis_results')],
+    'pathway_activity':[('systems','score_pathway_activity')],
+    'pathway_enrichment':[('omics','local_gene_set_enrichment'),('omics','preranked_gsea')],
+    'ppi':[('systems','query_string_network'),('systems','analyze_ppi_network')],
+    'software_interfaces':[('software','software_inventory'),('software','register_local_software')],
+    'bulk_rnaseq': [('transcriptomics','inspect_local_compute'),('transcriptomics','run_bulk_rnaseq')],
+    'single_cell': [('transcriptomics','inspect_local_compute'),('transcriptomics','run_small_single_cell')],
+    'pseudobulk': [('transcriptomics','aggregate_pseudobulk'),('transcriptomics','run_bulk_rnaseq')],
+    'normalized_expression': [('transcriptomics','run_normalized_expression')],
+    'molecular_properties': [('molecular','molecular_descriptors')],
+    'docking': [('molecular','audit_docking_inputs'),('molecular','run_vina_docking')],
+    'docking_audit': [('molecular','audit_docking_inputs'),('molecular','summarize_vina_poses')],
+    'compute_capacity': [('transcriptomics','inspect_local_compute')],
     'drug_target_audit': [('biomedical','audit_drug_target_records')],
     'cohort_eligibility': [('biomedical','assess_cohort_eligibility')],
     'genetic_alignment': [('biomedical','audit_genetic_alignment')],
@@ -49,20 +63,23 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
     if type(sensitive_data) is not bool or type(large_computation) is not bool:
         raise ValueError('Flags must be booleans')
     from bridge import tool_catalog
+    from compute_policy import edition
     selected = 'server_task' if large_computation else intent
     recommendations = []
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms'}
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
+        edition_allowed = not (entry or {}).get('requires_local_edition') or edition()=='local'
         recommendations.append({
             'category': category, 'name': name, 'catalog_entry': entry,
             'placement': 'local_preparation_for_server' if selected == 'server_task' else 'local',
             'uses_public_endpoint': public,
             'requires_specific_data_authorization': bool(sensitive_data and public),
             'missing_dependencies': missing,
-            'eligible_to_attempt': bool(entry and not missing and not (sensitive_data and public)),
+            'eligible_to_attempt': bool(entry and edition_allowed and not missing and not (sensitive_data and public)),
+            'compute_edition_allowed': edition_allowed,
             'runtime_success_established': bool(entry and entry.get('runtime_state') == 'passed'),
         })
     return {'requested_intent': intent, 'selected_intent': selected, 'recommendations': recommendations,
