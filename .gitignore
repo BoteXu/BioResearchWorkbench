@@ -34,3 +34,4 @@ bridge/compute_config.json
 
 bridge/software_registry.json
 bridge/bin/
+bridge/privacy_config.json

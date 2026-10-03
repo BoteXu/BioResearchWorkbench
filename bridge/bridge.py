@@ -198,7 +198,7 @@ def _source_manifest():
     manifest = []
     folder = HERE / "source_snapshots"
     folder.mkdir(exist_ok=True)
-    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py"):
+    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py", "statistics_ext.py", "advanced_ext.py", "server_ext.py", "scheduler_agent.py", "reporting_ext.py", "designed_expression.R", "tximport_pipeline.R", "dream_pipeline.R", "privacy_ext.py"):
         raw = (HERE / name).read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         path = folder / (digest + ".py")
@@ -220,7 +220,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
     preview = raw[:40000].decode("utf-8", errors="ignore")
     success = result.get("success", "error" not in result and not result.get("errors")) if isinstance(result, dict) else not (isinstance(result, str) and result.lower().startswith(("error", "an error occurred", "failed")))
     packages = {}
-    for package in ("biomni", "numpy", "pandas", "scipy", "scanpy", "gseapy", "pydeseq2", "rdkit", "networkx", "anndata", "igraph", "leidenalg"):
+    for package in ("biomni", "numpy", "pandas", "scipy", "scanpy", "gseapy", "pydeseq2", "rdkit", "networkx", "anndata", "igraph", "leidenalg", "statsmodels", "meeko", "gemmi"):
         try:
             packages[package] = version(package)
         except PackageNotFoundError:
@@ -238,7 +238,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
         "implementation": implementation,
         "sources": TRACE.get() or [],
         "input_files": _input_files(parameters),
-        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.6"},
+        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.7"},
         "bridge_source_manifest": _source_manifest(),
     }
     receipt_path = path.with_suffix(".receipt.json")
@@ -320,7 +320,7 @@ def readiness() -> dict:
         "database_module_ready": database_ready,
         "database_import_error": database_error,
         "available_tools": sorted(DATABASE_TOOLS),
-        "bridge_version": "2.6",
+        "bridge_version": "2.7",
         "compute_edition": __import__("compute_policy").edition(),
         "compute_placement": "Large calculations and data downloads run on the server. Local scope: retrieval, task preparation, command handoff, status/receipt and result auditing.",
         "runtime_health": health(),
@@ -332,6 +332,8 @@ def readiness() -> dict:
 
 
 def query_database(name: str, parameters: dict) -> dict:
+    from privacy_ext import enforce_outbound
+    enforce_outbound(parameters)
     _validate_parameters(parameters)
     if name not in DATABASE_TOOLS:
         raise ValueError(f"Unsupported Biomni database tool: {name}")
@@ -373,14 +375,22 @@ def _database_call(name, parameters):
             return getattr(self.original, attribute)
 
         def get(self, *args, **kwargs):
+            from privacy_ext import enforce_outbound
+            enforce_outbound({'url':args[0] if args else kwargs.get('url'),'parameters':kwargs.get('params',{})})
             kwargs.setdefault("timeout", 20)
-            response = self.original.get(*args, **kwargs)
+            with self.original.Session() as session:
+                session.trust_env = False
+                response = session.get(*args, **kwargs)
             trace_response(response)
             return response
 
         def post(self, *args, **kwargs):
+            from privacy_ext import enforce_outbound
+            enforce_outbound({'url':args[0] if args else kwargs.get('url'),'parameters':kwargs.get('params',{}),'payload':kwargs.get('json',kwargs.get('data',{}))})
             kwargs.setdefault("timeout", 20)
-            response = self.original.post(*args, **kwargs)
+            with self.original.Session() as session:
+                session.trust_env = False
+                response = session.post(*args, **kwargs)
             trace_response(response)
             return response
 

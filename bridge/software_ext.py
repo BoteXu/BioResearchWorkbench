@@ -76,6 +76,34 @@ def software_inventory() -> dict:
     return {'success':True,'software':rows,'cytoscape_interface':'local CyREST only; use explicit port and import operation','limitations':['Local discovery does not inspect the server. Use a real returned server inventory receipt.','Version and capability descriptions do not establish successful analysis execution.']}
 
 
+def check_software_health(names: list) -> dict:
+    """Re-probe configured fixed adapters and compare saved versions without launching analyses or overwriting registration."""
+    if not isinstance(names,list) or not 1<=len(names)<=len(SPECS) or len(set(names))!=len(names) or not set(names)<=set(SPECS): raise ValueError('Select distinct known adapters')
+    saved=_registry()['software'];rows=[]
+    for name in names:
+        try:
+            path=resolve(name);p=subprocess.run([path,*SPECS[name]['version_args']],capture_output=True,text=True,timeout=20,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+            version=(p.stdout+p.stderr).strip()[:4000];previous=saved.get(name,{}).get('version_output')
+            rows.append({'name':name,'path':path,'version_probe_pass':p.returncode==0,'version_output':version,'registered':name in saved,'version_changed':previous is not None and previous!=version})
+        except (ValueError,OSError,subprocess.TimeoutExpired) as exc: rows.append({'name':name,'version_probe_pass':False,'error_type':type(exc).__name__})
+    return {'success':True,'adapters':rows,'all_version_probes_passed':all(r['version_probe_pass'] for r in rows),'limitations':['A version probe does not execute an analysis or verify optional packages.','A changed version calls for compatibility review; no installation or automatic registry rewrite occurs.']}
+
+
+def inspect_cytoscape_health(port: int = 1234) -> dict:
+    """Read local running Cytoscape CyREST version and available layouts; record connection failure without claiming GUI validation."""
+    if type(port) is not int or not 1<=port<=65535: raise ValueError('Provide a valid local CyREST port')
+    import requests
+    session=requests.Session();session.trust_env=False
+    try:
+        base='http://localhost:'+str(port)+'/v1'
+        version=session.get(base+'/version',timeout=10);version.raise_for_status()
+        layouts=session.get(base+'/apply/layouts',timeout=10);layouts.raise_for_status()
+        return {'success':True,'connection_state':'responding','version':version.json(),'layouts':layouts.json(),'limitations':['Endpoint responses do not prove network rendering, GUI inspection or successful export.','Local host only; no public endpoint is configured.']}
+    except requests.RequestException as exc:
+        return {'success':False,'connection_state':'unavailable','error_type':type(exc).__name__,'limitations':['An unavailable GUI is not silently installed or started.']}
+    finally: session.close()
+
+
 def convert_molecular_structure(input_path: str, output_format: str, context: dict, obabel: str = 'obabel', ph: float = 7.4, generate_3d: bool = False) -> dict:
     """Convert one bounded structure through configured Open Babel with explicit pH/3D flags; chemistry needs review."""
     from compute_policy import require_local

@@ -1,6 +1,6 @@
 # Server and local analysis editions
 
-Version 2.6 distributes two source-only ZIP files from the same audited source tree. `edition.json` selects the default installation profile; each archive has its own verified manifest.
+Version 2.7 distributes two source-only ZIP files from the same audited source tree. `edition.json` selects the default installation profile; each archive has its own verified manifest.
 
 | Edition | Default profile | Intended use |
 |---|---|---|
@@ -68,3 +68,7 @@ The local edition is an explicit installation choice. The server edition refuses
 Implementation follows the primary [PyDESeq2 workflow](https://pydeseq2.readthedocs.io/en/stable/auto_examples/plot_minimal_pydeseq2_pipeline.html), [Scanpy clustering workflow](https://scanpy.readthedocs.io/en/stable/tutorials/basics/clustering.html), [limma guide](https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf), [edgeR package](https://bioconductor.org/packages/edgeR/), [GSEApy tutorial](https://gseapy.readthedocs.io/en/latest/gseapy_example.html), [STRING API](https://string-db.org/help/api/) and [Vina docking guide](https://autodock-vina.readthedocs.io/en/latest/docking_basic.html).
 
 `tests/analysis_check.py` runs real selected backends on fixed synthetic inputs, checking contrast direction/reversal, mandatory QC refusal, exact pseudobulk sums, pathway/network behavior and toy docking execution. Such checks establish listed software behavior; they do not validate docking accuracy, general biomedical reasoning or a real study. Inspect the actual release CI result and its platform-specific jobs before claiming verification. Open Babel and a real Cytoscape GUI require separate installed-software checks; native HarmonyOS and Linux ARM64 remain outside the clean-install matrix.
+
+## Version 2.7 additions
+
+See STATISTICS.md for consultation and bounded statistics, RESEARCH_WORKFLOWS.md for complex designs/imports/donor/network/molecular/server adapters, and PRIVACY_SECURITY.md for private routing and publication exclusions. A requested server workflow is not live-tested merely because its helper script exists.

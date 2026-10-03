@@ -27,3 +27,7 @@ Use the existing `workflow.prepare_server_inventory` bundle and your own shared 
 ## Portability
 
 Private registry settings are host-specific. Share the public package and these contracts with another person; they register their own installations and server route. Do not copy your private registry or generated client configurations into their package or a public issue.
+
+## Version 2.7 health and preparation
+
+Fixed version health comparisons and local CyREST health queries are available. Meeko single-ligand preparation has a bounded local adapter; receptor preparation is a server command adapter. Open Babel optional binary packaging is listed in requirements-interfaces.txt; a Windows synthetic conversion has executed. A live Cytoscape GUI remains unverified. See RESEARCH_WORKFLOWS.md and PRIVACY_SECURITY.md.

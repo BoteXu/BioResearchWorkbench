@@ -113,3 +113,31 @@ def run_vina_docking(receptor_path: str, ligand_path: str, center: list, box_siz
         (folder/'state.json').write_text('{"state":"failed_or_interrupted"}\n',encoding='utf8')
         raise
     return _finish(folder,{'workflow':'single_ligand_docking','backend':'AutoDock Vina','backend_version':checked.stdout.strip(),'parameters':config,'context':context,'input_audit':gate,'results':result,'limitations':result['limitations']+['Single run only; use protocol-matched repeats and experimental/reference controls before scientific interpretation.','Large libraries, flexible-receptor work and molecular dynamics belong on the server.']})
+def prepare_ligand_meeko(sdf_path: str, context: dict) -> dict:
+    """Prepare one reviewed explicit-hydrogen 3D SDF with Meeko; retain provenance, refuse guessed protonation or multiple molecules."""
+    from compute_policy import require_local
+    from transcriptomics_ext import _context,_folder,_finish
+    from pathlib import Path
+    from importlib.metadata import version
+    import hashlib
+    require_local();_context(context)
+    for key in ['protonation_review','stereochemistry_review','tautomer_review']:
+        if not context.get(key): raise ValueError('Record explicit ligand chemistry review: '+key)
+    source=Path(sdf_path).resolve(strict=True)
+    if source.suffix.lower()!='.sdf' or source.stat().st_size>10000000: raise ValueError('Provide a bounded prepared SDF')
+    from rdkit import Chem
+    from meeko import MoleculePreparation,PDBQTWriterLegacy
+    mols=list(Chem.SDMolSupplier(str(source),removeHs=False))
+    if len(mols)!=1 or mols[0] is None: raise ValueError('Exactly one valid ligand is required')
+    mol=mols[0]
+    if mol.GetNumAtoms()>300 or len(Chem.GetMolFrags(mol))!=1 or not mol.GetNumConformers() or not mol.GetConformer().Is3D(): raise ValueError('Provide a single bounded connected ligand with 3D coordinates')
+    if any(atom.GetNumImplicitHs()>0 for atom in mol.GetAtoms()): raise ValueError('Hydrogens must be explicit; protonation is not guessed')
+    import math
+    if any(not math.isfinite(v) for p in mol.GetConformer().GetPositions() for v in p): raise ValueError('Nonfinite conformer')
+    prepared=MoleculePreparation().prepare(mol)
+    if len(prepared)!=1: raise ValueError('Unexpected multiple molecular setups')
+    text,ok,error=PDBQTWriterLegacy.write_string(prepared[0])
+    if not ok: raise ValueError('Meeko preparation failed: '+error)
+    folder=_folder('ligand_preparation');(folder/'ligand.pdbqt').write_text(text,encoding='utf8')
+    return _finish(folder,{'workflow':'meeko_ligand_preparation','backend_version':version('meeko'),'input_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'context':context,'limitations':['This preserves the supplied chemical state; it does not establish correct protonation, tautomer or stereochemistry.','Meeko default atom typing is recorded by package version; metals/covalent/reactive ligands need a dedicated reviewed workflow.','Run docking-input QC before any docking search.']})
+

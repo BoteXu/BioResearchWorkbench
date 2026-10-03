@@ -72,6 +72,8 @@ def main():
     for file in (ROOT/'bridge').iterdir():
         if file.is_file() and file.suffix in {'.py','.R'}:
             shutil.copy2(file,local/file.name)
+    for guide in ROOT.glob('*.md'):
+        shutil.copy2(guide,local/guide.name)
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')
     checked([uv,'venv','--python','3.11',target/'.venv_tools'])
     python = runtime_python(target)

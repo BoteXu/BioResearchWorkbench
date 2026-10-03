@@ -105,12 +105,14 @@ def _folder(name):
 
 def _finish(folder,data):
     files = []
-    for file in sorted(folder.iterdir()):
-        if file.is_file() and file.name not in {'report.html','state.json','summary.json'}:
-            files.append({'name':file.name,'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
+    for file in sorted(folder.rglob('*')):
+        if file.is_symlink(): raise ValueError('Analysis outputs must not contain symbolic links')
+        if file.is_file() and file not in {folder/'report.html',folder/'state.json',folder/'summary.json'}:
+            files.append({'name':file.relative_to(folder).as_posix(),'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
     data.update(output_directory=str(folder),outputs=files,scientific_validity_established=False)
     (folder/'summary.json').write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf8')
-    (folder/'report.html').write_text('<!doctype html><meta charset="utf-8"><title>Analysis report</title><h1>Analysis report</h1><pre>'+html.escape(json.dumps(data,ensure_ascii=False,indent=2))+'</pre>',encoding='utf8')
+    from reporting_ext import render_report
+    render_report(folder,data)
     (folder/'state.json').write_text('{"state":"succeeded"}\n',encoding='utf8')
     return {'success':True,**data,'report_file':str(folder/'report.html')}
 

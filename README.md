@@ -1,6 +1,6 @@
 # Biomni Direct Tools
 
-Version 2.6 adds separately packaged server and local analysis editions. The local edition includes mandatory pre-analysis QC, three count-model backends, normalized-expression tests, small single-cell/pseudobulk workflows, pathway/PPI analysis, molecular descriptors, bounded Vina docking and persistent software interfaces. See [LOCAL_ANALYSIS.md](LOCAL_ANALYSIS.md) and [SOFTWARE_INTERFACES.md](SOFTWARE_INTERFACES.md). Platform access remains documented in [PLATFORMS.md](PLATFORMS.md).
+Version 2.7 adds a dedicated statistics consultation module, complex expression designs, expanded analysis/review workflows, real server-side Slurm adapters and stronger privacy gates. See [STATISTICS.md](STATISTICS.md), [RESEARCH_WORKFLOWS.md](RESEARCH_WORKFLOWS.md) and [PRIVACY_SECURITY.md](PRIVACY_SECURITY.md). It retains separately packaged server and local analysis editions. The local edition includes mandatory pre-analysis QC, three count-model backends, normalized-expression tests, small single-cell/pseudobulk workflows, pathway/PPI analysis, molecular descriptors, bounded Vina docking and persistent software interfaces. See [LOCAL_ANALYSIS.md](LOCAL_ANALYSIS.md) and [SOFTWARE_INTERFACES.md](SOFTWARE_INTERFACES.md). Platform access remains documented in [PLATFORMS.md](PLATFORMS.md).
 
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 

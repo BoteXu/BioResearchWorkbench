@@ -81,7 +81,7 @@ class PlatformChecks(unittest.TestCase):
         thread.start()
         try:
             def request(headers,body='{}'):
-                connection = http.client.HTTPConnection('localhost',server.server_port,timeout=5)
+                connection = http.client.HTTPConnection(server.server_address[0],server.server_port,timeout=5)
                 connection.request('POST','/api',body,{**{'Content-Type':'application/json'},**headers})
                 response = connection.getresponse()
                 status,data = response.status,json.loads(response.read())

@@ -30,6 +30,8 @@ def _public_url(url):
 
 
 def request(url, method="GET", params=None, payload=None, limit_bytes=30_000_000):
+    from privacy_ext import enforce_outbound
+    enforce_outbound({'url':url,'parameters':params or {},'payload':payload or {}})
     parsed = _public_url(url)
     if parsed.hostname == "eutils.ncbi.nlm.nih.gov":
         throttle("ncbi", 0.36)
@@ -39,9 +41,12 @@ def request(url, method="GET", params=None, payload=None, limit_bytes=30_000_000
             raise ValueError("Request payload exceeds 2 MB")
         headers["Content-Type"] = "application/json"
     response = None
+    # A private netrc or environment credential must never be attached implicitly.
+    session = requests.Session()
+    session.trust_env = False
     for attempt in range(2):
         for redirect in range(6):
-            response = requests.request(method, url, params=params, json=payload, headers=headers, timeout=(10, 40), stream=True, allow_redirects=False)
+            response = session.request(method, url, params=params, json=payload, headers=headers, timeout=(10, 40), stream=True, allow_redirects=False)
             if response.status_code not in {301, 302, 303, 307, 308}:
                 break
             destination = urljoin(response.url, response.headers.get("Location", ""))
@@ -72,6 +77,7 @@ def request(url, method="GET", params=None, payload=None, limit_bytes=30_000_000
         return raw, source
     finally:
         response.close()
+        session.close()
 
 
 def get_json(url, params=None):

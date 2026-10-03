@@ -9,3 +9,4 @@ from install import runtime_python
 root=Path(os.environ['RUNNER_TEMP'])/'BiomniLocal'
 binary=root/'.local'/'bin'/('vina.exe' if os.name=='nt' else 'vina')
 subprocess.run([str(runtime_python(root)),'tests/analysis_check.py'],check=True,env={**os.environ,'VINA':str(binary),'PYTHONUTF8':'1','BIOMNI_COMPUTE_EDITION':'local','NUMBA_NUM_THREADS':'2','OMP_NUM_THREADS':'2','OPENBLAS_NUM_THREADS':'2'})
+subprocess.run([str(runtime_python(root)),'tests/advanced_check.py'],check=True,env={**os.environ,'PYTHONUTF8':'1','BIOMNI_COMPUTE_EDITION':'local','NUMBA_NUM_THREADS':'2','OMP_NUM_THREADS':'2','OPENBLAS_NUM_THREADS':'2'})

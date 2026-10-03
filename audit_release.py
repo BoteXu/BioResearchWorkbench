@@ -18,7 +18,10 @@ RUNTIME = {'results','jobs','outputs','sources','source_snapshots','evidence','d
 
 
 def scan_text(text, deny_terms=()):
-    findings = [category for category,pattern in PATTERNS.items() if re.search(pattern,text)]
+    # The optional Open Babel distribution uses a four-component public package version.
+    # Exempt only its complete requirements line; all other address text remains scanned.
+    address_text = re.sub(r'(?m)^openbabel-wheel==[0-9]+(?:\.[0-9]+){3}\r?$', 'PUBLIC_PACKAGE_VERSION', text)
+    findings = [category for category,pattern in PATTERNS.items() if re.search(pattern,address_text if category=='address_literal' else text)]
     if any(term.casefold() in text.casefold() for term in deny_terms if term):
         findings.append('private_deny_term')
     return findings
