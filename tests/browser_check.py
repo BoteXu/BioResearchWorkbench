@@ -31,6 +31,7 @@ def main():
             for width in (360,1200):
                 page = browser.new_page(viewport={'width':width,'height':800})
                 page.goto(f'http://localhost:{server.server_port}')
+                expect(page.locator('h1')).to_have_text('BioResearchWorkbench 工具连接')
                 page.locator('#token').fill(token)
                 page.locator('#connect').click()
                 expect(page.locator('#tool option')).to_have_count(1)

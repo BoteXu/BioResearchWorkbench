@@ -335,8 +335,8 @@
     },
     {
       "path": "bridge/web_gateway.py",
-      "bytes": 12834,
-      "sha256": "9e3df85cab291db8934fab8c9f520be053fab1d7ff5ab81819471508080f1c0d"
+      "bytes": 12860,
+      "sha256": "9a7009b1b93bd495d98449364da1f6bea5d4a5b637aedac93b99f3a23c937653"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -375,8 +375,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 6547,
-      "sha256": "8f39b72b757235f0690fec3f2550d715cdef8617f49e8623d38d9815398b63a2"
+      "bytes": 6566,
+      "sha256": "88c0443755b69f3e94dc7d8799707bc69d498bcfb02abd22adc83686652ab925"
     },
     {
       "path": "install_skills.py",
@@ -590,8 +590,8 @@
     },
     {
       "path": "tests/browser_check.py",
-      "bytes": 2601,
-      "sha256": "595cacc2daf20630578286d958c9cb41bc10806512fef5dc58700b585d2ce8a1"
+      "bytes": 2694,
+      "sha256": "55633b0c7a02e6a6d4a61b98e76145573da13ee1aff2fc087b217663a88d2d74"
     },
     {
       "path": "tests/ci_analysis.py",

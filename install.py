@@ -69,7 +69,7 @@ def main():
         if not codex:
             raise ValueError('Codex CLI missing; choose --client portable or --skip-registration')
         if subprocess.run([codex,'mcp','get',mcp_name],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
-            raise ValueError('Existing biomni registration; inspect it first or use --skip-registration')
+            raise ValueError('Existing registration for the selected MCP name; inspect it first or use --skip-registration')
     target = Path(args.install_dir or Path.home()/('BioResearchWorkbenchLocal' if args.profile=='local' else 'BioResearchWorkbench')).expanduser().resolve()
     if target.exists():
         raise ValueError('Choose a new installation directory')
