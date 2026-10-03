@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import uuid
+import os
 from pathlib import Path, PurePosixPath
 from evidence import atomic_json
 
@@ -52,7 +53,14 @@ def inspect_ssh_route(alias: str = 'server') -> dict:
     """Read effective local SSH configuration without connecting or collecting credentials."""
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,100}', alias):
         raise ValueError('Use a configured SSH alias')
-    p = subprocess.run(['ssh', '-G', alias], capture_output=True, text=True, timeout=15, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+    executable = shutil.which('ssh')
+    if os.name=='nt':
+        native = Path(os.environ.get('SystemRoot',''))/'System32'/'OpenSSH'/'ssh.exe'
+        if native.is_file():
+            executable = str(native)
+    if not executable:
+        raise RuntimeError('OpenSSH client is not installed')
+    p = subprocess.run([executable, '-G', alias], capture_output=True, text=True, timeout=15, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
     if p.returncode:
         raise RuntimeError('SSH configuration inspection failed')
     fields = dict(line.split(' ', 1) for line in p.stdout.splitlines() if ' ' in line)

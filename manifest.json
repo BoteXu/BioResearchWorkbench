@@ -158,8 +158,8 @@
     },
     {
       "path": "bridge/smoke_mcp.py",
-      "bytes": 5799,
-      "sha256": "688ef3becbf872cf38d599d76b6a9b60cf934d13277aff41b81f0e184c502928"
+      "bytes": 5802,
+      "sha256": "562df4c6220fa08ca4f27ba3494b4bfe1f23e4b029a46da5f51291812d324e4c"
     },
     {
       "path": "bridge/web_gateway.py",
@@ -168,8 +168,8 @@
     },
     {
       "path": "bridge/workflow_ext.py",
-      "bytes": 16873,
-      "sha256": "599f5acd7990c4c4a87aabe3dc61f2e8da8273a515c934beff6ae22bc1af6b13"
+      "bytes": 17184,
+      "sha256": "891d3a75b520ec77333683b0a3265074f20b2898248b2508ec6757bb12b0c9f6"
     },
     {
       "path": "client_config.py",
@@ -228,8 +228,8 @@
     },
     {
       "path": "tests/browser_check.py",
-      "bytes": 2639,
-      "sha256": "08e088cd12e56a3ca9e821dc6a76cabfceef2ba9bdccc863875180c9d322f027"
+      "bytes": 2601,
+      "sha256": "595cacc2daf20630578286d958c9cb41bc10806512fef5dc58700b585d2ce8a1"
     },
     {
       "path": "tests/test_biomedical.py",

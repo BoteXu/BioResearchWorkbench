@@ -10,7 +10,7 @@ import web_gateway
 
 
 def main():
-    from playwright.sync_api import sync_playwright
+    from playwright.sync_api import sync_playwright, expect
     token = 'synthetic-browser-token-'+'x'*40
     calls = []
     def dispatch(data):
@@ -33,12 +33,12 @@ def main():
                 page.goto(f'http://localhost:{server.server_port}')
                 page.locator('#token').fill(token)
                 page.locator('#connect').click()
-                page.wait_for_function("document.querySelector('#tool').options.length === 1")
+                expect(page.locator('#tool option')).to_have_count(1)
                 page.locator('[data-name="rows"]').fill(json.dumps([{'fixture':'public'}]))
                 page.locator('#run').click()
-                page.wait_for_function("document.querySelector('#result').textContent.includes('synthetic_pass')")
-                assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
-                assert page.evaluate('localStorage.length === 0 && sessionStorage.length === 0 && document.cookie === ""')
+                expect(page.locator('#result')).to_contain_text('synthetic_pass')
+                assert page.evaluate('() => document.documentElement.scrollWidth <= window.innerWidth')
+                assert page.evaluate('() => localStorage.length === 0 && sessionStorage.length === 0 && document.cookie === ""')
                 with page.expect_download() as downloaded:
                     page.locator('#download').click()
                 assert downloaded.value.suggested_filename=='biomni-result.json'

@@ -59,7 +59,7 @@ async def main(network=False):
             assert biomedical_result['public_queries_performed'] is False
             assert biomedical_result['mappings'][0]['automatic_merge_allowed'] is False
             if shutil.which('ssh'):
-                route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'server'}})
+                route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'localhost'}})
                 route_result = checked_receipt(route, 'biomni.tool.workflow.inspect_ssh_route')
                 assert route_result['authenticated'] is False
             else:
