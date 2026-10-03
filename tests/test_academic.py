@@ -8,7 +8,7 @@ import types
 import unittest
 import zipfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'bridge'))
 import academic_common as common
 import library_ext as library
@@ -108,17 +108,19 @@ class AcademicChecks(unittest.TestCase):
         self.assertFalse(r['checks'][0]['checks'][0]['unit_matches_declared_rule'])
     def test_metadata_transmits_only_doi(self):
         result={'result':{'message':{'title':['Example study'],'issued':{'date-parts':[[2024]]}}}}
-        with patch('literature_ext.doi_metadata',return_value=result) as call:r=review.audit_reference_metadata(str(self.refs),True)
+        call=Mock(return_value=result)
+        with patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(doi_metadata=call)}):r=review.audit_reference_metadata(str(self.refs),True)
         call.assert_called_once_with('10.1234/example');self.assertEqual(r['records'][0]['state'],'queried_metadata_fields_match')
     def test_similar_search_requires_exact_authorization(self):
         with self.assertRaises(ValueError):review.find_similar_studies(['public query'],{})
     def test_similar_facets_stay_local(self):
         response={'success':True,'result':{'hitCount':2,'resultList':{'result':[{'id':'1','source':'MED','title':'Human cardiac study','abstractText':'donor analysis'}]},'nextCursorMark':'next'}}
-        with patch('literature_ext.query_europepmc',return_value=response) as search:
+        search=Mock(return_value=response)
+        with patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(query_europepmc=search)}):
             r=review.find_similar_studies(['cardiac research'],{'species':['human'],'tissue':['cardiac'],'question_terms':['private comparison phrase']},True,5)
         search.assert_called_once_with('cardiac research',5);self.assertEqual(r['candidates'][0]['matched_facets']['species'],['human']);self.assertFalse(r['searches'][0]['coverage_complete'])
     def test_update_failure_not_clean_bill(self):
-        with patch('literature_ext.doi_metadata',side_effect=RuntimeError()):r=review.check_publication_updates(['10.1234/example'],True)
+        with patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(doi_metadata=Mock(side_effect=RuntimeError()))}):r=review.check_publication_updates(['10.1234/example'],True)
         self.assertEqual(r['records'][0]['state'],'query_failed')
     def test_text_revision_preserves_citation(self):
         r=collaboration.prepare_manuscript_revision(str(self.doc),[{'location':'line:3','old_text':'The effect was uncertain [@alpha].','new_text':'The estimated effect remained uncertain [@alpha].','reason':'clarify uncertainty'}],hashlib.sha256(self.doc.read_bytes()).hexdigest())

@@ -418,8 +418,8 @@
     },
     {
       "path": "tests/test_academic.py",
-      "bytes": 24223,
-      "sha256": "ad9ea1d4c71e62bc53c7285bb83e47c53795587c4e6f066919372fac755a3c06"
+      "bytes": 24395,
+      "sha256": "d3887cadfe3d949a27c61b3a62d2834e54107e95a47ccfbf71cfa449681b0b78"
     },
     {
       "path": "tests/test_biomedical.py",
