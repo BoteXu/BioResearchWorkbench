@@ -80,8 +80,8 @@ class CoreChecks(unittest.TestCase):
         portable = json.loads(configs['portable.mcp.json'])
         vscode = json.loads(configs['vscode.mcp.json'])
         codex = tomllib.loads(configs['codex.config.toml'])
-        self.assertEqual(portable['mcpServers']['biomni']['command'],vscode['servers']['biomni']['command'])
-        self.assertEqual(codex['mcp_servers']['biomni']['env'],{'PYTHONUTF8':'1'})
+        self.assertEqual(portable['mcpServers']['bioresearch']['command'],vscode['servers']['bioresearch']['command'])
+        self.assertEqual(codex['mcp_servers']['bioresearch']['env'],{'PYTHONUTF8':'1'})
         with self.assertRaises(ValueError):
             client_config.generate(self.root,self.root/'client_configs')
 

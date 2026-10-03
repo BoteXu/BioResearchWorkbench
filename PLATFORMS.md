@@ -14,7 +14,7 @@ Version 2.5 uses one Python installer and platform-specific virtual-environment 
 | HarmonyOS PC with a compatible Linux/Python environment | Same POSIX installer inside that environment | Conditional route; no native HarmonyOS hardware verification |
 | HarmonyOS PC, phone and tablet | Responsive browser client connected to your own tool host | API and desktop/mobile viewport checks; no HarmonyOS device verification |
 
-Inspect the actual [workflow result](https://github.com/BoteXu/biomni-direct-tools/actions) for the release being installed. A listed CI target is not proof that a failed run passed. Optional `omics`/`full` profiles and individual model-client GUIs are outside the core clean-install matrix.
+Inspect the actual [workflow result](https://github.com/BoteXu/BioResearchWorkbench/actions) for the release being installed. A listed CI target is not proof that a failed run passed. Optional `omics`/`full` profiles and individual model-client GUIs are outside the core clean-install matrix.
 
 Native HarmonyOS is not assumed to provide a Linux ABI, CPython, uv or a desktop MCP client. This release contains no native HAP package. A compatible Linux environment must be provisioned and verified separately; installing such an environment is not performed by this project. The browser route works without Python on the device.
 
@@ -26,7 +26,7 @@ Install [uv from its official instructions](https://docs.astral.sh/uv/getting-st
 sh ./Install.sh --client portable --skip-registration
 ```
 
-The default destination is a new `BiomniTools` directory in your home folder. Select a fresh destination with `--install-dir "$HOME/BiomniToolsNew"`. For automatic Codex registration, use `--client codex` without `--skip-registration`, with the Codex CLI installed. For another client use `--client claude-desktop` or `--client vscode`, then merge its private generated configuration. No existing client configuration is overwritten.
+The default destination is a new `BioResearchWorkbench` directory in your home folder. Select a fresh destination with `--install-dir "$HOME/BioResearchWorkbenchNew"`. For automatic Codex registration, use `--client codex` without `--skip-registration`, with the Codex CLI installed. For another client use `--client claude-desktop` or `--client vscode`, then merge its private generated configuration. No existing client configuration is overwritten.
 
 An existing Python 3.10 or newer can also run `python3 install.py` with the same arguments; uv creates the actual Python 3.11 tool environment. `python3 install.py --validate-only` checks distribution hashes without creating an environment.
 
@@ -43,7 +43,7 @@ Use `-InstallDir`, `-Profile`, `-Client`, `-SkipRegistration`, `-TrustDnsProxy` 
 Install the core profile on a tool host you control, running Windows, macOS or Linux. Open the gateway from that host's installed Python. On macOS/Linux:
 
 ```sh
-cd "$HOME/BiomniTools"
+cd "$HOME/BioResearchWorkbench"
 .venv_tools/bin/python .local/web_gateway.py --create-token-file browser-token.txt
 .venv_tools/bin/python .local/web_gateway.py --token-file browser-token.txt
 ```
@@ -51,7 +51,7 @@ cd "$HOME/BiomniTools"
 On Windows:
 
 ```powershell
-Set-Location (Join-Path $HOME 'BiomniTools')
+Set-Location (Join-Path $HOME 'BioResearchWorkbench')
 & .\.venv_tools\Scripts\python.exe .\.local\web_gateway.py --create-token-file browser-token.txt
 & .\.venv_tools\Scripts\python.exe .\.local\web_gateway.py --token-file browser-token.txt
 ```

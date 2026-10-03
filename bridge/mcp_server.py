@@ -15,7 +15,7 @@ with redirect_stdout(sys.stderr):
     tool_catalog(limit=1)
 
 
-mcp = FastMCP("BiomniDirectTools")
+mcp = FastMCP("BioResearchWorkbench")
 _STDIO_LOCK = threading.RLock()
 
 

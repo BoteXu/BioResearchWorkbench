@@ -1,10 +1,16 @@
-# Biomni Direct Tools
+# BioResearchWorkbench
+
+**生物医学科研工作台。最初的底层基于 Biomni，随后通过组合第三方研究软件与本项目编写的桥接、检查和工作流程，扩展为覆盖文献、证据、统计、计算及写作的工作台。**
+
+The original foundation is [Biomni](https://github.com/snap-stanford/Biomni). This project integrates existing research tools; it does not claim their algorithms, datasets, models or software as its own. Read [origins and third-party attribution](ORIGINS.md) for what is reused, what is adapted and what this project adds. This is an independent downstream workbench, not an official Biomni release.
+
+Package 2.8.2 introduces the independent name and detailed attribution. Existing Biomni-named tools and skills remain compatible; see [migration](MIGRATION.md).
 
 Package 2.8.1 adds an optional [14-skill research workflow pack](SKILLS.md): evidence tracing, omics QC/design, statistics, target/structure/docking review, private library maintenance, figures, academic delivery and server handoff. The instructions reuse bridge 2.8 and existing software; they do not add another model or scientific dependency stack. Run `python install_skills.py --dry-run` then `python install_skills.py`, or add `--install-skills` to a new tool installation.
 
 Version 2.8 adds a persistent [personal research index](PERSONAL_LIBRARY.md), private library exchange, scoped Zotero read/write adapters, located manuscript/review audits, approved similar-study searches and evidence-backed collaboration. See [ACADEMIC_WORKFLOWS.md](ACADEMIC_WORKFLOWS.md) and [ZOTERO_LOCAL.md](ZOTERO_LOCAL.md). Version 2.7 added a dedicated statistics consultation module, complex expression designs, expanded analysis/review workflows, real server-side Slurm adapters and stronger privacy gates. See [STATISTICS.md](STATISTICS.md), [RESEARCH_WORKFLOWS.md](RESEARCH_WORKFLOWS.md) and [PRIVACY_SECURITY.md](PRIVACY_SECURITY.md). It retains separately packaged server and local analysis editions. The local edition includes mandatory pre-analysis QC, three count-model backends, normalized-expression tests, small single-cell/pseudobulk workflows, pathway/PPI analysis, molecular descriptors, bounded Vina docking and persistent software interfaces. See [LOCAL_ANALYSIS.md](LOCAL_ANALYSIS.md) and [SOFTWARE_INTERFACES.md](SOFTWARE_INTERFACES.md). Platform access remains documented in [PLATFORMS.md](PLATFORMS.md).
 
-A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
+A research workbench built from an initial direct Biomni tool layer for Codex and compatible clients. The host model provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required by this tool layer.
 
 ## Scope
 
@@ -29,7 +35,7 @@ Download this repository, open PowerShell in its folder, and run:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install.ps1
 ```
 
-The default destination is a new `BiomniTools` folder under the current user's profile. Use `-InstallDir` to select another new folder. Use `-ValidateOnly` to check repository file hashes. The installer refuses to overwrite an existing directory or an existing `biomni` MCP entry. `-SkipRegistration` permits installing separately before choosing how to register it.
+The default destination is a new `BioResearchWorkbench` folder under the current user's profile. Use `-InstallDir` to select another new folder. Use `-ValidateOnly` to check repository file hashes. The installer refuses to overwrite an existing directory or an existing MCP entry with the selected registration name. `-SkipRegistration` permits installing separately before choosing how to register it.
 
 ### Profiles and other clients
 

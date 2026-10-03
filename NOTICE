@@ -1,5 +1,11 @@
-Biomni direct-tool bridge additions.
+BioResearchWorkbench, formerly Biomni Direct Tools.
+The initial foundation is Biomni. This is an independent downstream integration,
+not an official Biomni release and not a newly invented scientific engine.
 Uses the official Biomni project: https://github.com/snap-stanford/Biomni
 Upstream revision: 400c1f366b96a35ca253e13c9b06c5076af41d65
 Upstream source is fetched separately during installation. Its license and notices must be retained.
 Bridge additions are distributed under Apache-2.0; see LICENSE.
+Numerical, statistical, omics, chemistry, docking, document and library software
+remain the work of their respective upstream projects. Our adapters and workflow
+instructions do not transfer ownership or relicense those components.
+See ORIGINS.md and third_party_components.json for source and integration roles.

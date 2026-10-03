@@ -49,7 +49,7 @@ def main():
     parser.add_argument('--skills-dir',help='Private skill discovery directory; requires --install-skills')
     args = parser.parse_args()
     validate_package()
-    mcp_name = args.mcp_name or ('biomni-local' if args.profile=='local' else 'biomni')
+    mcp_name = args.mcp_name or ('bioresearch-local' if args.profile=='local' else 'bioresearch')
     if args.validate_only:
         return
     if args.skills_dir and not args.install_skills:
@@ -70,7 +70,7 @@ def main():
             raise ValueError('Codex CLI missing; choose --client portable or --skip-registration')
         if subprocess.run([codex,'mcp','get',mcp_name],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
             raise ValueError('Existing biomni registration; inspect it first or use --skip-registration')
-    target = Path(args.install_dir or Path.home()/('BiomniLocalTools' if args.profile=='local' else 'BiomniTools')).expanduser().resolve()
+    target = Path(args.install_dir or Path.home()/('BioResearchWorkbenchLocal' if args.profile=='local' else 'BioResearchWorkbench')).expanduser().resolve()
     if target.exists():
         raise ValueError('Choose a new installation directory')
     target.parent.mkdir(parents=True,exist_ok=True)
@@ -82,6 +82,8 @@ def main():
             shutil.copy2(file,local/file.name)
     for guide in ROOT.glob('*.md'):
         shutil.copy2(guide,local/guide.name)
+    for provenance in ('LICENSE','NOTICE','third_party_components.json'):
+        shutil.copy2(ROOT/provenance,local/provenance)
     shutil.copytree(ROOT/'skills',target/'skills',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     shutil.copy2(ROOT/'install_skills.py',target/'install_skills.py')
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')

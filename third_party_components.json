@@ -1,0 +1,1688 @@
+{
+  "project": "BioResearchWorkbench",
+  "initial_foundation": "Biomni",
+  "components": [
+    {
+      "name": "Biomni",
+      "use": "fetched_upstream_source",
+      "origin": "https://github.com/snap-stanford/Biomni",
+      "revision": "400c1f366b96a35ca253e13c9b06c5076af41d65",
+      "license_reference": "https://github.com/snap-stanford/Biomni/blob/400c1f366b96a35ca253e13c9b06c5076af41d65/LICENSE",
+      "our_role": "Direct tool discovery/calls and additional adapters; upstream source retains its attribution."
+    },
+    {
+      "name": "anndata",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/anndata/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "annotated-types",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/annotated-types/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "anthropic",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/anthropic/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "anyio",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/anyio/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "array-api-compat",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/array-api-compat/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "attrs",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/attrs/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "beautifulsoup4",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/beautifulsoup4/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "biopython",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/biopython/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "certifi",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/certifi/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "cffi",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/cffi/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "charset-normalizer",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/charset-normalizer/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "click",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/click/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "cloudpickle",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/cloudpickle/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "colorama",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/colorama/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "contourpy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/contourpy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "cryptography",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/cryptography/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "cycler",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/cycler/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "distro",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/distro/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "docstring-parser",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/docstring-parser/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "donfig",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/donfig/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "fonttools",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/fonttools/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "formulaic",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/formulaic/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "gemmi",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/gemmi/json",
+      "version_references": [
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "google-crc32c",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/google-crc32c/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "googlesearch-python",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/googlesearch-python/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "gseapy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/gseapy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "h11",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/h11/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "h5py",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/h5py/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "httpcore",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/httpcore/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "httpcore2",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/httpcore2/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "httpx",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/httpx/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "httpx-sse",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/httpx-sse/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "httpx2",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/httpx2/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "idna",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/idna/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "igraph",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/igraph/json",
+      "version_references": [
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "interface-meta",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/interface-meta/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jiter",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jiter/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "joblib",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/joblib/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jsonpatch",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jsonpatch/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jsonpointer",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jsonpointer/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jsonschema",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jsonschema/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jsonschema-specifications",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jsonschema-specifications/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "kiwisolver",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/kiwisolver/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain-anthropic",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain-anthropic/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain-core",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain-core/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain-ollama",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain-ollama/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain-openai",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain-openai/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langchain-protocol",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langchain-protocol/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langgraph",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langgraph/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langgraph-checkpoint",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langgraph-checkpoint/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langgraph-prebuilt",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langgraph-prebuilt/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langgraph-sdk",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langgraph-sdk/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "langsmith",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/langsmith/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "legacy-api-wrap",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/legacy-api-wrap/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "leidenalg",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/leidenalg/json",
+      "version_references": [
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "llvmlite",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/llvmlite/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "matplotlib",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/matplotlib/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "mcp",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/mcp/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "mcp-types",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/mcp-types/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "meeko",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/meeko/json",
+      "version_references": [
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "narwhals",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/narwhals/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "natsort",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/natsort/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "networkx",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/networkx/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "numba",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/numba/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "numcodecs",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/numcodecs/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "numpy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/numpy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "ollama",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/ollama/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "openai",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/openai/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "openbabel-wheel",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/openbabel-wheel/json",
+      "version_references": [
+        "requirements-interfaces.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "opentelemetry-api",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/opentelemetry-api/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "orjson",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/orjson/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "ormsgpack",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/ormsgpack/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "packaging",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/packaging/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pandas",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pandas/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "patsy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/patsy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pillow",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pillow/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "psutil",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/psutil/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pycparser",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pycparser/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pydantic",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pydantic/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pydantic-core",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pydantic-core/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pydantic-settings",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pydantic-settings/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pydeseq2",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pydeseq2/json",
+      "version_references": [
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pyjwt",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pyjwt/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pynndescent",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pynndescent/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pyparsing",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pyparsing/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pypdf",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pypdf/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pypdf2",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pypdf2/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "python-dateutil",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/python-dateutil/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "python-dotenv",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/python-dotenv/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "python-multipart",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/python-multipart/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pytz",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pytz/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pywin32",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pywin32/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "pyyaml",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/pyyaml/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "rdkit",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/rdkit/json",
+      "version_references": [
+        "requirements-local.txt",
+        "requirements-local.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "referencing",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/referencing/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "regex",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/regex/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "requests",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/requests/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "requests-toolbelt",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/requests-toolbelt/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "rpds-py",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/rpds-py/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "scanpy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/scanpy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "scikit-learn",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/scikit-learn/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "scipy",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/scipy/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements-omics.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "scverse-misc",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/scverse-misc/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "seaborn",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/seaborn/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "session-info2",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/session-info2/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "six",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/six/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "sniffio",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/sniffio/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "soupsieve",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/soupsieve/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "sse-starlette",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/sse-starlette/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "starlette",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/starlette/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "statsmodels",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/statsmodels/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements-local.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "tenacity",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/tenacity/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "threadpoolctl",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/threadpoolctl/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "tiktoken",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/tiktoken/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "tqdm",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/tqdm/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "truststore",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/truststore/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "typing-extensions",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/typing-extensions/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "typing-inspection",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/typing-inspection/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "tzdata",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/tzdata/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "umap-learn",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/umap-learn/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "urllib3",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/urllib3/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "uuid-utils",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/uuid-utils/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "uvicorn",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/uvicorn/json",
+      "version_references": [
+        "requirements-core.lock.txt",
+        "requirements-core.windows-py311.lock.txt",
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "websockets",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/websockets/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "wrapt",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/wrapt/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "xxhash",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/xxhash/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "zarr",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/zarr/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "zstandard",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/zstandard/json",
+      "version_references": [
+        "requirements-full.lock.txt",
+        "requirements.windows-py311.lock.txt"
+      ],
+      "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "limma",
+      "use": "optional_external_software",
+      "origin": "https://bioconductor.org/packages/limma/",
+      "our_role": "R expression-analysis adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "edgeR",
+      "use": "optional_external_software",
+      "origin": "https://bioconductor.org/packages/edgeR/",
+      "our_role": "R expression-analysis adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "AutoDock Vina",
+      "use": "optional_external_software",
+      "origin": "https://github.com/ccsb-scripps/AutoDock-Vina",
+      "our_role": "Fixed optional official binary and docking adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "Open Babel",
+      "use": "optional_external_software",
+      "origin": "https://openbabel.org/",
+      "our_role": "Optional format-conversion adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "Cytoscape",
+      "use": "optional_external_software",
+      "origin": "https://cytoscape.org/",
+      "our_role": "Optional local CyREST adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "Zotero",
+      "use": "optional_external_software",
+      "origin": "https://www.zotero.org/",
+      "our_role": "Scoped local library adapter",
+      "license_status": "Upstream exact-version terms apply independently."
+    },
+    {
+      "name": "NCBI",
+      "use": "external_public_service",
+      "origin": "https://www.ncbi.nlm.nih.gov/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Europe PMC",
+      "use": "external_public_service",
+      "origin": "https://europepmc.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Crossref",
+      "use": "external_public_service",
+      "origin": "https://www.crossref.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "UniProt",
+      "use": "external_public_service",
+      "origin": "https://www.uniprot.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Ensembl",
+      "use": "external_public_service",
+      "origin": "https://www.ensembl.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Reactome",
+      "use": "external_public_service",
+      "origin": "https://reactome.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "STRING",
+      "use": "external_public_service",
+      "origin": "https://string-db.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "ChEMBL",
+      "use": "external_public_service",
+      "origin": "https://www.ebi.ac.uk/chembl/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "PubChem",
+      "use": "external_public_service",
+      "origin": "https://pubchem.ncbi.nlm.nih.gov/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "RCSB PDB",
+      "use": "external_public_service",
+      "origin": "https://www.rcsb.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "AlphaFold DB",
+      "use": "external_public_service",
+      "origin": "https://alphafold.ebi.ac.uk/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "ClinicalTrials.gov",
+      "use": "external_public_service",
+      "origin": "https://clinicaltrials.gov/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "GTEx",
+      "use": "external_public_service",
+      "origin": "https://gtexportal.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Human Protein Atlas",
+      "use": "external_public_service",
+      "origin": "https://www.proteinatlas.org/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "CELLxGENE",
+      "use": "external_public_service",
+      "origin": "https://cellxgene.cziscience.com/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "ENA",
+      "use": "external_public_service",
+      "origin": "https://www.ebi.ac.uk/ena/",
+      "our_role": "Source-data query and audit adapter; data ownership stays with provider.",
+      "license_status": "Provider access, citation and redistribution terms; software license does not cover returned content."
+    },
+    {
+      "name": "Host clients and existing specialist skills",
+      "use": "optional_host_capability",
+      "our_role": "Workflow instructions select installed capabilities; external code/models are not bundled."
+    }
+  ],
+  "limits": [
+    "Declared integration relationships, not a complete legal audit or proof of runtime availability.",
+    "Requirement files define versions; components may be optional or transitive.",
+    "Public-service list names principal integrations; exact endpoints and source receipts are task-specific."
+  ]
+}

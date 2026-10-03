@@ -1,6 +1,7 @@
 {
+  "project": "BioResearchWorkbench",
   "bridge_version": "2.8",
-  "package_version": "2.8.1",
+  "package_version": "2.8.2",
   "files": [
     {
       "path": ".gitattributes",
@@ -24,8 +25,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 6518,
-      "sha256": "5563c38924f46b3674cda135dbfa25706b76eceb58034fdd007c1a9cb0ac2c75"
+      "bytes": 6598,
+      "sha256": "40f17940f0fae75f4eaf9e8543948ba81ef57cdbf9d0f01a0737df0c79d0c8eb"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -53,9 +54,19 @@
       "sha256": "1ffb3084941177d4d6b89eb93aa5c0fa645689c201aad981679acb95e06b171a"
     },
     {
+      "path": "MIGRATION.md",
+      "bytes": 1693,
+      "sha256": "cb22fb5af668eb0f5bd5eab2d81d5ee488fb65957001e6e91b1be0e8e1c76683"
+    },
+    {
       "path": "NOTICE",
-      "bytes": 336,
-      "sha256": "7cccc61d8605af72aa490074af25e6afe65cc38ec5cfb439b7d30aa431657701"
+      "bytes": 820,
+      "sha256": "d36c6f4eba087c627b1fcde0a50d8bffb12009df02a412d58c644573ba972e22"
+    },
+    {
+      "path": "ORIGINS.md",
+      "bytes": 6011,
+      "sha256": "1b053c6dc36cd9d472ab8589d56e4bac2bd9e76b56cbf19bb455df4bde4d78dc"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -64,8 +75,8 @@
     },
     {
       "path": "PLATFORMS.md",
-      "bytes": 6262,
-      "sha256": "4cc9f5099d1bd70574dd7fe5b24a0ba08ddb9f09387a52f90361d604574d3776"
+      "bytes": 6299,
+      "sha256": "ff28ddfb5cebdc82d44f219c715b8a079b690e40afb9af59e10f7bd8813740fe"
     },
     {
       "path": "PRIVACY.md",
@@ -79,8 +90,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 11826,
-      "sha256": "439caab31898fcd6346ed22a884714cce51cb08633233c1834ff0e952ad085d9"
+      "bytes": 12750,
+      "sha256": "bb0c7bcc9c9fbaa03bc75502b8810be062ba3c6d430050f056b2e04f6464ae79"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -89,8 +100,8 @@
     },
     {
       "path": "SKILLS.md",
-      "bytes": 4487,
-      "sha256": "f8640142d3b316d363ca4ef1516ae61d942251b4eaf46af47b01fd8090c46129"
+      "bytes": 4754,
+      "sha256": "3e44ebce1c8881fc2fdc3ee80d8b0beaa5abd2da2228c36b143d64b128310238"
     },
     {
       "path": "SOFTWARE_INTERFACES.md",
@@ -229,8 +240,8 @@
     },
     {
       "path": "bridge/mcp_server.py",
-      "bytes": 3460,
-      "sha256": "1974a031412a437346d8a11607f05f7e564eb89faa25504c69f422c9df4a3c5a"
+      "bytes": 3463,
+      "sha256": "c2ea343c7767cf4f8b584c158a90a6de9c4f2cfa5385658cc422cc49ff5cd214"
     },
     {
       "path": "bridge/molecular_ext.py",
@@ -324,8 +335,8 @@
     },
     {
       "path": "bridge/web_gateway.py",
-      "bytes": 12806,
-      "sha256": "977687a204fa97a01d462260d601180fcf948c79a3ba61945ee926867efa697b"
+      "bytes": 12834,
+      "sha256": "9e3df85cab291db8934fab8c9f520be053fab1d7ff5ab81819471508080f1c0d"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -339,13 +350,13 @@
     },
     {
       "path": "build_releases.py",
-      "bytes": 1952,
-      "sha256": "59eb8e261acd6a731c251bdfd99bde2a7d220ea21d283666773dda07a1ff7144"
+      "bytes": 1987,
+      "sha256": "b62dd51795a4fb7fd4e1d098049d106f14957468dda55e722c8e830030afa6b6"
     },
     {
       "path": "client_config.py",
-      "bytes": 2415,
-      "sha256": "08b1232eb38c6ffc6fe7a3c39c00bf4e10bd085519f7d53a3c2af27720637a71"
+      "bytes": 2425,
+      "sha256": "618ff59b892f7aff3ccf623057ad0248497e50c009c50c3bfc8221e8d1a30ce2"
     },
     {
       "path": "edition.json",
@@ -364,8 +375,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 6390,
-      "sha256": "91d317fda21e0b468bb2c75f91046237dc8cf074b3b3b8e355a5e56d56b18418"
+      "bytes": 6547,
+      "sha256": "8f39b72b757235f0690fec3f2550d715cdef8617f49e8623d38d9815398b63a2"
     },
     {
       "path": "install_skills.py",
@@ -604,13 +615,18 @@
     },
     {
       "path": "tests/test_core.py",
-      "bytes": 6621,
-      "sha256": "b2e7342640fef8a9a160efc8e24dbfe9401789a9606d5fc1215676d0596356dc"
+      "bytes": 6636,
+      "sha256": "4905b7f7d3f0c302d41f88ac77a28c90fbce1ad9598f26770ae33d2e27923680"
     },
     {
       "path": "tests/test_cytoscape.py",
       "bytes": 1951,
       "sha256": "4e9dcbf37d60cf692057052e5a798067c74df13774b8bded826888c460f20d73"
+    },
+    {
+      "path": "tests/test_origins.py",
+      "bytes": 2400,
+      "sha256": "615d7062a471006a43995e0e1d219d0125ba1ca0c670493193c64f798aad853c"
     },
     {
       "path": "tests/test_platforms.py",
@@ -633,9 +649,14 @@
       "sha256": "4f07a555d0076421c5357a125cd1f313d9cac4030ce3fd298412f17a38419158"
     },
     {
+      "path": "third_party_components.json",
+      "bytes": 75322,
+      "sha256": "7db6d16196b3facc5605259cf320d714386a24e2d5a8d6e356f444bfaf1fbbcf"
+    },
+    {
       "path": "update_manifest.py",
-      "bytes": 786,
-      "sha256": "0b063349cde058e2b351d2aabf3a495fbf42162c93c2b776a18da115249375ca"
+      "bytes": 819,
+      "sha256": "344bb5e766c9599311e500091084ea0373f2778c28f1287a49410ea6bd038407"
     },
     {
       "path": "update_skill_catalog.py",
@@ -644,8 +665,8 @@
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",
-      "bytes": 3001,
-      "sha256": "91089642969c3daf86abff16bc3e5dbd4c8d6e103d51697023c6010aceb34681"
+      "bytes": 3217,
+      "sha256": "8eb9aecb7e97738a2d5a1ddca2d47f30b08a7314166af55031e507d7c3971187"
     }
   ]
 }

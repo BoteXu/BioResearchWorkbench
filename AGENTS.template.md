@@ -1,8 +1,8 @@
-## Biomni for biomedical work
+## BioResearchWorkbench for biomedical work
 
 Optional package 2.8.1 workflow skills are documented in SKILLS.md. Use the relevant installed `biomni-*` skill alongside current tool discovery. Skills supply workflow instructions, not new runtime backends or permission to read or mutate private libraries. Preserve existing specialist skills, client capabilities and authorization boundaries.
 
-For substantive biomedical research requests, inspect the globally configured biomni MCP server with biomni_status and biomni_tool_catalog. Use a suitable verified tool when it improves the task. Do not install a skill to duplicate a working function.
+For substantive biomedical research requests, inspect the configured BioResearchWorkbench MCP server (new registration bioresearch, existing registration biomni) with biomni_status and biomni_tool_catalog. Use a suitable verified tool when it improves the task. Do not install a skill to duplicate a working function.
 
 Codex supplies reasoning; Biomni supplies tools. No separate Biomni reasoning model, E1 environment or data lake is included. Import readiness is not runtime proof. Verify primary sources and keep species, model, assay, biological unit and causal limits explicit. Do not send sensitive data to public endpoints without specific authorization.
 

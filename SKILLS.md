@@ -1,5 +1,7 @@
 # 可选研究 skill 包
 
+这些流程属于 BioResearchWorkbench。项目最初底层基于 Biomni，第三方算法与工具归属见 [ORIGINS.md](ORIGINS.md)。现有 `biomni-*` 名称保留兼容；改名不意味着上游算法成为本项目原创，见 [MIGRATION.md](MIGRATION.md)。
+
 Package 2.8.1 adds 14 original Apache-2.0-licensed workflow skills to bridge 2.8. They provide task instructions, tool routing and acceptance boundaries; they do not introduce another model, duplicate database clients, or install analysis/Office software. Existing installed specialist skills remain reusable. The static security reviewer is the only new skill-local executable helper.
 
 ## 包含的流程

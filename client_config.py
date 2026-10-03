@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 
-def generate(install_dir, output_dir, trust_dns_proxy=False, server_name="biomni"):
+def generate(install_dir, output_dir, trust_dns_proxy=False, server_name="bioresearch"):
     if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{0,30}",server_name): raise ValueError("Invalid MCP server name")
     root = Path(install_dir).resolve(strict=True)
     python = root / '.venv_tools' / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
@@ -36,6 +36,6 @@ if __name__ == '__main__':
     parser.add_argument('--install-dir',required=True)
     parser.add_argument('--output-dir',required=True)
     parser.add_argument('--trust-dns-proxy',action='store_true')
-    parser.add_argument('--server-name',default='biomni')
+    parser.add_argument('--server-name',default='bioresearch')
     args = parser.parse_args()
     generate(args.install_dir,args.output_dir,args.trust_dns_proxy,args.server_name)
