@@ -20,8 +20,9 @@ def checked_receipt(reply, expected_tool):
     assert payload["success"] is True, payload
     raw = Path(payload["result_file"]).read_bytes()
     assert hashlib.sha256(raw).hexdigest() == payload["sha256"], payload
-    if expected_tool.startswith('biomni.tool.research.'):
-        source = next(x for x in payload['bridge_source_manifest'] if x['name'] == 'research_ext.py')
+    if expected_tool.startswith(('biomni.tool.research.','biomni.tool.biomedical.')):
+        module_name = 'biomedical_ext.py' if '.biomedical.' in expected_tool else 'research_ext.py'
+        source = next(x for x in payload['bridge_source_manifest'] if x['name'] == module_name)
         assert hashlib.sha256(Path(source['snapshot']).read_bytes()).hexdigest() == source['sha256']
     return json.loads(raw)
 
@@ -45,7 +46,7 @@ async def main(network=False):
             assert not catalog.isError, catalog
             payload = catalog.structuredContent or json.loads(next(item.text for item in catalog.content if item.type == "text"))
             assert payload["total_matches"] == 7, payload
-            for category, expected in [('atlas', 4), ('workflow', 8), ('research', 3)]:
+            for category, expected in [('atlas', 4), ('workflow', 8), ('research', 3), ('biomedical',10)]:
                 discovered = await session.call_tool('biomni_tool_catalog', {'category':category, 'limit':30})
                 assert not discovered.isError, discovered
                 data = discovered.structuredContent or json.loads(next(x.text for x in discovered.content if x.type == 'text'))
@@ -53,6 +54,10 @@ async def main(network=False):
             plan = await session.call_tool('biomni_run_tool', {'category':'research','name':'select_tools','parameters':{'intent':'result_audit'}})
             plan_result = checked_receipt(plan, 'biomni.tool.research.select_tools')
             assert plan_result['state'] == 'plan_only' and not plan_result['submitted']
+            biomedical = await session.call_tool('biomni_run_tool', {'category':'biomedical','name':'map_disease_terms','parameters':{'terms':['synthetic disease'],'sensitive_data':True,'mappings':[{'term':'synthetic disease','target_id':'MONDO:0000001','relation':'related','ontology_version':'synthetic_version','source_reference':'synthetic fixture'}]}})
+            biomedical_result = checked_receipt(biomedical, 'biomni.tool.biomedical.map_disease_terms')
+            assert biomedical_result['public_queries_performed'] is False
+            assert biomedical_result['mappings'][0]['automatic_merge_allowed'] is False
             if shutil.which('ssh'):
                 route = await session.call_tool('biomni_run_tool', {'category':'workflow','name':'inspect_ssh_route','parameters':{'alias':'server'}})
                 route_result = checked_receipt(route, 'biomni.tool.workflow.inspect_ssh_route')

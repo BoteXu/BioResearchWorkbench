@@ -19,7 +19,7 @@ def main():
     suite = unittest.defaultTestLoader.discover(str(root/'tests'))
     with redirect_stdout(io.StringIO()):
         result = unittest.TextTestRunner(stream=io.StringIO(),verbosity=0).run(suite)
-    report = {'suite_version':'1','created_at':datetime.now(timezone.utc).isoformat(),
+    report = {'suite_version':'2','created_at':datetime.now(timezone.utc).isoformat(),
               'offline':{'run':result.testsRun,'failures':[t.id() for t,_ in result.failures],
                          'errors':[t.id() for t,_ in result.errors],'skipped':[t.id() for t,_ in result.skipped]},
               'network':[], 'network_state':'not_requested',
@@ -51,6 +51,16 @@ def main():
             except Exception as exc:
                 report['network'].append({'case':name,'pass':False,'error_type':type(exc).__name__})
         report['network_state'] = 'completed'
+        try:
+            receipt = bridge.run_tool('biomedical','map_disease_terms',{'terms':['heart failure'],'ontology':'mondo'})
+            raw = Path(receipt['result_file']).read_bytes()
+            data = json.loads(raw)
+            candidates = data['terms'][0]['candidates'] if receipt['success'] else []
+            check = bool(receipt['success'] and candidates and any(str(c.get('id','')).startswith('MONDO:') for c in candidates)
+                         and not data['terms'][0]['automatic_merge_allowed'] and hashlib.sha256(raw).hexdigest()==receipt['sha256'])
+            report['network'].append({'case':'ontology_candidates','pass':check,'receipt_file':receipt['receipt_file']})
+        except Exception as exc:
+            report['network'].append({'case':'ontology_candidates','pass':False,'error_type':type(exc).__name__})
     report['pass'] = result.wasSuccessful() and not result.skipped and all(c['pass'] for c in report['network'])
     if args.output_file:
         path = Path(args.output_file)

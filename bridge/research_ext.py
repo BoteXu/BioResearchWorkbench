@@ -17,6 +17,16 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'drug_target_audit': [('biomedical','audit_drug_target_records')],
+    'cohort_eligibility': [('biomedical','assess_cohort_eligibility')],
+    'genetic_alignment': [('biomedical','audit_genetic_alignment')],
+    'evidence_matrix': [('biomedical','build_evidence_matrix')],
+    'evidence_conflicts': [('biomedical','compare_evidence')],
+    'structure_audit': [('biomedical','audit_structure_context')],
+    'disease_terms': [('biomedical','map_disease_terms')],
+    'cell_annotation_audit': [('biomedical','audit_cell_annotations')],
+    'enrichment_audit': [('biomedical','audit_enrichment_results')],
+    'study_elements': [('biomedical','extract_study_elements')],
     'literature': [('literature', 'query_pubmed'), ('literature', 'query_europepmc')],
     'identifier': [('research', 'resolve_identifier'), ('research', 'audit_identifier_mapping')],
     'genetics': [('database', 'query_gwas_catalog'), ('database', 'query_clinvar'), ('database', 'query_gnomad')],
@@ -44,7 +54,7 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name == 'resolve_identifier'
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
         recommendations.append({
             'category': category, 'name': name, 'catalog_entry': entry,

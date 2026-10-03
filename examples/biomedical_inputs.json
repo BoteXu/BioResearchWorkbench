@@ -1,0 +1,39 @@
+{
+  "notice": "Synthetic fixtures only. These values are not experimental evidence.",
+  "audit_drug_target_records": {
+    "target_id": "TARGET_EXAMPLE", "species": "homo_sapiens",
+    "records": [{"activity_id":"synthetic_activity","molecule_id":"COMPOUND_EXAMPLE","assay_id":"synthetic_assay","target_id":"TARGET_EXAMPLE","target_type":"SINGLE PROTEIN","species":"homo_sapiens","assay_type":"B","confidence_score":9,"standard_type":"Ki","standard_relation":"=","standard_value":0.1,"standard_units":"uM","conditions":"synthetic conditions","source_reference":"synthetic fixture"}]
+  },
+  "assess_cohort_eligibility": {
+    "criteria":{"species":"homo_sapiens","tissue":"synthetic_tissue","model":"synthetic_model","assay":"bulk_rna","contrast":"case_vs_control","min_units_per_group":2},
+    "studies":[{"study_id":"synthetic_study","species":"homo_sapiens","tissue":"synthetic_tissue","model":"synthetic_model","assay":"bulk_rna","contrast":"case_vs_control","group_unit_counts":{"case":3,"control":3},"biological_unit":"donor","sample_metadata_reference":"synthetic sample table","matrix_type":"raw_counts","paired":false,"batch":"synthetic_batch","dose":"not_applicable","time":"synthetic_time","source_reference":"synthetic fixture"}]
+  },
+  "audit_genetic_alignment": {
+    "reference_assembly":"GRCh38",
+    "rows":[{"variant_id":"synthetic_variant","left":{"species":"homo_sapiens","chromosome":"1","position":101,"assembly":"GRCh38","ancestry":"synthetic_ancestry","effect_allele":"A","other_allele":"C","effect_type":"beta","effect":0.2,"effect_allele_frequency":0.3,"source_reference":"synthetic left fixture"},"right":{"species":"homo_sapiens","chromosome":"1","position":101,"assembly":"GRCh38","ancestry":"synthetic_ancestry","effect_allele":"C","other_allele":"A","effect_type":"beta","effect":-0.4,"effect_allele_frequency":0.7,"confidence_interval":[-0.6,-0.2],"source_reference":"synthetic right fixture"}}]
+  },
+  "build_evidence_matrix": {
+    "question":"synthetic question",
+    "records":[{"candidate":"synthetic_candidate","evidence_type":"binding","species":"homo_sapiens","model":"purified_protein","tissue":"not_applicable","assay":"synthetic_binding","biological_unit":"independent_preparation","contrast":"compound_vs_vehicle","source_reference":"synthetic fixture"}]
+  },
+  "compare_evidence": {
+    "records":[{"question":"synthetic question","endpoint":"synthetic endpoint","species":"homo_sapiens","model":"synthetic_model","tissue":"synthetic_tissue","assay":"synthetic_assay","biological_unit":"donor","contrast":"case_vs_control","dose":"synthetic_dose","time":"synthetic_time","effect_unit":"log2_fold_change","outcome":"positive","source_reference":"synthetic study A"},{"question":"synthetic question","endpoint":"synthetic endpoint","species":"homo_sapiens","model":"synthetic_model","tissue":"synthetic_tissue","assay":"synthetic_assay","biological_unit":"donor","contrast":"case_vs_control","dose":"synthetic_dose","time":"synthetic_time","effect_unit":"log2_fold_change","outcome":"negative","source_reference":"synthetic study B"}]
+  },
+  "audit_structure_context": {
+    "protein_id":"EXAMPLE_PROTEIN","species":"homo_sapiens","required_regions":[[10,40]],
+    "records":[{"structure_id":"synthetic_structure","chain_id":"A","protein_id":"EXAMPLE_PROTEIN","species":"homo_sapiens","method":"X-ray","mapping_reference":"synthetic canonical mapping","reference_length":100,"mapped_intervals":[[1,60]],"missing_residues":[],"mutations":[],"isoform":"canonical","ligands":[],"source_reference":"synthetic fixture"}]
+  },
+  "map_disease_terms": {
+    "terms":["synthetic disease"],"sensitive_data":true,
+    "mappings":[{"term":"synthetic disease","target_id":"MONDO:0000001","relation":"related","ontology_version":"synthetic_version","source_reference":"synthetic fixture"}]
+  },
+  "audit_cell_annotations": {
+    "clusters":[{"cluster_id":"synthetic_cluster","label":"synthetic_cell","markers":["GENE_A","GENE_B"],"donor_count":3,"species":"homo_sapiens","tissue":"synthetic_tissue","model":"synthetic_model","doublet_flag":false,"source_reference":"synthetic fixture"}],
+    "marker_rules":{"synthetic_cell":{"positive":["GENE_A","GENE_B"],"negative":["GENE_C"],"species":"homo_sapiens","tissue":"synthetic_tissue","model":"synthetic_model","source_reference":"synthetic rule fixture"}}
+  },
+  "audit_enrichment_results": {
+    "background_genes":["GENE_A","GENE_B","GENE_C"],"mapping_summary":{"input_count":4,"mapped_count":3},
+    "results":[{"term_id":"synthetic_term","database_version":"synthetic_version","contrast":"case_vs_control","method":"ORA","direction":"unsigned","q_value":0.03,"driver_genes":["GENE_A","GENE_B"],"driver_contributions":{"GENE_A":1,"GENE_B":1},"background_reference":"synthetic measured gene universe","source_reference":"synthetic fixture"}]
+  },
+  "extract_study_elements": {"path":"examples/study_fixture.md"}
+}

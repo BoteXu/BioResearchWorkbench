@@ -1,6 +1,6 @@
 # Biomni Direct Tools
 
-Version 2.3 adds explicit task routing, official identifier resolution, local mapping audits and a fixed research engineering acceptance suite. Lightweight profiles, client configuration generation and privacy checks remain available.
+Version 2.4 adds ten biomedical evidence helpers for pharmacology, cohorts, genetics, evidence synthesis, structures, disease terms, cell annotations, enrichment and study passages. See [BIOMEDICAL.md](BIOMEDICAL.md) for contracts, examples and limits. Lightweight profiles, client configuration generation and privacy checks remain available.
 
 A direct Biomni tool layer for Codex. Codex provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required.
 
@@ -75,7 +75,7 @@ If the Ensembl symbol service times out or has a server failure, the resolver ca
 
 Official API contracts: [Ensembl symbol cross-references](https://rest.ensembl.org/documentation/info/xref_external), [Ensembl identifier lookup](https://rest.ensembl.org/documentation/info/lookup), [UniProt API](https://www.uniprot.org/help/api_queries), [RCSB Data API](https://data.rcsb.org/), [PubChem PUG REST](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest), and [ChEMBL web services](https://www.ebi.ac.uk/chembl/api/data/docs).
 
-Run `python run_acceptance.py` for fixed offline checks. In an installed core environment, add `--network` to test six tiny public identifier cases and save their standard bridge receipts. Optional `--output-file` saves a private report and refuses overwriting. An offline pass explicitly says the network suite was not requested. A pass measures the listed engineering checks, not general biomedical reasoning or scientific validity.
+Run `python run_acceptance.py` for fixed offline checks. In an installed core environment, add `--network` to test six public identifier cases and an OLS candidate lookup, saving standard bridge receipts. Optional `--output-file` saves a private report and refuses overwriting. An offline pass explicitly says the network suite was not requested. A pass measures listed engineering checks, not general biomedical reasoning or scientific validity.
 
 `python -m unittest discover -s tests -v` verifies synthetic sample/result audits, client formats, stale outputs and privacy gates. `bridge/smoke_mcp.py` verifies MCP discovery and a tiny result-table fixture; add `--network` for a real public database query.
 

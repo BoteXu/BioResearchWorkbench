@@ -1,5 +1,5 @@
 {
-  "bridge_version": "2.3",
+  "bridge_version": "2.4",
   "files": [
     {
       "path": ".gitattributes",
@@ -18,8 +18,13 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 2546,
-      "sha256": "1ede2e4631f489fbdba48c799637751b19a3e123845af4b77292e3119c9dd452"
+      "bytes": 3157,
+      "sha256": "643e6d5bda31645218f7e843a2a53f78b4c7b0e4071a5f8aa684b5674592b12a"
+    },
+    {
+      "path": "BIOMEDICAL.md",
+      "bytes": 9342,
+      "sha256": "eab919fd18224cc3706a7148acd05b270891c7fed5a70e60883cce5a82b36cd7"
     },
     {
       "path": "Install.ps1",
@@ -43,8 +48,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9888,
-      "sha256": "4aeb95916b877a3ef82ef4d0ea06b5531b9a2b109a03043bf590930a2520b096"
+      "bytes": 10009,
+      "sha256": "cca6c2c070e3460ec255774ab49e4780ddf11cb70b47014cd005ba3efc18edaf"
     },
     {
       "path": "audit_release.py",
@@ -62,9 +67,14 @@
       "sha256": "7b20c011b99c19960d1937ec29c92d41a2f4694170920df65fb4f8c06a1ad147"
     },
     {
+      "path": "bridge/biomedical_ext.py",
+      "bytes": 31577,
+      "sha256": "f01871f152e6f47ea66cde8f575cdb45bfcfe28761192bfae644d98ddb5e2984"
+    },
+    {
       "path": "bridge/bridge.py",
-      "bytes": 22369,
-      "sha256": "064eadfe1763df8862bb43086a462bf540aa0da0c344cf8aaed347eca10258e4"
+      "bytes": 22390,
+      "sha256": "b21eca41e0ae1b5c46c0931c1de141aa64f034e26254a48d58e92850d37c4853"
     },
     {
       "path": "bridge/database_ext.py",
@@ -78,8 +88,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 2477,
-      "sha256": "6e8c71ba94d8feacbd020369ba46e47f212bba16bff0f4b689876c2748773205"
+      "bytes": 2775,
+      "sha256": "8cc10ad16459e01d303f65ff4642d772f2cb610815471f3686dc07b6405a6fb4"
     },
     {
       "path": "bridge/http_client.py",
@@ -128,8 +138,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 15918,
-      "sha256": "d60e1670bec79b6f8d5809dde204893e2380ddb6a144b04515dca97e4e2073b1"
+      "bytes": 16612,
+      "sha256": "52dcb4cf3c5d797101ebe1543889d31840d7dfa1e1f0ea1ea4090a8def382faa"
     },
     {
       "path": "bridge/server_probe.py",
@@ -138,8 +148,8 @@
     },
     {
       "path": "bridge/smoke_mcp.py",
-      "bytes": 5034,
-      "sha256": "f74ac27173ccfda4a6d6b1293334265902eda83dee662b7b6f56788f8c96bfe8"
+      "bytes": 5799,
+      "sha256": "688ef3becbf872cf38d599d76b6a9b60cf934d13277aff41b81f0e184c502928"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -150,6 +160,16 @@
       "path": "client_config.py",
       "bytes": 2168,
       "sha256": "344eb0f799af92e6f06c2699144c500284bf5fe34c47ef41573ecd49706dcdec"
+    },
+    {
+      "path": "examples/biomedical_inputs.json",
+      "bytes": 4892,
+      "sha256": "9ba7ca40e6e636dd992ad3385e68f96455a7da2f93ee70103efe4583f01c7ea8"
+    },
+    {
+      "path": "examples/study_fixture.md",
+      "bytes": 446,
+      "sha256": "b97e73980fa050f1261d0ce515bbf06618bce6e1ea648c9c4f8bf01900dda887"
     },
     {
       "path": "requirements-core.txt",
@@ -173,8 +193,13 @@
     },
     {
       "path": "run_acceptance.py",
-      "bytes": 3771,
-      "sha256": "40cd6b2b99d8ca025d5f0a985e090bd4f4740c3373e1eec60bdbc94a5bb3b581"
+      "bytes": 4614,
+      "sha256": "a10703786bd4706f67f6f67a4de13909a4e2f3c5a9f0c46d248fe9675875b819"
+    },
+    {
+      "path": "tests/test_biomedical.py",
+      "bytes": 11047,
+      "sha256": "86bf90cd19d5b23c061ec37afcd512dade62dd0e003770ec97793def08ba476b"
     },
     {
       "path": "tests/test_core.py",
@@ -189,12 +214,12 @@
     {
       "path": "update_manifest.py",
       "bytes": 760,
-      "sha256": "68287c3315a156db9b26e0ae8a1ac1159fd2b182a297595d4f42b35e0e95902d"
+      "sha256": "5bbcc923590ca6f19c159a9266ce676f97717efc5cdbabbfc497bbf3b6eed753"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",
-      "bytes": 2312,
-      "sha256": "a28294926232e00c67ede5691bed49e51590464dab3d0c67db15712012fb578a"
+      "bytes": 3001,
+      "sha256": "91089642969c3daf86abff16bc3e5dbd4c8d6e103d51697023c6010aceb34681"
     }
   ]
 }
