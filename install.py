@@ -45,11 +45,19 @@ def main():
     parser.add_argument('--trust-dns-proxy',action='store_true')
     parser.add_argument('--validate-only',action='store_true')
     parser.add_argument('--install-vina',action='store_true',help='Download the fixed official Vina binary for this host')
+    parser.add_argument('--install-skills',action='store_true',help='Copy the optional audited workflow pack into client discovery')
+    parser.add_argument('--skills-dir',help='Private skill discovery directory; requires --install-skills')
     args = parser.parse_args()
     validate_package()
     mcp_name = args.mcp_name or ('biomni-local' if args.profile=='local' else 'biomni')
     if args.validate_only:
         return
+    if args.skills_dir and not args.install_skills:
+        parser.error('--skills-dir requires --install-skills')
+    from install_skills import install as install_skill_pack, validate_pack
+    validate_pack()
+    if args.install_skills:
+        install_skill_pack(args.skills_dir,dry_run=True)
     if platform.system() not in {'Windows','Darwin','Linux'}:
         raise ValueError('Native platform unverified; use browser access or a compatible Linux environment')
     uv = shutil.which('uv')
@@ -74,6 +82,8 @@ def main():
             shutil.copy2(file,local/file.name)
     for guide in ROOT.glob('*.md'):
         shutil.copy2(guide,local/guide.name)
+    shutil.copytree(ROOT/'skills',target/'skills',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+    shutil.copy2(ROOT/'install_skills.py',target/'install_skills.py')
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')
     checked([uv,'venv','--python','3.11',target/'.venv_tools'])
     python = runtime_python(target)
@@ -100,6 +110,8 @@ def main():
         if args.trust_dns_proxy:
             command.extend(['--env','BIOMNI_TRUST_DNS_PROXY=1'])
         checked(command+['--',python,local/'mcp_server.py'])
+    if args.install_skills:
+        install_skill_pack(args.skills_dir)
     print('INSTALLATION_AND_SMOKE_CHECKS_OK')
     print('Merge private client settings and AGENTS.generated.md, then open a fresh client session.')
 

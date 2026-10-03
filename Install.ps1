@@ -6,6 +6,8 @@ param(
     [switch]$SkipRegistration,
     [switch]$TrustDnsProxy,
     [switch]$InstallVina,
+    [switch]$InstallSkills,
+    [string]$SkillsDir = '',
     [switch]$ValidateOnly
 )
 $ErrorActionPreference = 'Stop'
@@ -17,6 +19,8 @@ if ($Profile) { $InstallerArgs += @('--profile',$Profile) }
 if ($SkipRegistration) { $InstallerArgs += '--skip-registration' }
 if ($TrustDnsProxy) { $InstallerArgs += '--trust-dns-proxy' }
 if ($InstallVina) { $InstallerArgs += '--install-vina' }
+if ($InstallSkills) { $InstallerArgs += '--install-skills' }
+if ($SkillsDir) { $InstallerArgs += @('--skills-dir',$SkillsDir) }
 if ($ValidateOnly) { $InstallerArgs += '--validate-only' }
 & $Uv @InstallerArgs
 if ($LASTEXITCODE -ne 0) { throw "Installation failed (exit $LASTEXITCODE)" }

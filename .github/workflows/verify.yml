@@ -18,6 +18,7 @@ jobs:
           python-version: '3.11'
       - run: python audit_release.py --history --manifest
       - run: python run_acceptance.py
+      - run: python install_skills.py --validate-only
   browser-interface:
     runs-on: ubuntu-latest
     needs: privacy-and-unit
@@ -53,7 +54,12 @@ jobs:
       - name: Fresh core installation and MCP network smoke
         shell: bash
         run: |
-          python install.py --profile core --client portable --skip-registration --install-dir "$RUNNER_TEMP/BiomniCore"
+          python install.py --profile core --client portable --skip-registration --install-skills --skills-dir "$RUNNER_TEMP/BiomniSkills" --install-dir "$RUNNER_TEMP/BiomniCore"
+      - name: Installed workflow pack is discoverable and repeatable
+        shell: bash
+        run: |
+          python install_skills.py --destination "$RUNNER_TEMP/BiomniSkills"
+          python -c "import install_skills,os; from pathlib import Path; c=install_skills.validate_pack(); root=Path(os.environ['RUNNER_TEMP'])/'BiomniSkills'; assert len(list(root.glob('*/SKILL.md')))==len(c['skills'])"
       - name: Confirm core profile stays lightweight
         shell: bash
         run: |
@@ -88,7 +94,7 @@ jobs:
       - name: Fresh local profile and pinned Vina
         shell: bash
         run: |
-          python install.py --profile local --client portable --skip-registration --install-vina --install-dir "$RUNNER_TEMP/BiomniLocal"
+          python install.py --profile local --client portable --skip-registration --install-vina --install-skills --skills-dir "$RUNNER_TEMP/BiomniLocalSkills" --install-dir "$RUNNER_TEMP/BiomniLocal"
       - name: Real optional backends on fixed synthetic data
         shell: bash
         run: |

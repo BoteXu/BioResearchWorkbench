@@ -1,0 +1,244 @@
+{
+  "version": "2.8.1",
+  "skills": [
+    {
+      "name": "biomni-academic-delivery",
+      "description": "把已审核证据和结果制作成论文文档、报告、PDF 或演示文稿，并验证最终交付。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "collaboration.build_evidence_draft",
+        "collaboration.prepare_manuscript_revision",
+        "review.audit_manuscript_format",
+        "collaboration.compare_manuscript_versions"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-academic-delivery/references/tool-routing.md": "34a530c3d2d60ebae4222e96be5a3cf6be831811276fdce249f34015dc30c531",
+        "biomni-academic-delivery/SKILL.md": "80ca6a8e2ff7c2562545f631c69212ee8459ef12a6761938e802003461b9283c"
+      }
+    },
+    {
+      "name": "biomni-claim-audit",
+      "description": "核验科学结论、追溯原始研究引用和审查机制表述；普通论文摘要不触发此流程。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "review.audit_claim_evidence",
+        "review.check_publication_updates",
+        "biomedical.extract_study_elements",
+        "literature.extract_local_document"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-claim-audit/references/tool-routing.md": "cffed0b9eba5f232c5a309a23d5a5c5bf1af0467dcc91908628bb8c280d6f9d0",
+        "biomni-claim-audit/SKILL.md": "7ce1e24171c88bea36660b03399dd4146531f985990cabc07c83490716fb839e"
+      }
+    },
+    {
+      "name": "biomni-docking-review",
+      "description": "为分子对接建立输入 QC、对照、姿势检查和结果解释流程；大量筛选使用服务器。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "molecular.audit_docking_inputs",
+        "advanced.audit_redocking_coordinates",
+        "molecular.summarize_vina_poses",
+        "software.check_software_health"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-docking-review/references/tool-routing.md": "f5becf181eb62dc3ed22ae57f14889d00eb215d625ca9d3d1e1e7450cc9aa9cc",
+        "biomni-docking-review/SKILL.md": "1e95df209c771907840654ef64a03ddd5d962f7d55f302eba90e29f9d9785af3"
+      }
+    },
+    {
+      "name": "biomni-omics-design",
+      "description": "规划或验收 bulk、单细胞、空间转录组与组学分析；绘图任务无需重新分析。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "statistics.guide_study_statistics",
+        "qc.preflight_transcriptomics",
+        "workflow.audit_sample_metadata",
+        "server.prepare_standard_pipeline",
+        "reporting.audit_analysis_result"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-omics-design/references/tool-routing.md": "7fe53750ae3caf03d88f2fbe3c9a8b75b0271cba6237c1c481b5335085316cc4",
+        "biomni-omics-design/SKILL.md": "4950fb6ec664d9414bc581ad34d54b3c7b9a94dbde2d7ea88688bc85ff41522a"
+      }
+    },
+    {
+      "name": "biomni-personal-library",
+      "description": "维护指定范围的 Zotero 文献与私有研究索引，进行有版本的导入、检索、批注和交换。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "zotero.inspect_zotero_connection",
+        "zotero.read_zotero_library",
+        "personal_library.prepare_personal_library_ingest",
+        "personal_library.search_personal_library",
+        "personal_library.export_personal_library"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-personal-library/references/tool-routing.md": "61b4c7e2dd7575cd1e1d55b285df7f0b69da5d73ee6bd09306b5f8965605c981",
+        "biomni-personal-library/SKILL.md": "ce39aafceccca6f555083e38442d9c4e22a913deca09aa2d0edcdbf9d15edd71"
+      }
+    },
+    {
+      "name": "biomni-remote-compute",
+      "description": "通过用户已有 SSH 和调度环境管理大型科研计算、追踪真实状态并验收返回结果。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "workflow.prepare_server_inventory",
+        "workflow.prepare_remote_task",
+        "server.prepare_scheduler_task",
+        "server.inspect_scheduler_receipt",
+        "workflow.verify_remote_results"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-remote-compute/references/tool-routing.md": "eb34a9d598e8a06434a896d3ac541e4b09d8680e1c83ceda19c57bf00bde1e61",
+        "biomni-remote-compute/SKILL.md": "8f5d21b3b93b797e8af2a70608fa77d475fc1720e9e2ce5604ba6461d39a4c3d"
+      }
+    },
+    {
+      "name": "biomni-scientific-figures",
+      "description": "从已审核组学、统计或计算生物学结果制作和检查科研图表；不用于重新拟合分析。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "workflow.audit_result_table",
+        "workflow.verify_remote_results",
+        "biomedical.audit_enrichment_results"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-scientific-figures/references/tool-routing.md": "6221ebaeba407a4d118322d88250240ebc5835a03760dba99de5f691bd2379f8",
+        "biomni-scientific-figures/SKILL.md": "9ddf3045521a456274d9cf89953a2210eb6f8aec116bc139dbd5ed2b6f879cd8"
+      }
+    },
+    {
+      "name": "biomni-skill-security",
+      "description": "纳入或发布第三方 skill 前审查提示注入、脚本权限、网络目的地、依赖和私人信息风险。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "privacy.inspect_privacy_policy",
+        "privacy.audit_outbound_parameters"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-skill-security/references/tool-routing.md": "ecdbe8f097bc73239e31f56d227f52331dbf7a544b9d1910e8a9e80aa2a021f0",
+        "biomni-skill-security/scripts/scan.py": "28f61fb73aa5663a76c47ebe6429d6abaef4a34f4531ce6a0ae8028c109bdcf4",
+        "biomni-skill-security/SKILL.md": "3fce9aa5e6924dab13ede5ae85d13ab33f22415e0b9dc632295c2f8dcd970765"
+      }
+    },
+    {
+      "name": "biomni-statistical-plan",
+      "description": "在正式推断前制定统计分析计划，审核设计、效应估计、不确定性和敏感性分析。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "statistics.guide_study_statistics",
+        "statistics.audit_statistical_dataset",
+        "statistics.audit_prediction_split",
+        "statistics.adjust_pvalues"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-statistical-plan/references/tool-routing.md": "f03a0e13e6e853a25eb12733d8d34bab626ff2cd96d335579f50dda89034b012",
+        "biomni-statistical-plan/SKILL.md": "40bed56086f3b838351f86b7b4847938de7697b41996e0701fa2400cad1c2cf1"
+      }
+    },
+    {
+      "name": "biomni-structure-review",
+      "description": "检查蛋白结构来源、链与残基映射、模型置信度及分子结果解释。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "biomedical.audit_structure_context",
+        "research.resolve_identifier",
+        "advanced.audit_md_summary"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-structure-review/references/tool-routing.md": "646aa65fa410f617d1e69288f0398f16f95c79908aeec049d2613a3c980a981e",
+        "biomni-structure-review/SKILL.md": "13a8b1db155498e53d826544f39b4e5662db7d7155c2134ea03a06167c5acce9"
+      }
+    },
+    {
+      "name": "biomni-submission-audit",
+      "description": "在投稿前审查正文、图表、引用、报告规范和回复材料的一致性。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "review.audit_paper",
+        "review.audit_manuscript_format",
+        "review.audit_terminology_units",
+        "review.audit_reporting_checklist",
+        "collaboration.prepare_reviewer_response"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-submission-audit/references/tool-routing.md": "7fd529c87b56d64275402509b21f695a5208bab8123333854c31811ce17bf3f7",
+        "biomni-submission-audit/SKILL.md": "5b41bbf90452203bdba0c5ae6bf21ae1c705337d7fed61dffd9e7efe1770eaa3"
+      }
+    },
+    {
+      "name": "biomni-systematic-review",
+      "description": "设计和审计系统综述、范围综述及有记录的文献筛选与证据综合流程。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "review.find_similar_studies",
+        "library.audit_reference_duplicates",
+        "review.audit_review",
+        "review.audit_reporting_checklist",
+        "statistics.guide_study_statistics"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-systematic-review/references/tool-routing.md": "e4649585e3a512f2162d151d18c7b158df7ee56f644ea2feb8bebf610dbadc3d",
+        "biomni-systematic-review/SKILL.md": "5d7f554751b3e183af584f0945c105422dab14c4f6df56188f9fa6913336ac1d"
+      }
+    },
+    {
+      "name": "biomni-target-evidence",
+      "description": "整合遗传、组学、药理、结构与实验信息，审查靶点方向、一致性和外推范围。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "biomedical.audit_genetic_alignment",
+        "biomedical.audit_drug_target_records",
+        "biomedical.build_evidence_matrix",
+        "biomedical.compare_evidence",
+        "biomedical.assess_cohort_eligibility"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-target-evidence/references/tool-routing.md": "0f15645eb23b3fb0e7fd803c335d5e6d037e7e614ef22dfdf3798b81b3ce3236",
+        "biomni-target-evidence/SKILL.md": "53884b656a47b2235775fcb42a148c6cd392276df28804a5da30b3b64da8c88f"
+      }
+    },
+    {
+      "name": "biomni-workflow-maintenance",
+      "description": "将实际完成的研究流程整理为可复用 skill，并维护方法版本、验收条件和回归样例。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "research.select_tools",
+        "reporting.audit_analysis_result"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-workflow-maintenance/references/tool-routing.md": "9287ba1971a3336a0f3ac1d937158de4f48824aed3cb1b60aaf11e4f1051419c",
+        "biomni-workflow-maintenance/SKILL.md": "4edf7d2bd7e7316b9a7a21c2ad305485aebcac2a49ceff1dee95e06511e36804"
+      }
+    }
+  ]
+}
