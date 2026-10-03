@@ -43,6 +43,12 @@ def main():
         co=pd.read_csv(Path(fit['output_directory'])/'coefficients.csv',index_col=0);assert 1.8<co.loc['x','estimate']<2.2;checks.append('OLS_HC3_known_effect')
         probability=1/(1+np.exp(-x));frame['binary']=rng.binomial(1,probability);frame.to_csv(p,index=False)
         logistic=st.fit_statistical_model(str(p),'binary',{'x':'numeric'},context,model='logistic',unit_key='unit');assert logistic['model']=='logistic';checks.append('logistic_real_backend')
+        separated=frame.copy();separated['binary']=(separated.x>0).astype(int);sp=root/'separated.csv';separated.to_csv(sp,index=False)
+        try: st.fit_statistical_model(str(sp),'binary',{'x':'numeric'},context,model='logistic',unit_key='unit')
+        except Exception as exc:
+            assert type(exc).__name__ in {'PerfectSeparationWarning','PerfectSeparationError'}
+        else: raise AssertionError('Separation must not be reported as completed inference')
+        checks.append('logistic_separation_blocks_inference')
         frame['exposure']=rng.uniform(.5,2,size=100);frame['count']=rng.poisson(frame.exposure*np.exp(.2+.3*x));frame.to_csv(p,index=False)
         poisson=st.fit_statistical_model(str(p),'count',{'x':'numeric'},context,model='poisson',unit_key='unit',exposure_key='exposure');assert poisson['exposure_offset']=='exposure';checks.append('poisson_exposure_offset')
         group=np.repeat(np.arange(20),5);random_intercepts=rng.normal(scale=3,size=20);frame['cluster']=['g'+str(i) for i in group];frame['mixed_y']=2*x+random_intercepts[group]+rng.normal(scale=.2,size=100);frame.to_csv(p,index=False)
@@ -79,6 +85,10 @@ def main():
         stable=adv.audit_network_stability(str(edge),rc,[.6,.85],[.5,1.],null_permutations=2);assert stable['fixed_node_universe']==4;checks.append('network_threshold_and_null_sensitivity')
         pred=[dict(unit='v'+str(i),y=i%2,p=.8 if i%2 else .2) for i in range(20)];split=st.audit_prediction_split(['training'],[r['unit'] for r in pred],['training'])
         evaluated=adv.evaluate_binary_prediction(pred,'y','p','unit',.5,split);assert evaluated['roc_auc']==1 and evaluated['confusion_counts']['FP']==0;checks.append('validation_discrimination_and_calibration')
+        try: adv.evaluate_binary_prediction(pred,'y','p','unit',.5,st.audit_prediction_split(['training'],['other-validation'],['training']))
+        except ValueError: pass
+        else: raise AssertionError('An unrelated split receipt must not authorize performance evaluation')
+        checks.append('prediction_requires_exact_validation_units')
         mol=Chem.AddHs(Chem.MolFromSmiles('CCO'));assert AllChem.EmbedMolecule(mol,randomSeed=42)==0;sdf=root/'ligand.sdf';writer=Chem.SDWriter(str(sdf));writer.write(mol);writer.close()
         prepared=prepare_ligand_meeko(str(sdf),{**context,'protonation_review':'synthetic neutral ethanol','stereochemistry_review':'no stereocenters','tautomer_review':'fixed synthetic state'});assert Path(prepared['output_directory'],'ligand.pdbqt').is_file();checks.append('Meeko_real_ligand_preparation')
         # Tampering must fail result review, including nested files.

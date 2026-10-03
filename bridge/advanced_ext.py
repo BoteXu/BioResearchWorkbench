@@ -361,7 +361,7 @@ def infer_diffusion_pseudotime(h5ad_path: str, root_cells: list, unit_key: str, 
 
 
 def audit_cell_communication(records: list, conditions: list, min_donors: int = 3) -> dict:
-    """Review returned ligand/receptor communication scores for donor coverage, sign consistency and provenance; expression scores do not establish signaling."""
+    """Review returned ligand/receptor communication scores for donor coverage and provenance; expression scores do not establish signaling."""
     if not isinstance(records,list) or not 1<=len(records)<=10000 or not 2<=len(conditions)<=5 or min_donors<3: raise ValueError('Provide bounded donor-level scores and explicit conditions')
     from statistics_ext import _finite
     required={'donor','condition','sender','receiver','ligand','receptor','score','source','method'};groups={};seen=set()
@@ -389,6 +389,8 @@ def evaluate_binary_prediction(records: list, outcome_key: str, probability_key:
     if not isinstance(split_review,dict) or split_review.get('leakage_gate_pass') is not True or not 10<=len(records)<=10000 or not 0<threshold<1: raise ValueError('A passed independent-unit split review and explicit threshold are required')
     units=[r[unit_key] for r in records]
     if len(set(units))!=len(units) or any(not isinstance(u,str) or not u for u in units): raise ValueError('Validation rows require distinct nonempty independent units')
+    fingerprint=hashlib.sha256(json.dumps(sorted(set(units)),ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+    if split_review.get('unit_set_hashes',{}).get('validation')!=fingerprint: raise ValueError('Prediction units do not match the audited validation split')
     y=np.array([_finite(r[outcome_key]) for r in records]);p=np.array([_finite(r[probability_key]) for r in records])
     if set(y)!={0.,1.} or (p<0).any() or (p>1).any(): raise ValueError('Provide both binary classes and probabilities in [0,1]')
     pred=p>=threshold;bins=[]

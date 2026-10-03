@@ -176,7 +176,9 @@ def audit_prediction_split(training_units: list, validation_units: list, preproc
     if prep-train: issues.append('preprocessing_fit_outside_training')
     if tune&val: issues.append('validation_used_for_tuning')
     if tune-train: issues.append('tuning_outside_training')
-    return {'success':True,'leakage_gate_pass':not issues,'issues':issues,'unique_units':{k:len(set(v)) for k,v in groups.items()},'limitations':['Provided IDs do not detect mislabeled donors, related individuals, batch/site leakage or feature leakage.','Hyperparameter selection needs inner folds; external validation must remain untouched.','This is a split audit, not performance evaluation or model validation.']}
+    import hashlib,json
+    fingerprints={k:hashlib.sha256(json.dumps(sorted(set(v)),ensure_ascii=False,separators=(',',':')).encode()).hexdigest() for k,v in groups.items()}
+    return {'success':True,'leakage_gate_pass':not issues,'issues':issues,'unit_set_hashes':fingerprints,'unique_units':{k:len(set(v)) for k,v in groups.items()},'limitations':['Provided IDs do not detect mislabeled donors, related individuals, batch/site leakage or feature leakage.','Hyperparameter selection needs inner folds; external validation must remain untouched.','This is a split audit, not performance evaluation or model validation.']}
 
 
 def fit_statistical_model(path: str, outcome: str, predictors: dict, context: dict, model: str = 'linear', cluster_key: str = '', unit_key: str = '', exposure_key: str = '', interactions: list = None) -> dict:
@@ -231,7 +233,11 @@ def fit_statistical_model(path: str, outcome: str, predictors: dict, context: di
     if model=='linear': fitted=sm.OLS(y,x).fit(**covariance)
     elif model=='logistic':
         if set(y)!={0.,1.} or min(sum(y==0),sum(y==1))<10: raise ValueError('Binary model needs both classes and at least ten observations in each; sparse-event inference is unsupported')
-        fitted=sm.GLM(y,x,family=sm.families.Binomial()).fit(**covariance)
+        import warnings
+        from statsmodels.tools.sm_exceptions import PerfectSeparationWarning
+        with warnings.catch_warnings():
+            warnings.filterwarnings('error',category=PerfectSeparationWarning)
+            fitted=sm.GLM(y,x,family=sm.families.Binomial()).fit(**covariance)
     elif model=='poisson':
         if (y<0).any() or (y!=np.floor(y)).any() or y.sum()==0: raise ValueError('Poisson requires nonnegative integer counts and events')
         fitted=sm.GLM(y,x,family=sm.families.Poisson(),offset=offset).fit(**covariance)
