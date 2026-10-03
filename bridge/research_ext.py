@@ -17,6 +17,16 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'reference_library':[('library','import_reference_library'),('library','audit_reference_duplicates'),('library','export_reference_library'),('review','audit_reference_metadata')],
+    'zotero_read':[('zotero','inspect_zotero_connection'),('zotero','read_zotero_library')],
+    'zotero_write':[('zotero','prepare_zotero_write'),('zotero','apply_zotero_write')],
+    'manuscript_evidence':[('review','inspect_manuscript'),('review','audit_claim_evidence')],
+    'paper_review':[('review','audit_paper'),('review','audit_manuscript_format'),('review','audit_terminology_units')],
+    'review_audit':[('review','audit_review'),('review','audit_reporting_checklist')],
+    'similar_studies':[('review','find_similar_studies'),('review','check_publication_updates')],
+    'manuscript_collaboration':[('collaboration','plan_manuscript'),('collaboration','build_evidence_draft'),('collaboration','manage_collaboration_review')],
+    'manuscript_revision':[('collaboration','compare_manuscript_versions'),('collaboration','prepare_manuscript_revision')],
+    'reviewer_response':[('collaboration','prepare_reviewer_response')],
     'privacy_review':[('privacy','inspect_privacy_policy'),('privacy','audit_outbound_parameters')],
     'statistics_guidance':[('statistics','guide_study_statistics'),('statistics','audit_statistical_dataset')],
     'statistical_comparison':[('statistics','compare_groups'),('statistics','adjust_pvalues')],
@@ -95,7 +105,7 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network'}
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
         edition_allowed = not (entry or {}).get('requires_local_edition') or edition()=='local'
         recommendations.append({

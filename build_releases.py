@@ -20,8 +20,8 @@ def build(destination):
         payload=dict(files)
         payload['edition.json']=(json.dumps({'edition':edition,'default_profile':profile})+'\n').encode()
         entries=[{'path':name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()} for name,raw in sorted(payload.items()) if name!='manifest.json']
-        payload['manifest.json']=(json.dumps({'bridge_version':'2.7','edition':edition,'files':entries},indent=2)+'\n').encode()
-        target=output/('biomni-direct-tools-v2.7.0-'+edition+'.zip')
+        payload['manifest.json']=(json.dumps({'bridge_version':'2.8','edition':edition,'files':entries},indent=2)+'\n').encode()
+        target=output/('biomni-direct-tools-v2.8.0-'+edition+'.zip')
         if target.exists(): raise ValueError('Choose a fresh release output directory')
         with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED) as archive:
             for name,raw in sorted(payload.items()):

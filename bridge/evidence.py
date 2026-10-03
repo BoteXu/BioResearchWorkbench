@@ -32,6 +32,9 @@ def connection():
     conn.execute("CREATE TABLE IF NOT EXISTS runtime_passes(tool TEXT PRIMARY KEY, tested_at TEXT, receipt TEXT)")
     conn.execute("INSERT OR IGNORE INTO runtime_passes SELECT tool,tested_at,receipt FROM observations WHERE success=1")
     conn.execute("CREATE TABLE IF NOT EXISTS throttle(service TEXT PRIMARY KEY, last_request REAL)")
+    # Bootstrap/migration writes start a transaction. Finish it before callers
+    # request their own BEGIN IMMEDIATE for the shared NCBI throttle.
+    conn.commit()
     try:
         yield conn
         conn.commit()

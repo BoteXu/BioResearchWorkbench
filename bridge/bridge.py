@@ -198,7 +198,7 @@ def _source_manifest():
     manifest = []
     folder = HERE / "source_snapshots"
     folder.mkdir(exist_ok=True)
-    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py", "statistics_ext.py", "advanced_ext.py", "server_ext.py", "scheduler_agent.py", "reporting_ext.py", "designed_expression.R", "tximport_pipeline.R", "dream_pipeline.R", "privacy_ext.py"):
+    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py", "statistics_ext.py", "advanced_ext.py", "server_ext.py", "scheduler_agent.py", "reporting_ext.py", "designed_expression.R", "tximport_pipeline.R", "dream_pipeline.R", "privacy_ext.py", "academic_common.py", "library_ext.py", "zotero_ext.py", "review_ext.py", "collaboration_ext.py"):
         raw = (HERE / name).read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         path = folder / (digest + ".py")
@@ -238,7 +238,7 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
         "implementation": implementation,
         "sources": TRACE.get() or [],
         "input_files": _input_files(parameters),
-        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.7"},
+        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.8"},
         "bridge_source_manifest": _source_manifest(),
     }
     receipt_path = path.with_suffix(".receipt.json")
@@ -320,7 +320,7 @@ def readiness() -> dict:
         "database_module_ready": database_ready,
         "database_import_error": database_error,
         "available_tools": sorted(DATABASE_TOOLS),
-        "bridge_version": "2.7",
+        "bridge_version": "2.8",
         "compute_edition": __import__("compute_policy").edition(),
         "compute_placement": "Large calculations and data downloads run on the server. Local scope: retrieval, task preparation, command handoff, status/receipt and result auditing.",
         "runtime_health": health(),

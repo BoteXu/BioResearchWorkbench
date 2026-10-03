@@ -5,6 +5,10 @@ from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "library": ("library_ext", ["import_reference_library", "audit_reference_duplicates", "export_reference_library", "index_pdf_folder"]),
+    "zotero": ("zotero_ext", ["inspect_zotero_connection", "read_zotero_library", "read_zotero_attachment", "prepare_zotero_write", "apply_zotero_write"]),
+    "review": ("review_ext", ["inspect_manuscript", "audit_claim_evidence", "audit_paper", "audit_review", "audit_manuscript_format", "audit_terminology_units", "find_similar_studies", "check_publication_updates", "audit_reporting_checklist", "audit_reference_metadata"]),
+    "collaboration": ("collaboration_ext", ["plan_manuscript", "build_evidence_draft", "compare_manuscript_versions", "prepare_manuscript_revision", "manage_collaboration_review", "prepare_reviewer_response"]),
     "privacy": ("privacy_ext", ["inspect_privacy_policy", "audit_outbound_parameters"]),
     "statistics": ("statistics_ext", ["guide_study_statistics", "audit_statistical_dataset", "compare_groups", "adjust_pvalues", "plan_sample_size", "meta_analyze_effects", "audit_prediction_split", "fit_statistical_model"]),
     "advanced": ("advanced_ext", ["run_designed_expression", "import_expression_data", "analyze_cell_composition", "score_regulatory_activity", "summarize_pathway_overlap", "audit_network_stability", "audit_redocking_coordinates", "audit_md_summary", "audit_batch_embedding", "run_donor_differential_state", "infer_diffusion_pseudotime", "audit_cell_communication", "evaluate_binary_prediction", "audit_colocalization_results"]),
@@ -40,6 +44,9 @@ def registry():
                     item["default"] = parameter.default
                     optional.append(item)
             dependencies = []
+            if category=='zotero': dependencies=['requests']
+            if category=='library' and name=='index_pdf_folder': dependencies=['pypdf']
+            if category=='review': dependencies=['requests'] if name in {'find_similar_studies','check_publication_updates','audit_reference_metadata'} else ['pypdf']
             if category=='statistics':
                 dependencies = ['numpy','scipy'] if name=='compare_groups' else ['scipy'] if name in {'plan_sample_size','meta_analyze_effects'} else ['numpy','pandas','statsmodels'] if name=='fit_statistical_model' else []
             if category=='advanced':
