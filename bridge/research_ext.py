@@ -30,6 +30,7 @@ INTENTS = {
     'cell_composition':[('advanced','analyze_cell_composition')],
     'regulatory_activity':[('advanced','score_regulatory_activity')],
     'pathway_redundancy':[('advanced','summarize_pathway_overlap')],
+    'network_render':[('software','cytoscape_import_network'),('software','cytoscape_render_network')],
     'network_stability':[('advanced','audit_network_stability')],
     'trajectory':[('advanced','infer_diffusion_pseudotime')],
     'communication_review':[('advanced','audit_cell_communication')],

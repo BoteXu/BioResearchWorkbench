@@ -96,8 +96,10 @@ def inspect_cytoscape_health(port: int = 1234) -> dict:
     session=requests.Session();session.trust_env=False
     try:
         base='http://localhost:'+str(port)+'/v1'
-        version=session.get(base+'/version',timeout=10);version.raise_for_status()
-        layouts=session.get(base+'/apply/layouts',timeout=10);layouts.raise_for_status()
+        version=session.get(base+'/version',timeout=10,allow_redirects=False);version.raise_for_status()
+        if not 200<=version.status_code<300: raise ValueError('Local CyREST redirects are not permitted')
+        layouts=session.get(base+'/apply/layouts',timeout=10,allow_redirects=False);layouts.raise_for_status()
+        if not 200<=layouts.status_code<300: raise ValueError('Local CyREST redirects are not permitted')
         return {'success':True,'connection_state':'responding','version':version.json(),'layouts':layouts.json(),'limitations':['Endpoint responses do not prove network rendering, GUI inspection or successful export.','Local host only; no public endpoint is configured.']}
     except requests.RequestException as exc:
         return {'success':False,'connection_state':'unavailable','error_type':type(exc).__name__,'limitations':['An unavailable GUI is not silently installed or started.']}
@@ -139,8 +141,36 @@ def cytoscape_import_network(graphml_path: str, port: int = 1234) -> dict:
     payload = {'data':{'name':'Biomni reviewed network'},'elements':{'nodes':[{'data':{**a,'id':str(n),'name':str(n)}} for n,a in graph.nodes(data=True)],'edges':[{'data':{**v,'id':'edge'+str(i),'source':str(a),'target':str(b)}} for i,(a,b,v) in enumerate(graph.edges(data=True))]}}
     session = requests.Session();session.trust_env=False
     try:
-        response = session.post('http://localhost:'+str(port)+'/v1/networks',json=payload,timeout=30)
+        response = session.post('http://localhost:'+str(port)+'/v1/networks',json=payload,timeout=30,allow_redirects=False)
         response.raise_for_status()
+        if not 200<=response.status_code<300: raise ValueError('Local CyREST redirects are not permitted')
         data = response.json()
     finally: session.close()
     return {'success':True,'cytoscape_response':data,'nodes_imported':len(graph),'edges_imported':graph.number_of_edges(),'limitations':['This records an import response only; layout, visual inspection and scientific interpretation remain separate.','The endpoint is restricted to this host; no public service or clinical data transfer is configured.']}
+
+
+def cytoscape_render_network(network_id: int, layout: str, style: str = '', port: int = 1234) -> dict:
+    """Apply an explicit local Cytoscape layout/style and export a bounded PNG; never follow redirects, start a GUI or publish the image."""
+    from urllib.parse import quote
+    from transcriptomics_ext import _folder,_finish
+    import requests
+    if type(network_id) is not int or network_id<1 or type(port) is not int or not 1<=port<=65535 or not re.fullmatch(r'[A-Za-z0-9_.-]{1,60}',layout) or not isinstance(style,str) or len(style)>100 or any(ord(c)<32 for c in style): raise ValueError('Provide a numeric local network ID and explicit layout/style')
+    base='http://localhost:'+str(port)+'/v1';session=requests.Session();session.trust_env=False
+    try:
+        for path in ['/apply/layouts/'+quote(layout,safe='')+'/'+str(network_id)]+(['/apply/styles/'+quote(style,safe='')+'/'+str(network_id)] if style else []):
+            response=session.get(base+path,timeout=60,allow_redirects=False);response.raise_for_status()
+            if not 200<=response.status_code<300: raise ValueError('Local CyREST redirects are not permitted')
+        response=session.get(base+'/networks/'+str(network_id)+'/views/first.png',timeout=60,allow_redirects=False,stream=True);response.raise_for_status()
+        try:
+            if not 200<=response.status_code<300: raise ValueError('Local CyREST redirects are not permitted')
+            chunks=[];size=0
+            for chunk in response.iter_content(65536):
+                size+=len(chunk)
+                if size>30000000: raise ValueError('Network PNG exceeds local image limit')
+                chunks.append(chunk)
+            raw=b''.join(chunks)
+        finally: response.close()
+        if not raw.startswith(b'\x89PNG\r\n\x1a\n'): raise ValueError('CyREST did not return a PNG')
+    finally:session.close()
+    folder=_folder('cytoscape_render');(folder/'network.png').write_bytes(raw)
+    return _finish(folder,{'workflow':'cytoscape_render','network_id':network_id,'layout':layout,'style':style,'limitations':['This records an export response, not human visual inspection or scientific network validity.','The GUI must already be running; available layouts/styles depend on its installation.','Only the first network view is exported; all data remains on the local owned host.']})

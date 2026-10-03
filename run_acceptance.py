@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import io
 import json
+import re
 import sys
 import unittest
 from contextlib import redirect_stdout
@@ -47,7 +48,8 @@ def main():
                              hashlib.sha256(raw).hexdigest() == receipt['sha256'])
                 report['network'].append({'case':name,'pass':check,'receipt_file':receipt['receipt_file'],
                                           'resolution_status':data.get('status'),
-                                          'candidate_coverage_complete':data.get('candidate_coverage_complete')})
+                                          'candidate_coverage_complete':data.get('candidate_coverage_complete'),
+                                          'error_type':(str(data.get('error','')).split(':',1)[0] if re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',str(data.get('error','')).split(':',1)[0]) else None)})
             except Exception as exc:
                 report['network'].append({'case':name,'pass':False,'error_type':type(exc).__name__})
         report['network_state'] = 'completed'

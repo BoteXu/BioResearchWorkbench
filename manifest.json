@@ -78,8 +78,8 @@
     },
     {
       "path": "SOFTWARE_INTERFACES.md",
-      "bytes": 3735,
-      "sha256": "4e9cbeb3b1f886f83ca01b2c583d68b4fc6d741db58b1623121060e907f15296"
+      "bytes": 4214,
+      "sha256": "77fcd079233fd7eb6105b0eb463a3e6ab4b254da2f22dc03d48493e079105e05"
     },
     {
       "path": "STATISTICS.md",
@@ -153,8 +153,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 7059,
-      "sha256": "959ea0a94f1a29dacbec80cc7a83deae9a70788c589e6eb13007954f09176ef1"
+      "bytes": 7118,
+      "sha256": "deb3b767c5a896f38ed79bb9a609bb410d68a35aa8bc39d72f30f0b662b589bb"
     },
     {
       "path": "bridge/http_client.py",
@@ -228,8 +228,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 19942,
-      "sha256": "eeec110a4321d8f0b860e7c10fca8db9dfb5894e05adbf0c3628da7945935121"
+      "bytes": 20046,
+      "sha256": "9ab6372d348dbb54a75fc374e0d14d49914c6d057df8a8f20ef7882ed4c52942"
     },
     {
       "path": "bridge/scheduler_agent.py",
@@ -253,8 +253,8 @@
     },
     {
       "path": "bridge/software_ext.py",
-      "bytes": 11077,
-      "sha256": "d6980ee4f844a7f28c011fca789ce5457e9ed7d45f3cd8903962190f936a9b54"
+      "bytes": 13808,
+      "sha256": "ac16bd2992fad3dd37ee9d2fb611203708d522032df9bcf9659eb0a147ead3b0"
     },
     {
       "path": "bridge/statistics_ext.py",
@@ -358,8 +358,8 @@
     },
     {
       "path": "run_acceptance.py",
-      "bytes": 4614,
-      "sha256": "a10703786bd4706f67f6f67a4de13909a4e2f3c5a9f0c46d248fe9675875b819"
+      "bytes": 4818,
+      "sha256": "700b24aa256436bdb447e3bea689d74ae0654041c3199f8700343d2e9b7cc9c8"
     },
     {
       "path": "tests/advanced_check.py",
@@ -395,6 +395,11 @@
       "path": "tests/test_core.py",
       "bytes": 6621,
       "sha256": "b2e7342640fef8a9a160efc8e24dbfe9401789a9606d5fc1215676d0596356dc"
+    },
+    {
+      "path": "tests/test_cytoscape.py",
+      "bytes": 1951,
+      "sha256": "4e9dcbf37d60cf692057052e5a798067c74df13774b8bded826888c460f20d73"
     },
     {
       "path": "tests/test_platforms.py",

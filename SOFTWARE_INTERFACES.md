@@ -31,3 +31,7 @@ Private registry settings are host-specific. Share the public package and these 
 ## Version 2.7 health and preparation
 
 Fixed version health comparisons and local CyREST health queries are available. Meeko single-ligand preparation has a bounded local adapter; receptor preparation is a server command adapter. Open Babel optional binary packaging is listed in requirements-interfaces.txt; a Windows synthetic conversion has executed. A live Cytoscape GUI remains unverified. See RESEARCH_WORKFLOWS.md and PRIVACY_SECURITY.md.
+
+### Local Cytoscape rendering
+
+`software.cytoscape_render_network` applies an explicitly selected layout and optional style to an existing local network, then exports the first view as a bounded PNG. The GUI must already be running. All CyREST adapters disable environment credentials and redirects; redirected responses are rejected before any further request. Tests verify these protocol boundaries, not a running GUI or visual quality. Live GUI rendering remains unverified.

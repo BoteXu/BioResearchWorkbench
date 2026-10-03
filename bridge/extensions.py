@@ -10,7 +10,7 @@ EXPORTS = {
     "advanced": ("advanced_ext", ["run_designed_expression", "import_expression_data", "analyze_cell_composition", "score_regulatory_activity", "summarize_pathway_overlap", "audit_network_stability", "audit_redocking_coordinates", "audit_md_summary", "audit_batch_embedding", "run_donor_differential_state", "infer_diffusion_pseudotime", "audit_cell_communication", "evaluate_binary_prediction", "audit_colocalization_results"]),
     "server": ("server_ext", ["prepare_scheduler_task", "inspect_scheduler_receipt", "prepare_standard_pipeline", "inspect_multiqc_report"]),
     "reporting": ("reporting_ext", ["audit_analysis_result"]),
-    "software": ("software_ext", ["register_local_software", "software_inventory", "check_software_health", "inspect_cytoscape_health", "convert_molecular_structure", "cytoscape_import_network"]),
+    "software": ("software_ext", ["register_local_software", "software_inventory", "check_software_health", "inspect_cytoscape_health", "cytoscape_render_network", "convert_molecular_structure", "cytoscape_import_network"]),
     "systems": ("systems_ext", ["score_pathway_activity", "query_string_network", "analyze_ppi_network"]),
     "qc": ("qc_ext", ["preflight_transcriptomics", "compare_analysis_results"]),
     "transcriptomics": ("transcriptomics_ext", ["inspect_local_compute", "run_bulk_rnaseq", "aggregate_pseudobulk", "run_normalized_expression", "run_small_single_cell"]),
@@ -45,7 +45,7 @@ def registry():
             if category=='advanced':
                 dependencies = [] if name in {'summarize_pathway_overlap','audit_redocking_coordinates','audit_md_summary','audit_cell_communication','audit_colocalization_results'} else ['numpy','pandas']
                 dependencies += {'import_expression_data':['anndata','scipy'], 'infer_diffusion_pseudotime':['scanpy','anndata','scipy'], 'evaluate_binary_prediction':['sklearn'], 'audit_batch_embedding':['sklearn'], 'audit_network_stability':['networkx','sklearn']}.get(name,[])
-            if category=='software' and name=='inspect_cytoscape_health': dependencies=['requests']
+            if category=='software' and name in {'inspect_cytoscape_health','cytoscape_render_network'}: dependencies=['requests']
             if category=='systems':
                 dependencies = ['numpy','pandas','gseapy'] if name=='score_pathway_activity' else ['networkx','matplotlib'] if name=='analyze_ppi_network' else ['requests']
             if category=='software' and name=='cytoscape_import_network': dependencies = ['networkx','requests']
