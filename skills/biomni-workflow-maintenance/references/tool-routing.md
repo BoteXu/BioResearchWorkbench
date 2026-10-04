@@ -29,3 +29,13 @@
 - `workbench.freeze_reproduction_package`
 
 Check WORKBENCH.md and SCIENTIFIC_BACKENDS.md in the installed tool host. Prepared tasks, native invocation, engineering tests and real scientific acceptance remain distinct. Private index and document mutations require explicit reviewed dispatch.
+
+## Bridge 2.10 additions
+- `code_review.map_code_project`
+- `code_review.audit_scientific_code`
+- `code_review.prepare_code_revision`
+- `code_review.prepare_scientific_test_suite`
+- `code_execution.prepare_code_execution`
+- `code_execution.prepare_code_workflow`
+
+Read CODE_WORKFLOWS.md and CLINICAL_RESEARCH.md in the private installation. Code execution and large clinical/omics computation stay on the server. Scaffolds and passing static checks are not runtime or scientific validation.

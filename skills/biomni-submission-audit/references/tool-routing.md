@@ -22,3 +22,8 @@
 
 流程说明可由不同宿主模型阅读；客户端是否自动发现 skill、是否提供文件/渲染/SSH 功能应单独确认。鸿蒙浏览器网关提供工具 JSON 访问，不承诺原生 skill 执行或 MCP 接入。所有可选软件维持现有权限和私有配置。
 
+
+## Bridge 2.10 additions
+- `clinical_research.audit_medical_reporting`
+
+Read CODE_WORKFLOWS.md and CLINICAL_RESEARCH.md in the private installation. Code execution and large clinical/omics computation stay on the server. Scaffolds and passing static checks are not runtime or scientific validation.

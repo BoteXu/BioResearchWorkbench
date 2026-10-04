@@ -27,3 +27,10 @@
 - `scientific_backend.prepare_scientific_backend`
 
 Check WORKBENCH.md and SCIENTIFIC_BACKENDS.md in the installed tool host. Prepared tasks, native invocation, engineering tests and real scientific acceptance remain distinct. Private index and document mutations require explicit reviewed dispatch.
+
+## Bridge 2.10 additions
+- `clinical_research.guide_clinical_study`
+- `clinical_research.prepare_clinical_backend`
+- `clinical_research.audit_clinical_prediction`
+
+Read CODE_WORKFLOWS.md and CLINICAL_RESEARCH.md in the private installation. Code execution and large clinical/omics computation stay on the server. Scaffolds and passing static checks are not runtime or scientific validation.

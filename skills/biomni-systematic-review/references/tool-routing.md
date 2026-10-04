@@ -32,3 +32,9 @@
 - `academic_workspace.inspect_review_search`
 
 Check WORKBENCH.md and SCIENTIFIC_BACKENDS.md in the installed tool host. Prepared tasks, native invocation, engineering tests and real scientific acceptance remain distinct. Private index and document mutations require explicit reviewed dispatch.
+
+## Bridge 2.10 additions
+- `clinical_research.extract_review_effects`
+- `clinical_research.record_bias_assessment`
+
+Read CODE_WORKFLOWS.md and CLINICAL_RESEARCH.md in the private installation. Code execution and large clinical/omics computation stay on the server. Scaffolds and passing static checks are not runtime or scientific validation.

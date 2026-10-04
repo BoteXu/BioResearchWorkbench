@@ -4,6 +4,8 @@
 
 The original foundation is [Biomni](https://github.com/snap-stanford/Biomni). This project integrates existing research tools; it does not claim their algorithms, datasets, models or software as its own. Read [origins and third-party attribution](ORIGINS.md) for what is reused, what is adapted and what this project adds. This is an independent downstream workbench, not an official Biomni release.
 
+Package 2.10.0 adds [scientific code development/review](CODE_WORKFLOWS.md) and [clinical research support](CLINICAL_RESEARCH.md): scoped source and Notebook checks, data/join/numerical contracts, QC version binding, reviewed patches/tests, real server code/workflow adapters, clinical evidence/labels/QC/prediction/review tools and three fixed clinical R backends. Scaffolds, engineering acceptance, actual execution and scientific validation are reported separately.
+
 Package 2.9.0 adds [private project/workflow/reproduction/backup tools](WORKBENCH.md), fulltext/annotation search, scoped incremental index sync, resumable independent review, native Windows Word collaboration and three [real server scientific adapters](SCIENTIFIC_BACKENDS.md). Large calculations stay on the server; runtime and scientific validation boundaries remain explicit.
 
 Package 2.8.2 introduced the independent name and detailed attribution. Existing Biomni-named tools and skills remain compatible; see [migration](MIGRATION.md).

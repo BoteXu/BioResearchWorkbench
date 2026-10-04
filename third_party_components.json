@@ -1720,6 +1720,69 @@
       "origin": "https://github.com/tesseract-ocr/tesseract",
       "license_status": "Apache-2.0; consult exact installed version. Not relicensed or vendored here.",
       "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "Jupyter nbclient / nbformat",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://nbclient.readthedocs.io/en/latest/client.html",
+      "license_reference": "BSD-3-Clause",
+      "our_role": "Fixed server notebook execution; not vendored"
+    },
+    {
+      "name": "Snakemake",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://snakemake.readthedocs.io/en/stable/",
+      "license_reference": "MIT",
+      "our_role": "Generate reviewed workflows; CI-only synthetic execution"
+    },
+    {
+      "name": "Nextflow",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://github.com/nextflow-io/nextflow",
+      "license_reference": "Apache-2.0",
+      "our_role": "Generate reviewed workflows; CI-only synthetic execution"
+    },
+    {
+      "name": "pydicom",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://github.com/pydicom/pydicom",
+      "license_reference": "MIT",
+      "our_role": "Fixed server metadata extraction; no diagnosis"
+    },
+    {
+      "name": "survival",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://cran.r-project.org/package=survival",
+      "license_reference": "LGPL-2.1-or-later",
+      "our_role": "Fixed server Cox/PH adapter"
+    },
+    {
+      "name": "cmprsk",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://cran.r-project.org/package=cmprsk",
+      "license_reference": "GPL-2-or-later",
+      "our_role": "Fixed server competing-risks adapter"
+    },
+    {
+      "name": "RxNorm / DailyMed",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://www.nlm.nih.gov/",
+      "license_reference": "Service terms and source content rights",
+      "our_role": "Approved public drug vocabulary and US label retrieval"
+    },
+    {
+      "name": "uv / renv",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://docs.astral.sh/uv/",
+      "license_reference": "Upstream respective licenses",
+      "our_role": "Read lockfiles; no vendored algorithm or implicit install"
+    },
+    {
+      "name": "GitHub CodeQL",
+      "use": "optional_existing_server_software_or_public_service",
+      "origin": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning",
+      "license_reference": "GitHub CodeQL terms",
+      "our_role": "Public source security scanning in CI"
     }
   ],
   "limits": [

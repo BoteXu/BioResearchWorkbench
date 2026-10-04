@@ -167,8 +167,17 @@ def apply_project_revision(plan_file: str, expected_sha256: str, dispatch: bool 
 def _stage_view(value, stage):
     stages={s['id']:s for s in value['stages']}
     blocked=[d for d in stage.get('depends_on',[]) if stages[d].get('state','planned')!='accepted']
+    binding_current=None
+    if stage.get('qc_binding'):
+        from code_common import binding as current_binding, sha as binding_sha
+        b=stage['qc_binding']
+        try:
+            _,raw=read_file(b['binding_file']);saved=json.loads(raw)
+            binding_current=digest(raw)==b['expected_sha256'] and saved.get('accepted_for_bound_inputs') is True and saved.get('binding_sha256')==binding_sha(current_binding(b['inputs'],b['design'],b['references']))
+        except (ValueError,KeyError,OSError,TypeError):binding_current=False
+        if not binding_current:blocked.append('qc_binding_changed_or_unavailable')
     state=stage.get('state','planned')
-    return {**stage,'state':state,'blocked_by':blocked,'ready':state=='planned' and not blocked,
+    return {**stage,'state':state,'blocked_by':blocked,'ready':state=='planned' and not blocked,'qc_binding_current':binding_current,'requires_revalidation':binding_current is False,
         'recovery':'inspect real scheduler/process and runner receipts before any new dispatch' if state=='unknown' else None}
 
 

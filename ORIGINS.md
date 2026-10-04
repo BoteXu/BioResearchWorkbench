@@ -38,3 +38,6 @@
 - 可选第三方 skill 的代码、模板、字体和插件没有被批量复制入本包。随包 14 套说明是本项目编写的组合工作流，不宣称通用科研方法原创。
 
 机器可读的组件使用关系见 [third_party_components.json](third_party_components.json)。其 `use` 字段区分获取的底层源码、安装依赖、可选外部软件、外部服务和宿主能力；锁文件仍是完整版本清单的依据。
+
+## Bridge 2.10 attribution
+Original additions: source-scoped code/numeric/clinical contracts, located review ledgers, fixed code/workflow/clinical adapters, private version bindings and acceptance fixtures. Existing Python/Jupyter, Nextflow, Snakemake, pydicom, survival, cmprsk, uv, renv and CodeQL retain upstream authorship/licenses. No clinical guideline or bias grading rules are redistributed. Official RxNorm/DailyMed services retain NLM provenance and regional scope.

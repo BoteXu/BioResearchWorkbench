@@ -17,6 +17,32 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'code_project':[('code_review', 'map_code_project'), ('code_review', 'audit_scientific_code')],
+    'code_notebook':[('code_review', 'audit_notebook'), ('code_execution', 'prepare_code_execution')],
+    'code_data_contract':[('code_review', 'audit_data_contract'), ('code_review', 'audit_table_join'), ('code_review', 'compare_data_exchange')],
+    'code_result_validation':[('code_review', 'audit_numeric_results'), ('code_review', 'compare_scientific_results')],
+    'code_qc_binding':[('code_review', 'bind_analysis_qc'), ('code_review', 'check_analysis_qc')],
+    'code_revision':[('code_review', 'prepare_code_revision'), ('code_review', 'materialize_code_revision'), ('code_execution', 'prepare_code_execution')],
+    'method_reproduction':[('code_review', 'prepare_method_reproduction'), ('code_review', 'audit_plan_implementation')],
+    'code_api_migration':[('code_review', 'prepare_api_migration'), ('code_review', 'inspect_dependency_locks'), ('code_review', 'compare_environments')],
+    'code_scientific_tests':[('code_review', 'prepare_scientific_test_suite'), ('code_execution', 'prepare_code_execution')],
+    'code_configuration_migration':[('code_review', 'prepare_configuration_migration'), ('code_review', 'apply_configuration_migration')],
+    'code_release_review':[('code_review', 'audit_dependency_components'), ('code_review', 'audit_release_scope')],
+    'code_performance':[('code_execution', 'prepare_code_execution'), ('code_execution', 'summarize_performance'), ('code_execution', 'estimate_compute_resources')],
+    'code_parallel':[('code_execution', 'audit_parallel_execution'), ('code_execution', 'prepare_code_task_array')],
+    'code_resume':[('code_execution', 'audit_resume_compatibility')],
+    'code_workflow':[('code_execution', 'prepare_code_workflow'), ('code_execution', 'preview_code_workflow')],
+    'code_adapter':[('code_execution', 'prepare_adapter_development')],
+    'medical_guidelines':[('clinical_research', 'audit_medical_guidelines')],
+    'medical_drug_reference':[('clinical_research', 'query_drug_reference'), ('clinical_research', 'read_drug_label'), ('clinical_research', 'compare_drug_labels')],
+    'clinical_qc':[('clinical_research', 'audit_clinical_dataset'), ('clinical_research', 'audit_clinical_mapping')],
+    'clinical_study':[('statistics', 'guide_study_statistics'), ('clinical_research', 'guide_clinical_study'), ('clinical_research', 'prepare_clinical_backend')],
+    'clinical_prediction':[('clinical_research', 'audit_clinical_prediction'), ('clinical_research', 'audit_medical_reporting')],
+    'clinical_review_effects':[('clinical_research', 'extract_review_effects'), ('clinical_research', 'record_bias_assessment')],
+    'pharmacovigilance':[('clinical_research', 'audit_adverse_event_reports')],
+    'imaging_qc':[('clinical_research', 'audit_imaging_metadata'), ('code_execution', 'prepare_code_execution')],
+    'medical_teaching':[('clinical_research', 'prepare_medical_teaching')],
+
     'research_project':[('workbench','create_research_project'),('workbench','prepare_project_revision'),('workbench','apply_project_revision'),('workbench','audit_project_lineage')],
     'stage_workflow':[('workbench','inspect_research_project'),('workbench','execute_workflow_stage'),('workbench','advance_workflow_stage'),('workbench','build_project_dashboard')],
     'research_reproduction':[('workbench','freeze_reproduction_package')],
@@ -116,18 +142,18 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
         raise ValueError('Flags must be booleans')
     from bridge import tool_catalog
     from compute_policy import edition
-    server_intents={'scientific_server_backend','coloc_susie','decoupler_activity','multilevel_meta_analysis','server_ocr'}
+    server_intents={'code_notebook','code_revision','code_scientific_tests','code_performance','code_parallel','code_workflow','clinical_study','imaging_qc','scientific_server_backend','coloc_susie','decoupler_activity','multilevel_meta_analysis','server_ocr'}
     selected = 'server_task' if large_computation and intent not in server_intents else intent
     recommendations = []
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata','retrieve_review_search_page'}
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata','retrieve_review_search_page','query_drug_reference','read_drug_label'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
         edition_allowed = not (entry or {}).get('requires_local_edition') or edition()=='local'
         recommendations.append({
             'category': category, 'name': name, 'catalog_entry': entry,
-            'placement': 'local_preparation_for_server' if selected == 'server_task' or category=='scientific_backend' and name.startswith('prepare_') else 'local',
+            'placement': 'local_preparation_for_server' if selected == 'server_task' or category in {'scientific_backend','code_execution','clinical_research'} and name in {'prepare_scientific_backend','prepare_pdf_ocr','prepare_code_execution','prepare_code_task_array','prepare_clinical_backend'} else 'local',
             'suggested_parameters': {'backend':intent} if name=='prepare_scientific_backend' and intent in {'coloc_susie','decoupler_activity'} else {'backend':'metafor_multilevel'} if name=='prepare_scientific_backend' and intent=='multilevel_meta_analysis' else {},
             'uses_public_endpoint': public,
             'requires_specific_data_authorization': bool(sensitive_data and public),

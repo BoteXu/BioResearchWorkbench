@@ -1,5 +1,5 @@
 {
-  "version": "2.9.0",
+  "version": "2.10.0",
   "skills": [
     {
       "name": "biomni-academic-delivery",
@@ -69,11 +69,14 @@
         "qc.preflight_transcriptomics",
         "workflow.audit_sample_metadata",
         "server.prepare_standard_pipeline",
-        "reporting.audit_analysis_result"
+        "reporting.audit_analysis_result",
+        "code_review.audit_data_contract",
+        "code_review.bind_analysis_qc",
+        "code_review.check_analysis_qc"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-omics-design/references/tool-routing.md": "7fe53750ae3caf03d88f2fbe3c9a8b75b0271cba6237c1c481b5335085316cc4",
+        "biomni-omics-design/references/tool-routing.md": "4ddbce4dd5cb5303720e8d715414dd37929bcf76fd17eabb05bc4acb9d7a0bda",
         "biomni-omics-design/SKILL.md": "4950fb6ec664d9414bc581ad34d54b3c7b9a94dbde2d7ea88688bc85ff41522a"
       }
     },
@@ -116,11 +119,14 @@
         "workbench.advance_workflow_stage",
         "workbench.build_project_dashboard",
         "scientific_backend.prepare_scientific_backend",
-        "scientific_backend.prepare_pdf_ocr"
+        "scientific_backend.prepare_pdf_ocr",
+        "code_execution.prepare_code_execution",
+        "code_execution.prepare_code_task_array",
+        "code_execution.audit_resume_compatibility"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-remote-compute/references/tool-routing.md": "dfae719fd1858d01a6fdd4060fe7309745dcf1c6d0273da31969c09ce2978de6",
+        "biomni-remote-compute/references/tool-routing.md": "10345c3fddf3151bd8f342a89c7791670e319774021d6d3e78c36f8bbf71fbf0",
         "biomni-remote-compute/SKILL.md": "8f5d21b3b93b797e8af2a70608fa77d475fc1720e9e2ce5604ba6461d39a4c3d"
       }
     },
@@ -147,11 +153,13 @@
       "license": "Apache-2.0",
       "tool_routes": [
         "privacy.inspect_privacy_policy",
-        "privacy.audit_outbound_parameters"
+        "privacy.audit_outbound_parameters",
+        "code_review.audit_release_scope",
+        "code_review.audit_dependency_components"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-skill-security/references/tool-routing.md": "ecdbe8f097bc73239e31f56d227f52331dbf7a544b9d1910e8a9e80aa2a021f0",
+        "biomni-skill-security/references/tool-routing.md": "04355b3ed7834710561b7a56187e33fe8edcb51b98632d9f2c1ca68bc99b5826",
         "biomni-skill-security/scripts/scan.py": "28f61fb73aa5663a76c47ebe6429d6abaef4a34f4531ce6a0ae8028c109bdcf4",
         "biomni-skill-security/SKILL.md": "3fce9aa5e6924dab13ede5ae85d13ab33f22415e0b9dc632295c2f8dcd970765"
       }
@@ -166,11 +174,14 @@
         "statistics.audit_statistical_dataset",
         "statistics.audit_prediction_split",
         "statistics.adjust_pvalues",
-        "scientific_backend.prepare_scientific_backend"
+        "scientific_backend.prepare_scientific_backend",
+        "clinical_research.guide_clinical_study",
+        "clinical_research.prepare_clinical_backend",
+        "clinical_research.audit_clinical_prediction"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-statistical-plan/references/tool-routing.md": "5feef00c90a7814e0824f5af3efd39b875dee5452ec570477a8ae32533afaa44",
+        "biomni-statistical-plan/references/tool-routing.md": "efa77e79c7f3235a9fbad06b7b06fdcad99db11a6a5265cc986e78a08aa214a3",
         "biomni-statistical-plan/SKILL.md": "40bed56086f3b838351f86b7b4847938de7697b41996e0701fa2400cad1c2cf1"
       }
     },
@@ -200,11 +211,12 @@
         "review.audit_manuscript_format",
         "review.audit_terminology_units",
         "review.audit_reporting_checklist",
-        "collaboration.prepare_reviewer_response"
+        "collaboration.prepare_reviewer_response",
+        "clinical_research.audit_medical_reporting"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-submission-audit/references/tool-routing.md": "7fd529c87b56d64275402509b21f695a5208bab8123333854c31811ce17bf3f7",
+        "biomni-submission-audit/references/tool-routing.md": "e6d7c4d46f13c48e6969bf91dcfc411897790d235bf982afb5db3c9cd3920a1f",
         "biomni-submission-audit/SKILL.md": "5b41bbf90452203bdba0c5ae6bf21ae1c705337d7fed61dffd9e7efe1770eaa3"
       }
     },
@@ -223,11 +235,13 @@
         "academic_workspace.retrieve_review_search_page",
         "academic_workspace.record_independent_screening",
         "academic_workspace.resolve_screening_conflict",
-        "academic_workspace.inspect_review_search"
+        "academic_workspace.inspect_review_search",
+        "clinical_research.extract_review_effects",
+        "clinical_research.record_bias_assessment"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-systematic-review/references/tool-routing.md": "e569f7ad926d9d6f754bfbc025d7bffe3f74041452ac5079ec12e5eee894b20f",
+        "biomni-systematic-review/references/tool-routing.md": "55a08c222f80a1202ec735f4b320487efb0686a1a3fef8624e60e7381d54ae3e",
         "biomni-systematic-review/SKILL.md": "5d7f554751b3e183af584f0945c105422dab14c4f6df56188f9fa6913336ac1d"
       }
     },
@@ -261,11 +275,17 @@
         "workbench.prepare_project_revision",
         "workbench.apply_project_revision",
         "workbench.validate_adapter_contract",
-        "workbench.freeze_reproduction_package"
+        "workbench.freeze_reproduction_package",
+        "code_review.map_code_project",
+        "code_review.audit_scientific_code",
+        "code_review.prepare_code_revision",
+        "code_review.prepare_scientific_test_suite",
+        "code_execution.prepare_code_execution",
+        "code_execution.prepare_code_workflow"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-workflow-maintenance/references/tool-routing.md": "142e068aae9e570f0262f3faeb6b93c192177603a063d18a12706e86fc5118bb",
+        "biomni-workflow-maintenance/references/tool-routing.md": "16b3e7445265ea5caac2df3f219937201d6ea5d507a5b13c08f122a6a4c0e67d",
         "biomni-workflow-maintenance/SKILL.md": "4edf7d2bd7e7316b9a7a21c2ad305485aebcac2a49ceff1dee95e06511e36804"
       }
     }
