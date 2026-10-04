@@ -383,6 +383,7 @@ def validate_adapter_contract(contract: dict) -> dict:
     if contract['runtime_state'] not in {'unverified','synthetic_pass','real_pass','failed'}:issues.append('invalid_runtime_state')
     if not isinstance(contract['invocation'],list) or not contract['invocation'] or any(not isinstance(a,str) or '\x00' in a for a in contract['invocation']):issues.append('invalid_fixed_argv')
     if not isinstance(contract['resources'],dict) or not {'cpus','memory_mb','walltime_minutes'}<=set(contract['resources']):issues.append('missing_resource_limits')
+    elif any(type(contract['resources'][k]) is not int or contract['resources'][k]<=0 for k in ('cpus','memory_mb','walltime_minutes')):issues.append('invalid_resource_limits')
     for n in ('inputs','outputs'):
         if not isinstance(contract[n],list) or not contract[n] or any(not isinstance(i,dict) or not {'name','format','required'}<=set(i) for i in contract[n]):issues.append('invalid_'+n)
     for n in ('id','version','license','source','parser'):text(contract[n],1000)

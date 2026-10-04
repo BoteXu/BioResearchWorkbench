@@ -8,7 +8,7 @@ EXPORTS = {
     "workbench": ("workbench_ext", ["create_research_project", "inspect_research_project", "prepare_project_revision", "apply_project_revision", "advance_workflow_stage", "execute_workflow_stage", "audit_project_lineage", "build_project_dashboard", "freeze_reproduction_package", "create_private_backup", "prepare_private_restore", "apply_private_restore", "validate_adapter_contract"]),
     "academic_workspace": ("academic_workspace_ext", ["index_selected_fulltext", "search_selected_fulltext", "prepare_zotero_incremental_sync", "apply_zotero_incremental_sync", "create_review_search", "retrieve_review_search_page", "record_independent_screening", "resolve_screening_conflict", "inspect_review_search"]),
     "scientific_backend": ("scientific_backend_ext", ["inspect_scientific_backends", "prepare_scientific_backend", "prepare_pdf_ocr"]),
-    "word_native": ("word_native_ext", ["inspect_native_word", "prepare_native_word_revision", "apply_native_word_revision", "request_native_citation_refresh"]),
+    "word_native": ("word_native_ext", ["inspect_native_word", "prepare_native_word_revision", "apply_native_word_revision", "render_native_word_pdf", "request_native_citation_refresh"]),
     "personal_library": ("personal_library_ext", ["create_personal_library", "inspect_personal_library", "prepare_personal_library_ingest", "apply_personal_library_ingest", "search_personal_library", "annotate_personal_reference", "export_personal_library"]),
     "library": ("library_ext", ["import_reference_library", "audit_reference_duplicates", "export_reference_library", "index_pdf_folder"]),
     "zotero": ("zotero_ext", ["inspect_zotero_connection", "read_zotero_library", "read_zotero_attachment", "prepare_zotero_write", "apply_zotero_write"]),

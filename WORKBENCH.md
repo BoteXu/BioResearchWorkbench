@@ -89,7 +89,9 @@ requires two differing recorded decisions and retains original judgments.
 
 Windows Word COM adapter reads explicit DOCX native UTF-16 offsets, rendered pages,
 fields, revisions and comments. Reviewed hash-bound range edits/comments run on a
-fresh copy with tracked revisions and PDF export. Citation fields, existing
+fresh copy with tracked revisions. `render_native_word_pdf` is a separate read-only
+export, so rendering failure cannot hide an already saved manuscript revision.
+Citation fields, existing
 revisions and paragraph/cell markers are protected. Mac/Linux/HarmonyOS retain
 portable document tools; native Windows COM is not supported there. No Office
 installation occurs. Document macros/ActiveX/embedded objects and external
@@ -101,6 +103,8 @@ template macro on a fresh copy, leaving Word open for user review. Invocation
 may be asynchronous or display dialogs and is recorded as pending, never complete.
 Review/save the copy in Word and inspect it again before final publication.
 Unknown native writes are never automatically retried; source documents stay intact.
+The adapter does not change Word's personal author preferences. Private document
+metadata and comment authors must be reviewed before any sharing/publication.
 
 ## Validation
 

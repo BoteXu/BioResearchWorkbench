@@ -27,6 +27,7 @@
 - `word_native.inspect_native_word`
 - `word_native.prepare_native_word_revision`
 - `word_native.apply_native_word_revision`
+- `word_native.render_native_word_pdf`
 - `word_native.request_native_citation_refresh`
 
 Check WORKBENCH.md and SCIENTIFIC_BACKENDS.md in the installed tool host. Prepared tasks, native invocation, engineering tests and real scientific acceptance remain distinct. Private index and document mutations require explicit reviewed dispatch.

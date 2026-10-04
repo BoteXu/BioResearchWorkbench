@@ -14,11 +14,12 @@
         "word_native.inspect_native_word",
         "word_native.prepare_native_word_revision",
         "word_native.apply_native_word_revision",
+        "word_native.render_native_word_pdf",
         "word_native.request_native_citation_refresh"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-academic-delivery/references/tool-routing.md": "67540e5967a7ba4aa067e4589542993537ed47437040c3b6eda1bc96caffc856",
+        "biomni-academic-delivery/references/tool-routing.md": "854d053b0671ab94f00992c27350aa4a813f918673beac5ff81cc2724f9b882c",
         "biomni-academic-delivery/SKILL.md": "80ca6a8e2ff7c2562545f631c69212ee8459ef12a6761938e802003461b9283c"
       }
     },

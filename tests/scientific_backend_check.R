@@ -40,6 +40,6 @@ badnet<-net;badnet$weight[1]<-0;dec$network<-csv(badnet,'badnetwork.csv');run(de
 effects<-data.frame(effect_id=paste0('e',1:12),study_id=rep(paste0('study',1:6),each=2),yi=c(.1,.2,.3,.25,.4,.3,.2,.25,.5,.4,.3,.35),vi=rep(.04,12))
 V<-diag(effects$vi);for(i in seq(1,12,2)){V[i,i+1]<-.01;V[i+1,i]<-.01};dimnames(V)<-list(effects$effect_id,effects$effect_id)
 meta<-list(backend='metafor_multilevel',effects=csv(effects,'effects.csv'),covariance=matrix_csv(V,'covariance.csv'),effect_scale='mean difference',estimand='mean simulated effect',independent_unit='study',moderators=list(),dependence_description='two correlated effects per study, covariance supplied')
-me<-run(meta,'meta');stopifnot(nrow(me$coefficients)==1,length(me$leave_one_study_out)==6)
+me<-run(meta,'meta');stopifnot(nrow(me$coefficients)==1,NROW(me$leave_one_study_out)==6)
 badV<-V;diag(badV)<-1;meta$covariance<-matrix_csv(badV,'badV.csv');run(meta,'bad_meta',FALSE)
 cat('SCIENTIFIC_BACKENDS_SYNTHETIC_PASS: coloc/susie convergence and prior grid; ULM/MLM agreement; multilevel covariance/leave-study-out; 3 QC refusals\n')

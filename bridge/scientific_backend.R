@@ -100,7 +100,7 @@ result <- tryCatch({
    keep<-d$study_id!=s
    tryCatch({f<-metafor::rma.mv(yi=yi,V=V[keep,keep,drop=FALSE],mods=mods,random=~1|study_id/effect_id,data=d[keep,,drop=FALSE],method='REML');list(excluded_study=s,coefficients=as.numeric(coef(f)),state='fit')},error=function(e)list(excluded_study=s,state='failed',reason=conditionMessage(e)))
   })
-  list(fit=fit,coefficients=as.data.frame(coef(summary(fit))),prediction=predict(fit),leave_one_study_out=leave,residuals=residuals(fit),
+  list(fit=fit,coefficients=as.data.frame(coef(summary(fit))),prediction=unclass(predict(fit)),leave_one_study_out=leave,residuals=residuals(fit),
     estimand=c$estimand,effect_scale=c$effect_scale,interpretation='Dependence and cohort overlap must be represented in the supplied covariance. Model diagnostics do not replace study-level bias and applicability review.')
  } else stop('Unknown fixed scientific adapter')
 }, error=function(e) {write_json(list(state='failed',reason=conditionMessage(e)),'failure.json');stop(e)})

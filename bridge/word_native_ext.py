@@ -74,7 +74,7 @@ def prepare_native_word_revision(manuscript_path: str, expected_source_sha256: s
 
 
 def apply_native_word_revision(plan_file: str, expected_sha256: str, dispatch: bool = False) -> dict:
-    """Execute one reviewed native Word plan on a fresh copy; preserve source, create real comments/tracked edits and export a PDF for final rendering review."""
+    """Execute one reviewed native Word plan on a fresh copy; preserve source and create real comments/tracked edits. PDF rendering is a separate read-only task."""
     p,raw=read_file(plan_file)
     if dispatch is not True or digest(raw)!=expected_sha256 or not p.is_relative_to((HERE/'outputs').resolve()) or not p.parent.name.startswith('native_word_revision_plan_'):raise ValueError('Explicit unchanged generated Word plan required')
     plan=json.loads(raw);_,source=read_file(plan['source'])
@@ -85,7 +85,18 @@ def apply_native_word_revision(plan_file: str, expected_sha256: str, dispatch: b
     result=artifact('native_word_revision',{'state':'dispatched','source_sha256':digest(source)})
     folder=Path(result['output_directory']);target=folder/'revised.docx';target.write_bytes(source)
     receipt=_native({**plan,'operation':'revise','source':str(target),'folder':str(folder)},folder)
-    return {**result,'native':receipt,'state':'rendered_review_required','revised_file':str(target),'pdf_file':str(folder/'rendered.pdf')}
+    return {**result,'native':receipt,'state':'saved_revision_rendering_pending','revised_file':str(target)}
+
+
+def render_native_word_pdf(manuscript_path: str, expected_source_sha256: str) -> dict:
+    """Render one explicit unchanged DOCX through installed Word to a fresh private PDF; report completion only after actual native export."""
+    p,raw=read_file(manuscript_path)
+    if p.suffix.lower()!='.docx' or digest(raw)!=expected_source_sha256:raise ValueError('Unchanged DOCX required')
+    _document(raw);result=artifact('native_word_render',{'source_sha256':digest(raw),'state':'render_requested'})
+    folder=Path(result['output_directory']);receipt=_native({'operation':'render','source':str(p),'source_sha256':digest(raw),'folder':str(folder)},folder)
+    pdf=folder/'rendered.pdf'
+    if not pdf.is_file() or not pdf.stat().st_size:raise RuntimeError('Native export did not produce a PDF')
+    return {**result,'native':receipt,'pdf_file':str(pdf),'pdf_sha256':digest(pdf.read_bytes()),'state':'rendered_visual_review_required'}
 
 
 def request_native_citation_refresh(manuscript_path: str, expected_source_sha256: str,

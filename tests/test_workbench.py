@@ -102,6 +102,14 @@ class WorkbenchChecks(unittest.TestCase):
         c['placement']='arbitrary';self.assertEqual(work.validate_adapter_contract(c)['decision'],'fail')
     def test_scientific_adapter_missing_qc_contract(self):
         with self.assertRaises(ValueError):scientific.prepare_scientific_backend('coloc_susie',{},'/work','server.invalid','out',CONTEXT,[])
+    def test_adapter_config_and_source_bound_to_runner(self):
+        (self.root/'scientific_backend.R').write_text('# synthetic fixed adapter')
+        config={'matrix':'matrix.csv','network':'network.csv','network_source':'synthetic','network_version':'1','input_scale':'signed_statistic','min_targets':3,'methods':['ulm']}
+        inputs=[{'path':'matrix.csv','sha256':'a'*64},{'path':'network.csv','sha256':'b'*64}]
+        r=scientific.prepare_scientific_backend('decoupler_activity',config,'/work','server.invalid','out',CONTEXT,inputs)
+        task=json.loads(Path(r['task_file']).read_text());self.assertEqual(r['request_sha256'],self.sha(r['task_file']))
+        for item in task['inputs'][2:]:self.assertEqual(item['sha256'],self.sha(Path(r['bundle'])/item['path']))
+        self.assertEqual({i['path'] for i in task['inputs']}, {'matrix.csv','network.csv','scientific_config.json','scientific_backend.R'})
     def test_annotation_located_search(self):
         p=self.save('snapshot.json',{'records':[{'key':'ABCDEFGH','data':{'itemType':'annotation','parentItem':'PDFKEY01','annotationText':'The result was not causal.','annotationPageLabel':'iv'}}]})
         r=academic.index_selected_fulltext([],p);found=academic.search_selected_fulltext(r['index_id'],'not causal')

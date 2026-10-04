@@ -32,7 +32,7 @@ try {
  $doc.Content.Text='Synthetic result.'
  $doc.Content.Font.Name='Arial'
  $doc.SaveAs2($value.source,16)
-} finally {if($null -ne $doc){$doc.Close(0)};$app.Quit()}
+} finally {if($null -ne $doc){$doc.Close(0)};$app.Quit(0)}
 """,encoding='utf8')
         code='$Config=$env:BRW_FIXTURE_CONFIG\n'+script.read_text().split('\n',1)[1]
         process=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',base64.b64encode(code.encode('utf-16le')).decode('ascii')],env={**os.environ,'BRW_FIXTURE_CONFIG':str(config)},capture_output=True,timeout=90)
@@ -59,9 +59,12 @@ try {
                     for log in root.rglob('native.stderr.txt'):print(log.read_text(encoding='utf8')[:2000])
                     raise
             assert result['native']['comments']==1 and result['native']['revisions']>=1
-            assert Path(result['pdf_file']).stat().st_size>0
+            assert result['state']=='saved_revision_rendering_pending'
+            parts=common.docx_parts(Path(result['revised_file']).read_bytes())
+            assert b'<w:ins' in parts['word/document.xml'] and b'<w:del' in parts['word/document.xml']
+            assert b'Synthetic native comment' in parts['word/comments.xml']
             assert hashlib.sha256(source.read_bytes()).hexdigest()==sha
-            print('NATIVE_WORD_SYNTHETIC_PASS: inspected offsets, tracked edit, native comment, PDF, unchanged source')
+            print('NATIVE_WORD_SYNTHETIC_PASS: inspected offsets, tracked edit, native comment, unchanged source. PDF rendering and Zotero refresh remain separate.')
 
 
 native_source=word._native

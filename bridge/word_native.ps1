@@ -4,8 +4,6 @@ $request = Get-Content -LiteralPath $RequestFile -Raw -Encoding UTF8 | ConvertFr
 $word = $null
 $doc = $null
 $keepOpen = $false
-$oldUserName = $null
-$oldInitials = $null
 function Checkpoint([string]$stage) { [IO.File]::WriteAllText((Join-Path $request.folder 'native_progress.json'), ('{"stage":"' + $stage + '"}')) }
 try {
     $hash = [Security.Cryptography.SHA256]::Create()
@@ -17,7 +15,7 @@ try {
     $word.Options.BackgroundSave = $false
     $word.AutomationSecurity = 3
     if ($word.Documents.Count -ne 0) { $keepOpen=$true; throw 'Word automation instance is not empty; no existing documents will be touched' }
-    $readOnly = $request.operation -eq 'inspect'
+    $readOnly = $request.operation -in @('inspect','render')
     $doc = $word.Documents.Open($request.source, $false, $readOnly, $false)
     Checkpoint 'opened'
     if ($doc.ProtectionType -ne -1) { throw 'Protected document is unsupported' }
@@ -44,10 +42,6 @@ try {
         }
         $doc.TrackRevisions = $true
         Checkpoint 'validated'
-        $oldUserName = $word.UserName
-        $oldInitials = $word.UserInitials
-        $word.UserName = 'Project Reviewer'
-        $word.UserInitials = 'PR'
         # Comments before descending edits let Word retain their anchor movement.
         foreach ($comment in $request.comments) {
             $range = $doc.Range($comment.start,$comment.end)
@@ -68,13 +62,15 @@ try {
         }
         $doc.Save()
         Checkpoint 'saved'
-        # Explicit PDF options avoid opening another viewer, embedded personal
-        # properties, IRM inheritance and missing-font bitmap downloads.
-        $doc.ExportAsFixedFormat((Join-Path $request.folder 'rendered.pdf'),17,$false,0,0,1,1,0,$false,$false,0,$false,$false,$false)
-        Checkpoint 'rendered'
-        $result.state = 'saved_and_rendered'
+        $result.state = 'saved_revision'
         $result.comments = $doc.Comments.Count
         $result.revisions = $doc.Revisions.Count
+    } elseif ($request.operation -eq 'render') {
+        # Rendering is a separate read-only task; its timeout cannot obscure an
+        # already saved revision or trigger a retry of a manuscript write.
+        $doc.ExportAsFixedFormat((Join-Path $request.folder 'rendered.pdf'),17,$false,0,0,1,1,0,$false,$false,0,$false,$false,$false)
+        Checkpoint 'rendered'
+        $result.state='rendered_review_required'
     } elseif ($request.operation -eq 'zotero_refresh') {
         # Only an already-installed trusted global template; no document macros.
         $trusted = @($word.Templates | Where-Object { $_.Name -eq 'Zotero.dotm' })
@@ -87,9 +83,8 @@ try {
     } elseif ($request.operation -ne 'inspect') { throw 'Unknown fixed native operation' }
     $result | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $request.folder 'native_receipt.json') -Encoding UTF8
 } finally {
-    if ($null -ne $word -and $null -ne $oldUserName) { $word.UserName=$oldUserName; $word.UserInitials=$oldInitials }
     if (-not $keepOpen) {
         if ($null -ne $doc) { $doc.Close(0) }
-        if ($null -ne $word) { $word.Quit() }
+        if ($null -ne $word) { $word.Quit(0) }
     }
 }

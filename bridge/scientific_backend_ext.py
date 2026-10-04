@@ -40,7 +40,7 @@ def prepare_scientific_backend(backend: str, configuration: dict, remote_workdir
     for key in paths:_relative(configuration[key])
     if not set(configuration[k] for k in paths)<={i['path'] for i in inputs}:raise ValueError('All data files must be in the checksum input manifest')
     _relative(output_directory)
-    if not rscript or '\x00' in rscript:raise ValueError('Select an existing Rscript executable')
+    if not rscript or '\x00' in rscript or Path(rscript).stem.lower()!='rscript':raise ValueError('Select an existing Rscript executable')
     config={**configuration,'backend':backend,'context':context,'output_directory':output_directory,'seed':configuration.get('seed',1)}
     if backend=='coloc_susie':
         if config['trait1_type'] not in {'quant','cc'} or config['trait2_type'] not in {'quant','cc'}:raise ValueError('Explicit trait types required')
@@ -71,6 +71,7 @@ def prepare_pdf_ocr(pdf_input: str, remote_workdir: str, expected_host: str, out
     if not re.fullmatch(r'[a-z]{3}(\+[a-z]{3})*',language):raise ValueError('Use installed OCR language codes')
     if pdf_input not in {i['path'] for i in inputs}:raise ValueError('Checksummed PDF input required')
     config={'input':pdf_input,'output_directory':output_directory,'language':language,'executable':ocrmypdf}
+    if Path(ocrmypdf).stem.lower()!='ocrmypdf':raise ValueError('Select an existing OCRmyPDF executable')
     bundle=prepare_remote_task(['python3','ocr_adapter.py','ocr_config.json'],remote_workdir,expected_host,
         [output_directory+'/searchable.pdf',output_directory+'/pages.json',output_directory+'/qc.json'],context,inputs)
     folder=Path(bundle['bundle']);atomic_json(folder/'ocr_config.json',config);shutil.copyfile(HERE/'ocr_adapter.py',folder/'ocr_adapter.py')
