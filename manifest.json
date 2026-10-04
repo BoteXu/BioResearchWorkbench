@@ -705,8 +705,8 @@
     },
     {
       "path": "tests/test_workbench.py",
-      "bytes": 13815,
-      "sha256": "5cde336682c30cfe79249cdc6e04a03fb8247b02e95f05ac0b5f13f15268e25f"
+      "bytes": 13946,
+      "sha256": "dba40a2e6262edc3f521ff8b25e9a1cac7b145960e580b4596151f7cba277295"
     },
     {
       "path": "third_party_components.json",

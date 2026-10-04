@@ -104,6 +104,7 @@ class WorkbenchChecks(unittest.TestCase):
         with self.assertRaises(ValueError):scientific.prepare_scientific_backend('coloc_susie',{},'/work','server.invalid','out',CONTEXT,[])
     def test_adapter_config_and_source_bound_to_runner(self):
         (self.root/'scientific_backend.R').write_text('# synthetic fixed adapter')
+        (self.root/'remote_runner.py').write_bytes((Path(__file__).resolve().parents[1]/'bridge'/'remote_runner.py').read_bytes())
         config={'matrix':'matrix.csv','network':'network.csv','network_source':'synthetic','network_version':'1','input_scale':'signed_statistic','min_targets':3,'methods':['ulm']}
         inputs=[{'path':'matrix.csv','sha256':'a'*64},{'path':'network.csv','sha256':'b'*64}]
         r=scientific.prepare_scientific_backend('decoupler_activity',config,'/work','server.invalid','out',CONTEXT,inputs)
