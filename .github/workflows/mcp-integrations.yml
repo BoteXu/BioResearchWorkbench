@@ -36,8 +36,7 @@ jobs:
       - name: Actual scoped queries, symbol references, retrieval and browser interaction
         shell: bash
         run: |
-          browser=$(node -e 'process.stdout.write(require(process.env.RUNNER_TEMP+"/OptionalMcp/playwright/node_modules/playwright").chromium.executablePath())')
-          python tests/mcp_process_check.py --runtime-root "$RUNNER_TEMP/OptionalMcp" --browser-executable "$browser"
+          python tests/mcp_process_check.py --runtime-root "$RUNNER_TEMP/OptionalMcp"
       - name: Actual restricted DuckDB external-file refusal
         shell: bash
         run: |

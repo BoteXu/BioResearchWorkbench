@@ -10,8 +10,8 @@
     },
     {
       "path": ".github/workflows/mcp-integrations.yml",
-      "bytes": 1892,
-      "sha256": "ca5ae7d0801a05e277d5ef5b99bca2add79f1c9e4957130ae9d6ebf2b1fcaa28"
+      "bytes": 1698,
+      "sha256": "718f4ffaf56b1356357e83f458629ea42e8989bf3876a9aea2af7577c3da7056"
     },
     {
       "path": ".github/workflows/verify.yml",
@@ -425,8 +425,8 @@
     },
     {
       "path": "bridge/slurm_monitor.py",
-      "bytes": 5369,
-      "sha256": "0c7eb3839ae7c34379822a838c416f2c980fb0e72f2d5aeaacd2cc1fed6e510c"
+      "bytes": 5372,
+      "sha256": "d31dd69d2fa2e8429e307ea6fe6a3546848119baa8783e96c152d9388f914c71"
     },
     {
       "path": "bridge/smoke_mcp.py",
@@ -510,8 +510,8 @@
     },
     {
       "path": "configure_mcp.py",
-      "bytes": 6792,
-      "sha256": "31f05604703e72d03ffcc1f25d6050ff0a81704284a7495508956ab4588ac405"
+      "bytes": 6804,
+      "sha256": "0b8bb748b9a4cc390c9c03430448238c19bbea38c8b730a299154e15f4abea88"
     },
     {
       "path": "edition.json",
@@ -810,8 +810,8 @@
     },
     {
       "path": "tests/mcp_process_check.py",
-      "bytes": 4733,
-      "sha256": "ce29ee34317fe0d389e68b9834b8d5eb170631c79c87b0e3299252ec14630201"
+      "bytes": 5752,
+      "sha256": "7ce8cffc852e53d0cc29b5ef30014dca9552256e99a7297670e700b7c4cf795f"
     },
     {
       "path": "tests/mcp_runtime_check.py",

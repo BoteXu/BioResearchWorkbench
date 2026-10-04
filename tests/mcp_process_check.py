@@ -16,8 +16,14 @@ import semantic_index_ext
 from probe_mcp import probe
 
 
-def main(runtime_root,browser_executable):
+def main(runtime_root,browser_executable=''):
     runtime=Path(runtime_root).resolve(strict=True)
+    if not browser_executable:
+        # Keep path construction out of Git Bash/MSYS argument conversion.
+        if sys.platform.startswith('linux') and shutil.which('google-chrome'):
+            browser_executable=shutil.which('google-chrome')
+        else:
+            browser_executable=subprocess.check_output([shutil.which('node'),'-e','process.stdout.write(require(process.argv[1]).chromium.executablePath())',str(runtime/'playwright/node_modules/playwright')],text=True)
     with tempfile.TemporaryDirectory() as temp:
         root=Path(temp).resolve();academic_common.HERE=root
         project=root/'fixture-code';project.mkdir();(project/'analysis.py').write_text('def summarize(values):\n    return sum(values) / len(values)\n\ndef report():\n    return summarize([1,3])\n')
@@ -40,6 +46,13 @@ def main(runtime_root,browser_executable):
                'brw-playwright':[{'tool':'browser_navigate','arguments':{'url':'about:blank'},'contains':'about:blank'},{'tool':'browser_evaluate','arguments':{'function':'() => { document.body.innerHTML = "<button id=inc>Increase</button><output id=count>0</output>"; document.getElementById("inc").onclick = () => document.getElementById("count").textContent = "1"; document.getElementById("inc").click(); return document.getElementById("count").textContent; }'},'contains':'1'}]}
         output=root/'acceptance';output.mkdir()
         results=asyncio.run(probe(data,calls,output))
+        for result in results:
+            if result['state']!='calls_passed':
+                # This test uses only synthetic records and a disposable browser, never a private project/library.
+                for call in result['calls']:
+                    if not call['passed']:
+                        message=json.dumps(call['response'],ensure_ascii=True).replace(str(root),'[fixture-root]').replace(str(runtime),'[runtime-root]')
+                        print('SYNTHETIC_CALL_DIAGNOSTIC',result['server'],call['tool'],message[:3000])
         assert all(r['state']=='calls_passed' for r in results),'Actual MCP calls did not all pass'
         assert next(r for r in results if r['server']=='brw-qdrant')['tools']==['qdrant-find'],'Index write tool must not be exposed'
         assert set(next(r for r in results if r['server']=='brw-serena')['tools'])=={'get_symbols_overview','find_symbol','find_referencing_symbols','get_current_config'},'Unexpected code capabilities'
@@ -47,4 +60,4 @@ def main(runtime_root,browser_executable):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--runtime-root',required=True);p.add_argument('--browser-executable',required=True);a=p.parse_args();main(a.runtime_root,a.browser_executable)
+    p=argparse.ArgumentParser();p.add_argument('--runtime-root',required=True);p.add_argument('--browser-executable',default='');a=p.parse_args();main(a.runtime_root,a.browser_executable)

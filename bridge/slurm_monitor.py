@@ -11,7 +11,7 @@ import tempfile
 import time
 from pathlib import Path, PurePosixPath
 
-FIELDS = ['job_id','state','exit_code','elapsed_seconds','max_rss','cpus','nodes','cpu_seconds','requested_memory','owner']
+FIELDS = ['job_id','state','exit_code','elapsed_seconds','max_rss','cpus','nodes','total_cpu_time','requested_memory','owner']
 
 
 def validate(request):

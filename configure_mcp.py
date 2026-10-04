@@ -58,7 +58,7 @@ def generate(runtime_root, output_dir, project, database, index_path, collection
                'QDRANT_ALLOW_ARBITRARY_FILTER':'false','EMBEDDING_MODEL':'sentence-transformers/all-MiniLM-L6-v2','PYTHONUTF8':'1','HF_HUB_OFFLINE':'1',
                'FASTEMBED_CACHE_PATH':str(root/'embedding-cache'),'TOOL_FIND_DESCRIPTION':'Search only this explicitly selected private research index. Similarity is retrieval, not scientific evidence. Never automatically import a library.'})
     if 'playwright' in selected:
-        entry('playwright',node,[playwright_cli,'--headless','--isolated','--executable-path',browser_executable,'--output-dir',out/'browser-private','--block-service-workers'])
+        entry('playwright',node,[playwright_cli,'--headless','--isolated','--sandbox','--executable-path',browser_executable,'--output-dir',out/'browser-private','--block-service-workers'])
         servers['brw-playwright']['cwd']=str(out.resolve())
     if 'context7' in selected:
         entry('context7',node,[root/'context7'/'node_modules'/'@upstash'/'context7-mcp'/'dist'/'index.js'])
