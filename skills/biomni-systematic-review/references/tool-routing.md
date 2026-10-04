@@ -22,3 +22,13 @@
 
 流程说明可由不同宿主模型阅读；客户端是否自动发现 skill、是否提供文件/渲染/SSH 功能应单独确认。鸿蒙浏览器网关提供工具 JSON 访问，不承诺原生 skill 执行或 MCP 接入。所有可选软件维持现有权限和私有配置。
 
+
+## Bridge 2.9 additions
+
+- `academic_workspace.create_review_search`
+- `academic_workspace.retrieve_review_search_page`
+- `academic_workspace.record_independent_screening`
+- `academic_workspace.resolve_screening_conflict`
+- `academic_workspace.inspect_review_search`
+
+Check WORKBENCH.md and SCIENTIFIC_BACKENDS.md in the installed tool host. Prepared tasks, native invocation, engineering tests and real scientific acceptance remain distinct. Private index and document mutations require explicit reviewed dispatch.

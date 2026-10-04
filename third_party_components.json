@@ -1678,6 +1678,48 @@
       "name": "Host clients and existing specialist skills",
       "use": "optional_host_capability",
       "our_role": "Workflow instructions select installed capabilities; external code/models are not bundled."
+    },
+    {
+      "name": "coloc",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/chr1swallace/coloc",
+      "license_status": "GPL-3; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "susieR",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/stephenslab/susieR",
+      "license_status": "MIT; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "decoupleR",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/saezlab/decoupleR",
+      "license_status": "GPL-3; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "metafor",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/wviechtb/metafor",
+      "license_status": "GPL-2-or-later; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "OCRmyPDF",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/ocrmypdf/OCRmyPDF",
+      "license_status": "MPL-2.0; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
+    },
+    {
+      "name": "Tesseract",
+      "use": "separately_installed_server_backend",
+      "origin": "https://github.com/tesseract-ocr/tesseract",
+      "license_status": "Apache-2.0; consult exact installed version. Not relicensed or vendored here.",
+      "our_role": "Fixed input/QC/orchestration adapter; upstream authors supply the algorithm."
     }
   ],
   "limits": [

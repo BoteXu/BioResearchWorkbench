@@ -78,7 +78,7 @@ def main():
     local = target/'.local'
     local.mkdir()
     for file in (ROOT/'bridge').iterdir():
-        if file.is_file() and file.suffix in {'.py','.R'}:
+        if file.is_file() and file.suffix in {'.py','.R','.ps1'}:
             shutil.copy2(file,local/file.name)
     for guide in ROOT.glob('*.md'):
         shutil.copy2(guide,local/guide.name)

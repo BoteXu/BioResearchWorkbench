@@ -4,7 +4,9 @@
 
 The original foundation is [Biomni](https://github.com/snap-stanford/Biomni). This project integrates existing research tools; it does not claim their algorithms, datasets, models or software as its own. Read [origins and third-party attribution](ORIGINS.md) for what is reused, what is adapted and what this project adds. This is an independent downstream workbench, not an official Biomni release.
 
-Package 2.8.2 introduces the independent name and detailed attribution. Existing Biomni-named tools and skills remain compatible; see [migration](MIGRATION.md).
+Package 2.9.0 adds [private project/workflow/reproduction/backup tools](WORKBENCH.md), fulltext/annotation search, scoped incremental index sync, resumable independent review, native Windows Word collaboration and three [real server scientific adapters](SCIENTIFIC_BACKENDS.md). Large calculations stay on the server; runtime and scientific validation boundaries remain explicit.
+
+Package 2.8.2 introduced the independent name and detailed attribution. Existing Biomni-named tools and skills remain compatible; see [migration](MIGRATION.md).
 
 Package 2.8.1 adds an optional [14-skill research workflow pack](SKILLS.md): evidence tracing, omics QC/design, statistics, target/structure/docking review, private library maintenance, figures, academic delivery and server handoff. The instructions reuse bridge 2.8 and existing software; they do not add another model or scientific dependency stack. Run `python install_skills.py --dry-run` then `python install_skills.py`, or add `--install-skills` to a new tool installation.
 

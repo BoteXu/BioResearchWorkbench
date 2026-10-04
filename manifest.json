@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
-  "bridge_version": "2.8",
-  "package_version": "2.8.2",
+  "bridge_version": "2.9",
+  "package_version": "2.9.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -10,8 +10,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 4123,
-      "sha256": "a81bb0392d7976089760fc9510c91293755e7d788b87c2fc774b4f4b80d5c1af"
+      "bytes": 4761,
+      "sha256": "de4bef9f70b98e478a759f98d7269d3e28977656cfc786ec25f6611fc60d7012"
     },
     {
       "path": ".gitignore",
@@ -25,8 +25,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 6598,
-      "sha256": "40f17940f0fae75f4eaf9e8543948ba81ef57cdbf9d0f01a0737df0c79d0c8eb"
+      "bytes": 7193,
+      "sha256": "457b132a5ea881f5b1e5502a5900c240a2e64c11bae4a6fbf849db510f0eb967"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -90,13 +90,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 12750,
-      "sha256": "bb0c7bcc9c9fbaa03bc75502b8810be062ba3c6d430050f056b2e04f6464ae79"
+      "bytes": 13131,
+      "sha256": "07c509f681d270e9942ec60ee70e910e80da439214c2513d13567fdcc7c9055e"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
       "bytes": 8897,
       "sha256": "38685253cb98c0275e1520a36fd6ab967ce88a4b63058d7639ba5edd4fa66b24"
+    },
+    {
+      "path": "SCIENTIFIC_BACKENDS.md",
+      "bytes": 3737,
+      "sha256": "c09902f8c4592b9bfd7fc7e996717923a9f17047775b2742fbd699eb39415030"
     },
     {
       "path": "SKILLS.md",
@@ -112,6 +117,11 @@
       "path": "STATISTICS.md",
       "bytes": 5731,
       "sha256": "6d2d660e4d036f5b1fcaaf2423c392e4c45b1d6d943a000e43ba4125b248e257"
+    },
+    {
+      "path": "WORKBENCH.md",
+      "bytes": 7118,
+      "sha256": "ddeab61f199967212aac23e2f85b2723693834076c8773311ec693fed0e0a150"
     },
     {
       "path": "ZOTERO_LOCAL.md",
@@ -139,6 +149,11 @@
       "sha256": "a05b40e8d1eec2cc184182e9ac4349d606660c1ffdce64c650dde3bb385ab1c4"
     },
     {
+      "path": "bridge/academic_workspace_ext.py",
+      "bytes": 15888,
+      "sha256": "8f19c98d794a845359e5015ec308fa089fe871426de6807d27e45d6698bcb69a"
+    },
+    {
       "path": "bridge/advanced_ext.py",
       "bytes": 41393,
       "sha256": "6394d0d4b8b9dcabebbff781e10016de774429181a9bdca2f36d1662e74bc405"
@@ -155,8 +170,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 23698,
-      "sha256": "ec8e19dae9b360d12a7b2cc7059b69a9612029fc9493891a465f4a041841bc39"
+      "bytes": 23859,
+      "sha256": "f9de5331682cdbf6acc09cedc67e87e6d70becb25f111e027493a55b4ec77f92"
     },
     {
       "path": "bridge/collaboration_ext.py",
@@ -195,8 +210,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 8474,
-      "sha256": "c32010b5aa627cb25cc66586d6cc7ff8eab000d9f0d11d9658e06e678ba86d11"
+      "bytes": 9587,
+      "sha256": "ad168440735055f3f2a7ad97436654c3f90e366615be711ed6a8e3627e7a8b6c"
     },
     {
       "path": "bridge/http_client.py",
@@ -249,6 +264,11 @@
       "sha256": "ea607acf153369fd94dc7a33b44ef141f195d3085283f6fcab3d705c072341ad"
     },
     {
+      "path": "bridge/ocr_adapter.py",
+      "bytes": 1544,
+      "sha256": "31cd1a2db042d81fcf173bb0f4662e6ee109a401590923e432507d4bf20c9673"
+    },
+    {
       "path": "bridge/omics_ext.py",
       "bytes": 18146,
       "sha256": "702b7f80e304d4a2a350655196d7402492d4c3c30a8559c656fe2e301ec7fd58"
@@ -292,6 +312,16 @@
       "path": "bridge/scheduler_agent.py",
       "bytes": 4275,
       "sha256": "c6c933e5ef04d87c0692d848c8e14c90fc7998ce4dce926e6f9f89c070739fdb"
+    },
+    {
+      "path": "bridge/scientific_backend.R",
+      "bytes": 9595,
+      "sha256": "131c5fa24cc0bab07bd8170181ec355272980a08d81add76c4dbfb1bae948e33"
+    },
+    {
+      "path": "bridge/scientific_backend_ext.py",
+      "bytes": 6775,
+      "sha256": "71177731647e93945303d3b81478da466bdaa959934b37bc48737bccc551ec5c"
     },
     {
       "path": "bridge/server_ext.py",
@@ -339,6 +369,21 @@
       "sha256": "9a7009b1b93bd495d98449364da1f6bea5d4a5b637aedac93b99f3a23c937653"
     },
     {
+      "path": "bridge/word_native.ps1",
+      "bytes": 5021,
+      "sha256": "920876b79803122ef2d2295f7349dbae495bebb8cc06732e2dac4a34c8ecc4cc"
+    },
+    {
+      "path": "bridge/word_native_ext.py",
+      "bytes": 7772,
+      "sha256": "fb96cb2eb4abab57dd1eded69e35ada33bf8fbd67d4d32070d92051dae9e803e"
+    },
+    {
+      "path": "bridge/workbench_ext.py",
+      "bytes": 26020,
+      "sha256": "382b113de03c18a2549df99cc10d5320085a54290c2cb8821df2444b0acf966f"
+    },
+    {
       "path": "bridge/workflow_ext.py",
       "bytes": 17184,
       "sha256": "891d3a75b520ec77333683b0a3265074f20b2898248b2508ec6757bb12b0c9f6"
@@ -351,7 +396,7 @@
     {
       "path": "build_releases.py",
       "bytes": 1987,
-      "sha256": "b62dd51795a4fb7fd4e1d098049d106f14957468dda55e722c8e830030afa6b6"
+      "sha256": "faaae4ea6c585a45e134a5dc9d87736da2960d5b976acffe77ee37c45c98e24e"
     },
     {
       "path": "client_config.py",
@@ -375,8 +420,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 6566,
-      "sha256": "88c0443755b69f3e94dc7d8799707bc69d498bcfb02abd22adc83686652ab925"
+      "bytes": 6573,
+      "sha256": "2df51e760ffe532b0cb143d9cc870356aa4b4aa8a1e8d9327c9b76a4f23426c3"
     },
     {
       "path": "install_skills.py",
@@ -435,8 +480,8 @@
     },
     {
       "path": "skills/biomni-academic-delivery/references/tool-routing.md",
-      "bytes": 1659,
-      "sha256": "34a530c3d2d60ebae4222e96be5a3cf6be831811276fdce249f34015dc30c531"
+      "bytes": 2106,
+      "sha256": "67540e5967a7ba4aa067e4589542993537ed47437040c3b6eda1bc96caffc856"
     },
     {
       "path": "skills/biomni-claim-audit/SKILL.md",
@@ -445,8 +490,8 @@
     },
     {
       "path": "skills/biomni-claim-audit/references/tool-routing.md",
-      "bytes": 1638,
-      "sha256": "cffed0b9eba5f232c5a309a23d5a5c5bf1af0467dcc91908628bb8c280d6f9d0"
+      "bytes": 1997,
+      "sha256": "f3365de6b85d6968440b0f325ba7e03be87ca69fd7c4bd89f8d7df8984b0f4be"
     },
     {
       "path": "skills/biomni-docking-review/SKILL.md",
@@ -475,8 +520,8 @@
     },
     {
       "path": "skills/biomni-personal-library/references/tool-routing.md",
-      "bytes": 1704,
-      "sha256": "61b4c7e2dd7575cd1e1d55b285df7f0b69da5d73ee6bd09306b5f8965605c981"
+      "bytes": 2292,
+      "sha256": "43725917e487855019ee965c383d62c827663a9d84d47e872dc95c7e82ed9492"
     },
     {
       "path": "skills/biomni-remote-compute/SKILL.md",
@@ -485,8 +530,8 @@
     },
     {
       "path": "skills/biomni-remote-compute/references/tool-routing.md",
-      "bytes": 1670,
-      "sha256": "eb34a9d598e8a06434a896d3ac541e4b09d8680e1c83ceda19c57bf00bde1e61"
+      "bytes": 2109,
+      "sha256": "dfae719fd1858d01a6fdd4060fe7309745dcf1c6d0273da31969c09ce2978de6"
     },
     {
       "path": "skills/biomni-scientific-figures/SKILL.md",
@@ -520,8 +565,8 @@
     },
     {
       "path": "skills/biomni-statistical-plan/references/tool-routing.md",
-      "bytes": 1640,
-      "sha256": "f03a0e13e6e853a25eb12733d8d34bab626ff2cd96d335579f50dda89034b012"
+      "bytes": 1965,
+      "sha256": "5feef00c90a7814e0824f5af3efd39b875dee5452ec570477a8ae32533afaa44"
     },
     {
       "path": "skills/biomni-structure-review/SKILL.md",
@@ -550,8 +595,8 @@
     },
     {
       "path": "skills/biomni-systematic-review/references/tool-routing.md",
-      "bytes": 1663,
-      "sha256": "e4649585e3a512f2162d151d18c7b158df7ee56f644ea2feb8bebf610dbadc3d"
+      "bytes": 2180,
+      "sha256": "e569f7ad926d9d6f754bfbc025d7bffe3f74041452ac5079ec12e5eee894b20f"
     },
     {
       "path": "skills/biomni-target-evidence/SKILL.md",
@@ -570,13 +615,13 @@
     },
     {
       "path": "skills/biomni-workflow-maintenance/references/tool-routing.md",
-      "bytes": 1555,
-      "sha256": "9287ba1971a3336a0f3ac1d937158de4f48824aed3cb1b60aaf11e4f1051419c"
+      "bytes": 2026,
+      "sha256": "142e068aae9e570f0262f3faeb6b93c192177603a063d18a12706e86fc5118bb"
     },
     {
       "path": "skills/catalog.json",
-      "bytes": 11599,
-      "sha256": "55dcfeeed9670b514a9e8a135c3cd7b9f7e23dee1ca9cb1c253c2898c42e9ef6"
+      "bytes": 13016,
+      "sha256": "dc99e362b6a70ef2cd9833732a8e70cd9aa5d298570ac48a0e275a94ead66f23"
     },
     {
       "path": "tests/advanced_check.py",
@@ -597,6 +642,16 @@
       "path": "tests/ci_analysis.py",
       "bytes": 832,
       "sha256": "f65eade8d3e053de2d50953117278500b436d55cfb3845edec5e47e69dc061da"
+    },
+    {
+      "path": "tests/native_word_check.py",
+      "bytes": 3649,
+      "sha256": "12b4b7ded2df8da1d9a63876452d065e9b04d6fa8566de51a070f778057871d9"
+    },
+    {
+      "path": "tests/scientific_backend_check.R",
+      "bytes": 4933,
+      "sha256": "153d4c6c7857acaf5d5c9e9d4f579957adfc65078c1bc955c34404e9c00b32ea"
     },
     {
       "path": "tests/test_academic.py",
@@ -649,19 +704,24 @@
       "sha256": "4f07a555d0076421c5357a125cd1f313d9cac4030ce3fd298412f17a38419158"
     },
     {
+      "path": "tests/test_workbench.py",
+      "bytes": 12748,
+      "sha256": "2cb1950b44eb108699924cc394ec633b68ed63a5ffbc9a3927a385d8cdaec2a4"
+    },
+    {
       "path": "third_party_components.json",
-      "bytes": 75322,
-      "sha256": "7db6d16196b3facc5605259cf320d714386a24e2d5a8d6e356f444bfaf1fbbcf"
+      "bytes": 77403,
+      "sha256": "fe7b9cafaec2e20c069690a41eed4b816164c189c1fdc7b550a10c877d51669f"
     },
     {
       "path": "update_manifest.py",
       "bytes": 819,
-      "sha256": "344bb5e766c9599311e500091084ea0373f2778c28f1287a49410ea6bd038407"
+      "sha256": "b549075e835893f68791e9d0ac491415d811b7d0853abadbc7ce597a4066e25a"
     },
     {
       "path": "update_skill_catalog.py",
       "bytes": 1957,
-      "sha256": "443e1eab7245eeb3a07ab7df1a1edb6e88e0517ee366b63f0b4707f689d21e8a"
+      "sha256": "c99be695c345aca41924c27d0228dbf5b149bc0016bd7d46805288a05e00825b"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",
