@@ -159,7 +159,7 @@ def prepare_code_workflow(stages: list, engine: str = 'snakemake', approved_code
         lines=['rule all:','    input: '+repr([f'.receipts/{s["id"]}.json' for s in ordered])]
         for s in ordered:
             ins=s.get('inputs',[])+[f'.receipts/{d}.json' for d in s.get('depends_on',[])]+['workflow.json','workflow_stage.py']
-            lines += [f'rule {s["id"]}:','    input: '+repr(ins),'    output: '+repr([f'.receipts/{s["id"]}.json']),f'    threads: {s["resources"]["cpus"]}',f'    resources: mem_mb={s["resources"]["memory_mb"]}, runtime={s["resources"]["wall_minutes"]}',
+            lines += [f'rule {s["id"]}:','    input: '+repr(ins),'    output: '+repr(s['outputs']+[f'.receipts/{s["id"]}.json']),f'    threads: {s["resources"]["cpus"]}',f'    resources: mem_mb={s["resources"]["memory_mb"]}, runtime={s["resources"]["wall_minutes"]}',
               '    shell: '+repr('python3 workflow_stage.py workflow.json '+s['id'])]
         files['Snakefile']='\n'.join(lines)+'\n'
     else:

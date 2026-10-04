@@ -43,12 +43,15 @@ def main():
                 receipt = bridge.run_tool('research','resolve_identifier',parameters)
                 raw = Path(receipt['result_file']).read_bytes()
                 data = json.loads(raw)
+                # Fixed public probes expose only the status, never response text or local paths.
+                status_match = re.search(r'\bHTTP ([45][0-9]{2}):', str(data.get('error', '')))
                 check = bool(receipt['success'] and data['identity_check_pass'] and
                              (expected is None or any(c['identifier'].split('.')[0] == expected for c in data['candidates'])) and
                              hashlib.sha256(raw).hexdigest() == receipt['sha256'])
                 report['network'].append({'case':name,'pass':check,'receipt_file':receipt['receipt_file'],
                                           'resolution_status':data.get('status'),
                                           'candidate_coverage_complete':data.get('candidate_coverage_complete'),
+                                          'http_status':int(status_match.group(1)) if status_match else None,
                                           'error_type':(str(data.get('error','')).split(':',1)[0] if re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',str(data.get('error','')).split(':',1)[0]) else None)})
             except Exception as exc:
                 report['network'].append({'case':name,'pass':False,'error_type':type(exc).__name__})

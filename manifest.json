@@ -205,8 +205,8 @@
     },
     {
       "path": "bridge/code_execution_ext.py",
-      "bytes": 21030,
-      "sha256": "897b026133c2dad5c764d9f6fc040a7a55c45f4883794ce6bdb170333a45ab9f"
+      "bytes": 21043,
+      "sha256": "cb8bff39f1dc831db8d22d91e2d8c7a2b64f17760462eaeddeaaad54446f13d8"
     },
     {
       "path": "bridge/code_review_ext.py",
@@ -520,8 +520,8 @@
     },
     {
       "path": "run_acceptance.py",
-      "bytes": 4818,
-      "sha256": "700b24aa256436bdb447e3bea689d74ae0654041c3199f8700343d2e9b7cc9c8"
+      "bytes": 5122,
+      "sha256": "2ea76a35a18e84047732627f160fec4499fc9867959efc917f6b9eea1953577a"
     },
     {
       "path": "skills/biomni-academic-delivery/SKILL.md",
@@ -725,8 +725,8 @@
     },
     {
       "path": "tests/test_code_clinical.py",
-      "bytes": 23511,
-      "sha256": "8a73c26a6a5c29eb7272d98695beaa6b6d0a35b4911d5566cc0ae9564ca81691"
+      "bytes": 23629,
+      "sha256": "63231a40ce8cd33b437ba366e97f985d85821f5bd7e42253b197f8cb0df4a1f1"
     },
     {
       "path": "tests/test_compute.py",

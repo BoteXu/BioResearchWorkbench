@@ -146,6 +146,7 @@ class CodeClinicalChecks(unittest.TestCase):
         with self.assertRaises(ValueError):execution.prepare_code_workflow([a,b],approved_code=True)
     def test_workflow_generation_and_missing_input(self):
         r=execution.prepare_code_workflow([self.stage('qc','qc'),self.stage('analysis','analysis',['qc'])],approved_code=True);self.assertTrue(Path(r['output_directory'],'Snakefile').is_file())
+        self.assertIn("output: ['qc.json', '.receipts/qc.json']",Path(r['output_directory'],'Snakefile').read_text())
         result=execution.preview_code_workflow(str(Path(r['output_directory'])/'workflow.json'),[]);self.assertEqual(result['missing_external_inputs'],['fixture.py'])
     def test_guideline_located_region_version(self):
         p=self.save('guide.txt','Recommendation for fixture population.\n')
