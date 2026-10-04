@@ -12,6 +12,7 @@ import time
 import uuid
 import inspect
 import copy
+import re
 from contextlib import redirect_stdout
 from importlib.metadata import version, PackageNotFoundError
 from datetime import datetime, timezone
@@ -209,6 +210,8 @@ def _source_manifest():
 
 
 def _save_result(category: str, name: str, parameters: dict, result: object, implementation="Biomni pinned source", elapsed_seconds=None) -> dict:
+    if any(not isinstance(value, str) or not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,99}', value) for value in (category, name)):
+        raise ValueError('Receipt category and tool name must be safe registered identifiers')
     raw = json.dumps(_clean(result), ensure_ascii=False, indent=2, default=str, allow_nan=False).encode("utf-8")
     digest = hashlib.sha256(raw).hexdigest()
     RESULTS.mkdir(parents=True, exist_ok=True)

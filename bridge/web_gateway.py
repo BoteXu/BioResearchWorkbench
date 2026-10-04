@@ -60,7 +60,11 @@ def returned_result(receipt):
     """Return bounded tool data to the browser together with its original receipt."""
     result = {'receipt':receipt,'result_state':'unavailable'}
     if receipt.get('result_file'):
+        import bridge
         file = Path(receipt['result_file'])
+        if file.is_symlink() or file.resolve().parent != bridge.RESULTS.resolve():
+            raise ValueError('Browser results must belong to the bridge results directory')
+        file = file.resolve(strict=True)
         if file.stat().st_size>2000000:
             result['result_state'] = 'review_large_result_on_host'
         else:

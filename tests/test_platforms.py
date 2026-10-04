@@ -7,6 +7,7 @@ import sys
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
@@ -15,11 +16,12 @@ sys.path.insert(0,str(ROOT))
 sys.path.insert(0,str(ROOT/'bridge'))
 import install
 import web_gateway
+import bridge
 
 
 class PlatformChecks(unittest.TestCase):
     def test_returned_data_integrity_and_size_limit(self):
-        with tempfile.TemporaryDirectory() as folder:
+        with tempfile.TemporaryDirectory() as folder, patch.object(bridge,'RESULTS',Path(folder)):
             path = Path(folder)/'fixture.json'
             raw = b'{"fixture":"public"}'
             path.write_bytes(raw)
@@ -29,6 +31,14 @@ class PlatformChecks(unittest.TestCase):
                 web_gateway.returned_result({**receipt,'sha256':'incorrect'})
             path.write_bytes(b'x'*2000001)
             self.assertEqual(web_gateway.returned_result(receipt)['result_state'],'review_large_result_on_host')
+
+    def test_browser_result_escape_and_receipt_name_rejected(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'private.json';path.write_text('{}')
+            with patch.object(bridge,'RESULTS',Path(folder)/'results'), self.assertRaises(ValueError):
+                web_gateway.returned_result({'result_file':str(path),'sha256':hashlib.sha256(b'{}').hexdigest()})
+            with self.assertRaises(ValueError):
+                bridge._save_result('../outside','tool',{}, {})
 
     def test_runtime_paths_for_both_platform_families(self):
         root = Path('synthetic_install')

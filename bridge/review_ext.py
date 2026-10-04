@@ -154,7 +154,7 @@ def audit_manuscript_format(manuscript_path: str, references_path: str, journal_
     unknown=[c for c in citations if c['id'] not in ids]
     for c in unknown:findings.append({'rule':'unknown_citation_key',**c,'severity':'error'})
     # Numeric citations are detected but require a supplied numbered bibliography mapping.
-    numeric=[{'location':s['location'],'text':m.group(0)} for s in document['segments'] for m in re.finditer(r'\[(?:\d+[,-]?\s*)+\]',s['text'])]
+    numeric=[{'location':s['location'],'text':m.group(0)} for s in document['segments'] for m in re.finditer(r'\[[0-9]+(?:[ \t]*[,-][ \t]*[0-9]+)*[ \t]*\]',s['text'])]
     full='\n'.join(s['text'] for s in document['segments']);words=len(re.findall(r'\b\w+\b|[\u4e00-\u9fff]',full))
     rules=journal_rules or {};rule_results=[]
     if rules:

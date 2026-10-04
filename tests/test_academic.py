@@ -86,6 +86,9 @@ class AcademicChecks(unittest.TestCase):
         self.assertIn('source_excerpt_not_found',r['claims'][0]['issues']);self.assertIn('source_hash_missing_or_changed',r['claims'][0]['issues'])
     def test_format_unknown_citation(self):
         r=review.audit_manuscript_format(self.write('bad.md','Study [@absent].\n'),str(self.refs));self.assertEqual(r['findings'][0]['rule'],'unknown_citation_key')
+    def test_numeric_citation_long_malformed_text(self):
+        r=review.audit_manuscript_format(self.write('numeric.md','Study [1, 2] and [3-5].\n['+'0'*10000+'X\n'),str(self.refs))
+        self.assertEqual([x['text'] for x in r['numeric_citations_requiring_mapping']],['[1, 2]','[3-5]'])
     def test_format_supplied_journal_rules(self):
         r=review.audit_manuscript_format(str(self.doc),str(self.refs),{'journal':'Example','source_url':'https://example.org/author-guide','checked_on':'2026-01-01','version':'reviewed','max_words':1,'required_sections':['Results']})
         self.assertFalse(r['journal_rule_checks'][0]['pass']);self.assertEqual(r['scope'],'supplied_journal_rules')

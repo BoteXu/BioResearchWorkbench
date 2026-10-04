@@ -114,6 +114,11 @@
       "sha256": "c09902f8c4592b9bfd7fc7e996717923a9f17047775b2742fbd699eb39415030"
     },
     {
+      "path": "SECURITY_REVIEW.md",
+      "bytes": 2721,
+      "sha256": "b879ec99127e42f96e41f9b0617d0f3198dc8a202a36a0ceaba52e6121096ba5"
+    },
+    {
       "path": "SKILLS.md",
       "bytes": 4754,
       "sha256": "3e44ebce1c8881fc2fdc3ee80d8b0beaa5abd2da2228c36b143d64b128310238"
@@ -185,8 +190,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 24034,
-      "sha256": "6df70032a48d95b25d59661ddf5565c1c2f0d4638904ccf347adee0192a14a2a"
+      "bytes": 24268,
+      "sha256": "70cff99e40f79783e8f3ca23e125b00d561f8240fe3e20057d5b25e1291aa5af"
     },
     {
       "path": "bridge/clinical_backend.R",
@@ -350,8 +355,8 @@
     },
     {
       "path": "bridge/review_ext.py",
-      "bytes": 28986,
-      "sha256": "62f3558a05bd3744934163a106da8b7ce95c094d20a914e090fa58c84f34cf3d"
+      "bytes": 29009,
+      "sha256": "a09d1ef2229e5f73f4501187e0cdc69eb331bdab76659d0d4cf9e7629f028fea"
     },
     {
       "path": "bridge/scheduler_agent.py",
@@ -410,8 +415,8 @@
     },
     {
       "path": "bridge/web_gateway.py",
-      "bytes": 13077,
-      "sha256": "a13d8b3da76b679f18e00255422c5df9a9bc17b205af27d3647601c9eff081d0"
+      "bytes": 13315,
+      "sha256": "24ca0c6058c9467a90ad1a1ad697af1da41183da35dce627bd389de1f9034b2d"
     },
     {
       "path": "bridge/word_native.ps1",
@@ -715,8 +720,8 @@
     },
     {
       "path": "tests/test_academic.py",
-      "bytes": 27321,
-      "sha256": "3eefb4861553ccb430eda06fa93cfde1471cbcedfdf4c24c02d55f72a4b0b30c"
+      "bytes": 27612,
+      "sha256": "0d649b1d57f7ad598020eaa8acff6dee1cbbbb19fa7c3875213d52d7bef2d460"
     },
     {
       "path": "tests/test_biomedical.py",
@@ -750,8 +755,8 @@
     },
     {
       "path": "tests/test_platforms.py",
-      "bytes": 5007,
-      "sha256": "92a5f09997ca5985e2d92f1e76c6fdda758eb5c37df24abfedfbd76fbcc56372"
+      "bytes": 5617,
+      "sha256": "a74c3983f4f8a7344b0a65a1f2c9f0bdc5baeed62077cfa395cdd3f7d9139c39"
     },
     {
       "path": "tests/test_research.py",
