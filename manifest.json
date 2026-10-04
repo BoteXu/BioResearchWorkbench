@@ -415,8 +415,8 @@
     },
     {
       "path": "bridge/web_gateway.py",
-      "bytes": 13315,
-      "sha256": "24ca0c6058c9467a90ad1a1ad697af1da41183da35dce627bd389de1f9034b2d"
+      "bytes": 13340,
+      "sha256": "93d95ea503a19a7d3adf6e8457d13ce09b33faf6d09d5f978a4e43d52d2c31a7"
     },
     {
       "path": "bridge/word_native.ps1",
@@ -755,8 +755,8 @@
     },
     {
       "path": "tests/test_platforms.py",
-      "bytes": 5617,
-      "sha256": "a74c3983f4f8a7344b0a65a1f2c9f0bdc5baeed62077cfa395cdd3f7d9139c39"
+      "bytes": 5484,
+      "sha256": "71c00e81cf05226f6e4971d32351f632c12520615547764d9202a2eb65564e84"
     },
     {
       "path": "tests/test_research.py",

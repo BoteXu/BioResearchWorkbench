@@ -16,6 +16,7 @@ from urllib.parse import urlsplit
 
 LOCK = threading.RLock()
 MAX_BODY = 1000000
+RESULTS = Path(__file__).resolve().parent / 'results'
 HTML = '''<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BioResearchWorkbench 工具连接</title><style>body{font:16px system-ui;margin:auto;padding:24px;max-width:900px;background:#f4f7fa;color:#203040}h1{overflow-wrap:anywhere}section{background:white;border-radius:12px;padding:20px;margin:16px 0}input,select,textarea,button{font:inherit;padding:10px;margin:6px 0;box-sizing:border-box;width:100%;border:1px solid #bccbd4;border-radius:6px}button{background:#146b72;color:white;cursor:pointer}textarea{min-height:100px}pre{white-space:pre-wrap;overflow-wrap:anywhere}small{color:#536774}</style><h1>BioResearchWorkbench 工具连接</h1><p>连接你自己的工具宿主，查询资料、检查结果。大计算继续在服务器完成。</p><section><label>连接口令<input id="token" type="password" autocomplete="off"></label><button id="connect">连接并加载工具</button><button id="status">查看工具状态</button><small>口令只保存在当前页面内存中，不写入地址或浏览器存储。</small></section><section><label>工具类别<select id="category"><option>code_review</option><option>code_execution</option><option>clinical_research</option><option>workbench</option><option>academic_workspace</option><option>scientific_backend</option><option>word_native</option><option>biomedical</option><option>qc</option><option>systems</option><option>software</option><option>statistics</option><option>advanced</option><option>server</option><option>reporting</option><option>library</option><option>zotero</option><option>review</option><option>collaboration</option><option>personal_library</option><option>transcriptomics</option><option>molecular</option><option>research</option><option>atlas</option><option>literature</option><option>workflow</option><option>omics</option><option>database</option></select></label><label>选择工具<select id="tool"></select></label><div id="description"></div><div id="fields"></div><button id="run">运行检查或查询</button><small>公开数据库参数仅填写公开检索信息；敏感资料需获得具体授权。文件路径指向工具宿主上的文件。</small></section><section><h2>结果</h2><pre id="result">等待连接</pre><button id="download">保存当前结果</button></section><script src="/client.js"></script></html>'''
 JS = '''let entries=[],last=null; const el=id=>document.getElementById(id);
 async function call(data){const response=await fetch('/api',{method:'POST',headers:{'Authorization':'Bearer '+el('token').value,'Content-Type':'application/json'},body:JSON.stringify(data)});const value=await response.json();if(!response.ok)throw new Error(value.error||'连接失败');return value;}
@@ -60,9 +61,8 @@ def returned_result(receipt):
     """Return bounded tool data to the browser together with its original receipt."""
     result = {'receipt':receipt,'result_state':'unavailable'}
     if receipt.get('result_file'):
-        import bridge
         file = Path(receipt['result_file'])
-        if file.is_symlink() or file.resolve().parent != bridge.RESULTS.resolve():
+        if file.is_symlink() or file.resolve().parent != RESULTS.resolve():
             raise ValueError('Browser results must belong to the bridge results directory')
         file = file.resolve(strict=True)
         if file.stat().st_size>2000000:
