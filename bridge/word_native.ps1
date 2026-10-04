@@ -68,7 +68,9 @@ try {
         }
         $doc.Save()
         Checkpoint 'saved'
-        $doc.ExportAsFixedFormat((Join-Path $request.folder 'rendered.pdf'),17)
+        # Explicit PDF options avoid opening another viewer, embedded personal
+        # properties, IRM inheritance and missing-font bitmap downloads.
+        $doc.ExportAsFixedFormat((Join-Path $request.folder 'rendered.pdf'),17,$false,0,0,1,1,0,$false,$false,0,$false,$false,$false)
         Checkpoint 'rendered'
         $result.state = 'saved_and_rendered'
         $result.comments = $doc.Comments.Count

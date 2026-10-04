@@ -8,7 +8,7 @@ import types
 import unittest
 import zipfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'bridge'))
 import academic_common as common
 import workbench_ext as work
@@ -123,15 +123,15 @@ class WorkbenchChecks(unittest.TestCase):
         with patch('privacy_ext.enforce_outbound'):return academic.create_review_search(['synthetic query'],True)['search_id']
     def page(self,identity):
         response={'success':True,'result':{'hitCount':2,'nextCursorMark':'next','resultList':{'result':[{'source':'MED','id':'1'}]}}}
-        with patch('privacy_ext.enforce_outbound'),patch('literature_ext.query_europepmc',return_value=response):return academic.retrieve_review_search_page(identity,0,0,50,True)
+        with patch('privacy_ext.enforce_outbound'),patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(query_europepmc=Mock(return_value=response))}):return academic.retrieve_review_search_page(identity,0,0,50,True)
     def test_resumable_search_cursor_and_coverage(self):
         identity=self.search();r=self.page(identity);self.assertFalse(r['query_coverage'][0]['complete']);self.assertEqual(r['query_coverage'][0]['cursor'],'next')
         response={'success':True,'result':{'hitCount':2,'resultList':{'result':[{'source':'MED','id':'2'}]}}}
-        with patch('privacy_ext.enforce_outbound'),patch('literature_ext.query_europepmc',return_value=response):r=academic.retrieve_review_search_page(identity,0,1,50,True)
+        with patch('privacy_ext.enforce_outbound'),patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(query_europepmc=Mock(return_value=response))}):r=academic.retrieve_review_search_page(identity,0,1,50,True)
         self.assertTrue(r['query_coverage'][0]['complete']);self.assertEqual(r['unique_records'],2)
     def test_failed_search_page_retains_revision_cursor(self):
         identity=self.search()
-        with patch('privacy_ext.enforce_outbound'),patch('literature_ext.query_europepmc',side_effect=RuntimeError('failed')):
+        with patch('privacy_ext.enforce_outbound'),patch.dict(sys.modules,{'literature_ext':types.SimpleNamespace(query_europepmc=Mock(side_effect=RuntimeError('failed')))}):
             with self.assertRaises(RuntimeError):academic.retrieve_review_search_page(identity,0,0,50,True)
         state=academic.inspect_review_search(identity)['search'];self.assertEqual(state['revision'],0);self.assertEqual(state['queries'][0]['cursor'],'*')
     def test_real_second_reviewer_conflict_required(self):

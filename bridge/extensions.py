@@ -50,6 +50,7 @@ def registry():
                     optional.append(item)
             dependencies = []
             if category=='academic_workspace' and name=='index_selected_fulltext': dependencies=['pypdf']
+            if category=='academic_workspace' and name=='retrieve_review_search_page': dependencies=['requests']
             if category=='zotero': dependencies=['requests']
             if category=='library' and name=='index_pdf_folder': dependencies=['pypdf']
             if category=='review': dependencies=['requests'] if name in {'find_similar_studies','check_publication_updates','audit_reference_metadata'} else ['pypdf']

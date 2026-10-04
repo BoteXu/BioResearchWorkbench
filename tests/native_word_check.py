@@ -30,6 +30,7 @@ try {
  if ($app.Documents.Count -ne 0) {throw 'Word instance is not empty'}
  $doc=$app.Documents.Add()
  $doc.Content.Text='Synthetic result.'
+ $doc.Content.Font.Name='Arial'
  $doc.SaveAs2($value.source,16)
 } finally {if($null -ne $doc){$doc.Close(0)};$app.Quit()}
 """,encoding='utf8')

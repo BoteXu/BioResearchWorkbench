@@ -210,8 +210,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 9587,
-      "sha256": "ad168440735055f3f2a7ad97436654c3f90e366615be711ed6a8e3627e7a8b6c"
+      "bytes": 9700,
+      "sha256": "850d91291f3effb35d1b6c74b4171a46abaa41225d329fd48a798c70be3c2761"
     },
     {
       "path": "bridge/http_client.py",
@@ -320,8 +320,8 @@
     },
     {
       "path": "bridge/scientific_backend_ext.py",
-      "bytes": 6775,
-      "sha256": "71177731647e93945303d3b81478da466bdaa959934b37bc48737bccc551ec5c"
+      "bytes": 7507,
+      "sha256": "261d6807bdaed4532701a3e2e20f27f4936e3bebc216366d3d44e22772cc12a3"
     },
     {
       "path": "bridge/server_ext.py",
@@ -370,8 +370,8 @@
     },
     {
       "path": "bridge/word_native.ps1",
-      "bytes": 5021,
-      "sha256": "920876b79803122ef2d2295f7349dbae495bebb8cc06732e2dac4a34c8ecc4cc"
+      "bytes": 5227,
+      "sha256": "6331bffa8fb75fec469e803fd85d6f748a9d794d6df0d408dcfca65bfd96b40e"
     },
     {
       "path": "bridge/word_native_ext.py",
@@ -645,8 +645,8 @@
     },
     {
       "path": "tests/native_word_check.py",
-      "bytes": 3649,
-      "sha256": "12b4b7ded2df8da1d9a63876452d065e9b04d6fa8566de51a070f778057871d9"
+      "bytes": 3681,
+      "sha256": "7badb30b1188696b5d34529b7e79b3ac9b479b63b6e189a0ecbc73677723234d"
     },
     {
       "path": "tests/scientific_backend_check.R",
@@ -705,8 +705,8 @@
     },
     {
       "path": "tests/test_workbench.py",
-      "bytes": 12748,
-      "sha256": "2cb1950b44eb108699924cc394ec633b68ed63a5ffbc9a3927a385d8cdaec2a4"
+      "bytes": 12898,
+      "sha256": "87bd5d3f208b824589f5940fc0891231a10b0a7ca2c0fe64b11667728d01d884"
     },
     {
       "path": "third_party_components.json",

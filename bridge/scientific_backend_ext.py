@@ -14,6 +14,15 @@ BACKENDS={
 }
 
 
+def _bind_bundle(bundle, names):
+    """Bind adapter source and generated configuration as actual runner inputs."""
+    folder=Path(bundle['bundle']);task_file=Path(bundle['task_file']);task=json.loads(task_file.read_text(encoding='utf8'))
+    if set(names)&{i['path'] for i in task['inputs']}:raise ValueError('Reserved adapter input filenames conflict with data inputs')
+    task['inputs'] += [{'path':name,'sha256':digest((folder/name).read_bytes())} for name in names]
+    atomic_json(task_file,task);bundle['request_sha256']=digest(task_file.read_bytes())
+    return bundle
+
+
 def inspect_scientific_backends() -> dict:
     """List fixed server adapters and their runtime boundaries without installing packages or probing a server."""
     return {'success':True,'adapters':{k:{**v,'runtime_state':'requires_server_receipt','placement':'server'} for k,v in BACKENDS.items()},
@@ -49,6 +58,7 @@ def prepare_scientific_backend(backend: str, configuration: dict, remote_workdir
     bundle=prepare_remote_task([rscript,'scientific_backend.R','scientific_config.json'],remote_workdir,expected_host,
         [output_directory+'/summary.json',output_directory+'/results.rds',output_directory+'/session.txt'],context,inputs)
     folder=Path(bundle['bundle']);atomic_json(folder/'scientific_config.json',config);shutil.copyfile(HERE/'scientific_backend.R',folder/'scientific_backend.R')
+    bundle=_bind_bundle(bundle,['scientific_config.json','scientific_backend.R'])
     return {**bundle,'backend':backend,'qc':'mandatory_in_server_program','configuration_sha256':digest((folder/'scientific_config.json').read_bytes()),
         'limitations':bundle['limitations']+['Copy input data and the full bundle to the declared working directory. Scientific code performs QC before fitting; failed QC exits without success outputs. Existing packages only.']}
 
@@ -64,4 +74,5 @@ def prepare_pdf_ocr(pdf_input: str, remote_workdir: str, expected_host: str, out
     bundle=prepare_remote_task(['python3','ocr_adapter.py','ocr_config.json'],remote_workdir,expected_host,
         [output_directory+'/searchable.pdf',output_directory+'/pages.json',output_directory+'/qc.json'],context,inputs)
     folder=Path(bundle['bundle']);atomic_json(folder/'ocr_config.json',config);shutil.copyfile(HERE/'ocr_adapter.py',folder/'ocr_adapter.py')
+    bundle=_bind_bundle(bundle,['ocr_config.json','ocr_adapter.py'])
     return {**bundle,'limitations':bundle['limitations']+['OCRmyPDF, Tesseract and pypdf must already exist on the server. Low text, replacement characters and page-count changes require review; OCR accuracy is not established by completion.']}
