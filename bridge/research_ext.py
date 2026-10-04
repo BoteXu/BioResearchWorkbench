@@ -17,6 +17,21 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'research_project':[('workbench','create_research_project'),('workbench','prepare_project_revision'),('workbench','apply_project_revision'),('workbench','audit_project_lineage')],
+    'stage_workflow':[('workbench','inspect_research_project'),('workbench','execute_workflow_stage'),('workbench','advance_workflow_stage'),('workbench','build_project_dashboard')],
+    'research_reproduction':[('workbench','freeze_reproduction_package')],
+    'private_backup_restore':[('workbench','create_private_backup'),('workbench','prepare_private_restore'),('workbench','apply_private_restore')],
+    'adapter_contract':[('workbench','validate_adapter_contract')],
+    'fulltext_search':[('academic_workspace','index_selected_fulltext'),('academic_workspace','search_selected_fulltext')],
+    'zotero_incremental_sync':[('academic_workspace','prepare_zotero_incremental_sync'),('academic_workspace','apply_zotero_incremental_sync')],
+    'review_retrieval':[('academic_workspace','create_review_search'),('academic_workspace','retrieve_review_search_page'),('academic_workspace','inspect_review_search')],
+    'independent_screening':[('academic_workspace','record_independent_screening'),('academic_workspace','resolve_screening_conflict')],
+    'native_word':[('word_native','inspect_native_word'),('word_native','prepare_native_word_revision'),('word_native','apply_native_word_revision'),('word_native','render_native_word_pdf'),('word_native','request_native_citation_refresh')],
+    'scientific_server_backend':[('statistics','guide_study_statistics'),('scientific_backend','inspect_scientific_backends'),('scientific_backend','prepare_scientific_backend')],
+    'coloc_susie':[('statistics','guide_study_statistics'),('scientific_backend','prepare_scientific_backend'),('advanced','audit_colocalization_results')],
+    'decoupler_activity':[('statistics','guide_study_statistics'),('scientific_backend','prepare_scientific_backend')],
+    'multilevel_meta_analysis':[('statistics','guide_study_statistics'),('scientific_backend','prepare_scientific_backend')],
+    'server_ocr':[('scientific_backend','prepare_pdf_ocr')],
     'personal_library':[('personal_library','inspect_personal_library'),('personal_library','prepare_personal_library_ingest'),('personal_library','apply_personal_library_ingest'),('personal_library','search_personal_library')],
     'reference_library':[('library','import_reference_library'),('library','audit_reference_duplicates'),('library','export_reference_library'),('review','audit_reference_metadata')],
     'zotero_read':[('zotero','inspect_zotero_connection'),('zotero','read_zotero_library')],
@@ -101,17 +116,19 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
         raise ValueError('Flags must be booleans')
     from bridge import tool_catalog
     from compute_policy import edition
-    selected = 'server_task' if large_computation else intent
+    server_intents={'scientific_server_backend','coloc_susie','decoupler_activity','multilevel_meta_analysis','server_ocr'}
+    selected = 'server_task' if large_computation and intent not in server_intents else intent
     recommendations = []
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata'}
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata','retrieve_review_search_page'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
         edition_allowed = not (entry or {}).get('requires_local_edition') or edition()=='local'
         recommendations.append({
             'category': category, 'name': name, 'catalog_entry': entry,
-            'placement': 'local_preparation_for_server' if selected == 'server_task' else 'local',
+            'placement': 'local_preparation_for_server' if selected == 'server_task' or category=='scientific_backend' and name.startswith('prepare_') else 'local',
+            'suggested_parameters': {'backend':intent} if name=='prepare_scientific_backend' and intent in {'coloc_susie','decoupler_activity'} else {'backend':'metafor_multilevel'} if name=='prepare_scientific_backend' and intent=='multilevel_meta_analysis' else {},
             'uses_public_endpoint': public,
             'requires_specific_data_authorization': bool(sensitive_data and public),
             'missing_dependencies': missing,

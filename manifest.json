@@ -300,8 +300,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 21476,
-      "sha256": "3e1b86fa566a32a01468a0e0eec1afb9c68043aa4239dc127241aef9f6f9d390"
+      "bytes": 24119,
+      "sha256": "fb5fa76ea1d44d03a015b67dd32a92c88ba839f03fa30073966c28453ced39d7"
     },
     {
       "path": "bridge/review_ext.py",
