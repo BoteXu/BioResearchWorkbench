@@ -14,7 +14,7 @@ PATTERNS = {
     'credential_token': r'(?:ghp_|github_pat_|sk-)[A-Za-z0-9_]{20,}',
     'personal_email': r'[A-Za-z0-9_.+\-]+@(?!(?:example\.(?:invalid|com)|users\.noreply\.github\.com)\b)[A-Za-z0-9.\-]+\.[A-Za-z]{2,}',
 }
-RUNTIME = {'results','jobs','outputs','sources','source_snapshots','evidence','data','downloads','articles','supplements','client_configs','.venv_tools','__pycache__'}
+RUNTIME = {'results','jobs','outputs','sources','source_snapshots','evidence','data','downloads','articles','supplements','client_configs','.venv_tools','__pycache__','node_modules','embedding-cache','serena-private','browser-private','.serena'}
 
 
 def scan_text(text, deny_terms=()):
@@ -42,7 +42,7 @@ def review(root, manifest=False, history=False, deny_terms=()):
     findings = []
     for path in paths:
         name = path.relative_to(root).as_posix()
-        if any(part in RUNTIME for part in path.relative_to(root).parts) or path.name.startswith('.env') or path.suffix.lower() in {'.pem','.key','.sqlite3','.log','.pfx','.p12','.zip'}:
+        if any(part in RUNTIME for part in path.relative_to(root).parts) or path.name.startswith('.env') or path.name.endswith(('.private.json','.private.txt')) or path.suffix.lower() in {'.env','.pem','.key','.sqlite3','.sqlite','.duckdb','.onnx','.log','.pfx','.p12','.zip'}:
             findings.append({'file':name,'category':'runtime_or_sensitive_file'})
             continue
         for category in scan_text(path.read_text(encoding='utf8',errors='replace'),deny_terms):
@@ -76,7 +76,7 @@ def review(root, manifest=False, history=False, deny_terms=()):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root',default='.')
+    parser.add_argument('--root',default=str(Path(__file__).resolve().parent))
     parser.add_argument('--manifest',action='store_true')
     parser.add_argument('--history',action='store_true')
     parser.add_argument('--deny-file')

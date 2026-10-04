@@ -35,3 +35,15 @@ bridge/compute_config.json
 bridge/software_registry.json
 bridge/bin/
 bridge/privacy_config.json
+# Optional MCP state and generated private profiles
+.serena/
+node_modules/
+embedding-cache/
+serena-private/
+browser-private/
+*.private.json
+*.private.txt
+mcp-profiles.json
+codex.mcp.toml
+*.duckdb
+*.onnx

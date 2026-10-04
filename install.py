@@ -85,6 +85,8 @@ def main():
     for provenance in ('LICENSE','NOTICE','third_party_components.json'):
         shutil.copy2(ROOT/provenance,local/provenance)
     shutil.copytree(ROOT/'skills',target/'skills',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+    shutil.copy2(ROOT/'mcp_components.json',local/'mcp_components.json')
+    shutil.copy2(ROOT/'mcp_embedding_model.json',local/'mcp_embedding_model.json')
     shutil.copy2(ROOT/'install_skills.py',target/'install_skills.py')
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')
     checked([uv,'venv','--python','3.11',target/'.venv_tools'])

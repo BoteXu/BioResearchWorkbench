@@ -1,0 +1,4 @@
+mcp-server-motherduck==1.0.8
+duckdb==1.5.5
+fastmcp==4.0.10
+mcp==2.3.0

@@ -1,0 +1,2 @@
+serena-agent==1.7.0
+jedi-language-server==0.47.0

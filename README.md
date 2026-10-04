@@ -107,3 +107,7 @@ Official Biomni: https://github.com/snap-stanford/Biomni
 Pinned upstream revision: `400c1f366b96a35ca253e13c9b06c5076af41d65`.
 
 Apache-2.0; see `LICENSE` and `NOTICE`. This repository provides a direct-tool integration layer and is not an official upstream release.
+
+## Optional MCP integrations (v2.11)
+
+See [MCP_INTEGRATIONS.md](MCP_INTEGRATIONS.md) for scoped Serena, Context7, DuckDB, Qdrant and Playwright processes, a digest-pinned optional Docker gateway, actual read-only Slurm observation and reviewed scientific-software interfaces. Core remains lightweight; external runtimes, private profiles and acceptance receipts are separate.

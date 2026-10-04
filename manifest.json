@@ -1,12 +1,17 @@
 {
   "project": "BioResearchWorkbench",
-  "bridge_version": "2.10",
-  "package_version": "2.10.0",
+  "bridge_version": "2.11",
+  "package_version": "2.11.0",
   "files": [
     {
       "path": ".gitattributes",
       "bytes": 14,
       "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": ".github/workflows/mcp-integrations.yml",
+      "bytes": 1892,
+      "sha256": "ca5ae7d0801a05e277d5ef5b99bca2add79f1c9e4957130ae9d6ebf2b1fcaa28"
     },
     {
       "path": ".github/workflows/verify.yml",
@@ -15,8 +20,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 564,
-      "sha256": "e5126d9ba78651080ae4fc449d5050975643d0ea12c782c5fcdb66a53cdf9cf6"
+      "bytes": 767,
+      "sha256": "b5d51738c99f71eff545504252f7555987c434550d4aec5f6bf10c5d44e69f5f"
     },
     {
       "path": "ACADEMIC_WORKFLOWS.md",
@@ -25,8 +30,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 8079,
-      "sha256": "0dd758110341a4c16cb0bf4d1418d9fc24d633b09d9da8d87c3eed49bba85f9a"
+      "bytes": 9297,
+      "sha256": "c59bf44b2035d9b482e920a27c7820cecbbf5f863d139cd3a6fdc4848bc09eac"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -64,6 +69,11 @@
       "sha256": "1ffb3084941177d4d6b89eb93aa5c0fa645689c201aad981679acb95e06b171a"
     },
     {
+      "path": "MCP_INTEGRATIONS.md",
+      "bytes": 9924,
+      "sha256": "c0bf07b2ce88559a019b9cdbbe6156d32967c36500c91f6d035b1498cf1b9412"
+    },
+    {
       "path": "MIGRATION.md",
       "bytes": 1693,
       "sha256": "cb22fb5af668eb0f5bd5eab2d81d5ee488fb65957001e6e91b1be0e8e1c76683"
@@ -75,8 +85,8 @@
     },
     {
       "path": "ORIGINS.md",
-      "bytes": 7208,
-      "sha256": "fd1e47e481676a5bb74adef7c2d483a76a40190987a72bc4a2870af084441e53"
+      "bytes": 7995,
+      "sha256": "2cdaefc199e53f1dbc9d701107bc2288c2e58c9d11ab4fa489c45e069554c0d6"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -100,8 +110,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 13601,
-      "sha256": "0d5665b75c90c9043a42a30d39e0327801fee91b8bd7b011124bd4ff45ad6fff"
+      "bytes": 13978,
+      "sha256": "ee234a85c4c56dd5654bd3044cc5b890b34bdb8415951b9a97797a4cc6f2721e"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -145,8 +155,8 @@
     },
     {
       "path": "audit_release.py",
-      "bytes": 4955,
-      "sha256": "41895cd0d3d2bc2ddf5a612f36d0cdb8995130c611e5bec31e538df1483aaa69"
+      "bytes": 5157,
+      "sha256": "a3ee0f23d219676585b9a18bace924ecaede374d17788612de2c11c0c9444a97"
     },
     {
       "path": "bootstrap_upstream.py",
@@ -190,8 +200,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 24268,
-      "sha256": "70cff99e40f79783e8f3ca23e125b00d561f8240fe3e20057d5b25e1291aa5af"
+      "bytes": 24444,
+      "sha256": "6e0ba309eead7665abb207c9fd7b064b114c82fabebd88538467eb5cd4c93478"
     },
     {
       "path": "bridge/clinical_backend.R",
@@ -254,19 +264,34 @@
       "sha256": "b588d79767d1bd99d2f0d9ce8567ec294b565df910640900492ea1d4eb843a4a"
     },
     {
+      "path": "bridge/duckdb_mcp.py",
+      "bytes": 1551,
+      "sha256": "f5fde1893e894d153def5d959ba3c4cb0666dd049a21243ddee4e2dc15d302b4"
+    },
+    {
       "path": "bridge/evidence.py",
       "bytes": 6000,
       "sha256": "1da88f0b1264dbc4d798bbfc984c524a99fbac33adfe3622c443a7605bf7567f"
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 11107,
-      "sha256": "3f9d58e9ccb467e682ba4bccf379092cbdbdc92ea7a088f7a77496b3e28745b3"
+      "bytes": 11728,
+      "sha256": "5c091c71835f09e33659d6cda29fdbdd9619b8bb6b30d30739747ae612299f50"
     },
     {
       "path": "bridge/http_client.py",
       "bytes": 4194,
       "sha256": "740be0154defd62637862762521ccc5e5b3baf0740ccd36d935550347444890f"
+    },
+    {
+      "path": "bridge/integration_ext.py",
+      "bytes": 3570,
+      "sha256": "085d1ce721c38cb5f0bf52f32a07bd2d81ae782bc95b804ca1328c9c4fc0b3f1"
+    },
+    {
+      "path": "bridge/interface_ext.py",
+      "bytes": 6318,
+      "sha256": "e7c4b663175bd9bd5e725c6ef1baf9909cbb7940b1dbd95e016c52108563dc61"
     },
     {
       "path": "bridge/job_manager.py",
@@ -339,6 +364,11 @@
       "sha256": "2a0952d8a6f9b55e52949e276efedaf58dbd89d3b51b7be7f196f21cbc71514c"
     },
     {
+      "path": "bridge/qdrant_readonly.py",
+      "bytes": 2206,
+      "sha256": "7dc6075dc4ed20584851a9c1117d54dd7c5c27cc56327028d0bd704debc34df1"
+    },
+    {
       "path": "bridge/remote_runner.py",
       "bytes": 3144,
       "sha256": "efa2b3253b4f101d3e8a0134c8c972ccb01718e6215f9e33a456356948a3153f"
@@ -350,8 +380,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 27420,
-      "sha256": "58a00c76bc472a6a0900ff1a7ae27d5481b97a4bf138f262ba96de7b5caec760"
+      "bytes": 28109,
+      "sha256": "1adc7f03b908ad11913cb3c3d15765a1621875197c181558993f0a5dd59e5e05"
     },
     {
       "path": "bridge/review_ext.py",
@@ -374,6 +404,16 @@
       "sha256": "bc0044955d3518e8c6e89e30fc6248b80d3b988430cdbd5f4851b11549efd376"
     },
     {
+      "path": "bridge/semantic_index_ext.py",
+      "bytes": 3928,
+      "sha256": "b5d553c4e9104f24a89d0be4f719678d8d16ff222c807f712d9a60e75613e510"
+    },
+    {
+      "path": "bridge/semantic_index_runner.py",
+      "bytes": 2719,
+      "sha256": "8777655e34c5d08edc834fdfabe1da3c2561c930772d9a5c1800d801d71e0d76"
+    },
+    {
       "path": "bridge/server_ext.py",
       "bytes": 8940,
       "sha256": "b4b019f3492c300dc425e8ed3ff2917361f66f58477677b434e5382dea8e7a91"
@@ -382,6 +422,11 @@
       "path": "bridge/server_probe.py",
       "bytes": 1867,
       "sha256": "ca1f19df90a51e62c777e9e215e8c8a0dcbc18422dac0160a0a6c2aa08a620b2"
+    },
+    {
+      "path": "bridge/slurm_monitor.py",
+      "bytes": 5369,
+      "sha256": "0c7eb3839ae7c34379822a838c416f2c980fb0e72f2d5aeaacd2cc1fed6e510c"
     },
     {
       "path": "bridge/smoke_mcp.py",
@@ -402,6 +447,11 @@
       "path": "bridge/systems_ext.py",
       "bytes": 10283,
       "sha256": "2d4d2d1aa682af06c8dacb83d42e1e4ebac21e9d0a9600f7a948ed9926f425f6"
+    },
+    {
+      "path": "bridge/table_query_ext.py",
+      "bytes": 3315,
+      "sha256": "84f130b60938972ed47754dfc802d126279135cf8dd3a127a08f0d7c886de661"
     },
     {
       "path": "bridge/transcriptomics_ext.py",
@@ -451,12 +501,17 @@
     {
       "path": "build_releases.py",
       "bytes": 1990,
-      "sha256": "81606f600d3a36937a0fcffb9c20ac91d423f4d328d3df34d010f33b565dd550"
+      "sha256": "4e04b0b0ea1f9fbef53d8b01a35c6e588fdefc029a6e48ea576e8e4c1bd670e8"
     },
     {
       "path": "client_config.py",
       "bytes": 2425,
       "sha256": "618ff59b892f7aff3ccf623057ad0248497e50c009c50c3bfc8221e8d1a30ce2"
+    },
+    {
+      "path": "configure_mcp.py",
+      "bytes": 6792,
+      "sha256": "31f05604703e72d03ffcc1f25d6050ff0a81704284a7495508956ab4588ac405"
     },
     {
       "path": "edition.json",
@@ -475,13 +530,43 @@
     },
     {
       "path": "install.py",
-      "bytes": 6573,
-      "sha256": "2df51e760ffe532b0cb143d9cc870356aa4b4aa8a1e8d9327c9b76a4f23426c3"
+      "bytes": 6729,
+      "sha256": "d1488a8f2731de1f11e972bd98bc0b4ce84f5d819fad818513140eb60266f65e"
+    },
+    {
+      "path": "install_mcp.py",
+      "bytes": 3322,
+      "sha256": "adb8cb9c5f4543388c52c1dc976d0e22dafde1d9d4288b55c2c2800573102e20"
     },
     {
       "path": "install_skills.py",
       "bytes": 5663,
       "sha256": "ddb8828705e09c5c88658c5128068a57c21c90e2f89c716c02e2ef75f6a96ba8"
+    },
+    {
+      "path": "mcp_components.json",
+      "bytes": 1925,
+      "sha256": "e5b02db8c1cf51e868862b8dc5ce2d6c89ff6e057798cfcfcc13a20979121a45"
+    },
+    {
+      "path": "mcp_embedding_model.json",
+      "bytes": 789,
+      "sha256": "c1dba4fd9daf637f30e59d672491d71ad78e846e5933a74f49d056aacdc3a9c1"
+    },
+    {
+      "path": "prepare_docker_gateway.py",
+      "bytes": 2344,
+      "sha256": "b570162bcd18a23b1adac77a11706da75c4a747d14d0b581e3a20f85521088bc"
+    },
+    {
+      "path": "probe_mcp.py",
+      "bytes": 2724,
+      "sha256": "b064af7a507931c3e7b047cf850d45dccdc6878df88a1120087583445f0a5c61"
+    },
+    {
+      "path": "provision_mcp_model.py",
+      "bytes": 905,
+      "sha256": "c8b3d1f374eb9b5635416e2d3f72496e9276aa2a90f2bb6e6d4aebed8997c554"
     },
     {
       "path": "requirements-core.lock.txt",
@@ -512,6 +597,21 @@
       "path": "requirements-local.txt",
       "bytes": 681,
       "sha256": "7a3a6cb0e47162d09c9c23d5e66b40d709fd66811314b959c84345b8cd0ae9fc"
+    },
+    {
+      "path": "requirements-mcp-duckdb.txt",
+      "bytes": 70,
+      "sha256": "72f3543a5a04000ec1129a333d1daef92384a3554cf19e8eb3cba242c4b64d4c"
+    },
+    {
+      "path": "requirements-mcp-qdrant.txt",
+      "bytes": 97,
+      "sha256": "db9750fc635fef0f00d3aa6e6d959786735d4fba06221dd2fcbba1c348b42f18"
+    },
+    {
+      "path": "requirements-mcp-serena.txt",
+      "bytes": 49,
+      "sha256": "342842cfd5dfdc50e56676a0127ec182f7eee91b7105793d66565c350412a496"
     },
     {
       "path": "requirements-omics.txt",
@@ -709,6 +809,16 @@
       "sha256": "b4beab5c4b7d0522e05dfce63f3ea8739138b6080bd5a6196eab3b80fbf3f5da"
     },
     {
+      "path": "tests/mcp_process_check.py",
+      "bytes": 4733,
+      "sha256": "ce29ee34317fe0d389e68b9834b8d5eb170631c79c87b0e3299252ec14630201"
+    },
+    {
+      "path": "tests/mcp_runtime_check.py",
+      "bytes": 1566,
+      "sha256": "487e2afa4eaa3259ac0794e4fca9d2a4877f30ce32800a574b769019141b2e57"
+    },
+    {
       "path": "tests/native_word_check.py",
       "bytes": 4026,
       "sha256": "025102280e28efe07172780d52f2f015d9969efd72904d7a025d89338a96cab2"
@@ -749,6 +859,11 @@
       "sha256": "4e9dcbf37d60cf692057052e5a798067c74df13774b8bded826888c460f20d73"
     },
     {
+      "path": "tests/test_mcp_integrations.py",
+      "bytes": 6284,
+      "sha256": "8be4898ce1898d3e7aecc1cad98cfe8ce16233dfe0a54d947b135485cdce1ae6"
+    },
+    {
       "path": "tests/test_origins.py",
       "bytes": 2400,
       "sha256": "615d7062a471006a43995e0e1d219d0125ba1ca0c670493193c64f798aad853c"
@@ -780,13 +895,13 @@
     },
     {
       "path": "third_party_components.json",
-      "bytes": 79985,
-      "sha256": "e38076522064c16e417c08609eb4a84bbae3a80b0f4c1629ae1199202d827374"
+      "bytes": 86273,
+      "sha256": "04b71c2ca9d91762a37f8ca521e6a506e004d091c55eb19ae84c58bbec9f123a"
     },
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "87d292cabf8cca025dcd7c12cf87d25ab8fdd3877a98e65f3c9d67922a3a51d0"
+      "sha256": "d88570fe1f9d1cef79c5cb56f5454e4dc691e0693708e04272a3adce4b49ab78"
     },
     {
       "path": "update_skill_catalog.py",

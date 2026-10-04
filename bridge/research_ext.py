@@ -17,6 +17,12 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'mcp_integration':[('integrations','inspect_mcp_components')],
+    'scoped_table_query':[('table_query','query_selected_table')],
+    'semantic_retrieval':[('semantic_index','prepare_semantic_index'),('semantic_index','audit_semantic_results')],
+    'live_scheduler_monitor':[('integrations','prepare_slurm_monitor'),('integrations','inspect_slurm_monitor')],
+    'software_snapshot':[('scientific_interfaces','inspect_scientific_interfaces'),('scientific_interfaces','export_zotero_snapshot'),('scientific_interfaces','export_cytoscape_snapshot')],
+    'software_revision':[('scientific_interfaces','prepare_cytoscape_revision'),('scientific_interfaces','apply_cytoscape_revision')],
     'code_project':[('code_review', 'map_code_project'), ('code_review', 'audit_scientific_code')],
     'code_notebook':[('code_review', 'audit_notebook'), ('code_execution', 'prepare_code_execution')],
     'code_data_contract':[('code_review', 'audit_data_contract'), ('code_review', 'audit_table_join'), ('code_review', 'compare_data_exchange')],

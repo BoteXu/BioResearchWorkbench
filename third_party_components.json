@@ -693,7 +693,8 @@
         "requirements-core.txt",
         "requirements-core.windows-py311.lock.txt",
         "requirements-full.lock.txt",
-        "requirements.windows-py311.lock.txt"
+        "requirements.windows-py311.lock.txt",
+        "requirements-mcp-duckdb.txt"
       ],
       "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
       "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
@@ -935,7 +936,8 @@
         "requirements-core.lock.txt",
         "requirements-core.windows-py311.lock.txt",
         "requirements-full.lock.txt",
-        "requirements.windows-py311.lock.txt"
+        "requirements.windows-py311.lock.txt",
+        "requirements-mcp-qdrant.txt"
       ],
       "our_role": "Dependency consumed by integration or optional upstream tool; not authored here.",
       "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
@@ -1783,6 +1785,143 @@
       "origin": "https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning",
       "license_reference": "GitHub CodeQL terms",
       "our_role": "Public source security scanning in CI"
+    },
+    {
+      "name": "serena-agent",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/oraios/serena",
+      "version": "1.7.0",
+      "license_reference": "MIT (installed 1.7.0 wheel; consult the license of any future revision)",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "@upstash/context7-mcp",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/upstash/context7",
+      "version": "4.0.3",
+      "license_reference": "MIT",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "mcp-server-motherduck",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/motherduckdb/mcp-server-motherduck",
+      "version": "1.0.8",
+      "license_reference": "MIT",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "mcp-server-qdrant",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/qdrant/mcp-server-qdrant",
+      "version": "0.8.1",
+      "license_reference": "Apache-2.0",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "@playwright/mcp",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/microsoft/playwright-mcp",
+      "version": "0.0.83",
+      "license_reference": "Apache-2.0",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "docker_gateway",
+      "use": "separately_installed_optional_MCP_process",
+      "origin": "https://github.com/docker/mcp-gateway",
+      "version": "0.43.3",
+      "license_reference": "Apache-2.0",
+      "our_role": "Original scoped adapters and acceptance tests; upstream implementation retains original authorship and license."
+    },
+    {
+      "name": "all-MiniLM-L6-v2 ONNX embedding files",
+      "use": "separately_provisioned_public_model_files",
+      "origin": "https://huggingface.co/qdrant/all-MiniLM-L6-v2-onnx",
+      "revision": "d13954661f83248295ba75c1ed411eef3b7b936e",
+      "license_reference": "upstream Apache-2.0 model license",
+      "our_role": "Pinned offline retrieval integration only; weights are not redistributed."
+    },
+    {
+      "name": "mcp-server-motherduck",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/mcp-server-motherduck/json",
+      "version_references": [
+        "requirements-mcp-duckdb.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "duckdb",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/duckdb/json",
+      "version_references": [
+        "requirements-mcp-duckdb.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "fastmcp",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/fastmcp/json",
+      "version_references": [
+        "requirements-mcp-duckdb.txt",
+        "requirements-mcp-qdrant.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "mcp-server-qdrant",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/mcp-server-qdrant/json",
+      "version_references": [
+        "requirements-mcp-qdrant.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "qdrant-client",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/qdrant-client/json",
+      "version_references": [
+        "requirements-mcp-qdrant.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "fastembed",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/fastembed/json",
+      "version_references": [
+        "requirements-mcp-qdrant.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "serena-agent",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/serena-agent/json",
+      "version_references": [
+        "requirements-mcp-serena.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "jedi-language-server",
+      "use": "separately_installed_python_dependency",
+      "origin": "https://pypi.org/pypi/jedi-language-server/json",
+      "version_references": [
+        "requirements-mcp-serena.txt"
+      ],
+      "our_role": "External optional tool dependency; not authored or relicensed here.",
+      "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
     }
   ],
   "limits": [

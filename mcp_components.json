@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "policy": "Optional separate processes; no model credential; private profiles and runtime receipts never shipped.",
+  "components": [
+    {"id":"serena","package":"serena-agent","version":"1.7.0","source":"https://github.com/oraios/serena","license":"MIT (installed 1.7.0 wheel; consult the license of any future revision)","placement":"scoped local code retrieval","transport":"stdio"},
+    {"id":"context7","package":"@upstash/context7-mcp","version":"4.0.3","source":"https://github.com/upstash/context7","license":"MIT","placement":"approved public documentation queries only","transport":"existing plugin preferred, optional stdio"},
+    {"id":"duckdb","package":"mcp-server-motherduck","version":"1.0.8","source":"https://github.com/motherduckdb/mcp-server-motherduck","license":"MIT","engine_version":"1.5.5","placement":"bounded selected local database; large tables on server","transport":"stdio"},
+    {"id":"qdrant","package":"mcp-server-qdrant","version":"0.8.1","source":"https://github.com/qdrant/mcp-server-qdrant","license":"Apache-2.0","placement":"selected private index; large embedding/index jobs on server","transport":"stdio"},
+    {"id":"playwright","package":"@playwright/mcp","version":"0.0.83","source":"https://github.com/microsoft/playwright-mcp","license":"Apache-2.0","placement":"isolated browser profile","transport":"stdio"},
+    {"id":"docker_gateway","version":"0.43.3","source":"https://github.com/docker/mcp-gateway","license":"Apache-2.0","placement":"optional owned Docker host; requires working engine","transport":"stdio"},
+    {"id":"slurm_monitor","version":"2.11","source":"bridge/slurm_monitor.py","license":"project LICENSE","placement":"owned submission host through existing shared SSH"},
+    {"id":"scientific_interfaces","version":"2.11","source":"bridge/interface_ext.py","license":"project LICENSE","placement":"scoped local Zotero and Cytoscape"}
+  ]
+}

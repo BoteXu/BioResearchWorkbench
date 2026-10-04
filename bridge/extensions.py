@@ -5,6 +5,10 @@ from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "integrations": ("integration_ext", ["inspect_mcp_components", "prepare_slurm_monitor", "inspect_slurm_monitor"]),
+    "table_query": ("table_query_ext", ["query_selected_table"]),
+    "semantic_index": ("semantic_index_ext", ["prepare_semantic_index", "audit_semantic_results"]),
+    "scientific_interfaces": ("interface_ext", ["inspect_scientific_interfaces", "export_zotero_snapshot", "export_cytoscape_snapshot", "prepare_cytoscape_revision", "apply_cytoscape_revision"]),
     "code_review": ("code_review_ext", ["map_code_project", "audit_scientific_code", "audit_notebook", "audit_data_contract", "audit_table_join", "compare_data_exchange", "audit_numeric_results", "compare_scientific_results", "bind_analysis_qc", "check_analysis_qc", "prepare_code_revision", "materialize_code_revision", "prepare_method_reproduction", "audit_plan_implementation", "prepare_api_migration", "inspect_dependency_locks", "compare_environments", "prepare_scientific_test_suite", "prepare_configuration_migration", "apply_configuration_migration", "audit_dependency_components", "audit_release_scope"]),
     "code_execution": ("code_execution_ext", ["prepare_code_execution", "inspect_code_execution", "summarize_performance", "estimate_compute_resources", "audit_parallel_execution", "audit_resume_compatibility", "prepare_code_workflow", "preview_code_workflow", "prepare_code_task_array", "prepare_adapter_development"]),
     "clinical_research": ("clinical_research_ext", ["audit_medical_guidelines", "query_drug_reference", "read_drug_label", "compare_drug_labels", "audit_clinical_dataset", "audit_clinical_mapping", "guide_clinical_study", "audit_clinical_prediction", "audit_medical_reporting", "extract_review_effects", "record_bias_assessment", "audit_adverse_event_reports", "audit_imaging_metadata", "prepare_medical_teaching", "prepare_clinical_backend"]),
@@ -52,6 +56,8 @@ def registry():
                     item["default"] = parameter.default
                     optional.append(item)
             dependencies = []
+            if category=='table_query': dependencies=['duckdb']
+            if category=='scientific_interfaces': dependencies=['requests']
             if category=='academic_workspace' and name=='index_selected_fulltext': dependencies=['pypdf']
             if category=='academic_workspace' and name=='retrieve_review_search_page': dependencies=['requests']
             if category=='zotero': dependencies=['requests']

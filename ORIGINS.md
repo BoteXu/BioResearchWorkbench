@@ -41,3 +41,6 @@
 
 ## Bridge 2.10 attribution
 Original additions: source-scoped code/numeric/clinical contracts, located review ledgers, fixed code/workflow/clinical adapters, private version bindings and acceptance fixtures. Existing Python/Jupyter, Nextflow, Snakemake, pydicom, survival, cmprsk, uv, renv and CodeQL retain upstream authorship/licenses. No clinical guideline or bias grading rules are redistributed. Official RxNorm/DailyMed services retain NLM provenance and regional scope.
+
+## Optional MCP processes in 2.11
+Serena (the installed 1.7.0 distribution), Context7, MotherDuck MCP/DuckDB, Qdrant/FastEmbed, Playwright and Docker MCP Gateway are separately installed external components. Their original authors and exact-version licenses remain applicable. This package supplies original scoped adapters, configuration generation and acceptance checks. It does not redistribute or relicense upstream executables, model weights or container images. The Docker public-fetch candidate comes from the MCP reference-server project and Docker image catalog. The compact embedding model originates from sentence-transformers and Qdrant ONNX packaging; its fixed revision and hashes are in mcp_embedding_model.json. Consult a new revision's actual license before upgrading.

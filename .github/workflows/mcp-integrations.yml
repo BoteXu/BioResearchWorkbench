@@ -1,0 +1,48 @@
+name: Verify optional MCP integrations
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-mcp:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m pip install uv requests mcp==1.30.0
+      - name: Install separate fixed upstream processes
+        shell: bash
+        run: python install_mcp.py --runtime-root "$RUNNER_TEMP/OptionalMcp" --components serena duckdb qdrant playwright
+      - name: Install a disposable CI browser
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            node "$RUNNER_TEMP/OptionalMcp/playwright/node_modules/playwright/cli.js" install --with-deps chromium
+          else
+            node "$RUNNER_TEMP/OptionalMcp/playwright/node_modules/playwright/cli.js" install chromium
+          fi
+      - name: Actual scoped queries, symbol references, retrieval and browser interaction
+        shell: bash
+        run: |
+          browser=$(node -e 'process.stdout.write(require(process.env.RUNNER_TEMP+"/OptionalMcp/playwright/node_modules/playwright").chromium.executablePath())')
+          python tests/mcp_process_check.py --runtime-root "$RUNNER_TEMP/OptionalMcp" --browser-executable "$browser"
+      - name: Actual restricted DuckDB external-file refusal
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            "$RUNNER_TEMP/OptionalMcp/duckdb/Scripts/python.exe" tests/mcp_runtime_check.py
+          else
+            "$RUNNER_TEMP/OptionalMcp/duckdb/bin/python" tests/mcp_runtime_check.py
+          fi
