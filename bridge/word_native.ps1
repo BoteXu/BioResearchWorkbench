@@ -12,7 +12,6 @@ try {
     $word = New-Object -ComObject Word.Application
     $word.Visible = $false
     $word.DisplayAlerts = 0
-    $word.Options.BackgroundSave = $false
     $word.AutomationSecurity = 3
     if ($word.Documents.Count -ne 0) { $keepOpen=$true; throw 'Word automation instance is not empty; no existing documents will be touched' }
     $readOnly = $request.operation -in @('inspect','render')
@@ -85,6 +84,6 @@ try {
 } finally {
     if (-not $keepOpen) {
         if ($null -ne $doc) { $doc.Close(0) }
-        if ($null -ne $word) { $word.Quit(0) }
+        if ($null -ne $word) { $saveChoice=0; $word.Quit([ref]$saveChoice) }
     }
 }

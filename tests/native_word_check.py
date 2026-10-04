@@ -32,7 +32,7 @@ try {
  $doc.Content.Text='Synthetic result.'
  $doc.Content.Font.Name='Arial'
  $doc.SaveAs2($value.source,16)
-} finally {if($null -ne $doc){$doc.Close(0)};$app.Quit(0)}
+} finally {if($null -ne $doc){$doc.Close(0)};$saveChoice=0;$app.Quit([ref]$saveChoice)}
 """,encoding='utf8')
         code='$Config=$env:BRW_FIXTURE_CONFIG\n'+script.read_text().split('\n',1)[1]
         process=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',base64.b64encode(code.encode('utf-16le')).decode('ascii')],env={**os.environ,'BRW_FIXTURE_CONFIG':str(config)},capture_output=True,timeout=90)

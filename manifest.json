@@ -65,8 +65,8 @@
     },
     {
       "path": "ORIGINS.md",
-      "bytes": 6011,
-      "sha256": "1b053c6dc36cd9d472ab8589d56e4bac2bd9e76b56cbf19bb455df4bde4d78dc"
+      "bytes": 6731,
+      "sha256": "4659451bca335c8ec7882b39411422d52dba750288437e97437123435f7003b6"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -370,8 +370,8 @@
     },
     {
       "path": "bridge/word_native.ps1",
-      "bytes": 5019,
-      "sha256": "4ff6ff6430344067684a985f646bbb4b43134b0114f3ce13f707db11de92e348"
+      "bytes": 5007,
+      "sha256": "b070a77a29f6ddddbfb0c15a4df724b1a07d4273d576510e5866ef21d7b83f03"
     },
     {
       "path": "bridge/word_native_ext.py",
@@ -645,8 +645,8 @@
     },
     {
       "path": "tests/native_word_check.py",
-      "bytes": 3997,
-      "sha256": "90438735591f4109efae080797a605b1aade170381fbd752d22feb303cc86a7a"
+      "bytes": 4026,
+      "sha256": "025102280e28efe07172780d52f2f015d9969efd72904d7a025d89338a96cab2"
     },
     {
       "path": "tests/scientific_backend_check.R",

@@ -17,6 +17,8 @@
 | 数据与统计基础库 | NumPy、pandas、SciPy、statsmodels、scikit-learn | 输入合同、设计检查、固定适配、结果保存与验收 | 基础数值、统计和机器学习算法 |
 | 转录组与单细胞 | [PyDESeq2](https://github.com/owkin/PyDESeq2)、[Scanpy](https://scanpy.readthedocs.io/)、[AnnData](https://anndata.readthedocs.io/)、igraph、leidenalg | QC 门禁、样本/独立单位检查、对比配置、受限执行和报告 | 差异表达模型、单细胞算法、Leiden 聚类 |
 | R 差异分析后端 | [limma](https://bioconductor.org/packages/limma/)、[edgeR](https://bioconductor.org/packages/edgeR/) | 复用安装者已有 R 环境，通过固定脚本交换数据和检查回执 | limma、edgeR 的统计方法与软件；其许可证独立适用 |
+| 新增服务器推断 | [coloc](https://github.com/chr1swallace/coloc)、[susieR](https://github.com/stephenslab/susieR)、[decoupleR](https://github.com/saezlab/decoupleR)、[metafor](https://github.com/wviechtb/metafor) | 输入与 LD/网络/协方差 QC、固定任务程序、诊断和来源回执 | 共定位、精细定位、活性推断和荟萃模型；算法归原作者 |
+| OCR 与原生文档 | [OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF)、[Tesseract](https://github.com/tesseract-ocr/tesseract)、Microsoft Word 与 Zotero 原生模板 | 服务器 OCR 任务、页位置检查、固定原生批注/修订/渲染接口 | OCR 引擎、Office 软件、引用刷新插件；这些软件未随包提供 |
 | 通路、网络与绘图 | [GSEApy](https://gseapy.readthedocs.io/)、NetworkX、Matplotlib、[Cytoscape](https://cytoscape.org/) | 标识/背景检查、网络导入、结果组织、绘图适配与审查 | 富集方法、图算法、绘图库和 Cytoscape GUI |
 | 分子与对接 | [RDKit](https://www.rdkit.org/)、[Meeko](https://github.com/forlilab/Meeko)、Gemmi、[AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina)、[Open Babel](https://openbabel.org/) | 输入与资源 QC、固定软件调用、姿势汇总、对照和回执检查 | 化学算法、配体准备算法、对接评分/搜索引擎和格式转换软件 |
 | 文档与参考文献 | [pypdf](https://pypdf.readthedocs.io/)、Beautiful Soup、[Zotero](https://www.zotero.org/) | 有界文档读取、局部库访问、写入计划、字段保护和审计 | PDF 解析器、Zotero 软件、引用生态与 Word 插件 |
