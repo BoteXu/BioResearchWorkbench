@@ -5,7 +5,8 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, Mock
+from types import SimpleNamespace
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'bridge'))
 import molecular_biology_ext as m
 import server_operations_ext as s
@@ -89,11 +90,11 @@ class MolecularTests(unittest.TestCase):
         for function,args in [(m.query_intact_interactions,('P01308',9606)),(m.query_complex_record,('CPX-2158',)),(m.query_cell_line,('CVCL_0030',))]:
             with self.assertRaises(ValueError):function(*args)
     def test_query_identity_schema_and_pagination(self):
-        with patch('http_client.get_json',return_value={'content':[{'ac':'EBI-1','taxIdA':9606,'taxIdB':9606}],'number':0,'size':1,'totalElements':3,'last':False}):
+        with patch.dict(sys.modules,{'http_client':SimpleNamespace(get_json=Mock(return_value={'content':[{'ac':'EBI-1','taxIdA':9606,'taxIdB':9606}],'number':0,'size':1,'totalElements':3,'last':False}))}):
             r=m.query_intact_interactions('P01308',9606,True,page_size=1);self.assertFalse(r['candidate_coverage_complete']);self.assertEqual(r['next_page'],1)
-        with patch('http_client.get_json',return_value={'complexAc':'CPX-999','participants':[]}):
+        with patch.dict(sys.modules,{'http_client':SimpleNamespace(get_json=Mock(return_value={'complexAc':'CPX-999','participants':[]}))}):
             with self.assertRaises(ValueError):m.query_complex_record('CPX-2158',True)
-        with patch('http_client.get_json',return_value={'content':[],'number':0,'size':100,'totalElements':0}):
+        with patch.dict(sys.modules,{'http_client':SimpleNamespace(get_json=Mock(return_value={'content':[],'number':0,'size':100,'totalElements':0}))}):
             with self.assertRaises(ValueError):m.query_intact_interactions('P01308',9606,True)
     def test_budget_and_unknown_submission_are_not_observation(self):
         with patch('code_execution_ext.estimate_compute_resources',return_value={'state':'estimate'}):
@@ -105,7 +106,7 @@ class MolecularTests(unittest.TestCase):
         cur=[{'path':'new.tsv','bytes':10,'sha256':'b'*64,'stable_snapshot_reviewed':True},{'path':'active.tsv','bytes':1,'sha256':'c'*64}]
         r=s.plan_incremental_return(old,cur,5);self.assertEqual(r['manifest']['files'],[]);self.assertEqual(len(r['deferred']),2);self.assertEqual(r['missing_from_current'],['old.tsv']);self.assertFalse(r['deletion_authorized'])
     def test_all_routes_plan_only_and_unknown_method_refused(self):
-        with patch('bridge.tool_catalog',return_value={'tools':[]}):
+        with patch.dict(sys.modules,{'bridge':SimpleNamespace(tool_catalog=Mock(return_value={'tools':[]}))}):
             for task in m.ROUTES:self.assertFalse(m.guide_molecular_drylab(task,C)['submitted'])
         with self.assertRaises(ValueError):m.guide_molecular_drylab('arbitrary',C)
     def test_pipeline_refuses_absent_bound_qc_and_extra_flags(self):
