@@ -82,7 +82,7 @@ def preview_upgrade(install_dir, package_root=ROOT):
         if actual==spec['sha256']:continue
         if actual is not None and (old is None or actual!=old['sha256']):
             custom.append(name)
-            if name.startswith('.local/') and p.suffix=='.py':blockers.append('custom_source_requires_manual_merge:'+name)
+            if name.startswith('.local/') and p.suffix in {'.py','.R','.ps1'}:blockers.append('custom_source_requires_manual_merge:'+name)
             continue
         changes.append({'path':name,'before_sha256':actual,'after_sha256':spec['sha256'],'source':spec['source']})
     # Runtime configuration, unknown add-ons, user-customized skills and retired stock files remain private and untouched.

@@ -18,7 +18,7 @@ python upgrade.py --apply-plan <私有计划文件> --reviewed-sha256 <审核后
 python upgrade.py --rollback-journal <本次升级的私有 journal 文件>
 ```
 
-预览绑定包、基线和目标前置哈希。计算版配置和依赖集变化需要单独环境迁移；不静默安装依赖、不修改客户端注册/凭据/软件路径。用户自定义 skill 保留；定制 Python 桥接源码阻断直接覆盖，需要先手工合并。已审核配置迁移可复用现有 `code_review.prepare_configuration_migration` / `apply_configuration_migration`，其具体计划必须审查并绑定哈希。
+预览绑定包、基线和目标前置哈希。计算版配置和依赖集变化需要单独环境迁移；不静默安装依赖、不修改客户端注册/凭据/软件路径。用户自定义 skill 保留；定制 Python、R 或 PowerShell 桥接源码阻断直接覆盖，需要先手工合并。已审核配置迁移可复用现有 `code_review.prepare_configuration_migration` / `apply_configuration_migration`，其具体计划必须审查并绑定哈希。
 
 应用前创建独占锁与升级日志，备份所改文件，并在每次写入前核对哈希。失败尝试回滚受管文件；无法安全恢复时保留 journal 供明确核查。显式回滚不会覆盖升级后用户再修改的内容。未知/中断升级、旧锁和不明任务均不能自动重试。恢复源码不是恢复科学任务或依赖环境，重启后还需运行验收。
 

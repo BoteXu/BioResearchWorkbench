@@ -17,17 +17,20 @@ def audit_benchmark_receipt(receipt_path: str, expected_receipt_sha256: str, ben
     import hashlib, math
     _,raw=read_file(receipt_path,2_000_000)
     if hashlib.sha256(raw).hexdigest()!=expected_receipt_sha256:raise ValueError('Benchmark receipt changed')
-    r=json.loads(raw);spec=next((x for x in inspect_scientific_benchmarks()['benchmarks'] if x['id']==benchmark_id),None)
+    r=json.loads(raw)
+    if not isinstance(r,dict):raise ValueError('Benchmark receipt must be a JSON object')
+    spec=next((x for x in inspect_scientific_benchmarks()['benchmarks'] if x['id']==benchmark_id),None)
     if spec is None:raise ValueError('Unknown public benchmark')
-    interface=r.get('schema')==1 and r.get('benchmark_id')==benchmark_id and isinstance(r.get('metrics'),dict)
-    backend=interface and r.get('state')=='completed' and type(r.get('exit_code')) is int and r['exit_code']==0 and bool(r.get('backend_version')) and bool(r.get('dataset_version')) and r.get('design')==spec['design']
+    interface=type(r.get('schema')) is int and r['schema']==1 and r.get('benchmark_id')==benchmark_id and isinstance(r.get('metrics'),dict)
+    backend=interface and r.get('state')=='completed' and type(r.get('exit_code')) is int and r['exit_code']==0 and all(isinstance(r.get(k),str) and r[k].strip() for k in ['backend_version','dataset_version']) and r.get('design')==spec['design']
     issues=[]
     if not interface:issues.append('interface_contract_failed')
     if not backend:issues.append('backend_completion_or_design_unverified')
     if not re.fullmatch('[a-f0-9]{64}',str(r.get('input_sha256',''))):backend=False;issues.append('missing_input_binding')
     checks=[]
+    metrics=r['metrics'] if isinstance(r.get('metrics'),dict) else {}
     for name,bounds in spec['reference_metrics'].items():
-        value=r.get('metrics',{}).get(name);valid=type(value) in (int,float) and math.isfinite(value) and bounds['minimum']<=value<=bounds['maximum']
+        value=metrics.get(name);valid=type(value) in (int,float) and math.isfinite(value) and bounds['minimum']<=value<=bounds['maximum']
         checks.append({'metric':name,'reference_match':valid,'value':value})
     match=backend and all(x['reference_match'] for x in checks)
     return artifact('benchmark_audit',{'benchmark_id':benchmark_id,'receipt_sha256':expected_receipt_sha256,

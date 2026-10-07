@@ -120,5 +120,8 @@ class MolecularTests(unittest.TestCase):
             r['state']='completed';p.write_text(json.dumps(r));h=hashlib.sha256(p.read_bytes()).hexdigest()
             self.assertTrue(v.audit_benchmark_receipt(str(p),h,r['benchmark_id'])['reference_agreement'])
             with self.assertRaises(ValueError):v.audit_benchmark_receipt(str(p),'b'*64,r['benchmark_id'])
+            for updates in [{'schema':True},{'metrics':None},{'backend_version':True},{'exit_code':True}]:
+                bad={**r,**updates};p.write_text(json.dumps(bad));h=hashlib.sha256(p.read_bytes()).hexdigest()
+                self.assertFalse(v.audit_benchmark_receipt(str(p),h,r['benchmark_id'])['backend_completed'])
 
 if __name__=='__main__':unittest.main()

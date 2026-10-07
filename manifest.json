@@ -60,8 +60,8 @@
     },
     {
       "path": "EVOLUTION.md",
-      "bytes": 6208,
-      "sha256": "8f201ee82ec1e5da80e405cc8d010149e6af0a2272d32ec3c91fa2bad61a040b"
+      "bytes": 6227,
+      "sha256": "bbb911222cc413c9bd4300cb838bb994f16cea282e3f24fc18d98314775a4bff"
     },
     {
       "path": "Install.ps1",
@@ -166,7 +166,7 @@
     {
       "path": "TOOL_CATALOG.json",
       "bytes": 332844,
-      "sha256": "45ed12883c5100b813e7bcc9e2412bc4c367aa44ba90cfab45b0a34d037c32fe"
+      "sha256": "f515470feb00554b2efcf947ca1ea01e0450310bd5f35049efd108687a319451"
     },
     {
       "path": "TOOL_CATALOG.md",
@@ -370,8 +370,8 @@
     },
     {
       "path": "bridge/mcp_server.py",
-      "bytes": 5523,
-      "sha256": "3d0a7e5bef0619f2507f63378c6a7b796af08310f5341d192a391412a7976dbd"
+      "bytes": 5705,
+      "sha256": "615eb0766a62b4a9e4702580e63b6956c965388d0be37505d05eb568160f6587"
     },
     {
       "path": "bridge/molecular_biology_ext.py",
@@ -520,8 +520,8 @@
     },
     {
       "path": "bridge/validation_ext.py",
-      "bytes": 2814,
-      "sha256": "2c0048d3589f6dc7bc722dcaf6a7dff758b73e21458416c25e22ddeaed7df984"
+      "bytes": 3023,
+      "sha256": "bd859eee82fb6cf6759de428541ca0160018915a1568d6fbf9d41744e0639733"
     },
     {
       "path": "bridge/web_gateway.py",
@@ -915,8 +915,8 @@
     },
     {
       "path": "tests/molecular_process_check.py",
-      "bytes": 6166,
-      "sha256": "407f0d6af3cfdbfc549a1f8a030f33cd1ee10c2395ff8796484fda6b9a5a6a04"
+      "bytes": 6852,
+      "sha256": "3ae6cbcf24374a36d07de8cc09668d1ed79fd4ed245c9c034b91efa4a6f1cdfc"
     },
     {
       "path": "tests/native_word_check.py",
@@ -975,8 +975,8 @@
     },
     {
       "path": "tests/test_molecular_drylab.py",
-      "bytes": 11988,
-      "sha256": "27aa5d18b3936adff4b4ddd777f614485220675f71928821fcd4d2c04c58dc64"
+      "bytes": 12315,
+      "sha256": "871f644b62e4c67ff8c6ca2a4b2d282ded411cd25a9230d2fd6f17f6ee12272a"
     },
     {
       "path": "tests/test_origins.py",
@@ -985,8 +985,8 @@
     },
     {
       "path": "tests/test_platform_evolution.py",
-      "bytes": 7558,
-      "sha256": "71974a2c7cf979df4b77abc44c25989e50668acf26df0817814a041b72b12150"
+      "bytes": 8187,
+      "sha256": "167b3837de0e649bee58bed252c7cb1f6bde1890e1054b5a23dfab486761647e"
     },
     {
       "path": "tests/test_platforms.py",
@@ -1030,8 +1030,8 @@
     },
     {
       "path": "upgrade.py",
-      "bytes": 11370,
-      "sha256": "5da1fc179b248864dbf13023317c29b06fed9a30258ec677110cc7643cc390cc"
+      "bytes": 11386,
+      "sha256": "c4491b8a9e252914caa7738f83a88a18faf700485c6cf3bc0dd359f35fb5ee08"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",

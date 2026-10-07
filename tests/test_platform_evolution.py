@@ -60,6 +60,11 @@ class PlatformEvolutionTests(unittest.TestCase):
             r=Path(d);a=r/'a';b=r/'b';t=r/'install';self.package(a,'1','old');self.package(b,'2','new');self.installation(t,a)
             (t/'skills/biomni-fixture/SKILL.md').write_text('my instructions');p=upgrade.preview_upgrade(t,b);self.assertIn('skills/biomni-fixture/SKILL.md',p['preserved_customizations']);upgrade.apply_upgrade(p,p['plan_sha256']);self.assertEqual((t/'skills/biomni-fixture/SKILL.md').read_text(),'my instructions')
             (t/'.local/fixture.py').write_text('custom source');p=upgrade.preview_upgrade(t,b);self.assertFalse(p['can_apply'])
+            (t/'.local/fixture.py').write_text('new')
+            for suffix in ['.R','.ps1']:
+                name='bridge/custom'+suffix;(b/name).write_text('stock');(t/('.local/custom'+suffix)).write_text('custom')
+                manifest=json.loads((b/'manifest.json').read_text());manifest['files'].append({'path':name,'sha256':hashlib.sha256((b/name).read_bytes()).hexdigest()});(b/'manifest.json').write_text(json.dumps(manifest))
+                p=upgrade.preview_upgrade(t,b);self.assertFalse(p['can_apply']);self.assertIn('custom_source_requires_manual_merge:.local/custom'+suffix,p['blockers'])
     def test_preview_race_and_post_upgrade_changes_refuse_overwrite(self):
         with tempfile.TemporaryDirectory() as d:
             r=Path(d);a=r/'a';b=r/'b';t=r/'install';self.package(a,'1','old');self.package(b,'2','new');self.installation(t,a)
@@ -72,7 +77,7 @@ class PlatformEvolutionTests(unittest.TestCase):
             r=Path(d);a=r/'a';b=r/'b';t=r/'install';self.package(a,'1','old');self.package(b,'2','new');self.installation(t,a)
             p=upgrade.preview_upgrade(t,b);original=upgrade._copy_atomic;failed=[False]
             def fail_once(source,target):
-                if target==t/'.local/fixture.py' and not failed[0]:
+                if target.resolve()==(t/'.local/fixture.py').resolve() and not failed[0]:
                     failed[0]=True;original(source,target);raise OSError('simulated failure after replacement')
                 return original(source,target)
             with patch.object(upgrade,'_copy_atomic',side_effect=fail_once):

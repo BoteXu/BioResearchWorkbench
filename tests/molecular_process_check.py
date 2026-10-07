@@ -29,6 +29,13 @@ async def mcp_check(host):
             a=await session.call_tool('biomni_tool_availability',{'category':'molecular_biology','name':'audit_splicing_results'})
             validate(a.structuredContent,tools['biomni_tool_availability'].outputSchema)
             assert a.structuredContent['current_environment_verified'] is True
+    restricted=StdioServerParameters(command=sys.executable,args=[str(host/'.local/mcp_server.py')],env={**os.environ,'PYTHONUTF8':'1','BIOMNI_MODULES':'literature'})
+    async with stdio_client(restricted) as (read,write):
+        async with ClientSession(read,write) as session:
+            await session.initialize();names={t.name for t in (await session.list_tools()).tools}
+            assert 'biomni_molecular_plan' not in names and 'biomni_splicing_audit' not in names
+            rejected=await session.call_tool('biomni_run_tool',{'category':'molecular_biology','name':'guide_molecular_drylab','parameters':{'task':'splicing','context':C}})
+            assert rejected.isError
 
 
 def main():

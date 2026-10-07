@@ -11,6 +11,7 @@ from evidence import record_claim
 from job_manager import submit, status, cancel, list_jobs
 from tool_contracts import MolecularContext, MolecularTask, ExecutionReceipt, Availability
 from evidence import health
+from extensions import enabled_categories
 
 # Load descriptions and direct routing before worker threads, without a model stack.
 with redirect_stdout(sys.stderr):
@@ -87,25 +88,27 @@ def biomni_tool_availability(category: str, name: str) -> Availability:
         return Availability(**health(category+'.'+name))
 
 
-@mcp.tool()
 def biomni_molecular_plan(task: MolecularTask, context: MolecularContext) -> ExecutionReceipt:
     """Prepare a molecular dry-lab route with explicit scientific context and QC. This does not submit or run analysis."""
     with _STDIO_LOCK, redirect_stdout(sys.stderr):
         return ExecutionReceipt(**run_tool('molecular_biology', 'guide_molecular_drylab', {'task':task, 'context':context.model_dump(exclude_none=True)}))
 
 
-@mcp.tool()
 def biomni_splicing_audit(records: list[dict], context: MolecularContext) -> ExecutionReceipt:
     """Review returned event/isoform results. Fraction units are required for delta-PSI/usage; read MOLECULAR_DRYLAB.md for nested record fields."""
     with _STDIO_LOCK, redirect_stdout(sys.stderr):
         return ExecutionReceipt(**run_tool('molecular_biology','audit_splicing_results',{'records':records,'context':context.model_dump(exclude_none=True)}))
 
 
-@mcp.tool()
 def biomni_regulatory_audit(records: list[dict], context: MolecularContext) -> ExecutionReceipt:
     """Review returned chromatin, RNA-binding or translation links, retaining binding/association/regulatory-direction boundaries."""
     with _STDIO_LOCK, redirect_stdout(sys.stderr):
         return ExecutionReceipt(**run_tool('molecular_biology','audit_regulatory_links',{'records':records,'context':context.model_dump(exclude_none=True)}))
+
+
+if 'molecular_biology' in enabled_categories():
+    for entrypoint in (biomni_molecular_plan, biomni_splicing_audit, biomni_regulatory_audit):
+        mcp.tool()(entrypoint)
 
 
 if __name__ == "__main__":
