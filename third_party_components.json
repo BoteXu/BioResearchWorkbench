@@ -1930,6 +1930,123 @@
       "use": "consulted_skill_reference_only",
       "license_status": "No explicit redistribution grant found in reviewed snapshot",
       "our_role": "Independent gap review and original bounded audits; no upstream payload copied, installed or executed."
+    },
+    {
+      "name": "intact",
+      "origin": "https://www.ebi.ac.uk/intact",
+      "use": "official_public_read_only_api",
+      "our_role": "Original bounded client and source receipt handling; service and data remain external.",
+      "license_status": "Source data terms apply separately from this code.",
+      "terms": "https://www.ebi.ac.uk/about/terms-of-use/"
+    },
+    {
+      "name": "complex_portal",
+      "origin": "https://www.ebi.ac.uk/complexportal",
+      "use": "official_public_read_only_api",
+      "our_role": "Original bounded client and source receipt handling; service and data remain external.",
+      "license_status": "Source data terms apply separately from this code.",
+      "terms": "https://www.ebi.ac.uk/about/terms-of-use/"
+    },
+    {
+      "name": "cellosaurus",
+      "origin": "https://www.cellosaurus.org",
+      "use": "official_public_read_only_api",
+      "our_role": "Original bounded client and source receipt handling; service and data remain external.",
+      "license_status": "Source data terms apply separately from this code.",
+      "terms": "https://www.cellosaurus.org/about"
+    },
+    {
+      "name": "biomcp",
+      "origin": "https://github.com/genomoncology/biomcp",
+      "revision": "37631c3574703755bf742e1e8459bc0d77522220",
+      "use": "consulted_candidate_reference_only",
+      "our_role": "Selected metadata and entrypoint review; no upstream code or skills redistributed, installed or executed.",
+      "license_status": "MIT",
+      "review_scope": [
+        "README.md",
+        "LICENSE",
+        "pyproject.toml"
+      ]
+    },
+    {
+      "name": "biocontext_kb",
+      "origin": "https://github.com/biocontext-ai/knowledgebase-mcp",
+      "revision": "7e99be76f69ea89c713c4ddcc13842d70f8da6b2",
+      "use": "consulted_candidate_reference_only",
+      "our_role": "Selected metadata and entrypoint review; no upstream code or skills redistributed, installed or executed.",
+      "license_status": "Apache-2.0",
+      "review_scope": [
+        "README.md",
+        "LICENSE",
+        "pyproject.toml",
+        "selected antibodyregistry source"
+      ]
+    },
+    {
+      "name": "tooluniverse",
+      "origin": "https://github.com/mims-harvard/ToolUniverse",
+      "revision": "14c418672dac2af59ed987c1fc8ce4927116ff42",
+      "use": "consulted_candidate_reference_only",
+      "our_role": "Selected metadata and entrypoint review; no upstream code or skills redistributed, installed or executed.",
+      "license_status": "Apache-2.0",
+      "review_scope": [
+        "README.md",
+        "LICENSE",
+        "pyproject.toml"
+      ]
+    },
+    {
+      "name": "scientific_agent_skills",
+      "origin": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "revision": "92ace75ac21efe19a620434e0ca4e356081fe807",
+      "use": "consulted_candidate_reference_only",
+      "our_role": "Selected metadata and entrypoint review; no upstream code or skills redistributed, installed or executed.",
+      "license_status": "MIT",
+      "review_scope": [
+        "README.md",
+        "LICENSE.md",
+        "pyproject.toml",
+        "skills/arboreto/SKILL.md",
+        "skills/bioservices/SKILL.md",
+        "skills/pydeseq2/SKILL.md"
+      ]
+    },
+    {
+      "name": "bioskills_reference",
+      "origin": "https://github.com/GPTomics/bioSkills",
+      "revision": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "use": "consulted_candidate_reference_only",
+      "our_role": "Selected metadata and entrypoint review; no upstream code or skills redistributed, installed or executed.",
+      "license_status": "MIT",
+      "review_scope": [
+        "README.md",
+        "LICENSE",
+        "selected alternative-splicing and CLIP entrypoints"
+      ]
+    },
+    {
+      "name": "nf-core/atacseq",
+      "origin": "https://github.com/nf-core/atacseq",
+      "revision": "1a1dbe52ffbd82256c941a032b0e22abbd925b8a",
+      "use": "fixed_server_task_preparation_only",
+      "our_role": "Original QC-bound command preparation; pipeline code, references and containers not bundled.",
+      "license_status": "Consult the pinned upstream pipeline and individual tool/data licenses."
+    },
+    {
+      "name": "nf-core/chipseq",
+      "origin": "https://github.com/nf-core/chipseq",
+      "revision": "76e2382b6d443db4dc2396e6831d1243256d80b0",
+      "use": "fixed_server_task_preparation_only",
+      "our_role": "Original QC-bound command preparation; pipeline code, references and containers not bundled.",
+      "license_status": "Consult the pinned upstream pipeline and individual tool/data licenses."
+    },
+    {
+      "name": "nf-core/methylseq",
+      "origin": "https://github.com/nf-core/methylseq",
+      "revision": "5aa56467a85a5e2d6795ea72dfa5a5f0c9babc23",
+      "use": "fixed_server_task_preparation_only",
+      "our_role": "Original QC-bound command preparation; pipeline code, references and containers not bundled.",
+      "license_status": "Consult the pinned upstream pipeline and individual tool/data licenses."
     }
   ],
   "limits": [

@@ -1,5 +1,5 @@
 {
-  "version": "2.12.0",
+  "version": "2.13.0",
   "skills": [
     {
       "name": "biomni-academic-delivery",
@@ -48,18 +48,53 @@
       "kind": "workflow_instructions",
       "license": "Apache-2.0",
       "tool_routes": [
+        "cadd.guide_cadd_workflow",
+        "cadd.audit_docking_campaign",
+        "cadd.audit_restraint_mapping",
         "molecular.audit_docking_inputs",
         "advanced.audit_redocking_coordinates",
         "molecular.summarize_vina_poses",
-        "software.check_software_health",
-        "cadd.guide_cadd_workflow",
-        "cadd.audit_docking_campaign",
-        "cadd.audit_restraint_mapping"
+        "software.check_software_health"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-docking-review/references/tool-routing.md": "9511baea166467be07772c57d3b03af2132f8cf7c583c5a392929bb935023a22",
         "biomni-docking-review/SKILL.md": "b96748270668d0e612c6b2c816c5da19a2189f0d0306a557147053cc385c75a6"
+      }
+    },
+    {
+      "name": "biomni-molecular-drylab",
+      "description": "规划和审查分子生物学干实验，衔接基因调控、RNA 加工、蛋白功能、互作与机制证据；不生成湿实验操作流程。",
+      "kind": "workflow_instructions",
+      "license": "Apache-2.0",
+      "tool_routes": [
+        "molecular_biology.guide_molecular_drylab",
+        "molecular_biology.inspect_molecular_resources",
+        "molecular_biology.plan_molecular_extension",
+        "molecular_biology.query_intact_interactions",
+        "molecular_biology.query_complex_record",
+        "molecular_biology.query_cell_line",
+        "molecular_biology.audit_splicing_results",
+        "molecular_biology.audit_regulatory_links",
+        "molecular_biology.audit_protein_annotations",
+        "molecular_biology.audit_interaction_records",
+        "molecular_biology.audit_perturbation_results",
+        "molecular_biology.audit_mechanism_graph",
+        "molecular_biology.prepare_molecular_pipeline",
+        "statistics.guide_study_statistics",
+        "code_review.bind_analysis_qc",
+        "code_review.check_analysis_qc",
+        "code_execution.prepare_code_execution",
+        "server_operations.plan_server_budget",
+        "server_operations.review_unknown_submission",
+        "server_operations.plan_incremental_return",
+        "validation.inspect_scientific_benchmarks",
+        "validation.audit_benchmark_receipt"
+      ],
+      "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
+      "files": {
+        "biomni-molecular-drylab/references/tool-routing.md": "6052b206b07119e3475123852a8071c0e7e01e03e4aa406ba66c74c73322143e",
+        "biomni-molecular-drylab/SKILL.md": "adf425dcfe0f49e49ced70416a9f0751f96183c831a126fb67b2df5cbafcb553"
       }
     },
     {
@@ -114,6 +149,9 @@
       "kind": "workflow_instructions",
       "license": "Apache-2.0",
       "tool_routes": [
+        "cadd.guide_cadd_workflow",
+        "cadd.audit_simulation_protocol",
+        "cadd.audit_restart_manifest",
         "workflow.prepare_server_inventory",
         "workflow.prepare_remote_task",
         "server.prepare_scheduler_task",
@@ -125,10 +163,7 @@
         "scientific_backend.prepare_pdf_ocr",
         "code_execution.prepare_code_execution",
         "code_execution.prepare_code_task_array",
-        "code_execution.audit_resume_compatibility",
-        "cadd.guide_cadd_workflow",
-        "cadd.audit_simulation_protocol",
-        "cadd.audit_restart_manifest"
+        "code_execution.audit_resume_compatibility"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
@@ -197,15 +232,15 @@
       "kind": "workflow_instructions",
       "license": "Apache-2.0",
       "tool_routes": [
-        "biomedical.audit_structure_context",
-        "research.resolve_identifier",
-        "advanced.audit_md_summary",
         "cadd.guide_cadd_workflow",
         "cadd.audit_simulation_protocol",
         "cadd.audit_restart_manifest",
         "cadd.audit_replica_exchange",
         "cadd.audit_af3_records",
-        "cadd.audit_mmgbsa_summary"
+        "cadd.audit_mmgbsa_summary",
+        "biomedical.audit_structure_context",
+        "research.resolve_identifier",
+        "advanced.audit_md_summary"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {

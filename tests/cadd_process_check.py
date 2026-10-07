@@ -15,10 +15,16 @@ def main():
     parser.add_argument('--installation')
     args=parser.parse_args()
     host=Path(args.installation) if args.installation else Path(os.environ['RUNNER_TEMP'])/'BiomniCore'
+    source_dir=Path(__file__).resolve().parents[1]/'bridge'
+    for name,module in list(sys.modules.items()):
+        filename=getattr(module,'__file__',None)
+        if filename and Path(filename).resolve().is_relative_to(source_dir):del sys.modules[name]
+    sys.path[:]=[p for p in sys.path if Path(p or '.').resolve()!=source_dir]
     sys.path.insert(0, str(host/'.local'))
     import bridge
+    assert Path(bridge.__file__).resolve().parent==(host/'.local').resolve()
     from extensions import registry
-    assert bridge.readiness()['bridge_version']=='2.12'
+    assert bridge.readiness()['bridge_version']=='2.13'
     assert len([k for k in registry() if k[0]=='cadd'])==8
     fixtures=CaddTests(); expected, results=fixtures.campaign(); mapping, restraints=fixtures.restraint()
     cases=[

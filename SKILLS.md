@@ -1,6 +1,8 @@
 # 可选研究 skill 包
 
-Bridge 2.12 expands the existing docking, structure and remote-compute skills with eight original CADD audit routes. Read [CADD_WORKFLOWS.md](CADD_WORKFLOWS.md). The pack still contains 14 workflows; no third-party CADD skill payload or duplicate database skill is installed. Review scope and attribution are in [CADD_SKILL_REVIEW.md](CADD_SKILL_REVIEW.md).
+Bridge 2.13 adds the original `biomni-molecular-drylab` workflow and expands the maintained pack to 15 workflows. It reuses existing tools and adds no scientific dependency stack. See [MOLECULAR_DRYLAB.md](MOLECULAR_DRYLAB.md) and [EVOLUTION.md](EVOLUTION.md).
+
+Bridge 2.12 expands the existing docking, structure and remote-compute skills with eight original CADD audit routes. Read [CADD_WORKFLOWS.md](CADD_WORKFLOWS.md). That release contained 14 workflows; no third-party CADD skill payload or duplicate database skill is installed. Review scope and attribution are in [CADD_SKILL_REVIEW.md](CADD_SKILL_REVIEW.md).
 
 这些流程属于 BioResearchWorkbench。项目最初底层基于 Biomni，第三方算法与工具归属见 [ORIGINS.md](ORIGINS.md)。现有 `biomni-*` 名称保留兼容；改名不意味着上游算法成为本项目原创，见 [MIGRATION.md](MIGRATION.md)。
 
@@ -23,6 +25,7 @@ Package 2.8.1 adds 14 original Apache-2.0-licensed workflow skills to bridge 2.8
 | `biomni-target-evidence` | 遗传、组学、药理和结构证据整合 |
 | `biomni-docking-review` | 对接输入 QC、对照与姿势验收 |
 | `biomni-personal-library` | 指定 Zotero 范围与私有索引维护 |
+| `biomni-molecular-drylab` | 分子生物学干实验、分层证据与结果审查 |
 | `biomni-submission-audit` | 投稿前结论、引用、图表和格式检查 |
 
 ## 安装

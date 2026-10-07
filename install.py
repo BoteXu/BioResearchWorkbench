@@ -88,6 +88,8 @@ def main():
     shutil.copy2(ROOT/'mcp_components.json',local/'mcp_components.json')
     shutil.copy2(ROOT/'mcp_embedding_model.json',local/'mcp_embedding_model.json')
     shutil.copy2(ROOT/'cadd_sources.json',local/'cadd_sources.json')
+    for name in ('molecular_resources.json','TOOL_CATALOG.json','benchmark_catalog.json'):
+        shutil.copy2(ROOT/name,local/name)
     shutil.copy2(ROOT/'install_skills.py',target/'install_skills.py')
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')
     checked([uv,'venv','--python','3.11',target/'.venv_tools'])
@@ -117,6 +119,8 @@ def main():
         checked(command+['--',python,local/'mcp_server.py'])
     if args.install_skills:
         install_skill_pack(args.skills_dir)
+    from upgrade import initialize_installation
+    initialize_installation(target, ROOT)
     print('INSTALLATION_AND_SMOKE_CHECKS_OK')
     print('Merge private client settings and AGENTS.generated.md, then open a fresh client session.')
 

@@ -30,7 +30,7 @@ def scanner():
 class SkillPackTests(unittest.TestCase):
     def test_pack_and_routes_resolve_without_importing_science(self):
         catalog=install_skills.validate_pack()
-        self.assertEqual(len(catalog['skills']),14)
+        self.assertEqual(len(catalog['skills']),15)
         tree=ast.parse((ROOT/'bridge'/'extensions.py').read_text(encoding='utf8'))
         exports=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='EXPORTS' for t in n.targets))
         for skill in catalog['skills']:
@@ -46,7 +46,7 @@ class SkillPackTests(unittest.TestCase):
         with scratch() as tmp:
             dest=Path(tmp)/'skills'
             result=install_skills.install(dest,dry_run=True)
-            self.assertEqual(len(result['actions']),14)
+            self.assertEqual(len(result['actions']),15)
             self.assertFalse(dest.exists())
 
     def test_install_and_idempotent_reinstall(self):

@@ -283,7 +283,10 @@ def build_project_dashboard(project_id: str, software_states: list = None) -> di
     """Render a private static task board with blocked stages, receipt snapshots and unverified software states."""
     result=inspect_research_project(project_id);value=result['project']
     table=''.join('<tr>'+''.join('<td>'+html.escape(str(s.get(k,'')))+'</td>' for k in ('id','kind','placement','state','blocked_by','recovery'))+'</tr>' for s in result['stages'])
-    page='<html><meta charset="utf-8"><title>Research project</title><h1>'+html.escape(value['title'])+'</h1><p>Private receipt snapshot. Refresh real task state before recovery.</p><table><tr><th>Stage</th><th>Kind</th><th>Placement</th><th>State</th><th>Blocked by</th><th>Recovery</th></tr>'+table+'</table><h2>Software</h2><pre>'+html.escape(_canon(rows(software_states or [],100)))+'</pre></html>'
+    evidence=''.join('<li>'+html.escape(_canon(r))+'</li>' for r in value['evidence'])
+    lineage=''.join('<li>'+html.escape(_canon(r))+'</li>' for r in value['edges'])
+    missing=''.join('<li>'+html.escape(s['id'])+': '+html.escape(_canon(s.get('blocked_by',[])))+'</li>' for s in result['stages'] if s.get('blocked_by'))
+    page='<html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Research project</title><style>body{font:16px system-ui;max-width:1000px;margin:auto;padding:24px}td,li,pre{overflow-wrap:anywhere}table{width:100%;border-collapse:collapse}td,th{padding:8px;border:1px solid #ccc}pre{white-space:pre-wrap}</style><h1>'+html.escape(value['title'])+'</h1><p>Private receipt snapshot. Refresh real task state before recovery.</p><h2>Research question</h2><p>'+html.escape(value['question'])+'</p><table><tr><th>Stage</th><th>Kind</th><th>Placement</th><th>State</th><th>Blocked by</th><th>Recovery</th></tr>'+table+'</table><h2>QC and missing stages</h2><ul>'+missing+'</ul><h2>Evidence and sources</h2><ul>'+evidence+'</ul><h2>Evidence lineage</h2><ul>'+lineage+'</ul><h2>Software</h2><pre>'+html.escape(_canon(rows(software_states or [],100)))+'</pre></html>'
     return artifact('project_dashboard',result,{'dashboard.html':page})
 
 

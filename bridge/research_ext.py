@@ -17,6 +17,21 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'scientific_benchmark': [('validation','inspect_scientific_benchmarks'),('validation','audit_benchmark_receipt')],
+    'server_budget': [('code_execution','estimate_compute_resources'),('server_operations','plan_server_budget')],
+    'unknown_submission': [('server_operations','review_unknown_submission')],
+    'incremental_return': [('server_operations','plan_incremental_return'),('workflow','verify_remote_results')],
+    'molecular_pipeline': [('molecular_biology','prepare_molecular_pipeline'),('server','inspect_multiqc_report')],
+    'molecular_drylab': [('molecular_biology', 'guide_molecular_drylab')],
+    'molecular_resources': [('molecular_biology', 'inspect_molecular_resources'), ('molecular_biology', 'plan_molecular_extension')],
+    'splicing_review': [('molecular_biology', 'audit_splicing_results')],
+    'regulatory_evidence': [('molecular_biology', 'audit_regulatory_links')],
+    'protein_annotation_review': [('molecular_biology', 'audit_protein_annotations')],
+    'experimental_interactions': [('molecular_biology', 'query_intact_interactions'), ('molecular_biology', 'audit_interaction_records')],
+    'protein_complex': [('molecular_biology', 'query_complex_record')],
+    'cell_line_identity': [('molecular_biology', 'query_cell_line')],
+    'perturbation_review': [('statistics', 'guide_study_statistics'), ('molecular_biology', 'audit_perturbation_results')],
+    'mechanism_graph': [('molecular_biology', 'audit_mechanism_graph'), ('biomedical', 'build_evidence_matrix'), ('review', 'audit_claim_evidence')],
     'cadd_workflow':[('cadd','guide_cadd_workflow')],
     'simulation_protocol':[('cadd','audit_simulation_protocol')],
     'simulation_restart':[('cadd','audit_restart_manifest')],
@@ -162,7 +177,7 @@ def select_tools(intent: str, sensitive_data: bool = False, large_computation: b
     for category, name in INTENTS[selected]:
         entries = tool_catalog(category=category, search=name, limit=100)['tools']
         entry = next((e for e in entries if e['name'] == name), None)
-        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata','retrieve_review_search_page','query_drug_reference','read_drug_label'}
+        public = category in {'database', 'atlas', 'literature'} or name in {'resolve_identifier','map_disease_terms','query_string_network','find_similar_studies','check_publication_updates','audit_reference_metadata','retrieve_review_search_page','query_drug_reference','read_drug_label','query_intact_interactions','query_complex_record','query_cell_line'}
         missing = [p for p, ready in (entry or {}).get('dependency_check', {}).items() if not ready]
         edition_allowed = not (entry or {}).get('requires_local_edition') or edition()=='local'
         recommendations.append({

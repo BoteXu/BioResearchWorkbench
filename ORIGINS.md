@@ -24,7 +24,7 @@
 | 文档与参考文献 | [pypdf](https://pypdf.readthedocs.io/)、Beautiful Soup、[Zotero](https://www.zotero.org/) | 有界文档读取、局部库访问、写入计划、字段保护和审计 | PDF 解析器、Zotero 软件、引用生态与 Word 插件 |
 | 公共文献与数据库 | NCBI、Europe PMC、Crossref、UniProt、Ensembl、Reactome、STRING 等原提供方 | 查询适配、来源快照、标识检查和证据记录 | 数据库内容、知识库注释、论文正文和数据库方法 |
 | 客户端及可选 specialist skills | 安装者已有的模型客户端、文档/绘图/结构查看/SSH skill 或插件 | 按可用能力选择调用，编写可移植研究工作流 | 外部模型、商业插件，以及未随包分发的第三方 skill 源码 |
-| 本项目新增代码与说明 | 工作台维护者 | 安装与兼容、隐私门禁、QC 和任务/结果检查、软件接口、私有索引、论文审计适配、14 套工作流说明与工程测试 | 不将通用科研方法、上游算法或第三方能力包装成自研模型 |
+| 本项目新增代码与说明 | 工作台维护者 | 安装与兼容、隐私门禁、QC 和任务/结果检查、软件接口、私有索引、论文审计适配、15 套工作流说明与工程测试 | 不将通用科研方法、上游算法或第三方能力包装成自研模型 |
 
 这些部分的作用主要是**拿现有工具搭建可追溯的研究工作台**。即使由我们编写了一个调用函数，也不代表其调用的算法由我们发明；即使接口检查通过，也不代表第三方软件在所有设备、模型或真实数据上已经验证。
 
@@ -35,7 +35,7 @@
 - Python 锁文件记录依赖版本，安装器从包分发渠道分别获取依赖，并保留包自身的许可证元数据。可选 R/外部软件由用户配置；Vina 仅在明确选择时从固定官方发行获取。
 - 每项依赖的许可证与引用要求以对应版本的原始文件为准。本表是来源和使用关系说明，不是完整的许可证合规认证或许可证文本替代品。
 - 外部数据库、全文、模型服务及商业插件具有自己的访问、引用和再分发条件；能查询不等于能公开重发其内容。
-- 可选第三方 skill 的代码、模板、字体和插件没有被批量复制入本包。随包 14 套说明是本项目编写的组合工作流，不宣称通用科研方法原创。
+- 可选第三方 skill 的代码、模板、字体和插件没有被批量复制入本包。随包 15 套说明是本项目编写的组合工作流，不宣称通用科研方法原创。
 
 机器可读的组件使用关系见 [third_party_components.json](third_party_components.json)。其 `use` 字段区分获取的底层源码、安装依赖、可选外部软件、外部服务和宿主能力；锁文件仍是完整版本清单的依据。
 
@@ -48,3 +48,7 @@ The gap review considered [makabaka007x/cadd-skill at a fixed commit](https://gi
 
 ## Optional MCP processes in 2.11
 Serena (the installed 1.7.0 distribution), Context7, MotherDuck MCP/DuckDB, Qdrant/FastEmbed, Playwright and Docker MCP Gateway are separately installed external components. Their original authors and exact-version licenses remain applicable. This package supplies original scoped adapters, configuration generation and acceptance checks. It does not redistribute or relicense upstream executables, model weights or container images. The Docker public-fetch candidate comes from the MCP reference-server project and Docker image catalog. The compact embedding model originates from sentence-transformers and Qdrant ONNX packaging; its fixed revision and hashes are in mcp_embedding_model.json. Consult a new revision's actual license before upgrading.
+
+## Molecular dry-lab and engineering additions in 2.13
+
+The molecular routing/audits, upgrade manager, validation lifecycle, generated catalog, server review helpers and question interface are original integration code. IntAct, Complex Portal, Cellosaurus, nf-core methods, DESeq2, pasilla, R datasets/stats and all prior upstream algorithms retain their original authorship and independent terms. External candidate metadata records fixed commits and limited review scope in molecular_resources.json; no candidate skill code, installation script, weights or provider dataset is redistributed. A repository license is not a license for every individual skill or upstream data source.

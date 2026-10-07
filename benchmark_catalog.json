@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "policy": "No dataset bytes are redistributed; isolated CI or an explicitly authorized server uses upstream licensed packages. Interface, backend completion and reference agreement are distinct.",
+  "benchmarks": [
+    {"id": "pasilla_deseq2", "source": "https://bioconductor.org/packages/pasilla", "reference": "https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html", "data_license": "LGPL (pasilla package); inspect installed version metadata and its bundled license", "species": "Drosophila melanogaster", "model": "public RNAi-treated versus untreated cell samples", "independent_unit": "sample under vignette design; original study design needs separate review", "backend": "DESeq2", "design": "~ condition; treated versus untreated; all supplied samples", "reference_metrics": {"FBgn0039155_log2_fold_change": {"minimum": -4.8, "maximum": -4.4}, "FBgn0039155_adjusted_pvalue": {"minimum": 0, "maximum": 0.000001}}, "acceptance_scope": "fixed tutorial result direction, magnitude and multiple-testing output; not universal RNA-seq validity"},
+    {"id": "toothgrowth_welch", "source": "https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/ToothGrowth.html", "reference": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html", "data_license": "R datasets package GPL-2 or GPL-3; inspect installed version metadata", "species": "Cavia porcellus", "backend": "R stats::t.test", "design": "dose 0.5 only; OJ minus VC; unpaired Welch", "reference_metrics": {"mean_difference": {"minimum": 5.249999, "maximum": 5.250001}, "pvalue": {"minimum": 0.0063, "maximum": 0.0064}}, "acceptance_scope": "fixed public statistical example and arithmetic/reference agreement; not clinical guidance"}
+  ]
+}

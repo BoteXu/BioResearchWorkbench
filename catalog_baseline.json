@@ -1,0 +1,2670 @@
+{
+  "package_version": "2.12.0",
+  "source_commit": "22ecdf987e3289dac82771c22b41386339cf6ab6",
+  "tools": {
+    "cadd.guide_cadd_workflow": {
+      "parameters": [
+        "task",
+        "context"
+      ],
+      "required": [
+        "task",
+        "context"
+      ]
+    },
+    "cadd.audit_simulation_protocol": {
+      "parameters": [
+        "protocol",
+        "context"
+      ],
+      "required": [
+        "protocol",
+        "context"
+      ]
+    },
+    "cadd.audit_restart_manifest": {
+      "parameters": [
+        "segments",
+        "context"
+      ],
+      "required": [
+        "segments",
+        "context"
+      ]
+    },
+    "cadd.audit_replica_exchange": {
+      "parameters": [
+        "ladder",
+        "exchanges",
+        "visits",
+        "context"
+      ],
+      "required": [
+        "ladder",
+        "exchanges",
+        "visits",
+        "context"
+      ]
+    },
+    "cadd.audit_docking_campaign": {
+      "parameters": [
+        "expected",
+        "results",
+        "score_domain",
+        "context"
+      ],
+      "required": [
+        "expected",
+        "results",
+        "score_domain",
+        "context"
+      ]
+    },
+    "cadd.audit_restraint_mapping": {
+      "parameters": [
+        "mapping",
+        "restraints",
+        "context"
+      ],
+      "required": [
+        "mapping",
+        "restraints",
+        "context"
+      ]
+    },
+    "cadd.audit_af3_records": {
+      "parameters": [
+        "records",
+        "selected_pair",
+        "context"
+      ],
+      "required": [
+        "records",
+        "selected_pair",
+        "context"
+      ]
+    },
+    "cadd.audit_mmgbsa_summary": {
+      "parameters": [
+        "runs",
+        "context"
+      ],
+      "required": [
+        "runs",
+        "context"
+      ]
+    },
+    "integrations.inspect_mcp_components": {
+      "parameters": [],
+      "required": []
+    },
+    "integrations.prepare_slurm_monitor": {
+      "parameters": [
+        "job_ids",
+        "submission_host",
+        "log_root",
+        "log_files"
+      ],
+      "required": [
+        "job_ids",
+        "submission_host"
+      ]
+    },
+    "integrations.inspect_slurm_monitor": {
+      "parameters": [
+        "request_path",
+        "receipt_path",
+        "max_age_seconds"
+      ],
+      "required": [
+        "request_path",
+        "receipt_path"
+      ]
+    },
+    "table_query.query_selected_table": {
+      "parameters": [
+        "database_path",
+        "table_name",
+        "columns",
+        "filters",
+        "limit",
+        "order_by"
+      ],
+      "required": [
+        "database_path",
+        "table_name",
+        "columns"
+      ]
+    },
+    "semantic_index.prepare_semantic_index": {
+      "parameters": [
+        "records",
+        "collection",
+        "index_path",
+        "authorized_source_scope"
+      ],
+      "required": [
+        "records",
+        "collection",
+        "index_path"
+      ]
+    },
+    "semantic_index.audit_semantic_results": {
+      "parameters": [
+        "results",
+        "source_records"
+      ],
+      "required": [
+        "results",
+        "source_records"
+      ]
+    },
+    "scientific_interfaces.inspect_scientific_interfaces": {
+      "parameters": [
+        "zotero_port",
+        "cytoscape_port"
+      ],
+      "required": []
+    },
+    "scientific_interfaces.export_zotero_snapshot": {
+      "parameters": [
+        "library",
+        "item_keys",
+        "port"
+      ],
+      "required": [
+        "library",
+        "item_keys"
+      ]
+    },
+    "scientific_interfaces.export_cytoscape_snapshot": {
+      "parameters": [
+        "network_id",
+        "port"
+      ],
+      "required": [
+        "network_id"
+      ]
+    },
+    "scientific_interfaces.prepare_cytoscape_revision": {
+      "parameters": [
+        "network_id",
+        "layout",
+        "port"
+      ],
+      "required": [
+        "network_id",
+        "layout"
+      ]
+    },
+    "scientific_interfaces.apply_cytoscape_revision": {
+      "parameters": [
+        "plan_path",
+        "reviewed_sha256"
+      ],
+      "required": [
+        "plan_path",
+        "reviewed_sha256"
+      ]
+    },
+    "code_review.map_code_project": {
+      "parameters": [
+        "root_path",
+        "files"
+      ],
+      "required": [
+        "root_path",
+        "files"
+      ]
+    },
+    "code_review.audit_scientific_code": {
+      "parameters": [
+        "root_path",
+        "files"
+      ],
+      "required": [
+        "root_path",
+        "files"
+      ]
+    },
+    "code_review.audit_notebook": {
+      "parameters": [
+        "notebook_path"
+      ],
+      "required": [
+        "notebook_path"
+      ]
+    },
+    "code_review.audit_data_contract": {
+      "parameters": [
+        "table_path",
+        "contract"
+      ],
+      "required": [
+        "table_path",
+        "contract"
+      ]
+    },
+    "code_review.audit_table_join": {
+      "parameters": [
+        "left_path",
+        "right_path",
+        "keys",
+        "relationship",
+        "join"
+      ],
+      "required": [
+        "left_path",
+        "right_path",
+        "keys"
+      ]
+    },
+    "code_review.compare_data_exchange": {
+      "parameters": [
+        "before_path",
+        "after_path",
+        "keys",
+        "columns",
+        "tolerance",
+        "numeric_columns"
+      ],
+      "required": [
+        "before_path",
+        "after_path",
+        "keys",
+        "columns"
+      ]
+    },
+    "code_review.audit_numeric_results": {
+      "parameters": [
+        "table_path",
+        "rules"
+      ],
+      "required": [
+        "table_path",
+        "rules"
+      ]
+    },
+    "code_review.compare_scientific_results": {
+      "parameters": [
+        "before_path",
+        "after_path",
+        "keys",
+        "metrics"
+      ],
+      "required": [
+        "before_path",
+        "after_path",
+        "keys",
+        "metrics"
+      ]
+    },
+    "code_review.bind_analysis_qc": {
+      "parameters": [
+        "inputs",
+        "design",
+        "references",
+        "qc_receipt_path",
+        "assessment"
+      ],
+      "required": [
+        "inputs",
+        "design",
+        "references",
+        "qc_receipt_path",
+        "assessment"
+      ]
+    },
+    "code_review.check_analysis_qc": {
+      "parameters": [
+        "binding_file",
+        "expected_sha256",
+        "inputs",
+        "design",
+        "references"
+      ],
+      "required": [
+        "binding_file",
+        "expected_sha256",
+        "inputs",
+        "design",
+        "references"
+      ]
+    },
+    "code_review.prepare_code_revision": {
+      "parameters": [
+        "root_path",
+        "replacements",
+        "rationale",
+        "validation_commands"
+      ],
+      "required": [
+        "root_path",
+        "replacements",
+        "rationale",
+        "validation_commands"
+      ]
+    },
+    "code_review.materialize_code_revision": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "destination_directory",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256",
+        "destination_directory"
+      ]
+    },
+    "code_review.prepare_method_reproduction": {
+      "parameters": [
+        "method",
+        "mappings",
+        "baseline"
+      ],
+      "required": [
+        "method",
+        "mappings",
+        "baseline"
+      ]
+    },
+    "code_review.audit_plan_implementation": {
+      "parameters": [
+        "plan",
+        "observations"
+      ],
+      "required": [
+        "plan",
+        "observations"
+      ]
+    },
+    "code_review.prepare_api_migration": {
+      "parameters": [
+        "installed_versions",
+        "changes"
+      ],
+      "required": [
+        "installed_versions",
+        "changes"
+      ]
+    },
+    "code_review.inspect_dependency_locks": {
+      "parameters": [
+        "root_path",
+        "files"
+      ],
+      "required": [
+        "root_path",
+        "files"
+      ]
+    },
+    "code_review.compare_environments": {
+      "parameters": [
+        "before",
+        "after"
+      ],
+      "required": [
+        "before",
+        "after"
+      ]
+    },
+    "code_review.prepare_scientific_test_suite": {
+      "parameters": [
+        "cases",
+        "source_manifest"
+      ],
+      "required": [
+        "cases",
+        "source_manifest"
+      ]
+    },
+    "code_review.prepare_configuration_migration": {
+      "parameters": [
+        "configuration_path",
+        "operations",
+        "target_schema"
+      ],
+      "required": [
+        "configuration_path",
+        "operations",
+        "target_schema"
+      ]
+    },
+    "code_review.apply_configuration_migration": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "destination",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256",
+        "destination"
+      ]
+    },
+    "code_review.audit_dependency_components": {
+      "parameters": [
+        "components"
+      ],
+      "required": [
+        "components"
+      ]
+    },
+    "code_review.audit_release_scope": {
+      "parameters": [
+        "root_path",
+        "files",
+        "deny_terms"
+      ],
+      "required": [
+        "root_path",
+        "files"
+      ]
+    },
+    "code_execution.prepare_code_execution": {
+      "parameters": [
+        "mode",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs"
+      ],
+      "required": [
+        "mode",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs"
+      ]
+    },
+    "code_execution.inspect_code_execution": {
+      "parameters": [
+        "execution_path",
+        "expected_configuration_sha256"
+      ],
+      "required": [
+        "execution_path",
+        "expected_configuration_sha256"
+      ]
+    },
+    "code_execution.summarize_performance": {
+      "parameters": [
+        "profile_path"
+      ],
+      "required": [
+        "profile_path"
+      ]
+    },
+    "code_execution.estimate_compute_resources": {
+      "parameters": [
+        "pilots",
+        "target_units",
+        "scaling",
+        "safety_factor"
+      ],
+      "required": [
+        "pilots",
+        "target_units"
+      ]
+    },
+    "code_execution.audit_parallel_execution": {
+      "parameters": [
+        "configuration",
+        "tasks"
+      ],
+      "required": [
+        "configuration",
+        "tasks"
+      ]
+    },
+    "code_execution.audit_resume_compatibility": {
+      "parameters": [
+        "previous",
+        "current",
+        "scheduler_observation",
+        "checkpoints"
+      ],
+      "required": [
+        "previous",
+        "current",
+        "scheduler_observation",
+        "checkpoints"
+      ]
+    },
+    "code_execution.prepare_code_workflow": {
+      "parameters": [
+        "stages",
+        "engine",
+        "approved_code"
+      ],
+      "required": [
+        "stages"
+      ]
+    },
+    "code_execution.preview_code_workflow": {
+      "parameters": [
+        "workflow_path",
+        "available_inputs"
+      ],
+      "required": [
+        "workflow_path",
+        "available_inputs"
+      ]
+    },
+    "code_execution.prepare_code_task_array": {
+      "parameters": [
+        "tasks",
+        "maximum_concurrent",
+        "resources"
+      ],
+      "required": [
+        "tasks",
+        "maximum_concurrent",
+        "resources"
+      ]
+    },
+    "code_execution.prepare_adapter_development": {
+      "parameters": [
+        "contract",
+        "interface"
+      ],
+      "required": [
+        "contract"
+      ]
+    },
+    "clinical_research.audit_medical_guidelines": {
+      "parameters": [
+        "sources",
+        "recommendations",
+        "target_population",
+        "review_date"
+      ],
+      "required": [
+        "sources",
+        "recommendations",
+        "target_population",
+        "review_date"
+      ]
+    },
+    "clinical_research.query_drug_reference": {
+      "parameters": [
+        "public_query",
+        "source",
+        "approved_public_query",
+        "maximum"
+      ],
+      "required": [
+        "public_query"
+      ]
+    },
+    "clinical_research.read_drug_label": {
+      "parameters": [
+        "set_id",
+        "approved_public_identifier"
+      ],
+      "required": [
+        "set_id"
+      ]
+    },
+    "clinical_research.compare_drug_labels": {
+      "parameters": [
+        "before_path",
+        "after_path"
+      ],
+      "required": [
+        "before_path",
+        "after_path"
+      ]
+    },
+    "clinical_research.audit_clinical_dataset": {
+      "parameters": [
+        "table_path",
+        "specification"
+      ],
+      "required": [
+        "table_path",
+        "specification"
+      ]
+    },
+    "clinical_research.audit_clinical_mapping": {
+      "parameters": [
+        "mapping",
+        "vocabulary_version",
+        "target_model"
+      ],
+      "required": [
+        "mapping",
+        "vocabulary_version"
+      ]
+    },
+    "clinical_research.guide_clinical_study": {
+      "parameters": [
+        "design"
+      ],
+      "required": [
+        "design"
+      ]
+    },
+    "clinical_research.audit_clinical_prediction": {
+      "parameters": [
+        "predictions_path",
+        "specification"
+      ],
+      "required": [
+        "predictions_path",
+        "specification"
+      ]
+    },
+    "clinical_research.audit_medical_reporting": {
+      "parameters": [
+        "document_path",
+        "checklist",
+        "assessments"
+      ],
+      "required": [
+        "document_path",
+        "checklist",
+        "assessments"
+      ]
+    },
+    "clinical_research.extract_review_effects": {
+      "parameters": [
+        "sources",
+        "extractions"
+      ],
+      "required": [
+        "sources",
+        "extractions"
+      ]
+    },
+    "clinical_research.record_bias_assessment": {
+      "parameters": [
+        "tool",
+        "assessments"
+      ],
+      "required": [
+        "tool",
+        "assessments"
+      ]
+    },
+    "clinical_research.audit_adverse_event_reports": {
+      "parameters": [
+        "table_path",
+        "specification"
+      ],
+      "required": [
+        "table_path",
+        "specification"
+      ]
+    },
+    "clinical_research.audit_imaging_metadata": {
+      "parameters": [
+        "records",
+        "specification"
+      ],
+      "required": [
+        "records",
+        "specification"
+      ]
+    },
+    "clinical_research.prepare_medical_teaching": {
+      "parameters": [
+        "title",
+        "sources",
+        "claims",
+        "case_data"
+      ],
+      "required": [
+        "title",
+        "sources",
+        "claims"
+      ]
+    },
+    "clinical_research.prepare_clinical_backend": {
+      "parameters": [
+        "backend",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs",
+        "rscript"
+      ],
+      "required": [
+        "backend",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs"
+      ]
+    },
+    "workbench.create_research_project": {
+      "parameters": [
+        "title",
+        "question",
+        "design",
+        "context",
+        "analysis_plan"
+      ],
+      "required": [
+        "title",
+        "question",
+        "design",
+        "context",
+        "analysis_plan"
+      ]
+    },
+    "workbench.inspect_research_project": {
+      "parameters": [
+        "project_id"
+      ],
+      "required": [
+        "project_id"
+      ]
+    },
+    "workbench.prepare_project_revision": {
+      "parameters": [
+        "project_id",
+        "expected_revision",
+        "changes"
+      ],
+      "required": [
+        "project_id",
+        "expected_revision",
+        "changes"
+      ]
+    },
+    "workbench.apply_project_revision": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "workbench.advance_workflow_stage": {
+      "parameters": [
+        "project_id",
+        "stage_id",
+        "expected_revision",
+        "event",
+        "receipt_path",
+        "assessment"
+      ],
+      "required": [
+        "project_id",
+        "stage_id",
+        "expected_revision",
+        "event",
+        "receipt_path"
+      ]
+    },
+    "workbench.execute_workflow_stage": {
+      "parameters": [
+        "project_id",
+        "stage_id",
+        "expected_revision",
+        "dispatch"
+      ],
+      "required": [
+        "project_id",
+        "stage_id",
+        "expected_revision"
+      ]
+    },
+    "workbench.audit_project_lineage": {
+      "parameters": [
+        "project_id",
+        "changed_source_ids"
+      ],
+      "required": [
+        "project_id"
+      ]
+    },
+    "workbench.build_project_dashboard": {
+      "parameters": [
+        "project_id",
+        "software_states"
+      ],
+      "required": [
+        "project_id"
+      ]
+    },
+    "workbench.freeze_reproduction_package": {
+      "parameters": [
+        "project_id",
+        "files",
+        "environment",
+        "commands"
+      ],
+      "required": [
+        "project_id",
+        "files",
+        "environment",
+        "commands"
+      ]
+    },
+    "workbench.create_private_backup": {
+      "parameters": [
+        "project_ids",
+        "library_ids",
+        "configuration_files"
+      ],
+      "required": []
+    },
+    "workbench.prepare_private_restore": {
+      "parameters": [
+        "backup_path",
+        "destination"
+      ],
+      "required": [
+        "backup_path",
+        "destination"
+      ]
+    },
+    "workbench.apply_private_restore": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "workbench.validate_adapter_contract": {
+      "parameters": [
+        "contract"
+      ],
+      "required": [
+        "contract"
+      ]
+    },
+    "academic_workspace.index_selected_fulltext": {
+      "parameters": [
+        "pdf_files",
+        "zotero_snapshot_path",
+        "min_characters_per_page"
+      ],
+      "required": [
+        "pdf_files"
+      ]
+    },
+    "academic_workspace.search_selected_fulltext": {
+      "parameters": [
+        "index_id",
+        "query",
+        "reference_ids",
+        "limit"
+      ],
+      "required": [
+        "index_id",
+        "query"
+      ]
+    },
+    "academic_workspace.prepare_zotero_incremental_sync": {
+      "parameters": [
+        "library_id",
+        "snapshot_path",
+        "source_namespace",
+        "scope"
+      ],
+      "required": [
+        "library_id",
+        "snapshot_path",
+        "source_namespace",
+        "scope"
+      ]
+    },
+    "academic_workspace.apply_zotero_incremental_sync": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "academic_workspace.create_review_search": {
+      "parameters": [
+        "public_queries",
+        "public_query_authorized"
+      ],
+      "required": [
+        "public_queries"
+      ]
+    },
+    "academic_workspace.retrieve_review_search_page": {
+      "parameters": [
+        "search_id",
+        "query_index",
+        "expected_revision",
+        "page_size",
+        "public_query_authorized"
+      ],
+      "required": [
+        "search_id",
+        "query_index",
+        "expected_revision"
+      ]
+    },
+    "academic_workspace.record_independent_screening": {
+      "parameters": [
+        "search_id",
+        "expected_revision",
+        "record_id",
+        "reviewer_id",
+        "decision",
+        "reason",
+        "independent_review_attested"
+      ],
+      "required": [
+        "search_id",
+        "expected_revision",
+        "record_id",
+        "reviewer_id",
+        "decision",
+        "reason"
+      ]
+    },
+    "academic_workspace.resolve_screening_conflict": {
+      "parameters": [
+        "search_id",
+        "expected_revision",
+        "record_id",
+        "resolver_id",
+        "decision",
+        "rationale"
+      ],
+      "required": [
+        "search_id",
+        "expected_revision",
+        "record_id",
+        "resolver_id",
+        "decision",
+        "rationale"
+      ]
+    },
+    "academic_workspace.inspect_review_search": {
+      "parameters": [
+        "search_id"
+      ],
+      "required": [
+        "search_id"
+      ]
+    },
+    "scientific_backend.inspect_scientific_backends": {
+      "parameters": [],
+      "required": []
+    },
+    "scientific_backend.prepare_scientific_backend": {
+      "parameters": [
+        "backend",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs",
+        "rscript"
+      ],
+      "required": [
+        "backend",
+        "configuration",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs"
+      ]
+    },
+    "scientific_backend.prepare_pdf_ocr": {
+      "parameters": [
+        "pdf_input",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs",
+        "language",
+        "ocrmypdf"
+      ],
+      "required": [
+        "pdf_input",
+        "remote_workdir",
+        "expected_host",
+        "output_directory",
+        "context",
+        "inputs"
+      ]
+    },
+    "word_native.inspect_native_word": {
+      "parameters": [
+        "manuscript_path"
+      ],
+      "required": [
+        "manuscript_path"
+      ]
+    },
+    "word_native.prepare_native_word_revision": {
+      "parameters": [
+        "manuscript_path",
+        "expected_source_sha256",
+        "edits",
+        "comments",
+        "refresh_fields"
+      ],
+      "required": [
+        "manuscript_path",
+        "expected_source_sha256"
+      ]
+    },
+    "word_native.apply_native_word_revision": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "word_native.render_native_word_pdf": {
+      "parameters": [
+        "manuscript_path",
+        "expected_source_sha256"
+      ],
+      "required": [
+        "manuscript_path",
+        "expected_source_sha256"
+      ]
+    },
+    "word_native.request_native_citation_refresh": {
+      "parameters": [
+        "manuscript_path",
+        "expected_source_sha256",
+        "sync_acknowledged",
+        "dispatch"
+      ],
+      "required": [
+        "manuscript_path",
+        "expected_source_sha256"
+      ]
+    },
+    "personal_library.create_personal_library": {
+      "parameters": [
+        "title",
+        "purpose",
+        "set_as_default"
+      ],
+      "required": [
+        "title",
+        "purpose"
+      ]
+    },
+    "personal_library.inspect_personal_library": {
+      "parameters": [
+        "library_id"
+      ],
+      "required": []
+    },
+    "personal_library.prepare_personal_library_ingest": {
+      "parameters": [
+        "library_id",
+        "references_path",
+        "source_namespace",
+        "tags"
+      ],
+      "required": [
+        "library_id",
+        "references_path",
+        "source_namespace"
+      ]
+    },
+    "personal_library.apply_personal_library_ingest": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "personal_library.search_personal_library": {
+      "parameters": [
+        "library_id",
+        "query",
+        "tags",
+        "reading_state",
+        "limit",
+        "start"
+      ],
+      "required": [
+        "library_id"
+      ]
+    },
+    "personal_library.annotate_personal_reference": {
+      "parameters": [
+        "library_id",
+        "record_id",
+        "expected_fingerprint",
+        "expected_revision",
+        "reading_state",
+        "tags",
+        "note"
+      ],
+      "required": [
+        "library_id",
+        "record_id",
+        "expected_fingerprint",
+        "expected_revision",
+        "reading_state",
+        "tags",
+        "note"
+      ]
+    },
+    "personal_library.export_personal_library": {
+      "parameters": [
+        "library_id",
+        "output_format",
+        "query",
+        "tags",
+        "limit"
+      ],
+      "required": [
+        "library_id",
+        "output_format"
+      ]
+    },
+    "library.import_reference_library": {
+      "parameters": [
+        "path"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "library.audit_reference_duplicates": {
+      "parameters": [
+        "path"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "library.export_reference_library": {
+      "parameters": [
+        "path",
+        "output_format"
+      ],
+      "required": [
+        "path",
+        "output_format"
+      ]
+    },
+    "library.index_pdf_folder": {
+      "parameters": [
+        "folder",
+        "max_files"
+      ],
+      "required": [
+        "folder"
+      ]
+    },
+    "zotero.inspect_zotero_connection": {
+      "parameters": [
+        "port"
+      ],
+      "required": []
+    },
+    "zotero.read_zotero_library": {
+      "parameters": [
+        "library",
+        "collection_key",
+        "item_keys",
+        "query",
+        "include_children",
+        "limit",
+        "start",
+        "port"
+      ],
+      "required": [
+        "library"
+      ]
+    },
+    "zotero.read_zotero_attachment": {
+      "parameters": [
+        "library",
+        "attachment_key",
+        "allowed_folder",
+        "port"
+      ],
+      "required": [
+        "library",
+        "attachment_key",
+        "allowed_folder"
+      ]
+    },
+    "zotero.prepare_zotero_write": {
+      "parameters": [
+        "library",
+        "changes",
+        "sync_acknowledged",
+        "port"
+      ],
+      "required": [
+        "library",
+        "changes"
+      ]
+    },
+    "zotero.apply_zotero_write": {
+      "parameters": [
+        "plan_file",
+        "expected_sha256",
+        "dispatch"
+      ],
+      "required": [
+        "plan_file",
+        "expected_sha256"
+      ]
+    },
+    "review.inspect_manuscript": {
+      "parameters": [
+        "path"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "review.audit_claim_evidence": {
+      "parameters": [
+        "manuscript_path",
+        "claims",
+        "references_path"
+      ],
+      "required": [
+        "manuscript_path",
+        "claims",
+        "references_path"
+      ]
+    },
+    "review.audit_paper": {
+      "parameters": [
+        "manuscript_path",
+        "study",
+        "reported_numbers"
+      ],
+      "required": [
+        "manuscript_path",
+        "study"
+      ]
+    },
+    "review.audit_review": {
+      "parameters": [
+        "manuscript_path",
+        "review_type",
+        "checklist",
+        "search_log",
+        "screening_records",
+        "evidence_records"
+      ],
+      "required": [
+        "manuscript_path",
+        "review_type",
+        "checklist",
+        "search_log",
+        "screening_records",
+        "evidence_records"
+      ]
+    },
+    "review.audit_manuscript_format": {
+      "parameters": [
+        "manuscript_path",
+        "references_path",
+        "journal_rules",
+        "citation_mapping"
+      ],
+      "required": [
+        "manuscript_path",
+        "references_path"
+      ]
+    },
+    "review.audit_terminology_units": {
+      "parameters": [
+        "manuscript_path",
+        "glossary",
+        "quantity_rules"
+      ],
+      "required": [
+        "manuscript_path",
+        "glossary",
+        "quantity_rules"
+      ]
+    },
+    "review.find_similar_studies": {
+      "parameters": [
+        "public_queries",
+        "comparison",
+        "public_query_authorized",
+        "max_results_per_query"
+      ],
+      "required": [
+        "public_queries",
+        "comparison"
+      ]
+    },
+    "review.check_publication_updates": {
+      "parameters": [
+        "dois",
+        "public_query_authorized"
+      ],
+      "required": [
+        "dois"
+      ]
+    },
+    "review.audit_reporting_checklist": {
+      "parameters": [
+        "manuscript_path",
+        "checklist_profile",
+        "assessments"
+      ],
+      "required": [
+        "manuscript_path",
+        "checklist_profile",
+        "assessments"
+      ]
+    },
+    "review.audit_reference_metadata": {
+      "parameters": [
+        "references_path",
+        "public_query_authorized"
+      ],
+      "required": [
+        "references_path"
+      ]
+    },
+    "collaboration.plan_manuscript": {
+      "parameters": [
+        "study",
+        "results",
+        "target_journal"
+      ],
+      "required": [
+        "study",
+        "results"
+      ]
+    },
+    "collaboration.build_evidence_draft": {
+      "parameters": [
+        "title",
+        "sections",
+        "references_path",
+        "evidence_ids"
+      ],
+      "required": [
+        "title",
+        "sections",
+        "references_path",
+        "evidence_ids"
+      ]
+    },
+    "collaboration.compare_manuscript_versions": {
+      "parameters": [
+        "before_path",
+        "after_path"
+      ],
+      "required": [
+        "before_path",
+        "after_path"
+      ]
+    },
+    "collaboration.prepare_manuscript_revision": {
+      "parameters": [
+        "manuscript_path",
+        "edits",
+        "expected_source_sha256"
+      ],
+      "required": [
+        "manuscript_path",
+        "edits",
+        "expected_source_sha256"
+      ]
+    },
+    "collaboration.manage_collaboration_review": {
+      "parameters": [
+        "manuscript_path",
+        "comments"
+      ],
+      "required": [
+        "manuscript_path",
+        "comments"
+      ]
+    },
+    "collaboration.prepare_reviewer_response": {
+      "parameters": [
+        "manuscript_path",
+        "responses"
+      ],
+      "required": [
+        "manuscript_path",
+        "responses"
+      ]
+    },
+    "privacy.inspect_privacy_policy": {
+      "parameters": [],
+      "required": []
+    },
+    "privacy.audit_outbound_parameters": {
+      "parameters": [
+        "parameters"
+      ],
+      "required": [
+        "parameters"
+      ]
+    },
+    "statistics.guide_study_statistics": {
+      "parameters": [
+        "study"
+      ],
+      "required": [
+        "study"
+      ]
+    },
+    "statistics.audit_statistical_dataset": {
+      "parameters": [
+        "path",
+        "unit_key",
+        "outcome_keys",
+        "group_key",
+        "required_keys",
+        "repeated"
+      ],
+      "required": [
+        "path",
+        "unit_key",
+        "outcome_keys"
+      ]
+    },
+    "statistics.compare_groups": {
+      "parameters": [
+        "case_values",
+        "control_values",
+        "case_units",
+        "control_units",
+        "paired",
+        "confidence"
+      ],
+      "required": [
+        "case_values",
+        "control_values",
+        "case_units",
+        "control_units"
+      ]
+    },
+    "statistics.adjust_pvalues": {
+      "parameters": [
+        "pvalues",
+        "family",
+        "method"
+      ],
+      "required": [
+        "pvalues",
+        "family"
+      ]
+    },
+    "statistics.plan_sample_size": {
+      "parameters": [
+        "effect_sizes",
+        "target_power",
+        "alpha",
+        "design",
+        "ratio",
+        "attrition"
+      ],
+      "required": [
+        "effect_sizes"
+      ]
+    },
+    "statistics.meta_analyze_effects": {
+      "parameters": [
+        "studies",
+        "effect_scale",
+        "contrast",
+        "method"
+      ],
+      "required": [
+        "studies",
+        "effect_scale",
+        "contrast"
+      ]
+    },
+    "statistics.audit_prediction_split": {
+      "parameters": [
+        "training_units",
+        "validation_units",
+        "preprocessing_fit_units",
+        "tuning_units"
+      ],
+      "required": [
+        "training_units",
+        "validation_units",
+        "preprocessing_fit_units"
+      ]
+    },
+    "statistics.fit_statistical_model": {
+      "parameters": [
+        "path",
+        "outcome",
+        "predictors",
+        "context",
+        "model",
+        "cluster_key",
+        "unit_key",
+        "exposure_key",
+        "interactions"
+      ],
+      "required": [
+        "path",
+        "outcome",
+        "predictors",
+        "context"
+      ]
+    },
+    "advanced.run_designed_expression": {
+      "parameters": [
+        "matrix_path",
+        "metadata_path",
+        "matrix_kind",
+        "unit_key",
+        "predictors",
+        "contrast_weights",
+        "context",
+        "interactions",
+        "method",
+        "rscript",
+        "min_count",
+        "min_samples"
+      ],
+      "required": [
+        "matrix_path",
+        "metadata_path",
+        "matrix_kind",
+        "unit_key",
+        "predictors",
+        "contrast_weights",
+        "context"
+      ]
+    },
+    "advanced.import_expression_data": {
+      "parameters": [
+        "input_path",
+        "input_format",
+        "context",
+        "layer",
+        "tenx_directory"
+      ],
+      "required": [
+        "input_path",
+        "input_format",
+        "context"
+      ]
+    },
+    "advanced.analyze_cell_composition": {
+      "parameters": [
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "context",
+        "min_cells"
+      ],
+      "required": [
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "context"
+      ]
+    },
+    "advanced.score_regulatory_activity": {
+      "parameters": [
+        "expression_path",
+        "metadata_path",
+        "network_path",
+        "context",
+        "min_targets"
+      ],
+      "required": [
+        "expression_path",
+        "metadata_path",
+        "network_path",
+        "context"
+      ]
+    },
+    "advanced.summarize_pathway_overlap": {
+      "parameters": [
+        "gene_sets_path",
+        "selected_terms",
+        "threshold",
+        "leading_edges"
+      ],
+      "required": [
+        "gene_sets_path",
+        "selected_terms"
+      ]
+    },
+    "advanced.audit_network_stability": {
+      "parameters": [
+        "edges_path",
+        "context",
+        "thresholds",
+        "resolutions",
+        "seed",
+        "null_permutations"
+      ],
+      "required": [
+        "edges_path",
+        "context",
+        "thresholds"
+      ]
+    },
+    "advanced.audit_redocking_coordinates": {
+      "parameters": [
+        "reference_path",
+        "predicted_path",
+        "atom_mapping",
+        "same_coordinate_frame"
+      ],
+      "required": [
+        "reference_path",
+        "predicted_path",
+        "atom_mapping",
+        "same_coordinate_frame"
+      ]
+    },
+    "advanced.audit_md_summary": {
+      "parameters": [
+        "path",
+        "time_key",
+        "metric_ranges",
+        "window",
+        "block_width",
+        "time_unit"
+      ],
+      "required": [
+        "path",
+        "time_key",
+        "metric_ranges",
+        "window",
+        "block_width",
+        "time_unit"
+      ]
+    },
+    "advanced.audit_batch_embedding": {
+      "parameters": [
+        "embedding_path",
+        "metadata_path",
+        "batch_key",
+        "biology_key"
+      ],
+      "required": [
+        "embedding_path",
+        "metadata_path",
+        "batch_key",
+        "biology_key"
+      ]
+    },
+    "advanced.run_donor_differential_state": {
+      "parameters": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "cell_types",
+        "case",
+        "control",
+        "context",
+        "method",
+        "min_cells",
+        "paired",
+        "covariates"
+      ],
+      "required": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "cell_types",
+        "case",
+        "control",
+        "context"
+      ]
+    },
+    "advanced.infer_diffusion_pseudotime": {
+      "parameters": [
+        "h5ad_path",
+        "root_cells",
+        "unit_key",
+        "context"
+      ],
+      "required": [
+        "h5ad_path",
+        "root_cells",
+        "unit_key",
+        "context"
+      ]
+    },
+    "advanced.audit_cell_communication": {
+      "parameters": [
+        "records",
+        "conditions",
+        "min_donors"
+      ],
+      "required": [
+        "records",
+        "conditions"
+      ]
+    },
+    "advanced.evaluate_binary_prediction": {
+      "parameters": [
+        "records",
+        "outcome_key",
+        "probability_key",
+        "unit_key",
+        "threshold",
+        "split_review"
+      ],
+      "required": [
+        "records",
+        "outcome_key",
+        "probability_key",
+        "unit_key",
+        "threshold",
+        "split_review"
+      ]
+    },
+    "advanced.audit_colocalization_results": {
+      "parameters": [
+        "records",
+        "min_variant_coverage"
+      ],
+      "required": [
+        "records"
+      ]
+    },
+    "server.prepare_scheduler_task": {
+      "parameters": [
+        "argv",
+        "remote_workdir",
+        "expected_compute_host",
+        "submission_host",
+        "expected_outputs",
+        "context",
+        "partition",
+        "cpus",
+        "memory_mb",
+        "walltime",
+        "inputs"
+      ],
+      "required": [
+        "argv",
+        "remote_workdir",
+        "expected_compute_host",
+        "submission_host",
+        "expected_outputs",
+        "context",
+        "partition"
+      ]
+    },
+    "server.inspect_scheduler_receipt": {
+      "parameters": [
+        "task_file",
+        "scheduler_receipt_path",
+        "remote_receipt_path"
+      ],
+      "required": [
+        "task_file",
+        "scheduler_receipt_path"
+      ]
+    },
+    "server.prepare_standard_pipeline": {
+      "parameters": [
+        "pipeline",
+        "parameters",
+        "remote_workdir",
+        "expected_host",
+        "expected_outputs",
+        "context",
+        "inputs"
+      ],
+      "required": [
+        "pipeline",
+        "parameters",
+        "remote_workdir",
+        "expected_host",
+        "expected_outputs",
+        "context"
+      ]
+    },
+    "server.inspect_multiqc_report": {
+      "parameters": [
+        "path"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "reporting.audit_analysis_result": {
+      "parameters": [
+        "summary_path",
+        "expected_contrast",
+        "expected_units"
+      ],
+      "required": [
+        "summary_path",
+        "expected_contrast"
+      ]
+    },
+    "software.register_local_software": {
+      "parameters": [
+        "name",
+        "executable"
+      ],
+      "required": [
+        "name",
+        "executable"
+      ]
+    },
+    "software.software_inventory": {
+      "parameters": [],
+      "required": []
+    },
+    "software.check_software_health": {
+      "parameters": [
+        "names"
+      ],
+      "required": [
+        "names"
+      ]
+    },
+    "software.inspect_cytoscape_health": {
+      "parameters": [
+        "port"
+      ],
+      "required": []
+    },
+    "software.cytoscape_render_network": {
+      "parameters": [
+        "network_id",
+        "layout",
+        "style",
+        "port"
+      ],
+      "required": [
+        "network_id",
+        "layout"
+      ]
+    },
+    "software.convert_molecular_structure": {
+      "parameters": [
+        "input_path",
+        "output_format",
+        "context",
+        "obabel",
+        "ph",
+        "generate_3d"
+      ],
+      "required": [
+        "input_path",
+        "output_format",
+        "context"
+      ]
+    },
+    "software.cytoscape_import_network": {
+      "parameters": [
+        "graphml_path",
+        "port"
+      ],
+      "required": [
+        "graphml_path"
+      ]
+    },
+    "systems.score_pathway_activity": {
+      "parameters": [
+        "expression_path",
+        "metadata_path",
+        "gene_sets_path",
+        "context",
+        "matrix_kind",
+        "min_size",
+        "max_size",
+        "seed"
+      ],
+      "required": [
+        "expression_path",
+        "metadata_path",
+        "gene_sets_path",
+        "context",
+        "matrix_kind"
+      ]
+    },
+    "systems.query_string_network": {
+      "parameters": [
+        "identifiers",
+        "species_taxid",
+        "network_type",
+        "required_score",
+        "public_data_authorized"
+      ],
+      "required": [
+        "identifiers",
+        "species_taxid"
+      ]
+    },
+    "systems.analyze_ppi_network": {
+      "parameters": [
+        "edges_path",
+        "context",
+        "network_type",
+        "identifier_namespace",
+        "score_threshold",
+        "nodes",
+        "seed",
+        "resolution"
+      ],
+      "required": [
+        "edges_path",
+        "context",
+        "network_type",
+        "identifier_namespace"
+      ]
+    },
+    "qc.preflight_transcriptomics": {
+      "parameters": [
+        "matrix_path",
+        "metadata_path",
+        "matrix_kind",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context",
+        "paired",
+        "covariates",
+        "min_units"
+      ],
+      "required": [
+        "matrix_path",
+        "metadata_path",
+        "matrix_kind",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context"
+      ]
+    },
+    "qc.compare_analysis_results": {
+      "parameters": [
+        "result_paths",
+        "context"
+      ],
+      "required": [
+        "result_paths",
+        "context"
+      ]
+    },
+    "transcriptomics.inspect_local_compute": {
+      "parameters": [
+        "genes",
+        "observations",
+        "workflow"
+      ],
+      "required": [
+        "genes",
+        "observations"
+      ]
+    },
+    "transcriptomics.run_bulk_rnaseq": {
+      "parameters": [
+        "counts_path",
+        "metadata_path",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context",
+        "paired",
+        "covariates",
+        "min_units",
+        "min_count",
+        "alpha",
+        "threads",
+        "gene_sets_path",
+        "method",
+        "rscript"
+      ],
+      "required": [
+        "counts_path",
+        "metadata_path",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context"
+      ]
+    },
+    "transcriptomics.aggregate_pseudobulk": {
+      "parameters": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "cell_type",
+        "context",
+        "min_cells",
+        "covariates"
+      ],
+      "required": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "condition_key",
+        "cell_type_key",
+        "cell_type",
+        "context"
+      ]
+    },
+    "transcriptomics.run_normalized_expression": {
+      "parameters": [
+        "expression_path",
+        "metadata_path",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context",
+        "matrix_kind",
+        "rscript",
+        "paired",
+        "covariates",
+        "min_units",
+        "alpha",
+        "gene_sets_path",
+        "test",
+        "lfc_threshold"
+      ],
+      "required": [
+        "expression_path",
+        "metadata_path",
+        "condition_key",
+        "unit_key",
+        "case",
+        "control",
+        "context",
+        "matrix_kind"
+      ]
+    },
+    "transcriptomics.run_small_single_cell": {
+      "parameters": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "context",
+        "mitochondrial_prefix",
+        "min_genes",
+        "max_mito_percent",
+        "min_cells_per_gene",
+        "hvg_genes",
+        "neighbors",
+        "resolution",
+        "seed",
+        "resolution_grid",
+        "marker_method",
+        "doublet_batch_key",
+        "remove_predicted_doublets"
+      ],
+      "required": [
+        "counts_path",
+        "metadata_path",
+        "unit_key",
+        "context",
+        "mitochondrial_prefix"
+      ]
+    },
+    "molecular.molecular_descriptors": {
+      "parameters": [
+        "smiles"
+      ],
+      "required": [
+        "smiles"
+      ]
+    },
+    "molecular.prepare_ligand_meeko": {
+      "parameters": [
+        "sdf_path",
+        "context"
+      ],
+      "required": [
+        "sdf_path",
+        "context"
+      ]
+    },
+    "molecular.audit_docking_inputs": {
+      "parameters": [
+        "receptor_path",
+        "ligand_path",
+        "center",
+        "box_size",
+        "context"
+      ],
+      "required": [
+        "receptor_path",
+        "ligand_path",
+        "center",
+        "box_size",
+        "context"
+      ]
+    },
+    "molecular.summarize_vina_poses": {
+      "parameters": [
+        "poses_path"
+      ],
+      "required": [
+        "poses_path"
+      ]
+    },
+    "molecular.run_vina_docking": {
+      "parameters": [
+        "receptor_path",
+        "ligand_path",
+        "center",
+        "box_size",
+        "context",
+        "vina",
+        "exhaustiveness",
+        "poses",
+        "threads",
+        "seed",
+        "timeout_seconds"
+      ],
+      "required": [
+        "receptor_path",
+        "ligand_path",
+        "center",
+        "box_size",
+        "context"
+      ]
+    },
+    "biomedical.audit_drug_target_records": {
+      "parameters": [
+        "records",
+        "target_id",
+        "species"
+      ],
+      "required": [
+        "records",
+        "target_id",
+        "species"
+      ]
+    },
+    "biomedical.assess_cohort_eligibility": {
+      "parameters": [
+        "studies",
+        "criteria"
+      ],
+      "required": [
+        "studies",
+        "criteria"
+      ]
+    },
+    "biomedical.audit_genetic_alignment": {
+      "parameters": [
+        "rows",
+        "reference_assembly",
+        "max_frequency_difference"
+      ],
+      "required": [
+        "rows",
+        "reference_assembly"
+      ]
+    },
+    "biomedical.build_evidence_matrix": {
+      "parameters": [
+        "records",
+        "question"
+      ],
+      "required": [
+        "records",
+        "question"
+      ]
+    },
+    "biomedical.compare_evidence": {
+      "parameters": [
+        "records"
+      ],
+      "required": [
+        "records"
+      ]
+    },
+    "biomedical.audit_structure_context": {
+      "parameters": [
+        "records",
+        "protein_id",
+        "species",
+        "required_regions"
+      ],
+      "required": [
+        "records",
+        "protein_id",
+        "species"
+      ]
+    },
+    "biomedical.map_disease_terms": {
+      "parameters": [
+        "terms",
+        "mappings",
+        "ontology",
+        "sensitive_data"
+      ],
+      "required": [
+        "terms"
+      ]
+    },
+    "biomedical.audit_cell_annotations": {
+      "parameters": [
+        "clusters",
+        "marker_rules",
+        "min_donors"
+      ],
+      "required": [
+        "clusters",
+        "marker_rules"
+      ]
+    },
+    "biomedical.audit_enrichment_results": {
+      "parameters": [
+        "results",
+        "background_genes",
+        "mapping_summary",
+        "max_driver_fraction",
+        "max_mapping_loss"
+      ],
+      "required": [
+        "results",
+        "background_genes",
+        "mapping_summary"
+      ]
+    },
+    "biomedical.extract_study_elements": {
+      "parameters": [
+        "path",
+        "max_excerpts_per_field"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "research.select_tools": {
+      "parameters": [
+        "intent",
+        "sensitive_data",
+        "large_computation"
+      ],
+      "required": [
+        "intent"
+      ]
+    },
+    "research.resolve_identifier": {
+      "parameters": [
+        "namespace",
+        "identifier",
+        "species",
+        "assembly"
+      ],
+      "required": [
+        "namespace",
+        "identifier"
+      ]
+    },
+    "research.audit_identifier_mapping": {
+      "parameters": [
+        "rows",
+        "species",
+        "assembly"
+      ],
+      "required": [
+        "rows",
+        "species"
+      ]
+    },
+    "atlas.query_gtex": {
+      "parameters": [
+        "endpoint",
+        "parameters"
+      ],
+      "required": [
+        "endpoint",
+        "parameters"
+      ]
+    },
+    "atlas.query_hpa": {
+      "parameters": [
+        "ensembl_gene_id"
+      ],
+      "required": [
+        "ensembl_gene_id"
+      ]
+    },
+    "atlas.search_cellxgene_collections": {
+      "parameters": [
+        "search",
+        "limit"
+      ],
+      "required": [
+        "search"
+      ]
+    },
+    "atlas.query_ena_runs": {
+      "parameters": [
+        "accession",
+        "limit"
+      ],
+      "required": [
+        "accession"
+      ]
+    },
+    "workflow.inspect_ssh_route": {
+      "parameters": [
+        "alias"
+      ],
+      "required": []
+    },
+    "workflow.prepare_remote_task": {
+      "parameters": [
+        "argv",
+        "remote_workdir",
+        "expected_host",
+        "expected_outputs",
+        "context",
+        "inputs"
+      ],
+      "required": [
+        "argv",
+        "remote_workdir",
+        "expected_host",
+        "expected_outputs",
+        "context"
+      ]
+    },
+    "workflow.prepare_server_inventory": {
+      "parameters": [
+        "remote_workdir",
+        "expected_host"
+      ],
+      "required": [
+        "remote_workdir",
+        "expected_host"
+      ]
+    },
+    "workflow.inspect_remote_task": {
+      "parameters": [
+        "task_file",
+        "remote_receipt_path"
+      ],
+      "required": [
+        "task_file",
+        "remote_receipt_path"
+      ]
+    },
+    "workflow.verify_remote_results": {
+      "parameters": [
+        "task_file",
+        "remote_receipt_path",
+        "downloaded_root"
+      ],
+      "required": [
+        "task_file",
+        "remote_receipt_path",
+        "downloaded_root"
+      ]
+    },
+    "workflow.audit_sample_metadata": {
+      "parameters": [
+        "path",
+        "sample_key",
+        "unit_key",
+        "condition_key",
+        "case",
+        "control",
+        "paired",
+        "min_units_per_group"
+      ],
+      "required": [
+        "path",
+        "sample_key",
+        "unit_key",
+        "condition_key",
+        "case",
+        "control"
+      ]
+    },
+    "workflow.audit_result_table": {
+      "parameters": [
+        "path",
+        "analysis",
+        "columns",
+        "context"
+      ],
+      "required": [
+        "path",
+        "analysis",
+        "columns",
+        "context"
+      ]
+    },
+    "workflow.build_server_download_manifest": {
+      "parameters": [
+        "ena_result_path"
+      ],
+      "required": [
+        "ena_result_path"
+      ]
+    },
+    "literature.query_pubmed": {
+      "parameters": [
+        "query",
+        "max_papers",
+        "max_retries"
+      ],
+      "required": [
+        "query"
+      ]
+    },
+    "literature.query_europepmc": {
+      "parameters": [
+        "query",
+        "max_results",
+        "cursor"
+      ],
+      "required": [
+        "query"
+      ]
+    },
+    "literature.doi_metadata": {
+      "parameters": [
+        "doi"
+      ],
+      "required": [
+        "doi"
+      ]
+    },
+    "literature.fetch_open_access_article": {
+      "parameters": [
+        "pmcid",
+        "include_supplements"
+      ],
+      "required": [
+        "pmcid"
+      ]
+    },
+    "literature.fetch_supplementary_info_from_doi": {
+      "parameters": [
+        "doi",
+        "output_dir"
+      ],
+      "required": [
+        "doi"
+      ]
+    },
+    "literature.extract_local_document": {
+      "parameters": [
+        "path"
+      ],
+      "required": [
+        "path"
+      ]
+    },
+    "literature.discover_publisher_supplements": {
+      "parameters": [
+        "doi",
+        "max_links"
+      ],
+      "required": [
+        "doi"
+      ]
+    },
+    "literature.download_publisher_supplement": {
+      "parameters": [
+        "discovery_receipt",
+        "url"
+      ],
+      "required": [
+        "discovery_receipt",
+        "url"
+      ]
+    },
+    "omics.audit_expression_matrix": {
+      "parameters": [
+        "path",
+        "matrix_kind",
+        "orientation",
+        "metadata_path",
+        "donor_key",
+        "condition_key"
+      ],
+      "required": [
+        "path",
+        "matrix_kind"
+      ]
+    },
+    "omics.audit_h5ad": {
+      "parameters": [
+        "path",
+        "matrix_kind",
+        "donor_key",
+        "condition_key",
+        "layer"
+      ],
+      "required": [
+        "path",
+        "matrix_kind"
+      ]
+    },
+    "omics.local_gene_set_enrichment": {
+      "parameters": [
+        "genes",
+        "background",
+        "gene_sets_path",
+        "min_size",
+        "max_size"
+      ],
+      "required": [
+        "genes",
+        "background",
+        "gene_sets_path"
+      ]
+    },
+    "omics.preranked_gsea": {
+      "parameters": [
+        "ranks_path",
+        "gene_sets_path",
+        "min_size",
+        "max_size",
+        "permutation_num",
+        "seed"
+      ],
+      "required": [
+        "ranks_path",
+        "gene_sets_path"
+      ]
+    },
+    "omics.map_orthologs": {
+      "parameters": [
+        "gene_ids",
+        "source_species",
+        "target_species",
+        "orthology_type"
+      ],
+      "required": [
+        "gene_ids",
+        "source_species",
+        "target_species"
+      ]
+    },
+    "omics.annotate_cells_by_markers": {
+      "parameters": [
+        "path",
+        "markers_path",
+        "matrix_kind",
+        "min_margin",
+        "min_markers",
+        "seed"
+      ],
+      "required": [
+        "path",
+        "markers_path",
+        "matrix_kind"
+      ]
+    },
+    "omics.transfer_cell_labels": {
+      "parameters": [
+        "reference_path",
+        "query_path",
+        "label_key",
+        "matrix_kind",
+        "neighbors",
+        "min_vote_fraction",
+        "seed"
+      ],
+      "required": [
+        "reference_path",
+        "query_path",
+        "label_key",
+        "matrix_kind"
+      ]
+    }
+  }
+}

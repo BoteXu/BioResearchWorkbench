@@ -1,10 +1,16 @@
 """Discover bridge extensions without duplicating external skills."""
 import importlib
 import inspect
+import ast
+import os
+from pathlib import Path
 from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "validation": ("validation_ext", ["inspect_scientific_benchmarks", "audit_benchmark_receipt"]),
+    "server_operations": ("server_operations_ext", ["plan_server_budget", "review_unknown_submission", "plan_incremental_return"]),
+    "molecular_biology": ("molecular_biology_ext", ["guide_molecular_drylab", "inspect_molecular_resources", "plan_molecular_extension", "query_intact_interactions", "query_complex_record", "query_cell_line", "audit_splicing_results", "audit_regulatory_links", "audit_protein_annotations", "audit_interaction_records", "audit_perturbation_results", "audit_mechanism_graph", "prepare_molecular_pipeline"]),
     "cadd": ("cadd_ext", ["guide_cadd_workflow", "audit_simulation_protocol", "audit_restart_manifest", "audit_replica_exchange", "audit_docking_campaign", "audit_restraint_mapping", "audit_af3_records", "audit_mmgbsa_summary"]),
     "integrations": ("integration_ext", ["inspect_mcp_components", "prepare_slurm_monitor", "inspect_slurm_monitor"]),
     "table_query": ("table_query_ext", ["query_selected_table"]),
@@ -41,22 +47,53 @@ EXPORTS = {
 }
 
 
-@lru_cache(maxsize=1)
+def enabled_categories():
+    value = os.environ.get('BIOMNI_MODULES', '').strip()
+    known = set(EXPORTS) | {'database', 'upstream'}
+    if not value: return known
+    selected = {x.strip() for x in value.split(',') if x.strip()}
+    if not selected or selected - known: raise ValueError('Unknown or empty BIOMNI_MODULES selection')
+    return selected
+
+
 def registry():
+    return _registry(tuple(sorted(enabled_categories())))
+
+
+def _lazy_function(module_name, name):
+    def call(**parameters):
+        return getattr(importlib.import_module(module_name), name)(**parameters)
+    return call
+
+
+@lru_cache(maxsize=16)
+def _registry(selected):
     entries = {}
     for category, (module_name, names) in EXPORTS.items():
-        module = importlib.import_module(module_name)
+        if category not in selected: continue
+        try:
+            tree = ast.parse(Path(__file__).with_name(module_name + '.py').read_text(encoding='utf8'))
+        except (OSError, SyntaxError) as exc:
+            for name in names:
+                entries[(category,name)] = {'function':_lazy_function(module_name,name),'name':name,'description':'Module source is unavailable; repair the selected installation.',
+                    'required_parameters':[],'optional_parameters':[],'dependency_check':{},'implementation':'bridge extension: '+module_name,
+                    'module_load':'unavailable','discovery_error':type(exc).__name__,'requires_local_edition':False}
+            continue
+        definitions = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
         for name in names:
-            function = getattr(module, name)
+            node = definitions[name]
+            function = _lazy_function(module_name, name)
             required, optional = [], []
-            for parameter in inspect.signature(function).parameters.values():
-                item = {"name": parameter.name, "type": str(parameter.annotation).replace("<class '", "").replace("'>", ""), "description": parameter.name.replace("_", " ")}
-                if parameter.default is inspect.Parameter.empty:
+            defaults = [None] * (len(node.args.args) - len(node.args.defaults)) + list(node.args.defaults)
+            for parameter, default in zip(node.args.args, defaults):
+                item = {"name": parameter.arg, "type": ast.unparse(parameter.annotation) if parameter.annotation else 'Any', "description": parameter.arg.replace("_", " ")}
+                if default is None:
                     required.append(item)
                 else:
-                    item["default"] = parameter.default
+                    item["default"] = ast.literal_eval(default)
                     optional.append(item)
             dependencies = []
+            if category == 'molecular_biology' and name.startswith('query_'): dependencies = ['requests']
             if category=='table_query': dependencies=['duckdb']
             if category=='scientific_interfaces': dependencies=['requests']
             if category=='academic_workspace' and name=='index_selected_fulltext': dependencies=['pypdf']
@@ -84,7 +121,7 @@ def registry():
             if category == 'omics' and name != 'map_orthologs':
                 dependencies = ['numpy', 'pandas', 'scipy']
                 dependencies += {'audit_h5ad':['anndata'], 'preranked_gsea':['gseapy'], 'transfer_cell_labels':['sklearn']}.get(name, [])
-            entries[(category, name)] = {"function": function, "name": name, "description": inspect.getdoc(function) or "", "required_parameters": required, "optional_parameters": optional, "implementation": f"bridge extension: {module_name}", "dependency_check": {package: find_spec(package) is not None for package in dependencies}}
+            entries[(category, name)] = {"function": function, "name": name, "description": ast.get_docstring(node) or "", "required_parameters": required, "optional_parameters": optional, "implementation": f"bridge extension: {module_name}", "dependency_check": {package: find_spec(package) is not None for package in dependencies}, 'module_load': 'deferred_until_call'}
             entries[(category,name)]['requires_local_edition'] = name in {'run_bulk_rnaseq','aggregate_pseudobulk','run_normalized_expression','run_small_single_cell','molecular_descriptors','run_vina_docking','score_pathway_activity','analyze_ppi_network','convert_molecular_structure'}
             entries[(category,name)]['requires_local_edition'] |= name in {'compare_groups','plan_sample_size','meta_analyze_effects','fit_statistical_model','run_designed_expression','import_expression_data','analyze_cell_composition','score_regulatory_activity','audit_network_stability','audit_batch_embedding','run_donor_differential_state','infer_diffusion_pseudotime','evaluate_binary_prediction','prepare_ligand_meeko'}
     return entries

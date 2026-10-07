@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
-  "bridge_version": "2.12",
-  "package_version": "2.12.0",
+  "bridge_version": "2.13",
+  "package_version": "2.13.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 6247,
-      "sha256": "2bd0a4c56395039cce3948359e63d853464cc70d2f836f7b4b674e10ba620e49"
+      "bytes": 7074,
+      "sha256": "a1e6de5ad47c808089d1b27c04213fe33db3208b80f628231e4149920bcd9dea"
     },
     {
       "path": ".gitignore",
@@ -30,8 +30,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 10127,
-      "sha256": "59a40149729a99f299c30da29cb78c111cb7f6cc8c0a71d55fa0d91fab4b17b8"
+      "bytes": 11103,
+      "sha256": "d230d1675b5d3a27fa1761d9b2cb90be1529a4319127559c4c5f4d1aaf86b3c5"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -57,6 +57,11 @@
       "path": "CODE_WORKFLOWS.md",
       "bytes": 9530,
       "sha256": "3f648ff91ea48ce1fa504df6902d19fba4667c72f7edabd7b61888deed021a19"
+    },
+    {
+      "path": "EVOLUTION.md",
+      "bytes": 6208,
+      "sha256": "8f201ee82ec1e5da80e405cc8d010149e6af0a2272d32ec3c91fa2bad61a040b"
     },
     {
       "path": "Install.ps1",
@@ -89,14 +94,19 @@
       "sha256": "cb22fb5af668eb0f5bd5eab2d81d5ee488fb65957001e6e91b1be0e8e1c76683"
     },
     {
+      "path": "MOLECULAR_DRYLAB.md",
+      "bytes": 9814,
+      "sha256": "351c45d2b6a00056cf8b3f029fa60bfd6cbf7f1a222919299a220b12ecb9f334"
+    },
+    {
       "path": "NOTICE",
       "bytes": 820,
       "sha256": "d36c6f4eba087c627b1fcde0a50d8bffb12009df02a412d58c644573ba972e22"
     },
     {
       "path": "ORIGINS.md",
-      "bytes": 8820,
-      "sha256": "9c94bba2fc7562664c7f01dca237052621d889a70f0a332585a4f4e2095fbd3d"
+      "bytes": 9505,
+      "sha256": "f11f84d01a15da2dcf2988170ce4c7946446fce6726a1f14614174fd33db0964"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -120,8 +130,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 14648,
-      "sha256": "50375337e9cd116cc1f812c0f8e3c6d1f3a33ebf66bc560749329a2542a5c98f"
+      "bytes": 15742,
+      "sha256": "a4a24d89516889a671377e073b992b7ce41af4edeefd806bf963438d3c2df382"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -140,8 +150,8 @@
     },
     {
       "path": "SKILLS.md",
-      "bytes": 5113,
-      "sha256": "d77f3096e6a455be951d53acda9d6ae8d18f2af7090af2ffcc8e894492980d09"
+      "bytes": 5461,
+      "sha256": "a384a2cf988dd10729d81ed193da59677a2ef502a69b3238f6f9901484b08b10"
     },
     {
       "path": "SOFTWARE_INTERFACES.md",
@@ -152,6 +162,16 @@
       "path": "STATISTICS.md",
       "bytes": 5731,
       "sha256": "6d2d660e4d036f5b1fcaaf2423c392e4c45b1d6d943a000e43ba4125b248e257"
+    },
+    {
+      "path": "TOOL_CATALOG.json",
+      "bytes": 332844,
+      "sha256": "45ed12883c5100b813e7bcc9e2412bc4c367aa44ba90cfab45b0a34d037c32fe"
+    },
+    {
+      "path": "TOOL_CATALOG.md",
+      "bytes": 44746,
+      "sha256": "63838c25ce25b6eb0eee58b51fada3ce9210aacfb51fdb73f61a872cefdc30d8"
     },
     {
       "path": "WORKBENCH.md",
@@ -167,6 +187,11 @@
       "path": "audit_release.py",
       "bytes": 5391,
       "sha256": "5161884324672f79f99e931ef9bccee60293a132a6c469cac111ef34304a3d19"
+    },
+    {
+      "path": "benchmark_catalog.json",
+      "bytes": 1766,
+      "sha256": "c2a41abe55baef5f05f8bbc490491435dbac91e8c0879360b9578a65e47f6e8a"
     },
     {
       "path": "bootstrap_upstream.py",
@@ -210,8 +235,8 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 24459,
-      "sha256": "7fc9dd0d16fea57a4595033ee0fec121b167be7974d3ebdf7b44815e5465fb7e"
+      "bytes": 26341,
+      "sha256": "7404f95cdddbcd6f760f86b8b38873a9a3cf376fd3a3c0e2d8c9d2dca2806bea"
     },
     {
       "path": "bridge/cadd_ext.py",
@@ -285,13 +310,13 @@
     },
     {
       "path": "bridge/evidence.py",
-      "bytes": 6000,
-      "sha256": "1da88f0b1264dbc4d798bbfc984c524a99fbac33adfe3622c443a7605bf7567f"
+      "bytes": 9684,
+      "sha256": "9704ef37cb85e142b75654f9d21e8d6421f985df63078fa89fc08bdf42c9181a"
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 11958,
-      "sha256": "b683253002983d845ac5a09c116ee97cc9135ec0658ee1588953551e89045e47"
+      "bytes": 14253,
+      "sha256": "701f7633e8a5c62db50a97ceec7efcee3c74c530f6dc3e6efcecaeefabeb058b"
     },
     {
       "path": "bridge/http_client.py",
@@ -345,8 +370,13 @@
     },
     {
       "path": "bridge/mcp_server.py",
-      "bytes": 3463,
-      "sha256": "c2ea343c7767cf4f8b584c158a90a6de9c4f2cfa5385658cc422cc49ff5cd214"
+      "bytes": 5523,
+      "sha256": "3d0a7e5bef0619f2507f63378c6a7b796af08310f5341d192a391412a7976dbd"
+    },
+    {
+      "path": "bridge/molecular_biology_ext.py",
+      "bytes": 42107,
+      "sha256": "f8f18d094988c3ae987b45763fd277147ebfd7946863245b114ab18dbedbd3c8"
     },
     {
       "path": "bridge/molecular_ext.py",
@@ -395,8 +425,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 28618,
-      "sha256": "d0f73491d2c86c09ab5bfb4d60785ce438157a23d10b1eaee7a459f25001b512"
+      "bytes": 30233,
+      "sha256": "485be6b0de9b22093e05b3aeaf8fa7002b1d94f47f277e4f84e1f14c82ee2214"
     },
     {
       "path": "bridge/review_ext.py",
@@ -434,6 +464,11 @@
       "sha256": "b4b019f3492c300dc425e8ed3ff2917361f66f58477677b434e5382dea8e7a91"
     },
     {
+      "path": "bridge/server_operations_ext.py",
+      "bytes": 7153,
+      "sha256": "48ecf403c36f4367b0f4b1f1956bfb51e8180d46336a3c8480a2085107e9d014"
+    },
+    {
       "path": "bridge/server_probe.py",
       "bytes": 1867,
       "sha256": "ca1f19df90a51e62c777e9e215e8c8a0dcbc18422dac0160a0a6c2aa08a620b2"
@@ -469,6 +504,11 @@
       "sha256": "84f130b60938972ed47754dfc802d126279135cf8dd3a127a08f0d7c886de661"
     },
     {
+      "path": "bridge/tool_contracts.py",
+      "bytes": 1519,
+      "sha256": "6345a7c275304477b9fedef649282aa8f6b94e1c695433883af9dbbe7007c58a"
+    },
+    {
       "path": "bridge/transcriptomics_ext.py",
       "bytes": 29575,
       "sha256": "698ae9e535a530eae70df87c5fc07c397321a073609d7b6b758193a50aa2a569"
@@ -479,9 +519,14 @@
       "sha256": "40fc86e6dcbc9432b0b530f5bbeb84d4f59cf71bd1300aa6008a22993ecbca2e"
     },
     {
+      "path": "bridge/validation_ext.py",
+      "bytes": 2814,
+      "sha256": "2c0048d3589f6dc7bc722dcaf6a7dff758b73e21458416c25e22ddeaed7df984"
+    },
+    {
       "path": "bridge/web_gateway.py",
-      "bytes": 13340,
-      "sha256": "93d95ea503a19a7d3adf6e8457d13ce09b33faf6d09d5f978a4e43d52d2c31a7"
+      "bytes": 17774,
+      "sha256": "8c82e86b6ae498de5a9de07400302b471f3b989ad0e9e23cf2a2710e9d4a24ba"
     },
     {
       "path": "bridge/word_native.ps1",
@@ -495,8 +540,8 @@
     },
     {
       "path": "bridge/workbench_ext.py",
-      "bytes": 26907,
-      "sha256": "f21a757cf5478114a9bf5ce348d33952d9e8b66a0610b90a096a9694c03ad68a"
+      "bytes": 27733,
+      "sha256": "4abcc8d24e6c620d7323410fe2fbc41295861e34b180ea0f4b348b34b372120d"
     },
     {
       "path": "bridge/workflow_ext.py",
@@ -516,12 +561,17 @@
     {
       "path": "build_releases.py",
       "bytes": 1990,
-      "sha256": "f2a9ee0ad3424346ca47083039794e52edf895c2b30ae4c3ad514765ad3a96be"
+      "sha256": "c853ba6de62bded0b6d5f571524987b0402d869ba249e8851929070a523072da"
     },
     {
       "path": "cadd_sources.json",
       "bytes": 1912,
       "sha256": "44a459d80b6bb8092362f70f4757160a8a3d76f1a08d6c84d16e72b585a8f61c"
+    },
+    {
+      "path": "catalog_baseline.json",
+      "bytes": 53827,
+      "sha256": "5f0e95b85549495f692f078fef182b167e1e9c7667f3615b869c2e687852a316"
     },
     {
       "path": "client_config.py",
@@ -549,9 +599,14 @@
       "sha256": "b97e73980fa050f1261d0ce515bbf06618bce6e1ea648c9c4f8bf01900dda887"
     },
     {
+      "path": "generate_catalog.py",
+      "bytes": 7134,
+      "sha256": "06c46346275fa7b29121174f415fde7cb2017d2f49a2a3f930f5e2a3bc9149d4"
+    },
+    {
       "path": "install.py",
-      "bytes": 6798,
-      "sha256": "b83b0c05262c3113d2bce5dc1a77f746713f5f8ce572cd49bc7904e1470c9d44"
+      "bytes": 7022,
+      "sha256": "c09c4a27da410f605d8c9be0deeadea05b2a08c3ca3900bee3d8ba62f5f828db"
     },
     {
       "path": "install_mcp.py",
@@ -572,6 +627,11 @@
       "path": "mcp_embedding_model.json",
       "bytes": 789,
       "sha256": "c1dba4fd9daf637f30e59d672491d71ad78e846e5933a74f49d056aacdc3a9c1"
+    },
+    {
+      "path": "molecular_resources.json",
+      "bytes": 4348,
+      "sha256": "09900707f3815ea01b6357337c29abbed90f880c41cad12499da9e96eb4235ae"
     },
     {
       "path": "prepare_docker_gateway.py",
@@ -677,6 +737,16 @@
       "path": "skills/biomni-docking-review/references/tool-routing.md",
       "bytes": 1940,
       "sha256": "9511baea166467be07772c57d3b03af2132f8cf7c583c5a392929bb935023a22"
+    },
+    {
+      "path": "skills/biomni-molecular-drylab/SKILL.md",
+      "bytes": 3186,
+      "sha256": "adf425dcfe0f49e49ced70416a9f0751f96183c831a126fb67b2df5cbafcb553"
+    },
+    {
+      "path": "skills/biomni-molecular-drylab/references/tool-routing.md",
+      "bytes": 1591,
+      "sha256": "6052b206b07119e3475123852a8071c0e7e01e03e4aa406ba66c74c73322143e"
     },
     {
       "path": "skills/biomni-omics-design/SKILL.md",
@@ -795,8 +865,8 @@
     },
     {
       "path": "skills/catalog.json",
-      "bytes": 14488,
-      "sha256": "31fe6167218750bc438686a0a23901210d75ba418797aede648e3e9cb88b7184"
+      "bytes": 16295,
+      "sha256": "336c640edff0b3cdf303607deb6445437f78eff6331ade518f5db347e82fe19b"
     },
     {
       "path": "tests/advanced_check.py",
@@ -810,13 +880,13 @@
     },
     {
       "path": "tests/browser_check.py",
-      "bytes": 2694,
-      "sha256": "55633b0c7a02e6a6d4a61b98e76145573da13ee1aff2fc087b217663a88d2d74"
+      "bytes": 3540,
+      "sha256": "7eaa5b911acaf7e99e39b5bef6f0818f42278b20ddf36ff2b242c44fa9d1b45d"
     },
     {
       "path": "tests/cadd_process_check.py",
-      "bytes": 3012,
-      "sha256": "7f489823a5600020e9f0ff6b3926563d1d5a6ff47c098cf5f6957ac6a072413a"
+      "bytes": 3424,
+      "sha256": "d1f156a9651766c91473e142907d255c1a65686e887c95b01c6629d179647f50"
     },
     {
       "path": "tests/ci_analysis.py",
@@ -844,9 +914,19 @@
       "sha256": "487e2afa4eaa3259ac0794e4fca9d2a4877f30ce32800a574b769019141b2e57"
     },
     {
+      "path": "tests/molecular_process_check.py",
+      "bytes": 6166,
+      "sha256": "407f0d6af3cfdbfc549a1f8a030f33cd1ee10c2395ff8796484fda6b9a5a6a04"
+    },
+    {
       "path": "tests/native_word_check.py",
       "bytes": 4026,
       "sha256": "025102280e28efe07172780d52f2f015d9969efd72904d7a025d89338a96cab2"
+    },
+    {
+      "path": "tests/public_benchmark_check.R",
+      "bytes": 2466,
+      "sha256": "8ac1921ad935859077e874008036a6bda1ef75641a6197b101d536410e18a073"
     },
     {
       "path": "tests/scientific_backend_check.R",
@@ -894,9 +974,19 @@
       "sha256": "8be4898ce1898d3e7aecc1cad98cfe8ce16233dfe0a54d947b135485cdce1ae6"
     },
     {
+      "path": "tests/test_molecular_drylab.py",
+      "bytes": 11780,
+      "sha256": "72d0bde7c23aa991d6803802dc0753ccd8611420c4bdd5ca4a97b952e5ca06b1"
+    },
+    {
       "path": "tests/test_origins.py",
       "bytes": 2400,
       "sha256": "615d7062a471006a43995e0e1d219d0125ba1ca0c670493193c64f798aad853c"
+    },
+    {
+      "path": "tests/test_platform_evolution.py",
+      "bytes": 7558,
+      "sha256": "71974a2c7cf979df4b77abc44c25989e50668acf26df0817814a041b72b12150"
     },
     {
       "path": "tests/test_platforms.py",
@@ -911,7 +1001,7 @@
     {
       "path": "tests/test_skills.py",
       "bytes": 7182,
-      "sha256": "94d7626b116743b21fe2dd3a25226dc46db6576db9a711955897b06edea157db"
+      "sha256": "53b665a634e352fdb9520a861b5d705c3839c9b04a316143fc15552c0020935b"
     },
     {
       "path": "tests/test_statistics.py",
@@ -925,18 +1015,23 @@
     },
     {
       "path": "third_party_components.json",
-      "bytes": 86695,
-      "sha256": "dab7c192f34aa03b0b0b18e9e21275a1944a0c4a990274c8e462a772f40a5b02"
+      "bytes": 91712,
+      "sha256": "314ffa2030d80a3e05b48d01ca89ebce31f4671743eb180f77826e959ac88560"
     },
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "e4ac0010e215139e7aaf0462d1e864f5b6e0ac4f1226983e4e22fe2a34003ea6"
+      "sha256": "f26a2053499380f2a9254423ccf0d3ac0510546ff069dbfef63ace4875d9fe6f"
     },
     {
       "path": "update_skill_catalog.py",
-      "bytes": 1957,
-      "sha256": "c99be695c345aca41924c27d0228dbf5b149bc0016bd7d46805288a05e00825b"
+      "bytes": 1958,
+      "sha256": "ac88b692d000e8bb9cdf65ca53db0b9d084ea18ed7dc8725a203c8cbe5018bb1"
+    },
+    {
+      "path": "upgrade.py",
+      "bytes": 11370,
+      "sha256": "5da1fc179b248864dbf13023317c29b06fed9a30258ec677110cc7643cc390cc"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",

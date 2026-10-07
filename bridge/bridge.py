@@ -20,8 +20,8 @@ from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlsplit
 from database_ext import SPECS, adapted_query, validate as validate_database
-from evidence import TRACE, atomic_json, health, observe, utc, trace_response
-from extensions import registry as extension_registry
+from evidence import TRACE, atomic_json, health, observe, utc, trace_response, validation_context
+from extensions import registry as extension_registry, enabled_categories
 
 
 HERE = Path(__file__).resolve().parent
@@ -85,9 +85,13 @@ def tool_catalog(category: str | None = None, search: str | None = None, limit: 
     """Browse Biomni's registered tools and distinguish imports from actual execution."""
     matches = []
     extensions = extension_registry()
+    enabled = enabled_categories()
     observed = health()
     for module_name, schemas in _registry().items():
         short_name = module_name.rsplit(".", 1)[-1]
+        from extensions import EXPORTS
+        if (short_name in EXPORTS and short_name not in enabled) or (short_name == 'database' and 'database' not in enabled) or (short_name not in enabled and 'upstream' not in enabled):
+            continue
         if short_name in EXCLUDED_MODULES:
             continue
         if category and short_name != category:
@@ -150,9 +154,10 @@ def tool_catalog(category: str | None = None, search: str | None = None, limit: 
             continue
         if search and search.casefold() not in f"{short_name} {name} {entry['description']}".casefold():
             continue
-        matches.append({"category": short_name, **{k: v for k, v in entry.items() if k != "function"}, "required": [p["name"] for p in entry["required_parameters"]], "import_ready": True, "import_error": None, "callable_route": "biomni_run_tool", **observed.get(f"{short_name}.{name}", {"runtime_state": "untested"})})
+        matches.append({"category": short_name, **{k: v for k, v in entry.items() if k != "function"}, "required": [p["name"] for p in entry["required_parameters"]], "import_ready": None, "import_check": "deferred_until_call", "import_error": None, "callable_route": "biomni_run_tool", **observed.get(f"{short_name}.{name}", {"runtime_state": "untested"})})
     registered = {item["name"] for item in matches if item["category"] == "database"}
     for direct_name, spec in SPECS.items():
+        if 'database' not in enabled: continue
         if spec[0] in registered or category and category != "database":
             continue
         if search and search.casefold() not in f"database {direct_name} {spec[0]}".casefold():
@@ -199,7 +204,7 @@ def _source_manifest():
     manifest = []
     folder = HERE / "source_snapshots"
     folder.mkdir(exist_ok=True)
-    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py", "statistics_ext.py", "advanced_ext.py", "server_ext.py", "scheduler_agent.py", "reporting_ext.py", "designed_expression.R", "tximport_pipeline.R", "dream_pipeline.R", "privacy_ext.py", "academic_common.py", "library_ext.py", "zotero_ext.py", "review_ext.py", "collaboration_ext.py", "personal_library_ext.py", "workbench_ext.py", "academic_workspace_ext.py", "scientific_backend_ext.py", "scientific_backend.R", "ocr_adapter.py", "word_native_ext.py", "word_native.ps1", "code_common.py", "code_review_ext.py", "code_execution_ext.py", "code_runner.py", "workflow_stage.py", "array_runner.py", "clinical_research_ext.py", "clinical_backend.R", "integration_ext.py", "interface_ext.py", "table_query_ext.py", "slurm_monitor.py", "semantic_index_ext.py", "semantic_index_runner.py", "qdrant_readonly.py", "duckdb_mcp.py", "cadd_ext.py"):
+    for name in ("bridge.py", "database_ext.py", "literature_ext.py", "omics_ext.py", "atlas_ext.py", "workflow_ext.py", "research_ext.py", "biomedical_ext.py", "remote_runner.py", "server_probe.py", "extensions.py", "evidence.py", "http_client.py", "lazy_genomics.py", "lazy_database.py", "job_manager.py", "job_worker.py", "mcp_server.py", "web_gateway.py", "compute_policy.py", "transcriptomics_ext.py", "limma_pipeline.R", "count_models.R", "qc_ext.py", "molecular_ext.py", "systems_ext.py", "software_ext.py", "statistics_ext.py", "advanced_ext.py", "server_ext.py", "scheduler_agent.py", "reporting_ext.py", "designed_expression.R", "tximport_pipeline.R", "dream_pipeline.R", "privacy_ext.py", "academic_common.py", "library_ext.py", "zotero_ext.py", "review_ext.py", "collaboration_ext.py", "personal_library_ext.py", "workbench_ext.py", "academic_workspace_ext.py", "scientific_backend_ext.py", "scientific_backend.R", "ocr_adapter.py", "word_native_ext.py", "word_native.ps1", "code_common.py", "code_review_ext.py", "code_execution_ext.py", "code_runner.py", "workflow_stage.py", "array_runner.py", "clinical_research_ext.py", "clinical_backend.R", "integration_ext.py", "interface_ext.py", "table_query_ext.py", "slurm_monitor.py", "semantic_index_ext.py", "semantic_index_runner.py", "qdrant_readonly.py", "duckdb_mcp.py", "cadd_ext.py", "molecular_biology_ext.py", "server_operations_ext.py", "validation_ext.py", "tool_contracts.py"):
         raw = (HERE / name).read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
         path = folder / (digest + ".py")
@@ -241,14 +246,17 @@ def _save_result(category: str, name: str, parameters: dict, result: object, imp
         "implementation": implementation,
         "sources": TRACE.get() or [],
         "input_files": _input_files(parameters),
-        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.12"},
+        "environment": {"python": sys.version.split()[0], "executable": sys.executable, "packages": packages, "biomni_commit": "400c1f366b96a35ca253e13c9b06c5076af41d65", "bridge_version": "2.13"},
         "bridge_source_manifest": _source_manifest(),
+        "error_type": result.get('error_type') if isinstance(result, dict) else None,
+        "error_code": result.get('error_code') if isinstance(result, dict) else None,
+        "validation_context": validation_context(),
     }
     receipt_path = path.with_suffix(".receipt.json")
     receipt["receipt_file"] = str(receipt_path)
     atomic_json(receipt_path, receipt)
     error = result.get("error") or result.get("errors") if isinstance(result, dict) else None
-    observe(f"{category}.{name}", success, receipt_path, error)
+    observe(f"{category}.{name}", success, receipt_path, error, context=receipt['validation_context'])
     return receipt
 
 
@@ -260,7 +268,8 @@ def _execute(category, name, parameters, function, implementation="Biomni pinned
         try:
             result = function()
         except Exception as exc:
-            result = {"success": False, "error": f"{type(exc).__name__}: {exc}"}
+            code = 'INVALID_INPUT' if isinstance(exc, (ValueError, TypeError)) else 'DEPENDENCY_UNAVAILABLE' if isinstance(exc, ImportError) else 'EXECUTION_FAILED'
+            result = {"success": False, "error": f"{type(exc).__name__}: {exc}", 'error_type': type(exc).__name__, 'error_code': code}
         return _save_result(category, name, submitted_parameters, result, implementation, round(time.monotonic() - started, 3))
     finally:
         TRACE.reset(token)
@@ -269,10 +278,18 @@ def _execute(category, name, parameters, function, implementation="Biomni pinned
 def run_tool(category: str, name: str, parameters: dict) -> dict:
     """Call a registered Biomni tool, excluding code execution and lab automation."""
     _validate_parameters(parameters)
+    enabled = enabled_categories()
+    from extensions import EXPORTS
+    if category in EXPORTS and category not in enabled or category not in EXPORTS and 'upstream' not in enabled:
+        raise ValueError('Tool module is disabled in this process')
     extension = extension_registry().get((category, name))
     if extension:
-        inspect.signature(extension["function"]).bind(**parameters)
+        needed = {p['name'] for p in extension['required_parameters']}
+        permitted = needed | {p['name'] for p in extension['optional_parameters']}
+        if set(parameters) - permitted or needed - set(parameters):
+            raise ValueError('Unsupported or missing registered tool parameters')
         def call_extension():
+            if extension.get('discovery_error'): raise RuntimeError('Selected module source is unavailable; inspect installation integrity')
             missing = [package for package, available in extension.get('dependency_check', {}).items() if not available]
             if missing:
                 raise RuntimeError('Optional dependencies missing: ' + ', '.join(missing) + '. Use the omics profile for these local helpers; keep large analyses on the server.')
@@ -322,8 +339,10 @@ def readiness() -> dict:
         "model_or_api_key_required": False,
         "database_module_ready": database_ready,
         "database_import_error": database_error,
-        "available_tools": sorted(DATABASE_TOOLS),
-        "bridge_version": "2.12",
+        "available_tools": sorted(DATABASE_TOOLS) if 'database' in enabled_categories() else [],
+        "enabled_modules": sorted(enabled_categories()),
+        "extension_loading": "deferred_until_call",
+        "bridge_version": "2.13",
         "compute_edition": __import__("compute_policy").edition(),
         "compute_placement": "Large calculations and data downloads run on the server. Local scope: retrieval, task preparation, command handoff, status/receipt and result auditing.",
         "runtime_health": health(),
@@ -335,6 +354,7 @@ def readiness() -> dict:
 
 
 def query_database(name: str, parameters: dict) -> dict:
+    if 'database' not in enabled_categories(): raise ValueError('Database module is disabled in this process')
     from privacy_ext import enforce_outbound
     enforce_outbound(parameters)
     _validate_parameters(parameters)
