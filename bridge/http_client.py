@@ -41,42 +41,46 @@ def request(url, method="GET", params=None, payload=None, limit_bytes=30_000_000
             raise ValueError("Request payload exceeds 2 MB")
         headers["Content-Type"] = "application/json"
     response = None
-    # A private netrc or environment credential must never be attached implicitly.
+    # Environment credentials and netrc are never attached implicitly.
     session = requests.Session()
     session.trust_env = False
-    for attempt in range(2):
-        for redirect in range(6):
-            response = session.request(method, url, params=params, json=payload, headers=headers, timeout=(10, 40), stream=True, allow_redirects=False)
-            if response.status_code not in {301, 302, 303, 307, 308}:
-                break
-            destination = urljoin(response.url, response.headers.get("Location", ""))
-            status = response.status_code
-            response.close()
-            _public_url(destination)
-            url, params = destination, None
-            if status in {301, 302, 303}:
-                method, payload = "GET", None
-        else:
-            raise ValueError("Too many redirects")
-        if response.status_code in {429, 502, 503, 504} and attempt == 0:
-            response.close()
-            time.sleep(2)
-            continue
-        break
-    try:
+    def body(current):
         chunks, size = [], 0
-        for chunk in response.iter_content(65536):
+        for chunk in current.iter_content(65536):
             size += len(chunk)
             if size > limit_bytes:
                 raise ValueError(f"Response exceeds {limit_bytes} bytes; narrow the query")
             chunks.append(chunk)
-        raw = b"".join(chunks)
-        source = trace_response(response, raw)
-        if response.status_code >= 400:
-            raise RuntimeError(f"HTTP {response.status_code}: {response.url}; {raw[:400].decode('utf8', errors='replace')}")
-        return raw, source
+        return b"".join(chunks)
+    try:
+        for attempt in range(3):
+            for redirect in range(6):
+                response = session.request(method, url, params=params, json=payload, headers=headers, timeout=(10, 40), stream=True, allow_redirects=False)
+                if response.status_code not in {301, 302, 303, 307, 308}:
+                    break
+                destination = urljoin(response.url, response.headers.get("Location", ""))
+                status = response.status_code
+                response.close()
+                _public_url(destination)
+                url, params = destination, None
+                if status in {301, 302, 303}:
+                    method, payload = "GET", None
+            else:
+                raise ValueError("Too many redirects")
+            # Retry only known HTTP failures of read-only GETs. Unknown writes and connection exceptions are never retried.
+            if method == "GET" and response.status_code in {429, 500, 502, 503, 504} and attempt < 2:
+                trace_response(response, body(response))
+                response.close()
+                time.sleep(2 * (attempt + 1))
+                continue
+            raw = body(response)
+            source = trace_response(response, raw)
+            if response.status_code >= 400:
+                raise RuntimeError(f"HTTP {response.status_code}: {response.url}; {raw[:400].decode('utf8', errors='replace')}")
+            return raw, source
     finally:
-        response.close()
+        if response is not None:
+            response.close()
         session.close()
 
 

@@ -1,29 +1,82 @@
 # BioResearchWorkbench
 
-**生物医学科研工作台。最初的底层基于 Biomni，随后通过组合第三方研究软件与本项目编写的桥接、检查和工作流程，扩展为覆盖文献、证据、统计、计算及写作的工作台。**
+**以分子生物学干实验为重点的生物医学科研工作台：公开检索、统计与分析设计、输入 QC、服务器计算衔接、返回结果审查、证据追溯和论文交付。**
 
-The original foundation is [Biomni](https://github.com/snap-stanford/Biomni). This project integrates existing research tools; it does not claim their algorithms, datasets, models or software as its own. Read [origins and third-party attribution](ORIGINS.md) for what is reused, what is adapted and what this project adds. This is an independent downstream workbench, not an official Biomni release.
+最初的底层基于 [Biomni](https://github.com/snap-stanford/Biomni)。本项目在此基础上编写桥接、检查、任务衔接和工作流，并组合第三方研究软件。上游算法、数据库、模型、软件和客户端插件保留各自归属；详见 [来源与第三方归属](ORIGINS.md) 和 [组件清单](third_party_components.json)。这是独立的下游工作台。
 
-Package 2.10.0 adds [scientific code development/review](CODE_WORKFLOWS.md) and [clinical research support](CLINICAL_RESEARCH.md): scoped source and Notebook checks, data/join/numerical contracts, QC version binding, reviewed patches/tests, real server code/workflow adapters, clinical evidence/labels/QC/prediction/review tools and three fixed clinical R backends. Scaffolds, engineering acceptance, actual execution and scientific validation are reported separately.
+The original foundation is Biomni. This independent downstream project adds tool adapters, QC/evidence checks and workflow orchestration, while preserving third-party attribution. The host model supplies reasoning; this tool layer needs no additional model API key or local LLM. It does not include Biomni-R0, the full E1 environment or a data lake.
 
-Package 2.9.0 adds [private project/workflow/reproduction/backup tools](WORKBENCH.md), fulltext/annotation search, scoped incremental index sync, resumable independent review, native Windows Word collaboration and three [real server scientific adapters](SCIENTIFIC_BACKENDS.md). Large calculations stay on the server; runtime and scientific validation boundaries remain explicit.
+[![Public verification](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml/badge.svg)](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml)
 
-Package 2.8.2 introduced the independent name and detailed attribution. Existing Biomni-named tools and skills remain compatible; see [migration](MIGRATION.md).
+## v2.13.0 更新
 
-Package 2.8.1 adds an optional [research workflow pack](SKILLS.md): evidence tracing, omics QC/design, statistics, target/structure/docking review, private library maintenance, figures, academic delivery and server handoff. The instructions reuse bridge 2.8 and existing software; they do not add another model or scientific dependency stack. Run `python install_skills.py --dry-run` then `python install_skills.py`, or add `--install-skills` to a new tool installation.
+本次深化分子生物学干实验，并补齐八个工程方向。扩展函数定义、必需参数、默认值、枚举、模板、模块信息与版本差异由公开源码生成，见 [功能目录](TOOL_CATALOG.md) / [机器可读合同](TOOL_CATALOG.json)。模板中的占位符必须替换为经审查的真实输入。
 
-Version 2.8 adds a persistent [personal research index](PERSONAL_LIBRARY.md), private library exchange, scoped Zotero read/write adapters, located manuscript/review audits, approved similar-study searches and evidence-backed collaboration. See [ACADEMIC_WORKFLOWS.md](ACADEMIC_WORKFLOWS.md) and [ZOTERO_LOCAL.md](ZOTERO_LOCAL.md). Version 2.7 added a dedicated statistics consultation module, complex expression designs, expanded analysis/review workflows, real server-side Slurm adapters and stronger privacy gates. See [STATISTICS.md](STATISTICS.md), [RESEARCH_WORKFLOWS.md](RESEARCH_WORKFLOWS.md) and [PRIVACY_SECURITY.md](PRIVACY_SECURITY.md). It retains separately packaged server and local analysis editions. The local edition includes mandatory pre-analysis QC, three count-model backends, normalized-expression tests, small single-cell/pseudobulk workflows, pathway/PPI analysis, molecular descriptors, bounded Vina docking and persistent software interfaces. See [LOCAL_ANALYSIS.md](LOCAL_ANALYSIS.md) and [SOFTWARE_INTERFACES.md](SOFTWARE_INTERFACES.md). Platform access remains documented in [PLATFORMS.md](PLATFORMS.md).
+<!-- GENERATED:CATALOG:BEGIN -->
+**公开目录（自动生成）**：237 个扩展函数、36 个类别、142 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
+<!-- GENERATED:CATALOG:END -->
 
-A research workbench built from an initial direct Biomni tool layer for Codex and compatible clients. The host model provides reasoning; the bridge provides explicit database queries, literature retrieval, evidence records, metadata lookups and result checks. No additional model API key or local LLM is required by this tool layer.
+| 工程方向 | 本版提供什么 | 验收和使用边界 |
+|---|---|---|
+| 准确的工具状态 | 历史成功、最近尝试、当前环境验证分开；源码、依赖元数据、配置、解释器与登记软件变化使验证过期 | `passed` 只针对该环境下的已观测调用；旧成功不能覆盖最近失败 |
+| 安全升级与回滚 | 包完整性校验、升级预览、配置/依赖兼容检查、审核哈希、逐文件备份与失败回滚；复用配置迁移工具 | 自定义 skill 保留；定制桥接代码需合并；升级不迁移凭据、安装依赖或改客户端注册 |
+| 文档与目录同步 | 自动生成工具目录、参数合同、调用模板、版本差异和 README 数量；CI 检查一致性 | 静态目录不是运行验收；上游工具由运行目录另行发现 |
+| 可选模块加载 | `BIOMNI_MODULES` 选择类别，按实际调用延迟导入；专用 MCP 入口随所选模块暴露 | 不自动安装依赖，不授予文件/网络/库写权限 |
+| 更明确的 MCP 调用 | 保留通用入口，增加状态、分子路线、剪接与调控专用入口，提供输入约束、输出 schema 和结构化结果 | 检查 `success`、具体 QC 和原始来源；schema 一致不证明科学主张成立 |
+| 科学基准 | 许可明确的 pasilla/DESeq2 和 ToothGrowth/Welch 参考检查；接口、后端完成、参考一致分层 | 在独立 CI 或获准服务器运行；只覆盖所列设计和指标范围 |
+| 服务器任务管理 | pilot 资源/成本预算、不明提交核查、增量回传计划；复用队列观测与检查点审查 | 使用已有共享 SSH/调度环境；准备不是提交，未知提交不自动重试 |
+| 按问题操作 | 认证页面选择研究方向、查看 QC、来源和缺失结果；项目页显示证据谱系和阶段阻断 | 路线按钮只生成计划；浏览器令牌和私有结果留在受控环境 |
 
-## Scope
+具体合同、升级说明和限制见 [EVOLUTION.md](EVOLUTION.md)。
 
-- Selected public genetics, target, protein, structure, pharmacology and literature queries.
-- GTEx expression/eQTL/sQTL, Human Protein Atlas, CELLxGENE collection metadata and ENA run/file metadata.
-- Server task and inventory preparation, returned lifecycle receipt inspection, output checksum checks, sample-unit audits and small result-table checks.
-- Existing lightweight omics helpers with explicit limitations.
+## 分子生物学入口
 
-Large calculations and large downloads belong on the recipient's own server. Reuse that server's analysis environment. This is not the full Biomni reasoning agent, E1 environment or data lake.
+`molecular_biology.guide_molecular_drylab` 提供 16 个问题方向；也可使用有类型约束的 MCP 入口 `biomni_molecular_plan`。先明确物种、模型、真正独立的生物学单位、比较方向、来源/注释版本；涉及基因组坐标时还需组装版本。正式推断先做统计咨询和输入/设计/参考 QC。
+
+- **基因与 RNA**：注释/映射、表达、单细胞、可变剪接、异构体、长读长结果审查。
+- **调控与蛋白**：染色质、RNA 结合、翻译、表观遗传、调控网络、蛋白功能与蛋白组/PTM。
+- **互作与机制**：PPI/复合体、条件特异扰动、结构/CADD、逐条机制证据和冲突。
+- **三个新增官方只读查询**：IntAct、Complex Portal、Cellosaurus。每次需明确批准所查询的公开标识；IntAct 只读一页，返回筛选与覆盖范围，空页不能证明没有互作。
+- **六种新增摘要审查**：剪接、调控、蛋白注释、互作、扰动、机制图。记录需绑定来源和上下文；`qc_gate_pass` 表示摘要合同一致，科学有效性仍需独立审查。
+- **固定流程准备**：nf-core ATAC/ChIP/甲基化按固定提交、参考和输入绑定 QC，生成服务器任务包；不执行引擎或下载参考。
+
+rMATS、LeafCutter、DEXSeq、DRIMSeq、IsoQuant、FLAIR、SQANTI3、SCENIC 等列为方法候选，需要所选服务器环境和真实运行验收，不能当作已新增的可执行后端。外部 BioMCP、BioContextAI、ToolUniverse 和技能候选也保留审查状态，不自动安装/连接。详细路线见 [MOLECULAR_DRYLAB.md](MOLECULAR_DRYLAB.md)。
+
+## 既有模块继续协同
+
+| 模块 | 使用说明 |
+|---|---|
+| 文献、主张核验、综述与论文协作 | [学术工作流](ACADEMIC_WORKFLOWS.md)、[工作流 skill](SKILLS.md) |
+| 统计指导与正式分析前设计 | [统计学模块](STATISTICS.md) |
+| Bulk、单细胞、空间、通路与 PPI | [分析与研究流程](RESEARCH_WORKFLOWS.md)、[有界本地版](LOCAL_ANALYSIS.md) |
+| 结构、对接、MD 与 CADD 审查 | [CADD 工作流](CADD_WORKFLOWS.md)、[第三方 skill 审查](CADD_SKILL_REVIEW.md) |
+| 代码/Notebook/工作流与医学研究 | [代码工作流](CODE_WORKFLOWS.md)、[临床研究](CLINICAL_RESEARCH.md) |
+| 私有项目、证据谱系、复现与服务器适配器 | [项目工作台](WORKBENCH.md)、[科学后端](SCIENTIFIC_BACKENDS.md) |
+| Zotero、个人研究索引与本机软件 | [Zotero](ZOTERO_LOCAL.md)、[个人文献库](PERSONAL_LIBRARY.md)、[软件接口](SOFTWARE_INTERFACES.md) |
+| 可选 MCP 和平台访问 | [MCP 接入](MCP_INTEGRATIONS.md)、[平台说明](PLATFORMS.md) |
+
+## 两个发行版
+
+在 [Releases](https://github.com/BoteXu/BioResearchWorkbench/releases) 选择所需安装包。两个包共享工具源码，默认依赖和计算边界不同。
+
+| 发行版 | 默认 profile | 适合的使用方式 |
+|---|---|---|
+| `server` | `core` | 本地检索、命令准备、任务/回执追踪、结果检查与交付；大计算、大下载、索引在已有服务器 |
+| `local` | `local` | 在服务器版能力上选择有界的小型转录组、通路/PPI 和分子计算；先做 QC/资源检查，R/外部软件仍需配置和实测 |
+
+私有配置、库、研究资料、运行回执和可选私有补充不随公开包分发。公开工作台的实现请求不授权修改私有文献库或对外传输敏感数据。
+
+## 持续升级
+
+新安装仍使用下面的平台安装器，并要求新目录。已有安装使用下载包中的 `upgrade.py`，先阅读 [升级与回滚说明](EVOLUTION.md)，检查与当前版本对应的受管文件基线。
+
+```text
+python upgrade.py --install-dir <私有安装目录> --preview-file <新的私有计划文件>
+python upgrade.py --apply-plan <私有计划文件> --reviewed-sha256 <审核后的计划哈希>
+python upgrade.py --rollback-journal <本次升级的私有 journal 文件>
+```
+
+未记录基线的旧安装只能从对应原版包显式初始化；定制源码不能被当作原版采用。源码/环境升级后重新启动工具进程，再进行实际调用验收。依赖变化、未知升级状态和升级后的定制内容需要分别核查；回滚源码不等于恢复分析任务。
 
 ## Cross-platform installation
 
@@ -78,6 +131,8 @@ Import readiness does not establish runtime readiness. Table formatting, caller-
 
 Tool catalog descriptions are read without importing a scientific/model stack. Upstream `import_ready: null` means its import was deferred. Pass `check_imports=true` for an explicit import check, and inspect optional dependency checks separately. Observed runtime passes remain distinct from dependency presence.
 
+对于固定公开端点的只读 GET，收到 429/500/502/503/504 后最多尝试三次，每次响应保留来源记录。持续失败仍报告失败；连接状态不明和 POST 不自动重试。这不适用于服务器任务提交、原生写入或文献库写入。
+
 ## Verification
 
 ### Research helpers
@@ -102,22 +157,8 @@ Before release, follow [PRIVACY.md](PRIVACY.md). The privacy gate scans current 
 
 ## Upstream and license
 
-Official Biomni: https://github.com/snap-stanford/Biomni
+Official Biomni: [snap-stanford/Biomni](https://github.com/snap-stanford/Biomni)
 
 Pinned upstream revision: `400c1f366b96a35ca253e13c9b06c5076af41d65`.
 
 Apache-2.0; see `LICENSE` and `NOTICE`. This repository provides a direct-tool integration layer and is not an official upstream release.
-
-## CADD review and audit tools (v2.12)
-
-Eight original `cadd` tools add MD/tREMD/REST2 protocol review, restart continuity, exchange diagnostics, docking campaign completeness, restraint mapping, selected AF3 confidence summaries and independent-run endpoint-energy review. Read [CADD_WORKFLOWS.md](CADD_WORKFLOWS.md) and the [source skill review](CADD_SKILL_REVIEW.md). No upstream CADD scripts, model weights or simulation engines are bundled; existing specialist database tools are reused. Local scope remains bounded planning/result checks and heavy calculation stays on the server. Synthetic audit acceptance does not establish live engine or scientific validity.
-
-## Optional MCP integrations (v2.11)
-
-See [MCP_INTEGRATIONS.md](MCP_INTEGRATIONS.md) for scoped Serena, Context7, DuckDB, Qdrant and Playwright processes, a digest-pinned optional Docker gateway, actual read-only Slurm observation and reviewed scientific-software interfaces. Core remains lightweight; external runtimes, private profiles and acceptance receipts are separate.
-
-## Molecular dry-lab workbench and engineering evolution (v2.13)
-
-The molecular dry-lab entrypoint connects gene/regulatory/RNA/protein/interaction/structure evidence with existing literature, statistics, omics, code, server and academic workflows. Three new approved-public-identifier clients query IntAct, Complex Portal and Cellosaurus. Original summary audits preserve species, model, assay, independent-unit, annotation and causal boundaries. Fixed QC-bound nf-core ATAC/ChIP/methylation preparation submits nothing. See [MOLECULAR_DRYLAB.md](MOLECULAR_DRYLAB.md).
-
-[EVOLUTION.md](EVOLUTION.md) covers expired validation states, reviewed upgrades/rollback, generated catalogs, lazy optional modules, typed MCP entrypoints, licensed public reference benchmarks, server budgets/recovery/incremental-return plans and the question-oriented private browser interface. External skill/MCP candidates are reviewed references, not automatically enabled connections. Large analysis remains on the server; private updates are excluded from this public package.

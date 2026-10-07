@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 7074,
-      "sha256": "a1e6de5ad47c808089d1b27c04213fe33db3208b80f628231e4149920bcd9dea"
+      "bytes": 7571,
+      "sha256": "5bee9135cd9fd1ec5adeb01a0bedc863487bfd56fe3ef0d8e0fef72a2c454834"
     },
     {
       "path": ".gitignore",
@@ -130,8 +130,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 15742,
-      "sha256": "a4a24d89516889a671377e073b992b7ce41af4edeefd806bf963438d3c2df382"
+      "bytes": 17779,
+      "sha256": "dc1f0d37524c17e6185f445fe790e14263d1f6939d5a28a2d99d791be81269b1"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -320,8 +320,8 @@
     },
     {
       "path": "bridge/http_client.py",
-      "bytes": 4194,
-      "sha256": "740be0154defd62637862762521ccc5e5b3baf0740ccd36d935550347444890f"
+      "bytes": 4570,
+      "sha256": "d8c4d38cf79e151c3fb4aeaedd2451606301b60dea947342c72cee75bbfb161d"
     },
     {
       "path": "bridge/integration_ext.py",
@@ -600,8 +600,8 @@
     },
     {
       "path": "generate_catalog.py",
-      "bytes": 7134,
-      "sha256": "06c46346275fa7b29121174f415fde7cb2017d2f49a2a3f930f5e2a3bc9149d4"
+      "bytes": 7975,
+      "sha256": "4482cf8bb8bb5132e421ac36149c2ffd66d3cfd627c729db207df0fc4f23b73b"
     },
     {
       "path": "install.py",
@@ -967,6 +967,11 @@
       "path": "tests/test_cytoscape.py",
       "bytes": 1951,
       "sha256": "4e9dcbf37d60cf692057052e5a798067c74df13774b8bded826888c460f20d73"
+    },
+    {
+      "path": "tests/test_http_readonly.py",
+      "bytes": 3054,
+      "sha256": "0883faa3bfed2fa657276bfc43d9695e1247446b46839ba445a91084b5a6f11f"
     },
     {
       "path": "tests/test_mcp_integrations.py",

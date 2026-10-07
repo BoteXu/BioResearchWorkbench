@@ -77,11 +77,21 @@ jobs:
         with:
           r-version: '4.4.3'
           use-public-rspm: true
+      - name: Provide Rhtslib system headers in isolated CI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libbz2-dev liblzma-dev
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-R-4.4.3-public-benchmarks-bioc-3.20-v1
       - name: Install isolated licensed benchmark dependencies
         shell: Rscript {0}
         run: |
           install.packages(c('BiocManager','jsonlite','digest'),repos='https://cloud.r-project.org')
+          BiocManager::install(version='3.20',ask=FALSE)
           BiocManager::install(c('DESeq2','pasilla'),ask=FALSE,update=FALSE)
+          stopifnot(requireNamespace('DESeq2',quietly=TRUE),requireNamespace('pasilla',quietly=TRUE))
       - run: Rscript tests/public_benchmark_check.R
   browser-interface:
     runs-on: ubuntu-latest

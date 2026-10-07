@@ -83,6 +83,13 @@ def generate(root=ROOT):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args()
     data, md = generate(); outputs={'TOOL_CATALOG.json': json.dumps(data, ensure_ascii=False, indent=2)+'\n', 'TOOL_CATALOG.md':md}
+    begin='<!-- GENERATED:CATALOG:BEGIN -->';end='<!-- GENERATED:CATALOG:END -->'
+    readme=(ROOT/'README.md').read_text(encoding='utf8')
+    if readme.count(begin)!=1 or readme.count(end)!=1 or readme.index(begin)>readme.index(end):
+        raise SystemExit('README requires one ordered generated catalog block')
+    skills=len(json.loads((ROOT/'skills/catalog.json').read_text(encoding='utf8'))['skills'])
+    summary=f"**公开目录（自动生成）**：{data['extension_functions']} 个扩展函数、{data['extension_categories']} 个类别、{data['routing_intents']} 个任务路由、{skills} 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。\n"
+    outputs['README.md']=readme[:readme.index(begin)+len(begin)]+'\n'+summary+readme[readme.index(end):]
     if args.check:
         if any(not (ROOT/name).exists() or (ROOT/name).read_text(encoding='utf8')!=value for name,value in outputs.items()):
             raise SystemExit('Generated tool catalog is stale; regenerate before release')
