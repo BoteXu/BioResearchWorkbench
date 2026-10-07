@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 7571,
-      "sha256": "5bee9135cd9fd1ec5adeb01a0bedc863487bfd56fe3ef0d8e0fef72a2c454834"
+      "bytes": 7644,
+      "sha256": "1d3a25f5059429b23a2e9856a374ead297e33afbcbbadb33eda243981edb9995"
     },
     {
       "path": ".gitignore",
@@ -130,8 +130,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 17779,
-      "sha256": "dc1f0d37524c17e6185f445fe790e14263d1f6939d5a28a2d99d791be81269b1"
+      "bytes": 18311,
+      "sha256": "5eb7126d46af55eb058ff60e178eb70fa6bbf8b343018c645d7475e66da20f80"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -705,8 +705,8 @@
     },
     {
       "path": "run_acceptance.py",
-      "bytes": 5122,
-      "sha256": "2ea76a35a18e84047732627f160fec4499fc9867959efc917f6b9eea1953577a"
+      "bytes": 7116,
+      "sha256": "0253b061dab3d076c28bfe242d7900db2bb4a36bad3f9ac045b84c1268602719"
     },
     {
       "path": "skills/biomni-academic-delivery/SKILL.md",
@@ -937,6 +937,11 @@
       "path": "tests/test_academic.py",
       "bytes": 27612,
       "sha256": "0d649b1d57f7ad598020eaa8acff6dee1cbbbb19fa7c3875213d52d7bef2d460"
+    },
+    {
+      "path": "tests/test_acceptance_layers.py",
+      "bytes": 1581,
+      "sha256": "0a07686b927366929ef81595faacd7b0dc407e3f17f141fbc996219e442a87e4"
     },
     {
       "path": "tests/test_biomedical.py",

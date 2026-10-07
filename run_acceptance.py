@@ -11,11 +11,31 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+def finalize_report(report, allow_unavailable_public_services=False):
+    """Keep strict acceptance separate from an explicitly scoped CI installation gate."""
+    offline=report['offline']
+    engineering=not any(offline[k] for k in ['failures','errors','skipped'])
+    for row in report['network']:
+        unavailable=(row.get('invocation_success') is False and row.get('receipt_integrity_verified') is True and
+                     (row.get('http_status') in {429,500,502,503,504} or row.get('error_type') in {'ConnectTimeout','ReadTimeout','Timeout'}))
+        row['availability_state']='passed' if row['pass'] else 'external_unavailable' if unavailable else 'check_failed'
+    network=all(r['pass'] for r in report['network'])
+    outages=[r['case'] for r in report['network'] if r['availability_state']=='external_unavailable']
+    hard_failures=[r['case'] for r in report['network'] if r['availability_state']=='check_failed']
+    strict=engineering and network
+    return {**report,'engineering_pass':engineering,'network_pass':network if report['network_state']!='not_requested' else None,
+            'public_service_outages':outages,'network_check_failures':hard_failures,'pass':strict,
+            'ci_gate_pass':strict or bool(engineering and allow_unavailable_public_services and outages and not hard_failures),
+            'ci_gate_policy':'known_public_service_outages_reported_separately' if allow_unavailable_public_services else 'strict_all_requested_checks'}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--network',action='store_true')
+    parser.add_argument('--allow-unavailable-public-services',action='store_true',help='Explicit CI-only installation gate; strict pass and failed network states remain false')
     parser.add_argument('--output-file',help='Private JSON report; do not publish runtime reports')
     args = parser.parse_args()
+    if args.allow_unavailable_public_services and not args.network:parser.error('The separate service gate requires --network')
     root = Path(__file__).resolve().parent
     suite = unittest.defaultTestLoader.discover(str(root/'tests'))
     with redirect_stdout(io.StringIO()):
@@ -49,10 +69,12 @@ def main():
                              (expected is None or any(c['identifier'].split('.')[0] == expected for c in data['candidates'])) and
                              hashlib.sha256(raw).hexdigest() == receipt['sha256'])
                 report['network'].append({'case':name,'pass':check,'receipt_file':receipt['receipt_file'],
+                                          'invocation_success':bool(receipt['success']),
+                                          'receipt_integrity_verified':hashlib.sha256(raw).hexdigest()==receipt['sha256'],
                                           'resolution_status':data.get('status'),
                                           'candidate_coverage_complete':data.get('candidate_coverage_complete'),
                                           'http_status':int(status_match.group(1)) if status_match else None,
-                                          'error_type':(str(data.get('error','')).split(':',1)[0] if re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',str(data.get('error','')).split(':',1)[0]) else None)})
+                                          'error_type':data.get('error_type') or (str(data.get('error','')).split(':',1)[0] if re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',str(data.get('error','')).split(':',1)[0]) else None)})
             except Exception as exc:
                 report['network'].append({'case':name,'pass':False,'error_type':type(exc).__name__})
         report['network_state'] = 'completed'
@@ -66,14 +88,14 @@ def main():
             report['network'].append({'case':'ontology_candidates','pass':check,'receipt_file':receipt['receipt_file']})
         except Exception as exc:
             report['network'].append({'case':'ontology_candidates','pass':False,'error_type':type(exc).__name__})
-    report['pass'] = result.wasSuccessful() and not result.skipped and all(c['pass'] for c in report['network'])
+    report=finalize_report(report,args.allow_unavailable_public_services)
     if args.output_file:
         path = Path(args.output_file)
         if path.exists():
             raise ValueError('Choose a fresh report path')
         path.write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')
     print(json.dumps(report,indent=2))
-    return 0 if report['pass'] else 1
+    return 0 if report['ci_gate_pass'] else 1
 
 
 if __name__ == '__main__':

@@ -143,10 +143,10 @@ jobs:
         shell: bash
         run: |
           python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'-c',\"import importlib.util; assert all(importlib.util.find_spec(n) is None for n in ['numpy','pandas','scipy','torch','langchain'])\"],check=True)"
-      - name: Fixed public identity acceptance suite
+      - name: Fixed public identities with external service outages reported separately
         shell: bash
         run: |
-          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'run_acceptance.py','--network'],check=True)"
+          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'run_acceptance.py','--network','--allow-unavailable-public-services'],check=True)"
   local-analysis-install:
     strategy:
       fail-fast: false

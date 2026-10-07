@@ -153,6 +153,8 @@ Run `python run_acceptance.py` for fixed offline checks. In an installed core en
 
 GitHub Actions runs privacy/history/manifest checks and unit tests, then installs the core profile on clean Windows, Linux, macOS ARM and macOS Intel runners and tests MCP over the network. A separate browser check uses synthetic data at desktop and mobile viewport sizes; this does not certify HarmonyOS hardware. Inspect the actual run result before claiming clean-install success. Other client GUI integrations, optional profiles and a real HPC deployment are not implied by a core CI pass.
 
+联网报告区分 `engineering_pass`、`network_pass` 和严格的 `pass`。CLI 默认要求所有请求的检查通过。CI 的安装门禁显式使用 `--allow-unavailable-public-services`：只对有完整回执的已识别 HTTP 429/500/502/503/504 或超时另列 `external_unavailable`，仍保留 `network_pass=false` 和 `pass=false`。身份不匹配、输入/认证/协议错误、回执损坏或离线失败均阻断。CI 绿色不代表所有外部服务此刻可用，需检查报告中的 `public_service_outages`。
+
 Before release, follow [PRIVACY.md](PRIVACY.md). The privacy gate scans current candidates and historical blobs, checks generic commit identities and avoids printing matched values. Names and research context still require manual review.
 
 ## Upstream and license
