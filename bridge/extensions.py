@@ -5,6 +5,7 @@ from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "cadd": ("cadd_ext", ["guide_cadd_workflow", "audit_simulation_protocol", "audit_restart_manifest", "audit_replica_exchange", "audit_docking_campaign", "audit_restraint_mapping", "audit_af3_records", "audit_mmgbsa_summary"]),
     "integrations": ("integration_ext", ["inspect_mcp_components", "prepare_slurm_monitor", "inspect_slurm_monitor"]),
     "table_query": ("table_query_ext", ["query_selected_table"]),
     "semantic_index": ("semantic_index_ext", ["prepare_semantic_index", "audit_semantic_results"]),

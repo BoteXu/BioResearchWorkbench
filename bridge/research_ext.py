@@ -17,6 +17,14 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'cadd_workflow':[('cadd','guide_cadd_workflow')],
+    'simulation_protocol':[('cadd','audit_simulation_protocol')],
+    'simulation_restart':[('cadd','audit_restart_manifest')],
+    'replica_exchange_review':[('cadd','audit_replica_exchange')],
+    'docking_campaign_review':[('cadd','audit_docking_campaign')],
+    'restraint_mapping_review':[('cadd','audit_restraint_mapping')],
+    'af3_confidence_review':[('cadd','audit_af3_records')],
+    'endpoint_energy_review':[('cadd','audit_mmgbsa_summary')],
     'mcp_integration':[('integrations','inspect_mcp_components')],
     'scoped_table_query':[('table_query','query_selected_table')],
     'semantic_retrieval':[('semantic_index','prepare_semantic_index'),('semantic_index','audit_semantic_results')],

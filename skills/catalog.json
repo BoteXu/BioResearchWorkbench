@@ -1,5 +1,5 @@
 {
-  "version": "2.10.0",
+  "version": "2.12.0",
   "skills": [
     {
       "name": "biomni-academic-delivery",
@@ -51,12 +51,15 @@
         "molecular.audit_docking_inputs",
         "advanced.audit_redocking_coordinates",
         "molecular.summarize_vina_poses",
-        "software.check_software_health"
+        "software.check_software_health",
+        "cadd.guide_cadd_workflow",
+        "cadd.audit_docking_campaign",
+        "cadd.audit_restraint_mapping"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-docking-review/references/tool-routing.md": "f5becf181eb62dc3ed22ae57f14889d00eb215d625ca9d3d1e1e7450cc9aa9cc",
-        "biomni-docking-review/SKILL.md": "1e95df209c771907840654ef64a03ddd5d962f7d55f302eba90e29f9d9785af3"
+        "biomni-docking-review/references/tool-routing.md": "9511baea166467be07772c57d3b03af2132f8cf7c583c5a392929bb935023a22",
+        "biomni-docking-review/SKILL.md": "b96748270668d0e612c6b2c816c5da19a2189f0d0306a557147053cc385c75a6"
       }
     },
     {
@@ -122,12 +125,15 @@
         "scientific_backend.prepare_pdf_ocr",
         "code_execution.prepare_code_execution",
         "code_execution.prepare_code_task_array",
-        "code_execution.audit_resume_compatibility"
+        "code_execution.audit_resume_compatibility",
+        "cadd.guide_cadd_workflow",
+        "cadd.audit_simulation_protocol",
+        "cadd.audit_restart_manifest"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-remote-compute/references/tool-routing.md": "10345c3fddf3151bd8f342a89c7791670e319774021d6d3e78c36f8bbf71fbf0",
-        "biomni-remote-compute/SKILL.md": "8f5d21b3b93b797e8af2a70608fa77d475fc1720e9e2ce5604ba6461d39a4c3d"
+        "biomni-remote-compute/references/tool-routing.md": "eca45f67c9e182de765275bf5bffa2e12eadeca3492a4fcd4353913352309281",
+        "biomni-remote-compute/SKILL.md": "50ae6f174e58a3e2b4bc1b9243e276b8a88c2a4f1ac6684898c96edba731b28c"
       }
     },
     {
@@ -193,12 +199,18 @@
       "tool_routes": [
         "biomedical.audit_structure_context",
         "research.resolve_identifier",
-        "advanced.audit_md_summary"
+        "advanced.audit_md_summary",
+        "cadd.guide_cadd_workflow",
+        "cadd.audit_simulation_protocol",
+        "cadd.audit_restart_manifest",
+        "cadd.audit_replica_exchange",
+        "cadd.audit_af3_records",
+        "cadd.audit_mmgbsa_summary"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-structure-review/references/tool-routing.md": "646aa65fa410f617d1e69288f0398f16f95c79908aeec049d2613a3c980a981e",
-        "biomni-structure-review/SKILL.md": "13a8b1db155498e53d826544f39b4e5662db7d7155c2134ea03a06167c5acce9"
+        "biomni-structure-review/references/tool-routing.md": "06aa22636d070ed560a8db4cd08f2d7990f4bf6b50da868d3f9c287c31616a0b",
+        "biomni-structure-review/SKILL.md": "fa935089cf8a627b00b5bae8c3982e0ce9931cf0b0e7c9500b8bf31633b11bbf"
       }
     },
     {

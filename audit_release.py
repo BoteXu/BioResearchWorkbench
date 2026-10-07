@@ -62,6 +62,9 @@ def review(root, manifest=False, history=False, deny_terms=()):
             fields = line.split('|')
             if fields != ['Project Contributors','contributors@example.invalid']*2:
                 findings.append({'category':'non_generic_commit_identity'})
+        for line in git(root,'log','--format=%ai|%ci','HEAD').splitlines():
+            if any(not stamp.endswith(' +0000') for stamp in line.split('|')):
+                findings.append({'category':'non_normalized_commit_timezone'})
         # Review historical blob content as well as current files and metadata.
         objects = git(root,'rev-list','--objects','HEAD').splitlines()
         blobs = set()

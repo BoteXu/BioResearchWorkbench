@@ -1,0 +1,60 @@
+{
+  "reviewed_collection": {
+    "name": "cadd-skill",
+    "origin": "https://github.com/makabaka007x/cadd-skill",
+    "revision": "49f09d57b9c5ace7f404b4eeb6a870b571c8efaf",
+    "license_status": "No explicit redistribution grant found in reviewed snapshot",
+    "use": "static_gap_review_only",
+    "redistributed_payload": false,
+    "executed_payload": false
+  },
+  "review_scope": {
+    "skills": 13,
+    "tracked_files": 126,
+    "python_sources": 33,
+    "python_syntax_errors": 0,
+    "scientific_engine_execution": "not_performed",
+    "static_scan_is_safety_certificate": false
+  },
+  "our_implementation": {
+    "module": "cadd_ext.py",
+    "authorship": "Project-authored independent summary audits",
+    "license": "Apache-2.0",
+    "engine_execution": false,
+    "network": false
+  },
+  "method_references": [
+    {
+      "name": "GROMACS restart handling",
+      "origin": "https://manual.gromacs.org/current/user-guide/managing-simulations.html"
+    },
+    {
+      "name": "GROMACS replica exchange",
+      "origin": "https://manual.gromacs.org/current/reference-manual/algorithms/replica-exchange.html"
+    },
+    {
+      "name": "PLUMED partial tempering",
+      "origin": "https://www.plumed.org/doc-v2.9/user-doc/html/partial_tempering.html"
+    },
+    {
+      "name": "AlphaFold 3 output schema",
+      "origin": "https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md"
+    },
+    {
+      "name": "HADDOCK AIRs",
+      "origin": "https://www.bonvinlab.org/software/haddock2.4/airs/"
+    },
+    {
+      "name": "Amber force fields",
+      "origin": "https://ambermd.org/AmberModels.php"
+    },
+    {
+      "name": "Amber manuals",
+      "origin": "https://ambermd.org/Manuals.php"
+    }
+  ],
+  "limitations": [
+    "Method documentation is referenced, not redistributed.",
+    "External engine licenses, capabilities and real data validity require separate acceptance."
+  ]
+}

@@ -1,5 +1,16 @@
 # 工具适配与调用
 
+## Bridge 2.12 CADD additions
+
+- `cadd.guide_cadd_workflow`
+- `cadd.audit_simulation_protocol`
+- `cadd.audit_restart_manifest`
+- `cadd.audit_replica_exchange`
+- `cadd.audit_af3_records`
+- `cadd.audit_mmgbsa_summary`
+
+Read CADD_WORKFLOWS.md in the installed tool host. Source binding declarations require independently reviewed receipts; confidence and computational estimates are not experimental activity.
+
 ## 发现
 
 按名称在当前 `biomni_tool_catalog` 检索下列工具，读取当前所需参数、版本、`runtime_state`、`last_attempt_success` 与依赖检查。每个工具通过 `biomni_run_tool(category, name, parameters)` 调用；不要从工具名猜测参数。

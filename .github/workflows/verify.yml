@@ -108,6 +108,10 @@ jobs:
         run: |
           python install_skills.py --destination "$RUNNER_TEMP/BiomniSkills"
           python -c "import install_skills,os; from pathlib import Path; c=install_skills.validate_pack(); root=Path(os.environ['RUNNER_TEMP'])/'BiomniSkills'; assert len(list(root.glob('*/SKILL.md')))==len(c['skills'])"
+      - name: Installed CADD audits generate bound reports and retain refusals
+        shell: bash
+        run: |
+          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'tests/cadd_process_check.py'],check=True)"
       - name: Confirm core profile stays lightweight
         shell: bash
         run: |

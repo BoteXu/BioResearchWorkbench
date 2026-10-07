@@ -108,6 +108,10 @@ Pinned upstream revision: `400c1f366b96a35ca253e13c9b06c5076af41d65`.
 
 Apache-2.0; see `LICENSE` and `NOTICE`. This repository provides a direct-tool integration layer and is not an official upstream release.
 
+## CADD review and audit tools (v2.12)
+
+Eight original `cadd` tools add MD/tREMD/REST2 protocol review, restart continuity, exchange diagnostics, docking campaign completeness, restraint mapping, selected AF3 confidence summaries and independent-run endpoint-energy review. Read [CADD_WORKFLOWS.md](CADD_WORKFLOWS.md) and the [source skill review](CADD_SKILL_REVIEW.md). No upstream CADD scripts, model weights or simulation engines are bundled; existing specialist database tools are reused. Local scope remains bounded planning/result checks and heavy calculation stays on the server. Synthetic audit acceptance does not establish live engine or scientific validity.
+
 ## Optional MCP integrations (v2.11)
 
 See [MCP_INTEGRATIONS.md](MCP_INTEGRATIONS.md) for scoped Serena, Context7, DuckDB, Qdrant and Playwright processes, a digest-pinned optional Docker gateway, actual read-only Slurm observation and reviewed scientific-software interfaces. Core remains lightweight; external runtimes, private profiles and acceptance receipts are separate.

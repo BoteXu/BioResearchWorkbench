@@ -1922,6 +1922,14 @@
       ],
       "our_role": "External optional tool dependency; not authored or relicensed here.",
       "license_status": "Consult exact-version distribution license metadata; not relicensed by this repository."
+    },
+    {
+      "name": "cadd-skill",
+      "origin": "https://github.com/makabaka007x/cadd-skill",
+      "revision": "49f09d57b9c5ace7f404b4eeb6a870b571c8efaf",
+      "use": "consulted_skill_reference_only",
+      "license_status": "No explicit redistribution grant found in reviewed snapshot",
+      "our_role": "Independent gap review and original bounded audits; no upstream payload copied, installed or executed."
     }
   ],
   "limits": [

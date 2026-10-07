@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
-  "bridge_version": "2.11",
-  "package_version": "2.11.0",
+  "bridge_version": "2.12",
+  "package_version": "2.12.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 5940,
-      "sha256": "9d1f6ae1709465aab1e88f70c41e2bc4d4cac7a4ee7cd85d2d79fbc9d1521d43"
+      "bytes": 6247,
+      "sha256": "2bd0a4c56395039cce3948359e63d853464cc70d2f836f7b4b674e10ba620e49"
     },
     {
       "path": ".gitignore",
@@ -30,13 +30,23 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 9297,
-      "sha256": "c59bf44b2035d9b482e920a27c7820cecbbf5f863d139cd3a6fdc4848bc09eac"
+      "bytes": 10127,
+      "sha256": "59a40149729a99f299c30da29cb78c111cb7f6cc8c0a71d55fa0d91fab4b17b8"
     },
     {
       "path": "BIOMEDICAL.md",
       "bytes": 9342,
       "sha256": "eab919fd18224cc3706a7148acd05b270891c7fed5a70e60883cce5a82b36cd7"
+    },
+    {
+      "path": "CADD_SKILL_REVIEW.md",
+      "bytes": 7009,
+      "sha256": "dc4a26cdbcb62dd336f531b1f4af4bb0357bf63436f3b204033ae064cf9ea3ff"
+    },
+    {
+      "path": "CADD_WORKFLOWS.md",
+      "bytes": 10694,
+      "sha256": "f319d04484924128ec381c3255d447edc8b93cff1ca32656fd3aac0dae203c5e"
     },
     {
       "path": "CLINICAL_RESEARCH.md",
@@ -85,8 +95,8 @@
     },
     {
       "path": "ORIGINS.md",
-      "bytes": 7995,
-      "sha256": "2cdaefc199e53f1dbc9d701107bc2288c2e58c9d11ab4fa489c45e069554c0d6"
+      "bytes": 8820,
+      "sha256": "9c94bba2fc7562664c7f01dca237052621d889a70f0a332585a4f4e2095fbd3d"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -110,8 +120,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 13978,
-      "sha256": "ee234a85c4c56dd5654bd3044cc5b890b34bdb8415951b9a97797a4cc6f2721e"
+      "bytes": 14648,
+      "sha256": "50375337e9cd116cc1f812c0f8e3c6d1f3a33ebf66bc560749329a2542a5c98f"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -130,8 +140,8 @@
     },
     {
       "path": "SKILLS.md",
-      "bytes": 4754,
-      "sha256": "3e44ebce1c8881fc2fdc3ee80d8b0beaa5abd2da2228c36b143d64b128310238"
+      "bytes": 5113,
+      "sha256": "d77f3096e6a455be951d53acda9d6ae8d18f2af7090af2ffcc8e894492980d09"
     },
     {
       "path": "SOFTWARE_INTERFACES.md",
@@ -155,8 +165,8 @@
     },
     {
       "path": "audit_release.py",
-      "bytes": 5157,
-      "sha256": "a3ee0f23d219676585b9a18bace924ecaede374d17788612de2c11c0c9444a97"
+      "bytes": 5391,
+      "sha256": "5161884324672f79f99e931ef9bccee60293a132a6c469cac111ef34304a3d19"
     },
     {
       "path": "bootstrap_upstream.py",
@@ -200,8 +210,13 @@
     },
     {
       "path": "bridge/bridge.py",
-      "bytes": 24444,
-      "sha256": "6e0ba309eead7665abb207c9fd7b064b114c82fabebd88538467eb5cd4c93478"
+      "bytes": 24459,
+      "sha256": "7fc9dd0d16fea57a4595033ee0fec121b167be7974d3ebdf7b44815e5465fb7e"
+    },
+    {
+      "path": "bridge/cadd_ext.py",
+      "bytes": 29660,
+      "sha256": "b0a57d41d16257916f14bd8fba0677134f788d3239955bfba6d8b8c799bf74e2"
     },
     {
       "path": "bridge/clinical_backend.R",
@@ -275,8 +290,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 11728,
-      "sha256": "5c091c71835f09e33659d6cda29fdbdd9619b8bb6b30d30739747ae612299f50"
+      "bytes": 11958,
+      "sha256": "b683253002983d845ac5a09c116ee97cc9135ec0658ee1588953551e89045e47"
     },
     {
       "path": "bridge/http_client.py",
@@ -380,8 +395,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 28109,
-      "sha256": "1adc7f03b908ad11913cb3c3d15765a1621875197c181558993f0a5dd59e5e05"
+      "bytes": 28618,
+      "sha256": "d0f73491d2c86c09ab5bfb4d60785ce438157a23d10b1eaee7a459f25001b512"
     },
     {
       "path": "bridge/review_ext.py",
@@ -501,7 +516,12 @@
     {
       "path": "build_releases.py",
       "bytes": 1990,
-      "sha256": "4e04b0b0ea1f9fbef53d8b01a35c6e588fdefc029a6e48ea576e8e4c1bd670e8"
+      "sha256": "f2a9ee0ad3424346ca47083039794e52edf895c2b30ae4c3ad514765ad3a96be"
+    },
+    {
+      "path": "cadd_sources.json",
+      "bytes": 1912,
+      "sha256": "44a459d80b6bb8092362f70f4757160a8a3d76f1a08d6c84d16e72b585a8f61c"
     },
     {
       "path": "client_config.py",
@@ -530,8 +550,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 6729,
-      "sha256": "d1488a8f2731de1f11e972bd98bc0b4ce84f5d819fad818513140eb60266f65e"
+      "bytes": 6798,
+      "sha256": "b83b0c05262c3113d2bce5dc1a77f746713f5f8ce572cd49bc7904e1470c9d44"
     },
     {
       "path": "install_mcp.py",
@@ -650,13 +670,13 @@
     },
     {
       "path": "skills/biomni-docking-review/SKILL.md",
-      "bytes": 2313,
-      "sha256": "1e95df209c771907840654ef64a03ddd5d962f7d55f302eba90e29f9d9785af3"
+      "bytes": 2896,
+      "sha256": "b96748270668d0e612c6b2c816c5da19a2189f0d0306a557147053cc385c75a6"
     },
     {
       "path": "skills/biomni-docking-review/references/tool-routing.md",
-      "bytes": 1639,
-      "sha256": "f5becf181eb62dc3ed22ae57f14889d00eb215d625ca9d3d1e1e7450cc9aa9cc"
+      "bytes": 1940,
+      "sha256": "9511baea166467be07772c57d3b03af2132f8cf7c583c5a392929bb935023a22"
     },
     {
       "path": "skills/biomni-omics-design/SKILL.md",
@@ -680,13 +700,13 @@
     },
     {
       "path": "skills/biomni-remote-compute/SKILL.md",
-      "bytes": 2129,
-      "sha256": "8f5d21b3b93b797e8af2a70608fa77d475fc1720e9e2ce5604ba6461d39a4c3d"
+      "bytes": 2656,
+      "sha256": "50ae6f174e58a3e2b4bc1b9243e276b8a88c2a4f1ac6684898c96edba731b28c"
     },
     {
       "path": "skills/biomni-remote-compute/references/tool-routing.md",
-      "bytes": 2494,
-      "sha256": "10345c3fddf3151bd8f342a89c7791670e319774021d6d3e78c36f8bbf71fbf0"
+      "bytes": 2791,
+      "sha256": "eca45f67c9e182de765275bf5bffa2e12eadeca3492a4fcd4353913352309281"
     },
     {
       "path": "skills/biomni-scientific-figures/SKILL.md",
@@ -725,13 +745,13 @@
     },
     {
       "path": "skills/biomni-structure-review/SKILL.md",
-      "bytes": 2068,
-      "sha256": "13a8b1db155498e53d826544f39b4e5662db7d7155c2134ea03a06167c5acce9"
+      "bytes": 2944,
+      "sha256": "fa935089cf8a627b00b5bae8c3982e0ce9931cf0b0e7c9500b8bf31633b11bbf"
     },
     {
       "path": "skills/biomni-structure-review/references/tool-routing.md",
-      "bytes": 1594,
-      "sha256": "646aa65fa410f617d1e69288f0398f16f95c79908aeec049d2613a3c980a981e"
+      "bytes": 2002,
+      "sha256": "06aa22636d070ed560a8db4cd08f2d7990f4bf6b50da868d3f9c287c31616a0b"
     },
     {
       "path": "skills/biomni-submission-audit/SKILL.md",
@@ -775,8 +795,8 @@
     },
     {
       "path": "skills/catalog.json",
-      "bytes": 14029,
-      "sha256": "f46946e96c5b011da41b494c9153396f0addcb2f436767cf146c6cb938110786"
+      "bytes": 14488,
+      "sha256": "31fe6167218750bc438686a0a23901210d75ba418797aede648e3e9cb88b7184"
     },
     {
       "path": "tests/advanced_check.py",
@@ -792,6 +812,11 @@
       "path": "tests/browser_check.py",
       "bytes": 2694,
       "sha256": "55633b0c7a02e6a6d4a61b98e76145573da13ee1aff2fc087b217663a88d2d74"
+    },
+    {
+      "path": "tests/cadd_process_check.py",
+      "bytes": 3012,
+      "sha256": "7f489823a5600020e9f0ff6b3926563d1d5a6ff47c098cf5f6957ac6a072413a"
     },
     {
       "path": "tests/ci_analysis.py",
@@ -837,6 +862,11 @@
       "path": "tests/test_biomedical.py",
       "bytes": 11047,
       "sha256": "86bf90cd19d5b23c061ec37afcd512dade62dd0e003770ec97793def08ba476b"
+    },
+    {
+      "path": "tests/test_cadd.py",
+      "bytes": 12909,
+      "sha256": "558b67c59999a0aae1d3c0a0f311cb180a97b452c6646931197d619b2af9af5e"
     },
     {
       "path": "tests/test_code_clinical.py",
@@ -895,13 +925,13 @@
     },
     {
       "path": "third_party_components.json",
-      "bytes": 86273,
-      "sha256": "04b71c2ca9d91762a37f8ca521e6a506e004d091c55eb19ae84c58bbec9f123a"
+      "bytes": 86695,
+      "sha256": "dab7c192f34aa03b0b0b18e9e21275a1944a0c4a990274c8e462a772f40a5b02"
     },
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "d88570fe1f9d1cef79c5cb56f5454e4dc691e0693708e04272a3adce4b49ab78"
+      "sha256": "e4ac0010e215139e7aaf0462d1e864f5b6e0ac4f1226983e4e22fe2a34003ea6"
     },
     {
       "path": "update_skill_catalog.py",
