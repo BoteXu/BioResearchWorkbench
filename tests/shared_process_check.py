@@ -19,6 +19,12 @@ ROOT = Path(__file__).resolve().parents[1]
 STAGE = 'setup'
 
 
+def is_fixture_process(process, bridge):
+    arguments = process.cmdline()
+    expected = (bridge/'shared_mcp.py').resolve()
+    return 'serve' in arguments and any(Path(arg).resolve()==expected for arg in arguments if arg.endswith('shared_mcp.py'))
+
+
 def payload(result):
     if result.isError: raise RuntimeError('MCP metadata call failed')
     return result.structuredContent or json.loads(next(x.text for x in result.content if x.type=='text'))
@@ -83,7 +89,15 @@ def main():
             outputs=[]
             for launcher in launchers:
                 stdout, stderr = launcher.communicate(timeout=60)
-                if launcher.returncode: raise RuntimeError('Shared launcher failed: '+str(launcher.returncode))
+                if launcher.returncode:
+                    try:
+                        failed = json.loads(stdout)
+                        detail = {k:failed[k] for k in ['action','reason','new_process_started'] if k in failed}
+                    except (ValueError, TypeError):
+                        text = stderr.decode('utf8',errors='replace')
+                        detail = {'exception_types':__import__('re').findall(r'\b([A-Za-z]+Error):', text)}
+                    print(json.dumps({'launcher_failure':detail,'available_gib':round(psutil.virtual_memory().available/1024**3,2)}))
+                    raise RuntimeError('Shared launcher failed: '+str(launcher.returncode))
                 outputs.append(json.loads(stdout))
             assert len({r['pid'] for r in outputs})==1
             assert sum(r['action']=='started' for r in outputs)==1
@@ -91,7 +105,7 @@ def main():
             assert runtime and runtime['pid']==outputs[0]['pid']
             process = psutil.Process(runtime['pid'])
             assert abs(process.create_time()-runtime['process_create_time']) < 0.01
-            assert str(bridge/'shared_mcp.py') in process.cmdline() and 'serve' in process.cmdline()
+            assert is_fixture_process(process, bridge)
             observed = asyncio.run(clients(settings, shared))
             assert observed['pid']==process.pid
             assert shared.start()['action']=='reused'
@@ -114,7 +128,7 @@ def main():
             runtime = shared.health(settings)
             if runtime:
                 owned = psutil.Process(runtime['pid'])
-                if abs(owned.create_time()-runtime['process_create_time'])<0.01 and str(bridge/'shared_mcp.py') in owned.cmdline() and 'serve' in owned.cmdline():
+                if abs(owned.create_time()-runtime['process_create_time'])<0.01 and is_fixture_process(owned, bridge):
                     owned.terminate(); owned.wait(timeout=15)
 
 

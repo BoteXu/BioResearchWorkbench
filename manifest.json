@@ -945,8 +945,8 @@
     },
     {
       "path": "tests/shared_process_check.py",
-      "bytes": 7439,
-      "sha256": "4de7cafaee4816d275471036807c0db98b30c720ce49c51e2ab86c1b6f494cdf"
+      "bytes": 8175,
+      "sha256": "f19e597865aa832c6c1a827fc4152578a472728c82bd06e5d28d08991b0308a7"
     },
     {
       "path": "tests/test_academic.py",
