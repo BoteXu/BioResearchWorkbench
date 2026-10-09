@@ -11,6 +11,7 @@ import csv
 import functools
 import hashlib
 import inspect
+import importlib.util
 import io
 import ipaddress
 import json
@@ -25,7 +26,13 @@ import time
 import typing
 from datetime import datetime, timezone
 from urllib.request import Request, ProxyHandler, build_opener
-from shared_support import admission, MemoryHistory, BoundedCache, inspect_client_config
+# Configuration writers load this file by filename, without the bridge on sys.path.
+# Resolve the reviewed sibling explicitly rather than depending on ambient module search.
+_support_spec = importlib.util.spec_from_file_location('brw_shared_support', Path(__file__).with_name('shared_support.py'))
+_support = importlib.util.module_from_spec(_support_spec)
+_support_spec.loader.exec_module(_support)
+admission, MemoryHistory, BoundedCache, inspect_client_config = (
+    _support.admission, _support.MemoryHistory, _support.BoundedCache, _support.inspect_client_config)
 
 BRIDGE = Path(__file__).resolve().parent
 PRIVATE = BRIDGE / 'shared_mcp_private'
@@ -48,7 +55,7 @@ ALLOWED_MCP_TOOLS = {'biomni_status', 'biomni_database_query', 'biomni_tool_cata
 
 def source_hash():
     value = hashlib.sha256()
-    for file in sorted(BRIDGE.glob('*.py')):
+    for file in sorted(p for p in BRIDGE.iterdir() if p.is_file() and p.suffix in {'.py','.R','.ps1'}):
         value.update(file.name.encode()); value.update(file.read_bytes())
     return value.hexdigest()
 

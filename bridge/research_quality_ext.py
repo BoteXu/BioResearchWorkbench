@@ -175,7 +175,9 @@ def resolve_public_identifiers(namespace: str, identifiers: list, species: str =
         except Exception as error:
             rows.append({'identifier':identifier, 'cache_hit':False, 'error_type':type(error).__name__, 'state':'failed_requires_review'})
     return {'records':rows, 'requested_count':len(identifiers), 'unique_count':len(rows),
-            'batch_complete':all('resolution' in v for v in rows), 'public_queries_performed':any(not v['cache_hit'] for v in rows),
+            'batch_complete':all('resolution' in v for v in rows),
+            'public_resolution_attempted':any(not v['cache_hit'] for v in rows),
+            'public_queries_performed':True if any(not v['cache_hit'] and 'resolution' in v for v in rows) else None if any(not v['cache_hit'] for v in rows) else False,
             'cache':PUBLIC_CACHE.summary(), 'source_truth_verified':False,
             'limitations':['Cache is bounded, memory-only, five minutes, and restricted to explicitly approved public IDs.',
                            'A cache hit reuses dated source data; it is not a fresh source fetch. Failed entries are never cached.',

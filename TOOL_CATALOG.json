@@ -6531,7 +6531,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "category": "research_quality",
@@ -6566,7 +6566,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "category": "research_quality",
@@ -6621,7 +6621,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "category": "research_quality",
@@ -6682,7 +6682,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "category": "research_quality",
@@ -6724,7 +6724,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "category": "review",

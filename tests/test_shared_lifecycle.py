@@ -6,6 +6,7 @@ import sys
 import tempfile
 import threading
 import time
+import subprocess
 import unittest
 from unittest.mock import patch
 
@@ -17,6 +18,10 @@ import upgrade
 
 
 class LifecycleChecks(unittest.TestCase):
+    def test_filename_import_does_not_require_ambient_bridge_path(self):
+        root = Path(__file__).resolve().parents[1]
+        code = "import importlib.util,sys;spec=importlib.util.spec_from_file_location('selected',sys.argv[1]);v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v);assert callable(v.admission)"
+        subprocess.run([sys.executable,'-I','-c',code,str(root/'bridge/shared_mcp.py')], check=True, capture_output=True)
     def test_upgrade_lease_prevents_concurrent_start_and_refuses_owned_runtime(self):
         from shared_mcp import ProcessLock
         with tempfile.TemporaryDirectory() as folder:

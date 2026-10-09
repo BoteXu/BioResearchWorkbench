@@ -176,7 +176,7 @@
     {
       "path": "TOOL_CATALOG.json",
       "bytes": 339746,
-      "sha256": "17219bba9f39757f961b6c3933f67f70885ece6a81d9887d7cc849ee5e356d53"
+      "sha256": "7b13527cf5b6208f071dc210c8c1840cf4895008a832629619f854b3b03cd993"
     },
     {
       "path": "TOOL_CATALOG.md",
@@ -440,8 +440,8 @@
     },
     {
       "path": "bridge/research_quality_ext.py",
-      "bytes": 19450,
-      "sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+      "bytes": 19635,
+      "sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
     },
     {
       "path": "bridge/review_ext.py",
@@ -490,8 +490,8 @@
     },
     {
       "path": "bridge/shared_mcp.py",
-      "bytes": 34061,
-      "sha256": "3863705c36de2dc97b4611e23e1c5f8afa4e0108ae1d64195556292c6e0e5429"
+      "bytes": 34621,
+      "sha256": "5a6cc5c73b5781f4bf750236a7ae4ebf95e65657ec2a8df4a8cc7f98af3b8e80"
     },
     {
       "path": "bridge/shared_support.py",
@@ -1045,8 +1045,8 @@
     },
     {
       "path": "tests/test_shared_lifecycle.py",
-      "bytes": 6052,
-      "sha256": "7589a2400765347a7f194cde88d46d4e224d38faca1d7b1a78c70c1d388a1921"
+      "bytes": 6523,
+      "sha256": "a56428e0cb0c66347c7c400a3fb72ad3dad05d9a77d35248ac40e82778e13a2e"
     },
     {
       "path": "tests/test_shared_mcp.py",
