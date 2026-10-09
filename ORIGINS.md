@@ -51,4 +51,6 @@ Serena (the installed 1.7.0 distribution), Context7, MotherDuck MCP/DuckDB, Qdra
 
 ## Molecular dry-lab and engineering additions in 2.13
 
+The shared MCP transport in package 2.13.1 is original integration code built on the separately installed MCP Python SDK/FastMCP, Starlette, Uvicorn and psutil, plus operating-system locking primitives. Their existing authorship and licenses remain unchanged. No private deployment configuration or runtime receipt is redistributed.
+
 The molecular routing/audits, upgrade manager, validation lifecycle, generated catalog, server review helpers and question interface are original integration code. IntAct, Complex Portal, Cellosaurus, nf-core methods, DESeq2, pasilla, R datasets/stats and all prior upstream algorithms retain their original authorship and independent terms. External candidate metadata records fixed commits and limited review scope in molecular_resources.json; no candidate skill code, installation script, weights or provider dataset is redistributed. A repository license is not a license for every individual skill or upstream data source.

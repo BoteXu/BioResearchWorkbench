@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
   "bridge_version": "2.13",
-  "package_version": "2.13.0",
+  "package_version": "2.13.1",
   "files": [
     {
       "path": ".gitattributes",
@@ -15,13 +15,13 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 7644,
-      "sha256": "1d3a25f5059429b23a2e9856a374ead297e33afbcbbadb33eda243981edb9995"
+      "bytes": 7972,
+      "sha256": "938f903bdbbd3d390fcdf04de5bf621d1b91d9ae3aa481f13de3b6282f7e4d71"
     },
     {
       "path": ".gitignore",
-      "bytes": 767,
-      "sha256": "b5d51738c99f71eff545504252f7555987c434550d4aec5f6bf10c5d44e69f5f"
+      "bytes": 824,
+      "sha256": "24551d06cab70fcdd526c83b9d63863de79c8f18ba9b66c25582f09301a964f2"
     },
     {
       "path": "ACADEMIC_WORKFLOWS.md",
@@ -30,8 +30,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 11103,
-      "sha256": "d230d1675b5d3a27fa1761d9b2cb90be1529a4319127559c4c5f4d1aaf86b3c5"
+      "bytes": 11709,
+      "sha256": "a116b8a38d4aed02e146990a5eae3b2de30b12bb7734b2834b3607b87816ac29"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -65,8 +65,8 @@
     },
     {
       "path": "Install.ps1",
-      "bytes": 1255,
-      "sha256": "21fd57c9e7a5a85106b0e014f362d5b26cb70407e114e8996638598c00e17e80"
+      "bytes": 1468,
+      "sha256": "0ee3fea298a9c045baae39a65d090b76eeb52279b33a15b833f5c3725ffd87c2"
     },
     {
       "path": "Install.sh",
@@ -105,8 +105,8 @@
     },
     {
       "path": "ORIGINS.md",
-      "bytes": 9505,
-      "sha256": "f11f84d01a15da2dcf2988170ce4c7946446fce6726a1f14614174fd33db0964"
+      "bytes": 9839,
+      "sha256": "3e197759734bba63a30bf23a4e886810b4207612a831e1a0ad3b1a119eeea5aa"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -115,8 +115,8 @@
     },
     {
       "path": "PLATFORMS.md",
-      "bytes": 6299,
-      "sha256": "ff28ddfb5cebdc82d44f219c715b8a079b690e40afb9af59e10f7bd8813740fe"
+      "bytes": 6447,
+      "sha256": "2d6dc17ad0cfec903048ee94f2128643a0e984d0f2d6b265987eb6b83dcf8f87"
     },
     {
       "path": "PRIVACY.md",
@@ -125,13 +125,13 @@
     },
     {
       "path": "PRIVACY_SECURITY.md",
-      "bytes": 4120,
-      "sha256": "1d4fa8fe366d1a6b2388f2f310cdbb49f2299f2cd8992f5493dd7fc62626d491"
+      "bytes": 4347,
+      "sha256": "fc9abf4aefaca4b34e6adad55eb9d9f8145afaeb370d1b37039b26021ea9e50c"
     },
     {
       "path": "README.md",
-      "bytes": 18311,
-      "sha256": "5eb7126d46af55eb058ff60e178eb70fa6bbf8b343018c645d7475e66da20f80"
+      "bytes": 19361,
+      "sha256": "56fb252f3f81bee6b0164636d6df86e379c55f5c8950b9c08dde7edd994bf33c"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -147,6 +147,11 @@
       "path": "SECURITY_REVIEW.md",
       "bytes": 2721,
       "sha256": "b879ec99127e42f96e41f9b0617d0f3198dc8a202a36a0ceaba52e6121096ba5"
+    },
+    {
+      "path": "SHARED_MCP.md",
+      "bytes": 5422,
+      "sha256": "abf1204a8ed77ce5af9e151b4e6fbf1f295fcf277c7fbcc5b0cd8f7eedbaef9f"
     },
     {
       "path": "SKILLS.md",
@@ -165,13 +170,13 @@
     },
     {
       "path": "TOOL_CATALOG.json",
-      "bytes": 332844,
-      "sha256": "f515470feb00554b2efcf947ca1ea01e0450310bd5f35049efd108687a319451"
+      "bytes": 331932,
+      "sha256": "511132e72b614289281d3d6f1ab684667a92b4c3748e652eb89b9fbd1941b4e9"
     },
     {
       "path": "TOOL_CATALOG.md",
       "bytes": 44746,
-      "sha256": "63838c25ce25b6eb0eee58b51fada3ce9210aacfb51fdb73f61a872cefdc30d8"
+      "sha256": "16595c1f133b6f39feac34d9e4500b2f9b12fca2d718b6f3e6ca53bc520b2e40"
     },
     {
       "path": "WORKBENCH.md",
@@ -185,8 +190,8 @@
     },
     {
       "path": "audit_release.py",
-      "bytes": 5391,
-      "sha256": "5161884324672f79f99e931ef9bccee60293a132a6c469cac111ef34304a3d19"
+      "bytes": 5444,
+      "sha256": "33be269c985d2ebff7ce57662c69c9ddc7942ba5682c86c6ba1bdf9aa7900d43"
     },
     {
       "path": "benchmark_catalog.json",
@@ -474,6 +479,11 @@
       "sha256": "ca1f19df90a51e62c777e9e215e8c8a0dcbc18422dac0160a0a6c2aa08a620b2"
     },
     {
+      "path": "bridge/shared_mcp.py",
+      "bytes": 20084,
+      "sha256": "01eedd2135e8b5557212f15a79f89f4f2573e3d8e306bb7e59d408655d69116c"
+    },
+    {
       "path": "bridge/slurm_monitor.py",
       "bytes": 5372,
       "sha256": "d31dd69d2fa2e8429e307ea6fe6a3546848119baa8783e96c152d9388f914c71"
@@ -560,8 +570,8 @@
     },
     {
       "path": "build_releases.py",
-      "bytes": 1990,
-      "sha256": "c853ba6de62bded0b6d5f571524987b0402d869ba249e8851929070a523072da"
+      "bytes": 2054,
+      "sha256": "602996b4b5a1f368d941decd54a483e053d9f6020acbe9629243df187e93345f"
     },
     {
       "path": "cadd_sources.json",
@@ -570,13 +580,13 @@
     },
     {
       "path": "catalog_baseline.json",
-      "bytes": 53827,
-      "sha256": "5f0e95b85549495f692f078fef182b167e1e9c7667f3615b869c2e687852a316"
+      "bytes": 57982,
+      "sha256": "bdbf1662c6a6f61348cee454f217e762ae3c44e23a6f45c81f574d837d3315d6"
     },
     {
       "path": "client_config.py",
-      "bytes": 2425,
-      "sha256": "618ff59b892f7aff3ccf623057ad0248497e50c009c50c3bfc8221e8d1a30ce2"
+      "bytes": 6699,
+      "sha256": "bbd7e150f12a04ac40912b014a5da6a1d8e81dd8f24adedb0fa035e01a899af1"
     },
     {
       "path": "configure_mcp.py",
@@ -601,12 +611,12 @@
     {
       "path": "generate_catalog.py",
       "bytes": 7975,
-      "sha256": "4482cf8bb8bb5132e421ac36149c2ffd66d3cfd627c729db207df0fc4f23b73b"
+      "sha256": "f059b643471480d08da5f6b37079c94c6afb29033e92a016d5c3115d592905d2"
     },
     {
       "path": "install.py",
-      "bytes": 7022,
-      "sha256": "c09c4a27da410f605d8c9be0deeadea05b2a08c3ca3900bee3d8ba62f5f828db"
+      "bytes": 8329,
+      "sha256": "465adf5890333ad14c5751460097fc914d11cf884d9d60e0d179b0a853e874b7"
     },
     {
       "path": "install_mcp.py",
@@ -934,6 +944,11 @@
       "sha256": "29cd79aceba247c909653ffa5ece60bed5ae2b2d6a1f875b30f60a744066f66c"
     },
     {
+      "path": "tests/shared_process_check.py",
+      "bytes": 7439,
+      "sha256": "4de7cafaee4816d275471036807c0db98b30c720ce49c51e2ab86c1b6f494cdf"
+    },
+    {
       "path": "tests/test_academic.py",
       "bytes": 27612,
       "sha256": "0d649b1d57f7ad598020eaa8acff6dee1cbbbb19fa7c3875213d52d7bef2d460"
@@ -1009,6 +1024,11 @@
       "sha256": "2b13e240066178d7f33489966ab86213e519e50c799dfaf176e0f687bbcdabc0"
     },
     {
+      "path": "tests/test_shared_mcp.py",
+      "bytes": 6272,
+      "sha256": "03c776de90a8ccc9213104c03e68d4eb8a38a42408908e5c6de3523ce4c8ab25"
+    },
+    {
       "path": "tests/test_skills.py",
       "bytes": 7182,
       "sha256": "53b665a634e352fdb9520a861b5d705c3839c9b04a316143fc15552c0020935b"
@@ -1031,7 +1051,7 @@
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "f26a2053499380f2a9254423ccf0d3ac0510546ff069dbfef63ace4875d9fe6f"
+      "sha256": "e3d0141cc5f6a06b3c9c20df8484ff4a5c341ec946358137d55c81b5e39eaa02"
     },
     {
       "path": "update_skill_catalog.py",

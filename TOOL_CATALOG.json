@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "package_version": "2.13.0",
+  "package_version": "2.13.1",
   "extension_functions": 237,
   "extension_categories": 36,
   "routing_intents": 142,
@@ -10775,28 +10775,9 @@
     }
   },
   "version_changes": {
-    "from_version": "2.12.0",
-    "to_version": "2.13.0",
-    "added": [
-      "molecular_biology.audit_interaction_records",
-      "molecular_biology.audit_mechanism_graph",
-      "molecular_biology.audit_perturbation_results",
-      "molecular_biology.audit_protein_annotations",
-      "molecular_biology.audit_regulatory_links",
-      "molecular_biology.audit_splicing_results",
-      "molecular_biology.guide_molecular_drylab",
-      "molecular_biology.inspect_molecular_resources",
-      "molecular_biology.plan_molecular_extension",
-      "molecular_biology.prepare_molecular_pipeline",
-      "molecular_biology.query_cell_line",
-      "molecular_biology.query_complex_record",
-      "molecular_biology.query_intact_interactions",
-      "server_operations.plan_incremental_return",
-      "server_operations.plan_server_budget",
-      "server_operations.review_unknown_submission",
-      "validation.audit_benchmark_receipt",
-      "validation.inspect_scientific_benchmarks"
-    ],
+    "from_version": "2.13.0",
+    "to_version": "2.13.1",
+    "added": [],
     "removed": [],
     "parameter_changes": []
   },

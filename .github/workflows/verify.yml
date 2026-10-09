@@ -139,7 +139,11 @@ jobs:
         run: |
           python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'tests/cadd_process_check.py'],check=True)"
           python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'tests/molecular_process_check.py'],check=True)"
-      - name: Confirm core profile stays lightweight
+      - name: One shared runtime serves independent MCP clients
+        shell: bash
+        run: |
+          python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'tests/shared_process_check.py'],check=True)"
+      - name: Confirm core profile stays lightweight after shared transport acceptance
         shell: bash
         run: |
           python -c "import install,subprocess,os; subprocess.run([str(install.runtime_python(os.path.join(os.environ['RUNNER_TEMP'],'BiomniCore'))),'-c',\"import importlib.util; assert all(importlib.util.find_spec(n) is None for n in ['numpy','pandas','scipy','torch','langchain'])\"],check=True)"

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '2.13.0'
+VERSION = '2.13.1'
 
 
 def assignment(tree, name):

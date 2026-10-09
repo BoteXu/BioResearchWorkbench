@@ -41,6 +41,8 @@ def main():
     default_profile = json.loads((ROOT/'edition.json').read_text(encoding='utf8'))['default_profile']
     parser.add_argument('--profile',choices=['core','local','omics','full'],default=default_profile)
     parser.add_argument('--client',choices=['codex','claude-desktop','vscode','portable'],default='codex')
+    parser.add_argument('--transport', choices=['shared','stdio'], help='Server profiles default to one shared runtime; local/Desktop profiles retain stdio')
+    parser.add_argument('--shared-port', type=int, default=8768)
     parser.add_argument('--skip-registration',action='store_true')
     parser.add_argument('--trust-dns-proxy',action='store_true')
     parser.add_argument('--validate-only',action='store_true')
@@ -48,6 +50,9 @@ def main():
     parser.add_argument('--install-skills',action='store_true',help='Copy the optional audited workflow pack into client discovery')
     parser.add_argument('--skills-dir',help='Private skill discovery directory; requires --install-skills')
     args = parser.parse_args()
+    transport = args.transport or ('stdio' if args.profile=='local' or args.client=='claude-desktop' else 'shared')
+    if transport=='shared' and args.client=='claude-desktop':
+        parser.error('This package has no validated shared Desktop snippet; select a supported HTTP client or --transport stdio')
     validate_package()
     mcp_name = args.mcp_name or ('bioresearch-local' if args.profile=='local' else 'bioresearch')
     if args.validate_only:
@@ -111,8 +116,15 @@ def main():
     if placement=='local':
         text+='\nThis is the optional local analysis edition. Explicit bounded transcriptomics and single-ligand docking workflows may run locally after input/design/resource checks. Large computations still belong on the server. Use real local-job completion receipts.\n'
     (target/'AGENTS.generated.md').write_text(text,encoding='utf8',newline='\n')
-    generate(target,target/'client_configs',args.trust_dns_proxy,mcp_name)
-    if codex:
+    if transport=='shared':
+        shared_command = [python,local/'shared_mcp.py','init','--port',args.shared_port]
+        if args.trust_dns_proxy: shared_command.append('--trust-dns-proxy')
+        checked(shared_command, env)
+    generate(target,target/'client_configs',args.trust_dns_proxy,mcp_name,transport)
+    if codex and transport=='shared':
+        # Use the installed Python 3.11 for TOML readback; credentials are not CLI arguments.
+        checked([python,'-c','import sys; sys.path.insert(0,sys.argv[1]); from client_config import register_shared_codex; register_shared_codex(sys.argv[2],sys.argv[3])',ROOT,target/'client_configs',mcp_name])
+    elif codex:
         command = [codex,'mcp','add',mcp_name,'--env','PYTHONUTF8=1']
         if args.trust_dns_proxy:
             command.extend(['--env','BIOMNI_TRUST_DNS_PROXY=1'])
@@ -122,6 +134,8 @@ def main():
     from upgrade import initialize_installation
     initialize_installation(target, ROOT)
     print('INSTALLATION_AND_SMOKE_CHECKS_OK')
+    if transport=='shared':
+        print('Start .local/shared_mcp.py once with the installed Python; client connections never spawn the backend. Login startup is an explicit owner choice.')
     print('Merge private client settings and AGENTS.generated.md, then open a fresh client session.')
 
 

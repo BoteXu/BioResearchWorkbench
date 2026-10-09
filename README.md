@@ -8,7 +8,13 @@ The original foundation is Biomni. This independent downstream project adds tool
 
 [![Public verification](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml/badge.svg)](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml)
 
-## v2.13.0 更新
+## v2.13.1 更新：多会话共享后台
+
+服务器安装默认生成认证的 HTTP MCP 配置，让多个聊天共用一个 BioResearchWorkbench 后台。启动锁和服务锁防止重复初始化；调用统一排队，即使会话取消等待，真正运行的任务结束后才放行下一项。共享配置提供检索、服务器准备和有界检查，关闭本地科研工作进程与批量依赖导入。
+
+Windows、macOS 和 Linux 使用同一共享入口。安装器生成私有认证和配置，由使用者启动后台；登录自启是明确的可选配置。原 stdio 和可选本地版保留。已有聊天可能缓存旧连接，需核对实际实例。操作与迁移见 [SHARED_MCP.md](SHARED_MCP.md)。
+
+## v2.13.0 的分子生物学与工程扩展
 
 本次深化分子生物学干实验，并补齐八个工程方向。扩展函数定义、必需参数、默认值、枚举、模板、模块信息与版本差异由公开源码生成，见 [功能目录](TOOL_CATALOG.md) / [机器可读合同](TOOL_CATALOG.json)。模板中的占位符必须替换为经审查的真实输入。
 
@@ -105,7 +111,7 @@ The default destination is a new `BioResearchWorkbench` folder under the current
 
 Use `-Profile omics` or `-Profile full` only when those optional local helpers are required.
 
-For another client, use `-Client claude-desktop`, `-Client vscode` or `-Client portable`. These choices do not require the Codex CLI. The installer generates configuration snippets in a private `client_configs` folder; merge the appropriate snippet into that client's configuration. Existing client settings are never overwritten. Only the Codex choice performs automatic registration.
+For another client, use `-Client claude-desktop`, `-Client vscode` or `-Client portable`. These choices do not require the Codex CLI. Server profiles default to shared HTTP for Codex, VS Code and portable configurations; the local/Desktop profiles retain stdio. Choose `-Transport` explicitly when needed. Private snippets contain paths or authentication headers. Only the Codex choice adds a new registration automatically; existing names are refused and unrelated settings are preserved with a private backup. Start the shared backend once using [SHARED_MCP.md](SHARED_MCP.md), then reconnect idle clients.
 
 The formats follow the documented [local MCP configuration](https://modelcontextprotocol.io/docs/develop/connect-local-servers) and [VS Code MCP configuration](https://code.visualstudio.com/docs/agent-customization/mcp-servers). The server protocol and generated JSON/TOML schemas are tested; individual client GUIs and models need their own connection validation. Provider login/API billing belongs to the chosen client and is separate from this tool layer.
 
@@ -129,7 +135,7 @@ Runtime records may contain paths, hostnames, parameters and input hashes. Keep 
 
 Import readiness does not establish runtime readiness. Table formatting, caller-supplied context and file integrity do not establish scientific validity. Keep species, model, assay, independent biological unit, contrast and causal limits explicit. Do not send sensitive data to public endpoints without specific authorization.
 
-Tool catalog descriptions are read without importing a scientific/model stack. Upstream `import_ready: null` means its import was deferred. Pass `check_imports=true` for an explicit import check, and inspect optional dependency checks separately. Observed runtime passes remain distinct from dependency presence.
+Tool catalog descriptions are read without importing a scientific/model stack. Upstream `import_ready: null` means its import was deferred. The shared profile refuses `check_imports=true` and marks inaccessible catalog entries; inspect selected availability receipts instead. Legacy stdio import probing remains explicit. Observed runtime passes remain distinct from dependency presence.
 
 对于固定公开端点的只读 GET，收到 429/500/502/503/504 后最多尝试三次，每次响应保留来源记录。持续失败仍报告失败；连接状态不明和 POST 不自动重试。这不适用于服务器任务提交、原生写入或文献库写入。
 

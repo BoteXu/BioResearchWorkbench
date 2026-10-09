@@ -2,7 +2,7 @@
 
 ## Private local tools, no personal public API
 
-The direct bridge needs no separate model provider, model API key or personal remote service. Installation registers a local stdio MCP process. It does not create an Internet endpoint, connect to SSH, launch a browser gateway, submit server jobs or upload results automatically.
+The direct bridge needs no separate model provider, model API key or personal remote service. Server installations default to an authenticated owner-local shared HTTP MCP registration; legacy/local profiles retain stdio. The owner starts the shared backend explicitly. Installation does not create an Internet endpoint, connect to SSH, launch a browser gateway, submit server jobs or upload results automatically. Shared execution and private configuration are described in [SHARED_MCP.md](SHARED_MCP.md).
 
 The optional browser gateway defaults to loopback and now refuses non-loopback exposure unless a private policy explicitly allows it; TLS is additionally required outside loopback. No remote gateway is enabled by the installer. Tokens are owner-local files and never embedded in URLs or browser storage. Do not expose a tool host publicly or publish generated client settings.
 

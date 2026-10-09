@@ -43,6 +43,9 @@ serena-private/
 browser-private/
 *.private.json
 *.private.txt
+*.private.toml
+*.private.lock
+bridge/shared_mcp_private/
 mcp-profiles.json
 codex.mcp.toml
 *.duckdb

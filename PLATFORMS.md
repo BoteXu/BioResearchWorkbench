@@ -1,6 +1,6 @@
 # Platform installation and HarmonyOS access
 
-Version 2.5 uses one Python installer and platform-specific virtual-environment paths. The default core profile is for retrieval, dispatch preparation and returned-result checks. Large downloads and calculations remain on your server.
+The portable installer uses platform-specific virtual-environment paths. Since v2.13.1 server profiles default to authenticated shared MCP on Windows, macOS and Linux; stdio remains selectable. Start the shared backend once as described in [SHARED_MCP.md](SHARED_MCP.md). The core profile is for retrieval, dispatch preparation and returned-result checks. Large downloads and calculations remain on your server.
 
 ## Compatibility and verification boundaries
 
@@ -69,4 +69,4 @@ Replace the example host and certificate files with your own private configurati
 
 The token authorizes queries and file-based checks on the host. Keep it private and revoke it by stopping the gateway, creating a token at a new file path, and restarting with that file. POSIX token files are owner-only; on Windows restrict access with the file's security settings. Tokens are never placed in URLs, cookies or browser storage, and request logging is disabled. Runtime results and downloaded JSON can contain private paths and parameters; keep them private. Sensitive data must not be sent to public databases without specific authorization.
 
-The gateway is an authenticated browser JSON API. It is not a Streamable HTTP MCP endpoint or a separate reasoning agent. Desktop model clients continue using the existing MCP stdio interface. Codex or your chosen model client supplies reasoning; the browser exposes explicit bridge tools. Server bundles remain preparation only, and neither this gateway nor local workers submit HPC jobs automatically.
+The gateway is an authenticated browser JSON API. It is separate from the owner-local shared Streamable HTTP MCP endpoint. Desktop clients use shared MCP or explicitly selected stdio. Codex or your chosen model client supplies reasoning; the browser exposes explicit bridge tools. Server bundles remain preparation only, and neither interface submits HPC jobs automatically.

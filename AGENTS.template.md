@@ -1,5 +1,7 @@
 ## BioResearchWorkbench for biomedical work
 
+Server installations default to one authenticated owner-local shared MCP runtime. Read SHARED_MCP.md. Reuse the existing instance, inspect biomni_shared_runtime and never launch per-chat stdio fallbacks. Calls are serialized; a cancelled client wait is not proof that an operation stopped. Local scientific workers and bulk import probing are not exposed in the shared profile. Existing chats may cache older settings; verify each actual connection before claiming adoption. Keep authentication headers, generated profiles and shared runtime records private; login startup is the owner's explicit choice.
+
 Optional package 2.8.1 workflow skills are documented in SKILLS.md. Use the relevant installed `biomni-*` skill alongside current tool discovery. Skills supply workflow instructions, not new runtime backends or permission to read or mutate private libraries. Preserve existing specialist skills, client capabilities and authorization boundaries.
 
 For substantive biomedical research requests, inspect the configured BioResearchWorkbench MCP server (new registration bioresearch, existing registration biomni) with biomni_status and biomni_tool_catalog. Use a suitable verified tool when it improves the task. Do not install a skill to duplicate a working function.
