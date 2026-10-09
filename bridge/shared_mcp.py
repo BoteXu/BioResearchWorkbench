@@ -88,6 +88,8 @@ def load_settings():
     settings = json.loads(path.read_text(encoding='utf8'))
     if (settings.get('schema') != 1 or settings.get('policy') != POLICY
             or type(settings.get('port')) is not int or not 1024 <= settings['port'] <= 65535
+            or type(settings.get('minimum_available_gib', 3)) not in {int, float}
+            or not 2 <= settings.get('minimum_available_gib', 3) <= 1024
             or not isinstance(settings.get('token'), str) or len(settings['token']) < 40
             or not isinstance(settings.get('installation_id'), str)):
         raise ValueError('Invalid private shared configuration')
@@ -142,16 +144,19 @@ def health(settings):
     return None
 
 
-def initialize(port=8768, review_current_source=False, trust_dns_proxy=False):
+def initialize(port=8768, review_current_source=False, trust_dns_proxy=False, minimum_available_gib=3):
     if type(port) is not int or not 1024 <= port <= 65535:
         raise ValueError('An unprivileged TCP port is required')
+    if type(minimum_available_gib) not in {int, float} or not 2 <= minimum_available_gib <= 1024:
+        raise ValueError('Explicit memory admission floor must be between 2 and 1024 GiB')
     private_directory()
     guard = ProcessLock(PRIVATE / 'configure.private.lock')
     try:
         path = PRIVATE / 'settings.private.json'
         if path.exists():
             settings = load_settings()
-            if settings['port'] != port or settings.get('trust_dns_proxy', False) != trust_dns_proxy:
+            if (settings['port'] != port or settings.get('trust_dns_proxy', False) != trust_dns_proxy
+                    or settings.get('minimum_available_gib', 3) != minimum_available_gib):
                 raise ValueError('Existing endpoint/options differ; review them privately before migration')
             if settings['source_sha256'] != source_hash():
                 if not review_current_source:
@@ -164,7 +169,8 @@ def initialize(port=8768, review_current_source=False, trust_dns_proxy=False):
             settings = {'schema': 1, 'port': port, 'policy': POLICY,
                         'token': secrets.token_urlsafe(48),
                         'installation_id': secrets.token_hex(16),
-                        'source_sha256': source_hash(), 'trust_dns_proxy': bool(trust_dns_proxy)}
+                        'source_sha256': source_hash(), 'trust_dns_proxy': bool(trust_dns_proxy),
+                        'minimum_available_gib': minimum_available_gib}
             atomic_json(path, settings)
         return {'action': 'configured', 'transport': 'streamable-http',
                 'private_credentials_written': True, 'local_scientific_execution': False}
@@ -210,8 +216,9 @@ def start(wait_seconds=30):
         with socket.socket() as probe:
             probe.bind((LOOPBACK, settings['port']))
         import psutil
-        if psutil.virtual_memory().available < 3 * 1024**3:
-            return {'action': 'refused', 'reason': 'available_memory_below_3_GiB'}
+        if psutil.virtual_memory().available < settings.get('minimum_available_gib', 3) * 1024**3:
+            return {'action': 'refused', 'reason': 'available_memory_below_configured_floor',
+                    'minimum_available_gib': settings.get('minimum_available_gib', 3)}
         options = {'creationflags': subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS} if os.name == 'nt' else {'start_new_session': True}
         child = subprocess.Popen([sys.executable, '-X', 'utf8', str(Path(__file__).resolve()), 'serve'],
             stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
@@ -305,7 +312,7 @@ def build_app(settings):
         if tool.name not in metadata:
             if settings['source_sha256'] != source_hash():
                 raise ValueError('Sources changed; review and restart before further operations')
-            if psutil.virtual_memory().available < 3*1024**3:
+            if psutil.virtual_memory().available < settings.get('minimum_available_gib', 3)*1024**3:
                 raise ValueError('Low memory; pause new tool operations')
         result = tool.fn(**arguments)
         if tool.name == 'biomni_tool_catalog':
@@ -407,11 +414,12 @@ def main():
     parser.add_argument('--port', type=int, default=8768)
     parser.add_argument('--review-current-source', action='store_true')
     parser.add_argument('--trust-dns-proxy', action='store_true')
+    parser.add_argument('--minimum-available-gib', type=float, default=3)
     args = parser.parse_args()
     if args.action == 'serve':
         serve(); return
     if args.action == 'init':
-        value = initialize(args.port, args.review_current_source, args.trust_dns_proxy)
+        value = initialize(args.port, args.review_current_source, args.trust_dns_proxy, args.minimum_available_gib)
     elif args.action == 'start':
         value = start()
     else:

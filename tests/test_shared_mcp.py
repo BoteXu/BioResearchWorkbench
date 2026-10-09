@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import socket
+from types import SimpleNamespace
 import threading
 import time
 import unittest
@@ -110,6 +112,20 @@ class SharedChecks(unittest.TestCase):
         self.assertFalse(shared_mcp.permitted('transcriptomics','run_bulk_rnaseq',exports))
         self.assertFalse(shared_mcp.permitted('unknown','unknown',exports))
         self.assertNotIn('biomni_job_submit', shared_mcp.ALLOWED_MCP_TOOLS)
+
+    def test_default_admission_refuses_low_memory_without_launching(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); (root/'fixture.py').touch()
+            with socket.socket() as selected:
+                selected.bind(('localhost',0)); port = selected.getsockname()[1]
+            with patch.object(shared_mcp,'BRIDGE',root), patch.object(shared_mcp,'PRIVATE',root/'private'):
+                shared_mcp.initialize(port)
+                fake = SimpleNamespace(virtual_memory=lambda:SimpleNamespace(available=int(2.9*1024**3)))
+                with patch.dict(sys.modules,{'psutil':fake}), patch.object(shared_mcp,'health',return_value=None), patch.object(shared_mcp.subprocess,'Popen') as launched:
+                    result = shared_mcp.start()
+                self.assertEqual(result['action'],'refused')
+                self.assertEqual(result['minimum_available_gib'],3)
+                launched.assert_not_called()
 
 
 if __name__ == '__main__': unittest.main()

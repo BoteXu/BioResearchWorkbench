@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 7972,
-      "sha256": "938f903bdbbd3d390fcdf04de5bf621d1b91d9ae3aa481f13de3b6282f7e4d71"
+      "bytes": 8002,
+      "sha256": "6de687a65d69bb64b2761ad5f754a6d402696a2e0466d5dedc68e7a039094ae0"
     },
     {
       "path": ".gitignore",
@@ -150,8 +150,8 @@
     },
     {
       "path": "SHARED_MCP.md",
-      "bytes": 5422,
-      "sha256": "abf1204a8ed77ce5af9e151b4e6fbf1f295fcf277c7fbcc5b0cd8f7eedbaef9f"
+      "bytes": 5965,
+      "sha256": "04d45bc706aa62cb54f2199a70e8591f77bdf3e02a2fe3f92da59879301e076d"
     },
     {
       "path": "SKILLS.md",
@@ -480,8 +480,8 @@
     },
     {
       "path": "bridge/shared_mcp.py",
-      "bytes": 20084,
-      "sha256": "01eedd2135e8b5557212f15a79f89f4f2573e3d8e306bb7e59d408655d69116c"
+      "bytes": 20894,
+      "sha256": "a0ff49a2280cdf07c058b875252fcec8b5fadae29a53635e7f2b03bec3b80684"
     },
     {
       "path": "bridge/slurm_monitor.py",
@@ -945,8 +945,8 @@
     },
     {
       "path": "tests/shared_process_check.py",
-      "bytes": 8175,
-      "sha256": "f19e597865aa832c6c1a827fc4152578a472728c82bd06e5d28d08991b0308a7"
+      "bytes": 8523,
+      "sha256": "9c931fb0b2b4c94c2366ffe661d4b874853b27d791d7075bfc7cf7377c66991d"
     },
     {
       "path": "tests/test_academic.py",
@@ -1025,8 +1025,8 @@
     },
     {
       "path": "tests/test_shared_mcp.py",
-      "bytes": 6272,
-      "sha256": "03c776de90a8ccc9213104c03e68d4eb8a38a42408908e5c6de3523ce4c8ab25"
+      "bytes": 7290,
+      "sha256": "143e52ee3d82c0a653ef8222a8fbc3650ed8881bccdfb81df04c533438dcb511"
     },
     {
       "path": "tests/test_skills.py",

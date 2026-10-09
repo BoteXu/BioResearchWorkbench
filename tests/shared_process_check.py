@@ -1,5 +1,6 @@
 """Actual multi-client shared MCP check; fixed metadata only, no public queries."""
 import asyncio
+import argparse
 import importlib.util
 import json
 import os
@@ -70,6 +71,9 @@ async def clients(settings, shared):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--minimum-available-gib', type=float, default=3)
+    args = parser.parse_args()
     with tempfile.TemporaryDirectory() as folder:
         bridge = Path(folder)/'.local'; shutil.copytree(ROOT/'bridge', bridge,
             ignore=shutil.ignore_patterns('__pycache__','shared_mcp_private','results','jobs','outputs','sources','source_snapshots','evidence','data','downloads','articles','supplements','compute_config.json','privacy_config.json','software_registry.json'))
@@ -77,7 +81,7 @@ def main():
         shared = importlib.util.module_from_spec(spec); spec.loader.exec_module(shared)
         with socket.socket() as temporary:
             temporary.bind((shared.LOOPBACK,0)); port = temporary.getsockname()[1]
-        shared.initialize(port)
+        shared.initialize(port, minimum_available_gib=args.minimum_available_gib)
         settings = shared.load_settings()
         process = None
         launchers = []
@@ -113,6 +117,8 @@ def main():
                 'independent_mcp_clients':2,'client_disconnect_isolated':True,
                 'max_parallel_tool_calls':observed['max_active'],'authentication_and_limits':True,
                 'local_scientific_workers_exposed':False,'public_queries':0,
+                'fixture_minimum_available_gib':args.minimum_available_gib,
+                'production_default_minimum_available_gib':3,
                 'native_client_gui_adoption':'not verified'}))
         except BaseException as error:
             def error_types(exc):
