@@ -615,8 +615,8 @@
     },
     {
       "path": "install.py",
-      "bytes": 8329,
-      "sha256": "465adf5890333ad14c5751460097fc914d11cf884d9d60e0d179b0a853e874b7"
+      "bytes": 8501,
+      "sha256": "b45898a27bd3b1138c3170d7c779fdc20ac81dcf32eb9576a56212fa815a921d"
     },
     {
       "path": "install_mcp.py",

@@ -73,8 +73,10 @@ def main():
         codex = shutil.which('codex')
         if not codex:
             raise ValueError('Codex CLI missing; choose --client portable or --skip-registration')
-        if subprocess.run([codex,'mcp','get',mcp_name],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
-            raise ValueError('Existing registration for the selected MCP name; inspect it first or use --skip-registration')
+        names = sorted({'biomni','bioresearch',mcp_name}) if transport=='shared' else [mcp_name]
+        for name in names:
+            if subprocess.run([codex,'mcp','get',name],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
+                raise ValueError('Existing workbench registration; review/migrate it first or use --skip-registration. A second alias will not be registered automatically')
     target = Path(args.install_dir or Path.home()/('BioResearchWorkbenchLocal' if args.profile=='local' else 'BioResearchWorkbench')).expanduser().resolve()
     if target.exists():
         raise ValueError('Choose a new installation directory')
