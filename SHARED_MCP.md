@@ -57,7 +57,7 @@ macOS / Linux：
 
 ### 调用编号与连接诊断
 
-普通成功结果带 `_shared_call`。需要在断开前掌握编号时，先 `biomni_shared_reserve_call`，再 `biomni_shared_dispatch`，用 `biomni_shared_call_status` 查询。编号只派发一次；未知、已派发或移出账本的编号拒绝重放。账本最多 256 项，不保存参数或结果正文；重启后的未完成项是 UNKNOWN_INTERRUPTED，必须核查真实回执。状态包含等待/执行耗时、排队位置、未开始的取消/超时，以及失败后需核查的状态。取消客户端等待不解除实际线程的门禁，失败也不证明外部写入已回滚。
+普通成功结果带 `shared_call`。需要在断开前掌握编号时，先 `biomni_shared_reserve_call`，再 `biomni_shared_dispatch`，用 `biomnishared_call_status` 查询。编号只派发一次；未知、已派发或移出账本的编号拒绝重放。账本最多 256 项，不保存参数或结果正文；重启后的未完成项是 UNKNOWN_INTERRUPTED，必须核查真实回执。状态包含等待/执行耗时、排队位置、未开始的取消/超时，以及失败后需核查的状态。取消客户端等待不解除实际线程的门禁，失败也不证明外部写入已回滚。
 
 `biomni_shared_connection_check` 比较两条选定连接的实例标识。`doctor --client-config <选定私有 JSON/TOML 文件>` 检查旧 stdio、重复启用、端点与认证；不输出令牌、路径或用户标签。静态配置和选定连接不能证明全部聊天已切换。
 

@@ -155,8 +155,8 @@
     },
     {
       "path": "SHARED_MCP.md",
-      "bytes": 9150,
-      "sha256": "d64a98b17d668fc7bc164969c4271ec7e85b27dd3ca92a77e6559e2d3369ecaa"
+      "bytes": 9148,
+      "sha256": "b8678aa5542849c69aa1e4286ca8928fb99623b52945e40f3ab87739e7898013"
     },
     {
       "path": "SKILLS.md",
@@ -490,8 +490,8 @@
     },
     {
       "path": "bridge/shared_mcp.py",
-      "bytes": 34621,
-      "sha256": "5a6cc5c73b5781f4bf750236a7ae4ebf95e65657ec2a8df4a8cc7f98af3b8e80"
+      "bytes": 35174,
+      "sha256": "ee445187abb22c8f6889e36fc1b12af91904e2bd905ecfc6dbfbf7b63b6644c8"
     },
     {
       "path": "bridge/shared_support.py",
@@ -880,8 +880,8 @@
     },
     {
       "path": "skills/biomni-workflow-maintenance/SKILL.md",
-      "bytes": 2594,
-      "sha256": "08a459a9fb9f8cb4f4ecee8a2b1ee6b2dd73007106173b5d2e4328a56f07bec6"
+      "bytes": 2593,
+      "sha256": "3de75debaf6e7faa2f18ff760d82bde1cd782de60835fa51948fe5ec4d9a638a"
     },
     {
       "path": "skills/biomni-workflow-maintenance/references/tool-routing.md",
@@ -891,7 +891,7 @@
     {
       "path": "skills/catalog.json",
       "bytes": 16295,
-      "sha256": "b3aeb63cbbac9570aab0967b1cb924ea5dad1d9d09fd90ab69f2b59a43eda855"
+      "sha256": "7a8a53379de71345c4fed533e1d9c78da5d15729a8587b7363579a6c184d743a"
     },
     {
       "path": "tests/advanced_check.py",
@@ -960,8 +960,8 @@
     },
     {
       "path": "tests/shared_process_check.py",
-      "bytes": 11586,
-      "sha256": "4cf2acde9ca0787a453d7cc39683dc4bdab179a4b2a1c5cbd25628d46e67c14b"
+      "bytes": 12282,
+      "sha256": "39365443a5eef77b8634a3a026d2e825de53b6d43183e66a113424e1f2eedbe5"
     },
     {
       "path": "tests/test_academic.py",

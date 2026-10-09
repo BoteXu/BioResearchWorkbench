@@ -62,6 +62,13 @@ async def clients(settings, shared):
                                 'call_id':ticket['call_id'], 'tool_name':'biomni_tool_catalog',
                                 'arguments':{'category':'research_quality','limit':1}}))
                             assert dispatched['result']['tools'] and dispatched['call']['state']=='COMPLETED'
+                            STAGE = 'structured-receipt-call'
+                            structured = payload(await client_a.call_tool('biomni_run_tool', {
+                                'category':'research_quality','name':'audit_identifier_context','parameters':{
+                                    'records':[{'id':'fixture','namespace':'protein_isoform','species':'synthetic','annotation_version':'1'}],
+                                    'expected_context':{'species':'synthetic','annotation_version':'1'}}}))
+                            assert structured['shared_call']['state']=='COMPLETED'
+                            assert structured.get('result_file') and structured.get('sha256')
                             assert (await client_b.call_tool('biomni_shared_dispatch', {
                                 'call_id':ticket['call_id'],'tool_name':'biomni_status','arguments':{}})).isError
                             assert payload(await client_b.call_tool('biomni_shared_call_status', {'call_id':ticket['call_id']}))['state']=='COMPLETED'

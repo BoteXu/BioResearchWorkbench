@@ -333,7 +333,7 @@
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-workflow-maintenance/references/tool-routing.md": "16b3e7445265ea5caac2df3f219937201d6ea5d507a5b13c08f122a6a4c0e67d",
-        "biomni-workflow-maintenance/SKILL.md": "08a459a9fb9f8cb4f4ecee8a2b1ee6b2dd73007106173b5d2e4328a56f07bec6"
+        "biomni-workflow-maintenance/SKILL.md": "3de75debaf6e7faa2f18ff760d82bde1cd782de60835fa51948fe5ec4d9a638a"
       }
     }
   ]

@@ -430,14 +430,23 @@ def build_app(settings):
         return result
 
     def wrap(tool):
+        from pydantic import BaseModel, create_model
+        signature = inspect.signature(tool.fn)
+        annotations = typing.get_type_hints(tool.fn)
+        returned = annotations.get('return')
+        if isinstance(returned, type) and issubclass(returned, BaseModel):
+            returned = create_model('Shared'+returned.__name__, __base__=returned, shared_call=(dict | None, None))
+            signature = signature.replace(return_annotation=returned)
+            annotations['return'] = returned
         @functools.wraps(tool.fn)
         async def invoke(**arguments):
             call_id = executor.reserve()
             result = await executor.call(perform, tool, arguments, call_id=call_id)
-            if isinstance(result, dict): result = {**result, '_shared_call': executor.status(call_id)}
+            if isinstance(result, BaseModel): result = result.model_dump(mode='json')
+            if isinstance(result, dict): result = {**result, 'shared_call': executor.status(call_id)}
             return result
-        invoke.__signature__ = inspect.signature(tool.fn)
-        invoke.__annotations__ = typing.get_type_hints(tool.fn)
+        invoke.__signature__ = signature
+        invoke.__annotations__ = annotations
         return invoke
     for tool in original.mcp._tool_manager.list_tools():
         if tool.name in ALLOWED_MCP_TOOLS:
