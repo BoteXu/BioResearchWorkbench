@@ -4,7 +4,7 @@
 
 | 扩展函数 | 类别 | 任务路由 | 包版本 |
 |---|---|---|---|
-| 237 | 36 | 142 | 2.13.1 |
+| 242 | 37 | 147 | 2.13.2 |
 
 参数 schema、默认值、枚举和调用模板见 [TOOL_CATALOG.json](TOOL_CATALOG.json)。模板中的占位符需要实际填写，模板不是可执行验收。
 
@@ -260,6 +260,16 @@
 | `select_tools` | Return an explicit task plan with live catalog/dependency/receipt states; execute nothing. | intent |
 | `resolve_identifier` | Resolve one public identifier against an official API; retain ambiguity, versions and raw source data. | namespace, identifier |
 | `audit_identifier_mapping` | Audit caller-supplied mappings locally for malformed IDs, context gaps and conflicting joins; query nothing. | rows, species |
+
+## research_quality
+
+| 函数 | 功能 | 必需参数 |
+|---|---|---|
+| `audit_literature_set` | Audit exact-ID duplicates, declared publication relations/updates and search coverage; query nothing. | records, searches |
+| `audit_identifier_context` | Audit species, build, annotation release, transcript/isoform specificity and mapping ambiguity offline. | records, expected_context |
+| `resolve_public_identifiers` | Resolve at most ten explicitly approved public IDs sequentially; preserve official raw data and partial failures. | namespace, identifiers |
+| `audit_returned_analysis` | Audit selected server-returned summaries, required result roles, exact QC bindings and method boundaries; execute nothing. | analysis, artifacts, context, qc, completion |
+| `audit_evidence_trace` | Audit located claim-to-source edges, versions, context conflicts and declared evidence ceilings offline. | claims, sources, context |
 
 ## review
 

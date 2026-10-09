@@ -67,10 +67,53 @@ def initialize_installation(install_dir, package_root=ROOT):
     _json(state,value);return {'state':'baseline_recorded','version':value['version'],'managed_files':len(files)}
 
 
+def shared_service_held(root):
+    """Check the owned service kernel lock without starting/importing a tool runtime."""
+    path = root/'.local/shared_mcp_private/service.private.lock'
+    if not path.exists(): return False
+    if path.is_symlink(): return True
+    with path.open('r+b', buffering=0) as stream:
+        try:
+            if os.name == 'nt':
+                import msvcrt
+                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(stream, fcntl.LOCK_EX|fcntl.LOCK_NB)
+                fcntl.flock(stream, fcntl.LOCK_UN)
+        except OSError: return True
+    return False
+
+
+def acquire_service_lease(root):
+    """Hold the same lifetime lock during code mutation so a concurrent launcher cannot start."""
+    folder = root/'.local/shared_mcp_private'
+    if not folder.exists(): return None
+    if folder.is_symlink(): raise ValueError('Linked service state is refused')
+    path = folder/'service.private.lock'
+    if path.is_symlink(): raise ValueError('Linked service lock is refused')
+    descriptor = os.open(path, os.O_CREAT|os.O_RDWR, 0o600)
+    stream = os.fdopen(descriptor, 'r+b', buffering=0)
+    try:
+        if os.fstat(descriptor).st_size == 0: stream.write(b'0')
+        stream.seek(0)
+        if os.name == 'nt':
+            import msvcrt
+            msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(stream, fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except OSError:
+        stream.close(); raise ValueError('Shared service owns the lifetime lock; drain and stop first') from None
+    return stream
+
+
 def preview_upgrade(install_dir, package_root=ROOT):
     root=_root(install_dir);package=_root(package_root);validate_package(package)
     previous=json.loads((root/'upgrade_state.json').read_text(encoding='utf8'))
     manifest,files=_mapping(package);changes=[];custom=[];blockers=[]
+    if shared_service_held(root): blockers.append('shared_service_running_drain_and_stop_before_upgrade')
     config=root/'.local/compute_config.json'
     cfg=json.loads(config.read_text(encoding='utf8')) if config.exists() else {}
     if cfg.get('edition') not in {'server','local'}:blockers.append('unrecognized_compute_configuration')
@@ -113,8 +156,11 @@ def apply_upgrade(plan, reviewed_sha256):
     folder=root/'.upgrades'/uuid.uuid4().hex;folder.mkdir(parents=True)
     journal={'schema':1,'state':'prepared','plan':plan,'written':[],'baseline':json.loads((root/'upgrade_state.json').read_text())}
     _json(folder/'journal.json',journal)
+    service_lease = None; service_lease_acquired = False
     try:
         _same_plan(plan,preview_upgrade(root,package))
+        service_lease = acquire_service_lease(root)
+        service_lease_acquired = True
         for change in plan['changes']:
             target=_target(root,change['path']);source=_target(package,change['source'])
             actual=digest(target.read_bytes()) if target.is_file() else None
@@ -130,16 +176,29 @@ def apply_upgrade(plan, reviewed_sha256):
         return {'state':'applied','version':plan['to_version'],'journal_file':str(folder/'journal.json'),'restart_required':True,
                 'preserved_customizations':plan['preserved_customizations'],'runtime_acceptance':'required_after_restart'}
     except Exception:
-        try:rollback_upgrade(folder/'journal.json',allow_in_progress=True)
-        except Exception:
-            journal['state']='rollback_requires_review';_json(folder/'journal.json',journal)
+        if service_lease_acquired:
+            try:rollback_upgrade(folder/'journal.json',allow_in_progress=True)
+            except Exception:
+                journal['state']='rollback_requires_review';_json(folder/'journal.json',journal)
+        else:
+            journal['state']='failed_before_source_mutation';_json(folder/'journal.json',journal)
         raise
     finally:
+        if service_lease: service_lease.close()
         # Only remove our own regular lock; no recursive deletion or lock recovery is attempted.
         if lock.is_file() and not lock.is_symlink():lock.unlink()
 
 
 def rollback_upgrade(journal_file, allow_in_progress=False):
+    path = Path(journal_file).resolve(strict=True)
+    root = _root(json.loads(path.read_text(encoding='utf8'))['plan']['install_dir'])
+    service_lease = acquire_service_lease(root) if not allow_in_progress else None
+    try: return _rollback_upgrade(path, allow_in_progress)
+    finally:
+        if service_lease: service_lease.close()
+
+
+def _rollback_upgrade(journal_file, allow_in_progress=False):
     path=Path(journal_file).resolve(strict=True);journal=json.loads(path.read_text(encoding='utf8'))
     root=_root(journal['plan']['install_dir'])
     if not path.parent.is_relative_to(root/'.upgrades') or path.name!='journal.json':raise ValueError('Journal must belong to the selected installation')

@@ -40,6 +40,7 @@ EXPORTS = {
     "molecular": ("molecular_ext", ["molecular_descriptors", "prepare_ligand_meeko", "audit_docking_inputs", "summarize_vina_poses", "run_vina_docking"]),
     "biomedical": ("biomedical_ext", ["audit_drug_target_records", "assess_cohort_eligibility", "audit_genetic_alignment", "build_evidence_matrix", "compare_evidence", "audit_structure_context", "map_disease_terms", "audit_cell_annotations", "audit_enrichment_results", "extract_study_elements"]),
     "research": ("research_ext", ["select_tools", "resolve_identifier", "audit_identifier_mapping"]),
+    "research_quality": ("research_quality_ext", ["audit_literature_set", "audit_identifier_context", "resolve_public_identifiers", "audit_returned_analysis", "audit_evidence_trace"]),
     "atlas": ("atlas_ext", ["query_gtex", "query_hpa", "search_cellxgene_collections", "query_ena_runs"]),
     "workflow": ("workflow_ext", ["inspect_ssh_route", "prepare_remote_task", "prepare_server_inventory", "inspect_remote_task", "verify_remote_results", "audit_sample_metadata", "audit_result_table", "build_server_download_manifest"]),
     "literature": ("literature_ext", ["query_pubmed", "query_europepmc", "doi_metadata", "fetch_open_access_article", "fetch_supplementary_info_from_doi", "extract_local_document", "discover_publisher_supplements", "download_publisher_supplement"]),

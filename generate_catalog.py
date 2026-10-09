@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '2.13.1'
+VERSION = '2.13.2'
 
 
 def assignment(tree, name):
@@ -25,6 +25,7 @@ def generate(root=ROOT):
         functions = {n.name:n for n in tree.body if isinstance(n, ast.FunctionDef)}
         enums = {}
         if category == 'molecular_biology': enums['task'] = list(assignment(tree, 'ROUTES'))
+        if category == 'research_quality': enums['analysis'] = list(assignment(tree, 'ANALYSES'))
         for name in names:
             node = functions[name]; properties = {}; required = []
             defaults = [None]*(len(node.args.args)-len(node.args.defaults)) + list(node.args.defaults)

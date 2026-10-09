@@ -17,6 +17,11 @@ PATTERNS = {
 }
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
+    'literature_quality': [('research_quality', 'audit_literature_set')],
+    'identifier_context': [('research_quality', 'audit_identifier_context')],
+    'public_identifier_batch': [('research_quality', 'resolve_public_identifiers')],
+    'server_result_depth': [('research_quality', 'audit_returned_analysis')],
+    'evidence_trace_depth': [('research_quality', 'audit_evidence_trace')],
     'scientific_benchmark': [('validation','inspect_scientific_benchmarks'),('validation','audit_benchmark_receipt')],
     'server_budget': [('code_execution','estimate_compute_resources'),('server_operations','plan_server_budget')],
     'unknown_submission': [('server_operations','review_unknown_submission')],

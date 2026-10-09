@@ -39,7 +39,7 @@
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-claim-audit/references/tool-routing.md": "f3365de6b85d6968440b0f325ba7e03be87ca69fd7c4bd89f8d7df8984b0f4be",
-        "biomni-claim-audit/SKILL.md": "7ce1e24171c88bea36660b03399dd4146531f985990cabc07c83490716fb839e"
+        "biomni-claim-audit/SKILL.md": "ba86271487060bb418bb2c71fdfebf52618f1ee7b1459159f0773d6a346db2d7"
       }
     },
     {
@@ -115,7 +115,7 @@
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-omics-design/references/tool-routing.md": "4ddbce4dd5cb5303720e8d715414dd37929bcf76fd17eabb05bc4acb9d7a0bda",
-        "biomni-omics-design/SKILL.md": "4950fb6ec664d9414bc581ad34d54b3c7b9a94dbde2d7ea88688bc85ff41522a"
+        "biomni-omics-design/SKILL.md": "b7ee3cb82901e95867bfb584c5358064c23890f1b732321b8ce3749e2fd445e6"
       }
     },
     {
@@ -333,7 +333,7 @@
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-workflow-maintenance/references/tool-routing.md": "16b3e7445265ea5caac2df3f219937201d6ea5d507a5b13c08f122a6a4c0e67d",
-        "biomni-workflow-maintenance/SKILL.md": "4edf7d2bd7e7316b9a7a21c2ad305485aebcac2a49ceff1dee95e06511e36804"
+        "biomni-workflow-maintenance/SKILL.md": "08a459a9fb9f8cb4f4ecee8a2b1ee6b2dd73007106173b5d2e4328a56f07bec6"
       }
     }
   ]

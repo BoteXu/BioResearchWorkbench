@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "package_version": "2.13.1",
-  "extension_functions": 237,
-  "extension_categories": 36,
-  "routing_intents": 142,
+  "package_version": "2.13.2",
+  "extension_functions": 242,
+  "extension_categories": 37,
+  "routing_intents": 147,
   "tools": [
     {
       "category": "academic_workspace",
@@ -6402,7 +6402,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "485be6b0de9b22093e05b3aeaf8fa7002b1d94f47f277e4f84e1f14c82ee2214"
+      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
     },
     {
       "category": "research",
@@ -6446,7 +6446,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "485be6b0de9b22093e05b3aeaf8fa7002b1d94f47f277e4f84e1f14c82ee2214"
+      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
     },
     {
       "category": "research",
@@ -6486,7 +6486,245 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "485be6b0de9b22093e05b3aeaf8fa7002b1d94f47f277e4f84e1f14c82ee2214"
+      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
+    },
+    {
+      "category": "research_quality",
+      "name": "audit_literature_set",
+      "description": "Audit exact-ID duplicates, declared publication relations/updates and search coverage; query nothing.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "records": {
+            "type": "array",
+            "description": "records",
+            "items": {}
+          },
+          "searches": {
+            "type": "array",
+            "description": "searches",
+            "items": {}
+          },
+          "relations": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "relations",
+            "items": {},
+            "default": null
+          }
+        },
+        "required": [
+          "records",
+          "searches"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "audit_literature_set",
+        "parameters": {
+          "records": "<records>",
+          "searches": "<searches>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+    },
+    {
+      "category": "research_quality",
+      "name": "audit_identifier_context",
+      "description": "Audit species, build, annotation release, transcript/isoform specificity and mapping ambiguity offline.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "records": {
+            "type": "array",
+            "description": "records",
+            "items": {}
+          },
+          "expected_context": {
+            "type": "object",
+            "description": "expected context"
+          }
+        },
+        "required": [
+          "records",
+          "expected_context"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "audit_identifier_context",
+        "parameters": {
+          "records": "<records>",
+          "expected_context": "<expected_context>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+    },
+    {
+      "category": "research_quality",
+      "name": "resolve_public_identifiers",
+      "description": "Resolve at most ten explicitly approved public IDs sequentially; preserve official raw data and partial failures.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "description": "namespace"
+          },
+          "identifiers": {
+            "type": "array",
+            "description": "identifiers",
+            "items": {}
+          },
+          "species": {
+            "type": "string",
+            "description": "species",
+            "default": ""
+          },
+          "assembly": {
+            "type": "string",
+            "description": "assembly",
+            "default": ""
+          },
+          "approved_public_data": {
+            "type": "boolean",
+            "description": "Explicit approval of these exact public identifiers; default false; never infer approval from installation.",
+            "default": false
+          },
+          "use_cache": {
+            "type": "boolean",
+            "description": "use cache",
+            "default": true
+          }
+        },
+        "required": [
+          "namespace",
+          "identifiers"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "resolve_public_identifiers",
+        "parameters": {
+          "namespace": "<namespace>",
+          "identifiers": "<identifiers>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+    },
+    {
+      "category": "research_quality",
+      "name": "audit_returned_analysis",
+      "description": "Audit selected server-returned summaries, required result roles, exact QC bindings and method boundaries; execute nothing.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "analysis": {
+            "type": "string",
+            "description": "analysis",
+            "enum": [
+              "bulk",
+              "single_cell",
+              "spatial",
+              "pathway",
+              "ppi",
+              "docking"
+            ]
+          },
+          "artifacts": {
+            "type": "array",
+            "description": "artifacts",
+            "items": {}
+          },
+          "context": {
+            "type": "object",
+            "description": "context"
+          },
+          "qc": {
+            "type": "object",
+            "description": "qc"
+          },
+          "completion": {
+            "type": "object",
+            "description": "completion"
+          }
+        },
+        "required": [
+          "analysis",
+          "artifacts",
+          "context",
+          "qc",
+          "completion"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "audit_returned_analysis",
+        "parameters": {
+          "analysis": "<analysis>",
+          "artifacts": "<artifacts>",
+          "context": "<context>",
+          "qc": "<qc>",
+          "completion": "<completion>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
+    },
+    {
+      "category": "research_quality",
+      "name": "audit_evidence_trace",
+      "description": "Audit located claim-to-source edges, versions, context conflicts and declared evidence ceilings offline.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claims": {
+            "type": "array",
+            "description": "claims",
+            "items": {}
+          },
+          "sources": {
+            "type": "array",
+            "description": "sources",
+            "items": {}
+          },
+          "context": {
+            "type": "object",
+            "description": "context"
+          }
+        },
+        "required": [
+          "claims",
+          "sources",
+          "context"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "audit_evidence_trace",
+        "parameters": {
+          "claims": "<claims>",
+          "sources": "<sources>",
+          "context": "<context>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "251a9122db568c68a8636bc43928e59eb6bf53753311a0f9295f7978af80705a"
     },
     {
       "category": "review",
@@ -10603,6 +10841,15 @@
       "compatibility": "Python 3.11; task-specific optional dependencies require runtime checks",
       "permission_review": "inspect the selected function contract"
     },
+    "research_quality": {
+      "source": "research_quality_ext.py",
+      "function_count": 5,
+      "load": "deferred_until_call",
+      "referenced_optional_packages": [],
+      "version_constraints": "requirements-core.lock.txt and selected requirements-local/omics/full profile; external R/CLI versions need actual probes",
+      "compatibility": "Python 3.11; task-specific optional dependencies require runtime checks",
+      "permission_review": "inspect the selected function contract"
+    },
     "review": {
       "source": "review_ext.py",
       "function_count": 10,
@@ -10775,9 +11022,15 @@
     }
   },
   "version_changes": {
-    "from_version": "2.13.0",
-    "to_version": "2.13.1",
-    "added": [],
+    "from_version": "2.13.1",
+    "to_version": "2.13.2",
+    "added": [
+      "research_quality.audit_evidence_trace",
+      "research_quality.audit_identifier_context",
+      "research_quality.audit_literature_set",
+      "research_quality.audit_returned_analysis",
+      "research_quality.resolve_public_identifiers"
+    ],
     "removed": [],
     "parameter_changes": []
   },

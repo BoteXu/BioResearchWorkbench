@@ -8,6 +8,8 @@ license: Apache-2.0
 
 ## 输入与触发
 
+返回服务器结果时，可选 research_quality.audit_returned_analysis 审查 bulk、single_cell、spatial、pathway、ppi 的必需结果角色、精确 QC/上下文绑定和选定摘要哈希；缺失结果与调用者声明分别报告。research_quality.audit_identifier_context 保留物种、构建、注释、转录本/异构体版本和映射歧义。独立单位、统计假设与科学有效性仍需实质核验；本机仅做有界检查。
+
 研究问题、数据尺度、样本元数据、独立重复关系、分析目标与资源预算。
 
 ## 使用边界

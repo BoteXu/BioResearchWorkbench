@@ -49,6 +49,34 @@ macOS / Linux：
 
 鸿蒙浏览器仍使用独立的 [浏览器访问路线](PLATFORMS.md)，该 JSON 网关与共享 MCP 是两个接口。
 
+## v2.13.2 生命周期与内存优化
+
+`start` 和直接 `serve` 在加载工具前使用同一准入检查；非元数据操作开始前再次检查。默认剩余内存门槛为 3 GiB、额外预算 0.25 GiB。Windows 检查提交量达到 80%、预估达到 85%，以及非分页池同时达到物理容量 15% 和 4 GiB；必需指标不可用时拒绝新任务。macOS/Linux 明确报告缺少 Windows 提交量/非分页池指标，不用交换区占用冒充提交量。主机严格规则优先，准入不授权本地科研计算。
+
+初始化可显式设置 `--minimum-after-reserve-gib`、`--reserve-gib`、`--maximum-commit-pct`、`--maximum-projected-commit-pct`；既有配置不自动放宽。每 15 秒记录私有内存趋势，最多保留 120 个样本，含 RSS、Windows private bytes、峰值和队列计数。状态查询也能采样。窗口变化是诊断线索；leak_established=false，短期连接检查不能替代长期验收。
+
+### 调用编号与连接诊断
+
+普通成功结果带 `_shared_call`。需要在断开前掌握编号时，先 `biomni_shared_reserve_call`，再 `biomni_shared_dispatch`，用 `biomni_shared_call_status` 查询。编号只派发一次；未知、已派发或移出账本的编号拒绝重放。账本最多 256 项，不保存参数或结果正文；重启后的未完成项是 UNKNOWN_INTERRUPTED，必须核查真实回执。状态包含等待/执行耗时、排队位置、未开始的取消/超时，以及失败后需核查的状态。取消客户端等待不解除实际线程的门禁，失败也不证明外部写入已回滚。
+
+`biomni_shared_connection_check` 比较两条选定连接的实例标识。`doctor --client-config <选定私有 JSON/TOML 文件>` 检查旧 stdio、重复启用、端点与认证；不输出令牌、路径或用户标签。静态配置和选定连接不能证明全部聊天已切换。
+
+### 安全升级和停止
+
+先用 status 获取实例标识，再对自己的服务明确执行：
+
+```text
+python .local/shared_mcp.py drain --expected-identity <当前实例标识>
+python .local/shared_mcp.py doctor
+python .local/shared_mcp.py stop --expected-identity <同一实例标识>
+```
+
+drain 拒绝新操作，已有排队和执行继续；stop 只在已经 drain 且真实队列/工作线程均空闲时接受，服务正常退出。resume 可明确恢复接收。控制要求本机认证、来源和精确实例标识，不暴露为模型自动调用的 MCP 工具。升级与回滚持有服务生命周期锁，阻止同时启动后台。随后审核源码哈希、重新启动和验收。
+
+诊断区分没有实例、持锁不健康、端口被其他应用占用、子进程退出、启动超时；只保留错误类型/退出码，不自动重启或重试。目录缓存最多 32 项/2 MiB/10 秒，精确源码/配置/健康记录字节变化失效；运行状态不缓存。公开 ID 缓存见 [科研质量检查](RESEARCH_QUALITY.md)，私有研究结果和写操作不加入公共查询缓存。
+
+关闭一个 HTTP 会话不停止后台，连接生命周期参考 [MCP Lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle)。
+
 ## 验收
 
 `tests/test_shared_mcp.py` 检查锁、凭据保护、源码变化、配置保留、队列超时、取消后的执行串行和禁止的操作。`tests/shared_process_check.py` 同时启动三个入口，用两个独立 MCP 客户端验证一个后台、断开隔离、并发计数、认证与请求限制。只调用元数据，不执行科研分析或公共查询。

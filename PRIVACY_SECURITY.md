@@ -1,5 +1,7 @@
 # Privacy and security boundaries
 
+Package 2.13.2 adds bounded private call/memory diagnostics and selected configuration checks. Diagnostics retain opaque IDs, states, timings and memory measurements; no query arguments, result bodies, tokens, personal labels or configuration paths are recorded by the shared layer. Client configuration checks output only counts/issues. Catalog caching remains installation-local and bounded; the separate public identifier cache requires exact public-data approval, is memory-only, and retains its source retrieval time. Private research text and writes are excluded from public query caching. Research summary audits query nothing unless the specifically approved public batch resolver is selected. See [RESEARCH_QUALITY.md](RESEARCH_QUALITY.md).
+
 ## Private local tools, no personal public API
 
 The direct bridge needs no separate model provider, model API key or personal remote service. Server installations default to an authenticated owner-local shared HTTP MCP registration; legacy/local profiles retain stdio. The owner starts the shared backend explicitly. Installation does not create an Internet endpoint, connect to SSH, launch a browser gateway, submit server jobs or upload results automatically. Shared execution and private configuration are described in [SHARED_MCP.md](SHARED_MCP.md).

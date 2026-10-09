@@ -8,6 +8,8 @@ license: Apache-2.0
 
 ## 输入与触发
 
+检索后可用 research_quality.audit_literature_set 保留 DOI/PMID 重复、版本关系、出版更新声明和检索覆盖；逐条结论可用 research_quality.audit_evidence_trace 检查来源版本、原文位置与实验边界。审计契约通过不等于原文直接支持结论；继续进行语义核验。文稿与证据摘要保持私有。
+
 结论或来源论文、允许检索的公开查询、可获取的正文与补充材料。
 
 ## 使用边界

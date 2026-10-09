@@ -10,6 +10,7 @@ import socket
 import subprocess
 import sys
 import tempfile
+import time
 
 import httpx
 import psutil
@@ -55,6 +56,17 @@ async def clients(settings, shared):
                             a, b = await asyncio.gather(client_a.call_tool('biomni_shared_runtime',{}), client_b.call_tool('biomni_shared_runtime',{}))
                             a, b = payload(a), payload(b)
                             assert a['pid']==b['pid'] and a['identity']==b['identity']
+                            STAGE = 'reserved-dispatch'
+                            ticket = payload(await client_a.call_tool('biomni_shared_reserve_call', {}))
+                            dispatched = payload(await client_a.call_tool('biomni_shared_dispatch', {
+                                'call_id':ticket['call_id'], 'tool_name':'biomni_tool_catalog',
+                                'arguments':{'category':'research_quality','limit':1}}))
+                            assert dispatched['result']['tools'] and dispatched['call']['state']=='COMPLETED'
+                            assert (await client_b.call_tool('biomni_shared_dispatch', {
+                                'call_id':ticket['call_id'],'tool_name':'biomni_status','arguments':{}})).isError
+                            assert payload(await client_b.call_tool('biomni_shared_call_status', {'call_id':ticket['call_id']}))['state']=='COMPLETED'
+                            connection = payload(await client_b.call_tool('biomni_shared_connection_check', {'expected_identity':a['identity']}))
+                            assert connection['matches_selected_connection']
                             STAGE = 'catalog-pair'
                             calls = await asyncio.gather(client_a.call_tool('biomni_tool_catalog',{'category':'workflow','limit':1}), client_b.call_tool('biomni_tool_catalog',{'category':'server','limit':1}))
                             assert all(payload(x)['tools'] for x in calls)
@@ -70,6 +82,27 @@ async def clients(settings, shared):
                 return after
 
 
+async def connection_endurance(settings, shared, cycles=20):
+    """Bounded connection churn, not a long-term leak or all-native-client acceptance."""
+    url = 'http://'+shared.LOOPBACK+':'+str(settings['port'])+'/mcp'
+    headers = {'Authorization':'Bearer '+settings['token']}
+    readings = []; started = time.monotonic()
+    for _ in range(cycles):
+        async with httpx.AsyncClient(headers=headers, trust_env=False, timeout=30) as client:
+            async with streamable_http_client(url, http_client=client) as (read, write, _):
+                async with ClientSession(read, write) as session:
+                    await session.initialize()
+                    readings.append(payload(await session.call_tool('biomni_shared_runtime', {})))
+        await asyncio.sleep(1.5)
+    assert len({r['identity'] for r in readings})==1
+    assert all(r['active']==0 and r['waiting']==0 for r in readings)
+    growth = readings[-1]['runtime_rss_mib']-readings[0]['runtime_rss_mib']
+    assert growth <= 64, 'Bounded metadata connection churn exceeded fixture RSS growth budget'
+    return {'connection_cycles':cycles, 'elapsed_seconds':round(time.monotonic()-started,2),
+            'rss_growth_mib':round(growth,2), 'maximum_rss_growth_mib':64,
+            'long_term_stability_established':False, 'leak_established':False}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--minimum-available-gib', type=float, default=3)
@@ -77,6 +110,7 @@ def main():
     with tempfile.TemporaryDirectory() as folder:
         bridge = Path(folder)/'.local'; shutil.copytree(ROOT/'bridge', bridge,
             ignore=shutil.ignore_patterns('__pycache__','shared_mcp_private','results','jobs','outputs','sources','source_snapshots','evidence','data','downloads','articles','supplements','compute_config.json','privacy_config.json','software_registry.json'))
+        sys.path.insert(0, str(bridge))
         spec = importlib.util.spec_from_file_location('shared_fixture', bridge/'shared_mcp.py')
         shared = importlib.util.module_from_spec(spec); spec.loader.exec_module(shared)
         with socket.socket() as temporary:
@@ -113,13 +147,19 @@ def main():
             observed = asyncio.run(clients(settings, shared))
             assert observed['pid']==process.pid
             assert shared.start()['action']=='reused'
+            endurance = asyncio.run(connection_endurance(settings, shared))
+            shared.control('drain', observed['identity'])
+            assert shared.health(settings)['status']=='DRAINING'
+            shared.control('resume', observed['identity'])
+            assert shared.health(settings)['status']=='RUNNING'
             print(json.dumps({'passed':True,'concurrent_launchers':3,'backend_instances':1,
                 'independent_mcp_clients':2,'client_disconnect_isolated':True,
                 'max_parallel_tool_calls':observed['max_active'],'authentication_and_limits':True,
                 'local_scientific_workers_exposed':False,'public_queries':0,
                 'fixture_minimum_available_gib':args.minimum_available_gib,
                 'production_default_minimum_available_gib':3,
-                'native_client_gui_adoption':'not verified'}))
+                'native_client_gui_adoption':'not verified', 'connection_endurance':endurance,
+                'reserved_dispatch_and_replay_refusal':True, 'drain_resume':True}))
         except BaseException as error:
             def error_types(exc):
                 return [name for item in exc.exceptions for name in error_types(item)] if isinstance(exc, BaseExceptionGroup) else [type(exc).__name__]
@@ -135,7 +175,9 @@ def main():
             if runtime:
                 owned = psutil.Process(runtime['pid'])
                 if abs(owned.create_time()-runtime['process_create_time'])<0.01 and is_fixture_process(owned, bridge):
-                    owned.terminate(); owned.wait(timeout=15)
+                    shared.control('drain', runtime['identity'])
+                    shared.control('stop', runtime['identity'])
+                    owned.wait(timeout=15)
 
 
 if __name__ == '__main__': main()
