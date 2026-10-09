@@ -150,8 +150,8 @@
     },
     {
       "path": "SHARED_MCP.md",
-      "bytes": 5965,
-      "sha256": "04d45bc706aa62cb54f2199a70e8591f77bdf3e02a2fe3f92da59879301e076d"
+      "bytes": 5980,
+      "sha256": "ff0d7037114d9a31d18f2db6569c9ce01c622fbb55ecef161c1526a22e543dbb"
     },
     {
       "path": "SKILLS.md",
@@ -1025,8 +1025,8 @@
     },
     {
       "path": "tests/test_shared_mcp.py",
-      "bytes": 7290,
-      "sha256": "143e52ee3d82c0a653ef8222a8fbc3650ed8881bccdfb81df04c533438dcb511"
+      "bytes": 7350,
+      "sha256": "4c2821d3c8e541936f807924b9a61ea6cdcd6b1bf573c5d5d878ab5e427726fa"
     },
     {
       "path": "tests/test_skills.py",
