@@ -55,7 +55,7 @@ ALLOWED_MCP_TOOLS = {'biomni_status', 'biomni_database_query', 'biomni_tool_cata
 
 def source_hash():
     value = hashlib.sha256()
-    for file in sorted(p for p in BRIDGE.iterdir() if p.is_file() and p.suffix in {'.py','.R','.ps1'}):
+    for file in sorted(p for p in BRIDGE.iterdir() if p.is_file() and (p.suffix in {'.py','.R','.ps1'} or p.name == 'omics_workflows.json')):
         value.update(file.name.encode()); value.update(file.read_bytes())
     return value.hexdigest()
 

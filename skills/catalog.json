@@ -1,5 +1,5 @@
 {
-  "version": "2.13.0",
+  "version": "2.14.0",
   "skills": [
     {
       "name": "biomni-academic-delivery",
@@ -99,7 +99,7 @@
     },
     {
       "name": "biomni-omics-design",
-      "description": "规划或验收 bulk、单细胞、空间转录组与组学分析；绘图任务无需重新分析。",
+      "description": "规划与验收转录、表观、遗传、蛋白、代谢及多组学流程；先做设计和 QC，再按条件选择拓展分析。",
       "kind": "workflow_instructions",
       "license": "Apache-2.0",
       "tool_routes": [
@@ -110,12 +110,16 @@
         "reporting.audit_analysis_result",
         "code_review.audit_data_contract",
         "code_review.bind_analysis_qc",
-        "code_review.check_analysis_qc"
+        "code_review.check_analysis_qc",
+        "omics_workflows.inspect_omics_workflows",
+        "omics_workflows.plan_omics_workflow",
+        "omics_workflows.audit_omics_readiness",
+        "omics_workflows.audit_omics_result_bundle"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-omics-design/references/tool-routing.md": "4ddbce4dd5cb5303720e8d715414dd37929bcf76fd17eabb05bc4acb9d7a0bda",
-        "biomni-omics-design/SKILL.md": "b7ee3cb82901e95867bfb584c5358064c23890f1b732321b8ce3749e2fd445e6"
+        "biomni-omics-design/references/tool-routing.md": "a281ee17c5ed7ff813cb908fa81ec96c78ac888ecb97042c5c20ee8404dce630",
+        "biomni-omics-design/SKILL.md": "ca7c46d431509ec2138c78118cf0ba4e8dbf4f11fb6993fb9349a3362d4350fe"
       }
     },
     {

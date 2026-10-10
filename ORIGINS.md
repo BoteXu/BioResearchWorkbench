@@ -1,5 +1,7 @@
 # 项目起源、第三方归属与我们的工作
 
+Package 2.14 的组学目录、规划、QC 与结果契约由本项目编写。nf-core、Bioconductor、MOFA2 及目录中列出的其他方法均为第三方原作者的算法/文档；这里只链接官方资料和列出服务器候选，不复制其 pipeline、脚本、权重或数据库。候选不是新的执行后端，实际运行仍需已有服务器环境与版本验收，见 OMICS_WORKFLOWS.md。
+
 ## 最初底层：Biomni
 
 **BioResearchWorkbench 最初的底层建立在 [Biomni](https://github.com/snap-stanford/Biomni) 上。** 最早的实现复用了 Biomni 的工具目录、工具描述、部分生物医学工具和数据库查询代码，并将它们接入宿主模型可直接调用的工具桥。项目随后扩展了研究流程、QC、统计咨询、软件接口、文献与论文审查等功能，因此采用独立名称。

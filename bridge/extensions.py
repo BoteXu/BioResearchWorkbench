@@ -8,6 +8,7 @@ from importlib.util import find_spec
 from functools import lru_cache
 
 EXPORTS = {
+    "omics_workflows": ("omics_workflows_ext", ["inspect_omics_workflows", "plan_omics_workflow", "audit_omics_readiness", "audit_omics_result_bundle"]),
     "validation": ("validation_ext", ["inspect_scientific_benchmarks", "audit_benchmark_receipt"]),
     "server_operations": ("server_operations_ext", ["plan_server_budget", "review_unknown_submission", "plan_incremental_return"]),
     "molecular_biology": ("molecular_biology_ext", ["guide_molecular_drylab", "inspect_molecular_resources", "plan_molecular_extension", "query_intact_interactions", "query_complex_record", "query_cell_line", "audit_splicing_results", "audit_regulatory_links", "audit_protein_annotations", "audit_interaction_records", "audit_perturbation_results", "audit_mechanism_graph", "prepare_molecular_pipeline"]),

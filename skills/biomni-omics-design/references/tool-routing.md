@@ -29,3 +29,11 @@
 - `code_review.check_analysis_qc`
 
 Read CODE_WORKFLOWS.md and CLINICAL_RESEARCH.md in the private installation. Code execution and large clinical/omics computation stay on the server. Scaffolds and passing static checks are not runtime or scientific validation.
+
+## Package 2.14 workflow contracts
+- `omics_workflows.inspect_omics_workflows`
+- `omics_workflows.plan_omics_workflow`
+- `omics_workflows.audit_omics_readiness`
+- `omics_workflows.audit_omics_result_bundle`
+
+Read OMICS_WORKFLOWS.md. All new functions are offline plans or bounded summary audits. Reuse actual server environments; reference methods are candidates, not installed engines. Explicit statistical consultation and independent units precede inference.

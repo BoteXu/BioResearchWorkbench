@@ -43,7 +43,7 @@ def _mapping(package):
     for entry in manifest['files']:
         name=entry['path'];target=None
         if name.startswith('bridge/') and Path(name).suffix in {'.py','.R','.ps1'}:target='.local/'+name.split('/',1)[1]
-        elif '/' not in name and (name.endswith('.md') or name in {'LICENSE','NOTICE','third_party_components.json','mcp_components.json','mcp_embedding_model.json','cadd_sources.json','molecular_resources.json','TOOL_CATALOG.json','benchmark_catalog.json'}):target='.local/'+name
+        elif '/' not in name and (name.endswith('.md') or name in {'LICENSE','NOTICE','third_party_components.json','mcp_components.json','mcp_embedding_model.json','cadd_sources.json','molecular_resources.json','TOOL_CATALOG.json','benchmark_catalog.json','omics_workflows.json'}):target='.local/'+name
         elif name.startswith('skills/'):target=name
         elif name=='install_skills.py':target=name
         if target: files[target]={'source':name,'sha256':entry['sha256']}

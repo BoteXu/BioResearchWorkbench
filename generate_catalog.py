@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '2.13.2'
+VERSION = '2.14.0'
 
 
 def assignment(tree, name):
@@ -26,6 +26,10 @@ def generate(root=ROOT):
         enums = {}
         if category == 'molecular_biology': enums['task'] = list(assignment(tree, 'ROUTES'))
         if category == 'research_quality': enums['analysis'] = list(assignment(tree, 'ANALYSES'))
+        if category == 'omics_workflows':
+            omics = json.loads((root/'omics_workflows.json').read_text(encoding='utf8'))
+            enums['workflow'] = [w['id'] for w in omics['workflows']]
+            enums['family'] = sorted({w['family'] for w in omics['workflows']})
         for name in names:
             node = functions[name]; properties = {}; required = []
             defaults = [None]*(len(node.args.args)-len(node.args.defaults)) + list(node.args.defaults)
@@ -33,7 +37,11 @@ def generate(root=ROOT):
                 annotation = ast.unparse(p.annotation) if p.annotation else 'Any'
                 spec = {'type': types.get(annotation, 'string'), 'description': p.arg.replace('_', ' ')}
                 if spec['type'] == 'array': spec['items'] = {}
-                if p.arg in enums: spec['enum'] = enums[p.arg]
+                if p.arg in enums: spec['enum'] = enums[p.arg] + ([''] if d is not None and ast.literal_eval(d) == '' else [])
+                if category == 'omics_workflows' and p.arg == 'extensions':
+                    spec['items'] = {'type': 'string', 'enum': list(omics['extensions'])}
+                    spec['maxItems'] = 12
+                    spec['uniqueItems'] = True
                 if d is None: required.append(p.arg)
                 else:
                     default = ast.literal_eval(d); spec['default'] = default

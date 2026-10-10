@@ -68,6 +68,7 @@ jobs:
       - run: python run_acceptance.py
       - run: python install_skills.py --validate-only
       - run: python generate_catalog.py --check
+      - run: python generate_omics_guide.py --check
   public-scientific-benchmarks:
     runs-on: ubuntu-latest
     needs: privacy-and-unit

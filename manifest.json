@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
   "bridge_version": "2.13",
-  "package_version": "2.13.2",
+  "package_version": "2.14.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -15,8 +15,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "bytes": 8002,
-      "sha256": "6de687a65d69bb64b2761ad5f754a6d402696a2e0466d5dedc68e7a039094ae0"
+      "bytes": 8054,
+      "sha256": "8b32bd85c808e0ab3cb849e0632fee14b9b51a96adee04fdd40ab000185db92e"
     },
     {
       "path": ".gitignore",
@@ -30,8 +30,8 @@
     },
     {
       "path": "AGENTS.template.md",
-      "bytes": 11709,
-      "sha256": "a116b8a38d4aed02e146990a5eae3b2de30b12bb7734b2834b3607b87816ac29"
+      "bytes": 12612,
+      "sha256": "38bd96b9aa1805d972e4f0a9fc28feb070adf18750efba18c3cf31e1b681721e"
     },
     {
       "path": "BIOMEDICAL.md",
@@ -60,8 +60,8 @@
     },
     {
       "path": "EVOLUTION.md",
-      "bytes": 6751,
-      "sha256": "70c0df71f48a1c2fb3f8463f836bec5671dfefe5b04459142c0f02b9c4e3a2d7"
+      "bytes": 7656,
+      "sha256": "53568c3569f7bc2a7039e0e9fb8c2b60fb4d03d7657df5178c14b502d103cae1"
     },
     {
       "path": "Install.ps1",
@@ -104,9 +104,14 @@
       "sha256": "d36c6f4eba087c627b1fcde0a50d8bffb12009df02a412d58c644573ba972e22"
     },
     {
+      "path": "OMICS_WORKFLOWS.md",
+      "bytes": 46586,
+      "sha256": "99f20e367f183563c74b30c827aeae598ccf54d10de90af736cd9fde945a0e03"
+    },
+    {
       "path": "ORIGINS.md",
-      "bytes": 9839,
-      "sha256": "3e197759734bba63a30bf23a4e886810b4207612a831e1a0ad3b1a119eeea5aa"
+      "bytes": 10250,
+      "sha256": "2a863046d6e83a709e02a3cac839837a0ed8d12243cb651f2e83e5c07d61773a"
     },
     {
       "path": "PERSONAL_LIBRARY.md",
@@ -130,8 +135,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 19997,
-      "sha256": "ec4767c0bbee6473779fbe0591da878ec1e3c21ba4c456f8cf1879cca4003b35"
+      "bytes": 21208,
+      "sha256": "e40c8561f9d5c90513b8898748e15fea502289864de5d50cb258af07e33eeb22"
     },
     {
       "path": "RESEARCH_QUALITY.md",
@@ -160,8 +165,8 @@
     },
     {
       "path": "SKILLS.md",
-      "bytes": 5461,
-      "sha256": "a384a2cf988dd10729d81ed193da59677a2ef502a69b3238f6f9901484b08b10"
+      "bytes": 5504,
+      "sha256": "9c523f5be0b040902ceaae3c4db871bc84d1ad437d9d66c6d81ca245e9be3701"
     },
     {
       "path": "SOFTWARE_INTERFACES.md",
@@ -175,13 +180,13 @@
     },
     {
       "path": "TOOL_CATALOG.json",
-      "bytes": 339746,
-      "sha256": "7b13527cf5b6208f071dc210c8c1840cf4895008a832629619f854b3b03cd993"
+      "bytes": 349354,
+      "sha256": "4b04d112c2e31b2e1d53e1192e8f47746f964b6a55d6e28eca305b4d065138b5"
     },
     {
       "path": "TOOL_CATALOG.md",
-      "bytes": 45670,
-      "sha256": "fa6acc92fe7ab9fcc7810eb5a106e739f92e400492a32ce0a5cbdeffff575edb"
+      "bytes": 46483,
+      "sha256": "eb2d4fe4e6143dbb01e32e1fd771137608cef5b025a8fcd6abebcb59db3e2088"
     },
     {
       "path": "WORKBENCH.md",
@@ -325,8 +330,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 14438,
-      "sha256": "a058a8dc02da46a64af43bbea2ddd9c73b78b886230d7a7ac58dc496aa8bbecb"
+      "bytes": 14592,
+      "sha256": "c2d2d2fcfac0caa013f5767223d972ba00c770b30491b868076f3603e2749c9a"
     },
     {
       "path": "bridge/http_client.py",
@@ -404,6 +409,11 @@
       "sha256": "702b7f80e304d4a2a350655196d7402492d4c3c30a8559c656fe2e301ec7fd58"
     },
     {
+      "path": "bridge/omics_workflows_ext.py",
+      "bytes": 19447,
+      "sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+    },
+    {
       "path": "bridge/personal_library_ext.py",
       "bytes": 13556,
       "sha256": "13129a7718211bb243f683573b34a439a1fcb2ba1e2f4991f230258e1c660045"
@@ -435,8 +445,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 30624,
-      "sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
+      "bytes": 31012,
+      "sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
     },
     {
       "path": "bridge/research_quality_ext.py",
@@ -490,8 +500,8 @@
     },
     {
       "path": "bridge/shared_mcp.py",
-      "bytes": 35174,
-      "sha256": "ee445187abb22c8f6889e36fc1b12af91904e2bd905ecfc6dbfbf7b63b6644c8"
+      "bytes": 35212,
+      "sha256": "1c8d4c19f1d34b5978084546abcb933b799ca262d03d2958911a283cc032933b"
     },
     {
       "path": "bridge/shared_support.py",
@@ -625,13 +635,18 @@
     },
     {
       "path": "generate_catalog.py",
-      "bytes": 8073,
-      "sha256": "4b88568a8c49c6f7548c9df0fb32786e545686d381772fac8dfa512bf575a141"
+      "bytes": 8673,
+      "sha256": "a80aba11ca9105c2e63ce2d48c84b72804341f1a446fa23dabf2d941989da84b"
+    },
+    {
+      "path": "generate_omics_guide.py",
+      "bytes": 10019,
+      "sha256": "f34be93d976da6dd672df9d9e3c65bf9a08f0bdaea3c80c1d8092316767ffac0"
     },
     {
       "path": "install.py",
-      "bytes": 8501,
-      "sha256": "b45898a27bd3b1138c3170d7c779fdc20ac81dcf32eb9576a56212fa815a921d"
+      "bytes": 8524,
+      "sha256": "4dcea5501804fea12287c37cb421fab6e6132ad35df10cdf773bf4ceee3de640"
     },
     {
       "path": "install_mcp.py",
@@ -657,6 +672,11 @@
       "path": "molecular_resources.json",
       "bytes": 4348,
       "sha256": "09900707f3815ea01b6357337c29abbed90f880c41cad12499da9e96eb4235ae"
+    },
+    {
+      "path": "omics_workflows.json",
+      "bytes": 73858,
+      "sha256": "c5524dca007e8772c4816b5273878cf31e54822b7ceedebc3ffb059eb21ecbbe"
     },
     {
       "path": "prepare_docker_gateway.py",
@@ -775,13 +795,13 @@
     },
     {
       "path": "skills/biomni-omics-design/SKILL.md",
-      "bytes": 2907,
-      "sha256": "b7ee3cb82901e95867bfb584c5358064c23890f1b732321b8ce3749e2fd445e6"
+      "bytes": 3752,
+      "sha256": "ca7c46d431509ec2138c78118cf0ba4e8dbf4f11fb6993fb9349a3362d4350fe"
     },
     {
       "path": "skills/biomni-omics-design/references/tool-routing.md",
-      "bytes": 2029,
-      "sha256": "4ddbce4dd5cb5303720e8d715414dd37929bcf76fd17eabb05bc4acb9d7a0bda"
+      "bytes": 2492,
+      "sha256": "a281ee17c5ed7ff813cb908fa81ec96c78ac888ecb97042c5c20ee8404dce630"
     },
     {
       "path": "skills/biomni-personal-library/SKILL.md",
@@ -890,8 +910,8 @@
     },
     {
       "path": "skills/catalog.json",
-      "bytes": 16295,
-      "sha256": "7a8a53379de71345c4fed533e1d9c78da5d15729a8587b7363579a6c184d743a"
+      "bytes": 16526,
+      "sha256": "7914c6e1eb7c9d21c3585d426b83f7d1c588dfab92cff4ec5513045b8e99f19c"
     },
     {
       "path": "tests/advanced_check.py",
@@ -960,8 +980,8 @@
     },
     {
       "path": "tests/shared_process_check.py",
-      "bytes": 12282,
-      "sha256": "39365443a5eef77b8634a3a026d2e825de53b6d43183e66a113424e1f2eedbe5"
+      "bytes": 13236,
+      "sha256": "fe14b569bf997bd1fe7ca933e78523dc05b2dc3d4d383a332dc37582e032fa83"
     },
     {
       "path": "tests/test_academic.py",
@@ -1017,6 +1037,11 @@
       "path": "tests/test_molecular_drylab.py",
       "bytes": 12315,
       "sha256": "871f644b62e4c67ff8c6ca2a4b2d282ded411cd25a9230d2fd6f17f6ee12272a"
+    },
+    {
+      "path": "tests/test_omics_workflows.py",
+      "bytes": 12484,
+      "sha256": "40679c729eba9e9e8d227a37097821b14b0e4e079fe64aaf3f526113f74ff27c"
     },
     {
       "path": "tests/test_origins.py",
@@ -1076,17 +1101,17 @@
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "e260736ff52b1d3637e2c151665efb01c3830c6ae74c81799dba221c590b22c8"
+      "sha256": "fc2245cdded99a6fbfaed29f04a1fafd5362689e5b6d40e333cc5239d95db4f2"
     },
     {
       "path": "update_skill_catalog.py",
       "bytes": 1958,
-      "sha256": "ac88b692d000e8bb9cdf65ca53db0b9d084ea18ed7dc8725a203c8cbe5018bb1"
+      "sha256": "3a1cd677869951b25706c58e2ea98af5fd60e7635376f00b3cacc23c2185038a"
     },
     {
       "path": "upgrade.py",
-      "bytes": 13989,
-      "sha256": "ef17c65e8293ea3f2223952f47883061b328c57b34098d1f262526e4f2203e38"
+      "bytes": 14012,
+      "sha256": "6fa97b41607fad289193dc8c7c82e6c57bb6d49a382301f9e6138262f2f9113d"
     },
     {
       "path": "\u516c\u5f00\u7248\u8bf4\u660e.md",

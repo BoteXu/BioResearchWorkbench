@@ -4,7 +4,7 @@
 
 | 扩展函数 | 类别 | 任务路由 | 包版本 |
 |---|---|---|---|
-| 242 | 37 | 147 | 2.13.2 |
+| 246 | 38 | 151 | 2.14.0 |
 
 参数 schema、默认值、枚举和调用模板见 [TOOL_CATALOG.json](TOOL_CATALOG.json)。模板中的占位符需要实际填写，模板不是可执行验收。
 
@@ -220,6 +220,15 @@
 | `map_orthologs` | Map explicit Ensembl IDs via homology, retaining absent and nonmatching mappings. | gene_ids, source_species, target_species |
 | `annotate_cells_by_markers` | Score explicit marker sets locally and retain ambiguous cells as Unknown. | path, markers_path, matrix_kind |
 | `transfer_cell_labels` | Reference-fitted PCA/kNN transfer on shared genes with an explicit Unknown class. | reference_path, query_path, label_key, matrix_kind |
+
+## omics_workflows
+
+| 函数 | 功能 | 必需参数 |
+|---|---|---|
+| `inspect_omics_workflows` | Discover 28 original standard/extension workflow contracts, QC, result roles and server-only candidates offline. |  |
+| `plan_omics_workflow` | Prepare an exact version-bound server workflow with modality QC and explicitly selected conditional extensions; never submit. | workflow, context, design, input_manifest |
+| `audit_omics_readiness` | Audit plan-bound modality QC, explicit threshold units, statistical consultation and existing server acceptance declarations offline. | plan, checks |
+| `audit_omics_result_bundle` | Audit required standard/extension output roles, exact provenance and declared server completion; read no raw data and retry nothing. | plan, result_manifest, execution_receipt, checks |
 
 ## personal_library
 

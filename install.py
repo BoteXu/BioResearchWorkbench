@@ -95,7 +95,7 @@ def main():
     shutil.copy2(ROOT/'mcp_components.json',local/'mcp_components.json')
     shutil.copy2(ROOT/'mcp_embedding_model.json',local/'mcp_embedding_model.json')
     shutil.copy2(ROOT/'cadd_sources.json',local/'cadd_sources.json')
-    for name in ('molecular_resources.json','TOOL_CATALOG.json','benchmark_catalog.json'):
+    for name in ('molecular_resources.json','TOOL_CATALOG.json','benchmark_catalog.json','omics_workflows.json'):
         shutil.copy2(ROOT/name,local/name)
     shutil.copy2(ROOT/'install_skills.py',target/'install_skills.py')
     (local/'compute_config.json').write_text(json.dumps({'edition':'local' if args.profile=='local' else 'server','profile':args.profile})+'\n',encoding='utf8')

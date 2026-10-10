@@ -77,6 +77,16 @@ async def clients(settings, shared):
                             STAGE = 'catalog-pair'
                             calls = await asyncio.gather(client_a.call_tool('biomni_tool_catalog',{'category':'workflow','limit':1}), client_b.call_tool('biomni_tool_catalog',{'category':'server','limit':1}))
                             assert all(payload(x)['tools'] for x in calls)
+                            STAGE = 'omics-catalog-through-mcp'
+                            omics = payload(await client_a.call_tool('biomni_run_tool', {
+                                'category':'omics_workflows', 'name':'inspect_omics_workflows',
+                                'parameters':{'workflow':'bulk_atac','detail':True}}))
+                            assert omics['success'] and omics['shared_call']['state']=='COMPLETED'
+                            omics_raw = Path(omics['result_file']).read_bytes()
+                            assert __import__('hashlib').sha256(omics_raw).hexdigest()==omics['sha256']
+                            omics_result = json.loads(omics_raw)
+                            assert omics_result['total_workflows']==28 and omics_result['workflows'][0]['qc_gates']
+                            assert not omics_result['new_executors']
                             STAGE = 'policy-refusals'
                             assert (await client_a.call_tool('biomni_tool_catalog',{'check_imports':True})).isError
                             assert (await client_a.call_tool('biomni_run_tool',{'category':'transcriptomics','name':'run_bulk_rnaseq','parameters':{}})).isError
@@ -117,6 +127,7 @@ def main():
     with tempfile.TemporaryDirectory() as folder:
         bridge = Path(folder)/'.local'; shutil.copytree(ROOT/'bridge', bridge,
             ignore=shutil.ignore_patterns('__pycache__','shared_mcp_private','results','jobs','outputs','sources','source_snapshots','evidence','data','downloads','articles','supplements','compute_config.json','privacy_config.json','software_registry.json'))
+        shutil.copyfile(ROOT/'omics_workflows.json', bridge/'omics_workflows.json')
         sys.path.insert(0, str(bridge))
         spec = importlib.util.spec_from_file_location('shared_fixture', bridge/'shared_mcp.py')
         shared = importlib.util.module_from_spec(spec); spec.loader.exec_module(shared)

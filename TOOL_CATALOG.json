@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "package_version": "2.13.2",
-  "extension_functions": 242,
-  "extension_categories": 37,
-  "routing_intents": 147,
+  "package_version": "2.14.0",
+  "extension_functions": 246,
+  "extension_categories": 38,
+  "routing_intents": 151,
   "tools": [
     {
       "category": "academic_workspace",
@@ -5827,6 +5827,316 @@
       "source_sha256": "702b7f80e304d4a2a350655196d7402492d4c3c30a8559c656fe2e301ec7fd58"
     },
     {
+      "category": "omics_workflows",
+      "name": "inspect_omics_workflows",
+      "description": "Discover 28 original standard/extension workflow contracts, QC, result roles and server-only candidates offline.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "workflow": {
+            "type": "string",
+            "description": "workflow",
+            "enum": [
+              "bulk_rna",
+              "scrna",
+              "spatial_rna",
+              "small_rna",
+              "long_read_rna",
+              "splicing",
+              "riboseq",
+              "clipseq",
+              "expression_array",
+              "bulk_atac",
+              "scatac",
+              "chipseq",
+              "cutandrun",
+              "methylseq",
+              "methylation_array",
+              "hic",
+              "germline",
+              "somatic",
+              "gwas_qtl",
+              "proteomics",
+              "phosphoproteomics",
+              "metabolomics",
+              "lipidomics",
+              "amplicon",
+              "metagenomics",
+              "singlecell_multiome",
+              "multiomics",
+              "perturbation",
+              ""
+            ],
+            "default": ""
+          },
+          "family": {
+            "type": "string",
+            "description": "family",
+            "enum": [
+              "epigenomics",
+              "functional",
+              "genomics",
+              "integration",
+              "metabolomics",
+              "microbiome",
+              "proteomics",
+              "transcriptomics",
+              ""
+            ],
+            "default": ""
+          },
+          "detail": {
+            "type": "boolean",
+            "description": "detail",
+            "default": false
+          },
+          "limit": {
+            "type": "integer",
+            "description": "limit",
+            "default": 40
+          }
+        },
+        "required": []
+      },
+      "example_template": {
+        "category": "omics_workflows",
+        "name": "inspect_omics_workflows",
+        "parameters": {}
+      },
+      "effect_units": [],
+      "source_file": "bridge/omics_workflows_ext.py",
+      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+    },
+    {
+      "category": "omics_workflows",
+      "name": "plan_omics_workflow",
+      "description": "Prepare an exact version-bound server workflow with modality QC and explicitly selected conditional extensions; never submit.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "workflow": {
+            "type": "string",
+            "description": "workflow",
+            "enum": [
+              "bulk_rna",
+              "scrna",
+              "spatial_rna",
+              "small_rna",
+              "long_read_rna",
+              "splicing",
+              "riboseq",
+              "clipseq",
+              "expression_array",
+              "bulk_atac",
+              "scatac",
+              "chipseq",
+              "cutandrun",
+              "methylseq",
+              "methylation_array",
+              "hic",
+              "germline",
+              "somatic",
+              "gwas_qtl",
+              "proteomics",
+              "phosphoproteomics",
+              "metabolomics",
+              "lipidomics",
+              "amplicon",
+              "metagenomics",
+              "singlecell_multiome",
+              "multiomics",
+              "perturbation"
+            ]
+          },
+          "context": {
+            "type": "object",
+            "description": "context"
+          },
+          "design": {
+            "type": "object",
+            "description": "design"
+          },
+          "input_manifest": {
+            "type": "array",
+            "description": "input manifest",
+            "items": {}
+          },
+          "extensions": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "extensions",
+            "items": {
+              "type": "string",
+              "enum": [
+                "pathway",
+                "ppi",
+                "coexpression",
+                "deconvolution",
+                "trajectory",
+                "velocity",
+                "communication",
+                "regulatory",
+                "splicing",
+                "timecourse",
+                "prediction",
+                "genetic_causality",
+                "chromatin_links",
+                "te",
+                "protein_activity",
+                "multiomics",
+                "composition",
+                "functional_profile",
+                "lipid_classes",
+                "sv_cnv",
+                "repertoire"
+              ]
+            },
+            "maxItems": 12,
+            "uniqueItems": true,
+            "default": null
+          }
+        },
+        "required": [
+          "workflow",
+          "context",
+          "design",
+          "input_manifest"
+        ]
+      },
+      "example_template": {
+        "category": "omics_workflows",
+        "name": "plan_omics_workflow",
+        "parameters": {
+          "workflow": "<workflow>",
+          "context": "<context>",
+          "design": "<design>",
+          "input_manifest": "<input_manifest>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/omics_workflows_ext.py",
+      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+    },
+    {
+      "category": "omics_workflows",
+      "name": "audit_omics_readiness",
+      "description": "Audit plan-bound modality QC, explicit threshold units, statistical consultation and existing server acceptance declarations offline.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "plan": {
+            "type": "object",
+            "description": "plan"
+          },
+          "checks": {
+            "type": "array",
+            "description": "checks",
+            "items": {}
+          },
+          "statistical_receipt": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "statistical receipt",
+            "default": null
+          },
+          "backend_receipt": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "backend receipt",
+            "default": null
+          }
+        },
+        "required": [
+          "plan",
+          "checks"
+        ]
+      },
+      "example_template": {
+        "category": "omics_workflows",
+        "name": "audit_omics_readiness",
+        "parameters": {
+          "plan": "<plan>",
+          "checks": "<checks>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/omics_workflows_ext.py",
+      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+    },
+    {
+      "category": "omics_workflows",
+      "name": "audit_omics_result_bundle",
+      "description": "Audit required standard/extension output roles, exact provenance and declared server completion; read no raw data and retry nothing.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "plan": {
+            "type": "object",
+            "description": "plan"
+          },
+          "result_manifest": {
+            "type": "array",
+            "description": "result manifest",
+            "items": {}
+          },
+          "execution_receipt": {
+            "type": "object",
+            "description": "execution receipt"
+          },
+          "checks": {
+            "type": "array",
+            "description": "checks",
+            "items": {}
+          },
+          "statistical_receipt": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "statistical receipt",
+            "default": null
+          },
+          "backend_receipt": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "backend receipt",
+            "default": null
+          }
+        },
+        "required": [
+          "plan",
+          "result_manifest",
+          "execution_receipt",
+          "checks"
+        ]
+      },
+      "example_template": {
+        "category": "omics_workflows",
+        "name": "audit_omics_result_bundle",
+        "parameters": {
+          "plan": "<plan>",
+          "result_manifest": "<result_manifest>",
+          "execution_receipt": "<execution_receipt>",
+          "checks": "<checks>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/omics_workflows_ext.py",
+      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+    },
+    {
       "category": "personal_library",
       "name": "create_personal_library",
       "description": "Create a fresh private SQLite research index with an opaque ID; do not read/import Zotero or configure cloud synchronization.",
@@ -6402,7 +6712,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
+      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
     },
     {
       "category": "research",
@@ -6446,7 +6756,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
+      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
     },
     {
       "category": "research",
@@ -6486,7 +6796,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ef036549d88b743749930fca2a97faac777e804766828dca064345153e0f5702"
+      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
     },
     {
       "category": "research_quality",
@@ -10792,6 +11102,15 @@
       "compatibility": "Python 3.11; task-specific optional dependencies require runtime checks",
       "permission_review": "inspect the selected function contract"
     },
+    "omics_workflows": {
+      "source": "omics_workflows_ext.py",
+      "function_count": 4,
+      "load": "deferred_until_call",
+      "referenced_optional_packages": [],
+      "version_constraints": "requirements-core.lock.txt and selected requirements-local/omics/full profile; external R/CLI versions need actual probes",
+      "compatibility": "Python 3.11; task-specific optional dependencies require runtime checks",
+      "permission_review": "inspect the selected function contract"
+    },
     "personal_library": {
       "source": "personal_library_ext.py",
       "function_count": 7,
@@ -11023,8 +11342,12 @@
   },
   "version_changes": {
     "from_version": "2.13.1",
-    "to_version": "2.13.2",
+    "to_version": "2.14.0",
     "added": [
+      "omics_workflows.audit_omics_readiness",
+      "omics_workflows.audit_omics_result_bundle",
+      "omics_workflows.inspect_omics_workflows",
+      "omics_workflows.plan_omics_workflow",
       "research_quality.audit_evidence_trace",
       "research_quality.audit_identifier_context",
       "research_quality.audit_literature_set",

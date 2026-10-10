@@ -8,6 +8,14 @@ The original foundation is Biomni. This independent downstream project adds tool
 
 [![Public verification](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml/badge.svg)](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml)
 
+## v2.14.0：组学标准流程与条件拓展
+
+新增 28 条组学流程、21 类条件拓展和四个离线规划/验收接口。覆盖转录组、表观组、遗传变异、蛋白/PTM、代谢/脂质、微生物概况与多组学。每条流程列出输入尺度、独立单位、方法特有 QC、标准步骤、拓展前提、必需结果和解释边界，见自动生成的 [OMICS_WORKFLOWS.md](OMICS_WORKFLOWS.md)。
+
+`omics_workflows.inspect_omics_workflows` 发现目录，`plan_omics_workflow` 生成绑定参考/输入/设计的计划，`audit_omics_readiness` 检查 QC、统计咨询及已有服务器验收，`audit_omics_result_bundle` 检查结果角色与回执谱系。缺失 QC、错误输入尺度、完全混杂、未满足拓展前提或状态未知会明确阻断。默认不添加拓展，不给所有平台套统一数值阈值。
+
+这些新增接口仅做有界元数据与摘要检查，不提供新的组学执行器、不自动下载或安装环境；计算复用已有服务器。21 类拓展在不同流程中有 108 个关联，这不是 108 个新算法。实际方法版本、协议和服务器后端仍需逐项验收。现有私有可选 bulk 附加包未纳入公开版。
+
 ## v2.13.1 更新：多会话共享后台
 
 服务器安装默认生成认证的 HTTP MCP 配置，让多个聊天共用一个 BioResearchWorkbench 后台。启动锁和服务锁防止重复初始化；调用统一排队，即使会话取消等待，真正运行的任务结束后才放行下一项。共享配置提供检索、服务器准备和有界检查，关闭本地科研工作进程与批量依赖导入。
@@ -19,7 +27,7 @@ Windows、macOS 和 Linux 使用同一共享入口。安装器生成私有认证
 本次深化分子生物学干实验，并补齐八个工程方向。扩展函数定义、必需参数、默认值、枚举、模板、模块信息与版本差异由公开源码生成，见 [功能目录](TOOL_CATALOG.md) / [机器可读合同](TOOL_CATALOG.json)。模板中的占位符必须替换为经审查的真实输入。
 
 <!-- GENERATED:CATALOG:BEGIN -->
-**公开目录（自动生成）**：242 个扩展函数、37 个类别、147 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
+**公开目录（自动生成）**：246 个扩展函数、38 个类别、151 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
 <!-- GENERATED:CATALOG:END -->
 
 | 工程方向 | 本版提供什么 | 验收和使用边界 |

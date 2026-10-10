@@ -13,7 +13,7 @@ Package 2.8.1 adds 14 original Apache-2.0-licensed workflow skills to bridge 2.8
 | Skill | 用途 |
 |---|---|
 | `biomni-claim-audit` | 科学主张、原始研究与真实引用链 |
-| `biomni-omics-design` | Bulk、单细胞和空间转录组设计、QC 与验收 |
+| `biomni-omics-design` | 转录、表观、遗传、蛋白、代谢、多组学的设计、QC、条件拓展与返回验收 |
 | `biomni-scientific-figures` | 冻结结果表、可追溯科研图表与视觉验收 |
 | `biomni-academic-delivery` | 论文、PDF、LaTeX 与汇报交付 |
 | `biomni-remote-compute` | 已有服务器流程、真实调度状态与结果回收 |
