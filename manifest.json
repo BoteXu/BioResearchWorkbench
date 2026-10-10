@@ -675,8 +675,8 @@
     },
     {
       "path": "omics_workflows.json",
-      "bytes": 73858,
-      "sha256": "c5524dca007e8772c4816b5273878cf31e54822b7ceedebc3ffb059eb21ecbbe"
+      "bytes": 71286,
+      "sha256": "c3de5aa82d4a543bba93736a3c939bee9b68b7a49d5df3aa92ea321a7f0c2e0a"
     },
     {
       "path": "prepare_docker_gateway.py",
