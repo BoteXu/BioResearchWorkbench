@@ -18,7 +18,7 @@ import generate_catalog
 import upgrade
 
 
-def fixture(workflow='bulk_rna', selected=None):
+def fixture(workflow='bulk_rna', selected=None, concrete=None):
     catalog, _, profile = omics._selected(workflow)
     context = {'species': 'fixture_species', 'model': 'synthetic_fixture', 'assay': 'synthetic_assay', 'reference': 'fixture_reference',
                'assembly': 'fixture_build', 'annotation_version': 'fixture_annotation_v1',
@@ -32,8 +32,18 @@ def fixture(workflow='bulk_rna', selected=None):
     for e in selected:
         for prerequisite in catalog['extensions'][e]['prerequisites']:
             design['capabilities'][prerequisite] = {'available': True, 'source_location': 'synthetic_locator', 'source_sha256': 'a' * 64}
+    requests = []
+    for key in concrete or []:
+        method = catalog['analysis_methods'][key]
+        requests.append({'id': key, 'method': method['method_candidates'][0],
+                         'decisions': {f: 'synthetic reviewed decision' for f in method['decision_fields']},
+                         'null_model': 'synthetic null', 'multiplicity_family': 'synthetic test family',
+                         'sensitivity_plan': 'synthetic sensitivity plan'})
+        for prerequisite in method['prerequisites']:
+            design['capabilities'][prerequisite] = {'available': True, 'source_location': 'synthetic_locator',
+                                                   'source_sha256': 'a' * 64, 'reviewed_by_host': True}
     inputs = [{'id': 'input_fixture', 'kind': profile['input_kinds'][0], 'source_location': 'synthetic_locator', 'sha256': 'a' * 64}]
-    return omics.plan_omics_workflow(workflow, context, design, inputs, selected)
+    return omics.plan_omics_workflow(workflow, context, design, inputs, selected, requests)
 
 
 def evidence(plan):
@@ -46,6 +56,11 @@ def ready(plan):
     checks = [{**binding, 'id': q['id'], 'status': 'passed'} for q in plan['required_qc']]
     stats = {**binding, 'status': 'reviewed', 'estimand': plan['design']['estimand'], 'biological_unit': plan['design']['biological_unit']}
     backend = {**binding, 'status': 'runtime_verified', 'route': 'existing_server', 'method_versions': {'fixture_method': '1.0'}}
+    backend['analysis_methods'] = {}
+    for route in plan['analysis_routes']:
+        backend['analysis_methods'][route['id']] = {**binding, 'status': 'runtime_verified',
+            'method': route['request']['method'], 'request_sha256': route['request_sha256']}
+        backend['method_versions'][route['request']['method']] = '1.0'
     return checks, stats, backend
 
 
@@ -53,8 +68,8 @@ class OmicsContracts(unittest.TestCase):
     def test_every_workflow_and_compatible_extension_has_resolved_contract(self):
         catalog, _ = omics._catalog()
         self.assertEqual(len(catalog['workflows']), 28)
-        self.assertEqual(len(catalog['extensions']), 21)
-        self.assertEqual(sum(len(w['extensions']) for w in catalog['workflows']), 108)
+        self.assertEqual(len(catalog['extensions']), 22)
+        self.assertGreaterEqual(sum(len(w['extensions']) for w in catalog['workflows']), 108)
         for w in catalog['workflows']:
             for e in [None, *w['extensions']]:
                 plan = fixture(w['id'], [e] if e else [])
@@ -163,8 +178,10 @@ class OmicsContracts(unittest.TestCase):
         self.assertEqual((ROOT / 'OMICS_WORKFLOWS.md').read_text(encoding='utf8'), generate_omics_guide.generate())
         generated, _ = generate_catalog.generate()
         tools = [t for t in generated['tools'] if t['category'] == 'omics_workflows']
-        self.assertEqual(len(tools), 4)
-        self.assertEqual(len(tools[1]['input_schema']['properties']['workflow']['enum']), 28)
+        self.assertEqual(len(tools), 5)
+        plan_tool = next(t for t in tools if t['name'] == 'plan_omics_workflow')
+        self.assertEqual(len(plan_tool['input_schema']['properties']['workflow']['enum']), 28)
+        self.assertEqual(len(plan_tool['input_schema']['properties']['analysis_requests']['items']['properties']['id']['enum']), 81)
         self.assertEqual(set(extensions.EXPORTS['omics_workflows'][1]), {t['name'] for t in tools})
         _, mapping = upgrade._mapping(ROOT)
         self.assertIn('.local/omics_workflows.json', mapping)
@@ -176,6 +193,55 @@ class OmicsContracts(unittest.TestCase):
             module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
             self.assertEqual(module.inspect_omics_workflows()['total_workflows'], 28)
             with self.assertRaises(ValueError): module.plan_omics_workflow('bulk_rna', {}, {}, [])
+
+    def test_all_concrete_routes_have_bound_qc_outputs_and_method_acceptance(self):
+        catalog, _ = omics._catalog()
+        self.assertEqual(len(catalog['analysis_methods']), 81)
+        combinations = 0
+        for key, method in catalog['analysis_methods'].items():
+            for workflow in method['workflows']:
+                plan = fixture(workflow, concrete=[key]); checks, stats, backend = ready(plan)
+                self.assertTrue(omics.audit_omics_readiness(plan, checks, stats, backend)['summary_consistent'], (key, workflow))
+                specific = [q for q in plan['required_qc'] if q['id'].startswith('analysis__')]
+                self.assertEqual(len(specific), 4)
+                self.assertTrue(set(method['result_roles']) <= set(plan['result_roles']))
+                combinations += 1
+        self.assertEqual(combinations, 285)
+
+    def test_concrete_discovery_is_bounded_filtered_and_paginated(self):
+        result = omics.inspect_omics_extensions(parent='splicing', limit=2, detail=True)
+        self.assertEqual(result['matched'], 5); self.assertEqual(result['next_offset'], 2)
+        second = omics.inspect_omics_extensions(parent='splicing', limit=2, offset=2)
+        self.assertFalse({m['id'] for m in result['analyses']} & {m['id'] for m in second['analyses']})
+        self.assertTrue(omics.inspect_omics_extensions(search='WGCNA')['matched'])
+        self.assertEqual(omics.inspect_omics_extensions(workflow='hic', parent='splicing')['matched'], 0)
+        for args in ({'limit': True}, {'offset': True}, {'limit': 21}, {'search': 'x' * 101}):
+            with self.assertRaises(ValueError): omics.inspect_omics_extensions(**args)
+
+    def test_concrete_prerequisites_decisions_and_backend_are_not_generic_acceptance(self):
+        plan = fixture(concrete=['preranked_gsea']); checks, stats, backend = ready(plan)
+        self.assertFalse(omics.audit_omics_readiness(plan, checks[:-1], stats, backend)['summary_consistent'])
+        backend.pop('analysis_methods')
+        result = omics.audit_omics_readiness(plan, checks, stats, backend)
+        self.assertIn('concrete_backend_unverified_or_changed', [i['code'] for i in result['issues']])
+        requests = copy.deepcopy(plan['analysis_requests'])
+        design = copy.deepcopy(plan['design']); design['capabilities'].clear()
+        bad = omics.plan_omics_workflow('bulk_rna', plan['context'], design, plan['input_manifest'], analysis_requests=requests)
+        self.assertFalse(bad['plan_contract_consistent'])
+        requests[0]['decisions'].clear()
+        with self.assertRaises(ValueError):
+            omics.plan_omics_workflow('bulk_rna', plan['context'], design, plan['input_manifest'], analysis_requests=requests)
+        with self.assertRaises(ValueError): fixture('bulk_rna', selected=['pathway'], concrete=['preranked_gsea'])
+        with self.assertRaises(ValueError): fixture('hic', concrete=['preranked_gsea'])
+
+    def test_concrete_changed_method_scope_invalidates_prior_acceptance(self):
+        plan = fixture(concrete=['wgcna_modules']); checks, stats, backend = ready(plan)
+        backend['analysis_methods']['wgcna_modules']['request_sha256'] = 'b' * 64
+        self.assertFalse(omics.audit_omics_readiness(plan, checks, stats, backend)['summary_consistent'])
+        requests = copy.deepcopy(plan['analysis_requests']); requests[0]['sensitivity_plan'] = 'changed plan'
+        changed = omics.plan_omics_workflow('bulk_rna', plan['context'], plan['design'], plan['input_manifest'], analysis_requests=requests)
+        self.assertNotEqual(changed['plan_sha256'], plan['plan_sha256'])
+        self.assertFalse(omics.audit_omics_readiness(changed, checks, stats, backend)['summary_consistent'])
 
 
 if __name__ == '__main__':

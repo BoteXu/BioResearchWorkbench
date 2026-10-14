@@ -44,7 +44,7 @@ def _catalog():
     local = Path(__file__).with_name('omics_workflows.json')
     path = local if local.is_file() else Path(__file__).resolve().parents[1] / 'omics_workflows.json'
     raw = path.read_bytes()
-    if len(raw) > 300_000:
+    if len(raw) > 900_000:
         raise ValueError('Workflow catalog exceeds static bound')
     value = json.loads(raw)
     if value.get('schema') != 1:
@@ -55,6 +55,17 @@ def _catalog():
     for w in value['workflows']:
         if any(e not in value['extensions'] for e in w['extensions']) or any(r not in value['references'] for r in w['reference_ids']):
             raise ValueError('Unresolved workflow reference')
+    methods = value.get('analysis_methods', {})
+    for key, method in methods.items():
+        if key != method['id'] or method['parent'] not in value['extensions'] or not method['reference_ids']:
+            raise ValueError('Unresolved concrete analysis contract')
+        if any(r not in value['references'] for r in method['reference_ids']):
+            raise ValueError('Unresolved method reference')
+        if any(w not in ids for w in method['workflows']):
+            raise ValueError('Unknown method workflow')
+        for w in value['workflows']:
+            if (w['id'] in method['workflows']) != (key in w.get('analysis_methods', [])):
+                raise ValueError('Method compatibility index is inconsistent')
     return value, hashlib.sha256(raw).hexdigest()
 
 
@@ -89,7 +100,7 @@ def inspect_omics_workflows(workflow: str = '', family: str = '', detail: bool =
     if family and family not in {w['family'] for w in catalog['workflows']}:
         raise ValueError('Unknown family')
     selected = [w for w in catalog['workflows'] if (not workflow or w['id'] == workflow) and (not family or w['family'] == family)]
-    keys = ('id', 'family', 'title', 'input_description', 'input_kinds', 'extensions', 'backend_status')
+    keys = ('id', 'family', 'title', 'input_description', 'input_kinds', 'extensions', 'analysis_methods', 'backend_status')
     result = deepcopy(selected[:limit]) if detail else [{k: w[k] for k in keys} for w in selected[:limit]]
     refs = {key: catalog['references'][key] for w in selected[:limit] for key in w['reference_ids']}
     return {'catalog_version': catalog['catalog_version'], 'catalog_sha256': digest,
@@ -100,9 +111,67 @@ def inspect_omics_workflows(workflow: str = '', family: str = '', detail: bool =
             'public_queries_performed': False, 'local_scientific_execution': False}
 
 
-def plan_omics_workflow(workflow: str, context: dict, design: dict, input_manifest: list, extensions: list = None) -> dict:
+def inspect_omics_extensions(workflow: str = '', parent: str = '', search: str = '', detail: bool = False,
+                             offset: int = 0, limit: int = 12) -> dict:
+    """Discover concrete omics analyses by assay and question, including method-specific QC, decisions, outputs and limits; offline only."""
+    if type(detail) is not bool or type(limit) is not int or not 1 <= limit <= 20 or type(offset) is not int or offset < 0:
+        raise ValueError('Use a boolean detail, integer offset >=0 and integer limit from 1 to 20')
+    if not isinstance(search, str) or len(search) > 100:
+        raise ValueError('Search is bounded text, at most 100 characters')
+    catalog, digest = _catalog()
+    if workflow and workflow not in {w['id'] for w in catalog['workflows']}:
+        raise ValueError('Unknown workflow')
+    if parent and parent not in catalog['extensions']:
+        raise ValueError('Unknown extension family')
+    selected = [m for m in catalog['analysis_methods'].values()
+                if (not workflow or workflow in m['workflows']) and (not parent or parent == m['parent'])
+                and (not search or search.casefold() in json.dumps(m, ensure_ascii=False).casefold())]
+    page = selected[offset:offset + limit]
+    keys = ('id', 'parent', 'label', 'question', 'workflows', 'method_candidates', 'decision_fields')
+    result = deepcopy(page) if detail else [{k: m[k] for k in keys} for m in page]
+    return {'catalog_version': catalog['catalog_version'], 'catalog_sha256': digest,
+            'total_methods': len(catalog['analysis_methods']), 'matched': len(selected), 'returned': len(page),
+            'offset': offset, 'next_offset': offset + limit if offset + limit < len(selected) else None,
+            'analyses': result,
+            'references': {r: catalog['references'][r] for m in page for r in m['reference_ids']},
+            'execution_state': 'catalog_only', 'new_executors': False, 'local_scientific_execution': False,
+            'public_queries_performed': False}
+
+
+def _concrete_routes(catalog, workflow, requests, capabilities, issues):
+    rows = [] if requests is None else _rows(requests, 12, nonempty=False)
+    routes = []
+    for row in rows:
+        if set(row) != {'id', 'method', 'decisions', 'null_model', 'multiplicity_family', 'sensitivity_plan'}:
+            raise ValueError('Analysis request needs exactly id, method, decisions, null_model, multiplicity_family and sensitivity_plan')
+        method = catalog['analysis_methods'].get(row['id'])
+        if method is None or workflow not in method['workflows']:
+            raise ValueError('Concrete analysis is unknown or incompatible with the assay')
+        if row['method'] not in method['method_candidates']:
+            raise ValueError('Choose an exact method candidate; runtime acceptance is still required')
+        for key in ('null_model', 'multiplicity_family', 'sensitivity_plan'):
+            _text(row[key])
+        decisions = row['decisions']
+        if not isinstance(decisions, dict) or set(decisions) != set(method['decision_fields']):
+            raise ValueError('Provide exactly the method-specific decision fields from discovery')
+        for value in decisions.values():
+            _text(value)
+        route = deepcopy(method); missing = []
+        for prerequisite in method['prerequisites']:
+            source = capabilities.get(prerequisite)
+            if not isinstance(source, dict) or source.get('available') is not True or not _source(source):
+                missing.append(prerequisite)
+                _issue(issues, 'missing_concrete_prerequisite', row['id'] + ':' + prerequisite)
+        route.update({'request': deepcopy(row), 'request_sha256': _digest(row), 'missing_prerequisites': missing,
+                      'state': 'blocked' if missing else 'requires_host_review_and_server_acceptance'})
+        routes.append(route)
+    return routes
+
+
+def plan_omics_workflow(workflow: str, context: dict, design: dict, input_manifest: list, extensions: list = None,
+                        analysis_requests: list = None) -> dict:
     """Prepare an exact version-bound server workflow with modality QC and explicitly selected conditional extensions; never submit."""
-    _digest([context, design, input_manifest, extensions])
+    _digest([context, design, input_manifest, extensions, analysis_requests])
     catalog, catalog_hash, profile = _selected(workflow)
     if not isinstance(context, dict) or not isinstance(design, dict):
         raise ValueError('Explicit context and design objects required')
@@ -132,7 +201,7 @@ def plan_omics_workflow(workflow: str, context: dict, design: dict, input_manife
     if any(v not in profile['extensions'] for v in requested):
         raise ValueError('Selected extension is incompatible with this workflow')
     capabilities = design.get('capabilities', {})
-    if not isinstance(capabilities, dict) or len(capabilities) > 100:
+    if not isinstance(capabilities, dict) or len(capabilities) > 160:
         raise ValueError('Provide bounded evidence-backed capabilities')
     issues = []
     if any(row['kind'] not in profile['input_kinds'] for row in inputs):
@@ -145,7 +214,7 @@ def plan_omics_workflow(workflow: str, context: dict, design: dict, input_manife
         _issue(issues, 'insufficient_declared_independent_replication', 'design')
     if design['repeated_measures'] and not design.get('dependence_structure'):
         _issue(issues, 'missing_repeated_measure_structure', 'design')
-    if design.get('inference_mode') == 'descriptive' and requested:
+    if design.get('inference_mode') == 'descriptive' and (requested or analysis_requests):
         _issue(issues, 'descriptive_extension_requires_inferential_plan', 'design')
     extension_routes = []
     for name in requested:
@@ -158,15 +227,24 @@ def plan_omics_workflow(workflow: str, context: dict, design: dict, input_manife
         route['missing_prerequisites'] = missing
         route['state'] = 'blocked' if missing else 'requires_host_review_and_server_acceptance'
         extension_routes.append(route)
+    analysis_routes = _concrete_routes(catalog, workflow, analysis_requests, capabilities, issues)
+    if len(requested) + len(analysis_routes) > 12:
+        raise ValueError('Select at most 12 combined broad and concrete routes per reviewed plan')
+    if any(r['parent'] in requested for r in analysis_routes):
+        raise ValueError('Select either a broad family or its concrete children, without duplicate parent scope')
     required_qc = deepcopy(catalog['common_qc'] + profile['qc_gates'])
     required_qc += [{'id': 'extension__' + name, 'description': 'Selected extension assumptions, prerequisites and diagnostics'} for name in requested]
-    roles = list(dict.fromkeys(catalog['common_result_roles'] + profile['result_roles'] + [role for r in extension_routes for role in r['result_roles']]))
+    required_qc += [{'id': 'analysis__' + r['id'] + '__' + q['id'], 'description': q['description']}
+                    for r in analysis_routes for q in r['qc_gates']]
+    roles = list(dict.fromkeys(catalog['common_result_roles'] + profile['result_roles'] +
+                              [role for r in extension_routes + analysis_routes for role in r['result_roles']]))
     if design['inference_mode'] == 'descriptive':
         roles = [r for r in roles if r not in {'differential', 'differential_regions', 'association', 'multiple_testing'}]
         roles.append('descriptive_results')
     binding = {'catalog_sha256': catalog_hash, 'context_sha256': _digest(context), 'design_sha256': _digest(design), 'inputs_sha256': _digest(inputs)}
     body = {'schema': 1, 'catalog_version': catalog['catalog_version'], 'workflow': workflow,
             'context': context, 'design': design, 'input_manifest': inputs, 'requested_extensions': requested,
+            'analysis_requests': deepcopy(analysis_requests or []), 'analysis_routes': analysis_routes,
             'binding': binding, 'profile': profile, 'required_qc': required_qc, 'result_roles': roles,
             'extension_routes': extension_routes, 'issues': issues,
             'required_consultation': 'statistics.guide_study_statistics before inferential analysis',
@@ -183,7 +261,7 @@ def _validate_plan(plan):
     _digest(plan)
     if not isinstance(plan, dict) or plan.get('schema') != 1:
         raise ValueError('Provide the complete generated plan')
-    rebuilt = plan_omics_workflow(plan.get('workflow'), plan.get('context'), plan.get('design'), plan.get('input_manifest'), plan.get('requested_extensions'))
+    rebuilt = plan_omics_workflow(plan.get('workflow'), plan.get('context'), plan.get('design'), plan.get('input_manifest'), plan.get('requested_extensions'), plan.get('analysis_requests'))
     if plan != rebuilt:
         raise ValueError('Plan changed or catalog is stale; prepare and review a new plan')
     return rebuilt
@@ -257,6 +335,17 @@ def audit_omics_readiness(plan: dict, checks: list, statistical_receipt: dict = 
     versions = backend.get('method_versions')
     if not isinstance(versions, dict) or not versions or len(versions) > 100 or any(not isinstance(k, str) or not k.strip() or not isinstance(v, str) or not v.strip() or v.strip().lower() in {'latest', 'dev', 'main', 'master', 'unknown'} for k, v in versions.items()):
         _issue(issues, 'missing_exact_method_versions', 'backend')
+    declared = backend.get('analysis_methods', {})
+    if not isinstance(declared, dict):
+        raise ValueError('Concrete backend acceptance must be a mapping')
+    for route in current['analysis_routes']:
+        row = declared.get(route['id'], {})
+        if (not isinstance(row, dict) or not _source(row) or row.get('status') != 'runtime_verified'
+                or row.get('request_sha256') != route['request_sha256']
+                or row.get('method') != route['request']['method']):
+            _issue(issues, 'concrete_backend_unverified_or_changed', route['id'])
+        if not isinstance(versions, dict) or route['request']['method'] not in versions:
+            _issue(issues, 'concrete_method_version_missing', route['id'])
     return _finish('omics_readiness', [plan, checks, statistical_receipt, backend_receipt], issues,
                    plan_sha256=current['plan_sha256'], required_qc_count=len(required),
                    next_action='host_review_then_explicit_server_dispatch' if not any(i['severity'] == 'block' for i in issues) else 'resolve_qc_and_design_blockers',

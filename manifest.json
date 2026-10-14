@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
   "bridge_version": "2.13",
-  "package_version": "2.14.0",
+  "package_version": "2.15.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -60,8 +60,8 @@
     },
     {
       "path": "EVOLUTION.md",
-      "bytes": 7656,
-      "sha256": "53568c3569f7bc2a7039e0e9fb8c2b60fb4d03d7657df5178c14b502d103cae1"
+      "bytes": 8174,
+      "sha256": "4cfe014f5bac92662460c5f88401f56430e251d21b1a70b8c12f102246347306"
     },
     {
       "path": "Install.ps1",
@@ -105,8 +105,8 @@
     },
     {
       "path": "OMICS_WORKFLOWS.md",
-      "bytes": 46586,
-      "sha256": "99f20e367f183563c74b30c827aeae598ccf54d10de90af736cd9fde945a0e03"
+      "bytes": 140529,
+      "sha256": "34688c5aa711e8f29072702965f7367511d64622614a17bbd88010fd0789faa3"
     },
     {
       "path": "ORIGINS.md",
@@ -135,8 +135,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 21208,
-      "sha256": "e40c8561f9d5c90513b8898748e15fea502289864de5d50cb258af07e33eeb22"
+      "bytes": 21468,
+      "sha256": "2f431f90314ab637a4f1dcd2cbfc599a63926501a4ac197ea1b1c6bd10623e34"
     },
     {
       "path": "RESEARCH_QUALITY.md",
@@ -180,13 +180,13 @@
     },
     {
       "path": "TOOL_CATALOG.json",
-      "bytes": 349354,
-      "sha256": "4b04d112c2e31b2e1d53e1192e8f47746f964b6a55d6e28eca305b4d065138b5"
+      "bytes": 361247,
+      "sha256": "5e03b029668e98bbb5701dc1e514d9b9ac97353ae50b0d972d8408650b492734"
     },
     {
       "path": "TOOL_CATALOG.md",
-      "bytes": 46483,
-      "sha256": "eb2d4fe4e6143dbb01e32e1fd771137608cef5b025a8fcd6abebcb59db3e2088"
+      "bytes": 46650,
+      "sha256": "d2ff14c7a892f921311ba75daf869c729151f4b7626621a957df4fddf08fc50f"
     },
     {
       "path": "WORKBENCH.md",
@@ -330,8 +330,8 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 14592,
-      "sha256": "c2d2d2fcfac0caa013f5767223d972ba00c770b30491b868076f3603e2749c9a"
+      "bytes": 14620,
+      "sha256": "aa12411b3113ff2632ba0bd1ee2591bf15a8b051461e23ea00d712eb7fa11da5"
     },
     {
       "path": "bridge/http_client.py",
@@ -410,8 +410,8 @@
     },
     {
       "path": "bridge/omics_workflows_ext.py",
-      "bytes": 19447,
-      "sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+      "bytes": 25732,
+      "sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
     },
     {
       "path": "bridge/personal_library_ext.py",
@@ -445,8 +445,8 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 31012,
-      "sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
+      "bytes": 31094,
+      "sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
     },
     {
       "path": "bridge/research_quality_ext.py",
@@ -635,13 +635,13 @@
     },
     {
       "path": "generate_catalog.py",
-      "bytes": 8673,
-      "sha256": "a80aba11ca9105c2e63ce2d48c84b72804341f1a446fa23dabf2d941989da84b"
+      "bytes": 9986,
+      "sha256": "0fdfd82535602f90430c0911956a0f665a56cc711274c577acd46821034f0544"
     },
     {
       "path": "generate_omics_guide.py",
-      "bytes": 10019,
-      "sha256": "f34be93d976da6dd672df9d9e3c65bf9a08f0bdaea3c80c1d8092316767ffac0"
+      "bytes": 12865,
+      "sha256": "62edf31e22e856a125535cd5d8491e2bf9b6e3be19f1c944a236fbc71013df34"
     },
     {
       "path": "install.py",
@@ -675,8 +675,8 @@
     },
     {
       "path": "omics_workflows.json",
-      "bytes": 71286,
-      "sha256": "c3de5aa82d4a543bba93736a3c939bee9b68b7a49d5df3aa92ea321a7f0c2e0a"
+      "bytes": 255630,
+      "sha256": "09fb385faf1beb3746cdb9a505c5b6af3c8243b9fc0ce530866a41c3d92eced1"
     },
     {
       "path": "prepare_docker_gateway.py",
@@ -795,8 +795,8 @@
     },
     {
       "path": "skills/biomni-omics-design/SKILL.md",
-      "bytes": 3752,
-      "sha256": "ca7c46d431509ec2138c78118cf0ba4e8dbf4f11fb6993fb9349a3362d4350fe"
+      "bytes": 4316,
+      "sha256": "79a7c17d178251b0896a3b77026605d216cdffd5a8a2e30fec1fa058a570d4d0"
     },
     {
       "path": "skills/biomni-omics-design/references/tool-routing.md",
@@ -911,7 +911,7 @@
     {
       "path": "skills/catalog.json",
       "bytes": 16526,
-      "sha256": "7914c6e1eb7c9d21c3585d426b83f7d1c588dfab92cff4ec5513045b8e99f19c"
+      "sha256": "a5db3ed7c082ced0adc817591d98bce7ff43990905d7fd804aad99c8a81cb903"
     },
     {
       "path": "tests/advanced_check.py",
@@ -1040,8 +1040,8 @@
     },
     {
       "path": "tests/test_omics_workflows.py",
-      "bytes": 12484,
-      "sha256": "40679c729eba9e9e8d227a37097821b14b0e4e079fe64aaf3f526113f74ff27c"
+      "bytes": 17524,
+      "sha256": "8b0ea2c658fb9d7273b209f5130ed06bfcdbad1082972b28d06bf210fe3be1af"
     },
     {
       "path": "tests/test_origins.py",
@@ -1101,7 +1101,7 @@
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "fc2245cdded99a6fbfaed29f04a1fafd5362689e5b6d40e333cc5239d95db4f2"
+      "sha256": "001367723f67d6fb78fb9529cc6bfbdbe7ee1fb17751f1039f668dc5b380a0cb"
     },
     {
       "path": "update_skill_catalog.py",

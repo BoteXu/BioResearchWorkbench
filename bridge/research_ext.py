@@ -18,6 +18,7 @@ PATTERNS = {
 SPECIES = {'homo_sapiens': 9606, 'mus_musculus': 10090, 'rattus_norvegicus': 10116}
 INTENTS = {
     'omics_workflow_catalog': [('omics_workflows', 'inspect_omics_workflows')],
+    'omics_extension_methods': [('omics_workflows', 'inspect_omics_extensions')],
     'omics_workflow_plan': [('statistics', 'guide_study_statistics'), ('omics_workflows', 'plan_omics_workflow')],
     'omics_workflow_qc': [('omics_workflows', 'audit_omics_readiness')],
     'omics_workflow_return': [('omics_workflows', 'audit_omics_result_bundle'), ('workflow', 'verify_remote_results')],

@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "package_version": "2.14.0",
-  "extension_functions": 246,
+  "package_version": "2.15.0",
+  "extension_functions": 247,
   "extension_categories": 38,
-  "routing_intents": 151,
+  "routing_intents": 152,
   "tools": [
     {
       "category": "academic_workspace",
@@ -5894,6 +5894,8 @@
           "limit": {
             "type": "integer",
             "description": "limit",
+            "minimum": 1,
+            "maximum": 40,
             "default": 40
           }
         },
@@ -5906,7 +5908,116 @@
       },
       "effect_units": [],
       "source_file": "bridge/omics_workflows_ext.py",
-      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+      "source_sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
+    },
+    {
+      "category": "omics_workflows",
+      "name": "inspect_omics_extensions",
+      "description": "Discover concrete omics analyses by assay and question, including method-specific QC, decisions, outputs and limits; offline only.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "workflow": {
+            "type": "string",
+            "description": "workflow",
+            "enum": [
+              "bulk_rna",
+              "scrna",
+              "spatial_rna",
+              "small_rna",
+              "long_read_rna",
+              "splicing",
+              "riboseq",
+              "clipseq",
+              "expression_array",
+              "bulk_atac",
+              "scatac",
+              "chipseq",
+              "cutandrun",
+              "methylseq",
+              "methylation_array",
+              "hic",
+              "germline",
+              "somatic",
+              "gwas_qtl",
+              "proteomics",
+              "phosphoproteomics",
+              "metabolomics",
+              "lipidomics",
+              "amplicon",
+              "metagenomics",
+              "singlecell_multiome",
+              "multiomics",
+              "perturbation",
+              ""
+            ],
+            "default": ""
+          },
+          "parent": {
+            "type": "string",
+            "description": "parent",
+            "enum": [
+              "pathway",
+              "ppi",
+              "coexpression",
+              "deconvolution",
+              "trajectory",
+              "velocity",
+              "communication",
+              "regulatory",
+              "splicing",
+              "timecourse",
+              "prediction",
+              "genetic_causality",
+              "chromatin_links",
+              "te",
+              "protein_activity",
+              "multiomics",
+              "composition",
+              "functional_profile",
+              "lipid_classes",
+              "sv_cnv",
+              "repertoire",
+              "spatial_context",
+              ""
+            ],
+            "default": ""
+          },
+          "search": {
+            "type": "string",
+            "description": "search",
+            "default": ""
+          },
+          "detail": {
+            "type": "boolean",
+            "description": "detail",
+            "default": false
+          },
+          "offset": {
+            "type": "integer",
+            "description": "offset",
+            "minimum": 0,
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "description": "limit",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 12
+          }
+        },
+        "required": []
+      },
+      "example_template": {
+        "category": "omics_workflows",
+        "name": "inspect_omics_extensions",
+        "parameters": {}
+      },
+      "effect_units": [],
+      "source_file": "bridge/omics_workflows_ext.py",
+      "source_sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
     },
     {
       "category": "omics_workflows",
@@ -5992,8 +6103,253 @@
                 "functional_profile",
                 "lipid_classes",
                 "sv_cnv",
-                "repertoire"
+                "repertoire",
+                "spatial_context"
               ]
+            },
+            "maxItems": 12,
+            "uniqueItems": true,
+            "default": null
+          },
+          "analysis_requests": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "analysis requests",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "method",
+                "decisions",
+                "null_model",
+                "multiplicity_family",
+                "sensitivity_plan"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "enum": [
+                    "ora",
+                    "preranked_gsea",
+                    "camera_sets",
+                    "gsva_scores",
+                    "ssgsea_scores",
+                    "leading_edge",
+                    "physical_ppi",
+                    "ppi_modules",
+                    "network_diffusion",
+                    "wgcna_modules",
+                    "module_preservation",
+                    "differential_coexpression",
+                    "bulk_deconvolution",
+                    "spatial_deconvolution",
+                    "trajectory_topology",
+                    "trajectory_dynamics",
+                    "kinetic_velocity",
+                    "fate_probabilities",
+                    "lr_consensus",
+                    "lr_differential",
+                    "ligand_target_links",
+                    "spatial_lr",
+                    "tf_activity",
+                    "scenic_regulons",
+                    "motif_enrichment",
+                    "motif_deviation",
+                    "footprinting",
+                    "enhancer_grn",
+                    "exon_usage",
+                    "junction_events",
+                    "transcript_usage",
+                    "apa_usage",
+                    "isoform_switch",
+                    "longitudinal_effects",
+                    "impulse_response",
+                    "temporal_modules",
+                    "nested_prediction",
+                    "survival_prediction",
+                    "external_validation",
+                    "signature_matching",
+                    "fine_mapping",
+                    "colocalization",
+                    "two_sample_mr",
+                    "rare_variant_burden",
+                    "polygenic_score",
+                    "differential_binding",
+                    "peak_gene_links",
+                    "hic_loops_tads",
+                    "methylation_gene_links",
+                    "hic_compartments",
+                    "translation_efficiency",
+                    "uorf_translation",
+                    "kinase_activity",
+                    "ptm_adjustment",
+                    "protein_complexes",
+                    "proteogenomic_links",
+                    "mofa_factors",
+                    "supervised_multiomics",
+                    "rna_protein_concordance",
+                    "multiomics_mediation",
+                    "cross_study_meta",
+                    "singlecell_abundance",
+                    "microbe_differential",
+                    "microbe_diversity",
+                    "microbe_network",
+                    "cell_fraction_contrasts",
+                    "microbe_pathways",
+                    "microbe_strain",
+                    "microbe_gene_context",
+                    "lipid_class_enrichment",
+                    "lipid_chain_patterns",
+                    "singlecell_cnv",
+                    "bulk_cnv",
+                    "clonal_phylogeny",
+                    "repertoire_clonotypes",
+                    "repertoire_diversity",
+                    "clonotype_phenotype",
+                    "spatial_variable_genes",
+                    "spatial_niches",
+                    "spatial_gradients",
+                    "spatial_domains"
+                  ]
+                },
+                "method": {
+                  "type": "string",
+                  "enum": [
+                    "ALDEx2",
+                    "ANCOM-BC2",
+                    "ArchR",
+                    "BANKSY",
+                    "BayesSpace",
+                    "BisqueRNA",
+                    "CLUE Connectivity Map offline exports",
+                    "CNVkit",
+                    "CORUM membership review",
+                    "CellRank",
+                    "CopyKAT",
+                    "Cytoscape",
+                    "DESeq2 interaction design",
+                    "DEXSeq",
+                    "DMRcate",
+                    "DRIMSeq",
+                    "DaPars2",
+                    "DiffBind",
+                    "FACETS",
+                    "GSVA",
+                    "GSVA ssGSEA",
+                    "HOMER",
+                    "HUMAnN",
+                    "HiCExplorer",
+                    "IntAct",
+                    "IsoformSwitchAnalyzeR",
+                    "KSEA",
+                    "LDpred2",
+                    "LIANA+",
+                    "LIANA+ differential workflows",
+                    "LIANA+ spatial",
+                    "LeafCutter",
+                    "MOFA2",
+                    "MSstats",
+                    "MSstatsPTM",
+                    "Monocle3",
+                    "MuSiC",
+                    "NicheNet",
+                    "OpenMS proteogenomics review",
+                    "PRSice-2",
+                    "PhyloWGS",
+                    "PyClone-VI",
+                    "QAPA",
+                    "RCTD",
+                    "RiboCode",
+                    "RiboDiff",
+                    "RiboTaper",
+                    "SAIGE-GENE+",
+                    "SCENIC+",
+                    "SKAT",
+                    "SPARK-X",
+                    "SPIEC-EASI",
+                    "STRING physical network",
+                    "Scirpy",
+                    "Signac LinkPeaks",
+                    "Slingshot",
+                    "SpatialDE",
+                    "Squidpy neighborhood enrichment",
+                    "Squidpy spatial graph",
+                    "StrainPhlAn",
+                    "SuSiE",
+                    "TOBIAS",
+                    "TwoSampleMR",
+                    "WGCNA",
+                    "WGCNA modulePreservation",
+                    "bsseq",
+                    "cell2location",
+                    "chromVAR",
+                    "clusterProfiler",
+                    "coloc",
+                    "coloc.susie",
+                    "cooltools",
+                    "cooltools eigs-cis",
+                    "csaw",
+                    "decoupleR",
+                    "decoupler",
+                    "diffcoexp",
+                    "eggNOG-mapper",
+                    "fgsea",
+                    "fgsea leadingEdge",
+                    "igraph",
+                    "igraph personalized PageRank",
+                    "inferCNV",
+                    "limma",
+                    "limma camera",
+                    "lipidr",
+                    "lipidr LSEA",
+                    "maSigPro",
+                    "matched effects and sample-level models",
+                    "mediation",
+                    "metafor",
+                    "mgcv",
+                    "miloR",
+                    "mixOmics DIABLO",
+                    "motifmatchr",
+                    "phyloseq",
+                    "propeller",
+                    "pySCENIC",
+                    "rMATS",
+                    "satuRn",
+                    "scCODA",
+                    "scVelo",
+                    "scikit-learn Pipeline nested CV",
+                    "scikit-learn frozen estimator",
+                    "scikit-survival",
+                    "survival",
+                    "susieR",
+                    "tradeSeq",
+                    "variancePartition dream",
+                    "vegan"
+                  ]
+                },
+                "decisions": {
+                  "type": "object",
+                  "description": "Exactly the decision_fields returned for this concrete route; nonempty text values."
+                },
+                "null_model": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "multiplicity_family": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "sensitivity_plan": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
             },
             "maxItems": 12,
             "uniqueItems": true,
@@ -6019,7 +6375,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/omics_workflows_ext.py",
-      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+      "source_sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
     },
     {
       "category": "omics_workflows",
@@ -6070,7 +6426,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/omics_workflows_ext.py",
-      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+      "source_sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
     },
     {
       "category": "omics_workflows",
@@ -6134,7 +6490,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/omics_workflows_ext.py",
-      "source_sha256": "589e797125cb766f4d7a16c8f3600c7860a2287a09ccdc6fb75023ebc8ccd54d"
+      "source_sha256": "97e7718ed985d711e45e7a256698dae984254ad008df14848c9d1127481ff68d"
     },
     {
       "category": "personal_library",
@@ -6712,7 +7068,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
+      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
     },
     {
       "category": "research",
@@ -6756,7 +7112,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
+      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
     },
     {
       "category": "research",
@@ -6796,7 +7152,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "ae03036236e89d63db615d139ac77b0bd16839a5e91dc84049d7a7c9d90ab317"
+      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
     },
     {
       "category": "research_quality",
@@ -11104,7 +11460,7 @@
     },
     "omics_workflows": {
       "source": "omics_workflows_ext.py",
-      "function_count": 4,
+      "function_count": 5,
       "load": "deferred_until_call",
       "referenced_optional_packages": [],
       "version_constraints": "requirements-core.lock.txt and selected requirements-local/omics/full profile; external R/CLI versions need actual probes",
@@ -11342,10 +11698,11 @@
   },
   "version_changes": {
     "from_version": "2.13.1",
-    "to_version": "2.14.0",
+    "to_version": "2.15.0",
     "added": [
       "omics_workflows.audit_omics_readiness",
       "omics_workflows.audit_omics_result_bundle",
+      "omics_workflows.inspect_omics_extensions",
       "omics_workflows.inspect_omics_workflows",
       "omics_workflows.plan_omics_workflow",
       "research_quality.audit_evidence_trace",

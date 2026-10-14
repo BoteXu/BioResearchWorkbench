@@ -119,7 +119,7 @@
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
         "biomni-omics-design/references/tool-routing.md": "a281ee17c5ed7ff813cb908fa81ec96c78ac888ecb97042c5c20ee8404dce630",
-        "biomni-omics-design/SKILL.md": "ca7c46d431509ec2138c78118cf0ba4e8dbf4f11fb6993fb9349a3362d4350fe"
+        "biomni-omics-design/SKILL.md": "79a7c17d178251b0896a3b77026605d216cdffd5a8a2e30fec1fa058a570d4d0"
       }
     },
     {

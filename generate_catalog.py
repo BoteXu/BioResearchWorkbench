@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '2.14.0'
+VERSION = '2.15.0'
 
 
 def assignment(tree, name):
@@ -30,6 +30,7 @@ def generate(root=ROOT):
             omics = json.loads((root/'omics_workflows.json').read_text(encoding='utf8'))
             enums['workflow'] = [w['id'] for w in omics['workflows']]
             enums['family'] = sorted({w['family'] for w in omics['workflows']})
+            enums['parent'] = list(omics['extensions'])
         for name in names:
             node = functions[name]; properties = {}; required = []
             defaults = [None]*(len(node.args.args)-len(node.args.defaults)) + list(node.args.defaults)
@@ -42,6 +43,19 @@ def generate(root=ROOT):
                     spec['items'] = {'type': 'string', 'enum': list(omics['extensions'])}
                     spec['maxItems'] = 12
                     spec['uniqueItems'] = True
+                if category == 'omics_workflows' and p.arg == 'analysis_requests':
+                    spec.update({'maxItems': 12, 'uniqueItems': True, 'items': {
+                        'type': 'object', 'additionalProperties': False,
+                        'required': ['id', 'method', 'decisions', 'null_model', 'multiplicity_family', 'sensitivity_plan'],
+                        'properties': {
+                            'id': {'type': 'string', 'enum': list(omics['analysis_methods'])},
+                            'method': {'type': 'string', 'enum': sorted({v for m in omics['analysis_methods'].values() for v in m['method_candidates']})},
+                            'decisions': {'type': 'object', 'description': 'Exactly the decision_fields returned for this concrete route; nonempty text values.'},
+                            **{k: {'type': 'string', 'minLength': 1, 'maxLength': 500} for k in ['null_model', 'multiplicity_family', 'sensitivity_plan']}
+                        }}})
+                if category == 'omics_workflows' and p.arg in {'limit', 'offset'}:
+                    spec['minimum'] = 0 if p.arg == 'offset' else 1
+                    if p.arg == 'limit': spec['maximum'] = 20 if name == 'inspect_omics_extensions' else 40
                 if d is None: required.append(p.arg)
                 else:
                     default = ast.literal_eval(d); spec['default'] = default

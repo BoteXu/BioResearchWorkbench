@@ -8,13 +8,13 @@ The original foundation is Biomni. This independent downstream project adds tool
 
 [![Public verification](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml/badge.svg)](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml)
 
-## v2.14.0：组学标准流程与条件拓展
+## v2.15.0：组学拓展的具体方法与验收
 
-新增 28 条组学流程、21 类条件拓展和四个离线规划/验收接口。覆盖转录组、表观组、遗传变异、蛋白/PTM、代谢/脂质、微生物概况与多组学。每条流程列出输入尺度、独立单位、方法特有 QC、标准步骤、拓展前提、必需结果和解释边界，见自动生成的 [OMICS_WORKFLOWS.md](OMICS_WORKFLOWS.md)。
+在 28 条标准流程基础上，将拓展细化为 22 类、81 条具体路线，形成 285 个流程到细分分析的适用关联。包括富集/集合评分、PPI/共表达、去卷积、轨迹/动力学、通信、调控、剪接/APA、时间序列、预测/外部验证、遗传、染色质、翻译、蛋白/PTM、多组学、微生物、脂质、CNV/克隆及受体谱；空间变异/邻域/梯度/组织域单独定义。数量表示规划契约，不是新增执行引擎或已跑通的后端。
 
-`omics_workflows.inspect_omics_workflows` 发现目录，`plan_omics_workflow` 生成绑定参考/输入/设计的计划，`audit_omics_readiness` 检查 QC、统计咨询及已有服务器验收，`audit_omics_result_bundle` 检查结果角色与回执谱系。缺失 QC、错误输入尺度、完全混杂、未满足拓展前提或状态未知会明确阻断。默认不添加拓展，不给所有平台套统一数值阈值。
+`omics_workflows.inspect_omics_extensions` 按检测技术和研究问题检索，返回明确候选、专用 QC、参数决定、输出与解释边界。`plan_omics_workflow(..., analysis_requests=...)` 固定具体方法、零模型、比较族、敏感性方案和关键决定；四项专用 QC 与真实服务器方法验收、版本和请求哈希绑定，通用后端成功不能替代所选方法验收。原有四个入口与父类选择保持兼容。完整目录自动生成于 [OMICS_WORKFLOWS.md](OMICS_WORKFLOWS.md)。
 
-这些新增接口仅做有界元数据与摘要检查，不提供新的组学执行器、不自动下载或安装环境；计算复用已有服务器。21 类拓展在不同流程中有 108 个关联，这不是 108 个新算法。实际方法版本、协议和服务器后端仍需逐项验收。现有私有可选 bulk 附加包未纳入公开版。
+新增接口仅用标准库检查有界摘要，不做分析、不自动派发、不安装环境。计算使用现有服务器。本轮未纳入私有可选 bulk 附加包。官方文档的访问状态和核对范围记录在静态目录；方法候选仍需版本、权限、代码及真实服务器验收。已退出当前 Bioconductor 的 ImpulseDE2 仅保留历史说明。
 
 ## v2.13.1 更新：多会话共享后台
 
@@ -27,7 +27,7 @@ Windows、macOS 和 Linux 使用同一共享入口。安装器生成私有认证
 本次深化分子生物学干实验，并补齐八个工程方向。扩展函数定义、必需参数、默认值、枚举、模板、模块信息与版本差异由公开源码生成，见 [功能目录](TOOL_CATALOG.md) / [机器可读合同](TOOL_CATALOG.json)。模板中的占位符必须替换为经审查的真实输入。
 
 <!-- GENERATED:CATALOG:BEGIN -->
-**公开目录（自动生成）**：246 个扩展函数、38 个类别、151 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
+**公开目录（自动生成）**：247 个扩展函数、38 个类别、152 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
 <!-- GENERATED:CATALOG:END -->
 
 | 工程方向 | 本版提供什么 | 验收和使用边界 |

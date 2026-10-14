@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "catalog_version": "2.14.0",
+  "catalog_version": "2.15.0",
   "authorship": "Original downstream workflow contracts; upstream algorithms retain attribution.",
   "scope": "offline planning and bounded summary audit; no analysis executors, uploads, downloads or new environments",
   "references": {
@@ -14,9 +14,10 @@
     "drimseq": {
       "url": "https://bioconductor.org/packages/release/bioc/html/DRIMSeq.html",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "pureclip": {
       "url": "https://github.com/skrakau/PureCLIP",
@@ -28,16 +29,18 @@
     "limma": {
       "url": "https://bioconductor.org/packages/release/bioc/html/limma.html",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "signac": {
       "url": "https://stuartlab.org/signac/",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "minfi": {
       "url": "https://bioconductor.org/packages/release/bioc/html/minfi.html",
@@ -56,23 +59,26 @@
     "msstats": {
       "url": "https://bioconductor.org/packages/release/bioc/html/MSstats.html",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "msstatsptm": {
       "url": "https://bioconductor.org/packages/release/bioc/html/MSstatsPTM.html",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "lipidr": {
       "url": "https://bioconductor.org/packages/release/bioc/html/lipidr.html",
       "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "rnaseq": {
       "url": "https://nf-co.re/rnaseq/3.27.0/",
@@ -112,9 +118,10 @@
     "riboseq": {
       "url": "https://nf-co.re/riboseq/1.2.0/",
       "observed_version": "1.2.0",
-      "checked_on": "2026-10-10",
+      "checked_on": "2026-10-14",
       "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     },
     "atacseq": {
       "url": "https://nf-co.re/atacseq/2.1.2/",
@@ -188,10 +195,483 @@
     },
     "mofa": {
       "url": "https://biofam.github.io/MOFA2/",
-      "observed_version": "documentation snapshot",
-      "checked_on": "2026-10-10",
-      "maintenance": "documentation_reference",
-      "execution_version_pin_required": true
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "clusterprofiler": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "fgsea": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/fgsea.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "gsva": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/GSVA.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "string_docs": {
+      "url": "https://string-db.org/help/api/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation inspected with web retrieval; runtime not checked"
+    },
+    "intact": {
+      "url": "https://www.ebi.ac.uk/intact/home",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "igraph_docs": {
+      "url": "https://igraph.org/python/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "wgcna": {
+      "url": "https://cran.r-project.org/web/packages/WGCNA/index.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "diffcoexp": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/diffcoexp.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "music": {
+      "url": "https://github.com/xuranw/MuSiC",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "cell2location": {
+      "url": "https://cell2location.readthedocs.io/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "slingshot": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/slingshot.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "tradeseq": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/tradeSeq.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "scvelo": {
+      "url": "https://scvelo.readthedocs.io/en/stable/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "cellrank": {
+      "url": "https://cellrank.readthedocs.io/en/stable/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "liana": {
+      "url": "https://liana.readthedocs.io/en/stable/tutorials.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "nichenet": {
+      "url": "https://github.com/saeyslab/nichenetr",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "decoupler": {
+      "url": "https://github.com/saezlab/decoupler-py",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "pyscenic": {
+      "url": "https://pyscenic.readthedocs.io/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "chromvar": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/chromVAR.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "tobias": {
+      "url": "https://github.com/loosolab/TOBIAS",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "scenicplus": {
+      "url": "https://scenicplus.readthedocs.io/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "dexseq": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/DEXSeq.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "rmats": {
+      "url": "https://github.com/Xinglab/rmats-turbo",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "qapa": {
+      "url": "https://github.com/morrislab/qapa",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "isoformswitch": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/IsoformSwitchAnalyzeR.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "dream": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/variancePartition.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "impulsede": {
+      "url": "https://www.bioconductor.org/packages/stats/bioc/ImpulseDE2/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "historical_only_not_in_current_bioconductor",
+      "execution_version_pin_required": true,
+      "review_scope": "official package statistics says last seen in Bioconductor 3.11; not a default candidate"
+    },
+    "masigpro": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/maSigPro.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "sklearn": {
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "survival_docs": {
+      "url": "https://scikit-survival.readthedocs.io/en/stable/user_guide/evaluating-survival-models.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "clue": {
+      "url": "https://clue.io/connectopedia",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "susie": {
+      "url": "https://stephenslab.github.io/susieR/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "coloc": {
+      "url": "https://chr1swallace.github.io/coloc/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "twosamplemr": {
+      "url": "https://mrcieu.github.io/TwoSampleMR/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "skat": {
+      "url": "https://cran.r-project.org/web/packages/SKAT/index.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "prsice": {
+      "url": "https://choishingwan.github.io/PRSice/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "diffbind": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/DiffBind.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "cooltools": {
+      "url": "https://cooltools.readthedocs.io/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "dmrcate": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/DMRcate.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "ribocode": {
+      "url": "https://github.com/xryanglab/RiboCode",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "openms": {
+      "url": "https://openms.de/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "mixomics": {
+      "url": "https://mixomics.org/mixdiablo/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "mediation": {
+      "url": "https://cran.r-project.org/web/packages/mediation/index.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "metafor": {
+      "url": "https://www.metafor-project.org/doku.php",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "milor": {
+      "url": "https://bioconductor.org/packages/release/bioc/vignettes/miloR/inst/doc/milo_demo.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "ancombc": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/ANCOMBC.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "vegan": {
+      "url": "https://cran.r-project.org/web/packages/vegan/index.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "spieceasi": {
+      "url": "https://github.com/zdk123/SpiecEasi",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "sccoda": {
+      "url": "https://sccoda.readthedocs.io/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "humann": {
+      "url": "https://github.com/biobakery/humann",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "strainphlan": {
+      "url": "https://github.com/biobakery/MetaPhlAn/wiki/StrainPhlAn-4",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "eggnog": {
+      "url": "https://github.com/eggnogdb/eggnog-mapper",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "infercnv": {
+      "url": "https://github.com/broadinstitute/infercnv",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "cnvkit": {
+      "url": "https://cnvkit.readthedocs.io/en/stable/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "pyclone": {
+      "url": "https://github.com/Roth-Lab/pyclone-vi",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "scirpy": {
+      "url": "https://scirpy.scverse.org/en/latest/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
+    },
+    "sparkx": {
+      "url": "https://github.com/xzhoulab/SPARK",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": null,
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "reference candidate; live documentation retrieval unresolved"
+    },
+    "squidpy": {
+      "url": "https://squidpy.readthedocs.io/en/stable/",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation inspected with web retrieval; runtime not checked"
+    },
+    "bayesspace": {
+      "url": "https://bioconductor.org/packages/release/bioc/html/BayesSpace.html",
+      "observed_version": "selected official documentation; execution version must be pinned",
+      "checked_on": "2026-10-14",
+      "maintenance": "documentation_reference_not_runtime_acceptance",
+      "execution_version_pin_required": true,
+      "review_scope": "official documentation retrieval; not source-code, license or runtime acceptance"
     }
   },
   "common_qc": [
@@ -632,6 +1112,26 @@
       ],
       "interpretation_limit": "克隆型和细胞数不能替代独立供体；受体序列不证明抗原特异性。",
       "execution": "existing_server_only"
+    },
+    "spatial_context": {
+      "id": "spatial_context",
+      "label": "空间统计、组织结构与邻域",
+      "prerequisites": [
+        "registered_coordinates",
+        "tissue_boundaries",
+        "donor_structure"
+      ],
+      "method_candidates": [
+        "Squidpy",
+        "SPARK-X",
+        "SpatialDE"
+      ],
+      "result_roles": [
+        "spatial_statistics",
+        "spatial_controls"
+      ],
+      "interpretation_limit": "空间邻近、表达模式、组织域与因果机制分开；spot 不是独立供者。",
+      "execution": "existing_server_only"
     }
   },
   "workflows": [
@@ -691,7 +1191,9 @@
         "splicing",
         "timecourse",
         "prediction",
-        "multiomics"
+        "multiomics",
+        "regulatory",
+        "composition"
       ],
       "interpretation_limits": [
         "TPM/FPKM 不冒充原始计数",
@@ -707,6 +1209,36 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "wgcna_modules",
+        "module_preservation",
+        "differential_coexpression",
+        "bulk_deconvolution",
+        "tf_activity",
+        "exon_usage",
+        "junction_events",
+        "transcript_usage",
+        "apa_usage",
+        "isoform_switch",
+        "longitudinal_effects",
+        "impulse_response",
+        "temporal_modules",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "signature_matching",
+        "cross_study_meta",
+        "cell_fraction_contrasts"
       ]
     },
     {
@@ -768,7 +1300,10 @@
         "regulatory",
         "composition",
         "repertoire",
-        "multiomics"
+        "multiomics",
+        "timecourse",
+        "prediction",
+        "sv_cnv"
       ],
       "interpretation_limits": [
         "细胞数不等于生物学 n",
@@ -784,6 +1319,38 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "trajectory_topology",
+        "trajectory_dynamics",
+        "kinetic_velocity",
+        "fate_probabilities",
+        "lr_consensus",
+        "lr_differential",
+        "ligand_target_links",
+        "tf_activity",
+        "scenic_regulons",
+        "longitudinal_effects",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "signature_matching",
+        "cross_study_meta",
+        "singlecell_abundance",
+        "cell_fraction_contrasts",
+        "singlecell_cnv",
+        "repertoire_clonotypes",
+        "repertoire_diversity",
+        "clonotype_phenotype"
       ]
     },
     {
@@ -839,7 +1406,12 @@
         "deconvolution",
         "communication",
         "regulatory",
-        "multiomics"
+        "multiomics",
+        "ppi",
+        "timecourse",
+        "prediction",
+        "composition",
+        "spatial_context"
       ],
       "interpretation_limits": [
         "spot 或 bin 不构成独立供体",
@@ -855,6 +1427,33 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "spatial_deconvolution",
+        "lr_consensus",
+        "lr_differential",
+        "ligand_target_links",
+        "spatial_lr",
+        "tf_activity",
+        "longitudinal_effects",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "cross_study_meta",
+        "cell_fraction_contrasts",
+        "spatial_variable_genes",
+        "spatial_niches",
+        "spatial_gradients",
+        "spatial_domains"
       ]
     },
     {
@@ -922,7 +1521,8 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
-      ]
+      ],
+      "analysis_methods": []
     },
     {
       "id": "long_read_rna",
@@ -976,7 +1576,12 @@
       "extensions": [
         "splicing",
         "pathway",
-        "multiomics"
+        "multiomics",
+        "ppi",
+        "regulatory",
+        "timecourse",
+        "prediction",
+        "te"
       ],
       "interpretation_limits": [
         "新结构发现和差异使用为不同估计目标"
@@ -991,6 +1596,28 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "tf_activity",
+        "exon_usage",
+        "transcript_usage",
+        "apa_usage",
+        "isoform_switch",
+        "longitudinal_effects",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "uorf_translation",
+        "cross_study_meta"
       ]
     },
     {
@@ -1044,7 +1671,8 @@
       "extensions": [
         "pathway",
         "ppi",
-        "multiomics"
+        "multiomics",
+        "splicing"
       ],
       "interpretation_limits": [
         "基因表达变化不是剪接变化",
@@ -1060,6 +1688,13 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "exon_usage",
+        "junction_events",
+        "transcript_usage",
+        "apa_usage",
+        "isoform_switch"
       ]
     },
     {
@@ -1129,6 +1764,10 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "translation_efficiency",
+        "uorf_translation"
       ]
     },
     {
@@ -1197,7 +1836,8 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
-      ]
+      ],
+      "analysis_methods": []
     },
     {
       "id": "expression_array",
@@ -1250,7 +1890,10 @@
         "ppi",
         "coexpression",
         "deconvolution",
-        "prediction"
+        "prediction",
+        "regulatory",
+        "timecourse",
+        "multiomics"
       ],
       "interpretation_limits": [
         "标准化矩阵不得再次按原始强度处理"
@@ -1263,6 +1906,30 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "wgcna_modules",
+        "module_preservation",
+        "differential_coexpression",
+        "bulk_deconvolution",
+        "tf_activity",
+        "longitudinal_effects",
+        "impulse_response",
+        "temporal_modules",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "signature_matching",
+        "cross_study_meta"
       ]
     },
     {
@@ -1333,6 +2000,13 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "motif_enrichment",
+        "motif_deviation",
+        "footprinting",
+        "differential_binding",
+        "peak_gene_links"
       ]
     },
     {
@@ -1402,6 +2076,13 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "motif_enrichment",
+        "motif_deviation",
+        "footprinting",
+        "differential_binding",
+        "peak_gene_links"
       ]
     },
     {
@@ -1471,6 +2152,10 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "motif_enrichment",
+        "differential_binding"
       ]
     },
     {
@@ -1541,6 +2226,10 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "motif_enrichment",
+        "differential_binding"
       ]
     },
     {
@@ -1594,7 +2283,8 @@
       "extensions": [
         "pathway",
         "regulatory",
-        "multiomics"
+        "multiomics",
+        "chromatin_links"
       ],
       "interpretation_limits": [
         "覆盖缺失不是未甲基化",
@@ -1610,6 +2300,9 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "methylation_gene_links"
       ]
     },
     {
@@ -1664,7 +2357,8 @@
         "pathway",
         "regulatory",
         "multiomics",
-        "prediction"
+        "prediction",
+        "chromatin_links"
       ],
       "interpretation_limits": [
         "beta 与 M 值不可混用且不可双重转换"
@@ -1677,6 +2371,9 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "methylation_gene_links"
       ]
     },
     {
@@ -1747,6 +2444,10 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "hic_loops_tads",
+        "hic_compartments"
       ]
     },
     {
@@ -1800,7 +2501,8 @@
       ],
       "extensions": [
         "sv_cnv",
-        "genetic_causality"
+        "genetic_causality",
+        "prediction"
       ],
       "interpretation_limits": [
         "科研注释不构成临床诊断",
@@ -1816,6 +2518,13 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "nested_prediction",
+        "fine_mapping",
+        "rare_variant_burden",
+        "polygenic_score",
+        "bulk_cnv"
       ]
     },
     {
@@ -1885,6 +2594,10 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "bulk_cnv",
+        "clonal_phylogeny"
       ]
     },
     {
@@ -1937,7 +2650,9 @@
       ],
       "extensions": [
         "genetic_causality",
-        "pathway"
+        "pathway",
+        "prediction",
+        "multiomics"
       ],
       "interpretation_limits": [
         "区域关联、基因归属、共定位和因果分别报告"
@@ -1952,6 +2667,16 @@
         "feature_namespace",
         "assembly",
         "annotation_version"
+      ],
+      "analysis_methods": [
+        "nested_prediction",
+        "external_validation",
+        "fine_mapping",
+        "colocalization",
+        "two_sample_mr",
+        "rare_variant_burden",
+        "polygenic_score",
+        "cross_study_meta"
       ]
     },
     {
@@ -2009,7 +2734,9 @@
         "ppi",
         "coexpression",
         "multiomics",
-        "prediction"
+        "prediction",
+        "timecourse",
+        "protein_activity"
       ],
       "interpretation_limits": [
         "quantms 旧入口已归档，只作历史参考，不作为默认新部署",
@@ -2023,6 +2750,25 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "wgcna_modules",
+        "module_preservation",
+        "differential_coexpression",
+        "longitudinal_effects",
+        "temporal_modules",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "protein_complexes",
+        "proteogenomic_links",
+        "cross_study_meta"
       ]
     },
     {
@@ -2077,7 +2823,8 @@
         "protein_activity",
         "pathway",
         "ppi",
-        "multiomics"
+        "multiomics",
+        "prediction"
       ],
       "interpretation_limits": [
         "定位概率阈值需按方法预声明",
@@ -2091,6 +2838,20 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "kinase_activity",
+        "ptm_adjustment",
+        "cross_study_meta"
       ]
     },
     {
@@ -2145,7 +2906,9 @@
       "extensions": [
         "pathway",
         "multiomics",
-        "prediction"
+        "prediction",
+        "timecourse",
+        "lipid_classes"
       ],
       "interpretation_limits": [
         "未知峰不自动映射成确定代谢物",
@@ -2159,6 +2922,14 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "longitudinal_effects",
+        "temporal_modules",
+        "nested_prediction",
+        "external_validation",
+        "cross_study_meta",
+        "lipid_class_enrichment"
       ]
     },
     {
@@ -2212,7 +2983,9 @@
       "extensions": [
         "lipid_classes",
         "pathway",
-        "multiomics"
+        "multiomics",
+        "timecourse",
+        "prediction"
       ],
       "interpretation_limits": [
         "总碳数不能自动升级为位置异构体"
@@ -2225,6 +2998,14 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "longitudinal_effects",
+        "nested_prediction",
+        "external_validation",
+        "cross_study_meta",
+        "lipid_class_enrichment",
+        "lipid_chain_patterns"
       ]
     },
     {
@@ -2293,6 +3074,11 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "microbe_differential",
+        "microbe_diversity",
+        "microbe_network"
       ]
     },
     {
@@ -2360,6 +3146,14 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "microbe_differential",
+        "microbe_diversity",
+        "microbe_network",
+        "microbe_pathways",
+        "microbe_strain",
+        "microbe_gene_context"
       ]
     },
     {
@@ -2417,7 +3211,15 @@
         "chromatin_links",
         "trajectory",
         "communication",
-        "multiomics"
+        "multiomics",
+        "pathway",
+        "ppi",
+        "velocity",
+        "timecourse",
+        "prediction",
+        "composition",
+        "sv_cnv",
+        "repertoire"
       ],
       "interpretation_limits": [
         "ADT 不等于全面蛋白组",
@@ -2431,6 +3233,45 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "trajectory_topology",
+        "trajectory_dynamics",
+        "kinetic_velocity",
+        "fate_probabilities",
+        "lr_consensus",
+        "lr_differential",
+        "ligand_target_links",
+        "tf_activity",
+        "scenic_regulons",
+        "motif_enrichment",
+        "motif_deviation",
+        "footprinting",
+        "enhancer_grn",
+        "longitudinal_effects",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "differential_binding",
+        "peak_gene_links",
+        "mofa_factors",
+        "supervised_multiomics",
+        "cross_study_meta",
+        "singlecell_abundance",
+        "cell_fraction_contrasts",
+        "singlecell_cnv",
+        "repertoire_clonotypes",
+        "repertoire_diversity",
+        "clonotype_phenotype"
       ]
     },
     {
@@ -2483,7 +3324,15 @@
         "pathway",
         "ppi",
         "prediction",
-        "genetic_causality"
+        "genetic_causality",
+        "coexpression",
+        "deconvolution",
+        "regulatory",
+        "timecourse",
+        "chromatin_links",
+        "te",
+        "protein_activity",
+        "multiomics"
       ],
       "interpretation_limits": [
         "不同队列不能假称同一样本配对",
@@ -2497,6 +3346,41 @@
         "reference",
         "reference_version",
         "feature_namespace"
+      ],
+      "analysis_methods": [
+        "ora",
+        "preranked_gsea",
+        "camera_sets",
+        "gsva_scores",
+        "ssgsea_scores",
+        "leading_edge",
+        "physical_ppi",
+        "ppi_modules",
+        "network_diffusion",
+        "wgcna_modules",
+        "module_preservation",
+        "differential_coexpression",
+        "bulk_deconvolution",
+        "tf_activity",
+        "enhancer_grn",
+        "longitudinal_effects",
+        "nested_prediction",
+        "survival_prediction",
+        "external_validation",
+        "colocalization",
+        "two_sample_mr",
+        "peak_gene_links",
+        "methylation_gene_links",
+        "translation_efficiency",
+        "kinase_activity",
+        "ptm_adjustment",
+        "protein_complexes",
+        "proteogenomic_links",
+        "mofa_factors",
+        "supervised_multiomics",
+        "rna_protein_concordance",
+        "multiomics_mediation",
+        "cross_study_meta"
       ]
     },
     {
@@ -2566,7 +3450,4545 @@
         "reference",
         "reference_version",
         "feature_namespace"
-      ]
+      ],
+      "analysis_methods": []
     }
-  ]
+  ],
+  "analysis_methods": {
+    "ora": {
+      "id": "ora",
+      "parent": "pathway",
+      "label": "GO/Reactome 等过度代表分析",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "clusterProfiler"
+      ],
+      "prerequisites": [
+        "tested_universe",
+        "gene_sets",
+        "identifier_mapping"
+      ],
+      "question": "选定列表相对实际受检背景是否过度代表功能集合？",
+      "statistical_requirements": "预先固定列表选择、方向、实际可测受检背景及多重比较族；同源转换不可静默扩展基因数",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 tested_universe、gene_sets、identifier_mapping 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "预先固定列表选择、方向、实际可测受检背景及多重比较族；同源转换不可静默扩展基因数"
+        },
+        {
+          "id": "diagnostics",
+          "description": "核对集合版本、映射丢失、集合大小、背景包含关系、重叠基因及重复 ID"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较合理背景、集合大小范围和映射规则；保留未富集条目"
+        }
+      ],
+      "decision_fields": [
+        "universe_definition",
+        "list_selection",
+        "set_size_range"
+      ],
+      "result_roles": [
+        "ora_table",
+        "ora_universe",
+        "ora_overlap",
+        "ora_sensitivity"
+      ],
+      "interpretation_limit": "富集不是活性方向或机制证明。",
+      "reference_ids": [
+        "clusterprofiler"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "preranked_gsea": {
+      "id": "preranked_gsea",
+      "parent": "pathway",
+      "label": "全受检列表的预排序 GSEA",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "fgsea"
+      ],
+      "prerequisites": [
+        "complete_signed_ranks",
+        "gene_sets",
+        "tested_universe"
+      ],
+      "question": "整个受检排序中是否存在协调变化？",
+      "statistical_requirements": "声明有符号排序统计量、竞争性零假设及 FDR 比较族；不能仅输入显著 DEG",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 complete_signed_ranks、gene_sets、tested_universe 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明有符号排序统计量、竞争性零假设及 FDR 比较族；不能仅输入显著 DEG"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查排序并列、零值、重复映射、集合覆盖和蒙特卡洛误差"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较预先合理的排序量、集合大小和重复随机种子；保留 NES 方向"
+        }
+      ],
+      "decision_fields": [
+        "ranking_metric",
+        "null_definition",
+        "permutation_precision"
+      ],
+      "result_roles": [
+        "gsea_table",
+        "gsea_ranks",
+        "gsea_leading_edge",
+        "gsea_uncertainty"
+      ],
+      "interpretation_limit": "预排序置换不等同于样本标签置换。",
+      "reference_ids": [
+        "fgsea"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "camera_sets": {
+      "id": "camera_sets",
+      "parent": "pathway",
+      "label": "考虑基因间相关的集合检验",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "limma camera"
+      ],
+      "prerequisites": [
+        "expression_design",
+        "contrast_matrix",
+        "gene_sets"
+      ],
+      "question": "考虑基因间相关后集合是否关联指定对比？",
+      "statistical_requirements": "使用与表达模型相同的独立单位、设计和对比；声明竞争性检验族",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 expression_design、contrast_matrix、gene_sets 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "使用与表达模型相同的独立单位、设计和对比；声明竞争性检验族"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查设计秩、残差自由度、集合内相关及权重"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较相关估计、集合范围和离群样本影响"
+        }
+      ],
+      "decision_fields": [
+        "contrast_definition",
+        "correlation_model",
+        "set_size_range"
+      ],
+      "result_roles": [
+        "camera_table",
+        "camera_design",
+        "camera_diagnostics",
+        "camera_sensitivity"
+      ],
+      "interpretation_limit": "集合关联不能推出全部成员发生同方向变化。",
+      "reference_ids": [
+        "limma"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "gsva_scores": {
+      "id": "gsva_scores",
+      "parent": "pathway",
+      "label": "GSVA 样本级集合分数",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "GSVA"
+      ],
+      "prerequisites": [
+        "expression_scale",
+        "gene_sets",
+        "sample_metadata"
+      ],
+      "question": "冻结的集合如何在样本之间变化？",
+      "statistical_requirements": "打分与分数上的组间推断分开；分数模型沿用独立单位与重复结构",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 expression_scale、gene_sets、sample_metadata 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "打分与分数上的组间推断分开；分数模型沿用独立单位与重复结构"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查输入分布、核分布选择、常量特征及集合覆盖"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较核设置、集合覆盖和队列构成的影响"
+        }
+      ],
+      "decision_fields": [
+        "expression_scale",
+        "kernel_choice",
+        "score_model"
+      ],
+      "result_roles": [
+        "gsva_scores",
+        "gsva_coverage",
+        "gsva_diagnostics",
+        "gsva_contrasts"
+      ],
+      "interpretation_limit": "分数不是绝对通路活性，也不能任意跨队列比较。",
+      "reference_ids": [
+        "gsva"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "ssgsea_scores": {
+      "id": "ssgsea_scores",
+      "parent": "pathway",
+      "label": "ssGSEA 样本级排序分数",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "GSVA ssGSEA"
+      ],
+      "prerequisites": [
+        "expression_scale",
+        "gene_sets",
+        "sample_metadata"
+      ],
+      "question": "样本内集合排序富集如何变化？",
+      "statistical_requirements": "保留打分归一化规则及后续分数模型；细胞打分不增加独立 n",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 expression_scale、gene_sets、sample_metadata 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "保留打分归一化规则及后续分数模型；细胞打分不增加独立 n"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查秩并列、低覆盖、集合大小及归一化范围"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较归一化开关及参考集合覆盖"
+        }
+      ],
+      "decision_fields": [
+        "normalization_definition",
+        "rank_weight",
+        "score_model"
+      ],
+      "result_roles": [
+        "ssgsea_scores",
+        "ssgsea_coverage",
+        "ssgsea_parameters",
+        "ssgsea_sensitivity"
+      ],
+      "interpretation_limit": "不同算法的分数不能当作同一单位直接合并。",
+      "reference_ids": [
+        "gsva"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "leading_edge": {
+      "id": "leading_edge",
+      "parent": "pathway",
+      "label": "Leading-edge 与集合冗余审查",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "fgsea leadingEdge"
+      ],
+      "prerequisites": [
+        "gsea_results",
+        "complete_signed_ranks",
+        "gene_sets"
+      ],
+      "question": "哪些成员驱动已计算的集合信号，哪些集合重复？",
+      "statistical_requirements": "保留原检验族；展示代表项不得改写原 FDR 或只保留支持故事的集合",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 gsea_results、complete_signed_ranks、gene_sets 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "保留原检验族；展示代表项不得改写原 FDR 或只保留支持故事的集合"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查成员集合、rank 位置和 ES 方向与原始结果一致"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较预先说明的冗余阈值并保留未合并原表"
+        }
+      ],
+      "decision_fields": [
+        "representative_rule",
+        "overlap_definition",
+        "retained_test_family"
+      ],
+      "result_roles": [
+        "leading_edge_members",
+        "term_overlap",
+        "representative_terms",
+        "full_term_index"
+      ],
+      "interpretation_limit": "共享成员不证明共享独立机制。",
+      "reference_ids": [
+        "fgsea"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "physical_ppi": {
+      "id": "physical_ppi",
+      "parent": "ppi",
+      "label": "物理 PPI 证据网络",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "IntAct",
+        "STRING physical network"
+      ],
+      "prerequisites": [
+        "interaction_evidence",
+        "identifier_mapping",
+        "tested_universe"
+      ],
+      "question": "哪些候选蛋白具有指定证据等级的相互作用？",
+      "statistical_requirements": "指定物理/功能关系、物种、来源通道及网络受检背景",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 interaction_evidence、identifier_mapping、tested_universe 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "指定物理/功能关系、物种、来源通道及网络受检背景"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查重复边、自环、同源映射、置信度通道及实验来源"
+        },
+        {
+          "id": "sensitivity",
+          "description": "比较证据门槛及去除文本挖掘/预测通道后的网络"
+        }
+      ],
+      "decision_fields": [
+        "relation_type",
+        "evidence_channels",
+        "confidence_rule"
+      ],
+      "result_roles": [
+        "physical_edges",
+        "interaction_sources",
+        "network_universe",
+        "network_sensitivity"
+      ],
+      "interpretation_limit": "数据库边不自动证明当前细胞模型中的结合。 STRING physical 也含预测支持，不能全部标成实验物理结合。",
+      "reference_ids": [
+        "string_docs",
+        "intact"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "ppi_modules": {
+      "id": "ppi_modules",
+      "parent": "ppi",
+      "label": "PPI 模块与中心性稳健性",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "Cytoscape",
+        "igraph"
+      ],
+      "prerequisites": [
+        "reviewed_network",
+        "network_background",
+        "resampling_plan"
+      ],
+      "question": "模块和候选枢纽是否对网络构建稳健？",
+      "statistical_requirements": "声明方向、边权及匹配度分布的零模型；选择规则不能用结局反复调参",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 reviewed_network、network_background、resampling_plan 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明方向、边权及匹配度分布的零模型；选择规则不能用结局反复调参"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查孤立点、连通分量、中心性定义与模块大小"
+        },
+        {
+          "id": "sensitivity",
+          "description": "边删减/证据通道/随机种子敏感性；报告模块稳定性"
+        }
+      ],
+      "decision_fields": [
+        "edge_weight_definition",
+        "module_method",
+        "null_network"
+      ],
+      "result_roles": [
+        "network_modules",
+        "network_centrality",
+        "network_null",
+        "network_stability"
+      ],
+      "interpretation_limit": "高度节点不等于因果靶点。",
+      "reference_ids": [
+        "igraph_docs"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "network_diffusion": {
+      "id": "network_diffusion",
+      "parent": "ppi",
+      "label": "网络传播与候选排序",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "igraph personalized PageRank"
+      ],
+      "prerequisites": [
+        "reviewed_network",
+        "seed_evidence",
+        "heldout_evidence"
+      ],
+      "question": "给定种子和网络先验，哪些候选可优先复核？",
+      "statistical_requirements": "隔离构建种子与验证来源；用度匹配基线评估先验泄漏",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 reviewed_network、seed_evidence、heldout_evidence 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "隔离构建种子与验证来源；用度匹配基线评估先验泄漏"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查种子覆盖、传播参数、网络连通性与度偏倚"
+        },
+        {
+          "id": "sensitivity",
+          "description": "留一种子/留一来源与重启参数敏感性"
+        }
+      ],
+      "decision_fields": [
+        "seed_selection",
+        "restart_rule",
+        "validation_split"
+      ],
+      "result_roles": [
+        "diffusion_ranks",
+        "diffusion_seeds",
+        "diffusion_null",
+        "diffusion_holdout"
+      ],
+      "interpretation_limit": "传播得分是优先级，不是作用效应或药效。",
+      "reference_ids": [
+        "igraph_docs"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "wgcna_modules": {
+      "id": "wgcna_modules",
+      "parent": "coexpression",
+      "label": "WGCNA 模块与性状关联",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "proteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "WGCNA"
+      ],
+      "prerequisites": [
+        "independent_expression",
+        "sample_size_review",
+        "trait_design"
+      ],
+      "question": "独立样本的哪些共表达模块关联预定性状？",
+      "statistical_requirements": "先审样本量、有效独立 n、协变量及重复结构；模块与性状的检验族需明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 independent_expression、sample_size_review、trait_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "先审样本量、有效独立 n、协变量及重复结构；模块与性状的检验族需明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查缺失、离群样本、软阈值/连通性、模块大小、eigengene 方向及性状混杂"
+        },
+        {
+          "id": "sensitivity",
+          "description": "软阈值、分模块参数、独立单位重采样与离群敏感性"
+        }
+      ],
+      "decision_fields": [
+        "network_signedness",
+        "soft_threshold_basis",
+        "trait_model"
+      ],
+      "result_roles": [
+        "wgcna_modules",
+        "module_trait_effects",
+        "wgcna_diagnostics",
+        "wgcna_resampling"
+      ],
+      "interpretation_limit": "相关模块和 hub 不是调控因果；无统一小样本合格阈值。",
+      "reference_ids": [
+        "wgcna"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "module_preservation": {
+      "id": "module_preservation",
+      "parent": "coexpression",
+      "label": "独立队列模块保留与复现",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "proteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "WGCNA modulePreservation"
+      ],
+      "prerequisites": [
+        "frozen_reference_modules",
+        "independent_validation_cohort",
+        "shared_features"
+      ],
+      "question": "冻结模块在独立队列是否保留？",
+      "statistical_requirements": "训练/验证样本和供者独立；冻结模块定义、映射与复现判据",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 frozen_reference_modules、independent_validation_cohort、shared_features 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "训练/验证样本和供者独立；冻结模块定义、映射与复现判据"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查共享特征、模块大小效应、平台及样本量差异"
+        },
+        {
+          "id": "sensitivity",
+          "description": "匹配基因背景和置换次数；保留非保留模块"
+        }
+      ],
+      "decision_fields": [
+        "reference_modules",
+        "validation_independence",
+        "preservation_rule"
+      ],
+      "result_roles": [
+        "preservation_table",
+        "preservation_mapping",
+        "preservation_null",
+        "preservation_failures"
+      ],
+      "interpretation_limit": "保留统计与性状效应复现需分别判断。",
+      "reference_ids": [
+        "wgcna"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "differential_coexpression": {
+      "id": "differential_coexpression",
+      "parent": "coexpression",
+      "label": "差异相关与网络重连",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "proteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "diffcoexp"
+      ],
+      "prerequisites": [
+        "independent_expression",
+        "replicate_design",
+        "network_background"
+      ],
+      "question": "条件间相关结构是否改变？",
+      "statistical_requirements": "独立单位内置换或分层重采样；区分均值变化与相关变化",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 independent_expression、replicate_design、network_background 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "独立单位内置换或分层重采样；区分均值变化与相关变化"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查组内 n、方差范围、离群点、批次及边数检验族"
+        },
+        {
+          "id": "sensitivity",
+          "description": "稳健相关、分层置换与重采样稳定性"
+        }
+      ],
+      "decision_fields": [
+        "correlation_metric",
+        "permutation_unit",
+        "edge_test_family"
+      ],
+      "result_roles": [
+        "differential_edges",
+        "group_correlations",
+        "edge_uncertainty",
+        "rewiring_stability"
+      ],
+      "interpretation_limit": "网络差异不等同于新的直接物理互作。",
+      "reference_ids": [
+        "diffcoexp"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "bulk_deconvolution": {
+      "id": "bulk_deconvolution",
+      "parent": "deconvolution",
+      "label": "参考驱动的 bulk 细胞组成估计",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "MuSiC",
+        "BisqueRNA"
+      ],
+      "prerequisites": [
+        "compatible_reference",
+        "donor_reference",
+        "expression_scale"
+      ],
+      "question": "混合样本的细胞组成可否由参考合理估计？",
+      "statistical_requirements": "参考与目标独立性、物种/组织/平台匹配；组成比较使用样本级设计",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 compatible_reference、donor_reference、expression_scale 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "参考与目标独立性、物种/组织/平台匹配；组成比较使用样本级设计"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查参考细胞覆盖、标记特异性、残差、负值与总和约束"
+        },
+        {
+          "id": "sensitivity",
+          "description": "留一参考供者、缺失细胞类型及不同参考敏感性"
+        }
+      ],
+      "decision_fields": [
+        "reference_population",
+        "proportion_definition",
+        "unknown_cell_policy"
+      ],
+      "result_roles": [
+        "cell_fraction_estimates",
+        "reference_coverage",
+        "reconstruction_residuals",
+        "reference_sensitivity"
+      ],
+      "interpretation_limit": "RNA 贡献与细胞数比例需要区分。",
+      "reference_ids": [
+        "music"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_deconvolution": {
+      "id": "spatial_deconvolution",
+      "parent": "deconvolution",
+      "label": "空间 spot 细胞丰度估计",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "cell2location",
+        "RCTD"
+      ],
+      "prerequisites": [
+        "compatible_reference",
+        "registered_coordinates",
+        "tissue_metadata"
+      ],
+      "question": "混合 spot 的细胞丰度如何空间分布？",
+      "statistical_requirements": "切片/供者嵌套；训练参考和验证组织学独立，保留单位和分辨率",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 compatible_reference、registered_coordinates、tissue_metadata 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "切片/供者嵌套；训练参考和验证组织学独立，保留单位和分辨率"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查参考覆盖、后验/拟合诊断、组织边界和空间残差"
+        },
+        {
+          "id": "sensitivity",
+          "description": "参考、超参数及分辨率敏感性"
+        }
+      ],
+      "decision_fields": [
+        "abundance_unit",
+        "reference_scope",
+        "spatial_validation"
+      ],
+      "result_roles": [
+        "spatial_abundance",
+        "spatial_reference_fit",
+        "spatial_uncertainty",
+        "histology_checks"
+      ],
+      "interpretation_limit": "spot 不是独立受试者；空间丰度仍为估计。",
+      "reference_ids": [
+        "cell2location"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "trajectory_topology": {
+      "id": "trajectory_topology",
+      "parent": "trajectory",
+      "label": "轨迹拓扑与根节点稳健性",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "Slingshot",
+        "Monocle3"
+      ],
+      "prerequisites": [
+        "frozen_cell_states",
+        "root_evidence",
+        "donor_structure"
+      ],
+      "question": "状态之间有哪些对采样和根节点稳健的路径？",
+      "statistical_requirements": "根节点依据独立生物学信息；不以期望结论选择分支",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 frozen_cell_states、root_evidence、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "根节点依据独立生物学信息；不以期望结论选择分支"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查供者覆盖、批次混合、断裂群及分支支持"
+        },
+        {
+          "id": "sensitivity",
+          "description": "替代根、供者留出和参数敏感性"
+        }
+      ],
+      "decision_fields": [
+        "root_definition",
+        "branch_selection",
+        "donor_sampling"
+      ],
+      "result_roles": [
+        "trajectory_topology",
+        "pseudotime_assignments",
+        "root_evidence",
+        "trajectory_resampling"
+      ],
+      "interpretation_limit": "拟时序不是实测时间或谱系追踪。",
+      "reference_ids": [
+        "slingshot"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "trajectory_dynamics": {
+      "id": "trajectory_dynamics",
+      "parent": "trajectory",
+      "label": "沿轨迹与分支的表达变化",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "tradeSeq"
+      ],
+      "prerequisites": [
+        "frozen_pseudotime",
+        "lineage_weights",
+        "donor_structure"
+      ],
+      "question": "基因沿既定轨迹或不同分支如何变化？",
+      "statistical_requirements": "声明关联/起终点/分支差异的不同假设；供者相关与轨迹不确定性须审核",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 frozen_pseudotime、lineage_weights、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明关联/起终点/分支差异的不同假设；供者相关与轨迹不确定性须审核"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查拟合收敛、结点、有效样本覆盖及分支权重"
+        },
+        {
+          "id": "sensitivity",
+          "description": "结点数、轨迹替代及供者重采样"
+        }
+      ],
+      "decision_fields": [
+        "hypothesis_family",
+        "knot_selection",
+        "dependence_model"
+      ],
+      "result_roles": [
+        "trajectory_gene_tests",
+        "trajectory_curves",
+        "trajectory_fit",
+        "trajectory_test_family"
+      ],
+      "interpretation_limit": "同一数据的轨迹选择和检验可能存在选择偏差。",
+      "reference_ids": [
+        "tradeseq"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "kinetic_velocity": {
+      "id": "kinetic_velocity",
+      "parent": "velocity",
+      "label": "RNA velocity 动力学与相图",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "scVelo"
+      ],
+      "prerequisites": [
+        "spliced_unspliced",
+        "kinetic_model_review",
+        "donor_structure"
+      ],
+      "question": "动力学假设下是否存在稳定方向信息？",
+      "statistical_requirements": "声明模型、层来源、适用细胞范围；不得把细胞数作为生物学重复",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 spliced_unspliced、kinetic_model_review、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明模型、层来源、适用细胞范围；不得把细胞数作为生物学重复"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查相图、基因拟合、层定义、速度置信度及批次"
+        },
+        {
+          "id": "sensitivity",
+          "description": "模型、邻域、基因集与供者留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "kinetic_model",
+        "layer_definition",
+        "confidence_rule"
+      ],
+      "result_roles": [
+        "velocity_vectors",
+        "kinetic_parameters",
+        "phase_diagnostics",
+        "velocity_sensitivity"
+      ],
+      "interpretation_limit": "二维箭头展示不验证分化方向或命运。",
+      "reference_ids": [
+        "scvelo"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "fate_probabilities": {
+      "id": "fate_probabilities",
+      "parent": "velocity",
+      "label": "CellRank 状态与命运概率",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "CellRank"
+      ],
+      "prerequisites": [
+        "transition_kernel",
+        "terminal_state_evidence",
+        "donor_structure"
+      ],
+      "question": "指定转移核下到达终末状态的概率如何变化？",
+      "statistical_requirements": "区分 velocity/pseudotime/实测时间核；终末状态需外部依据",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 transition_kernel、terminal_state_evidence、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "区分 velocity/pseudotime/实测时间核；终末状态需外部依据"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查核归一化、宏状态稳定性、不可达状态和吸收假设"
+        },
+        {
+          "id": "sensitivity",
+          "description": "核权重、状态数及终末状态敏感性"
+        }
+      ],
+      "decision_fields": [
+        "kernel_definition",
+        "terminal_rule",
+        "state_count_basis"
+      ],
+      "result_roles": [
+        "fate_probabilities",
+        "terminal_states",
+        "kernel_diagnostics",
+        "fate_sensitivity"
+      ],
+      "interpretation_limit": "模型命运概率不是实际追踪到的细胞命运。",
+      "reference_ids": [
+        "cellrank"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "lr_consensus": {
+      "id": "lr_consensus",
+      "parent": "communication",
+      "label": "配体受体多方法共识",
+      "workflows": [
+        "scrna",
+        "spatial_rna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "LIANA+"
+      ],
+      "prerequisites": [
+        "ligand_receptor_reference",
+        "expression_support",
+        "donor_structure"
+      ],
+      "question": "哪些配体受体关系有表达与多方法支持？",
+      "statistical_requirements": "完整供者和细胞群分母；复合物亚基、物种和数据库版本固定",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 ligand_receptor_reference、expression_support、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "完整供者和细胞群分母；复合物亚基、物种和数据库版本固定"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查表达覆盖、群大小、亚基、方法分数方向与缺失组合"
+        },
+        {
+          "id": "sensitivity",
+          "description": "数据库/表达阈值/方法集合与供者稳定性"
+        }
+      ],
+      "decision_fields": [
+        "resource_version",
+        "complex_rule",
+        "expression_support_rule"
+      ],
+      "result_roles": [
+        "lr_consensus",
+        "lr_method_scores",
+        "lr_coverage",
+        "lr_sensitivity"
+      ],
+      "interpretation_limit": "表达兼容不证明分泌、接触或结合。",
+      "reference_ids": [
+        "liana"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "lr_differential": {
+      "id": "lr_differential",
+      "parent": "communication",
+      "label": "供者层级的差异通信",
+      "workflows": [
+        "scrna",
+        "spatial_rna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "LIANA+ differential workflows"
+      ],
+      "prerequisites": [
+        "per_donor_lr",
+        "replicate_design",
+        "comparable_cell_types"
+      ],
+      "question": "通信摘要是否随预定条件改变？",
+      "statistical_requirements": "供者级重复、缺失细胞群和组成差异分开处理；固定 LR 检验族",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 per_donor_lr、replicate_design、comparable_cell_types 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "供者级重复、缺失细胞群和组成差异分开处理；固定 LR 检验族"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查每组供者覆盖、缺失对、群丰度及分数可比性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "组成调整、供者重采样和数据库敏感性"
+        }
+      ],
+      "decision_fields": [
+        "donor_model",
+        "missing_pair_policy",
+        "contrast_family"
+      ],
+      "result_roles": [
+        "lr_contrasts",
+        "lr_donor_support",
+        "lr_missing_pairs",
+        "lr_contrast_sensitivity"
+      ],
+      "interpretation_limit": "通信得分差异不等同于信号传递效应。",
+      "reference_ids": [
+        "liana"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "ligand_target_links": {
+      "id": "ligand_target_links",
+      "parent": "communication",
+      "label": "配体到受体细胞靶基因",
+      "workflows": [
+        "scrna",
+        "spatial_rna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "NicheNet"
+      ],
+      "prerequisites": [
+        "sender_receiver_definition",
+        "receiver_target_genes",
+        "ligand_target_prior"
+      ],
+      "question": "哪些候选配体可解释指定受体细胞的响应基因？",
+      "statistical_requirements": "响应基因选择与可测背景明确；训练先验与验证证据分离",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 sender_receiver_definition、receiver_target_genes、ligand_target_prior 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "响应基因选择与可测背景明确；训练先验与验证证据分离"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查受体表达、靶基因覆盖、先验来源和方向"
+        },
+        {
+          "id": "sensitivity",
+          "description": "背景/候选配体/先验覆盖的敏感性"
+        }
+      ],
+      "decision_fields": [
+        "receiver_target_definition",
+        "sender_scope",
+        "prior_version"
+      ],
+      "result_roles": [
+        "ligand_priorities",
+        "ligand_target_links",
+        "receiver_universe",
+        "ligand_controls"
+      ],
+      "interpretation_limit": "先验一致性不是配体扰动的因果验证。",
+      "reference_ids": [
+        "nichenet"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_lr": {
+      "id": "spatial_lr",
+      "parent": "communication",
+      "label": "空间约束的配体受体关系",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "LIANA+ spatial"
+      ],
+      "prerequisites": [
+        "registered_coordinates",
+        "ligand_receptor_reference",
+        "tissue_boundaries"
+      ],
+      "question": "候选通信是否与局部空间邻域相容？",
+      "statistical_requirements": "组织掩膜、切片/供者内空间零模型；避免跨供者坐标拼接",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 registered_coordinates、ligand_receptor_reference、tissue_boundaries 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "组织掩膜、切片/供者内空间零模型；避免跨供者坐标拼接"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查距离单位、邻域、边界、稀疏性及混合 spot"
+        },
+        {
+          "id": "sensitivity",
+          "description": "距离半径、掩膜与空间置换敏感性"
+        }
+      ],
+      "decision_fields": [
+        "distance_unit",
+        "neighborhood_definition",
+        "spatial_null"
+      ],
+      "result_roles": [
+        "spatial_lr_scores",
+        "spatial_lr_pairs",
+        "spatial_null",
+        "spatial_lr_radius"
+      ],
+      "interpretation_limit": "共定位不能证明接触或实际分泌作用。",
+      "reference_ids": [
+        "liana"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "tf_activity": {
+      "id": "tf_activity",
+      "parent": "regulatory",
+      "label": "有符号调控靶集合的 TF 活性",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "decoupleR",
+        "decoupler"
+      ],
+      "prerequisites": [
+        "signed_regulon",
+        "expression_scale",
+        "tested_universe"
+      ],
+      "question": "靶基因模式是否支持 TF 活性变化候选？",
+      "statistical_requirements": "固定 regulon 版本/置信度及供者级模型；表达量与推断活性分开",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 signed_regulon、expression_scale、tested_universe 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "固定 regulon 版本/置信度及供者级模型；表达量与推断活性分开"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查靶覆盖、符号、最低靶数与方法间一致性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "资源、置信度、覆盖阈值和方法敏感性"
+        }
+      ],
+      "decision_fields": [
+        "regulon_resource",
+        "coverage_rule",
+        "activity_model"
+      ],
+      "result_roles": [
+        "tf_activity_scores",
+        "tf_target_coverage",
+        "tf_activity_effects",
+        "tf_activity_sensitivity"
+      ],
+      "interpretation_limit": "推断活性不证明 TF 蛋白量、结合或磷酸化。",
+      "reference_ids": [
+        "decoupler"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "scenic_regulons": {
+      "id": "scenic_regulons",
+      "parent": "regulatory",
+      "label": "SCENIC 共表达与 motif 支持 regulon",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "pySCENIC"
+      ],
+      "prerequisites": [
+        "independent_expression",
+        "motif_rank_database",
+        "donor_structure"
+      ],
+      "question": "哪些共表达靶集合获得 motif 先验支持？",
+      "statistical_requirements": "声明细胞与供者抽样、数据库版本及训练/验证分离",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 independent_expression、motif_rank_database、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明细胞与供者抽样、数据库版本及训练/验证分离"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查基因覆盖、共表达稳定性、motif 物种/基因区域和 regulon 覆盖"
+        },
+        {
+          "id": "sensitivity",
+          "description": "随机种子、细胞抽样、供者留出与数据库敏感性"
+        }
+      ],
+      "decision_fields": [
+        "ranking_database",
+        "region_definition",
+        "donor_validation"
+      ],
+      "result_roles": [
+        "regulon_edges",
+        "regulon_activity",
+        "motif_support",
+        "regulon_stability"
+      ],
+      "interpretation_limit": "共表达加 motif 支持不等于直接调控实验证据。",
+      "reference_ids": [
+        "pyscenic"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "motif_enrichment": {
+      "id": "motif_enrichment",
+      "parent": "regulatory",
+      "label": "匹配背景的 motif 富集",
+      "workflows": [
+        "bulk_atac",
+        "scatac",
+        "chipseq",
+        "cutandrun",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "motifmatchr",
+        "HOMER"
+      ],
+      "prerequisites": [
+        "peak_sequences",
+        "matched_peak_background",
+        "motif_database"
+      ],
+      "question": "目标区域相对匹配背景是否富集 motif？",
+      "statistical_requirements": "背景匹配长度/GC/可及性且固定受检 TF 族",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 peak_sequences、matched_peak_background、motif_database 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "背景匹配长度/GC/可及性且固定受检 TF 族"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查坐标构建、序列、GC、黑名单及相似 motif 冗余"
+        },
+        {
+          "id": "sensitivity",
+          "description": "不同匹配背景、窗口和 motif 库敏感性"
+        }
+      ],
+      "decision_fields": [
+        "background_matching",
+        "region_window",
+        "motif_version"
+      ],
+      "result_roles": [
+        "motif_enrichment",
+        "motif_background",
+        "motif_matches",
+        "motif_sensitivity"
+      ],
+      "interpretation_limit": "motif 匹配不等同于真实结合或 TF 身份唯一。",
+      "reference_ids": [
+        "signac"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "motif_deviation": {
+      "id": "motif_deviation",
+      "parent": "regulatory",
+      "label": "chromVAR motif 可及性偏差",
+      "workflows": [
+        "bulk_atac",
+        "scatac",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "chromVAR"
+      ],
+      "prerequisites": [
+        "peak_counts",
+        "motif_matches",
+        "gc_background"
+      ],
+      "question": "含 motif 的区域可及性偏差如何变化？",
+      "statistical_requirements": "样本/供者级比较；声明深度和 GC 背景校正及检验族",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 peak_counts、motif_matches、gc_background 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "样本/供者级比较；声明深度和 GC 背景校正及检验族"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查片段深度、偏差分布、背景峰与稀疏群覆盖"
+        },
+        {
+          "id": "sensitivity",
+          "description": "背景峰、低深度过滤及供者聚合敏感性"
+        }
+      ],
+      "decision_fields": [
+        "background_rule",
+        "motif_resource",
+        "comparison_unit"
+      ],
+      "result_roles": [
+        "motif_deviation_scores",
+        "motif_deviation_effects",
+        "chromvar_background",
+        "chromvar_diagnostics"
+      ],
+      "interpretation_limit": "偏差分数不是直接结合或转录激活。",
+      "reference_ids": [
+        "chromvar"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "footprinting": {
+      "id": "footprinting",
+      "parent": "regulatory",
+      "label": "ATAC footprint 与偏倚审查",
+      "workflows": [
+        "bulk_atac",
+        "scatac",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "TOBIAS"
+      ],
+      "prerequisites": [
+        "insertion_profiles",
+        "tagmentation_bias",
+        "motif_sites"
+      ],
+      "question": "偏倚校正后 motif 位点是否存在 footprint 模式？",
+      "statistical_requirements": "独立重复及区域匹配；深度和细胞混合影响需分开",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 insertion_profiles、tagmentation_bias、motif_sites 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "独立重复及区域匹配；深度和细胞混合影响需分开"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 Tn5 偏倚、链方向、覆盖、峰定义和核小体背景"
+        },
+        {
+          "id": "sensitivity",
+          "description": "覆盖下采样、窗口与偏倚模型敏感性"
+        }
+      ],
+      "decision_fields": [
+        "bias_model",
+        "site_selection",
+        "depth_matching"
+      ],
+      "result_roles": [
+        "footprint_profiles",
+        "footprint_scores",
+        "bias_profiles",
+        "footprint_sensitivity"
+      ],
+      "interpretation_limit": "footprint 不足以证明单个 TF 的直接结合。",
+      "reference_ids": [
+        "tobias"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "enhancer_grn": {
+      "id": "enhancer_grn",
+      "parent": "regulatory",
+      "label": "增强子—TF—基因候选网络",
+      "workflows": [
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "SCENIC+"
+      ],
+      "prerequisites": [
+        "matched_rna_atac",
+        "enhancer_candidates",
+        "motif_database"
+      ],
+      "question": "哪些候选调控链受到多模态支持？",
+      "statistical_requirements": "匹配/非匹配模态必须声明；先验和验证不重用同一证据",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_rna_atac、enhancer_candidates、motif_database 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "匹配/非匹配模态必须声明；先验和验证不重用同一证据"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查供者对齐、区域/基因映射、eRegulon 覆盖和平台"
+        },
+        {
+          "id": "sensitivity",
+          "description": "区域窗口、链接阈值和供者留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "pairing_definition",
+        "enhancer_scope",
+        "validation_split"
+      ],
+      "result_roles": [
+        "enhancer_tf_gene_links",
+        "eregulon_scores",
+        "link_support",
+        "grn_holdout"
+      ],
+      "interpretation_limit": "相关链接不是增强子扰动或调控因果证明。",
+      "reference_ids": [
+        "scenicplus"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "exon_usage": {
+      "id": "exon_usage",
+      "parent": "splicing",
+      "label": "外显子相对使用",
+      "workflows": [
+        "bulk_rna",
+        "splicing",
+        "long_read_rna"
+      ],
+      "method_candidates": [
+        "DEXSeq"
+      ],
+      "prerequisites": [
+        "exon_counts",
+        "exon_annotation",
+        "replicate_design"
+      ],
+      "question": "外显子的相对使用是否随条件改变？",
+      "statistical_requirements": "外显子/基因层级检验、独立单位及批次设计明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 exon_counts、exon_annotation、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "外显子/基因层级检验、独立单位及批次设计明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查覆盖、可比外显子边界、模型拟合及离群样本"
+        },
+        {
+          "id": "sensitivity",
+          "description": "过滤、注释与高影响样本敏感性"
+        }
+      ],
+      "decision_fields": [
+        "exon_definition",
+        "filtering_rule",
+        "hierarchical_testing"
+      ],
+      "result_roles": [
+        "exon_usage_effects",
+        "exon_counts_qc",
+        "exon_test_family",
+        "exon_diagnostics"
+      ],
+      "interpretation_limit": "相对使用不同于基因总量变化。",
+      "reference_ids": [
+        "dexseq"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "junction_events": {
+      "id": "junction_events",
+      "parent": "splicing",
+      "label": "剪接事件与 junction cluster",
+      "workflows": [
+        "bulk_rna",
+        "splicing"
+      ],
+      "method_candidates": [
+        "rMATS",
+        "LeafCutter"
+      ],
+      "prerequisites": [
+        "junction_counts",
+        "library_protocol",
+        "replicate_design"
+      ],
+      "question": "事件 PSI 或内含子簇相对使用是否改变？",
+      "statistical_requirements": "声明事件/簇、delta PSI 单位、配对关系和 FDR 族",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 junction_counts、library_protocol、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "声明事件/簇、delta PSI 单位、配对关系和 FDR 族"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查唯一比对、链特异性、读长、覆盖与事件可估计性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "覆盖阈值、注释与模型选择敏感性"
+        }
+      ],
+      "decision_fields": [
+        "event_model",
+        "psi_unit",
+        "coverage_rule"
+      ],
+      "result_roles": [
+        "junction_effects",
+        "junction_coverage",
+        "event_definitions",
+        "splicing_sensitivity"
+      ],
+      "interpretation_limit": "不同事件模型的效应与检验全集不能直接混用。",
+      "reference_ids": [
+        "rmats"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "transcript_usage": {
+      "id": "transcript_usage",
+      "parent": "splicing",
+      "label": "差异转录本使用 DTU",
+      "workflows": [
+        "bulk_rna",
+        "long_read_rna",
+        "splicing"
+      ],
+      "method_candidates": [
+        "DRIMSeq",
+        "satuRn"
+      ],
+      "prerequisites": [
+        "transcript_abundance",
+        "transcript_gene_map",
+        "replicate_design"
+      ],
+      "question": "同一基因内转录本组成是否改变？",
+      "statistical_requirements": "区分 DTU 和 DTE；基因/转录本层级检验及不确定性需明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 transcript_abundance、transcript_gene_map、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "区分 DTU 和 DTE；基因/转录本层级检验及不确定性需明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查可识别异构体、映射、低使用过滤及离散度"
+        },
+        {
+          "id": "sensitivity",
+          "description": "定量/注释/过滤敏感性"
+        }
+      ],
+      "decision_fields": [
+        "usage_denominator",
+        "annotation_version",
+        "stagewise_testing"
+      ],
+      "result_roles": [
+        "dtu_effects",
+        "transcript_mapping",
+        "dtu_diagnostics",
+        "dtu_hierarchical_tests"
+      ],
+      "interpretation_limit": "短读长异构体可识别性限制解释。",
+      "reference_ids": [
+        "drimseq"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "apa_usage": {
+      "id": "apa_usage",
+      "parent": "splicing",
+      "label": "可变多聚腺苷酸化 APA",
+      "workflows": [
+        "bulk_rna",
+        "long_read_rna",
+        "splicing"
+      ],
+      "method_candidates": [
+        "QAPA",
+        "DaPars2"
+      ],
+      "prerequisites": [
+        "three_prime_evidence",
+        "utr_annotation",
+        "library_protocol"
+      ],
+      "question": "3′ 端或 poly(A) 位点相对使用是否改变？",
+      "statistical_requirements": "协议适配、基因内分母与供者级对比；基因总量变化分开",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 three_prime_evidence、utr_annotation、library_protocol 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "协议适配、基因内分母与供者级对比；基因总量变化分开"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 3′ 偏倚、内部引物、覆盖和末端注释"
+        },
+        {
+          "id": "sensitivity",
+          "description": "位点窗口、注释和覆盖敏感性"
+        }
+      ],
+      "decision_fields": [
+        "three_prime_protocol",
+        "site_definition",
+        "usage_denominator"
+      ],
+      "result_roles": [
+        "apa_usage",
+        "apa_sites",
+        "apa_coverage",
+        "apa_sensitivity"
+      ],
+      "interpretation_limit": "普通 RNA-seq 对 APA 的证据强度取决于协议。",
+      "reference_ids": [
+        "qapa"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "isoform_switch": {
+      "id": "isoform_switch",
+      "parent": "splicing",
+      "label": "异构体转换及功能后果候选",
+      "workflows": [
+        "long_read_rna",
+        "bulk_rna",
+        "splicing"
+      ],
+      "method_candidates": [
+        "IsoformSwitchAnalyzeR"
+      ],
+      "prerequisites": [
+        "transcript_usage",
+        "isoform_sequences",
+        "domain_annotation"
+      ],
+      "question": "使用转换是否伴随有依据的功能注释差异？",
+      "statistical_requirements": "先验与观测结构分开；DTU 及后果筛选的比较族明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 transcript_usage、isoform_sequences、domain_annotation 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "先验与观测结构分开；DTU 及后果筛选的比较族明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 ORF、NMD、结构域映射、异构体覆盖与版本"
+        },
+        {
+          "id": "sensitivity",
+          "description": "ORF/结构域注释及最低使用量敏感性"
+        }
+      ],
+      "decision_fields": [
+        "orf_evidence",
+        "consequence_scope",
+        "isoform_filter"
+      ],
+      "result_roles": [
+        "isoform_switches",
+        "isoform_consequences",
+        "isoform_mapping",
+        "consequence_limits"
+      ],
+      "interpretation_limit": "RNA 注释后果不能直接推断蛋白表达或活性。",
+      "reference_ids": [
+        "isoformswitch"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "longitudinal_effects": {
+      "id": "longitudinal_effects",
+      "parent": "timecourse",
+      "label": "纵向、交互与重复测量效应",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "singlecell_multiome",
+        "multiomics",
+        "proteomics",
+        "metabolomics",
+        "lipidomics"
+      ],
+      "method_candidates": [
+        "limma",
+        "variancePartition dream"
+      ],
+      "prerequisites": [
+        "time_metadata",
+        "dependence_structure",
+        "replicate_design"
+      ],
+      "question": "时间、条件及其交互效应如何变化？",
+      "statistical_requirements": "区分纵向和横断面时间；随机效应、时间尺度和估计目标预先明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 time_metadata、dependence_structure、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "区分纵向和横断面时间；随机效应、时间尺度和估计目标预先明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查设计秩、时间覆盖、协方差结构、缺失与残差"
+        },
+        {
+          "id": "sensitivity",
+          "description": "时间函数、缺失假设与协方差结构敏感性"
+        }
+      ],
+      "decision_fields": [
+        "time_scale",
+        "time_function",
+        "covariance_structure"
+      ],
+      "result_roles": [
+        "time_contrasts",
+        "time_design",
+        "time_diagnostics",
+        "time_sensitivity"
+      ],
+      "interpretation_limit": "时间先后关联不建立因果次序。",
+      "reference_ids": [
+        "limma",
+        "dream"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "impulse_response": {
+      "id": "impulse_response",
+      "parent": "timecourse",
+      "label": "非线性时间响应",
+      "workflows": [
+        "bulk_rna",
+        "expression_array"
+      ],
+      "method_candidates": [
+        "maSigPro"
+      ],
+      "prerequisites": [
+        "time_metadata",
+        "sufficient_time_coverage",
+        "replicate_design"
+      ],
+      "question": "预定非线性响应是否受到数据支持？",
+      "statistical_requirements": "核对时间点覆盖和有效重复；明确条件/时间零假设",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 time_metadata、sufficient_time_coverage、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "核对时间点覆盖和有效重复；明确条件/时间零假设"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查拟合收敛、外推、低计数与时间覆盖"
+        },
+        {
+          "id": "sensitivity",
+          "description": "函数形式、异常时间点和留出时间验证"
+        }
+      ],
+      "decision_fields": [
+        "response_family",
+        "time_hypothesis",
+        "extrapolation_policy"
+      ],
+      "result_roles": [
+        "nonlinear_time_tests",
+        "fitted_time_curves",
+        "time_coverage",
+        "nonlinear_sensitivity"
+      ],
+      "interpretation_limit": "稀疏时间点不能可靠恢复任意动力学。",
+      "reference_ids": [
+        "masigpro"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "temporal_modules": {
+      "id": "temporal_modules",
+      "parent": "timecourse",
+      "label": "时间模式模块与稳定性",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "proteomics",
+        "metabolomics"
+      ],
+      "method_candidates": [
+        "maSigPro",
+        "WGCNA"
+      ],
+      "prerequisites": [
+        "frozen_time_effects",
+        "time_metadata",
+        "resampling_plan"
+      ],
+      "question": "哪些特征具有稳健的时间变化模式？",
+      "statistical_requirements": "模块生成与显著性推断分开；按供者/时间块重采样",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 frozen_time_effects、time_metadata、resampling_plan 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "模块生成与显著性推断分开；按供者/时间块重采样"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查缩放定义、曲线不确定性、模块大小和缺测"
+        },
+        {
+          "id": "sensitivity",
+          "description": "模块数、距离度量和时间块留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "curve_scaling",
+        "module_selection",
+        "block_resampling"
+      ],
+      "result_roles": [
+        "temporal_modules",
+        "temporal_centroids",
+        "temporal_uncertainty",
+        "temporal_stability"
+      ],
+      "interpretation_limit": "聚类相似时间曲线不是共同调控证明。",
+      "reference_ids": [
+        "masigpro"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "nested_prediction": {
+      "id": "nested_prediction",
+      "parent": "prediction",
+      "label": "无泄漏嵌套验证预测",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics",
+        "metabolomics",
+        "lipidomics",
+        "germline",
+        "gwas_qtl"
+      ],
+      "method_candidates": [
+        "scikit-learn Pipeline nested CV"
+      ],
+      "prerequisites": [
+        "outcome_definition",
+        "independent_splits",
+        "sample_size_review"
+      ],
+      "question": "冻结应用场景中模型是否优于预定基线？",
+      "statistical_requirements": "供者/研究/时间分组；特征筛选、填补、标准化和调参全部在训练折内",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 outcome_definition、independent_splits、sample_size_review 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "供者/研究/时间分组；特征筛选、填补、标准化和调参全部在训练折内"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查泄漏、类别失衡、校准、置信区间及每折有效 n"
+        },
+        {
+          "id": "sensitivity",
+          "description": "替代划分、基线、学习曲线与外部分布漂移"
+        }
+      ],
+      "decision_fields": [
+        "split_unit",
+        "primary_metric",
+        "preprocessing_scope"
+      ],
+      "result_roles": [
+        "out_of_fold_predictions",
+        "nested_splits",
+        "prediction_metrics",
+        "leakage_audit"
+      ],
+      "interpretation_limit": "内部交叉验证不等同于外部验证或临床效用。",
+      "reference_ids": [
+        "sklearn"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "survival_prediction": {
+      "id": "survival_prediction",
+      "parent": "prediction",
+      "label": "生存结局模型与动态性能",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "survival",
+        "scikit-survival"
+      ],
+      "prerequisites": [
+        "time_event_definition",
+        "censoring_metadata",
+        "independent_splits"
+      ],
+      "question": "指定时间起点与结局下风险预测是否可靠？",
+      "statistical_requirements": "明确 time zero、删失、竞争风险、事件数和验证；避免不死时间及结局后特征",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 time_event_definition、censoring_metadata、independent_splits 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "明确 time zero、删失、竞争风险、事件数和验证；避免不死时间及结局后特征"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查比例风险、校准、时间依赖指标和删失权重"
+        },
+        {
+          "id": "sensitivity",
+          "description": "风险定义、竞争风险、时间窗与外部验证敏感性"
+        }
+      ],
+      "decision_fields": [
+        "time_zero",
+        "event_definition",
+        "competing_risk_policy"
+      ],
+      "result_roles": [
+        "survival_predictions",
+        "survival_diagnostics",
+        "survival_calibration",
+        "censoring_checks"
+      ],
+      "interpretation_limit": "风险关联不等于治疗效果，C-index 不代表校准。",
+      "reference_ids": [
+        "survival_docs"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "external_validation": {
+      "id": "external_validation",
+      "parent": "prediction",
+      "label": "冻结模型的外部验证",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics",
+        "metabolomics",
+        "lipidomics",
+        "gwas_qtl"
+      ],
+      "method_candidates": [
+        "scikit-learn frozen estimator"
+      ],
+      "prerequisites": [
+        "frozen_model",
+        "independent_validation_cohort",
+        "frozen_preprocessing"
+      ],
+      "question": "冻结模型对独立目标人群能否推广？",
+      "statistical_requirements": "禁止外部队列重新选特征或阈值；校准更新需另列分析",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 frozen_model、independent_validation_cohort、frozen_preprocessing 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "禁止外部队列重新选特征或阈值；校准更新需另列分析"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查训练重叠、输入映射、预测失败、漂移及结局定义"
+        },
+        {
+          "id": "sensitivity",
+          "description": "预设亚组、失败样本和不同适用范围的性能"
+        }
+      ],
+      "decision_fields": [
+        "model_lock",
+        "validation_population",
+        "update_policy"
+      ],
+      "result_roles": [
+        "external_predictions",
+        "model_lock",
+        "external_metrics",
+        "transportability_audit"
+      ],
+      "interpretation_limit": "外部验证只覆盖实际纳入的人群和测量条件。",
+      "reference_ids": [
+        "sklearn"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "signature_matching": {
+      "id": "signature_matching",
+      "parent": "prediction",
+      "label": "扰动签名相似与反向匹配",
+      "workflows": [
+        "bulk_rna",
+        "expression_array",
+        "scrna"
+      ],
+      "method_candidates": [
+        "CLUE Connectivity Map offline exports"
+      ],
+      "prerequisites": [
+        "approved_public_signature",
+        "perturbation_reference",
+        "direction_definition"
+      ],
+      "question": "哪些已知扰动签名与目标变化相似或相反？",
+      "statistical_requirements": "细胞系、剂量、时间和签名方向匹配；未知/私有签名不得自动外发",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 approved_public_signature、perturbation_reference、direction_definition 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "细胞系、剂量、时间和签名方向匹配；未知/私有签名不得自动外发"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查映射、参考覆盖、排序统计、基线和细胞背景"
+        },
+        {
+          "id": "sensitivity",
+          "description": "签名定义、细胞系/剂量/时间和候选稳定性"
+        }
+      ],
+      "decision_fields": [
+        "matching_direction",
+        "reference_context",
+        "public_query_scope"
+      ],
+      "result_roles": [
+        "signature_matches",
+        "signature_context",
+        "signature_null",
+        "signature_sensitivity"
+      ],
+      "interpretation_limit": "反向表达签名不是疾病逆转、药效或安全性。",
+      "reference_ids": [
+        "clue"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "fine_mapping": {
+      "id": "fine_mapping",
+      "parent": "genetic_causality",
+      "label": "位点精细定位与可信集合",
+      "workflows": [
+        "gwas_qtl",
+        "germline"
+      ],
+      "method_candidates": [
+        "SuSiE",
+        "susieR"
+      ],
+      "prerequisites": [
+        "harmonized_summary",
+        "ancestry_matched_ld",
+        "locus_definition"
+      ],
+      "question": "关联位点中哪些变异具有模型后验支持？",
+      "statistical_requirements": "LD、祖源、样本量、等位基因与参考构建一致；允许多信号",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 harmonized_summary、ancestry_matched_ld、locus_definition 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "LD、祖源、样本量、等位基因与参考构建一致；允许多信号"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 LD/统计量一致性、等位基因、收敛与集合纯度"
+        },
+        {
+          "id": "sensitivity",
+          "description": "LD 来源、信号数与先验敏感性"
+        }
+      ],
+      "decision_fields": [
+        "ld_population",
+        "signal_prior",
+        "locus_window"
+      ],
+      "result_roles": [
+        "variant_pip",
+        "credible_sets",
+        "ld_diagnostics",
+        "finemap_sensitivity"
+      ],
+      "interpretation_limit": "PIP 是模型条件下概率，不直接指定效应基因。",
+      "reference_ids": [
+        "susie"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "colocalization": {
+      "id": "colocalization",
+      "parent": "genetic_causality",
+      "label": "多信号共定位",
+      "workflows": [
+        "gwas_qtl",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "coloc",
+        "coloc.susie"
+      ],
+      "prerequisites": [
+        "harmonized_trait_qtl",
+        "locus_definition",
+        "ancestry_matched_ld"
+      ],
+      "question": "两个关联信号是否支持共享因果变异候选？",
+      "statistical_requirements": "共享变异全集、样本重叠、信号数和先验明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 harmonized_trait_qtl、locus_definition、ancestry_matched_ld 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "共享变异全集、样本重叠、信号数和先验明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查等位基因、缺失变异、LD、QTL 强度及全部假设后验"
+        },
+        {
+          "id": "sensitivity",
+          "description": "先验、位点窗口、单/多信号及 LD 敏感性"
+        }
+      ],
+      "decision_fields": [
+        "prior_grid",
+        "signal_model",
+        "overlap_definition"
+      ],
+      "result_roles": [
+        "coloc_hypotheses",
+        "shared_variant_set",
+        "signal_pairs",
+        "coloc_sensitivity"
+      ],
+      "interpretation_limit": "共定位不自动证明基因介导、方向或 MR 假设成立。",
+      "reference_ids": [
+        "coloc"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "two_sample_mr": {
+      "id": "two_sample_mr",
+      "parent": "genetic_causality",
+      "label": "工具变量与两样本 MR 审查",
+      "workflows": [
+        "gwas_qtl",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "TwoSampleMR"
+      ],
+      "prerequisites": [
+        "instrument_evidence",
+        "harmonized_trait_qtl",
+        "ancestry_matched_ld"
+      ],
+      "question": "在可辩护工具变量假设下暴露与结局是否关联？",
+      "statistical_requirements": "预先审相关性、独立性、排除限制、样本重叠、弱工具与祖源",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 instrument_evidence、harmonized_trait_qtl、ancestry_matched_ld 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "预先审相关性、独立性、排除限制、样本重叠、弱工具与祖源"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 F 统计、回文位点、方向、异质性、多效性及共定位证据"
+        },
+        {
+          "id": "sensitivity",
+          "description": "留一、稳健估计、方向与工具选择敏感性；方法选择取决于工具数"
+        }
+      ],
+      "decision_fields": [
+        "instrument_selection",
+        "overlap_policy",
+        "pleiotropy_plan"
+      ],
+      "result_roles": [
+        "mr_estimates",
+        "instrument_audit",
+        "mr_assumption_checks",
+        "mr_sensitivity"
+      ],
+      "interpretation_limit": "多个估计器一致不能证明排除限制成立。",
+      "reference_ids": [
+        "twosamplemr"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "rare_variant_burden": {
+      "id": "rare_variant_burden",
+      "parent": "genetic_causality",
+      "label": "稀有变异聚合关联",
+      "workflows": [
+        "germline",
+        "gwas_qtl"
+      ],
+      "method_candidates": [
+        "SKAT",
+        "SAIGE-GENE+"
+      ],
+      "prerequisites": [
+        "variant_qc",
+        "ancestry_kinship",
+        "functional_masks"
+      ],
+      "question": "基因或掩膜中的稀有变异负担是否关联结局？",
+      "statistical_requirements": "频率/功能掩膜预先定义；亲缘、病例失衡和祖源受控",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 variant_qc、ancestry_kinship、functional_masks 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "频率/功能掩膜预先定义；亲缘、病例失衡和祖源受控"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查可调用区域、携带者数、批次、掩膜及校准"
+        },
+        {
+          "id": "sensitivity",
+          "description": "频率阈值、掩膜、单变异驱动与祖源分层"
+        }
+      ],
+      "decision_fields": [
+        "mask_definition",
+        "frequency_reference",
+        "relatedness_model"
+      ],
+      "result_roles": [
+        "burden_results",
+        "variant_masks",
+        "carrier_counts",
+        "burden_calibration"
+      ],
+      "interpretation_limit": "聚合关联不说明所有变异作用方向一致。",
+      "reference_ids": [
+        "skat"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "polygenic_score": {
+      "id": "polygenic_score",
+      "parent": "genetic_causality",
+      "label": "多基因评分与迁移性",
+      "workflows": [
+        "germline",
+        "gwas_qtl"
+      ],
+      "method_candidates": [
+        "PRSice-2",
+        "LDpred2"
+      ],
+      "prerequisites": [
+        "discovery_gwas",
+        "target_genotypes",
+        "ancestry_matched_ld"
+      ],
+      "question": "独立目标人群中遗传评分是否有可重复预测价值？",
+      "statistical_requirements": "发现/训练/验证无重叠；祖源、LD、协变量及绝对风险校准分开",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 discovery_gwas、target_genotypes、ancestry_matched_ld 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "发现/训练/验证无重叠；祖源、LD、协变量及绝对风险校准分开"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查等位基因、重叠、群体结构、基线及校准"
+        },
+        {
+          "id": "sensitivity",
+          "description": "祖源、LD、阈值和外部验证敏感性"
+        }
+      ],
+      "decision_fields": [
+        "discovery_overlap",
+        "ancestry_scope",
+        "calibration_target"
+      ],
+      "result_roles": [
+        "prs_weights",
+        "prs_predictions",
+        "prs_metrics",
+        "prs_overlap_audit"
+      ],
+      "interpretation_limit": "PRS 不是个体诊断或因果效应估计。",
+      "reference_ids": [
+        "prsice"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "differential_binding": {
+      "id": "differential_binding",
+      "parent": "chromatin_links",
+      "label": "差异峰、结合与可及性",
+      "workflows": [
+        "bulk_atac",
+        "scatac",
+        "chipseq",
+        "cutandrun",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "DiffBind",
+        "csaw"
+      ],
+      "prerequisites": [
+        "consensus_peak_counts",
+        "library_controls",
+        "replicate_design"
+      ],
+      "question": "区域信号在条件之间是否改变？",
+      "statistical_requirements": "独立重复、输入/IgG、共识区域和归一化假设明确；全局变化需外源依据",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 consensus_peak_counts、library_controls、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "独立重复、输入/IgG、共识区域和归一化假设明确；全局变化需外源依据"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 FRiP、复杂度、片段、spike-in、重复一致性及背景"
+        },
+        {
+          "id": "sensitivity",
+          "description": "峰集、归一化与低计数过滤敏感性"
+        }
+      ],
+      "decision_fields": [
+        "consensus_regions",
+        "normalization_basis",
+        "control_definition"
+      ],
+      "result_roles": [
+        "differential_regions",
+        "consensus_peak_set",
+        "binding_normalization",
+        "binding_diagnostics"
+      ],
+      "interpretation_limit": "峰强度与蛋白结合/可及性含义依协议而异。",
+      "reference_ids": [
+        "diffbind"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "peak_gene_links": {
+      "id": "peak_gene_links",
+      "parent": "chromatin_links",
+      "label": "峰—基因关联与顺式候选",
+      "workflows": [
+        "bulk_atac",
+        "scatac",
+        "singlecell_multiome",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "Signac LinkPeaks",
+        "ArchR"
+      ],
+      "prerequisites": [
+        "matched_rna_atac",
+        "genomic_mapping",
+        "donor_structure"
+      ],
+      "question": "哪些峰与基因表达存在可复核顺式关联？",
+      "statistical_requirements": "匹配单位、距离窗口和受检峰基因全集明确，控制深度与组成",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_rna_atac、genomic_mapping、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "匹配单位、距离窗口和受检峰基因全集明确，控制深度与组成"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查构建、TSS、窗口、GC/深度及供者混杂"
+        },
+        {
+          "id": "sensitivity",
+          "description": "距离、背景和供者留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "pairing_definition",
+        "cis_window",
+        "background_model"
+      ],
+      "result_roles": [
+        "peak_gene_links",
+        "peak_gene_universe",
+        "link_covariates",
+        "link_stability"
+      ],
+      "interpretation_limit": "相关不等于增强子因果靶基因。",
+      "reference_ids": [
+        "signac"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "hic_loops_tads": {
+      "id": "hic_loops_tads",
+      "parent": "chromatin_links",
+      "label": "Hi-C 环与 TAD 边界",
+      "workflows": [
+        "hic"
+      ],
+      "method_candidates": [
+        "cooltools",
+        "HiCExplorer"
+      ],
+      "prerequisites": [
+        "balanced_contact_maps",
+        "resolution_metadata",
+        "replicate_design"
+      ],
+      "question": "接触富集或结构域边界是否稳健？",
+      "statistical_requirements": "样本级重复、距离衰减和可比 bin 分辨率；bin 对不视为独立生物学重复",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 balanced_contact_maps、resolution_metadata、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "样本级重复、距离衰减和可比 bin 分辨率；bin 对不视为独立生物学重复"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查平衡收敛、覆盖、距离、低可映射区域和边界"
+        },
+        {
+          "id": "sensitivity",
+          "description": "分辨率、窗口及归一化敏感性"
+        }
+      ],
+      "decision_fields": [
+        "bin_resolution",
+        "distance_background",
+        "boundary_definition"
+      ],
+      "result_roles": [
+        "chromatin_loops",
+        "tad_boundaries",
+        "contact_expected",
+        "hic_sensitivity"
+      ],
+      "interpretation_limit": "空间接触不证明调控作用。",
+      "reference_ids": [
+        "cooltools"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "methylation_gene_links": {
+      "id": "methylation_gene_links",
+      "parent": "chromatin_links",
+      "label": "DMR 与表达/注释整合",
+      "workflows": [
+        "methylseq",
+        "methylation_array",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "DMRcate",
+        "bsseq"
+      ],
+      "prerequisites": [
+        "methylation_qc",
+        "region_mapping",
+        "expression_context"
+      ],
+      "question": "甲基化区域变化与基因/表达是否存在有条件关联？",
+      "statistical_requirements": "beta/M 值、覆盖权重、细胞组成和区域层级检验分开；匹配单位明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 methylation_qc、region_mapping、expression_context 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "beta/M 值、覆盖权重、细胞组成和区域层级检验分开；匹配单位明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查探针交叉反应、SNP、覆盖、构建、区域及效应尺度"
+        },
+        {
+          "id": "sensitivity",
+          "description": "区域定义、组成调整和注释敏感性"
+        }
+      ],
+      "decision_fields": [
+        "methylation_scale",
+        "region_definition",
+        "composition_adjustment"
+      ],
+      "result_roles": [
+        "dmr_effects",
+        "dmr_gene_mapping",
+        "methylation_expression",
+        "methylation_sensitivity"
+      ],
+      "interpretation_limit": "甲基化方向不普遍等同于表达抑制或因果。",
+      "reference_ids": [
+        "dmrcate"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "hic_compartments": {
+      "id": "hic_compartments",
+      "parent": "chromatin_links",
+      "label": "A/B compartment 与切换",
+      "workflows": [
+        "hic"
+      ],
+      "method_candidates": [
+        "cooltools eigs-cis"
+      ],
+      "prerequisites": [
+        "balanced_contact_maps",
+        "compartment_orientation",
+        "replicate_design"
+      ],
+      "question": "一致定向和分辨率下 compartment 是否改变？",
+      "statistical_requirements": "PC 符号需外部信号定向；按样本检验并保留不确定区",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 balanced_contact_maps、compartment_orientation、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "PC 符号需外部信号定向；按样本检验并保留不确定区"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查距离背景、染色体、特征向量选择及低覆盖 bins"
+        },
+        {
+          "id": "sensitivity",
+          "description": "分辨率、定向信号与PC选择敏感性"
+        }
+      ],
+      "decision_fields": [
+        "orientation_signal",
+        "bin_resolution",
+        "eigenvector_rule"
+      ],
+      "result_roles": [
+        "compartment_scores",
+        "compartment_switches",
+        "orientation_evidence",
+        "compartment_sensitivity"
+      ],
+      "interpretation_limit": "PC 符号可任意翻转，未经定向不能称 A/B 切换。",
+      "reference_ids": [
+        "cooltools"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "translation_efficiency": {
+      "id": "translation_efficiency",
+      "parent": "te",
+      "label": "配对 Ribo/RNA 翻译效率",
+      "workflows": [
+        "riboseq",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "RiboDiff",
+        "DESeq2 interaction design"
+      ],
+      "prerequisites": [
+        "paired_ribo_rna",
+        "psite_qc",
+        "replicate_design"
+      ],
+      "question": "Ribo 与 RNA 条件交互是否支持翻译变化？",
+      "statistical_requirements": "配对样本、assay×condition 交互；不能直接比较两次显著性或简单比值检验",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 paired_ribo_rna、psite_qc、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "配对样本、assay×condition 交互；不能直接比较两次显著性或简单比值检验"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查读长、三核苷酸周期、P-site、rRNA、CDS 覆盖和 RNA 匹配"
+        },
+        {
+          "id": "sensitivity",
+          "description": "读长过滤、CDS 范围、低计数及模型敏感性"
+        }
+      ],
+      "decision_fields": [
+        "interaction_estimand",
+        "psite_definition",
+        "matched_samples"
+      ],
+      "result_roles": [
+        "translation_interactions",
+        "ribo_rna_pairs",
+        "periodicity_qc",
+        "translation_sensitivity"
+      ],
+      "interpretation_limit": "Ribo 占据不直接等于蛋白生成速率。",
+      "reference_ids": [
+        "riboseq"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "uorf_translation": {
+      "id": "uorf_translation",
+      "parent": "te",
+      "label": "uORF 与候选翻译 ORF",
+      "workflows": [
+        "riboseq",
+        "long_read_rna"
+      ],
+      "method_candidates": [
+        "RiboTaper",
+        "RiboCode"
+      ],
+      "prerequisites": [
+        "ribo_periodicity",
+        "transcript_annotation",
+        "start_site_context"
+      ],
+      "question": "候选 ORF 是否具有翻译相关周期性证据？",
+      "statistical_requirements": "固定受检 ORF 集及多重比较；异构体映射和可识别性审查",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 ribo_periodicity、transcript_annotation、start_site_context 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "固定受检 ORF 集及多重比较；异构体映射和可识别性审查"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 frame、周期、起止覆盖与重复支持"
+        },
+        {
+          "id": "sensitivity",
+          "description": "注释、ORF边界、读长和周期阈值敏感性"
+        }
+      ],
+      "decision_fields": [
+        "orf_universe",
+        "periodicity_rule",
+        "annotation_scope"
+      ],
+      "result_roles": [
+        "candidate_orfs",
+        "orf_periodicity",
+        "orf_mapping",
+        "orf_controls"
+      ],
+      "interpretation_limit": "翻译迹象不证明稳定蛋白或功能。",
+      "reference_ids": [
+        "ribocode"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "kinase_activity": {
+      "id": "kinase_activity",
+      "parent": "protein_activity",
+      "label": "激酶—底物活性候选",
+      "workflows": [
+        "phosphoproteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "decoupleR",
+        "KSEA"
+      ],
+      "prerequisites": [
+        "localized_phosphosites",
+        "kinase_substrate_reference",
+        "protein_abundance"
+      ],
+      "question": "底物位点模式是否支持激酶活性候选？",
+      "statistical_requirements": "位点定位、底物覆盖和总蛋白调整明确，按生物学单位检验",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 localized_phosphosites、kinase_substrate_reference、protein_abundance 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "位点定位、底物覆盖和总蛋白调整明确，按生物学单位检验"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查位点映射、缺失机制、总蛋白与底物方向"
+        },
+        {
+          "id": "sensitivity",
+          "description": "资源/覆盖/总量调整敏感性"
+        }
+      ],
+      "decision_fields": [
+        "substrate_resource",
+        "localization_rule",
+        "protein_adjustment"
+      ],
+      "result_roles": [
+        "kinase_scores",
+        "kinase_coverage",
+        "protein_adjustment",
+        "kinase_sensitivity"
+      ],
+      "interpretation_limit": "底物模式不是激酶直接活性测定。",
+      "reference_ids": [
+        "decoupler",
+        "msstatsptm"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "ptm_adjustment": {
+      "id": "ptm_adjustment",
+      "parent": "protein_activity",
+      "label": "PTM 相对总蛋白变化",
+      "workflows": [
+        "phosphoproteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "MSstatsPTM"
+      ],
+      "prerequisites": [
+        "matched_ptm_protein",
+        "localized_phosphosites",
+        "replicate_design"
+      ],
+      "question": "PTM 变化是否超过对应蛋白总量变化？",
+      "statistical_requirements": "配对映射、尺度和缺失机制明确；调整后不自动代表位点占有率",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_ptm_protein、localized_phosphosites、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "配对映射、尺度和缺失机制明确；调整后不自动代表位点占有率"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查定位概率、蛋白组映射、重复肽及调整不确定性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "蛋白汇总、缺失和定位阈值敏感性"
+        }
+      ],
+      "decision_fields": [
+        "paired_protein_definition",
+        "ptm_scale",
+        "missingness_model"
+      ],
+      "result_roles": [
+        "adjusted_ptm_effects",
+        "total_protein_effects",
+        "ptm_mapping",
+        "ptm_uncertainty"
+      ],
+      "interpretation_limit": "没有占有率测量时不能声称绝对磷酸化比例。",
+      "reference_ids": [
+        "msstatsptm"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "protein_complexes": {
+      "id": "protein_complexes",
+      "parent": "protein_activity",
+      "label": "复合体丰度与协调变化",
+      "workflows": [
+        "proteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "MSstats",
+        "CORUM membership review"
+      ],
+      "prerequisites": [
+        "protein_abundance",
+        "complex_membership",
+        "replicate_design"
+      ],
+      "question": "已注释复合体成员是否协调变化？",
+      "statistical_requirements": "复合体定义、成员覆盖及缺失结构明确；蛋白共享肽不可重复计数",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 protein_abundance、complex_membership、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "复合体定义、成员覆盖及缺失结构明确；蛋白共享肽不可重复计数"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查成员数、方向不一致、共享肽与批次"
+        },
+        {
+          "id": "sensitivity",
+          "description": "成员覆盖、汇总方法和资源版本敏感性"
+        }
+      ],
+      "decision_fields": [
+        "complex_resource",
+        "coverage_rule",
+        "aggregation_definition"
+      ],
+      "result_roles": [
+        "complex_effects",
+        "complex_coverage",
+        "member_effects",
+        "complex_sensitivity"
+      ],
+      "interpretation_limit": "共丰度不证明复合体组装或直接互作。",
+      "reference_ids": [
+        "msstats"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "proteogenomic_links": {
+      "id": "proteogenomic_links",
+      "parent": "protein_activity",
+      "label": "蛋白基因组与变异肽证据",
+      "workflows": [
+        "proteomics",
+        "multiomics"
+      ],
+      "method_candidates": [
+        "OpenMS proteogenomics review"
+      ],
+      "prerequisites": [
+        "matched_variant_transcript",
+        "peptide_spectrum_evidence",
+        "decoy_strategy"
+      ],
+      "question": "变异/异构体是否具有可定位肽段支持？",
+      "statistical_requirements": "搜索空间、target-decoy 和分层 FDR明确；转录和肽证据独立报告",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_variant_transcript、peptide_spectrum_evidence、decoy_strategy 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "搜索空间、target-decoy 和分层 FDR明确；转录和肽证据独立报告"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查谱图、独特性、蛋白推断、序列版本及污染"
+        },
+        {
+          "id": "sensitivity",
+          "description": "数据库扩展、竞争肽和独立谱图验证"
+        }
+      ],
+      "decision_fields": [
+        "search_database",
+        "decoy_definition",
+        "peptide_uniqueness"
+      ],
+      "result_roles": [
+        "variant_peptide_links",
+        "peptide_spectrum_index",
+        "search_space_fdr",
+        "proteogenomic_controls"
+      ],
+      "interpretation_limit": "扩展数据库命中不是功能或表达量证明。",
+      "reference_ids": [
+        "openms"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "mofa_factors": {
+      "id": "mofa_factors",
+      "parent": "multiomics",
+      "label": "MOFA 潜在因子与视图解释",
+      "workflows": [
+        "multiomics",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "MOFA2"
+      ],
+      "prerequisites": [
+        "matched_sample_views",
+        "view_scales",
+        "missing_view_design"
+      ],
+      "question": "多个视图共享和特有变异由哪些因子解释？",
+      "statistical_requirements": "样本/供者对齐、缺失视图和视图权重明确；因子与结局关联另作检验",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_sample_views、view_scales、missing_view_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "样本/供者对齐、缺失视图和视图权重明确；因子与结局关联另作检验"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查收敛、视图方差、载荷、缺失模式及批次驱动"
+        },
+        {
+          "id": "sensitivity",
+          "description": "随机种子、因子数、缩放及视图留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "view_scaling",
+        "factor_count",
+        "missing_view_policy"
+      ],
+      "result_roles": [
+        "factor_scores",
+        "factor_loadings",
+        "view_variance",
+        "factor_stability"
+      ],
+      "interpretation_limit": "潜在因子不是自动发现的机制或因果轴。",
+      "reference_ids": [
+        "mofa"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "supervised_multiomics": {
+      "id": "supervised_multiomics",
+      "parent": "multiomics",
+      "label": "监督式多组学整合",
+      "workflows": [
+        "multiomics",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "mixOmics DIABLO"
+      ],
+      "prerequisites": [
+        "matched_sample_views",
+        "outcome_definition",
+        "independent_splits"
+      ],
+      "question": "多视图组合是否提供可验证预测增益？",
+      "statistical_requirements": "全部特征选择/调参在训练折内；与单视图基线同划分比较",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_sample_views、outcome_definition、independent_splits 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "全部特征选择/调参在训练折内；与单视图基线同划分比较"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查视图匹配、类别失衡、泄漏及视图缺失"
+        },
+        {
+          "id": "sensitivity",
+          "description": "视图消融、嵌套验证和外部验证"
+        }
+      ],
+      "decision_fields": [
+        "split_unit",
+        "view_weighting",
+        "feature_selection_scope"
+      ],
+      "result_roles": [
+        "multiview_predictions",
+        "multiview_weights",
+        "single_view_baselines",
+        "multiview_validation"
+      ],
+      "interpretation_limit": "监督分离图不是泛化性能证据。",
+      "reference_ids": [
+        "mixomics"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "rna_protein_concordance": {
+      "id": "rna_protein_concordance",
+      "parent": "multiomics",
+      "label": "RNA—蛋白/代谢关联与不一致",
+      "workflows": [
+        "multiomics"
+      ],
+      "method_candidates": [
+        "matched effects and sample-level models"
+      ],
+      "prerequisites": [
+        "matched_sample_views",
+        "feature_crosswalk",
+        "uncertainty_estimates"
+      ],
+      "question": "不同模态的变化是否一致或存在可解释差异？",
+      "statistical_requirements": "相关单位、时间尺度、标识映射及效应不确定性明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 matched_sample_views、feature_crosswalk、uncertainty_estimates 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "相关单位、时间尺度、标识映射及效应不确定性明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查多对多映射、缺失选择、动态范围与测量误差"
+        },
+        {
+          "id": "sensitivity",
+          "description": "匹配方式、时滞、缺失及稳健模型敏感性"
+        }
+      ],
+      "decision_fields": [
+        "matching_unit",
+        "effect_scale",
+        "mapping_policy"
+      ],
+      "result_roles": [
+        "cross_modal_effects",
+        "crosswalk_audit",
+        "discordant_features",
+        "concordance_sensitivity"
+      ],
+      "interpretation_limit": "不一致可能来自测量和时间差，不能直接称翻译后调控。",
+      "reference_ids": [
+        "mofa"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "multiomics_mediation": {
+      "id": "multiomics_mediation",
+      "parent": "multiomics",
+      "label": "有条件的中介分析审查",
+      "workflows": [
+        "multiomics"
+      ],
+      "method_candidates": [
+        "mediation"
+      ],
+      "prerequisites": [
+        "temporal_order",
+        "confounder_design",
+        "mediation_identifiability"
+      ],
+      "question": "在明确假设下能否定义和估计间接效应？",
+      "statistical_requirements": "定义直接/间接效应、时序、暴露后混杂、测量误差及可识别性",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 temporal_order、confounder_design、mediation_identifiability 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "定义直接/间接效应、时序、暴露后混杂、测量误差及可识别性"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查模型、支持域、缺失、交互和未测混杂假设"
+        },
+        {
+          "id": "sensitivity",
+          "description": "未测混杂、模型形式与测量误差敏感性"
+        }
+      ],
+      "decision_fields": [
+        "causal_estimand",
+        "temporal_order",
+        "confounding_assumptions"
+      ],
+      "result_roles": [
+        "mediation_estimands",
+        "mediation_effects",
+        "mediation_assumptions",
+        "mediation_sensitivity"
+      ],
+      "interpretation_limit": "横断面多组学相关不能直接建立中介因果链。",
+      "reference_ids": [
+        "mediation"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "cross_study_meta": {
+      "id": "cross_study_meta",
+      "parent": "multiomics",
+      "label": "跨研究效应综合与异质性",
+      "workflows": [
+        "bulk_rna",
+        "scrna",
+        "spatial_rna",
+        "expression_array",
+        "long_read_rna",
+        "proteomics",
+        "phosphoproteomics",
+        "singlecell_multiome",
+        "multiomics",
+        "metabolomics",
+        "lipidomics",
+        "gwas_qtl"
+      ],
+      "method_candidates": [
+        "metafor"
+      ],
+      "prerequisites": [
+        "study_effect_uncertainty",
+        "cohort_independence",
+        "comparable_estimands"
+      ],
+      "question": "可比研究效应是否一致，异质性来自哪里？",
+      "statistical_requirements": "确认效应尺度、方向、重复队列和目标人群；研究数限制元回归",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 study_effect_uncertainty、cohort_independence、comparable_estimands 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "确认效应尺度、方向、重复队列和目标人群；研究数限制元回归"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查 SE/CI、效应方向、队列重叠、影响点与选择性报告"
+        },
+        {
+          "id": "sensitivity",
+          "description": "留一研究、模型/尺度选择及小样本稳健性"
+        }
+      ],
+      "decision_fields": [
+        "effect_scale",
+        "overlap_policy",
+        "heterogeneity_model"
+      ],
+      "result_roles": [
+        "meta_effects",
+        "heterogeneity",
+        "overlap_matrix",
+        "meta_influence"
+      ],
+      "interpretation_limit": "综合不可比对象不会创造共同估计目标。",
+      "reference_ids": [
+        "metafor"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "singlecell_abundance": {
+      "id": "singlecell_abundance",
+      "parent": "composition",
+      "label": "Milo 细胞邻域差异丰度",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "miloR"
+      ],
+      "prerequisites": [
+        "cell_neighborhoods",
+        "donor_counts",
+        "replicate_design"
+      ],
+      "question": "细胞状态邻域相对丰度是否改变？",
+      "statistical_requirements": "以供者计数和设计检验；邻域重叠需适用的多重比较处理",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 cell_neighborhoods、donor_counts、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "以供者计数和设计检验；邻域重叠需适用的多重比较处理"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查图结构、邻域覆盖、供者支持及批次"
+        },
+        {
+          "id": "sensitivity",
+          "description": "邻域参数、图构建与供者留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "neighborhood_definition",
+        "sample_offset",
+        "graph_parameters"
+      ],
+      "result_roles": [
+        "neighborhood_effects",
+        "neighborhood_counts",
+        "neighborhood_fdr",
+        "neighborhood_stability"
+      ],
+      "interpretation_limit": "相对丰度变化不证明细胞绝对增殖或死亡。",
+      "reference_ids": [
+        "milor"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_differential": {
+      "id": "microbe_differential",
+      "parent": "composition",
+      "label": "微生物差异丰度与组成偏差",
+      "workflows": [
+        "amplicon",
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "ANCOM-BC2",
+        "ALDEx2"
+      ],
+      "prerequisites": [
+        "taxon_counts",
+        "sampling_fraction_design",
+        "replicate_design"
+      ],
+      "question": "组成和测量偏差下哪些类群关联条件？",
+      "statistical_requirements": "零值/结构零、测序深度、协变量和重复测量处理明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 taxon_counts、sampling_fraction_design、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "零值/结构零、测序深度、协变量和重复测量处理明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查污染、低流行率、零值、库大小与模型校准"
+        },
+        {
+          "id": "sensitivity",
+          "description": "过滤、零值、偏差模型和批次敏感性"
+        }
+      ],
+      "decision_fields": [
+        "zero_policy",
+        "prevalence_filter",
+        "sampling_fraction_model"
+      ],
+      "result_roles": [
+        "taxon_effects",
+        "structural_zero_audit",
+        "composition_diagnostics",
+        "taxon_sensitivity"
+      ],
+      "interpretation_limit": "相对丰度不等于绝对菌量或定植因果。",
+      "reference_ids": [
+        "ancombc"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_diversity": {
+      "id": "microbe_diversity",
+      "parent": "composition",
+      "label": "α/β 多样性与群落差异",
+      "workflows": [
+        "amplicon",
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "vegan",
+        "phyloseq"
+      ],
+      "prerequisites": [
+        "taxon_counts",
+        "distance_definition",
+        "replicate_design"
+      ],
+      "question": "样本内和样本间多样性是否关联预定因素？",
+      "statistical_requirements": "度量/深度处理明确；PERMANOVA 配合离散度审查及受限置换",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 taxon_counts、distance_definition、replicate_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "度量/深度处理明确；PERMANOVA 配合离散度审查及受限置换"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查测序深度、距离、树映射、离散度与置换单位"
+        },
+        {
+          "id": "sensitivity",
+          "description": "距离、过滤和深度处理敏感性"
+        }
+      ],
+      "decision_fields": [
+        "distance_metric",
+        "depth_policy",
+        "permutation_blocks"
+      ],
+      "result_roles": [
+        "alpha_diversity",
+        "beta_distances",
+        "diversity_tests",
+        "dispersion_audit"
+      ],
+      "interpretation_limit": "显著 PERMANOVA 可能受组间离散度差异影响。",
+      "reference_ids": [
+        "vegan"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_network": {
+      "id": "microbe_network",
+      "parent": "composition",
+      "label": "组成数据微生物关联网络",
+      "workflows": [
+        "amplicon",
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "SPIEC-EASI"
+      ],
+      "prerequisites": [
+        "taxon_counts",
+        "prevalence_design",
+        "resampling_plan"
+      ],
+      "question": "哪些条件关联对组成效应和抽样稳健？",
+      "statistical_requirements": "零值、稀疏性及独立样本量先审；边不是独立生物学重复",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 taxon_counts、prevalence_design、resampling_plan 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "零值、稀疏性及独立样本量先审；边不是独立生物学重复"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查流行率、正则化、网络稀疏度及批次"
+        },
+        {
+          "id": "sensitivity",
+          "description": "过滤、正则化和重采样稳定性"
+        }
+      ],
+      "decision_fields": [
+        "zero_transform",
+        "regularization_selection",
+        "edge_stability"
+      ],
+      "result_roles": [
+        "microbe_edges",
+        "network_selection",
+        "microbe_network_stability",
+        "microbe_network_null"
+      ],
+      "interpretation_limit": "统计关联边不是生态互作或因果。",
+      "reference_ids": [
+        "spieceasi"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "cell_fraction_contrasts": {
+      "id": "cell_fraction_contrasts",
+      "parent": "composition",
+      "label": "细胞类型组成与差异比例",
+      "workflows": [
+        "scrna",
+        "spatial_rna",
+        "singlecell_multiome",
+        "bulk_rna"
+      ],
+      "method_candidates": [
+        "scCODA",
+        "propeller"
+      ],
+      "prerequisites": [
+        "sample_cell_counts",
+        "donor_structure",
+        "composition_denominator"
+      ],
+      "question": "细胞群组成如何随条件变化？",
+      "statistical_requirements": "以供者/样本为单位，参考群、分母及缺失群明确；估计组成需传播不确定性",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 sample_cell_counts、donor_structure、composition_denominator 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "以供者/样本为单位，参考群、分母及缺失群明确；估计组成需传播不确定性"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查供者支持、总细胞数、捕获偏差和参考群稳定性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "参考群、注释粒度、低丰度过滤与供者留出"
+        }
+      ],
+      "decision_fields": [
+        "reference_group",
+        "denominator_definition",
+        "annotation_resolution"
+      ],
+      "result_roles": [
+        "cell_fraction_effects",
+        "cell_count_denominators",
+        "reference_group_audit",
+        "composition_sensitivity"
+      ],
+      "interpretation_limit": "捕获组成不等同于组织绝对细胞数。",
+      "reference_ids": [
+        "sccoda"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_pathways": {
+      "id": "microbe_pathways",
+      "parent": "functional_profile",
+      "label": "微生物功能与通路丰度",
+      "workflows": [
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "HUMAnN"
+      ],
+      "prerequisites": [
+        "functional_abundance",
+        "taxon_stratification",
+        "reference_database"
+      ],
+      "question": "功能贡献及物种来源如何变化？",
+      "statistical_requirements": "基因/通路长度、单位、未比对比例和组成模型明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 functional_abundance、taxon_stratification、reference_database 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "基因/通路长度、单位、未比对比例和组成模型明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查数据库版本、覆盖、未归类及物种分层贡献"
+        },
+        {
+          "id": "sensitivity",
+          "description": "数据库、归一化、检测阈值和分类分层敏感性"
+        }
+      ],
+      "decision_fields": [
+        "abundance_unit",
+        "pathway_coverage",
+        "stratification_policy"
+      ],
+      "result_roles": [
+        "microbe_function_effects",
+        "stratified_function",
+        "unclassified_fraction",
+        "function_sensitivity"
+      ],
+      "interpretation_limit": "功能基因丰度不等于实际代谢通量。",
+      "reference_ids": [
+        "humann"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_strain": {
+      "id": "microbe_strain",
+      "parent": "functional_profile",
+      "label": "菌株分辨与群体结构",
+      "workflows": [
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "StrainPhlAn"
+      ],
+      "prerequisites": [
+        "species_marker_coverage",
+        "strain_reference",
+        "cohort_design"
+      ],
+      "question": "样本间菌株差异是否得到足够覆盖支持？",
+      "statistical_requirements": "混合菌株、覆盖和样本独立性明确；不自动推断传播方向",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 species_marker_coverage、strain_reference、cohort_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "混合菌株、覆盖和样本独立性明确；不自动推断传播方向"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查标记覆盖、缺失、比对和系统树支持"
+        },
+        {
+          "id": "sensitivity",
+          "description": "覆盖阈值、标记集合与参考敏感性"
+        }
+      ],
+      "decision_fields": [
+        "marker_coverage",
+        "mixed_strain_policy",
+        "tree_reference"
+      ],
+      "result_roles": [
+        "strain_profiles",
+        "strain_tree",
+        "strain_coverage",
+        "strain_sensitivity"
+      ],
+      "interpretation_limit": "遗传相似不能单独证明宿主间直接传播。",
+      "reference_ids": [
+        "strainphlan"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "microbe_gene_context": {
+      "id": "microbe_gene_context",
+      "parent": "functional_profile",
+      "label": "微生物基因功能注释与上下文",
+      "workflows": [
+        "metagenomics"
+      ],
+      "method_candidates": [
+        "HUMAnN",
+        "eggNOG-mapper"
+      ],
+      "prerequisites": [
+        "assembled_gene_evidence",
+        "functional_reference",
+        "contamination_controls"
+      ],
+      "question": "现有序列/基因表支持哪些功能注释？",
+      "statistical_requirements": "同源阈值、数据库版本、拷贝/丰度单位及可比背景明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 assembled_gene_evidence、functional_reference、contamination_controls 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "同源阈值、数据库版本、拷贝/丰度单位及可比背景明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查污染、覆盖、同源歧义和上下文完整性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "参考版本、同源阈值和映射完整性敏感性"
+        }
+      ],
+      "decision_fields": [
+        "annotation_threshold",
+        "reference_version",
+        "ambiguity_policy"
+      ],
+      "result_roles": [
+        "gene_function_annotations",
+        "gene_annotation_evidence",
+        "context_coverage",
+        "annotation_ambiguity"
+      ],
+      "interpretation_limit": "同源注释不证明功能表达、致病性或实验表型。",
+      "reference_ids": [
+        "eggnog"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "lipid_class_enrichment": {
+      "id": "lipid_class_enrichment",
+      "parent": "lipid_classes",
+      "label": "脂质类别与链特征富集",
+      "workflows": [
+        "lipidomics",
+        "metabolomics"
+      ],
+      "method_candidates": [
+        "lipidr LSEA"
+      ],
+      "prerequisites": [
+        "lipid_identifications",
+        "tested_lipid_universe",
+        "lipid_effects"
+      ],
+      "question": "脂质类别或链特征是否协调变化？",
+      "statistical_requirements": "鉴定等级、同分异构和受检脂质背景明确；避免同一分子重复计数",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 lipid_identifications、tested_lipid_universe、lipid_effects 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "鉴定等级、同分异构和受检脂质背景明确；避免同一分子重复计数"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查命名、类映射、链解析、检测覆盖和 FDR族"
+        },
+        {
+          "id": "sensitivity",
+          "description": "鉴定等级、背景和类别粒度敏感性"
+        }
+      ],
+      "decision_fields": [
+        "identity_level",
+        "lipid_background",
+        "class_definition"
+      ],
+      "result_roles": [
+        "lipid_set_results",
+        "lipid_universe",
+        "lipid_identity_audit",
+        "lipid_set_sensitivity"
+      ],
+      "interpretation_limit": "类别富集不是脂代谢通量。",
+      "reference_ids": [
+        "lipidr"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "lipid_chain_patterns": {
+      "id": "lipid_chain_patterns",
+      "parent": "lipid_classes",
+      "label": "脂质链长与不饱和模式",
+      "workflows": [
+        "lipidomics"
+      ],
+      "method_candidates": [
+        "lipidr"
+      ],
+      "prerequisites": [
+        "lipid_chain_annotation",
+        "lipid_abundance",
+        "internal_standard_qc"
+      ],
+      "question": "链长/双键模式是否在独立样本中变化？",
+      "statistical_requirements": "总碳/总双键与精确酰链分辨率分开；同分异构不可伪拆",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 lipid_chain_annotation、lipid_abundance、internal_standard_qc 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "总碳/总双键与精确酰链分辨率分开；同分异构不可伪拆"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查链注释等级、离子加合、内标及单位"
+        },
+        {
+          "id": "sensitivity",
+          "description": "注释等级、类别分层和缺失处理敏感性"
+        }
+      ],
+      "decision_fields": [
+        "chain_resolution",
+        "class_stratification",
+        "abundance_unit"
+      ],
+      "result_roles": [
+        "chain_pattern_effects",
+        "chain_annotation",
+        "chain_denominators",
+        "chain_sensitivity"
+      ],
+      "interpretation_limit": "总和注释不能定位具体脂肪酸或酶活性。",
+      "reference_ids": [
+        "lipidr"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "singlecell_cnv": {
+      "id": "singlecell_cnv",
+      "parent": "sv_cnv",
+      "label": "表达推断的单细胞 CNV",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "inferCNV",
+        "CopyKAT"
+      ],
+      "prerequisites": [
+        "ordered_expression",
+        "normal_reference",
+        "donor_structure"
+      ],
+      "question": "表达沿基因组的模式是否与大尺度 CNV 相容？",
+      "statistical_requirements": "正常参考、肿瘤纯度及供者边界明确；表达程序偏倚单独审查",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 ordered_expression、normal_reference、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "正常参考、肿瘤纯度及供者边界明确；表达程序偏倚单独审查"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查参考污染、染色体排序、平滑尺度和周期程序"
+        },
+        {
+          "id": "sensitivity",
+          "description": "正常参考、平滑、低表达与独立 DNA 验证"
+        }
+      ],
+      "decision_fields": [
+        "normal_reference",
+        "genomic_smoothing",
+        "dna_validation"
+      ],
+      "result_roles": [
+        "inferred_cnv_profiles",
+        "normal_reference_audit",
+        "cnv_diagnostics",
+        "dna_concordance"
+      ],
+      "interpretation_limit": "RNA 推断不是 DNA CNV 测量，不能单凭此认定恶性。",
+      "reference_ids": [
+        "infercnv"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "bulk_cnv": {
+      "id": "bulk_cnv",
+      "parent": "sv_cnv",
+      "label": "DNA 拷贝数与等位基因状态",
+      "workflows": [
+        "somatic",
+        "germline"
+      ],
+      "method_candidates": [
+        "CNVkit",
+        "FACETS"
+      ],
+      "prerequisites": [
+        "dna_depth_baf",
+        "matched_normal",
+        "purity_ploidy_design"
+      ],
+      "question": "DNA 覆盖与等位基因证据支持何种拷贝状态？",
+      "statistical_requirements": "平台、正常参考、纯度/倍性和分段模型明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 dna_depth_baf、matched_normal、purity_ploidy_design 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "平台、正常参考、纯度/倍性和分段模型明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查覆盖噪声、BAF、性染色体、分段与纯度可识别性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "纯度/倍性解、分段和正常参考敏感性"
+        }
+      ],
+      "decision_fields": [
+        "normal_reference",
+        "purity_ploidy",
+        "segmentation_rule"
+      ],
+      "result_roles": [
+        "copy_segments",
+        "allele_copy_states",
+        "purity_ploidy_solutions",
+        "cnv_validation"
+      ],
+      "interpretation_limit": "模型整数状态存在纯度/倍性歧义。",
+      "reference_ids": [
+        "cnvkit"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "clonal_phylogeny": {
+      "id": "clonal_phylogeny",
+      "parent": "sv_cnv",
+      "label": "亚克隆组成与演化树",
+      "workflows": [
+        "somatic"
+      ],
+      "method_candidates": [
+        "PyClone-VI",
+        "PhyloWGS"
+      ],
+      "prerequisites": [
+        "variant_allele_counts",
+        "copy_number_context",
+        "purity_estimates"
+      ],
+      "question": "哪些克隆结构与现有 VAF/CNV 相容？",
+      "statistical_requirements": "多区域/时间对应、拷贝数、多重性及纯度不确定性明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 variant_allele_counts、copy_number_context、purity_estimates 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "多区域/时间对应、拷贝数、多重性及纯度不确定性明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查后验、克隆数、约束、低覆盖及替代树"
+        },
+        {
+          "id": "sensitivity",
+          "description": "克隆数、CNV/纯度解及抽样敏感性"
+        }
+      ],
+      "decision_fields": [
+        "mutation_multiplicity",
+        "purity_solution",
+        "tree_constraints"
+      ],
+      "result_roles": [
+        "clonal_fractions",
+        "candidate_phylogenies",
+        "clonality_uncertainty",
+        "phylogeny_constraints"
+      ],
+      "interpretation_limit": "一棵拟合树不证明唯一演化历史或传播路线。",
+      "reference_ids": [
+        "pyclone"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "repertoire_clonotypes": {
+      "id": "repertoire_clonotypes",
+      "parent": "repertoire",
+      "label": "TCR/BCR 克隆型与配对",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "Scirpy"
+      ],
+      "prerequisites": [
+        "vdj_contigs",
+        "cell_barcode_mapping",
+        "receptor_protocol"
+      ],
+      "question": "哪些细胞属于何种明确规则的受体克隆型？",
+      "statistical_requirements": "TCR/BCR、链配对、productive 和多链规则明确，供者分开",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 vdj_contigs、cell_barcode_mapping、receptor_protocol 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "TCR/BCR、链配对、productive 和多链规则明确，供者分开"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查条码、链数、doublet、序列完整性及测序深度"
+        },
+        {
+          "id": "sensitivity",
+          "description": "核苷酸/氨基酸、链配对和距离定义敏感性"
+        }
+      ],
+      "decision_fields": [
+        "receptor_type",
+        "chain_pairing",
+        "clonotype_rule"
+      ],
+      "result_roles": [
+        "clonotype_assignments",
+        "chain_qc",
+        "barcode_crosswalk",
+        "clonotype_definition"
+      ],
+      "interpretation_limit": "相似受体序列不自动证明相同抗原特异性。",
+      "reference_ids": [
+        "scirpy"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "repertoire_diversity": {
+      "id": "repertoire_diversity",
+      "parent": "repertoire",
+      "label": "受体谱多样性与克隆扩增",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "Scirpy"
+      ],
+      "prerequisites": [
+        "clonotype_counts",
+        "donor_structure",
+        "sampling_depth"
+      ],
+      "question": "供者层级受体谱多样性或扩增是否不同？",
+      "statistical_requirements": "测序深度、抽样单位、克隆定义和检验族明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 clonotype_counts、donor_structure、sampling_depth 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "测序深度、抽样单位、克隆定义和检验族明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查每供者细胞/克隆数、覆盖、稀有克隆和批次"
+        },
+        {
+          "id": "sensitivity",
+          "description": "深度匹配、克隆规则和供者重采样"
+        }
+      ],
+      "decision_fields": [
+        "diversity_metric",
+        "depth_matching",
+        "biological_unit"
+      ],
+      "result_roles": [
+        "repertoire_diversity",
+        "expansion_summary",
+        "repertoire_sampling",
+        "diversity_sensitivity"
+      ],
+      "interpretation_limit": "捕获频率不是整体机体克隆频率。",
+      "reference_ids": [
+        "scirpy"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "clonotype_phenotype": {
+      "id": "clonotype_phenotype",
+      "parent": "repertoire",
+      "label": "克隆型—细胞状态关联",
+      "workflows": [
+        "scrna",
+        "singlecell_multiome"
+      ],
+      "method_candidates": [
+        "Scirpy"
+      ],
+      "prerequisites": [
+        "clonotype_assignments",
+        "frozen_cell_states",
+        "donor_structure"
+      ],
+      "question": "克隆扩增与转录状态是否关联？",
+      "statistical_requirements": "供者内克隆和细胞依赖需控制；不能把同克隆细胞当独立受试者",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 clonotype_assignments、frozen_cell_states、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "供者内克隆和细胞依赖需控制；不能把同克隆细胞当独立受试者"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查状态注释、条码匹配、克隆大小及供者覆盖"
+        },
+        {
+          "id": "sensitivity",
+          "description": "注释、克隆规则和供者/克隆重采样"
+        }
+      ],
+      "decision_fields": [
+        "state_definition",
+        "clone_dependence",
+        "permutation_unit"
+      ],
+      "result_roles": [
+        "clone_state_associations",
+        "clone_state_counts",
+        "clone_dependence",
+        "clone_state_sensitivity"
+      ],
+      "interpretation_limit": "状态关联不证明抗原特异性或谱系转换。",
+      "reference_ids": [
+        "scirpy"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_variable_genes": {
+      "id": "spatial_variable_genes",
+      "parent": "spatial_context",
+      "label": "空间变异基因与空间零模型",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "SPARK-X",
+        "SpatialDE"
+      ],
+      "prerequisites": [
+        "registered_coordinates",
+        "expression_scale",
+        "tissue_boundaries"
+      ],
+      "question": "基因表达是否偏离预定空间零模型？",
+      "statistical_requirements": "切片内空间相关、供者重复及受检全集明确",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 registered_coordinates、expression_scale、tissue_boundaries 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "切片内空间相关、供者重复及受检全集明确"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查坐标单位、表达深度、组织掩膜、边界和模型校准"
+        },
+        {
+          "id": "sensitivity",
+          "description": "空间核、尺度、组织分区与切片复现"
+        }
+      ],
+      "decision_fields": [
+        "spatial_kernel",
+        "tissue_mask",
+        "sample_replication"
+      ],
+      "result_roles": [
+        "spatial_gene_tests",
+        "spatial_kernel",
+        "spatial_gene_qc",
+        "spatial_gene_replication"
+      ],
+      "interpretation_limit": "空间变异不等于条件差异或细胞特异性。",
+      "reference_ids": [
+        "sparkx"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_niches": {
+      "id": "spatial_niches",
+      "parent": "spatial_context",
+      "label": "邻域富集与组织生态位",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "Squidpy neighborhood enrichment"
+      ],
+      "prerequisites": [
+        "registered_coordinates",
+        "frozen_cell_states",
+        "tissue_boundaries"
+      ],
+      "question": "细胞类型邻接是否超过组织约束下预期？",
+      "statistical_requirements": "按供者/切片分层，组织分区内置换并保留密度/边界约束",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 registered_coordinates、frozen_cell_states、tissue_boundaries 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "按供者/切片分层，组织分区内置换并保留密度/边界约束"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查邻域构建、半径、密度、掩膜及稀有类型"
+        },
+        {
+          "id": "sensitivity",
+          "description": "半径、kNN/距离、注释粒度和受限置换敏感性"
+        }
+      ],
+      "decision_fields": [
+        "neighborhood_definition",
+        "permutation_constraint",
+        "density_control"
+      ],
+      "result_roles": [
+        "neighborhood_enrichment",
+        "spatial_graph",
+        "constrained_null",
+        "niche_stability"
+      ],
+      "interpretation_limit": "邻近不证明通信或功能依赖。",
+      "reference_ids": [
+        "squidpy"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_gradients": {
+      "id": "spatial_gradients",
+      "parent": "spatial_context",
+      "label": "组织边界距离与空间梯度",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "Squidpy spatial graph",
+        "mgcv"
+      ],
+      "prerequisites": [
+        "registered_coordinates",
+        "reviewed_tissue_boundaries",
+        "donor_structure"
+      ],
+      "question": "表达或组成是否随预定组织距离变化？",
+      "statistical_requirements": "边界独立定义、物理单位和供者内空间相关；避免用表达先选边界再检验",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 registered_coordinates、reviewed_tissue_boundaries、donor_structure 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "边界独立定义、物理单位和供者内空间相关；避免用表达先选边界再检验"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查配准、边界误差、距离方向、采样密度和残差"
+        },
+        {
+          "id": "sensitivity",
+          "description": "边界扰动、距离窗口与供者留出"
+        }
+      ],
+      "decision_fields": [
+        "boundary_definition",
+        "physical_unit",
+        "spatial_dependence"
+      ],
+      "result_roles": [
+        "distance_gradients",
+        "boundary_coordinates",
+        "spatial_residuals",
+        "gradient_sensitivity"
+      ],
+      "interpretation_limit": "距离梯度不是时间进程或因果暴露。",
+      "reference_ids": [
+        "squidpy"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    },
+    "spatial_domains": {
+      "id": "spatial_domains",
+      "parent": "spatial_context",
+      "label": "空间域与组织学一致性",
+      "workflows": [
+        "spatial_rna"
+      ],
+      "method_candidates": [
+        "BayesSpace",
+        "BANKSY"
+      ],
+      "prerequisites": [
+        "registered_coordinates",
+        "expression_scale",
+        "independent_histology"
+      ],
+      "question": "空间域是否稳定且与独立组织学相符？",
+      "statistical_requirements": "聚类与独立验证分开；域数选择不能依期望结论",
+      "qc_gates": [
+        {
+          "id": "input",
+          "description": "核对 registered_coordinates、expression_scale、independent_histology 的选定来源、尺度、完整分母及版本"
+        },
+        {
+          "id": "design",
+          "description": "聚类与独立验证分开；域数选择不能依期望结论"
+        },
+        {
+          "id": "diagnostics",
+          "description": "检查配准、图结构、批次、域覆盖及组织学一致性"
+        },
+        {
+          "id": "sensitivity",
+          "description": "域数、空间权重、分辨率和切片留出敏感性"
+        }
+      ],
+      "decision_fields": [
+        "domain_count",
+        "spatial_weight",
+        "histology_validation"
+      ],
+      "result_roles": [
+        "spatial_domains",
+        "domain_parameters",
+        "histology_concordance",
+        "domain_stability"
+      ],
+      "interpretation_limit": "域边界不自动等于细胞谱系或病理诊断。",
+      "reference_ids": [
+        "bayesspace"
+      ],
+      "execution": "existing_server_only",
+      "backend_status": "candidate_requires_selected_server_runtime_acceptance"
+    }
+  }
 }

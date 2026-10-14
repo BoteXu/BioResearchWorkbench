@@ -6,6 +6,10 @@ license: Apache-2.0
 
 # 组学设计、QC 与验收
 
+## 细分拓展选择
+
+先用 `omics_workflows.inspect_omics_extensions` 按 assay 与问题检索，再以 `analysis_requests` 明确方法、专用决定、零模型、比较族和敏感性方案。父类是兼容入口；避免只写“通路”“通信”“WGCNA”而没有可审查的背景/单位/模型。每条路线需要四项专用 QC、完整输出及所选方法/请求哈希绑定的真实服务器验收；目录或通用后端曾成功不等于这些方法已运行。未满足条件保留阻断，不能为扩大目录在本机装计算栈。
+
 ## 输入与触发
 
 先用 `omics_workflows.inspect_omics_workflows` 查看当前标准流程目录。`plan_omics_workflow` 绑定明确的参考、输入摘要、设计和主动选择的拓展；再用 `audit_omics_readiness` 审查必需 QC、统计咨询及已有服务器验收记录。返回结果用 `audit_omics_result_bundle` 核对标准/拓展结果角色与版本谱系。契约详见安装中的 OMICS_WORKFLOWS.md。这些是离线规划与摘要检查，不新增分析引擎，也不授权自动派发。

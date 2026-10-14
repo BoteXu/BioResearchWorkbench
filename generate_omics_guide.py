@@ -12,10 +12,11 @@ def generate():
     out = [
         '# 组学标准流程与条件拓展', '',
         '这是 BioResearchWorkbench 原创的流程、QC 和结果契约，最初工具基础来自 Biomni。第三方算法、文档和数据库保留原归属。本页从 `omics_workflows.json` 自动生成。', '',
-        f"版本 {data['catalog_version']}：{len(workflows)} 条流程、{len(extensions)} 类拓展、{sum(len(w['extensions']) for w in workflows)} 个流程到拓展的关联。关联数量不是独立算法或已经验收的执行后端。", '',
+        f"版本 {data['catalog_version']}：{len(workflows)} 条流程、{len(extensions)} 类拓展、{len(data['analysis_methods'])} 条细分分析路线，细分路线与流程有 {sum(len(w['analysis_methods']) for w in workflows)} 个适用关联。路线和关联数量不是新增算法或已经验收的执行后端。", '',
         '## 调用与状态', '',
         '- `omics_workflows.inspect_omics_workflows(workflow="", family="", detail=false, limit=40)`：离线发现目录；完整细节包括标准步骤、QC、输出角色和官方参考。',
-        '- `omics_workflows.plan_omics_workflow(workflow, context, design, input_manifest, extensions=null)`：只生成绑定版本的计划，拓展必须主动选择。',
+        '- `omics_workflows.inspect_omics_extensions(workflow="", parent="", search="", detail=false, offset=0, limit=12)`：按检测技术、父类和问题检索细分路线；最多 20 条一页，按 `next_offset` 继续。',
+        '- `omics_workflows.plan_omics_workflow(workflow, context, design, input_manifest, extensions=null, analysis_requests=null)`：只生成绑定版本的计划，拓展必须主动选择；推荐选具体路线。',
         '- `omics_workflows.audit_omics_readiness(plan, checks, statistical_receipt=null, backend_receipt=null)`：审查有定位来源的 QC、统计咨询和已有服务器验收摘要。',
         '- `omics_workflows.audit_omics_result_bundle(plan, result_manifest, execution_receipt, checks, statistical_receipt=null, backend_receipt=null)`：审查必需结果和真实回执的声明，不读取原始矩阵或观察服务器进程。', '',
         '新接口均仅用 Python 标准库，不创建分析环境、下载数据、调用公共数据库、连接服务器或运行算法。计算经用户已有 SSH/调度流程明确派发。共享服务串行运行，本地科研禁令优先于安装 profile。原始 RNA 私有附加包保持独立，未纳入本目录或公开包。', '',
@@ -29,6 +30,10 @@ def generate():
         '| `units` | 至多 1000 条唯一 `id` 与 `group`。单位是独立单位清单，重复时间点/切片映射另用 `dependence_structure` 说明；不是每个观测一行。 |',
         '| `input_manifest` | 1–100 条唯一 `id`, 工作流支持的 `kind`, 小写 `sha256`, `source_location`。哈希是调用者声明；与真实文件独立核验。 |',
         '| `extensions` | 最多 12 个无重复兼容 ID；省略即不添加。每个前提在 `design.capabilities` 中提供 `available=true`, `source_location`, `source_sha256`。 |', '',
+        '## 细分分析的选择与验收', '',
+        '`analysis_requests` 每项恰好含 `id`, `method`, `decisions`, `null_model`, `multiplicity_family`, `sensitivity_plan`。`id` 由细分检索返回；`method` 选该路线的明确候选。`decisions` 必须逐一填写该路线全部 `decision_fields`，不能用泛化模板省略背景全集、比较单位、参考版本、尺度或验证划分等关键决定。其余三项为非空有界文字；代码只核对结构，宿主须审查内容是否成立。', '',
+        '每条细分路线生成输入、设计、诊断、敏感性四项专用 QC 和明确输出角色。前提证据还要求 `reviewed_by_host=true`；缺少来源、诊断或稳健性结果会阻断摘要验收。已有父类入口保持兼容，但同一计划不能同时选父类及其子路线；父类加子路线合计最多 12 项，较大研究拆成有版本谱系的阶段计划。', '',
+        '真实服务器后端摘要除原有字段外，`analysis_methods[id]` 需给出 `status=runtime_verified`, 精确 `method`, 该请求的 `request_sha256`、定位来源及宿主审核；`method_versions` 必须包含所选方法的固定版本。改方法、参数决定或敏感性计划会改变请求/计划哈希，旧验收不能沿用。通用后端曾跑通不能代替具体方法验收。', '',
         '正式推断每声明组至少两个独立单位只是结构底线，不能当作统计功效或方法适用性验收。完全混杂阻断推断；需要预先说明重复测量结构、协变量和缺失处理。描述性模式不要求推断咨询，但仍要求 QC、方法和服务器来源；它不交付差异显著性结果，需提供 `descriptive_results`。需要推断拓展时重新建立 inferential 计划。', '',
         '## QC 与精确绑定', '',
         '计划含 `plan_sha256`、`catalog_sha256`、`context_sha256`、`design_sha256`、`inputs_sha256`。每条 QC、统计/后端摘要、输出记录和运行回执须携带完全一致的这些字段。目录、输入、设计或拓展改变必须重新生成和实质审核计划；改哈希不能代替审核。', '',
@@ -61,6 +66,18 @@ def generate():
                 '- 服务器候选：' + '；'.join(e['method_candidates']),
                 '- 新增结果角色：' + '、'.join('`' + v + '`' for v in e['result_roles']),
                 '- 解释边界：' + e['interpretation_limit'], '']
+    out += ['## 细分分析路线', '', '| ID | 父类 | 具体问题 | 适用流程 |', '|---|---|---|---|']
+    for key, m in data['analysis_methods'].items():
+        out.append(f"| `{key}` | `{m['parent']}` | {m['label']} | {', '.join(m['workflows'])} |")
+    for key, m in data['analysis_methods'].items():
+        out += ['', '### ' + m['label'] + ' (`' + key + '`)', '', '**问题**：' + m['question'], '',
+                '**服务器方法候选**：' + '；'.join(m['method_candidates']), '',
+                '**输入前提**：' + '、'.join('`' + x + '`' for x in m['prerequisites']), '',
+                '**必须作出的决定**：' + '、'.join('`' + x + '`' for x in m['decision_fields']), '', '**专用 QC**：', '']
+        out += ['- `' + q['id'] + '`：' + q['description'] for q in m['qc_gates']]
+        out += ['', '**必需输出**：' + '、'.join('`' + x + '`' for x in m['result_roles']), '',
+                '**解释边界**：' + m['interpretation_limit'], '',
+                '**原方法参考**：' + '、'.join('[' + r + '](' + data['references'][r]['url'] + ')' for r in m['reference_ids']), '']
     out += ['## 版本和归属', '',
             '官方参考核对日期为 2026-10-10，观察到的文档版本不能替代执行版本。固定实际 pipeline 版本、方法参数、参考数据库及软件/容器版本，并复用已有服务器环境。quantms 旧 nf-core 页面已标注归档，仅作历史方法参考；现有质谱软件需单独验收，不自动安装旧入口。', '',
             '本目录没有复制第三方 pipeline、脚本、权重或数据库，也没有把第三方算法当作本项目原创。公开合成契约测试验证拒绝/一致性语义，不表示所有组学后端已真实运行或得出有效科学结论。', '']
