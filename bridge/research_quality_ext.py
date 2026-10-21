@@ -48,7 +48,7 @@ def _finish(kind, value, issues, **extra):
 
 
 def _doi(value):
-    value = str(value or '').strip().lower().removeprefix('https://doi.org/').removeprefix('doi:')
+    value = re.sub(r'^(?:https?://(?:dx\.)?doi\.org/|doi:\s*)', '', str(value or '').strip().lower())
     if value and not re.fullmatch(r'10\.\d{4,9}/\S+', value): raise ValueError('Invalid declared DOI')
     return value
 
@@ -61,11 +61,18 @@ def audit_literature_set(records: list, searches: list, relations: list = None) 
     issues = []; keys = {}; groups = []; updates = []; titles = {}; relations_out = []
     search_ids = {r['id'] for r in searches}
     for search in searches:
-        for key in ['source', 'exact_query', 'retrieved_at_utc', 'reported_total', 'returned_count', 'coverage_state']:
+        for key in ['source', 'exact_query', 'retrieved_at_utc', 'returned_count', 'coverage_state']:
             if search.get(key) is None or search.get(key)=='': _issue(issues, 'missing_search_'+key, search['id'])
+        if 'reported_total' not in search:
+            _issue(issues, 'missing_search_reported_total', search['id'])
+        elif search['reported_total'] is None:
+            _issue(issues, 'search_total_unknown', search['id'], 'review')
+            if search.get('coverage_state')=='all_reported_records':
+                _issue(issues, 'unknown_total_cannot_establish_complete_search', search['id'])
         if search.get('coverage_state') not in {'bounded_page', 'all_reported_records', 'interrupted'}:
             _issue(issues, 'unknown_search_coverage', search['id'])
         for key in ['reported_total', 'returned_count']:
+            if key=='reported_total' and 'reported_total' in search and search[key] is None: continue
             if type(search.get(key)) is not int or search[key]<0: _issue(issues, 'invalid_'+key, search['id'])
         if type(search.get('reported_total')) is int and type(search.get('returned_count')) is int:
             if search['returned_count']>search['reported_total']: _issue(issues, 'search_count_inconsistent', search['id'])
@@ -102,7 +109,11 @@ def audit_literature_set(records: list, searches: list, relations: list = None) 
         if len(rows)>1:
             groups.append([r['id'] for r in rows])
             pmids = {str(r['pmid']) for r in rows if r.get('pmid')}
-            dois = {_doi(r['doi']) for r in rows if r.get('doi') and re.fullmatch(r'10\.\d{4,9}/\S+', str(r['doi']).lower())}
+            dois = set()
+            for item in rows:
+                try: normalized_doi = _doi(item.get('doi'))
+                except ValueError: continue
+                if normalized_doi: dois.add(normalized_doi)
             if len(pmids)>1 or len(dois)>1: _issue(issues, 'conflicting_strong_identifiers', rows[0]['id'])
     for link in relations or []:
         if not isinstance(link, dict): raise ValueError('Publication relation must be an object')
@@ -124,6 +135,64 @@ def audit_literature_set(records: list, searches: list, relations: list = None) 
         searches_without_selected_records=sorted(search_ids-represented), deduplication_applied=False,
         limitations=['Title similarity does not establish the same study.', 'Relations, correction and retraction flags require the located primary source.',
                      'A bounded page or missing update record cannot establish exhaustive search or absence of retraction.'])
+
+
+def audit_search_snapshot(provider: str, records: list, search: dict, relations: list = None) -> dict:
+    """Audit selected SciSpace or generic publication metadata offline; retain provider types, identifiers and unknown coverage."""
+    _bounded([records, search, relations])
+    if provider not in {'scispace', 'generic'} or not isinstance(records, list) or not 1<=len(records)<=500:
+        raise ValueError('Select scispace or generic and one to 500 metadata records')
+    if not isinstance(search, dict) or not isinstance(search.get('id'), str):
+        raise ValueError('A search object with an explicit ID and coverage is required')
+    if search.get('source')!=provider or search.get('returned_count')!=len(records):
+        raise ValueError('Snapshot source and returned count must match the selected records')
+    # Only metadata are retained. Abstracts, prompts and generated summaries are not evidence.
+    normalized = []; issues = []
+    labels = {'journal article':'article','article':'article','review':'review',
+              'preprint':'preprint','correction':'correction','retraction notice':'retraction_notice','other':'other'}
+    for raw in records:
+        if not isinstance(raw, dict): raise ValueError('Publication metadata must be objects')
+        rid = raw.get('unique_id') if provider=='scispace' else raw.get('id')
+        if not isinstance(rid, str) or not rid.strip() or len(rid)>200:
+            raise ValueError('Every record needs a stable provider ID')
+        try: doi = _doi(raw.get('doi'))
+        except ValueError: doi = ''; _issue(issues, 'invalid_provider_doi', rid)
+        declared = str(raw.get('publication_type') or '').strip()
+        kind = labels.get(declared.casefold(), 'other')
+        if declared.casefold() not in labels: _issue(issues, 'provider_publication_type_requires_review', rid, 'review')
+        hint = ('preprint' if doi.startswith(('10.48550/arxiv.', '10.1101/', '10.21203/'))
+                else 'repository_record' if doi.startswith(('10.5281/zenodo.', '10.17863/', '10.25740/')) else None)
+        if hint and kind!=hint:
+            _issue(issues, 'identifier_type_hint_conflicts_with_provider_label', rid, 'review')
+        date = raw.get('date', raw.get('publication_date'))
+        if date:
+            try: datetime.fromisoformat(str(date).replace('Z','+00:00'))
+            except ValueError: _issue(issues, 'provider_date_requires_review', rid, 'review')
+        row = {'id':rid, 'title':str(raw.get('title') or '').strip(), 'doi':doi,
+               'publication_type':kind, 'provider_publication_type':declared,
+               'identifier_type_hint':hint, 'provider_date':date,
+               'date_semantics':'Provider date; online, issue and repository dates are not interchangeable.',
+               'search_id':search['id'], 'primary_metadata_verified':False,
+               'update_source':raw.get('update_source')}
+        for key in ['pmid','retracted','corrected']:
+            if key in raw: row[key]=raw[key]
+        normalized.append(row)
+    result = audit_literature_set(normalized, [search], relations)
+    all_issues = issues+result['issues']
+    return {**result, 'audit':'search_snapshot', 'provider':provider, 'records':normalized,
+            'input_sha256':_digest([provider, records, search, relations]),
+            'issues':all_issues, 'summary_consistent':not any(v['severity']=='block' for v in all_issues),
+            'primary_metadata_verified':False, 'generated_text_is_primary_evidence':False,
+            'search_exhaustiveness_established':False,
+            'limitations':result['limitations']+[
+                'DOI-prefix hints are review flags, not publisher verification or an automatic publication-type correction.',
+                'Provider-generated summaries and missing limitation text cannot establish that a method has no limitations.']}
+
+
+def prepare_figure_handoff(input_path: str, figure_spec: dict, context: dict, qc: dict, execution: dict, sources: list, output_dir: str = '') -> dict:
+    """Bind one selected frozen TSV, QC, execution evidence and provenance to a portable figure handoff; execute no analysis."""
+    from figure_handoff_contract import prepare_handoff
+    return prepare_handoff(input_path, figure_spec, context, qc, execution, sources, output_dir)
 
 
 def audit_identifier_context(records: list, expected_context: dict) -> dict:

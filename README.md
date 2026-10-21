@@ -8,7 +8,15 @@ The original foundation is Biomni. This independent downstream project adds tool
 
 [![Public verification](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml/badge.svg)](https://github.com/BoteXu/BioResearchWorkbench/actions/workflows/verify.yml)
 
-## v2.15.0：组学拓展的具体方法与验收
+## v2.16.0：检索审计与科研绘图交接
+
+新增 `research_quality.audit_search_snapshot`，检查 SciSpace 或其他检索快照的强标识符、出版类型冲突、版本候选和检索覆盖，保留平台原始标签。平台未提供总数时显式记录未知，不再把有界返回误当成无效计数，也不把它声明为穷尽检索。相同标题不会自动合并预印本、存档和正式发表版。
+
+新增 `research_quality.prepare_figure_handoff`，把一份选定冻结 TSV、准确哈希、独立单位、方法／参考版本、QC、执行来源和 FigureSpec 交给综合绘图 skill。消费端仍需执行绘图预检；文件一致、声明的 QC 或完成回执不代表科学有效。接口使用标准库，不安装分析或绘图环境，不启动另一套 MCP 服务。调用与实际配套示例见 [结果到绘图的合同](CONNECTED_FIGURES.md)、[检索与证据审查](RESEARCH_QUALITY.md)。
+
+本轮参考 SciSpace 检索并核对原始论文，将共享对象身份和来源分层落实到独立编写的代码。第三方论文、算法与软件保留各自归属；没有复制论文图或将外部框架伪装成本项目后端。大计算继续使用现有服务器。
+
+## 保留 v2.15.0 的组学具体方法与验收
 
 在 28 条标准流程基础上，将拓展细化为 22 类、81 条具体路线，形成 285 个流程到细分分析的适用关联。包括富集/集合评分、PPI/共表达、去卷积、轨迹/动力学、通信、调控、剪接/APA、时间序列、预测/外部验证、遗传、染色质、翻译、蛋白/PTM、多组学、微生物、脂质、CNV/克隆及受体谱；空间变异/邻域/梯度/组织域单独定义。数量表示规划契约，不是新增执行引擎或已跑通的后端。
 
@@ -27,7 +35,7 @@ Windows、macOS 和 Linux 使用同一共享入口。安装器生成私有认证
 本次深化分子生物学干实验，并补齐八个工程方向。扩展函数定义、必需参数、默认值、枚举、模板、模块信息与版本差异由公开源码生成，见 [功能目录](TOOL_CATALOG.md) / [机器可读合同](TOOL_CATALOG.json)。模板中的占位符必须替换为经审查的真实输入。
 
 <!-- GENERATED:CATALOG:BEGIN -->
-**公开目录（自动生成）**：247 个扩展函数、38 个类别、152 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
+**公开目录（自动生成）**：249 个扩展函数、38 个类别、154 个任务路由、15 个原始工作流 skill。上游 Biomni 工具和客户端插件另行发现；这些数量不代表全部后端都已验收。
 <!-- GENERATED:CATALOG:END -->
 
 | 工程方向 | 本版提供什么 | 验收和使用边界 |

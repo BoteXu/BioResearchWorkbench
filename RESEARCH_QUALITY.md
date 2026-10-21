@@ -1,10 +1,12 @@
 # 检索、标识符、服务器结果与证据追溯
 
-v2.13.2 增加 `research_quality` 类别。五个入口复用既有检索、统计咨询、服务器流程和回执系统，不安装分析引擎，不扫描整个项目或文献库。使用 `biomni_run_tool`，参数与模板见 [自动功能目录](TOOL_CATALOG.json)。
+v2.16.0 的 `research_quality` 类别有七个入口，复用既有检索、统计咨询、服务器流程和回执系统，不安装分析引擎，不扫描整个项目或文献库。使用 `biomni_run_tool`，参数与模板见 [自动功能目录](TOOL_CATALOG.json)。
 
 | 工具 | 作用 | 验证边界 |
 |---|---|---|
 | audit_literature_set | DOI/PMID 重复与冲突、预印本/出版关系、更新声明、检索覆盖 | 标题相同不自动合并；没有更新记录不等于没有撤稿；有界检索不等于穷尽 |
+| audit_search_snapshot | SciSpace／通用检索元数据、原始出版类型、DOI 类型提示、日期语义与未知总数 | 不将平台摘要当作原文；类型提示需要出版方核验；不自动合并版本 |
+| prepare_figure_handoff | 选定冻结 TSV、QC、上下文、来源与 FigureSpec 的可移植交接 | 不执行分析；绘图器仍需独立预检；声明的完成回执不等于调度器认证 |
 | audit_identifier_context | 物种、构建、注释版本、转录本、蛋白异构体、一对多映射 | 不转换坐标、不证明序列相同或同源，不选第一个候选 |
 | resolve_public_identifiers | 最多十个明确获准公开查询的 ID，顺序调用官方解析工具 | 保留逐项失败、原始来源和部分回退；缓存不是新抓取 |
 | audit_returned_analysis | 六类服务器结果角色、方法上下文、QC 绑定、选定文件完整性 | 不提交或运行分析；声明的回执需独立核验；文件完整不等于方法有效 |
@@ -15,6 +17,10 @@ v2.13.2 增加 `research_quality` 类别。五个入口复用既有检索、统�
 ## 文献检索
 
 记录有唯一 `id`、`search_id`。检索记录有 source、exact_query、retrieved_at_utc、reported_total、returned_count、coverage_state。覆盖状态为 bounded_page、all_reported_records、interrupted；计数不一致阻断完整性声明。出版类型为 preprint、article、review、correction、retraction_notice、other。
+
+`reported_total: null` 表示平台未给出总数，必须保留该字段；有界页和中断检索可继续审查，但不会获得完整检索结论。缺少字段仍为错误，未知总数与 `all_reported_records` 不相容。`audit_search_snapshot(provider='scispace', records=..., search=...)` 使用每篇的原始 `unique_id`，返回规范化元数据并保留 `provider_publication_type`。DOI 中的 arXiv、bioRxiv 或存档前缀只产生复核提示，不覆盖原始标签，不证明同行评审或撤稿状态。在线日期、卷期日期和存档日期不互相代替。补充生成的“局限性”列没有内容，不能推断论文没有局限。
+
+冻结结果与绘图交接见 [CONNECTED_FIGURES.md](CONNECTED_FIGURES.md)。
 
 强标识符只形成重复候选组，保留全部原记录；标题相同仅供复核。出版关系类型为 is_preprint_of、corrects、retracts、is_version_of，必须记录 source_reference 和 source_locator。勘误/撤稿声明仍需核对出版方或数据库的实际返回内容。
 

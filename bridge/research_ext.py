@@ -23,6 +23,8 @@ INTENTS = {
     'omics_workflow_qc': [('omics_workflows', 'audit_omics_readiness')],
     'omics_workflow_return': [('omics_workflows', 'audit_omics_result_bundle'), ('workflow', 'verify_remote_results')],
     'literature_quality': [('research_quality', 'audit_literature_set')],
+    'search_snapshot_quality': [('research_quality', 'audit_search_snapshot')],
+    'figure_handoff': [('research_quality', 'prepare_figure_handoff')],
     'identifier_context': [('research_quality', 'audit_identifier_context')],
     'public_identifier_batch': [('research_quality', 'resolve_public_identifiers')],
     'server_result_depth': [('research_quality', 'audit_returned_analysis')],

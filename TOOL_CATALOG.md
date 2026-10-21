@@ -4,7 +4,7 @@
 
 | 扩展函数 | 类别 | 任务路由 | 包版本 |
 |---|---|---|---|
-| 247 | 38 | 152 | 2.15.0 |
+| 249 | 38 | 154 | 2.16.0 |
 
 参数 schema、默认值、枚举和调用模板见 [TOOL_CATALOG.json](TOOL_CATALOG.json)。模板中的占位符需要实际填写，模板不是可执行验收。
 
@@ -276,6 +276,8 @@
 | 函数 | 功能 | 必需参数 |
 |---|---|---|
 | `audit_literature_set` | Audit exact-ID duplicates, declared publication relations/updates and search coverage; query nothing. | records, searches |
+| `audit_search_snapshot` | Audit selected SciSpace or generic publication metadata offline; retain provider types, identifiers and unknown coverage. | provider, records, search |
+| `prepare_figure_handoff` | Bind one selected frozen TSV, QC, execution evidence and provenance to a portable figure handoff; execute no analysis. | input_path, figure_spec, context, qc, execution, sources |
 | `audit_identifier_context` | Audit species, build, annotation release, transcript/isoform specificity and mapping ambiguity offline. | records, expected_context |
 | `resolve_public_identifiers` | Resolve at most ten explicitly approved public IDs sequentially; preserve official raw data and partial failures. | namespace, identifiers |
 | `audit_returned_analysis` | Audit selected server-returned summaries, required result roles, exact QC bindings and method boundaries; execute nothing. | analysis, artifacts, context, qc, completion |

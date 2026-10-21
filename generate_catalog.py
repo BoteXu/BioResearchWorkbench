@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-VERSION = '2.15.0'
+VERSION = '2.16.0'
 
 
 def assignment(tree, name):
@@ -61,6 +61,16 @@ def generate(root=ROOT):
                     default = ast.literal_eval(d); spec['default'] = default
                     if default is None: spec['type'] = [spec['type'], 'null']
                 if p.arg == 'approved_public_data': spec['description'] = 'Explicit approval of these exact public identifiers; default false; never infer approval from installation.'
+                if name == 'audit_search_snapshot':
+                    if p.arg == 'provider': spec['enum'] = ['scispace', 'generic']
+                    if p.arg == 'records': spec.update({'minItems':1,'maxItems':500,'items':{'type':'object'}})
+                    if p.arg == 'search': spec.update({'required':['id','source','exact_query','retrieved_at_utc','reported_total','returned_count','coverage_state'],
+                        'properties':{'reported_total':{'type':['integer','null'],'minimum':0},'returned_count':{'type':'integer','minimum':1,'maximum':500},
+                                      'coverage_state':{'enum':['bounded_page','all_reported_records','interrupted']}}})
+                if name == 'prepare_figure_handoff':
+                    if p.arg == 'context': spec.update({'additionalProperties':False,'required':['independent_unit','contrast','method_version','reference_version','units','selected_scope','limitations'],
+                        'properties':{k:{'type':'string','minLength':1,'maxLength':2000} for k in ['independent_unit','contrast','method_version','reference_version','units','selected_scope','limitations']}})
+                    if p.arg == 'sources': spec.update({'minItems':1,'maxItems':50,'items':{'type':'object','required':['id','reference','version','locator']}})
                 properties[p.arg] = spec
             effect_units = ['delta_psi_fraction', 'delta_usage_fraction', 'log2_fold_change'] if name == 'audit_splicing_results' else []
             entries.append({'category': category, 'name': name, 'description': ast.get_docstring(node) or '',

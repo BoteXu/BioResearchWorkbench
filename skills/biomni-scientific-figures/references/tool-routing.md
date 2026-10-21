@@ -5,6 +5,7 @@
 按名称在当前 `biomni_tool_catalog` 检索下列工具，读取当前所需参数、版本、`runtime_state`、`last_attempt_success` 与依赖检查。每个工具通过 `biomni_run_tool(category, name, parameters)` 调用；不要从工具名猜测参数。
 
 - `workflow.audit_result_table`
+- `research_quality.prepare_figure_handoff`
 - `workflow.verify_remote_results`
 - `biomedical.audit_enrichment_results`
 

@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "package_version": "2.15.0",
-  "extension_functions": 247,
+  "package_version": "2.16.0",
+  "extension_functions": 249,
   "extension_categories": 38,
-  "routing_intents": 152,
+  "routing_intents": 154,
   "tools": [
     {
       "category": "academic_workspace",
@@ -7068,7 +7068,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
+      "source_sha256": "4744e244179927d9a64ab0ec67bfc721f2afbee6b673f5d069d6e01f405bbcb1"
     },
     {
       "category": "research",
@@ -7112,7 +7112,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
+      "source_sha256": "4744e244179927d9a64ab0ec67bfc721f2afbee6b673f5d069d6e01f405bbcb1"
     },
     {
       "category": "research",
@@ -7152,7 +7152,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_ext.py",
-      "source_sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
+      "source_sha256": "4744e244179927d9a64ab0ec67bfc721f2afbee6b673f5d069d6e01f405bbcb1"
     },
     {
       "category": "research_quality",
@@ -7197,7 +7197,216 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
+    },
+    {
+      "category": "research_quality",
+      "name": "audit_search_snapshot",
+      "description": "Audit selected SciSpace or generic publication metadata offline; retain provider types, identifiers and unknown coverage.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "provider",
+            "enum": [
+              "scispace",
+              "generic"
+            ]
+          },
+          "records": {
+            "type": "array",
+            "description": "records",
+            "items": {
+              "type": "object"
+            },
+            "minItems": 1,
+            "maxItems": 500
+          },
+          "search": {
+            "type": "object",
+            "description": "search",
+            "required": [
+              "id",
+              "source",
+              "exact_query",
+              "retrieved_at_utc",
+              "reported_total",
+              "returned_count",
+              "coverage_state"
+            ],
+            "properties": {
+              "reported_total": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "returned_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500
+              },
+              "coverage_state": {
+                "enum": [
+                  "bounded_page",
+                  "all_reported_records",
+                  "interrupted"
+                ]
+              }
+            }
+          },
+          "relations": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "relations",
+            "items": {},
+            "default": null
+          }
+        },
+        "required": [
+          "provider",
+          "records",
+          "search"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "audit_search_snapshot",
+        "parameters": {
+          "provider": "<provider>",
+          "records": "<records>",
+          "search": "<search>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
+    },
+    {
+      "category": "research_quality",
+      "name": "prepare_figure_handoff",
+      "description": "Bind one selected frozen TSV, QC, execution evidence and provenance to a portable figure handoff; execute no analysis.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "input_path": {
+            "type": "string",
+            "description": "input path"
+          },
+          "figure_spec": {
+            "type": "object",
+            "description": "figure spec"
+          },
+          "context": {
+            "type": "object",
+            "description": "context",
+            "additionalProperties": false,
+            "required": [
+              "independent_unit",
+              "contrast",
+              "method_version",
+              "reference_version",
+              "units",
+              "selected_scope",
+              "limitations"
+            ],
+            "properties": {
+              "independent_unit": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "contrast": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "method_version": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "reference_version": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "units": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "selected_scope": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "limitations": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            }
+          },
+          "qc": {
+            "type": "object",
+            "description": "qc"
+          },
+          "execution": {
+            "type": "object",
+            "description": "execution"
+          },
+          "sources": {
+            "type": "array",
+            "description": "sources",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "reference",
+                "version",
+                "locator"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 50
+          },
+          "output_dir": {
+            "type": "string",
+            "description": "output dir",
+            "default": ""
+          }
+        },
+        "required": [
+          "input_path",
+          "figure_spec",
+          "context",
+          "qc",
+          "execution",
+          "sources"
+        ]
+      },
+      "example_template": {
+        "category": "research_quality",
+        "name": "prepare_figure_handoff",
+        "parameters": {
+          "input_path": "<input_path>",
+          "figure_spec": "<figure_spec>",
+          "context": "<context>",
+          "qc": "<qc>",
+          "execution": "<execution>",
+          "sources": "<sources>"
+        }
+      },
+      "effect_units": [],
+      "source_file": "bridge/research_quality_ext.py",
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "category": "research_quality",
@@ -7232,7 +7441,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "category": "research_quality",
@@ -7287,7 +7496,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "category": "research_quality",
@@ -7348,7 +7557,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "category": "research_quality",
@@ -7390,7 +7599,7 @@
       },
       "effect_units": [],
       "source_file": "bridge/research_quality_ext.py",
-      "source_sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "source_sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "category": "review",
@@ -11518,7 +11727,7 @@
     },
     "research_quality": {
       "source": "research_quality_ext.py",
-      "function_count": 5,
+      "function_count": 7,
       "load": "deferred_until_call",
       "referenced_optional_packages": [],
       "version_constraints": "requirements-core.lock.txt and selected requirements-local/omics/full profile; external R/CLI versions need actual probes",
@@ -11698,7 +11907,7 @@
   },
   "version_changes": {
     "from_version": "2.13.1",
-    "to_version": "2.15.0",
+    "to_version": "2.16.0",
     "added": [
       "omics_workflows.audit_omics_readiness",
       "omics_workflows.audit_omics_result_bundle",
@@ -11709,6 +11918,8 @@
       "research_quality.audit_identifier_context",
       "research_quality.audit_literature_set",
       "research_quality.audit_returned_analysis",
+      "research_quality.audit_search_snapshot",
+      "research_quality.prepare_figure_handoff",
       "research_quality.resolve_public_identifiers"
     ],
     "removed": [],

@@ -1,7 +1,7 @@
 {
   "project": "BioResearchWorkbench",
   "bridge_version": "2.13",
-  "package_version": "2.15.0",
+  "package_version": "2.16.0",
   "files": [
     {
       "path": ".gitattributes",
@@ -57,6 +57,11 @@
       "path": "CODE_WORKFLOWS.md",
       "bytes": 9530,
       "sha256": "3f648ff91ea48ce1fa504df6902d19fba4667c72f7edabd7b61888deed021a19"
+    },
+    {
+      "path": "CONNECTED_FIGURES.md",
+      "bytes": 4710,
+      "sha256": "c6bc88bf1f47367c63c89dae1e840fa57c9c5fc5ebfc77c799c014fa3b6bb361"
     },
     {
       "path": "EVOLUTION.md",
@@ -135,13 +140,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 21468,
-      "sha256": "2f431f90314ab637a4f1dcd2cbfc599a63926501a4ac197ea1b1c6bd10623e34"
+      "bytes": 22692,
+      "sha256": "03598d17a80cad6143b002492553aeb9ca6d319ac0cb34f5d3936db87b082aa8"
     },
     {
       "path": "RESEARCH_QUALITY.md",
-      "bytes": 5175,
-      "sha256": "570f2f643f4231af9e72a9dabed2c25b3260f0a0f27dd0cd81a8f99aabad1f64"
+      "bytes": 6355,
+      "sha256": "65f6586a1655ef088f231f49047b0f1e67dc1c30f71ae191c4cbed01ca46b636"
     },
     {
       "path": "RESEARCH_WORKFLOWS.md",
@@ -180,13 +185,13 @@
     },
     {
       "path": "TOOL_CATALOG.json",
-      "bytes": 361247,
-      "sha256": "5e03b029668e98bbb5701dc1e514d9b9ac97353ae50b0d972d8408650b492734"
+      "bytes": 367252,
+      "sha256": "897fd6497d53e081f29ff198579d54c022803039b3f204de62208eb75cccb776"
     },
     {
       "path": "TOOL_CATALOG.md",
-      "bytes": 46650,
-      "sha256": "d2ff14c7a892f921311ba75daf869c729151f4b7626621a957df4fddf08fc50f"
+      "bytes": 47039,
+      "sha256": "fc7e7f3c08670f83b2e193dc81794536a0a009037c9d910ab78a30f114637762"
     },
     {
       "path": "WORKBENCH.md",
@@ -330,8 +335,13 @@
     },
     {
       "path": "bridge/extensions.py",
-      "bytes": 14620,
-      "sha256": "aa12411b3113ff2632ba0bd1ee2591bf15a8b051461e23ea00d712eb7fa11da5"
+      "bytes": 14671,
+      "sha256": "1d5121ac7945467ee5b42474e1d22cb5f351a0f956b43f34c3c0f0d5dd48edf4"
+    },
+    {
+      "path": "bridge/figure_handoff_contract.py",
+      "bytes": 9616,
+      "sha256": "f9475d0c9aa08f67b73f2cc591df0043a65521c0dcc375d840ba84f63162b804"
     },
     {
       "path": "bridge/http_client.py",
@@ -445,13 +455,13 @@
     },
     {
       "path": "bridge/research_ext.py",
-      "bytes": 31094,
-      "sha256": "33e761964663ee9c5eaf2ccf9190c5ced37dd3a427302d017e1875965ba5fb8d"
+      "bytes": 31246,
+      "sha256": "4744e244179927d9a64ab0ec67bfc721f2afbee6b673f5d069d6e01f405bbcb1"
     },
     {
       "path": "bridge/research_quality_ext.py",
-      "bytes": 19635,
-      "sha256": "5a15416c869d0ebdad63a0c24d0bf8d29f83ba1f3ed2d025c22be18745f91775"
+      "bytes": 24519,
+      "sha256": "13e18e9d205222f815c08dd957313df1fb0328f4004c66d829b3856d9a89f24c"
     },
     {
       "path": "bridge/review_ext.py",
@@ -635,8 +645,8 @@
     },
     {
       "path": "generate_catalog.py",
-      "bytes": 9986,
-      "sha256": "0fdfd82535602f90430c0911956a0f665a56cc711274c577acd46821034f0544"
+      "bytes": 11307,
+      "sha256": "cd2f16d11fa510b33fea52748839c769e13658dd1da60d28725c306533a262ce"
     },
     {
       "path": "generate_omics_guide.py",
@@ -765,13 +775,13 @@
     },
     {
       "path": "skills/biomni-claim-audit/SKILL.md",
-      "bytes": 2634,
-      "sha256": "ba86271487060bb418bb2c71fdfebf52618f1ee7b1459159f0773d6a346db2d7"
+      "bytes": 2885,
+      "sha256": "5c77292bb056def2b02e47281e29371c6cf627946d6bfb34dda6859fc0be0fd4"
     },
     {
       "path": "skills/biomni-claim-audit/references/tool-routing.md",
-      "bytes": 1997,
-      "sha256": "f3365de6b85d6968440b0f325ba7e03be87ca69fd7c4bd89f8d7df8984b0f4be"
+      "bytes": 2040,
+      "sha256": "f2fb8b3600fbf4e7f57167f3cfbde774dcd22b86c137a8a24d6d9146824fd24e"
     },
     {
       "path": "skills/biomni-docking-review/SKILL.md",
@@ -825,13 +835,18 @@
     },
     {
       "path": "skills/biomni-scientific-figures/SKILL.md",
-      "bytes": 2225,
-      "sha256": "9ddf3045521a456274d9cf89953a2210eb6f8aec116bc139dbd5ed2b6f879cd8"
+      "bytes": 2839,
+      "sha256": "3aa7e985dac130c9635c76e1076601c4a913e238cb110f1679e4dbec2a1136cb"
+    },
+    {
+      "path": "skills/biomni-scientific-figures/references/figure-handoff.md",
+      "bytes": 958,
+      "sha256": "6ddf50b00cbad420a855f0b474de5a999d4f32b448da4a075a3da5bcfb4bcd77"
     },
     {
       "path": "skills/biomni-scientific-figures/references/tool-routing.md",
-      "bytes": 1600,
-      "sha256": "6221ebaeba407a4d118322d88250240ebc5835a03760dba99de5f691bd2379f8"
+      "bytes": 1644,
+      "sha256": "4aa304c28878f3841a9aaee5642f482a4bc7a5f5981f276a9b929e6a4fd306c2"
     },
     {
       "path": "skills/biomni-skill-security/SKILL.md",
@@ -880,13 +895,13 @@
     },
     {
       "path": "skills/biomni-systematic-review/SKILL.md",
-      "bytes": 2355,
-      "sha256": "5d7f554751b3e183af584f0945c105422dab14c4f6df56188f9fa6913336ac1d"
+      "bytes": 2622,
+      "sha256": "7aa759edd3ef410accca226812ad8b9251b980259767ff2a3dbb42d3bea3beb9"
     },
     {
       "path": "skills/biomni-systematic-review/references/tool-routing.md",
-      "bytes": 2524,
-      "sha256": "55a08c222f80a1202ec735f4b320487efb0686a1a3fef8624e60e7381d54ae3e"
+      "bytes": 2567,
+      "sha256": "a2b9d04a9ded9a5602e350b97fd042dc96d20d855ffb634cb46fdf2533e4a3ae"
     },
     {
       "path": "skills/biomni-target-evidence/SKILL.md",
@@ -910,8 +925,8 @@
     },
     {
       "path": "skills/catalog.json",
-      "bytes": 16526,
-      "sha256": "a5db3ed7c082ced0adc817591d98bce7ff43990905d7fd804aad99c8a81cb903"
+      "bytes": 16811,
+      "sha256": "b6c9415dab03ecabd2cf3e18ffa82e083163bc9deb8e175468c68e91b6e078d2"
     },
     {
       "path": "tests/advanced_check.py",
@@ -1069,6 +1084,11 @@
       "sha256": "d19cd136382820b0cd7758b94b7be105dedbf89a8c4034898655a5e247c72a39"
     },
     {
+      "path": "tests/test_search_handoff.py",
+      "bytes": 6620,
+      "sha256": "fec33bb3b052d855e40b0b852a68a68d3275b01f68bd0044228b313d6816569b"
+    },
+    {
       "path": "tests/test_shared_lifecycle.py",
       "bytes": 6523,
       "sha256": "a56428e0cb0c66347c7c400a3fb72ad3dad05d9a77d35248ac40e82778e13a2e"
@@ -1101,12 +1121,12 @@
     {
       "path": "update_manifest.py",
       "bytes": 821,
-      "sha256": "001367723f67d6fb78fb9529cc6bfbdbe7ee1fb17751f1039f668dc5b380a0cb"
+      "sha256": "31d45ceebce526d578bc3271ed007ab1e52112efc1c878550c8f09c51f2808a2"
     },
     {
       "path": "update_skill_catalog.py",
       "bytes": 1958,
-      "sha256": "3a1cd677869951b25706c58e2ea98af5fd60e7635376f00b3cacc23c2185038a"
+      "sha256": "748de3ef42d337207019c0dbe94c06363daa39105705e2919a1d33246ed6cab8"
     },
     {
       "path": "upgrade.py",

@@ -5,6 +5,7 @@
 按名称在当前 `biomni_tool_catalog` 检索下列工具，读取当前所需参数、版本、`runtime_state`、`last_attempt_success` 与依赖检查。每个工具通过 `biomni_run_tool(category, name, parameters)` 调用；不要从工具名猜测参数。
 
 - `review.find_similar_studies`
+- `research_quality.audit_search_snapshot`
 - `library.audit_reference_duplicates`
 - `review.audit_review`
 - `review.audit_reporting_checklist`

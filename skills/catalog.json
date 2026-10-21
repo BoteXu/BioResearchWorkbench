@@ -1,5 +1,5 @@
 {
-  "version": "2.14.0",
+  "version": "2.16.0",
   "skills": [
     {
       "name": "biomni-academic-delivery",
@@ -30,6 +30,7 @@
       "license": "Apache-2.0",
       "tool_routes": [
         "review.audit_claim_evidence",
+        "research_quality.audit_search_snapshot",
         "review.check_publication_updates",
         "biomedical.extract_study_elements",
         "literature.extract_local_document",
@@ -38,8 +39,8 @@
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-claim-audit/references/tool-routing.md": "f3365de6b85d6968440b0f325ba7e03be87ca69fd7c4bd89f8d7df8984b0f4be",
-        "biomni-claim-audit/SKILL.md": "ba86271487060bb418bb2c71fdfebf52618f1ee7b1459159f0773d6a346db2d7"
+        "biomni-claim-audit/references/tool-routing.md": "f2fb8b3600fbf4e7f57167f3cfbde774dcd22b86c137a8a24d6d9146824fd24e",
+        "biomni-claim-audit/SKILL.md": "5c77292bb056def2b02e47281e29371c6cf627946d6bfb34dda6859fc0be0fd4"
       }
     },
     {
@@ -182,13 +183,15 @@
       "license": "Apache-2.0",
       "tool_routes": [
         "workflow.audit_result_table",
+        "research_quality.prepare_figure_handoff",
         "workflow.verify_remote_results",
         "biomedical.audit_enrichment_results"
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-scientific-figures/references/tool-routing.md": "6221ebaeba407a4d118322d88250240ebc5835a03760dba99de5f691bd2379f8",
-        "biomni-scientific-figures/SKILL.md": "9ddf3045521a456274d9cf89953a2210eb6f8aec116bc139dbd5ed2b6f879cd8"
+        "biomni-scientific-figures/references/figure-handoff.md": "6ddf50b00cbad420a855f0b474de5a999d4f32b448da4a075a3da5bcfb4bcd77",
+        "biomni-scientific-figures/references/tool-routing.md": "4aa304c28878f3841a9aaee5642f482a4bc7a5f5981f276a9b929e6a4fd306c2",
+        "biomni-scientific-figures/SKILL.md": "3aa7e985dac130c9635c76e1076601c4a913e238cb110f1679e4dbec2a1136cb"
       }
     },
     {
@@ -278,6 +281,7 @@
       "license": "Apache-2.0",
       "tool_routes": [
         "review.find_similar_studies",
+        "research_quality.audit_search_snapshot",
         "library.audit_reference_duplicates",
         "review.audit_review",
         "review.audit_reporting_checklist",
@@ -292,8 +296,8 @@
       ],
       "runtime_validation": "tool_routing_checked; backend validation remains task-specific",
       "files": {
-        "biomni-systematic-review/references/tool-routing.md": "55a08c222f80a1202ec735f4b320487efb0686a1a3fef8624e60e7381d54ae3e",
-        "biomni-systematic-review/SKILL.md": "5d7f554751b3e183af584f0945c105422dab14c4f6df56188f9fa6913336ac1d"
+        "biomni-systematic-review/references/tool-routing.md": "a2b9d04a9ded9a5602e350b97fd042dc96d20d855ffb634cb46fdf2533e4a3ae",
+        "biomni-systematic-review/SKILL.md": "7aa759edd3ef410accca226812ad8b9251b980259767ff2a3dbb42d3bea3beb9"
       }
     },
     {
