@@ -1,0 +1,35 @@
+{
+  "example_only": true,
+  "template_not_executable": true,
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "backend": "perturbation_baselines",
+  "parameters": {
+    "unit_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "condition_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "context_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "control": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "holdout_axis": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "expression_scale": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "seed": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "software_versions": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE"
+  },
+  "inputs": [
+    {
+      "id": "training_expression",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    {
+      "id": "training_metadata",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    {
+      "id": "test_metadata",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  ],
+  "note": "Disabled source template. No scientific result or installed dependency is implied."
+}

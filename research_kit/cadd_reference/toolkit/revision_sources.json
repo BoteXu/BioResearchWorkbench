@@ -1,0 +1,55 @@
+[
+  {
+    "id": "N01",
+    "title": "GROMACS replica exchange manual",
+    "url": "https://manual.gromacs.org/current/reference-manual/algorithms/replica-exchange.html",
+    "scope": "tREMD/原生自由能路径 HREX 的算法区别；current 在线页面不代表服务器安装版本"
+  },
+  {
+    "id": "N02",
+    "title": "Replica Exchange with Solute Scaling: REST2",
+    "doi": "10.1021/jp204407d",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3172817/",
+    "scope": "REST2 缩放及采样；不能当作全部实现/复杂体系的保证"
+  },
+  {
+    "id": "N03",
+    "title": "PLUMED partial_tempering manual",
+    "url": "https://www.plumed.org/doc-v2.10/user-doc/html/partial_tempering.html",
+    "scope": "展开拓扑、hot 标记及缩放测试；官方明确力场依赖风险"
+  },
+  {
+    "id": "N04",
+    "title": "ParmEd GROMACS topology documentation",
+    "url": "https://parmed.github.io/ParmEd/html/gromacs.html",
+    "scope": "转换接口、moleculetype 和原子顺序；物理验收为本规范项目要求"
+  },
+  {
+    "id": "N05",
+    "title": "Best Practices for Alchemical Free Energy Calculations",
+    "doi": "10.33011/livecoms.2.1.18378",
+    "url": "https://livecomsjournal.org/index.php/livecoms/article/view/v2i1e18378",
+    "scope": "平衡 alchemical 方法与适用修正；不外推到所有速率或 QM/MM 方法"
+  },
+  {
+    "id": "N06",
+    "title": "Best Practices for Constructing, Preparing, and Evaluating Protein-Ligand Binding Affinity Benchmarks",
+    "doi": "10.33011/livecoms.4.1.1497",
+    "url": "https://livecomsjournal.org/index.php/livecoms/article/download/v4i1e1497/1399/5059",
+    "scope": "validation、benchmark 与应用区别，实验数据/评价质量；非通用对接验证器"
+  },
+  {
+    "id": "N07",
+    "title": "Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations",
+    "doi": "10.33011/livecoms.1.1.5067",
+    "url": "https://livecomsjournal.org/index.php/livecoms/article/view/v1i1e5067",
+    "scope": "相关采样与不确定性；不包含力场系统误差的全面验证"
+  },
+  {
+    "id": "N08",
+    "title": "PoseBusters checks and original paper",
+    "doi": "10.1039/D3SC04185A",
+    "url": "https://posebusters.readthedocs.io/en/latest/checks.html",
+    "scope": "几何、立体、化学与碰撞检查；不证明活性或真实位姿"
+  }
+]

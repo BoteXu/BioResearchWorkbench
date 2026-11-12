@@ -1,0 +1,28 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "ldsc_h2",
+  "required_inputs": [
+    "sumstats",
+    "reference_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "python_executable",
+    "ldsc_script",
+    "ldsc_script_sha256",
+    "assembly",
+    "ancestry",
+    "heritability_scale"
+  ],
+  "required_output_roles": [
+    "native_ldsc_log",
+    "heritability_estimates",
+    "diagnostics",
+    "backend_versions",
+    "native_command"
+  ],
+  "method_scope": "Actual existing LDSC h2/intercept command on author-munged statistics, matched bound autosomal LD/M_5_50 references and native log estimates; observed-scale only, not genetic correlation",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

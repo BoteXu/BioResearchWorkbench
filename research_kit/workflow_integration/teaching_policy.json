@@ -1,0 +1,2349 @@
+{
+  "version": "3.3.1-private-review",
+  "source_deck_sha256": null,
+  "source_script_sha256": null,
+  "stages": [
+    {
+      "id": "design",
+      "title": "问题、独立单位与比较设计",
+      "slides": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "backend": "existing:statistics.guide_study_statistics",
+      "required_channels": [
+        "estimand",
+        "unit_map",
+        "cohort_definition",
+        "contrasts"
+      ],
+      "qc": [
+        "区分供体、样本、细胞和技术重复",
+        "病例定义及组织取材一致",
+        "混杂、配对、缺失与多重比较预设"
+      ],
+      "outputs": [
+        "study_design",
+        "unit_manifest",
+        "contrast_plan"
+      ],
+      "interpretation_limit": "教学示例和跨疾病方法图不自动变成本研究证据",
+      "requires": [],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "bulk_input",
+      "title": "原始读段、定量与表达层",
+      "slides": [
+        10,
+        11
+      ],
+      "backend": "existing:matrix_qc",
+      "required_channels": [
+        "reference",
+        "assay",
+        "count_semantics",
+        "sample_map"
+      ],
+      "qc": [
+        "读段方向/污染/参考版本",
+        "库大小、复杂度和定量偏差",
+        "原始整数与标准化表达分开"
+      ],
+      "outputs": [
+        "read_qc",
+        "quantification",
+        "matrix_qc"
+      ],
+      "interpretation_limit": "FPKM/TPM/整合矩阵不能冒充计数",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "bulk_de",
+      "title": "Bulk 多条件差异和效应",
+      "slides": [
+        12
+      ],
+      "backend": "existing:r_omics:DESeq2;new:r_omics:edgeR_QL,limma_voom",
+      "required_channels": [
+        "counts",
+        "design",
+        "contrasts"
+      ],
+      "qc": [
+        "设计满秩和残差自由度",
+        "各比较的独立支持",
+        "离群敏感性不自动删样本"
+      ],
+      "outputs": [
+        "full_differential",
+        "effect_uncertainty",
+        "normalization",
+        "model_diagnostics"
+      ],
+      "interpretation_limit": "保留不显著、过滤、未估计的不同原因",
+      "requires": [
+        "bulk_input"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "enrichment",
+      "title": "ORA、GSEA、基因集与排序背景",
+      "slides": [
+        13
+      ],
+      "backend": "existing:r_omics:ORA,fgsea;omics71:camera_sets,leading_edge,gsva_scores,ssgsea_scores",
+      "required_channels": [
+        "tested_universe",
+        "gene_sets_version",
+        "signed_ranking"
+      ],
+      "qc": [
+        "ID/物种一致",
+        "完整检验背景与排名",
+        "比较族和基因集重叠敏感性"
+      ],
+      "outputs": [
+        "full_enrichment",
+        "leading_edges",
+        "rank_hit_tracks",
+        "set_coverage"
+      ],
+      "interpretation_limit": "表达签名或富集不直接测量蛋白活性",
+      "requires": [
+        "bulk_de"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "network",
+      "title": "WGCNA、hdWGCNA 与模块稳定性",
+      "slides": [
+        14
+      ],
+      "backend": "existing:r_omics:WGCNA;omics71:differential_coexpression,ppi_modules",
+      "required_channels": [
+        "expression",
+        "unit_map",
+        "gene_filter"
+      ],
+      "qc": [
+        "不按DE结果循环筛选网络基因",
+        "独立样本及样本树",
+        "软阈值/模块/保留性和协变量审查"
+      ],
+      "outputs": [
+        "sample_tree",
+        "soft_threshold",
+        "modules",
+        "eigengenes",
+        "module_trait",
+        "preservation"
+      ],
+      "interpretation_limit": "当前WGCNA不是hdWGCNA；metacell不是新增供体",
+      "requires": [
+        "bulk_input"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "hdwgcna_network",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "predictive_design",
+      "title": "诊断和预测模型的任务定义",
+      "slides": [
+        15,
+        16
+      ],
+      "backend": "existing:ml,survival",
+      "required_channels": [
+        "outcome",
+        "unit_map",
+        "split_manifest"
+      ],
+      "qc": [
+        "OR必须为正且无效值为1",
+        "特征选择/插补/调参限训练折",
+        "测试/验证身份核清"
+      ],
+      "outputs": [
+        "split_provenance",
+        "oof_predictions",
+        "discrimination",
+        "calibration"
+      ],
+      "interpretation_limit": "课件15/16页的OR负值标签矛盾不进入默认解释",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "ml",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "sc_qc",
+      "title": "单细胞和单核分样本QC",
+      "slides": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "backend": "enhanced:singlecell,scvi",
+      "required_channels": [
+        "raw_count_layer",
+        "sample_map",
+        "mitochondrial_ids",
+        "assay"
+      ],
+      "qc": [
+        "按样本/测量方式设阈值",
+        "doublet/环境RNA单独留状态",
+        "注释后回看筛选偏倚"
+      ],
+      "outputs": [
+        "per_cell_qc",
+        "threshold_table",
+        "attrition_by_sample",
+        "annotation_attrition"
+      ],
+      "interpretation_limit": "未评估环境RNA不是环境RNA不存在",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "seurat_workflow",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "representation",
+      "title": "特征、PCA、邻居、整合与聚类",
+      "slides": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "backend": "enhanced:singlecell,scvi",
+      "required_channels": [
+        "raw_counts",
+        "batch_map",
+        "unintegrated_baseline"
+      ],
+      "qc": [
+        "HVG方法与输入尺度匹配",
+        "批次混合和生物保留分开验收",
+        "分辨率/邻居/随机种子敏感性"
+      ],
+      "outputs": [
+        "raw_layers",
+        "unintegrated_pca",
+        "latent",
+        "neighbors",
+        "clustering_sensitivity"
+      ],
+      "interpretation_limit": "好看的UMAP不能修复完全混杂设计",
+      "requires": [
+        "sc_qc"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "seurat_workflow",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "harmony_integrate",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "scvi",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "multivi_integrate",
+          "method_scope": "Native RNA+ATAC MuData API, paired measured cells only; unpaired modality branch not implemented by this route",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "totalvi_integrate",
+          "method_scope": "Native RNA+ADT MuData API, paired measured cells only; unpaired modality branch not implemented by this route",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "seurat_to_anndata",
+          "method_scope": "Observed-layer Seurat-to-AnnData exchange with real R extraction, exact literal axes, count/normalized layer checks and full server write/read equality; no statistical fitting or embedding replacement",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "annotation",
+      "title": "组合marker、参考和未知类型",
+      "slides": [
+        31,
+        32,
+        33
+      ],
+      "backend": "existing:biomedical.review_cell_annotation",
+      "required_channels": [
+        "marker_evidence",
+        "reference_version",
+        "annotation_confidence"
+      ],
+      "qc": [
+        "每亚群多marker与负marker",
+        "供体间复现",
+        "参考不覆盖时保留未知"
+      ],
+      "outputs": [
+        "annotation_table",
+        "marker_matrix",
+        "reference_coverage",
+        "unassigned_cells"
+      ],
+      "interpretation_limit": "标签迁移不强行消除疾病新状态",
+      "requires": [
+        "representation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "seurat_transfer",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "singler_annotate",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "pseudobulk",
+      "title": "供体级差异状态",
+      "slides": [
+        34,
+        35
+      ],
+      "backend": "enhanced:pseudobulk;existing:r_omics:DESeq2;new:r_omics:edgeR_QL,limma_voom",
+      "required_channels": [
+        "raw_counts",
+        "cell_qc",
+        "celltype_universe",
+        "technical_library_policy"
+      ],
+      "qc": [
+        "同unit/condition/type求和",
+        "低细胞数与缺失类型分开",
+        "每类型独立供体支持及配对完整"
+      ],
+      "outputs": [
+        "pseudobulk_counts",
+        "eligibility",
+        "missing_population_ledger",
+        "donor_effects"
+      ],
+      "interpretation_limit": "缺失细胞类型不填造零表达列",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "muscat_pseudobulk",
+          "method_scope": "Native muscat aggregation and edgeR pseudobulk DS with reviewed exact per-cell QC; paired design must span donor effects; no automatic sample-outlier deletion",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "pseudobulk",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "abundance",
+      "title": "组成、邻域丰度与参考类别",
+      "slides": [
+        36,
+        37,
+        38
+      ],
+      "backend": "new:composition_sccoda;existing:omics71:singlecell_abundance,cell_fraction_contrasts",
+      "required_channels": [
+        "sample_cell_counts",
+        "reference_cell_type",
+        "design"
+      ],
+      "qc": [
+        "供体为样本单位",
+        "参考类型稳定性和分母",
+        "多链后验诊断或NB诊断"
+      ],
+      "outputs": [
+        "composition_effects",
+        "composition_diagnostics",
+        "neighborhood_DA"
+      ],
+      "interpretation_limit": "相对比例变化不等于绝对细胞数变化",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "composition_sccoda",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "sc_pathways",
+      "title": "细胞内通路与候选优先级",
+      "slides": [
+        39,
+        40
+      ],
+      "backend": "existing:omics71:camera_sets,ssgsea_scores,tf_activity",
+      "required_channels": [
+        "celltype_effects",
+        "gene_sets",
+        "unit_map"
+      ],
+      "qc": [
+        "表达程序与真实功能分开",
+        "供体效应和背景覆盖",
+        "候选排序保留完整分母"
+      ],
+      "outputs": [
+        "program_scores",
+        "donor_contrasts",
+        "candidate_evidence"
+      ],
+      "interpretation_limit": "DEG最多或富集最强不自动是最佳靶点",
+      "requires": [
+        "pseudobulk"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "progeny_activity",
+          "method_scope": "Actual native PROGENy responsive footprints, perm=1 descriptive scores and exact measured-feature coverage, not generic GSVA or protein activity",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "programs",
+      "title": "连续状态、cNMF和共表达程序",
+      "slides": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "backend": "new:cnmf_programs;existing:r_omics:WGCNA;omics71:tf_activity",
+      "required_channels": [
+        "raw_counts",
+        "unit_map",
+        "selected_population"
+      ],
+      "qc": [
+        "K/随机初始化稳定性",
+        "身份、批次和活动程序区分",
+        "供体层程序比较和留出"
+      ],
+      "outputs": [
+        "program_usage",
+        "program_loadings",
+        "k_stability",
+        "donor_program_table"
+      ],
+      "interpretation_limit": "cNMF程序和共表达模块均不是直接调控边",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "cnmf_programs",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "hdwgcna_network",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "trajectory",
+      "title": "拓扑、速度、命运与动态表达",
+      "slides": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "backend": "new:cellrank_multiview;existing:omics71:trajectory_topology,trajectory_dynamics,kinetic_velocity",
+      "required_channels": [
+        "trajectory_root",
+        "direction_channels",
+        "sample_unit_map"
+      ],
+      "qc": [
+        "根/终态有外部依据",
+        "速度用真实spliced/unspliced和相图",
+        "多kernel假设、权重、终态敏感性"
+      ],
+      "outputs": [
+        "topology",
+        "phase_portraits",
+        "fate_probabilities",
+        "transition_qc",
+        "dynamic_genes"
+      ],
+      "interpretation_limit": "拟时序不是病程；命运概率不是实测谱系比例",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "palantir_trajectory",
+          "method_scope": "Native Palantir diffusion/Markov trajectory; not elapsed time or experimental ancestry",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "monocle3_trajectory",
+          "method_scope": "Monocle3 on actual reviewed stored UMAP. Not Monocle 2014, Monocle2 DDRTree or Slingshot",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "cellrank_multiview",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "regulation",
+      "title": "调控、异构体、蛋白和RNA ATAC",
+      "slides": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ],
+      "backend": "existing:omics71:scenic_regulons,enhancer_grn,transcript_usage,isoform_switch,repertoire_clonotypes;scvi:TOTALVI",
+      "required_channels": [
+        "assay_specific_layers",
+        "feature_map",
+        "paired_modalities"
+      ],
+      "qc": [
+        "motif与调控证据分开",
+        "同细胞配对和蛋白背景",
+        "转录本/克隆身份精确匹配"
+      ],
+      "outputs": [
+        "regulons",
+        "isoform_usage",
+        "protein_rna",
+        "clonotype_states"
+      ],
+      "interpretation_limit": "SCVI不充当MultiVI；RNA不冒充ADT；未配对不造配对",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "deconvolution",
+      "title": "Bulk与单细胞衔接",
+      "slides": [
+        58
+      ],
+      "backend": "existing:omics71:bulk_deconvolution",
+      "required_channels": [
+        "bulk_counts",
+        "multi_donor_reference",
+        "cell_size_contract"
+      ],
+      "qc": [
+        "MuSiC输入契约",
+        "参考缺失类型/相近类型可辨性",
+        "供体留出和外部计数对照"
+      ],
+      "outputs": [
+        "fractions",
+        "reference_coverage",
+        "holdout_error",
+        "sensitivity"
+      ],
+      "interpretation_limit": "细胞数、RNA贡献和捕获比例分开报告",
+      "requires": [
+        "annotation",
+        "bulk_input"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "communication",
+      "title": "配体受体与靶基因响应",
+      "slides": [
+        59,
+        60,
+        61
+      ],
+      "backend": "existing:omics71:lr_consensus,lr_differential,ligand_target_links",
+      "required_channels": [
+        "ligand_receptor_resource",
+        "receptor_response",
+        "unit_map"
+      ],
+      "qc": [
+        "复合体全部亚基",
+        "供体覆盖和表达背景",
+        "目标基因集/空间距离/检验族"
+      ],
+      "outputs": [
+        "lr_rank",
+        "donor_LR_effects",
+        "target_links",
+        "missing_coverage"
+      ],
+      "interpretation_limit": "共表达、数据库先验、通讯评分不证明实际分泌或结合",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "cellphonedb_per_unit",
+          "method_scope": "Native human CellPhoneDB permutation method within observed unit/condition; no pooled-cell population inference and no automated database download",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "functional_evidence",
+      "title": "扰动和正交验证证据",
+      "slides": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "backend": "existing:research_quality,target_evidence",
+      "required_channels": [
+        "evidence_ledger",
+        "species_model_assay",
+        "controls"
+      ],
+      "qc": [
+        "人/鼠/体外/体内分开",
+        "干预有效性与功能读数",
+        "阴性与未评估保留"
+      ],
+      "outputs": [
+        "orthogonal_evidence",
+        "falsifiable_validation_plan"
+      ],
+      "interpretation_limit": "只整理已发生证据与设计依据，不生成湿实验操作参数",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "cinemaot_effects",
+          "method_scope": "Native maintained pertpy CINEMA-OT unweighted/label-preweighted Sinkhorn per actual unit/contrast; actual OT matrix identity and effect reconstruction, observed missing arms preserved; not experimental pairing",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "spatial_identity",
+      "title": "空间平台、组织和分割",
+      "slides": [
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80
+      ],
+      "backend": "existing:omics_workflows:spatial;omics71:spatial_domains",
+      "required_channels": [
+        "coordinates",
+        "coordinate_units",
+        "section_donor_map",
+        "histology",
+        "segmentation"
+      ],
+      "qc": [
+        "ROI/bin/spot/cell单位区分",
+        "阴性探针/背景/探针面板覆盖",
+        "配准尺度和分割误差"
+      ],
+      "outputs": [
+        "spatial_qc",
+        "segmentation_qc",
+        "registration",
+        "panel_coverage"
+      ],
+      "interpretation_limit": "8微米bin或ROI不自动等于单细胞",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "paste_pairwise",
+          "method_scope": "Native full-mass PASTE pairwise transport and optional native rigid stacking; literal spot axes, known masses, explicit cost and marginal QC; not PASTE2 partial alignment",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "baysor_segment",
+          "method_scope": "Actual Baysor C++ CLI with exact binary/version; canonical actual transcript IDs, native count reconstruction from molecule assignments, preserved noise and polygon identities. Original Julia implementation/compartment segmentation excluded from this route.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "spatial_mapping",
+      "title": "空间解卷积和邻域",
+      "slides": [
+        81,
+        82,
+        83,
+        84,
+        85,
+        86
+      ],
+      "backend": "existing:omics71:spatial_deconvolution,spatial_domains,spatial_niches",
+      "required_channels": [
+        "counts",
+        "reference",
+        "coordinates",
+        "section_map"
+      ],
+      "qc": [
+        "参考覆盖及丰度语义",
+        "单模态基线",
+        "解剖及独立切片验证"
+      ],
+      "outputs": [
+        "abundance_maps",
+        "domains",
+        "neighborhoods",
+        "section_validation"
+      ],
+      "interpretation_limit": "现有RCTD不冒称cell2location/DestVI/BANKSY原算法",
+      "requires": [
+        "spatial_identity",
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "cell2location_reference",
+          "method_scope": "Actual native NB RegressionModel reference fit, q05/q50/q95; q50 is posterior median, not mean",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "cell2location_map",
+          "method_scope": "Native posterior mapping from real versioned reference signatures and counts; abundance prior not histological observation",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "destvi_deconvolution",
+          "method_scope": "Actual CondSCVI reference plus native DestVI fitting; matched ordered genes, measured spatial coordinates and counts",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "spatial_statistics",
+      "title": "空间变异、共现和生态位",
+      "slides": [
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98
+      ],
+      "backend": "existing:omics71:spatial_variable_genes,spatial_lr,spatial_niches,spatial_gradients",
+      "required_channels": [
+        "coordinates",
+        "section_map",
+        "distance_units",
+        "null_model"
+      ],
+      "qc": [
+        "按切片/供体分层",
+        "保留组织域或密度结构的零模型",
+        "多尺度/边界/分割敏感性"
+      ],
+      "outputs": [
+        "svg",
+        "distance_curves",
+        "niche_nulls",
+        "donor_spatial_effects"
+      ],
+      "interpretation_limit": "共定位不等于通信；课件72页P7色阶不明不作定量依据",
+      "requires": [
+        "spatial_mapping"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "banksy_domains",
+          "method_scope": "Native BANKSY neighborhoods and graph clustering independently per actual section, lambda=0 expression baseline retained; cluster numbers not aligned across sections",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "squidpy_section_statistics",
+          "method_scope": "Native Squidpy >=1.8.4 radius/Moran/neighborhood/cooccurrence within each section; undefined values retained, actual distance units and RNG version explicit",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "spark_spatial",
+          "method_scope": "Actual original SPARK count GLMM and spatial kernel tests per section, not SPARK-X. Native feature/spot attrition and missing p-values preserved",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "spatial_multiomics",
+      "title": "图像、空间ATAC、蛋白与MSI",
+      "slides": [
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "backend": "existing:omics71:peak_gene_links;multiomics_concordance",
+      "required_channels": [
+        "registered_modalities",
+        "pixel_spot_cell_map",
+        "measurement_mask"
+      ],
+      "qc": [
+        "同片/邻片与配准误差",
+        "原始分辨率和探针覆盖",
+        "单模态对照"
+      ],
+      "outputs": [
+        "registration_receipt",
+        "cross_modal_features",
+        "uncertainty_maps"
+      ],
+      "interpretation_limit": "预测超分辨或共同空间不是直接测量",
+      "requires": [
+        "spatial_identity"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "multivi_integrate",
+          "method_scope": "Native RNA+ATAC MuData API, paired measured cells only; unpaired modality branch not implemented by this route",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "totalvi_integrate",
+          "method_scope": "Native RNA+ADT MuData API, paired measured cells only; unpaired modality branch not implemented by this route",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "spatialglue_integrate",
+          "method_scope": "Native exact-source SpatialGlue two measured modalities on identical actual spots/coordinates, one section per fit. Explicit native datatype parameter overrides and source-bound preprocessing, embedding/attention/terminal losses. No batch-generalization or automatic cell-type claims.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "proteomics",
+      "title": "蛋白、PTM、互作与靶点占有",
+      "slides": [
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "backend": "existing:r_omics:limma;omics71:ptm_adjustment,kinase_activity,protein_complexes,physical_ppi,proteogenomic_links",
+      "required_channels": [
+        "peptide_protein_map",
+        "sample_map",
+        "identification_qc"
+      ],
+      "qc": [
+        "PSM/肽/蛋白FDR及位点定位分开",
+        "进样漂移和缺失机制",
+        "PTM与总蛋白配对"
+      ],
+      "outputs": [
+        "protein_effects",
+        "site_effects",
+        "identification_ledger",
+        "complex_evidence"
+      ],
+      "interpretation_limit": "coIP/交联/热稳定变化不单独证明直接结合或药效",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "msstats_compare",
+          "method_scope": "Actual MSstats feature-level comparisons; normalization and missingness decisions explicit, no fabricated intensities",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "metabolomics",
+      "title": "代谢、脂质、同位素与定量",
+      "slides": [
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149
+      ],
+      "backend": "existing:r_omics:limma;omics71:lipid_chain_patterns,lipid_class_enrichment",
+      "required_channels": [
+        "peak_identity",
+        "blank_qc",
+        "pooled_qc",
+        "internal_standard",
+        "calibration"
+      ],
+      "qc": [
+        "峰/候选结构/标准品层级",
+        "批次漂移与空白",
+        "示踪丰度与通量假设区分"
+      ],
+      "outputs": [
+        "peak_qc",
+        "identity_levels",
+        "metabolite_effects",
+        "tracing_contract"
+      ],
+      "interpretation_limit": "峰面积不自动是浓度；同位素富集不自动是稳态通量",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "xcms_preprocess",
+          "method_scope": "Native centroid MS1 xcms centWave/obiwarp/correspondence and optional measured peak integration; explicit source-to-sample map, blanks excluded from feature definition, missingness preserved. Not metabolite identification, normalization or abundance inference.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "epigenome_rna",
+      "title": "表观、RNA加工和特殊RNA",
+      "slides": [
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "backend": "existing:omics71:differential_binding,motif_enrichment,motif_deviation,methylation_gene_links,isoform_switch,translation_efficiency",
+      "required_channels": [
+        "assay_specific_counts",
+        "reference",
+        "transcript_map"
+      ],
+      "qc": [
+        "FRiP/TSS/峰集合或甲基化探针QC",
+        "motif家族和背景",
+        "RNA修饰预测与正交证据"
+      ],
+      "outputs": [
+        "peak_effects",
+        "motif_coverage",
+        "isoform_effects",
+        "special_RNA_assignment"
+      ],
+      "interpretation_limit": "染色质开放、motif和修饰概率均非功能证明",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "ev_microbiome",
+      "title": "分泌组、EV和微生物组",
+      "slides": [
+        160,
+        161,
+        162
+      ],
+      "backend": "existing:omics71:microbe_differential,microbe_diversity,microbe_pathways,microbe_network",
+      "required_channels": [
+        "sample_identity",
+        "contamination_controls",
+        "compositional_counts"
+      ],
+      "qc": [
+        "EV纯度和组织来源",
+        "低生物量污染",
+        "药物/饮食/肾功能等协变量"
+      ],
+      "outputs": [
+        "identity_qc",
+        "composition_effects",
+        "diversity",
+        "confounder_sensitivity"
+      ],
+      "interpretation_limit": "相对丰度和载体身份不能互相替代",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "multiomics",
+      "title": "匹配多组学、因子、分群和验证",
+      "slides": [
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "backend": "existing:r_omics:MOFA2;multiomics_concordance;ml",
+      "required_channels": [
+        "sample_view_map",
+        "feature_map",
+        "observed_mask"
+      ],
+      "qc": [
+        "同供体同组织/时点或明确非配对",
+        "缺失视图保留NA",
+        "监督选择全部嵌入训练折"
+      ],
+      "outputs": [
+        "factor_scores",
+        "view_variance",
+        "association",
+        "cluster_stability",
+        "external_validation"
+      ],
+      "interpretation_limit": "MOFA2不冒称DIABLO/SNF；无监督因子不自动是机制",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "diablo_fit",
+          "method_scope": "Native DIABLO with externally prespecified parameters, fit only. No nested-validation performance claim",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "snf_fusion",
+          "method_scope": "Native SNFtool affinity/fusion/spectral clustering; measured matched independent units only",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "variant_qc",
+      "title": "家系、变异与转录本解释",
+      "slides": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180
+      ],
+      "backend": "existing:database:clinvar,gnomad;omics71:rare_variant_burden",
+      "required_channels": [
+        "phenotype",
+        "pedigree",
+        "variant_calls",
+        "assembly",
+        "transcript"
+      ],
+      "qc": [
+        "read级质控及callability",
+        "SV/剪接/转录本可解释性",
+        "共分离和证据独立性"
+      ],
+      "outputs": [
+        "variant_qc",
+        "gene_burden",
+        "transcript_context",
+        "evidence_classification"
+      ],
+      "interpretation_limit": "方法案例、预测分数或功能模型不能单独给临床致病结论",
+      "requires": [
+        "design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "vep_offline",
+          "method_scope": "Actual offline human VEP, fully bound cache and existing uncompressed FASTA, exact source REF/ALT/record identity and ALLELE_NUM linkage; all transcripts retained, no automatic pathogenicity classification",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "gwas",
+      "title": "GWAS、祖源、Meta和精细定位",
+      "slides": [
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "backend": "existing:omics71:cross_study_meta,fine_mapping",
+      "required_channels": [
+        "phenotype",
+        "ancestry",
+        "alleles",
+        "LD",
+        "summary_statistics"
+      ],
+      "qc": [
+        "样本重叠/群体结构",
+        "等位基因方向/构建",
+        "LD同祖源和多信号诊断"
+      ],
+      "outputs": [
+        "gwas_qc",
+        "meta_heterogeneity",
+        "credible_sets",
+        "locus_gene_links"
+      ],
+      "interpretation_limit": "最近基因和峰顶不自动是效应基因",
+      "requires": [
+        "variant_qc"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "ldsc_h2",
+          "method_scope": "Actual existing LDSC h2/intercept command on author-munged statistics, matched bound autosomal LD/M_5_50 references and native log estimates; observed-scale only, not genetic correlation",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "causal_genetics",
+      "title": "QTL、共定位、TWAS和MR",
+      "slides": [
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197
+      ],
+      "backend": "existing:omics71:colocalization,two_sample_mr",
+      "required_channels": [
+        "qtl",
+        "gwas",
+        "alleles",
+        "instrument_selection",
+        "LD"
+      ],
+      "qc": [
+        "完整区域与先验敏感性",
+        "工具强度/多效性/样本重叠",
+        "同基因不同机制保留"
+      ],
+      "outputs": [
+        "coloc_posteriors",
+        "mr_effects",
+        "sensitivity",
+        "evidence_conflicts"
+      ],
+      "interpretation_limit": "MR/TWAS/共定位各自有假设；综合分数不是因果概率",
+      "requires": [
+        "gwas"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "smr_heidi",
+          "method_scope": "Actual native cis-SMR/HEIDI with full selected offline PLINK/BESD references, exact literal intersecting variants, explicit native frequency/LD thresholds and unassessed HEIDI retained. Not multi-SNP SMR, proof of colocalization or causal mediation.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "genetic_validation",
+      "title": "功能证据和PRS迁移",
+      "slides": [
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "backend": "existing:omics71:polygenic_score;ml",
+      "required_channels": [
+        "variant_function_evidence",
+        "locked_weights",
+        "target_ancestry"
+      ],
+      "qc": [
+        "MPRA与内源位置区分",
+        "发现和验证样本无泄漏",
+        "祖源迁移和校准"
+      ],
+      "outputs": [
+        "functional_evidence",
+        "locked_prs",
+        "calibration",
+        "external_performance"
+      ],
+      "interpretation_limit": "PGS不是诊断，编辑读数不等于组织疗效",
+      "requires": [
+        "causal_genetics"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "igv_scoped_report",
+          "method_scope": "Actual exact-source native IGV reports from scoped VCF/BAM/FASTA; literal reference-allele/contig checks, bounded selected views and existing offline template/assets. Privacy CSP blocks remote connections; browser/read-evidence/clinical interpretation remain separate unverified acceptance.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "mechanistic_models",
+      "title": "网络、代谢约束和因果假设",
+      "slides": [
+        207,
+        208,
+        209,
+        210,
+        211,
+        212
+      ],
+      "backend": "existing:omics71:network_diffusion,multiomics_mediation;server_model_reference",
+      "required_channels": [
+        "model_constraints",
+        "network_version",
+        "assumptions"
+      ],
+      "qc": [
+        "度数零模型",
+        "边界条件/质量平衡",
+        "共同原因和反向因果"
+      ],
+      "outputs": [
+        "network_null",
+        "constraint_audit",
+        "model_sensitivity"
+      ],
+      "interpretation_limit": "转录映射或FBA可行解不直接测量真实通量",
+      "requires": [
+        "multiomics"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "model_validation",
+      "title": "机器学习与风险模型验收",
+      "slides": [
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219
+      ],
+      "backend": "existing:ml,survival",
+      "required_channels": [
+        "patient_site_split",
+        "training_pipeline",
+        "baseline",
+        "evaluation_plan"
+      ],
+      "qc": [
+        "按患者/站点/时间阻断泄漏",
+        "同划分简单基线",
+        "校准/不确定性/阈值和外部效度"
+      ],
+      "outputs": [
+        "oof_predictions",
+        "calibration",
+        "uncertainty",
+        "external_metrics",
+        "decision_thresholds"
+      ],
+      "interpretation_limit": "课件213/216的标签歧义保留；SHAP不当机制",
+      "requires": [
+        "predictive_design"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "nestedcv_glmnet",
+          "method_scope": "Actual R nestedcv/caret glmnet, one row per real independent unit, exact outer and nested inner fold assignments, fold-local preprocessing, explicit second-level probability event and no full-data final fit or global supervised filter.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "drug_structure",
+      "title": "药物线索、序列/MSA、结构和对接",
+      "slides": [
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235
+      ],
+      "backend": "existing:sequence-plan,msa_qc,af3,molecular_qc,pose_qc,vina_docking;optional:interaction_profiles",
+      "required_channels": [
+        "target_evidence",
+        "sequence_identity",
+        "structure",
+        "chemical_states"
+      ],
+      "qc": [
+        "链/残基/MSA/模板和置信度",
+        "水/辅因子/金属/质子化/互变异构",
+        "已知姿态/阴性对照和全候选分母"
+      ],
+      "outputs": [
+        "structure_qc",
+        "state_ledger",
+        "poses",
+        "campaign_completeness",
+        "controls"
+      ],
+      "interpretation_limit": "生成姿态、对接分数和AF3接触不等于结合或功能",
+      "requires": [
+        "functional_evidence"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "drug2cell_score",
+          "method_scope": "Native Drug2cell, explicit offline target set snapshot and coverage; expression score not drug inhibition/clinical response",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "vina_docking",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "diffdock_pose",
+          "method_scope": "Actual exact-source current DiffDock single-complex native CLI with pre-existing score/confidence/ESM resources, offline child inference, original graph/stereochemistry preserved and all actual native rank/confidence files retained. Not affinity scoring or original historical model.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "md_free_energy",
+      "title": "动力学、采样和自由能",
+      "slides": [
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246
+      ],
+      "backend": "existing:md_analysis,free_energy,kinetics;biomni:cadd",
+      "required_channels": [
+        "topology",
+        "protocol",
+        "independent_runs",
+        "thermodynamic_states"
+      ],
+      "qc": [
+        "力场/拓扑/平衡段和重启谱系",
+        "独立重复/相关时间和有效样本",
+        "重加权/窗口重叠/闭环和标准态"
+      ],
+      "outputs": [
+        "replicate_metrics",
+        "sampling_diagnostics",
+        "energy_estimates",
+        "uncertainty"
+      ],
+      "interpretation_limit": "时间跑满不等于收敛，端点能量不是实测亲和力",
+      "requires": [
+        "drug_structure"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "potential_generation",
+      "title": "机器学习势与生成结构",
+      "slides": [
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "backend": "existing:graph_training;structure_qc;optional_generation_reference",
+      "required_channels": [
+        "training_domain",
+        "energy_force_labels",
+        "constraints"
+      ],
+      "qc": [
+        "能量/力分开留出",
+        "未见化学与构象OOD",
+        "生成约束、对称性和可实现性"
+      ],
+      "outputs": [
+        "heldout_errors",
+        "OOD_ledger",
+        "constraint_qc",
+        "structure_validation"
+      ],
+      "interpretation_limit": "势能面、生成骨架或低误差不直接证明可用功能",
+      "requires": [
+        "model_validation",
+        "drug_structure"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "diffsbdd_generate",
+          "method_scope": "Actual exact-source native conditional DiffSBDD pocket-residue sampling; all raw fragments/molecules kept with chemistry/coordinate QC, no silent sanitization/resampling. Not inpainting, property optimization or measured activity.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "rfdiffusion_backbone",
+          "method_scope": "Actual exact-source original RFdiffusion unconditional fixed-length backbone sampling; literal native design files/length checked, native TRB retained opaque without unpickling. Not a functional sequence, binder or RFdiffusion2 all-atom method.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "mace_singlepoint",
+          "method_scope": "Actual native MACE ASE molecular single-point energies/forces from exact existing trusted model, declared units/elements and fixed nonperiodic geometries. Not docking affinity, electronic ESP, periodic MD or scientific validation.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "perturbation_qc",
+      "title": "实测扰动身份与响应",
+      "slides": [
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265
+      ],
+      "backend": "existing:optional_private_perturbation",
+      "required_channels": [
+        "guide_identity",
+        "controls",
+        "target_engagement",
+        "viability",
+        "sample_map"
+      ],
+      "qc": [
+        "guide检出不等于有效干预",
+        "目标读数/存活混杂",
+        "下游响应评分和编辑效率分开"
+      ],
+      "outputs": [
+        "perturbation_assignment",
+        "response_heterogeneity",
+        "viability_adjustment"
+      ],
+      "interpretation_limit": "预测和实验有效性是不同证据层",
+      "requires": [
+        "annotation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "mixscape_classify",
+          "method_scope": "Native pertpy Mixscape; stratum=unit+celltype+replicate; classifications remain evidence, no automatic cell deletion",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "cellcap_programs",
+          "method_scope": "Actual exact-source CellCap counts/program training; random-cell optimizer split explicitly descriptive, native response relevance and decoder-weight projection, no independent-donor validation claim",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "virtual_perturbation",
+      "title": "网络和条件化扰动预测",
+      "slides": [
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280
+      ],
+      "backend": "existing:optional_private_perturbation:CPA,scGPT,CellOracle,GEARS,scTenifoldKnk,BoolNet/MaBoSS;reference_only:scGen,CellOT",
+      "required_channels": [
+        "perturbation_training",
+        "donor_split",
+        "heldout_targets",
+        "dose_time"
+      ],
+      "qc": [
+        "按未见供体/药物/基因/组合/剂量定义留出",
+        "训练内拟合归一化与特征",
+        "不确定性和对照响应"
+      ],
+      "outputs": [
+        "heldout_predictions",
+        "baseline_comparison",
+        "OOD",
+        "effect_specific_metrics"
+      ],
+      "interpretation_limit": "保留原方法差异，不把生成细胞当独立样本",
+      "requires": [
+        "perturbation_qc",
+        "model_validation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "scgen_predict",
+          "method_scope": "Native scGen log-normalized decoded prediction; not observed counts or a generic linear substitute",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "cellot_predict",
+          "method_scope": "Native gradient ICNN prediction using exact reviewed CellOT source and existing checkpoint; no new CellOT training",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "biolord_attributes",
+          "method_scope": "Native exact-source normal-likelihood biolord attribute fitting and counterfactual combinations on actual optimizer-trained controls; explicit source-cell IDs propagated, no suffix parsing. Random-cell monitoring is descriptive and not independent-donor generalization.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "scvidr_predict",
+          "method_scope": "Original legacy scVIDR discrete response prediction and optional native centroid regression; held out is celltype-treated response, controls remain in VAE training. Native balancing attrition/duplicates retained in explicit source mapping; not heldout donors or dose interpolation.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "causcell_counterfactual_fit",
+          "method_scope": "Actual exact-source original CausCell observed-data fit and within-vocabulary assumed-DAG intervention. Stable concept coding, preserved cell/gene axes and nonempty sampler batches repair original serialization defects. Both native Original/Generated halves are model outputs; no independent-unit predictive validation or causal identification.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "multimodal_prediction",
+      "title": "跨模态与动态生成",
+      "slides": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294
+      ],
+      "backend": "existing:optional_private_perturbation;model_reference",
+      "required_channels": [
+        "paired_training_truth",
+        "condition_identity",
+        "external_truth"
+      ],
+      "qc": [
+        "按组织/模态/药物留出",
+        "预测分辨率不超过证据",
+        "真实对照和功能验证分层"
+      ],
+      "outputs": [
+        "prediction_provenance",
+        "heldout_metrics",
+        "modality_uncertainty"
+      ],
+      "interpretation_limit": "图像、ATAC、蛋白轨迹和超分辨结果均标predicted",
+      "requires": [
+        "virtual_perturbation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "proteintalks_predict",
+          "method_scope": "Actual exact-source original ProteinTalks ppODE point prediction, exact protein/molecular-descriptor/case/baseline/checkpoint axes and fixed trained 6/24/48-hour labels on internal ticks 1/2/3. Binary phenotype definition stays explicit; not continuous synergy, SWAG uncertainty or clinical response.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "perturbation_benchmark",
+      "title": "简单基线与扰动特异性能",
+      "slides": [
+        295,
+        296,
+        297,
+        298,
+        299
+      ],
+      "backend": "new:perturbation_baselines;existing:optional_private_perturbation",
+      "required_channels": [
+        "train_test_units",
+        "full_gene_axis",
+        "control_reference",
+        "observed_test_truth"
+      ],
+      "qc": [
+        "零变化/训练平均/线性基线同划分",
+        "全基因/独立DEG集区分",
+        "delta/质心成对排序/功能终点分开"
+      ],
+      "outputs": [
+        "baseline_predictions",
+        "delta_metrics",
+        "specificity_metrics",
+        "leakage_audit"
+      ],
+      "interpretation_limit": "测试集选DEG只能标诊断，不用于调参与选择",
+      "requires": [
+        "virtual_perturbation"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "perturbation_baselines",
+          "method_scope": "Existing native scientific route; explicit reviewed parameters and upstream QC required",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "native_unit_profile_handoff",
+          "method_scope": "Actual receipt/request/source-bound expression handoff into independent-unit mean profiles, unchanged feature axes, exact cell memberships, explicit source selection/low-support HOLD and observed-vs-decoded distinction. Preserves producer validation scope and every actual target/celltype stratum. Not a new scientific analysis method.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        },
+        {
+          "backend": "systema_evaluate",
+          "method_scope": "Native exact-source Systema rank centroid accuracy plus explicitly repaired Pearson helper formula. Same full feature axis and actual independent-unit scenarios across methods; training-only custom reference and panel receipt",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "tissue_dynamics",
+      "title": "邻居效应、谱系与真实时间",
+      "slides": [
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "backend": "existing:omics71:spatial_lr,trajectory_dynamics,impulse_response;dynamic_model_reference",
+      "required_channels": [
+        "perturbed_cell_map",
+        "lineage",
+        "real_times",
+        "proliferation"
+      ],
+      "qc": [
+        "自身和邻居对照分开",
+        "隐藏真实时间点",
+        "增殖与状态转移分开"
+      ],
+      "outputs": [
+        "cell_intrinsic_effects",
+        "neighbor_effects",
+        "time_holdout",
+        "lineage_validation"
+      ],
+      "interpretation_limit": "快照轨迹和模拟命运不是实测谱系",
+      "requires": [
+        "spatial_statistics",
+        "perturbation_qc"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "prescient_trajectories",
+          "method_scope": "Actual exact-source PRESCIENT AutoGenerator stepping with selected literal initial cells, safe exact state dictionary, unchanged checkpoint metric representation/dt/noise/time units and bounded stochastic replicas; not thermodynamic free energy or biological lineage.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "active_learning",
+      "title": "选点、选择性和跨组织验证",
+      "slides": [
+        310,
+        311,
+        312,
+        313,
+        314,
+        315
+      ],
+      "backend": "existing:ml;active_design_reference",
+      "required_channels": [
+        "selection_history",
+        "uncertainty",
+        "untouched_validation",
+        "target_control"
+      ],
+      "qc": [
+        "主动选点与随机验证集隔离",
+        "选择性与存活分别评价",
+        "供体/组织/刺激外推边界"
+      ],
+      "outputs": [
+        "selection_ledger",
+        "prospective_validation",
+        "selectivity",
+        "transportability"
+      ],
+      "interpretation_limit": "被模型选中的验证点不代表无偏总体性能",
+      "requires": [
+        "model_validation",
+        "perturbation_benchmark"
+      ],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [
+        {
+          "backend": "batchie_posterior",
+          "method_scope": "Actual native BATCHIE SparseDrugCombo multichain viability posterior, exact experiment/unit/dose/mask identity and missing candidate outcomes preserved. Explicit legacy RNG streams, posterior intervals and rank Rhat/bulk ESS; DBAL batch selection and experimental dispatch remain separate.",
+          "runtime_status": "NOT_RUN_THIS_UPGRADE"
+        }
+      ],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE"
+    },
+    {
+      "id": "delivery",
+      "title": "全流程交付与版本失效",
+      "slides": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315
+      ],
+      "backend": "existing:accept,crosslink;scientific-visualization",
+      "required_channels": [
+        "source_manifest",
+        "receipts",
+        "full_result_denominators",
+        "figure_contracts"
+      ],
+      "qc": [
+        "每个队列分别讲完",
+        "源码/参考/参数变化使旧验收失效",
+        "观测/估计/预测/因果分级"
+      ],
+      "outputs": [
+        "full_tables",
+        "QC_decisions",
+        "run_manifest",
+        "figure_payloads",
+        "limitations"
+      ],
+      "interpretation_limit": "任何HOLD、UNKNOWN、未实测不得因图好看而升级",
+      "requires": [],
+      "server_runtime": "NOT_RUN_THIS_UPGRADE",
+      "native_adapters": [],
+      "inherited_server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "figure_consumer": {
+        "skill": "scientific-visualization",
+        "version": "2.1-private",
+        "reference": "FIGURE_INTEGRATION.md",
+        "policy": "workflow_channels.json",
+        "native_plan_entry": "native_figures.plan_native_figures",
+        "frozen_handoff_entry": "handoff_views.handoff_plan",
+        "local_scientific_execution": false,
+        "scientific_runtime_acceptance": "NOT_RUN_THIS_UPGRADE"
+      }
+    }
+  ],
+  "public_upload": false,
+  "scientific_execution_local": false,
+  "source_material_is_not_instruction": true,
+  "tool_catalog_status": "IN_PROGRESS_NOT_ALL_TOOLS_INTEGRATED",
+  "source_attachment_fingerprints_distributed": false,
+  "source_kind": "public source policy; original contributed attachments and their fingerprints are not distributed"
+}

@@ -1,0 +1,58 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "dock_inputs",
+    "reaction_mapping",
+    "receptor"
+  ],
+  "required_parameters": [
+    "executable",
+    "executable_sha256",
+    "native_version",
+    "prepared_input_ids",
+    "native_score_columns",
+    "pose_glob",
+    "score_file",
+    "bond_distance_angstrom",
+    "seed",
+    "software_versions",
+    "maximum_output_entries"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "docking_scores",
+    "covalent_geometry",
+    "ligand_coverage",
+    "pose_files"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "predicted_covalent_pose_not_affinity_or_reactivity",
+  "schema": "native-completion-contract/1",
+  "tool": "DOCKovalent 3.7",
+  "source_commit": null,
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Owner-provisioned licensed DOCKovalent 3.7 plus actual prepared DB2/grids. Not DOCK 3.8 or ordinary Vina. No licensed engine bundled.",
+  "figure_views": [
+    "rank",
+    "scatter"
+  ]
+}

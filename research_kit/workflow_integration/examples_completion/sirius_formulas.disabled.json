@@ -1,0 +1,64 @@
+{
+  "schema": "private-native-project-template/1",
+  "template_not_executable": true,
+  "backend": "sirius_formulas",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "executable": "REQUIRED_ACTUAL_EXECUTABLE",
+    "executable_sha256": "REQUIRED_ACTUAL_EXECUTABLE_SHA256",
+    "native_version": "REQUIRED_ACTUAL_NATIVE_VERSION",
+    "instrument": "REQUIRED_ACTUAL_INSTRUMENT",
+    "ppm_ms1": "REQUIRED_ACTUAL_PPM_MS1",
+    "ppm_ms2": "REQUIRED_ACTUAL_PPM_MS2",
+    "formula_candidates": "REQUIRED_ACTUAL_FORMULA_CANDIDATES",
+    "seed": "REQUIRED_ACTUAL_SEED",
+    "software_versions": {
+      "pandas": "REQUIRED_EXISTING_SERVER_VERSION"
+    },
+    "maximum_output_entries": "REQUIRED_ACTUAL_MAXIMUM_OUTPUT_ENTRIES"
+  },
+  "inputs": [
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "spectra",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "spectrum_identity",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "upstream_qc": "REQUIRED_ACTUAL_BOUND_QC",
+  "statistical_plan": {
+    "estimand": "REQUIRED_ACTUAL_ESTIMAND",
+    "independent_unit": "REQUIRED_ACTUAL_INDEPENDENT_UNIT",
+    "missingness": "REQUIRED_ACTUAL_MISSINGNESS",
+    "multiplicity": "REQUIRED_ACTUAL_MULTIPLICITY",
+    "sensitivity": "REQUIRED_ACTUAL_SENSITIVITY"
+  },
+  "acceptance_rules": [
+    {
+      "id": "native_numeric_QC",
+      "role": "diagnostics",
+      "field": "metrics.REQUIRED_ACTUAL_METRIC",
+      "operator": "ge",
+      "bound": "REQUIRED_PRESPECIFIED_NUMBER",
+      "definition": "REQUIRED_MEASURE_DEFINITION",
+      "unit": "REQUIRED_ACTUAL_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_BASIS"
+    }
+  ],
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_CPUS",
+    "gpus": "REQUIRED_ALLOCATED_GPUS"
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE"
+}

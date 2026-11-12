@@ -1,0 +1,5141 @@
+{
+  "version": "2.1.1-private",
+  "scope": "workflow metadata, decisions and returned summaries; not raw matrices or clinical data",
+  "schemas": [
+    {
+      "name": "dataset",
+      "title": "来源与研究角色",
+      "primary_key": [
+        "dataset_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "dataset_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "一个来源发布版本的唯一标识",
+          "validation": "非空唯一",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "study_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "原始研究身份，不能把二次atlas当新研究",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_accession",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际公开编号或私有来源标识",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "采用的发布版本/日期",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "论文/补表/清单定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "species",
+          "type": "string",
+          "required": "always",
+          "meaning": "物种及标识",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "tissue_region",
+          "type": "string",
+          "required": "always",
+          "meaning": "组织/区域/心腔定义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "assay_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "bulk/scRNA/snRNA/array/其他明确模态",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "bulk",
+            "scRNA",
+            "snRNA",
+            "array",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "entry_level",
+          "type": "enum",
+          "required": "always",
+          "meaning": "raw_reads/aligned/raw_counts/estimated/normalized/object/effect_summary",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "raw_reads",
+            "aligned",
+            "raw_counts",
+            "estimated",
+            "normalized",
+            "object",
+            "effect_summary"
+          ]
+        },
+        {
+          "name": "role",
+          "type": "enum",
+          "required": "always",
+          "meaning": "discovery/reference/validation/technical_bridge",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "discovery",
+            "reference",
+            "validation",
+            "technical_bridge"
+          ]
+        },
+        {
+          "name": "overlap_group",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "已证实或不确定重叠组",
+          "validation": "与identity审计一致",
+          "missing_policy": "无重叠填none；不确定填组ID，不能填none"
+        },
+        {
+          "name": "license_or_access",
+          "type": "string",
+          "required": "always",
+          "meaning": "数据许可/访问范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "included",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "是否进入该任务",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "decision_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "纳入/排除和范围理由",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "identity",
+      "title": "全局身份与技术映射",
+      "primary_key": [
+        "identity_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "identity_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "不可变实体记录ID；不是自动新造的生物学个体",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "dataset_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "dataset外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "original_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "原始记录ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "record_level",
+          "type": "enum",
+          "required": "always",
+          "meaning": "donor/sample/capture/library/run/cell",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "donor",
+            "sample",
+            "capture",
+            "library",
+            "run",
+            "cell"
+          ]
+        },
+        {
+          "name": "global_donor_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "经核实跨来源个体",
+          "validation": "保留已核实生物学个体；混样capture不强填唯一donor",
+          "missing_policy": "无法确认填NA并阻断相应推断"
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "具体组织/时间/条件的样本",
+          "validation": "按record_level及任务条件填写；关系见identity_link",
+          "missing_policy": "donor/capture等不适用单值属性可NA；要求身份明确的sample/cell推断仍须真实来源"
+        },
+        {
+          "name": "capture_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "真实共同装载捕获",
+          "validation": "允许一个capture多donor",
+          "missing_policy": "bulk不适用填NA"
+        },
+        {
+          "name": "library_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "建库身份",
+          "validation": "与文件外键一致",
+          "missing_policy": "没有记录填NA并列缺口"
+        },
+        {
+          "name": "run_id_original",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "原测序run或lane",
+          "validation": "不是本次分析run",
+          "missing_policy": "没有记录填NA并列缺口"
+        },
+        {
+          "name": "cell_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "来源前缀与原barcode构成的稳定细胞键",
+          "validation": "全局唯一且保留original_id",
+          "missing_policy": "非细胞记录填NA"
+        },
+        {
+          "name": "condition",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "原问题所用规范条件",
+          "validation": "按record_level及任务条件填写；关系见identity_link",
+          "missing_policy": "donor/capture等不适用单值属性可NA；要求身份明确的sample/cell推断仍须真实来源"
+        },
+        {
+          "name": "time_region",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "采样时间/组织信息与单位",
+          "validation": "按record_level及任务条件填写；关系见identity_link",
+          "missing_policy": "donor/capture等不适用单值属性可NA；要求身份明确的sample/cell推断仍须真实来源"
+        },
+        {
+          "name": "paired_or_dependence_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "真实配对/重复结构",
+          "validation": "与设计外键一致",
+          "missing_policy": "独立样本填none"
+        },
+        {
+          "name": "identity_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "verified/uncertain/conflict",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "verified",
+            "uncertain",
+            "conflict"
+          ]
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "支持映射的具体来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ],
+      "unique_constraints": [
+        [
+          "dataset_id",
+          "original_id",
+          "record_level"
+        ]
+      ]
+    },
+    {
+      "name": "file",
+      "title": "输入与输出文件清单",
+      "primary_key": [
+        "file_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "file_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "唯一文件身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "required": "always",
+          "meaning": "输入/对象/结果/图/日志等确切角色",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "path_or_accession",
+          "type": "string",
+          "required": "always",
+          "meaning": "私有文件路径或稳定公开定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "bytes",
+          "type": "integer",
+          "required": "always",
+          "meaning": "实际字节数",
+          "validation": "非负；预期非空输出须>0",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sha256",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际文件SHA256",
+          "validation": "64位小写十六进制，不以声明代替独立核实",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "源版本或父清单ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "dataset_or_run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "来源或生成运行外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "assay_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际模态与层",
+          "validation": "无层的文件填none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "采用参考外键",
+          "validation": "与定量/模型一致",
+          "missing_policy": "不适用填NA并说明"
+        },
+        {
+          "name": "integrity_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "verified/failed/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "verified",
+            "failed",
+            "unknown"
+          ]
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "校验/下载/生成回执定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "reference",
+      "title": "参考与定量口径",
+      "primary_key": [
+        "reference_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "reference_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "参考组合唯一ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "species",
+          "type": "string",
+          "required": "always",
+          "meaning": "物种",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "assembly",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "基因组构建",
+          "validation": "精确版本",
+          "missing_policy": "无基因组任务填NA并说明"
+        },
+        {
+          "name": "annotation_source_release",
+          "type": "string",
+          "required": "always",
+          "meaning": "注释机构与发布版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "fasta_manifest",
+          "type": "string",
+          "required": "always",
+          "meaning": "FASTA/转录本文件清单及hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "gtf_manifest",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "GTF/GFF/tx2gene清单及hash",
+          "validation": "与定量匹配",
+          "missing_policy": "不适用填NA"
+        },
+        {
+          "name": "feature_namespace",
+          "type": "string",
+          "required": "always",
+          "meaning": "gene/transcript及ID命名空间",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "counting_unit",
+          "type": "enum",
+          "required": "always",
+          "meaning": "read/fragment/UMI/estimated_count/其他",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "read",
+            "fragment",
+            "UMI",
+            "estimated_count",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "intron_policy",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "exon-only/exon+intron/探针或真实规则",
+          "validation": "以实际命令为准",
+          "missing_policy": "未知填unknown并限制比较"
+        },
+        {
+          "name": "strandedness",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "真实链方向与证据",
+          "validation": "不能由文件名推断",
+          "missing_policy": "不适用填NA"
+        },
+        {
+          "name": "software_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "参考构建/定量实际软件版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "命令/索引/源记录",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "layer",
+      "title": "表达层和允许用途",
+      "primary_key": [
+        "object_id",
+        "layer_name"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "object_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "对象版本外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "layer_name",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实assay/layer名称",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "semantic_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "raw/estimated/decont/log/residual/integrated/latent/imputed/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "raw",
+            "estimated",
+            "decont",
+            "log",
+            "residual",
+            "integrated",
+            "latent",
+            "imputed",
+            "unknown"
+          ]
+        },
+        {
+          "name": "source_file_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "file外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parent_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "变换前层",
+          "validation": "未变换填none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "transform",
+          "type": "string",
+          "required": "always",
+          "meaning": "确切算法/参数或none",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_set_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "特征集合与hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cell_or_sample_set_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "细胞/样本集合与hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "integer_expected",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "方法要求是否为整数",
+          "validation": "按真实计量与接口；不可任意取整",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "zeros_modified",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "是否改变零值",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "permitted_use",
+          "type": "string",
+          "required": "always",
+          "meaning": "可使用的具体模块/任务",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scope_limit",
+          "type": "string",
+          "required": "always",
+          "meaning": "缺失/方法限制",
+          "validation": "无已知限制填none，不隐瞒unknown",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "availability",
+      "title": "特征测量和表达状态",
+      "primary_key": [
+        "availability_record_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "availability_record_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "不可变来源特征/候选记录ID",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "dataset_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "来源外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "original_feature_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "未改动原ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "稳定分析ID",
+          "validation": "已解析映射的稳定ID；保留候选/来源映射关系",
+          "missing_policy": "未映射为NA；不能作为唯一主键；未解析候选不自动纳入"
+        },
+        {
+          "name": "symbol",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "显示名",
+          "validation": "不作唯一键",
+          "missing_policy": "未知填NA"
+        },
+        {
+          "name": "mapping_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "one_to_one/one_to_many/many_to_one/unmapped/ambiguous",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "one_to_one",
+            "one_to_many",
+            "many_to_one",
+            "unmapped",
+            "ambiguous"
+          ]
+        },
+        {
+          "name": "availability",
+          "type": "enum",
+          "required": "always",
+          "meaning": "measured/not_in_reference/filtered_out/mapping_failed/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "measured",
+            "not_in_reference",
+            "filtered_out",
+            "mapping_failed",
+            "unknown"
+          ]
+        },
+        {
+          "name": "expression_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "detected/all_zero/not_assessable",
+          "validation": "只有measured且有证据才判detected/all_zero；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "detected",
+            "all_zero",
+            "not_assessable"
+          ]
+        },
+        {
+          "name": "model_filled_zero",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "是否仅为模型兼容补零",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "映射参考版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reason_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "缺行/映射/检出来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "included_feature_sets",
+          "type": "string",
+          "required": "always",
+          "meaning": "结构/marker/DE/反卷积等各自集合",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "mapping_candidate_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "候选映射记录ID；unmapped用none，不表示生物学基因",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "resolution_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "resolved/unresolved/rejected",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "resolved",
+            "unresolved",
+            "rejected"
+          ]
+        }
+      ],
+      "unique_constraints": [
+        [
+          "dataset_id",
+          "original_feature_id",
+          "mapping_candidate_id"
+        ]
+      ]
+    },
+    {
+      "name": "contrast",
+      "title": "比较与估计目标",
+      "primary_key": [
+        "analysis_id",
+        "contrast_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "任务身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "contrast_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "预定比较唯一ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "question",
+          "type": "string",
+          "required": "always",
+          "meaning": "目标对象/暴露/结局/时间",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "estimand",
+          "type": "string",
+          "required": "always",
+          "meaning": "效应的明确含义及尺度",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "numerator",
+          "type": "string",
+          "required": "always",
+          "meaning": "正方向分子条件",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "denominator",
+          "type": "string",
+          "required": "always",
+          "meaning": "参照条件",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "analysis_set",
+          "type": "string",
+          "required": "always",
+          "meaning": "合格sample/type/背景清单",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "observation_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "矩阵每列或每行代表什么",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "independent_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实donor/animal/独立实验等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "model_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "model外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "test_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "全部预定检验的集合",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "analysis_role",
+          "type": "enum",
+          "required": "always",
+          "meaning": "primary/sensitivity/exploratory",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "primary",
+            "sensitivity",
+            "exploratory"
+          ]
+        },
+        {
+          "name": "frozen_at",
+          "type": "datetime",
+          "required": "always",
+          "meaning": "预先冻结时间",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "change_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "变更外键",
+          "validation": "首次填none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "model",
+      "title": "模型设计与可识别性",
+      "primary_key": [
+        "model_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模型唯一身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "formula_and_contrast",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际公式/系数与对比编码",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "family_link_or_method",
+          "type": "string",
+          "required": "always",
+          "meaning": "计数/线性/混合/组成/汇总方法及连接",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "factor_levels_reference",
+          "type": "string",
+          "required": "always",
+          "meaning": "分类水平及参照",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "covariates",
+          "type": "string",
+          "required": "always",
+          "meaning": "预定协变量及处理",
+          "validation": "无则none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "dependence_structure",
+          "type": "string",
+          "required": "always",
+          "meaning": "配对/重复/共享对照/层级",
+          "validation": "独立则none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "missingness_plan",
+          "type": "string",
+          "required": "always",
+          "meaning": "缺失策略及假设",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "actual_units_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际纳入样本与独立单位清单",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "design_rank",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "实际固定设计秩",
+          "validation": "服务器计算并与列数核对",
+          "missing_policy": "不适用模型填NA并说明"
+        },
+        {
+          "name": "n_design_columns",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "设计列数",
+          "validation": "与实际矩阵一致",
+          "missing_policy": "不适用填NA"
+        },
+        {
+          "name": "residual_df_or_basis",
+          "type": "string",
+          "required": "always",
+          "meaning": "自由度或方法适配依据",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "estimability_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "estimable/restricted/not_estimable/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "estimable",
+            "restricted",
+            "not_estimable",
+            "unknown"
+          ]
+        },
+        {
+          "name": "diagnostics_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "收敛/残差/影响等实际诊断",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "software_parameters",
+          "type": "string",
+          "required": "always",
+          "meaning": "固定版本和有效配置",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "qc_threshold",
+      "title": "逐范围阈值与依据",
+      "primary_key": [
+        "run_id",
+        "scope_id",
+        "metric"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "分析运行",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "capture/sample/type或其他范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "metric",
+          "type": "string",
+          "required": "always",
+          "meaning": "指标定义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "data_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "原始或处理后来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scale_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "原值/log2/百分数及分母",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "estimation_set_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "用于估阈值的集合hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "center",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "中心值",
+          "validation": "有限",
+          "missing_policy": "未用分布规则填NA"
+        },
+        {
+          "name": "mad_raw",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "未缩放MAD",
+          "validation": "有限非负",
+          "missing_policy": "不适用填NA"
+        },
+        {
+          "name": "mad_scaled",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "实际缩放MAD",
+          "validation": "与定义一致",
+          "missing_policy": "不适用填NA"
+        },
+        {
+          "name": "rule",
+          "type": "string",
+          "required": "always",
+          "meaning": "方向/系数/绝对界限/组合及例外",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cutoff_original",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际原单位界限或上下界",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "provenance_class",
+          "type": "enum",
+          "required": "always",
+          "meaning": "M/D/T/P或注明组合",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "M",
+            "D",
+            "T",
+            "P",
+            "M+D",
+            "M+T",
+            "M+P",
+            "D+T",
+            "D+P",
+            "T+P",
+            "M+D+T",
+            "M+D+P",
+            "M+T+P",
+            "D+T+P",
+            "M+D+T+P"
+          ]
+        },
+        {
+          "name": "basis_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "方法/项目理由和实际版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "decision_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "阈值审阅与适用范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "cell_qc",
+      "title": "逐细胞QC与决定",
+      "primary_key": [
+        "object_id",
+        "cell_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "object_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "对象版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cell_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "identity外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sample_capture_donor",
+          "type": "string",
+          "required": "always",
+          "meaning": "三层映射或链接",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "raw_nUMI",
+          "type": "number",
+          "required": "always",
+          "meaning": "GEX原始总量",
+          "validation": "非负；零需定位",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "raw_nGene",
+          "type": "integer",
+          "required": "always",
+          "meaning": "原始counts>0基因数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "raw_pct_mito",
+          "type": "number",
+          "required": "always",
+          "meaning": "线粒体GEX/总GEX×100",
+          "validation": "0–100或零分母NA",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "doublet_score_class",
+          "type": "string",
+          "required": "always",
+          "meaning": "算法分数/类别及方法，非自动校准概率",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "demux_class",
+          "type": "string",
+          "required": "always",
+          "meaning": "实验解混证据",
+          "validation": "未测填NA",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "ambient_estimate_warning",
+          "type": "string",
+          "required": "always",
+          "meaning": "污染估计及拟合警告",
+          "validation": "未估计填NA并说明",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "all_flags",
+          "type": "string",
+          "required": "always",
+          "meaning": "可重叠触发原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "final_keep",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "最终保留",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "primary_exclusion_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "互斥主原因",
+          "validation": "保留填retained",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "manual_decision_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "flag处理及理由",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "adopted_count_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "下游主计数层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "retention",
+      "title": "阶段流失和分母",
+      "primary_key": [
+        "scope_id",
+        "stage"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "capture/sample及分层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "stage",
+          "type": "string",
+          "required": "always",
+          "meaning": "有明确入口的阶段",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_input",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "进入数量",
+          "validation": "非负",
+          "missing_policy": "上游未知填NA"
+        },
+        {
+          "name": "n_removed_exclusive",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "互斥主排除数",
+          "validation": "非负",
+          "missing_policy": "未知填NA"
+        },
+        {
+          "name": "n_output",
+          "type": "integer",
+          "required": "always",
+          "meaning": "保留数量",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_warn_retained",
+          "type": "integer",
+          "required": "always",
+          "meaning": "保留中的警告数量",
+          "validation": "0≤值≤n_output",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "denominator_definition",
+          "type": "string",
+          "required": "always",
+          "meaning": "该阶段分母",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_id_list_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际集合与hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "balance_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "balanced/failed/not_assessable",
+          "validation": "可评价时input=removed+output；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "balanced",
+            "failed",
+            "not_assessable"
+          ]
+        },
+        {
+          "name": "unknown_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "未知阶段和处理",
+          "validation": "无则none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "eligibility",
+      "title": "模块与样本类型资格",
+      "primary_key": [
+        "module_id",
+        "run_id",
+        "scope_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "module_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "A/B/S/I/C/E/P/J/Q编号",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "sample/type/study等范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_cells",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "真实合格细胞数",
+          "validation": "非负",
+          "missing_policy": "非细胞任务NA"
+        },
+        {
+          "name": "n_samples",
+          "type": "integer",
+          "required": "always",
+          "meaning": "实际生物样本数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_independent_units",
+          "type": "integer",
+          "required": "always",
+          "meaning": "真实独立单位数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "coverage_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "逐组/类型/队列覆盖",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "eligible",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "可否进入指定模块",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "门槛/设计/层/缺失理由",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "permitted_use",
+          "type": "string",
+          "required": "always",
+          "meaning": "允许描述/推断/映射等范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "annotation_layer_design_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "冻结版本外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "run",
+      "title": "任务与真实执行回执",
+      "primary_key": [
+        "run_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "分析运行唯一ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "module_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模块/子分支",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "task_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "atlas/reference_mapping/joint_effect/meta/其他明确任务",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "atlas",
+            "reference_mapping",
+            "joint_effect",
+            "meta",
+            "bulk_de",
+            "celltype_de",
+            "enrichment",
+            "trajectory_descriptive",
+            "trajectory_population",
+            "deconvolution",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "input_manifest",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确输入清单及hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "design_reference_parameter_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "绑定版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "method_version_commit",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际算法与固定实现版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "execution_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "not_started/prepared/submitted/running/completed/failed/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "not_started",
+            "prepared",
+            "submitted",
+            "running",
+            "completed",
+            "failed",
+            "unknown"
+          ]
+        },
+        {
+          "name": "scheduler_runner_receipt",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "真实调度及runner回执",
+          "validation": "准备不等于提交",
+          "missing_policy": "未提交填NA"
+        },
+        {
+          "name": "started_at",
+          "type": "datetime",
+          "required": "conditional",
+          "meaning": "实际开始时间",
+          "validation": "含时区",
+          "missing_policy": "未开始/未知NA"
+        },
+        {
+          "name": "ended_at",
+          "type": "datetime",
+          "required": "conditional",
+          "meaning": "实际结束时间",
+          "validation": "含时区且与运行一致",
+          "missing_policy": "未结束/未知NA"
+        },
+        {
+          "name": "exit_code",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "真实退出码",
+          "validation": "不能由提交成功推断0",
+          "missing_policy": "未结束/未知NA"
+        },
+        {
+          "name": "logs_output_manifest",
+          "type": "string",
+          "required": "always",
+          "meaning": "日志与输出集合定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "seed_device",
+          "type": "string",
+          "required": "always",
+          "meaning": "所有相关随机源/设备",
+          "validation": "确定性或不适用写明",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "review_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "pending/reviewed/restricted/rejected",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "pending",
+            "reviewed",
+            "restricted",
+            "rejected"
+          ]
+        },
+        {
+          "name": "parent_or_recovery_run",
+          "type": "string",
+          "required": "always",
+          "meaning": "父/恢复运行",
+          "validation": "首次none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "parameter",
+      "title": "参数与冻结变更",
+      "primary_key": [
+        "run_id",
+        "module_id",
+        "scope_id",
+        "parameter_name"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "module_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模块",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "适用capture/type/model等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parameter_name",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实函数参数或项目规则",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "value_and_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际值及类型",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "units_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "单位/变换尺度",
+          "validation": "无量纲写dimensionless",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "provenance_class",
+          "type": "enum",
+          "required": "always",
+          "meaning": "M/D/T/P及组合",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "M",
+            "D",
+            "T",
+            "P",
+            "M+D",
+            "M+T",
+            "M+P",
+            "D+T",
+            "D+P",
+            "T+P",
+            "M+D+T",
+            "M+D+P",
+            "M+T+P",
+            "D+T+P",
+            "M+D+T+P"
+          ]
+        },
+        {
+          "name": "source_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "官方/原规范/项目依据和固定软件",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "selection_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "为什么适配当前问题",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "role",
+          "type": "enum",
+          "required": "always",
+          "meaning": "primary/sensitivity/exploratory",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "primary",
+            "sensitivity",
+            "exploratory"
+          ]
+        },
+        {
+          "name": "effective_value_or_rule",
+          "type": "string",
+          "required": "always",
+          "meaning": "自动算法的实际值或规则",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "frozen_at_reviewer",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实冻结与审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "previous_value_change_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "旧值及变更外键",
+          "validation": "首次none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "post_result_change",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "是否看过主结果后改变",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "annotation",
+      "title": "标签与竞争身份",
+      "primary_key": [
+        "annotation_version",
+        "parent_type",
+        "cluster_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "annotation_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "冻结注释版",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parent_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "母谱系",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cluster_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "算法群及版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_cells_samples_donors",
+          "type": "string",
+          "required": "always",
+          "meaning": "数量及可评估分母",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "canonical_panel_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "独立面板及可测性",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "marker_pairwise_files",
+          "type": "string",
+          "required": "always",
+          "meaning": "全背景/返回/Top200/竞争群",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "donor_qc_support_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "供者/技术/污染及稳定性",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_prediction",
+          "type": "string",
+          "required": "always",
+          "meaning": "原始参考建议/分数/版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cell_type_state",
+          "type": "string",
+          "required": "always",
+          "meaning": "谱系类型与状态分栏或连接表",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "annotation_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "accepted/provisional/unresolved",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "accepted",
+            "provisional",
+            "unresolved"
+          ]
+        },
+        {
+          "name": "decision_reason_reviewer",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实决定、范围和审阅",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "label_map_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "一对一cell→标签映射hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "marker",
+      "title": "描述性marker与精确检出率",
+      "primary_key": [
+        "run_id",
+        "parent_type",
+        "cluster_id",
+        "comparison_id",
+        "feature_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parent_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "母群",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cluster_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "目标群",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "comparison_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "母群内OVR或明确pairwise",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "稳定基因ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "assay_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "FC与检出同源层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "avg_log2FC",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "软件定义的FC",
+          "validation": "有限",
+          "missing_policy": "未返回/失败NA及状态"
+        },
+        {
+          "name": "pvalue",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "原marker检验P",
+          "validation": "0≤值≤1",
+          "missing_policy": "未返回/失败NA"
+        },
+        {
+          "name": "p_val_adj",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "原软件调整P",
+          "validation": "0≤值≤1",
+          "missing_policy": "未返回/失败NA"
+        },
+        {
+          "name": "p_adjust_method",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际Bonferroni等定义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "test_background_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "调整及预筛真实背景",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_detect_1",
+          "type": "integer",
+          "required": "always",
+          "meaning": "目标侧检出细胞数",
+          "validation": "0≤值≤n_cells_1",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_cells_1",
+          "type": "integer",
+          "required": "always",
+          "meaning": "目标侧实际细胞分母",
+          "validation": ">0才定义pct1",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_detect_2",
+          "type": "integer",
+          "required": "always",
+          "meaning": "本比较参照检出细胞数",
+          "validation": "0≤值≤n_cells_2",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_cells_2",
+          "type": "integer",
+          "required": "always",
+          "meaning": "本比较参照细胞分母",
+          "validation": ">0；rest为空不得运行",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "pct1_exact",
+          "type": "number",
+          "required": "always",
+          "meaning": "n_detect_1/n_cells_1",
+          "validation": "0–1；不按打印值筛",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "pct2_exact",
+          "type": "number",
+          "required": "always",
+          "meaning": "n_detect_2/n_cells_2",
+          "validation": "0–1；pairwise重算",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "delta_pct",
+          "type": "number",
+          "required": "always",
+          "meaning": "pct1_exact减pct2_exact",
+          "validation": "-1–1",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "rank_and_eligibility",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确筛选/排序及实际最多200",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "program_or_competitor",
+          "type": "string",
+          "required": "always",
+          "meaning": "程序、经典/竞争及审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "test_status_missing_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "返回/预筛/未测/失败区别",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "pb_key",
+      "title": "Pseudobulk聚合键",
+      "primary_key": [
+        "pb_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "pb_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "sample×type稳定键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sample_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实生物样本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "global_donor_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "独立身份/重复外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cell_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "冻结类型",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "condition_region_time",
+          "type": "string",
+          "required": "always",
+          "meaning": "保留原设计差异",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "capture_components",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际技术构成",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_cells",
+          "type": "integer",
+          "required": "always",
+          "meaning": "该聚合合格细胞数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sum_counts",
+          "type": "number",
+          "required": "always",
+          "meaning": "实际计数总量",
+          "validation": "有限非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "count_layer",
+          "type": "string",
+          "required": "always",
+          "meaning": "合法主计数层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "annotation_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "标签版",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "included",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "该门槛方案是否纳入",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "missing_or_exclusion_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "not_captured/below_min/sample_failed/none",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "design_id_threshold_scenario",
+          "type": "string",
+          "required": "always",
+          "meaning": "模型及10/20/50等预设方案",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "differential",
+      "title": "完整差异与缺失状态",
+      "primary_key": [
+        "run_id",
+        "contrast_id",
+        "scope_id",
+        "feature_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "contrast_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "方向/目标外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "bulk/type/事件或明确对象",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "基因/事件/转录本稳定键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "effect",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "原模型或明确估计量",
+          "validation": "有效时有限",
+          "missing_policy": "未检验/失败NA"
+        },
+        {
+          "name": "effect_name",
+          "type": "string",
+          "required": "always",
+          "meaning": "确切估计量名称",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "effect_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "log2/比例差/模型连接等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "positive_direction",
+          "type": "string",
+          "required": "always",
+          "meaning": "正值对应的分子减分母或明确对比",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "standard_error",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "与effect相配采样SE或另定义",
+          "validation": "不能用其他估计的SE",
+          "missing_policy": "不返回/无效NA并说明"
+        },
+        {
+          "name": "ci_low",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "区间下界",
+          "validation": "有效时有限且≤上界",
+          "missing_policy": "不返回/失败NA及原因"
+        },
+        {
+          "name": "ci_high",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "区间上界",
+          "validation": "有效时有限且≥下界",
+          "missing_policy": "不返回/失败NA及原因"
+        },
+        {
+          "name": "interval_type",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "置信/后验等真实区间定义",
+          "validation": "与effect同一模型",
+          "missing_policy": "不返回NA"
+        },
+        {
+          "name": "interval_level",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "区间覆盖水平",
+          "validation": "0<值<1",
+          "missing_policy": "不返回NA"
+        },
+        {
+          "name": "statistic",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "原检验统计量",
+          "validation": "有效时有限；下溢/异常单列",
+          "missing_policy": "未返回/未检验NA"
+        },
+        {
+          "name": "pvalue",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "正式原始P",
+          "validation": "0≤值≤1；0标数值下溢；NA不改1",
+          "missing_policy": "未检验/失败NA"
+        },
+        {
+          "name": "padj",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "按预定家族校正值",
+          "validation": "0≤值≤1；NA保留原因",
+          "missing_policy": "独立过滤等填NA并区分"
+        },
+        {
+          "name": "p_adjust_method",
+          "type": "string",
+          "required": "always",
+          "meaning": "BH/Bonferroni/专用等真实方法",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "test_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "完整检验集合",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_samples_numerator",
+          "type": "integer",
+          "required": "always",
+          "meaning": "分子实际样本数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_samples_denominator",
+          "type": "integer",
+          "required": "always",
+          "meaning": "参照实际样本数",
+          "validation": "非负",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_donors_numerator",
+          "type": "integer",
+          "required": "always",
+          "meaning": "分子实际独立供者数",
+          "validation": "非负；不以细胞/库替代",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_donors_denominator",
+          "type": "integer",
+          "required": "always",
+          "meaning": "参照实际独立供者数",
+          "validation": "非负；重复结构另记录",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "test_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "tested/prefiltered/not_measured/fit_failed/not_estimable/other_explicit",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "tested",
+            "prefiltered",
+            "not_measured",
+            "fit_failed",
+            "not_estimable",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "missing_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "每类NA的具体原因",
+          "validation": "tested无缺失填none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "shrunk_effect_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "收缩展示另表",
+          "validation": "未收缩填NA",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "model_input_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "可回溯精确模型与层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "abundance",
+      "title": "组成与邻域完整结果",
+      "primary_key": [
+        "run_id",
+        "contrast_id",
+        "type_or_nhood_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "contrast_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "比较",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "type_or_nhood_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "类型/邻域稳定键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sample_count_matrix",
+          "type": "string",
+          "required": "always",
+          "meaning": "计数表与样本顺序",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "denominator_definition",
+          "type": "string",
+          "required": "always",
+          "meaning": "全细胞/母谱系/图范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "valid_zero_missing_rule",
+          "type": "string",
+          "required": "always",
+          "meaning": "有效采样零与未采/失败/分母零区别",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "effect_name_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "相对丰度/比例坐标等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "effect_interval",
+          "type": "string",
+          "required": "always",
+          "meaning": "效应及方法适配区间",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "stat_adjustment",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际P/SpatialFDR/后验等含义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_independent_coverage",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际供者和每类型/邻域覆盖",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "graph_model_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "图/距离/模型/参数",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "status_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "资格/失败/缺失与限制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "meta",
+      "title": "跨队列效应与汇总",
+      "primary_key": [
+        "estimate_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "estimate_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "每一项估计的不可变记录ID",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "analysis_variant_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "主/具体留一/具体亚组配置身份",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "类型/组织等真实分析范围",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "model_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "该项模型版本身份",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "汇总身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "contrast_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "共同估计目标",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "稳定特征",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "study_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "研究；合并行用pooled且role注明",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "role",
+          "type": "enum",
+          "required": "always",
+          "meaning": "study_effect/pooled/leave_one_out/subgroup",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "study_effect",
+            "pooled",
+            "leave_one_out",
+            "subgroup"
+          ]
+        },
+        {
+          "name": "effect",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "未收缩且同尺度研究效应/相应合并效应",
+          "validation": "有效时有限",
+          "missing_policy": "不合格NA并记录"
+        },
+        {
+          "name": "sampling_se",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "与该估计匹配的SE",
+          "validation": "普通逆方差研究输入须有限>0",
+          "missing_policy": "不可用NA不得造值"
+        },
+        {
+          "name": "interval_type_bounds",
+          "type": "string",
+          "required": "always",
+          "meaning": "研究/合并区间，预测区间另列",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "n_samples",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "对应行实际研究样本数",
+          "validation": "非负",
+          "missing_policy": "合并行可NA并链接逐研究n"
+        },
+        {
+          "name": "n_independent_units",
+          "type": "integer",
+          "required": "conditional",
+          "meaning": "实际供者/动物等数量",
+          "validation": "非负",
+          "missing_policy": "合并依赖复杂时NA并说明"
+        },
+        {
+          "name": "effective_k",
+          "type": "integer",
+          "required": "always",
+          "meaning": "该特征实际有效研究数",
+          "validation": "≥0；未进入记0",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "dependence_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "重叠/共享对照处理及来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "weight_tau2_I2_Q",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际权重和异质性；小k局限",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "method_test_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "模型/区间/多重检验定义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "heldout_or_subgroup",
+          "type": "string",
+          "required": "always",
+          "meaning": "全部留一/亚组身份",
+          "validation": "主结果none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "prediction_interval_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "新队列可交换性与区间；不可靠则NA原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "eligibility_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "有效/排除/缺测原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ],
+      "unique_constraints": [
+        [
+          "run_id",
+          "contrast_id",
+          "scope_id",
+          "analysis_variant_id",
+          "role",
+          "study_id",
+          "feature_id"
+        ]
+      ]
+    },
+    {
+      "name": "splits",
+      "title": "独立划分与适配边界",
+      "primary_key": [
+        "split_id",
+        "unit_id",
+        "fold_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "split_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "任务划分身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "unit_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实被划分单位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "study_donor_sample",
+          "type": "string",
+          "required": "always",
+          "meaning": "所有相关层身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "fold_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "折或最终集合",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "partition",
+          "type": "enum",
+          "required": "always",
+          "meaning": "train/development/calibration/test/reference/query",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "train",
+            "development",
+            "calibration",
+            "test",
+            "reference",
+            "query"
+          ]
+        },
+        {
+          "name": "generalization_target",
+          "type": "string",
+          "required": "always",
+          "meaning": "新donor/study/target/combination等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "target_components",
+          "type": "string",
+          "required": "always",
+          "meaning": "扰动/组合及训练关系",
+          "validation": "非扰动任务NA",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "allowed_unlabeled_adaptation",
+          "type": "string",
+          "required": "always",
+          "meaning": "预定query影响范围",
+          "validation": "不允许填none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "preprocessing_fit_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "HVG/归一化/特征/阈值fit集合",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "overlap_audit",
+          "type": "string",
+          "required": "always",
+          "meaning": "身份/目标/相关单位泄漏审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "frozen_at",
+          "type": "datetime",
+          "required": "always",
+          "meaning": "拆分冻结时间",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "prediction",
+      "title": "响应 标签与候选评价",
+      "primary_key": [
+        "run_id",
+        "task_id",
+        "heldout_unit",
+        "feature_or_candidate_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模型/方法运行",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "task_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "任务与操作语义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "heldout_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "独立评价单位",
+          "validation": "无外部任务写internal并限制",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_or_candidate_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "预测特征/目标/标签",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "background_dose_time",
+          "type": "string",
+          "required": "always",
+          "meaning": "背景与实际剂量/时间",
+          "validation": "未定义分别写unknown",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "observed",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实评价量或标签",
+          "validation": "无真值NA，不能报准确率",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "predicted",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实模型输出与尺度",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "matched_control_baseline",
+          "type": "string",
+          "required": "always",
+          "meaning": "对照与公平基线",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "metric_and_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "指标、评价特征集与聚合层",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "support_coverage",
+          "type": "string",
+          "required": "always",
+          "meaning": "样本/donor/目标/特征分母",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "unknown_rejection",
+          "type": "string",
+          "required": "always",
+          "meaning": "拒绝、误接收/误拒绝或不适用",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "uncertainty_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "seed/重抽样/外部区间分开",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "controls_status",
+          "type": "string",
+          "required": "always",
+          "meaning": "无扰动/匹配/阳性/随机/外部支持",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "status_failure_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "失败、域外、方向能力与允许结论",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "deconv",
+      "title": "反卷积比例 参考和验证",
+      "primary_key": [
+        "run_id",
+        "bulk_sample_id",
+        "cell_type",
+        "replicate_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "运行/参考版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "bulk_sample_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实bulk样本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "cell_type",
+          "type": "string",
+          "required": "always",
+          "meaning": "参考冻结层级",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "replicate_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "主拟合/留出/bootstrap轮次",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_donor_draw",
+          "type": "string",
+          "required": "always",
+          "meaning": "原donor与draw_id",
+          "validation": "主拟合记录完整reference",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "estimate",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "方法定义的估计量",
+          "validation": "比例路线须满足相应约束",
+          "missing_policy": "缺类/失败NA，不补零"
+        },
+        {
+          "name": "estimate_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "相对细胞组成/RNA权重等真实定义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "truth_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "cell_number_fraction/rna_fraction/captured_cell_fraction/externally_defined/none",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "cell_number_fraction",
+            "rna_fraction",
+            "captured_cell_fraction",
+            "externally_defined",
+            "none"
+          ]
+        },
+        {
+          "name": "truth_value",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "对应真值的实际值",
+          "validation": "与估计目标一致",
+          "missing_policy": "无独立/模拟真值NA"
+        },
+        {
+          "name": "metric_error",
+          "type": "string",
+          "required": "always",
+          "meaning": "逐类型MAE/RMSE/bias等实际结果",
+          "validation": "主无真值NA",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_coverage",
+          "type": "string",
+          "required": "always",
+          "meaning": "type×donor及缺失类型",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "fit_status_warning",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际数值/收敛证据，不以和=1替代",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "failure_reason_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "返回丢类/共线/参考偏差及可报告层级",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "joint",
+      "title": "跨模态配对和证据连接",
+      "primary_key": [
+        "analysis_id",
+        "candidate_id",
+        "evidence_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "analysis_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "联合问题",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "candidate_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "基因/程序/类型/候选",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evidence_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "一条证据唯一身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "modality_source",
+          "type": "string",
+          "required": "always",
+          "meaning": "bulk/sc/sn/spatial/protein等及版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "pairing_level",
+          "type": "enum",
+          "required": "always",
+          "meaning": "exact_specimen/same_donor_region/cohort_matched/unmatched/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "exact_specimen",
+            "same_donor_region",
+            "cohort_matched",
+            "unmatched",
+            "unknown"
+          ]
+        },
+        {
+          "name": "direction_estimand_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "原问题/方向/尺度",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "effect_or_score_interval",
+          "type": "string",
+          "required": "always",
+          "meaning": "原证据效应/区间或明确score",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "independent_units",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际n及与其他证据重叠",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "coverage_and_missing",
+          "type": "string",
+          "required": "always",
+          "meaning": "可测/缺失/低覆盖原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evidence_level",
+          "type": "string",
+          "required": "always",
+          "meaning": "描述/关联复现/模型预测/实测干预等",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_result_model",
+          "type": "string",
+          "required": "always",
+          "meaning": "原完整表/模型外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "conflict_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "明确反向/宽区间/近零/不可评价及替代解释",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "analysis_request",
+      "title": "方法专用任务约定",
+      "primary_key": [
+        "request_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模块/子分支请求",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "module_method",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确模块与方法",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "question_estimand",
+          "type": "string",
+          "required": "always",
+          "meaning": "要回答的问题",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "input_layer_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "明确对象/层/来源和hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "observation_independent_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "观测/独立单位及重复",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "method_decisions",
+          "type": "string",
+          "required": "always",
+          "meaning": "该方法全部专用配置，不只方法名",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "null_model",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际零假设/参考/控制机制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "multiplicity_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "比较家族或不适用理由",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "controls",
+          "type": "string",
+          "required": "always",
+          "meaning": "适配阳性/匹配/随机/外部",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "sensitivity_plan",
+          "type": "string",
+          "required": "always",
+          "meaning": "针对具体风险的方案",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "expected_outputs_acceptance",
+          "type": "string",
+          "required": "always",
+          "meaning": "完整结果/诊断/失败与采用条件",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "server_method_receipt",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确方法实际后端验收",
+          "validation": "未验证NA，不冒充目录可用即通过",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "figure",
+      "title": "面板 图源和导出",
+      "primary_key": [
+        "figure_id",
+        "panel_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "figure_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "独立图文件身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "panel_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "组合面板身份",
+          "validation": "单面板填single",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "module_question",
+          "type": "string",
+          "required": "always",
+          "meaning": "对应模块与科学问题",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "figure_path_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "最终图文件与hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "object_layer_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "确切对象/层及hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_table_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "绘图子表/完整统计及hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "join_keys",
+          "type": "string",
+          "required": "always",
+          "meaning": "可回完整结果的联接键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "observation_independent_n",
+          "type": "string",
+          "required": "always",
+          "meaning": "点/独立单位及逐组实际n",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "denominator_count_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "比例分母与计数表",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "selection_transform_missing",
+          "type": "string",
+          "required": "always",
+          "meaning": "筛选、尺度、截断与NA规则",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "visual_encoding",
+          "type": "string",
+          "required": "always",
+          "meaning": "x/y/colour/size/facet、色轴/顺序",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "statistics_source",
+          "type": "string",
+          "required": "always",
+          "meaning": "model/contrast/effect/区间/家族",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "script_seed_export",
+          "type": "string",
+          "required": "always",
+          "meaning": "脚本版本、随机、尺寸/单位/格式/DPI",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "caption_review_limit",
+          "type": "string",
+          "required": "always",
+          "meaning": "图注、实际尺寸审查、限制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "issue",
+      "title": "异常 定位和恢复",
+      "primary_key": [
+        "issue_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "issue_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "问题唯一ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "error_code",
+          "type": "enum",
+          "required": "always",
+          "meaning": "E001–E040或明确补充码",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "E001",
+            "E002",
+            "E003",
+            "E004",
+            "E005",
+            "E006",
+            "E007",
+            "E008",
+            "E009",
+            "E010",
+            "E011",
+            "E012",
+            "E013",
+            "E014",
+            "E015",
+            "E016",
+            "E017",
+            "E018",
+            "E019",
+            "E020",
+            "E021",
+            "E022",
+            "E023",
+            "E024",
+            "E025",
+            "E026",
+            "E027",
+            "E028",
+            "E029",
+            "E030",
+            "E031",
+            "E032",
+            "E033",
+            "E034",
+            "E035",
+            "E036",
+            "E037",
+            "E038",
+            "E039",
+            "E040",
+            "OTHER_EXPLICIT"
+          ]
+        },
+        {
+          "name": "module_run_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "模块/运行/受影响对象",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "trigger_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "触发事实与源位置",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "severity",
+          "type": "enum",
+          "required": "always",
+          "meaning": "hard_stop/warning/information",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "hard_stop",
+            "warning",
+            "information"
+          ]
+        },
+        {
+          "name": "cause_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "confirmed/suspected/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "confirmed",
+            "suspected",
+            "unknown"
+          ]
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际措施",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "recovery_checkpoint",
+          "type": "enum",
+          "required": "always",
+          "meaning": "CP0/CP1/CP2/CP3/CP4/CP5",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "CP0",
+            "CP1",
+            "CP2",
+            "CP3",
+            "CP4",
+            "CP5"
+          ]
+        },
+        {
+          "name": "invalidated_outputs",
+          "type": "string",
+          "required": "always",
+          "meaning": "需重审/重生成的精确范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "owner_reviewer",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实负责人与复核",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "closed_at",
+          "type": "datetime",
+          "required": "conditional",
+          "meaning": "实际关闭时间",
+          "validation": "仅有关闭证据才填写",
+          "missing_policy": "未关NA"
+        },
+        {
+          "name": "verification_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "关闭检查来源",
+          "validation": "未关闭填pending，不能伪造",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "acceptance",
+      "title": "模块和结论验收",
+      "primary_key": [
+        "module_id",
+        "run_id",
+        "check_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "module_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "模块",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际运行/计划身份",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "check_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "一项具体检查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "execution_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "not_started/prepared/submitted/running/completed/failed/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "not_started",
+            "prepared",
+            "submitted",
+            "running",
+            "completed",
+            "failed",
+            "unknown"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "PASS/WARN/STOP/NA/PENDING",
+          "validation": "PENDING表示尚未验收，不是通过；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "PASS",
+            "WARN",
+            "STOP",
+            "NA",
+            "PENDING"
+          ]
+        },
+        {
+          "name": "acceptance_layer",
+          "type": "enum",
+          "required": "always",
+          "meaning": "input/engineering/method_numeric/scientific/figure",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "input",
+            "engineering",
+            "method_numeric",
+            "scientific",
+            "figure"
+          ]
+        },
+        {
+          "name": "evidence_path_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际证据与hash",
+          "validation": "无证据不能PASS",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "actual_n_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "具体比较/单位/范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reason_limit",
+          "type": "string",
+          "required": "always",
+          "meaning": "警告/停止/NA/待定原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "permitted_use",
+          "type": "string",
+          "required": "always",
+          "meaning": "允许使用范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reviewer_date",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "open_issue_ids",
+          "type": "string",
+          "required": "always",
+          "meaning": "未关闭issue",
+          "validation": "无则none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "release",
+      "title": "发布与依赖",
+      "primary_key": [
+        "release_id",
+        "file_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "release_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "发布唯一ID",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parent_release_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "父版本",
+          "validation": "首次none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "file_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "file清单外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "role_path_bytes_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "用途/位置/大小/hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_module_run",
+          "type": "string",
+          "required": "always",
+          "meaning": "生成模块和真实run",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "input_design_reference_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "绑定来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parameter_annotation_model_versions",
+          "type": "string",
+          "required": "always",
+          "meaning": "配置/标签/模型版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "dependencies",
+          "type": "string",
+          "required": "always",
+          "meaning": "上游对象和结果",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "acceptance_record",
+          "type": "string",
+          "required": "always",
+          "meaning": "验收记录外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "claim_or_panel_ids",
+          "type": "string",
+          "required": "always",
+          "meaning": "支持的主张/面板",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "known_limits",
+          "type": "string",
+          "required": "always",
+          "meaning": "已知缺口/失败/NA",
+          "validation": "无已知限制写none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reproduction_record",
+          "type": "string",
+          "required": "always",
+          "meaning": "主要结果重建证据",
+          "validation": "尚未完成填pending并限制发布",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "retention_update_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "保留与更新规则",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "object_intake",
+      "title": "已整合对象的逐模块接入",
+      "primary_key": [
+        "object_id",
+        "module_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "object_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "收到对象唯一身份/hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "module_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "拟启用模块",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "author_entry_stage",
+          "type": "string",
+          "required": "always",
+          "meaning": "原作者处理到哪一步",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "assay_layer_semantics",
+          "type": "string",
+          "required": "always",
+          "meaning": "全部相关层的真实意义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "identity_reference_coverage",
+          "type": "string",
+          "required": "always",
+          "meaning": "donor/cell/参考/特征恢复情况",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "available_missing_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际可得与缺失，原QC限制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "eligible",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "指定模块可否接入",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "permitted_use",
+          "type": "string",
+          "required": "always",
+          "meaning": "可复用描述/推断/映射等范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "recover_from",
+          "type": "string",
+          "required": "always",
+          "meaning": "补材料/重建入口或检查点",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "parent_conversion_record",
+          "type": "string",
+          "required": "always",
+          "meaning": "父对象与转换核对",
+          "validation": "无转换none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "decision_reviewer",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际依据、决定和审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "method_evidence",
+      "title": "方法证据与版本核对",
+      "primary_key": [
+        "evidence_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "evidence_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "本册R编号或项目证据唯一键",
+          "validation": "非空唯一",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "study_family_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "同一研究的预印本与正式版归同族",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "source_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "benchmark/method_paper/official_api/official_vignette/other_explicit",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "benchmark",
+            "method_paper",
+            "official_api",
+            "official_vignette",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": "always",
+          "meaning": "本次核对的准确题名",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "doi_or_official_url",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确DOI或官方页面",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "publication_or_document_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "正式出版版本或实际文档/commit版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "publication_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "published/preprint/repository/documentation/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "published",
+            "preprint",
+            "repository",
+            "documentation",
+            "unknown"
+          ]
+        },
+        {
+          "name": "superseded_identifiers",
+          "type": "string",
+          "required": "always",
+          "meaning": "被正式版替代的预印本或旧题名",
+          "validation": "无则none",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "discovery_query_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "SciSpace公开检索或主来源检索的私有记录外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "scispace_paper_id",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "SciSpace原返回的unique_id",
+          "validation": "不以DOI冒充",
+          "missing_policy": "非该渠道发现填NA"
+        },
+        {
+          "name": "source_locator",
+          "type": "string",
+          "required": "always",
+          "meaning": "具体Results/Methods/Discussion段落或API小节",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "review_scope",
+          "type": "enum",
+          "required": "always",
+          "meaning": "selected_primary_sections/indexed_primary_sections/abstract_only/metadata_only",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "selected_primary_sections",
+            "indexed_primary_sections",
+            "abstract_only",
+            "metadata_only"
+          ]
+        },
+        {
+          "name": "source_finding",
+          "type": "string",
+          "required": "always",
+          "meaning": "作者在相应研究条件下报告的发现",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "study_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "物种/组织/实验与方法范围；无法核对部分注明unknown",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "limitations",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际核实的限制和未评估范围",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "manual_decision",
+          "type": "string",
+          "required": "always",
+          "meaning": "本手册或项目决定；与作者发现分开",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "affected_modules",
+          "type": "string",
+          "required": "always",
+          "meaning": "W/U及来源模块编号",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evidence_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "verified_in_scope/partial/unverified/conflict/superseded",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "verified_in_scope",
+            "partial",
+            "unverified",
+            "conflict",
+            "superseded"
+          ]
+        },
+        {
+          "name": "reviewer_date",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际复核人与含日期记录；无独立复核不得声称双人审查",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "retrieval_receipt",
+          "type": "string",
+          "required": "always",
+          "meaning": "私有检索/读取记录定位；不得上传私有路径",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "integration_review",
+      "title": "整合采用与生物保留复核",
+      "primary_key": [
+        "run_id",
+        "review_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "候选整合运行外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "review_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "针对确定用途的复核唯一键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "task_purpose",
+          "type": "enum",
+          "required": "always",
+          "meaning": "atlas/coarse_annotation/fine_annotation/abundance/other_explicit",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "atlas",
+            "coarse_annotation",
+            "fine_annotation",
+            "abundance",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "baseline_run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "未整合基线外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "method_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际候选方法、软件和commit",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evaluation_cell_set_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "冻结评价细胞清单hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "feature_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "可比较特征策略及各方法的合法预处理差异",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "batch_and_biology_design",
+          "type": "string",
+          "required": "always",
+          "meaning": "技术与保护生物因素及交叉覆盖表",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "label_source",
+          "type": "string",
+          "required": "always",
+          "meaning": "独立经典面板/原标注/参考等准确来源",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "label_reuse_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "independent/reused_for_training/reused_for_tuning/unknown",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "independent",
+            "reused_for_training",
+            "reused_for_tuning",
+            "unknown"
+          ]
+        },
+        {
+          "name": "shared_support_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "逐类型共同批次/供者支持及NA原因",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "metric_results_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "分类型原始指标与定义；保留未汇总结果",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "protected_state_results",
+          "type": "string",
+          "required": "always",
+          "meaning": "预先指定状态/程序/谱系的核查结果定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "rare_or_isolated_results",
+          "type": "string",
+          "required": "always",
+          "meaning": "孤立/稀有类型覆盖和错误映射复核",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "stability_results",
+          "type": "string",
+          "required": "always",
+          "meaning": "参数及供者/研究留出检查定位",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "hard_biology_conflict",
+          "type": "boolean",
+          "required": "always",
+          "meaning": "是否存在尚未解决的谱系或状态损失",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "adopted_decision",
+          "type": "enum",
+          "required": "always",
+          "meaning": "adopt/restrict/reject/pending",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "adopt",
+            "restrict",
+            "reject",
+            "pending"
+          ]
+        },
+        {
+          "name": "permitted_use_limit",
+          "type": "string",
+          "required": "always",
+          "meaning": "采用用途、粒度及限制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "evidence_and_rule_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "方法证据和预定项目验收规则版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reviewer_date_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际审查日期、决定人和理由",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "reference_review",
+      "title": "反卷积参考与独立验证复核",
+      "primary_key": [
+        "run_id",
+        "validation_id"
+      ],
+      "format": "UTF-8 TSV; literal NA only as specified; preserve status/reason",
+      "fields": [
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "反卷积路线运行外键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "validation_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "冻结验证方案唯一键",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "method_adapter_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实引擎及输入适配实现/commit",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_manifest_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "参考供者/细胞/类型及层清单hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "bulk_manifest_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "bulk输入和处理谱系hash",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "bulk_input_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "raw_counts/TPM/其他明确输入；按所选方法核对",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_input_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实计量、变换、生成表达及其语义",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "modality_and_tissue_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "sc/sn、组织、疾病状态与跨模态覆盖",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "selected_type_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "报告类型全集及粗细层级",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "reference_coverage_gap",
+          "type": "string",
+          "required": "always",
+          "meaning": "缺失和低支持类型及证据；无则none",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "output_fraction_definition",
+          "type": "enum",
+          "required": "always",
+          "meaning": "cell_number_fraction/rna_fraction/captured_cell_fraction/relative_selected_types/other_explicit",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "cell_number_fraction",
+            "rna_fraction",
+            "captured_cell_fraction",
+            "relative_selected_types",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "truth_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "cell_number_fraction/rna_fraction/captured_cell_fraction/externally_defined/none",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "cell_number_fraction",
+            "rna_fraction",
+            "captured_cell_fraction",
+            "externally_defined",
+            "none"
+          ]
+        },
+        {
+          "name": "truth_source_and_pairing",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际真值与exact/same_donor/cohort/unmatched等级",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "development_test_split",
+          "type": "string",
+          "required": "always",
+          "meaning": "供者/研究留出及重叠审计",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "preprocessing_fit_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "特征/过滤/变换/阈值在哪一集合开发",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "simulation_generation",
+          "type": "string",
+          "required": "always",
+          "meaning": "混合生成规则、原始计量、抽样细胞数与RNA贡献；未模拟填none",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "stress_test_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "稀有/近似/遗漏类型及模态偏差挑战",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "metrics_by_type_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "每类型MAE/RMSE/bias等完整结果；相关为补充",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "failure_and_rejection_file",
+          "type": "string",
+          "required": "always",
+          "meaning": "所有失败和拒绝运行；无则none并有完整清单",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "uncertainty_definition",
+          "type": "string",
+          "required": "always",
+          "meaning": "供者重采样/模型后验/外部误差分开说明",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "acceptance_rule_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "按用途预定的误差/下限规则及采用版本",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        },
+        {
+          "name": "decision_scope",
+          "type": "enum",
+          "required": "always",
+          "meaning": "accuracy_validated_in_scope/stability_only/restricted/rejected/pending",
+          "validation": "按定义填写并与上游键一致；允许值见机器字段allowed_values",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测",
+          "allowed_values": [
+            "accuracy_validated_in_scope",
+            "stability_only",
+            "restricted",
+            "rejected",
+            "pending"
+          ]
+        },
+        {
+          "name": "reviewer_date_reason",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际审查、日期、理由及外推限制",
+          "validation": "按定义填写并与上游键一致",
+          "missing_policy": "必填；未知时停止受影响任务，不能猜测"
+        }
+      ]
+    },
+    {
+      "name": "identity_link",
+      "title": "实体关系和解混指派",
+      "primary_key": [
+        "link_id"
+      ],
+      "format": "UTF-8 TSV; literal NA denotes declared missingness; booleans true/false.",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "唯一关系记录ID",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "source_identity_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "identity实体外键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "target_identity_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "identity实体外键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "relation_type",
+          "type": "enum",
+          "required": "always",
+          "meaning": "有方向的实体关系",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "sample_of_donor",
+            "sample_in_capture",
+            "library_from_capture",
+            "library_from_sample",
+            "sequencing_of_library",
+            "cell_from_capture",
+            "cell_assigned_sample",
+            "cell_assigned_donor"
+          ]
+        },
+        {
+          "name": "assignment_status",
+          "type": "enum",
+          "required": "always",
+          "meaning": "confirmed/uncertain/rejected",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "confirmed",
+            "uncertain",
+            "rejected"
+          ]
+        },
+        {
+          "name": "confidence",
+          "type": "number",
+          "required": "conditional",
+          "meaning": "算法原始指派分数；不自动是校准概率",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "方法未返回可NA"
+        },
+        {
+          "name": "source_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "来源/映射版本",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际支持该关系的定位",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "limitation",
+          "type": "string",
+          "required": "always",
+          "meaning": "限制；无则none",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        }
+      ],
+      "unique_constraints": [
+        [
+          "source_identity_id",
+          "target_identity_id",
+          "relation_type"
+        ]
+      ]
+    },
+    {
+      "name": "enrichment_review",
+      "title": "富集零模型和偏倚审查",
+      "primary_key": [
+        "review_id"
+      ],
+      "format": "UTF-8 TSV; literal NA denotes declared missingness; booleans true/false.",
+      "fields": [
+        {
+          "name": "review_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "审查唯一键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "计划或真实运行外键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "contrast_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "比较方向身份",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "scope_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "类型/组织/背景",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "method_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "方法和锁定版本",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "test_class",
+          "type": "enum",
+          "required": "always",
+          "meaning": "检验目标类型",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "preranked_competitive",
+            "ora_competitive",
+            "competitive_design",
+            "self_contained_design",
+            "descriptive_score"
+          ]
+        },
+        {
+          "name": "sampling_regime",
+          "type": "enum",
+          "required": "always",
+          "meaning": "真实测量机制",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "full_length_fragment",
+            "end_tag_UMI",
+            "array",
+            "other_explicit"
+          ]
+        },
+        {
+          "name": "input_universe_rank_hash",
+          "type": "string",
+          "required": "always",
+          "meaning": "输入背景/排名来源和哈希",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "selection_bias_evidence",
+          "type": "string",
+          "required": "always",
+          "meaning": "长度/丰度/可测性诊断或不适用依据",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "gene_correlation_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "基因相关和独立证据限制",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "null_and_exchangeability",
+          "type": "string",
+          "required": "always",
+          "meaning": "零假设、随机化单位及可交换性",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "bias_action",
+          "type": "enum",
+          "required": "always",
+          "meaning": "按风险采用的动作",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "none_with_reason",
+            "planned_sensitivity",
+            "completed_sensitivity",
+            "restricted"
+          ]
+        },
+        {
+          "name": "sensitivity_result",
+          "type": "string",
+          "required": "always",
+          "meaning": "预案/实际敏感性及状态",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "test_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "校正家族",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "decision",
+          "type": "enum",
+          "required": "always",
+          "meaning": "ready_for_server/restricted/blocked/pending",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "ready_for_server",
+            "restricted",
+            "blocked",
+            "pending"
+          ]
+        },
+        {
+          "name": "limitations",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际限制；无则none",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "reviewer_date",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实审查和日期",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        }
+      ]
+    },
+    {
+      "name": "trajectory_review",
+      "title": "多样本轨迹推断合同",
+      "primary_key": [
+        "review_id"
+      ],
+      "format": "UTF-8 TSV; literal NA denotes declared missingness; booleans true/false.",
+      "fields": [
+        {
+          "name": "review_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "审查唯一键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "计划/真实运行身份",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "mode",
+          "type": "enum",
+          "required": "always",
+          "meaning": "descriptive/population_dynamic",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "descriptive",
+            "population_dynamic"
+          ]
+        },
+        {
+          "name": "hypothesis",
+          "type": "string",
+          "required": "always",
+          "meaning": "沿程/均值平移/曲线/拓扑/密度的具体零假设",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "method_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "方法/版本及接口",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "input_scale",
+          "type": "string",
+          "required": "always",
+          "meaning": "按方法要求的输入层；不能统一套counts",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "sample_design",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际donor/sample/配对和协变量来源",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "independent_unit",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实供者/动物/独立实验；不是cell",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "dependence_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "相关结构和误差估计",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "exchangeability",
+          "type": "string",
+          "required": "always",
+          "meaning": "重采样/置换单位、区组或不适用理由",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "root_lineage",
+          "type": "string",
+          "required": "always",
+          "meaning": "根依据和可比较分支",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "topology_policy",
+          "type": "string",
+          "required": "always",
+          "meaning": "拓扑/拟时序不确定性与条件解释",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "coverage_missingness",
+          "type": "string",
+          "required": "always",
+          "meaning": "每样本状态覆盖及缺失",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "test_family",
+          "type": "string",
+          "required": "always",
+          "meaning": "预设检验家族",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "backend_readiness_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "method_readiness外键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "decision",
+          "type": "enum",
+          "required": "always",
+          "meaning": "ready_for_server/restricted/blocked/pending",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "ready_for_server",
+            "restricted",
+            "blocked",
+            "pending"
+          ]
+        },
+        {
+          "name": "limitations",
+          "type": "string",
+          "required": "always",
+          "meaning": "结论范围",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "reviewer_date",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实审查和日期",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        }
+      ]
+    },
+    {
+      "name": "method_readiness",
+      "title": "方法实现与采用分层状态",
+      "primary_key": [
+        "readiness_id"
+      ],
+      "format": "UTF-8 TSV; literal NA denotes declared missingness; booleans true/false.",
+      "fields": [
+        {
+          "name": "readiness_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "资格记录唯一ID",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": "always",
+          "meaning": "analysis_request外键",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "method_version",
+          "type": "string",
+          "required": "always",
+          "meaning": "精确方法与版本",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "compute_placement",
+          "type": "enum",
+          "required": "always",
+          "meaning": "server",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "server"
+          ]
+        },
+        {
+          "name": "input_design_parameter_binding",
+          "type": "string",
+          "required": "always",
+          "meaning": "实际输入/设计/参数/参考绑定或待补说明",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "engineering_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "unverified/static_review/example_executed/project_executed/independent_reproduction",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "unverified",
+            "static_review",
+            "example_executed",
+            "project_executed",
+            "independent_reproduction"
+          ]
+        },
+        {
+          "name": "numeric_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "unassessed/pass/fail",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "unassessed",
+            "pass",
+            "fail"
+          ]
+        },
+        {
+          "name": "scientific_state",
+          "type": "enum",
+          "required": "always",
+          "meaning": "unassessed/adopt/restrict/reject",
+          "validation": "按本版合同填写并保留来源；允许值见机器字段allowed_values",
+          "missing_policy": "必填；缺少则阻断受影响任务",
+          "allowed_values": [
+            "unassessed",
+            "adopt",
+            "restrict",
+            "reject"
+          ]
+        },
+        {
+          "name": "receipt_manifest",
+          "type": "string",
+          "required": "conditional",
+          "meaning": "真实回执清单；未运行用NA",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "未执行须NA且状态不可升级"
+        },
+        {
+          "name": "diagnostics",
+          "type": "string",
+          "required": "always",
+          "meaning": "数值诊断或尚待执行",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "acceptance_scope",
+          "type": "string",
+          "required": "always",
+          "meaning": "验收针对的参数/设计范围",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "limits",
+          "type": "string",
+          "required": "always",
+          "meaning": "未解决限制",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        },
+        {
+          "name": "reviewer_date",
+          "type": "string",
+          "required": "always",
+          "meaning": "真实复核和日期",
+          "validation": "按本版合同填写并保留来源",
+          "missing_policy": "必填；缺少则阻断受影响任务"
+        }
+      ]
+    }
+  ],
+  "parent_templates_sha256": "95a2aba33ba7c4c19f0ad9a9af81b15d2a4864bd46af618d431563c710837773",
+  "validation_scope": "Metadata structure and explicit semantic checks only; never scientific acceptance or engine execution."
+}

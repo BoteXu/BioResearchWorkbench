@@ -1,0 +1,115 @@
+"""Step 10 — >=30 classifier benchmark (feature selection INSIDE folds) + SHAP.
+
+Never select features on the full dataset before cross-validating (gotchas §5).
+"""
+from __future__ import annotations
+import warnings; warnings.filterwarnings("ignore")
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import StratifiedKFold, cross_val_predict, cross_val_score
+from sklearn.metrics import roc_curve, auc
+from sklearn.linear_model import LogisticRegression, RidgeClassifier, SGDClassifier, PassiveAggressiveClassifier, Perceptron
+from sklearn.naive_bayes import GaussianNB, BernoulliNB
+from sklearn.neighbors import KNeighborsClassifier, NearestCentroid
+from sklearn.svm import SVC, NuSVC, LinearSVC
+from sklearn.tree import DecisionTreeClassifier, ExtraTreeClassifier
+from sklearn.ensemble import (RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier,
+                              HistGradientBoostingClassifier, AdaBoostClassifier, BaggingClassifier,
+                              VotingClassifier, StackingClassifier)
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis, LinearDiscriminantAnalysis
+from sklearn.neural_network import MLPClassifier
+import utils
+try: from xgboost import XGBClassifier
+except Exception as e: XGBClassifier = None; print("[ml] xgboost unavailable:", str(e)[:60])
+try: from lightgbm import LGBMClassifier
+except Exception as e: LGBMClassifier = None; print("[ml] lightgbm unavailable:", str(e)[:60])
+try: from catboost import CatBoostClassifier
+except Exception as e: CatBoostClassifier = None
+
+
+def run(cfg):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    X = expr[samples].T.values
+    K = cfg["ml"]["n_features"]; nf = cfg["ml"]["n_folds"]; seed = cfg["ml"]["seed"]
+    P = lambda m, scale=True: Pipeline((([("s", StandardScaler())] if scale else []) +
+                                        [("sel", SelectKBest(f_classif, k=K)), ("m", m)]))
+    M = {
+      "Logistic (L2)": P(LogisticRegression(max_iter=3000, C=.1)),
+      "Logistic (L1)": P(LogisticRegression(max_iter=3000, penalty="l1", solver="liblinear", C=.1)),
+      "Ridge": P(RidgeClassifier()), "SGD (log)": P(SGDClassifier(loss="log_loss", random_state=seed)),
+      "SGD (hinge)": P(SGDClassifier(loss="hinge", random_state=seed)),
+      "Passive-Aggressive": P(PassiveAggressiveClassifier(random_state=seed)), "Perceptron": P(Perceptron(random_state=seed)),
+      "GaussianNB": P(GaussianNB()), "BernoulliNB": P(BernoulliNB()),
+      "KNN (k=5)": P(KNeighborsClassifier(5)), "KNN (k=15)": P(KNeighborsClassifier(15)),
+      "NearestCentroid": P(NearestCentroid()),
+      "SVC (linear)": P(SVC(kernel="linear", probability=True, random_state=seed)),
+      "SVC (rbf)": P(SVC(kernel="rbf", probability=True, random_state=seed)),
+      "SVC (poly)": P(SVC(kernel="poly", probability=True, random_state=seed)),
+      "SVC (sigmoid)": P(SVC(kernel="sigmoid", probability=True, random_state=seed)),
+      "NuSVC": P(NuSVC(probability=True, random_state=seed)),
+      "LinearSVC": P(LinearSVC(max_iter=5000, random_state=seed)),
+      "DecisionTree": P(DecisionTreeClassifier(max_depth=6, random_state=seed), scale=False),
+      "ExtraTree": P(ExtraTreeClassifier(max_depth=6, random_state=seed), scale=False),
+      "RandomForest": P(RandomForestClassifier(n_estimators=500, max_depth=6, random_state=seed, n_jobs=-1), scale=False),
+      "ExtraTrees": P(ExtraTreesClassifier(n_estimators=500, max_depth=6, random_state=seed, n_jobs=-1), scale=False),
+      "GradientBoosting": P(GradientBoostingClassifier(n_estimators=200, random_state=seed), scale=False),
+      "HistGradientBoosting": P(HistGradientBoostingClassifier(max_iter=200, random_state=seed), scale=False),
+      "AdaBoost": P(AdaBoostClassifier(n_estimators=200, random_state=seed), scale=False),
+      "Bagging": P(BaggingClassifier(n_estimators=200, random_state=seed, n_jobs=-1), scale=False),
+      "QDA": P(QuadraticDiscriminantAnalysis()), "LDA": P(LinearDiscriminantAnalysis()),
+      "MLP": P(MLPClassifier(hidden_layer_sizes=(128, 64), max_iter=1000, random_state=seed)),
+    }
+    if XGBClassifier: M["XGBoost"] = P(XGBClassifier(n_estimators=300, max_depth=4, learning_rate=.05, random_state=seed, n_jobs=4, verbosity=0), scale=False)
+    if LGBMClassifier: M["LightGBM"] = P(LGBMClassifier(n_estimators=300, max_depth=4, learning_rate=.05, random_state=seed, n_jobs=4, verbose=-1), scale=False)
+    if CatBoostClassifier: M["CatBoost"] = P(CatBoostClassifier(iterations=300, depth=4, learning_rate=.05, random_seed=seed, verbose=0), scale=False)
+    M["Voting (soft)"] = VotingClassifier([("lr", M["Logistic (L2)"]), ("rf", M["RandomForest"])], voting="soft")
+    M["Stacking"] = StackingClassifier([("lr", M["Logistic (L2)"]), ("rf", M["RandomForest"]), ("sv", M["SVC (rbf)"])],
+                                       final_estimator=LogisticRegression(max_iter=2000))
+    cv = StratifiedKFold(n_folds, shuffle=True, random_state=seed)
+    rows = []
+    for name, mdl in M.items():
+        try:
+            try: p_ = cross_val_predict(mdl, X, y, cv=cv, method="predict_proba")[:, 1]
+            except (AttributeError, ValueError): p_ = cross_val_predict(mdl, X, y, cv=cv, method="decision_function")
+            a_ = auc(*roc_curve(y, p_)[:2])
+            acc = cross_val_score(mdl, X, y, cv=cv, scoring="accuracy").mean()
+            rows.append(dict(model=name, auc=a_, accuracy=acc))
+        except Exception as e:
+            print(f"  {name:<24} FAILED: {str(e)[:50]}")
+    R = pd.DataFrame(rows).sort_values("auc", ascending=False)
+    utils.save_table(R, cfg, "ml_benchmark.csv")
+    print(f"\n[ml] {len(R)} models; median AUC {R['auc'].median():.4f}")
+    print(R.head(10).to_string(index=False))
+    fig, ax = plt.subplots(figsize=(8, max(5, len(R) * .32)))
+    d = R.iloc[::-1]
+    ax.barh(d["model"], d["auc"], color=[colors["case"] if v >= .99 else colors["control"] for v in d["auc"]])
+    ax.set_xlim(min(.8, d["auc"].min() - .02), 1.005)
+    for i, v in enumerate(d["auc"]): ax.text(v + .001, i, f"{v:.3f}", va="center", fontsize=7)
+    utils.strip_plot(ax, f"ML benchmark — {len(R)} classifiers (feature selection inside folds)", "5-fold CV AUC")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F10_ml_benchmark")
+
+    # ---- SHAP ----
+    try:
+        import shap
+        from sklearn.ensemble import RandomForestClassifier as RF
+        sel = SelectKBest(f_classif, k=min(50, X.shape[1])).fit(X, y)
+        idx = sel.get_support()
+        Xs = X[:, idx]; feats = np.array(expr.index)[idx]
+        rf = RF(n_estimators=500, max_depth=6, random_state=seed, n_jobs=-1).fit(Xs, y)
+        sv = shap.TreeExplainer(rf).shap_values(Xs)
+        sv = sv[1] if isinstance(sv, list) else np.asarray(sv)
+        mapping = utils.attach_symbols(cfg, expr)
+        imp = pd.DataFrame({"gene_id": feats, "mean_abs_shap": np.abs(sv).mean(0)}) \
+                .sort_values("mean_abs_shap", ascending=False)
+        imp["symbol"] = imp["gene_id"].map(mapping)
+        utils.save_table(imp, cfg, "shap_importance.csv")
+        names = [s if isinstance(s, str) else g for s, g in zip(imp["symbol"], imp["gene_id"])][:20]
+        plt.figure(); shap.summary_plot(sv[:, np.argsort(-imp["mean_abs_shap"].values)[:20]], Xs[:, np.argsort(-imp["mean_abs_shap"].values)[:20]],
+                                        feature_names=names, max_display=20, show=False, plot_size=(8.2, 7))
+        plt.title("SHAP summary — top 20 genes", fontsize=11, weight="bold", loc="left")
+        plt.tight_layout(); utils.save_fig(plt.gcf(), cfg, "F10_shap")
+    except Exception as e:
+        print("[ml] SHAP skipped:", str(e)[:80])

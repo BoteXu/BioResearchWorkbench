@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-29",
+  "title": "Interaction Profiles as a Universal Language for Generative Molecular Design with ShEPhERD-2",
+  "doi": "10.64898/2026.09.10.750648",
+  "selected_primary_v1_methods_located": true,
+  "version_scope": "v1 author preprint mirror; footer 2026-09-12; selected section 4.4-4.5.1 pp21-22",
+  "url": "https://www.researchgate.net/publication/414270247_Interaction_Profiles_as_a_Universal_Language_for_Generative_Molecular_Design_with_ShEPhERD-2",
+  "license_as_displayed": "CC BY 4.0",
+  "official_v2_fulltext": "ACCESS_RESTRICTED_NOT_REVIEWED",
+  "supplementary_materials": "NOT_REVIEWED",
+  "performance_numbers_used": false,
+  "full_training_or_all_benchmark_reproduction": false,
+  "private_inputs_sent": false,
+  "source_implementation": "fixed original ConditionalEvalPipeline plus separate evidence capture; fixed-pose QC remains distinct",
+  "limitations": [
+    "located selected v1 methods do not establish v2 or supplement agreement",
+    "no scientific backends have been executed on server",
+    "native default GFN method not explicitly selected; actual logs and version review still required"
+  ]
+}

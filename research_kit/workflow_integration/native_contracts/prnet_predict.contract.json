@@ -1,0 +1,62 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "features",
+    "query_expression",
+    "condition_embeddings",
+    "query_metadata"
+  ],
+  "required_parameters": [
+    "architecture",
+    "batch_size",
+    "maximum_cases",
+    "accelerator",
+    "gaussian_sampling",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "prediction_matrix",
+    "prediction_mean",
+    "prediction_sd",
+    "prediction_identity"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "model_predicted_expression",
+  "schema": "native-completion-contract/1",
+  "tool": "PRnet",
+  "source_commit": [
+    "Perturbation-Response-Prediction/PRnet",
+    "f19174bde3ed2633f54c7831799cc38c4ffc7a0d"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Native Gaussian PGM inference with actual fixed drug/dose embeddings; no new training, no fabricated chemical embedding or independent-validation claim.",
+  "figure_views": [
+    "matrix",
+    "scatter"
+  ]
+}

@@ -1,0 +1,1143 @@
+{
+  "schema": "native-result-figure-policy/1",
+  "version": "3.4-private-review",
+  "scope": "49 v3.3 source routes; mapping is not server runtime acceptance",
+  "default_shap": "reference_classic, single-output small_rose_inset",
+  "routes": {
+    "seurat_workflow": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "processed_object",
+        "unintegrated_baseline",
+        "cell_metadata",
+        "embedding",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "harmony_integrate": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "processed_object",
+        "unintegrated_baseline",
+        "cell_metadata",
+        "embedding",
+        "integrated_representation",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "multivi_integrate": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "integrated_representation",
+        "cell_metadata",
+        "training_history",
+        "model_checkpoint",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "totalvi_integrate": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "integrated_representation",
+        "cell_metadata",
+        "training_history",
+        "model_checkpoint",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "spatialglue_integrate": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "integrated_representation",
+        "modality_representation",
+        "modality_attention",
+        "spatial_identity",
+        "training_diagnostics",
+        "processed_object",
+        "model_checkpoint",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "banksy_domains": {
+      "kind": "stored_representation",
+      "result_roles": [
+        "spatial_domains",
+        "spatial_representations",
+        "section_identity",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "dim_facet",
+        "batch_umap",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Stored axes only. A latent matrix is not automatically UMAP, observed expression or proof of batch-correction success.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "seurat_transfer": {
+      "kind": "annotation",
+      "result_roles": [
+        "processed_object",
+        "annotation_scores",
+        "anchor_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "dot_plot",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Keep scores, pruned labels, reference coverage and unknown identities separate. A score is not a calibrated label probability.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "singler_annotate": {
+      "kind": "annotation",
+      "result_roles": [
+        "annotation",
+        "annotation_scores",
+        "reference_coverage",
+        "annotation_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "dot_plot",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Keep scores, pruned labels, reference coverage and unknown identities separate. A score is not a calibrated label probability.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "hdwgcna_network": {
+      "kind": "network",
+      "result_roles": [
+        "processed_object",
+        "modules",
+        "module_eigengenes",
+        "soft_threshold",
+        "module_TOM",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "module_trait",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Keep actual soft powers, module membership, eigengenes and TOM. Do not recluster TOM with an unrelated Euclidean distance or treat metacells as donors.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "palantir_trajectory": {
+      "kind": "trajectory_order",
+      "result_roles": [
+        "pseudotime",
+        "fate_probabilities",
+        "diffusion_space",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "trajectory",
+        "pseudotime_lines",
+        "pseudotime_heat"
+      ],
+      "interpretation_boundary": "Pseudotime and fate probabilities retain roots/partitions and original representation. They are not physical time or experimentally established lineage.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "monocle3_trajectory": {
+      "kind": "trajectory_order",
+      "result_roles": [
+        "pseudotime",
+        "principal_graph",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "trajectory",
+        "pseudotime_lines",
+        "pseudotime_heat"
+      ],
+      "interpretation_boundary": "Pseudotime and fate probabilities retain roots/partitions and original representation. They are not physical time or experimentally established lineage.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "scgen_predict": {
+      "kind": "model_expression",
+      "result_roles": [
+        "predicted_expression",
+        "latent_shift",
+        "latent_shift_table",
+        "training_history",
+        "prediction_identity",
+        "model_checkpoint",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud",
+        "feature_grid"
+      ],
+      "interpretation_boundary": "Keep observed data, predicted responses and reference reconstructions distinct. Preserve target scenarios and exact producer validation scope; no count/DE/causal substitution.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "scvidr_predict": {
+      "kind": "model_expression",
+      "result_roles": [
+        "predicted_expression",
+        "heldout_expression",
+        "prediction_identity",
+        "heldout_identity",
+        "prediction_attrition",
+        "latent_shift_table",
+        "diagnostics",
+        "backend_versions",
+        "model_checkpoint",
+        "training_history"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud",
+        "feature_grid"
+      ],
+      "interpretation_boundary": "Keep observed data, predicted responses and reference reconstructions distinct. Preserve target scenarios and exact producer validation scope; no count/DE/causal substitution.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "biolord_attributes": {
+      "kind": "model_expression",
+      "result_roles": [
+        "attribute_representation",
+        "split_identity",
+        "predicted_expression",
+        "prediction_identity",
+        "diagnostics",
+        "backend_versions",
+        "model_checkpoint",
+        "training_history"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud",
+        "feature_grid"
+      ],
+      "interpretation_boundary": "Keep observed data, predicted responses and reference reconstructions distinct. Preserve target scenarios and exact producer validation scope; no count/DE/causal substitution.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "causcell_counterfactual_fit": {
+      "kind": "model_expression",
+      "result_roles": [
+        "encoded_object",
+        "concept_mapping",
+        "model_checkpoint",
+        "predicted_expression",
+        "prediction_identity",
+        "observed_source_identity",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud",
+        "feature_grid"
+      ],
+      "interpretation_boundary": "Keep observed data, predicted responses and reference reconstructions distinct. Preserve target scenarios and exact producer validation scope; no count/DE/causal substitution.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "diablo_fit": {
+      "kind": "factors",
+      "result_roles": [
+        "factor_scores",
+        "factor_loadings",
+        "model_object",
+        "sample_metadata",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "module_trait"
+      ],
+      "interpretation_boundary": "DIABLO fit is not independent validation; SNF similarity is not a causal network; CellCap decoder projections are model weights, not measured gene effects.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "snf_fusion": {
+      "kind": "factors",
+      "result_roles": [
+        "fused_similarity",
+        "cluster_assignments",
+        "model_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "module_trait"
+      ],
+      "interpretation_boundary": "DIABLO fit is not independent validation; SNF similarity is not a causal network; CellCap decoder projections are model weights, not measured gene effects.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cellcap_programs": {
+      "kind": "factors",
+      "result_roles": [
+        "basal_representation",
+        "program_usage",
+        "program_relevance",
+        "program_gene_projection",
+        "training_history",
+        "model_checkpoint",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "module_trait"
+      ],
+      "interpretation_boundary": "DIABLO fit is not independent validation; SNF similarity is not a causal network; CellCap decoder projections are model weights, not measured gene effects.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "msstats_compare": {
+      "kind": "differential",
+      "result_roles": [
+        "protein_differential",
+        "processed_object",
+        "model_object",
+        "missingness",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "volcano",
+        "effect_matrix",
+        "forest",
+        "contrast_grid"
+      ],
+      "interpretation_boundary": "Use the supplied effect scale, uncertainty and tested universe. Spatial association without a supplied effect cannot be drawn as a volcano. Retain missing populations and donor/section units.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "muscat_pseudobulk": {
+      "kind": "differential",
+      "result_roles": [
+        "singlecell_differential",
+        "population_eligibility",
+        "design_matrix",
+        "contrast_matrix",
+        "result_identity",
+        "pseudobulk_object",
+        "model_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "volcano",
+        "effect_matrix",
+        "forest",
+        "contrast_grid"
+      ],
+      "interpretation_boundary": "Use the supplied effect scale, uncertainty and tested universe. Spatial association without a supplied effect cannot be drawn as a volcano. Retain missing populations and donor/section units.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "spark_spatial": {
+      "kind": "differential",
+      "result_roles": [
+        "spatial_differential",
+        "spatial_filter",
+        "section_qc",
+        "model_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "volcano",
+        "effect_matrix",
+        "forest",
+        "contrast_grid"
+      ],
+      "interpretation_boundary": "Use the supplied effect scale, uncertainty and tested universe. Spatial association without a supplied effect cannot be drawn as a volcano. Retain missing populations and donor/section units.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "mixscape_classify": {
+      "kind": "perturbation_classification",
+      "result_roles": [
+        "perturbation_classification",
+        "classification_by_unit",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "proportion_stack",
+        "dim_highlight"
+      ],
+      "interpretation_boundary": "Retain NP/unknown classes and within-unit strata. Classification fractions are not validated KO efficacy or donor-level differential abundance.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cellot_predict": {
+      "kind": "transport_feature_space",
+      "result_roles": [
+        "predicted_expression",
+        "prediction_identity",
+        "prediction_summary",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud"
+      ],
+      "interpretation_boundary": "Author feature-space transport is not necessarily gene expression; the legacy predicted_expression role is not permission to relabel it.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "destvi_deconvolution": {
+      "kind": "estimated_proportion",
+      "result_roles": [
+        "celltype_proportions",
+        "celltype_latent_state",
+        "celltype_state_identity",
+        "model_checkpoint",
+        "training_history",
+        "spatial_identity",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "proportion_stack",
+        "feature_grid"
+      ],
+      "interpretation_boundary": "Only get_proportions output is a normalized proportion. Gamma is latent state; spots are not biological replicates.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cell2location_reference": {
+      "kind": "reference_signature",
+      "result_roles": [
+        "reference_signatures",
+        "reference_signature_uncertainty",
+        "model_checkpoint",
+        "training_history",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "forest"
+      ],
+      "interpretation_boundary": "Reference signatures and posterior uncertainty retain their original scale and reference design.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cell2location_map": {
+      "kind": "estimated_abundance",
+      "result_roles": [
+        "celltype_abundance",
+        "abundance_uncertainty",
+        "model_checkpoint",
+        "training_history",
+        "spatial_identity",
+        "processed_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "feature_grid",
+        "forest"
+      ],
+      "interpretation_boundary": "Unnormalized estimated abundance is not a proportion or exact measured count. Q05/Q95 is a 90% posterior credible interval when used as endpoints.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "progeny_activity": {
+      "kind": "activity_score",
+      "result_roles": [
+        "pathway_activity",
+        "pathway_coverage",
+        "sample_metadata",
+        "resource_model",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud"
+      ],
+      "interpretation_boundary": "PROGENy footprints and drug2cell target-expression scores retain resource/version/coverage. They are not GSVA enrichment P-values, binding affinity or drug potency.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "drug2cell_score": {
+      "kind": "activity_score",
+      "result_roles": [
+        "drug_scores",
+        "target_coverage",
+        "unit_activity",
+        "scored_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud"
+      ],
+      "interpretation_boundary": "PROGENy footprints and drug2cell target-expression scores retain resource/version/coverage. They are not GSVA enrichment P-values, binding affinity or drug potency.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cellphonedb_per_unit": {
+      "kind": "communication",
+      "result_roles": [
+        "lr_means",
+        "lr_pvalues",
+        "lr_significant_means",
+        "stratum_eligibility",
+        "stratum_metadata",
+        "stratum_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "cellcomm_bubble",
+        "cellcomm_chord"
+      ],
+      "interpretation_boundary": "Keep actual database interaction IDs, means and within-stratum permutation P-values. No invented between-donor contrast or evidence of physical binding.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "paste_pairwise": {
+      "kind": "transport_coupling",
+      "result_roles": [
+        "spatial_coupling",
+        "coupling_source_identity",
+        "coupling_target_identity",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "alluvial"
+      ],
+      "interpretation_boundary": "Transport mass and source/target axes must remain exact. OT coupling is not an experimentally paired cell correspondence; do not renormalize or discard weak entries for aesthetics.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "squidpy_section_statistics": {
+      "kind": "spatial_statistics",
+      "result_roles": [
+        "spatial_autocorrelation",
+        "neighborhood_enrichment",
+        "neighborhood_counts",
+        "cooccurrence",
+        "spatial_graph",
+        "section_diagnostics",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "module_trait"
+      ],
+      "interpretation_boundary": "Keep section-specific graph/distance units, Moran statistics, neighborhood counts/Z-scores and cooccurrence distinct. Preserve undefined values.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "vep_offline": {
+      "kind": "variant_annotation",
+      "result_roles": [
+        "annotated_variants",
+        "variant_consequences",
+        "diagnostics",
+        "backend_versions",
+        "native_command"
+      ],
+      "preferred_figures": [
+        "oncoprint"
+      ],
+      "interpretation_boundary": "Literal variant/allele/reference identity and consequence terms are required; annotated consequence alone is not measured function or clinical pathogenicity.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "ldsc_h2": {
+      "kind": "genetic_estimate",
+      "result_roles": [
+        "native_ldsc_log",
+        "heritability_estimates",
+        "diagnostics",
+        "backend_versions",
+        "native_command"
+      ],
+      "preferred_figures": [
+        "forest",
+        "effect_matrix"
+      ],
+      "interpretation_boundary": "Retain estimate scale, supplied uncertainty, LD/allele QC and HEIDI missing states. Do not clip negative heritability or call HEIDI non-rejection proof of causality.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "smr_heidi": {
+      "kind": "genetic_estimate",
+      "result_roles": [
+        "native_smr_results",
+        "genetic_evidence",
+        "allele_qc",
+        "native_command",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "forest",
+        "effect_matrix"
+      ],
+      "interpretation_boundary": "Retain estimate scale, supplied uncertainty, LD/allele QC and HEIDI missing states. Do not clip negative heritability or call HEIDI non-rejection proof of causality.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "seurat_to_anndata": {
+      "kind": "format_exchange",
+      "result_roles": [
+        "processed_object",
+        "exchange_source_material",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "umap_clusters",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Exact format exchange preserves observed layers and stored geometry; identity round-trip is not new analysis or scientific validation.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cinemaot_effects": {
+      "kind": "counterfactual_effect",
+      "result_roles": [
+        "counterfactual_effect_object",
+        "effect_identity",
+        "control_identity",
+        "unit_effect_summary",
+        "pair_diagnostics",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "effect_matrix",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Actual differences on the producer log1p scale are not log2 fold changes. Matching is computational, not experimental pairing or causal proof.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "systema_evaluate": {
+      "kind": "evaluation_rank",
+      "result_roles": [
+        "centroid_accuracy",
+        "perturbation_metrics",
+        "observed_centroids",
+        "predicted_centroids",
+        "reference_profile",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "radar",
+        "parallel_coords",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Centroid accuracy is a rank fraction with the native other-centroid denominator, not binary nearest-centroid accuracy. Correlation undefinedness and top-gene selection remain explicit.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "xcms_preprocess": {
+      "kind": "feature_intensity",
+      "result_roles": [
+        "feature_intensities_detected",
+        "feature_intensities",
+        "feature_definitions",
+        "sample_axis_map",
+        "sample_metadata",
+        "chromatographic_peaks",
+        "run_qc",
+        "processed_object",
+        "processing_history",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "missing_pattern",
+        "raincloud"
+      ],
+      "interpretation_boundary": "Keep detected and filled peaks distinct, missingness, QC/blank roles, retention-time seconds and m/z. Feature intensity is not compound identification or RNA counts.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "baysor_segment": {
+      "kind": "segmentation",
+      "result_roles": [
+        "molecule_assignments",
+        "cell_segmentation_qc",
+        "segmented_counts",
+        "cell_polygons",
+        "native_parameters",
+        "native_segmentation_log",
+        "native_command",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "feature_grid",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Keep noise assignments (cell 0), transcript IDs, coordinate units and polygon provenance. Segmentation labels are not cell-type annotations.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "nestedcv_glmnet": {
+      "kind": "validation_predictions",
+      "result_roles": [
+        "oof_predictions",
+        "validation_metrics",
+        "split_identity",
+        "fold_provenance",
+        "model_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "roc_multi",
+        "pr_curve",
+        "calibration",
+        "confusion"
+      ],
+      "interpretation_boundary": "Use exact outer-fold units, task/class order and event labels; no invented five-fold or external-validation claim and no full-data-fit performance substitution.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "diffdock_pose": {
+      "kind": "molecular_geometry",
+      "result_roles": [
+        "docking_poses",
+        "molecular_qc",
+        "native_command",
+        "diagnostics",
+        "backend_versions",
+        "native_engine_versions"
+      ],
+      "preferred_figures": [
+        "pose-3d-html",
+        "pose_grid_3d",
+        "interaction_2d"
+      ],
+      "interpretation_boundary": "Pose confidence is not affinity; generated molecules keep fragments/sanitization failures; generated backbones do not establish sequence, binding or function.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "diffsbdd_generate": {
+      "kind": "molecular_geometry",
+      "result_roles": [
+        "generated_molecules",
+        "molecular_qc",
+        "native_command",
+        "diagnostics",
+        "backend_versions",
+        "native_engine_versions"
+      ],
+      "preferred_figures": [
+        "pose-3d-html",
+        "pose_grid_3d",
+        "interaction_2d"
+      ],
+      "interpretation_boundary": "Pose confidence is not affinity; generated molecules keep fragments/sanitization failures; generated backbones do not establish sequence, binding or function.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "rfdiffusion_backbone": {
+      "kind": "molecular_geometry",
+      "result_roles": [
+        "protein_backbones",
+        "native_opaque_metadata",
+        "backbone_qc",
+        "native_command",
+        "diagnostics",
+        "backend_versions",
+        "native_engine_versions"
+      ],
+      "preferred_figures": [
+        "pose-3d-html",
+        "pose_grid_3d",
+        "interaction_2d"
+      ],
+      "interpretation_boundary": "Pose confidence is not affinity; generated molecules keep fragments/sanitization failures; generated backbones do not establish sequence, binding or function.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "mace_singlepoint": {
+      "kind": "molecular_energy",
+      "result_roles": [
+        "potential_energies",
+        "atomic_forces",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "validation_scatter",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Single-point energy (eV) and force (eV/angstrom) retain model/head/elements. These are not electrostatic potential, binding energy or free energy.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "igv_scoped_report": {
+      "kind": "genome_view",
+      "result_roles": [
+        "genome_browser_report",
+        "genome_view_scope",
+        "native_command",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [],
+      "interpretation_boundary": "Review the actual offline genome browser. Region read count is not allele balance/support; file generation is not browser acceptance.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "batchie_posterior": {
+      "kind": "conditional_mean_posterior",
+      "result_roles": [
+        "combination_predictions",
+        "posterior_predictions",
+        "posterior_checkpoint",
+        "posterior_diagnostics_object",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "forest",
+        "score_heatmap"
+      ],
+      "interpretation_boundary": "Posterior viability mean and Q05/Q95 form a 90% credible interval for conditional mean. MCMC draws are not biological samples and this is not an observational prediction interval.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "prescient_trajectories": {
+      "kind": "model_trajectory",
+      "result_roles": [
+        "model_trajectories",
+        "trajectory_identity",
+        "trajectory_time",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "trajectory",
+        "pseudotime_lines"
+      ],
+      "interpretation_boundary": "Keep checkpoint representation, actual initial-cell IDs, simulation replicate and dt. Learned potential is not thermodynamic free energy; simulations are not biological replicates.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "proteintalks_predict": {
+      "kind": "discrete_model_timepoints",
+      "result_roles": [
+        "proteome_predictions",
+        "phenotype_predictions",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "pseudotime_lines",
+        "deg_heatmap"
+      ],
+      "interpretation_boundary": "Native ticks 1/2/3 map to trained labels 6/24/48 h. Show discrete predictions; no invented physical-hour continuous integration or continuous synergy scale.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "native_unit_profile_handoff": {
+      "kind": "unit_profile_handoff",
+      "result_roles": [
+        "unit_expression_profiles",
+        "profile_metadata",
+        "profile_eligibility",
+        "profile_membership",
+        "source_selection",
+        "crossflow_lineage",
+        "diagnostics",
+        "backend_versions"
+      ],
+      "preferred_figures": [
+        "deg_heatmap",
+        "raincloud"
+      ],
+      "interpretation_boundary": "Within-unit means preserve every scenario, source-cell membership and eligibility HOLD. Averaging creates no new replicate and cannot upgrade model validation.",
+      "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "magpie_coregister": {
+      "kind": "registered_measured_MSI",
+      "result_roles": [
+        "registration_outputs",
+        "registration_validation"
+      ],
+      "preferred_views": [
+        "scatter",
+        "matrix",
+        "rank"
+      ],
+      "interpretation_boundary": "No top-level upstream license located in the reviewed tree; use only an owned checkout with actual permitted-use evidence. No author code is redistributed.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "diann_quantify": {
+      "kind": "measured_DIA_intensity",
+      "result_roles": [
+        "quantification_report",
+        "run_qc"
+      ],
+      "preferred_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "interpretation_boundary": "Academia limited non-profit edition only; Enterprise excluded. Native binary and its actual license must already be provisioned by owner.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "sirius_formulas": {
+      "kind": "computed_formula_candidates",
+      "result_roles": [
+        "formula_candidates",
+        "spectrum_qc"
+      ],
+      "preferred_views": [
+        "rank",
+        "scatter"
+      ],
+      "interpretation_boundary": "Offline molecular-formula/fragmentation-tree route only; no fingerprint/structure prediction service is called.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "csi_result_import": {
+      "kind": "imported_author_computed_structure_candidates",
+      "result_roles": [
+        "structure_candidates",
+        "spectrum_qc"
+      ],
+      "preferred_views": [
+        "rank",
+        "scatter"
+      ],
+      "interpretation_boundary": "Actual author-result import implemented. Fresh proprietary online prediction remains outside current authorization; no private spectra upload, no claim of an offline CSI algorithm.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "gnps_offline_network": {
+      "kind": "spectral_similarity_not_structure_identification",
+      "result_roles": [
+        "spectral_edges",
+        "spectral_nodes",
+        "spectrum_qc"
+      ],
+      "preferred_views": [
+        "edges",
+        "scatter",
+        "rank"
+      ],
+      "interpretation_boundary": "Actual original legacy Python spectral alignment plus explicit mutual-top-K. This is not the complete GNPS2 FBMN workflow or a structure identification method; no upload.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "dockovalent": {
+      "kind": "predicted_covalent_pose_not_affinity_or_reactivity",
+      "result_roles": [
+        "docking_scores",
+        "covalent_geometry",
+        "ligand_coverage",
+        "pose_files"
+      ],
+      "preferred_views": [
+        "rank",
+        "scatter"
+      ],
+      "interpretation_boundary": "Owner-provisioned licensed DOCKovalent 3.7 plus actual prepared DB2/grids. Not DOCK 3.8 or ordinary Vina. No licensed engine bundled.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "prnet_predict": {
+      "kind": "model_predicted_expression",
+      "result_roles": [
+        "prediction_matrix",
+        "prediction_mean",
+        "prediction_sd",
+        "prediction_identity"
+      ],
+      "preferred_views": [
+        "matrix",
+        "scatter"
+      ],
+      "interpretation_boundary": "Native Gaussian PGM inference with actual fixed drug/dose embeddings; no new training, no fabricated chemical embedding or independent-validation claim.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "scdiffusion_generate": {
+      "kind": "generated_expression_not_perturbation_effect",
+      "result_roles": [
+        "prediction_matrix",
+        "latent_representation",
+        "prediction_identity"
+      ],
+      "preferred_views": [
+        "matrix",
+        "scatter"
+      ],
+      "interpretation_boundary": "EperLuo/scDiffusion latent DDPM/DDIM plus strict autoencoder decode; empty, one- or two-classifier guidance with exact class and noise-schedule binding. Generated class-conditioned expression is not a perturbation effect; gradient interpolation from a real starting cell is a separate unimplemented scope.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "squidiff_predict": {
+      "kind": "model_predicted_expression_assumed_direction",
+      "result_roles": [
+        "prediction_matrix",
+        "latent_representation",
+        "prediction_identity"
+      ],
+      "preferred_views": [
+        "matrix",
+        "scatter"
+      ],
+      "interpretation_boundary": "Native semantic encoder and DDIM with training-only frozen latent direction. Upstream license file contains unresolved merge markers; actual owned-use review required. No fake get_diffused_data noise helper.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "cellnavi_drivers": {
+      "kind": "model_driver_ranking_not_expression_or_causality",
+      "result_roles": [
+        "driver_logits",
+        "driver_ranking",
+        "prediction_identity"
+      ],
+      "preferred_views": [
+        "rank",
+        "matrix"
+      ],
+      "interpretation_boundary": "Native finite-tuned driver logits/ranks using exact vocabulary, graph and actual training class prefix. Not expression prediction, calibrated probability or causal driver confirmation.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "stack_incontext": {
+      "kind": "incontext_model_prediction_not_independent_validation",
+      "result_roles": [
+        "prediction_matrix",
+        "prediction_identity"
+      ],
+      "preferred_views": [
+        "matrix",
+        "scatter"
+      ],
+      "interpretation_boundary": "Native StateICL in-context count prediction. Code and model/output licenses differ; no full-object pickle, missing-gene zero padding or context/target-unit leakage.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "morphdiff_gene2image": {
+      "kind": "generated_morphology_not_observed_image",
+      "result_roles": [
+        "predicted_images",
+        "prediction_identity",
+        "channel_summary"
+      ],
+      "preferred_views": [
+        "image_channels",
+        "rank"
+      ],
+      "interpretation_boundary": "Correct biomap-research/MorphDiff source, separate five-channel gene-to-image and image-to-image. The pinned native DDIM sampler forces CUDA; an existing server GPU is required, CPU is rejected. Not bowang-lab/MorphoDiff; generated morphology is not measured microscopy.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "morphdiff_image2image": {
+      "kind": "generated_morphology_conditioned_on_observed_image",
+      "result_roles": [
+        "predicted_images",
+        "prediction_identity",
+        "channel_summary"
+      ],
+      "preferred_views": [
+        "image_channels",
+        "rank"
+      ],
+      "interpretation_boundary": "Correct biomap-research/MorphDiff source, separate five-channel gene-to-image and image-to-image. The pinned native DDIM sampler forces CUDA; an existing server GPU is required, CPU is rejected. Not bowang-lab/MorphoDiff; generated morphology is not measured microscopy.",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE"
+    },
+    "omics71": {
+      "kind": "method_specific_observed_or_model_derived_frozen_results",
+      "preferred_figures": [],
+      "interpretation_boundary": "Select the exact reviewed analysis ID and result role; do not turn probabilities, ranks, expression predictions or associations into different quantities.",
+      "method_policy": "analysis71_routes.json"
+    }
+  },
+  "global_rules": [
+    "Use exact selected output paths when a role repeats. Never choose the last file implicitly.",
+    "Completed receipt, current expected source hashes, selected bytes and returned QC must bind before native result rendering.",
+    "Upstream H5AD/RDS/model objects require a frozen bounded display export on the server. Do not fit an embedding or unpickle models locally.",
+    "Select complementary supplied channels; missing channels remain unavailable, not zero or fabricated placeholder panels."
+  ]
+}

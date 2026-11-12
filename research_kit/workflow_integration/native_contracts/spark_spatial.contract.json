@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "spark_spatial",
+  "required_inputs": [
+    "counts",
+    "metadata",
+    "covariates"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "section_key",
+    "x_key",
+    "y_key",
+    "coordinate_unit",
+    "minimum_spots",
+    "minimum_expression_fraction",
+    "minimum_library_counts",
+    "threads"
+  ],
+  "required_output_roles": [
+    "spatial_differential",
+    "spatial_filter",
+    "section_qc",
+    "model_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual original SPARK count GLMM and spatial kernel tests per section, not SPARK-X. Native feature/spot attrition and missing p-values preserved",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

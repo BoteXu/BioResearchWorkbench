@@ -2047,6 +2047,30 @@
       "use": "fixed_server_task_preparation_only",
       "our_role": "Original QC-bound command preparation; pipeline code, references and containers not bundled.",
       "license_status": "Consult the pinned upstream pipeline and individual tool/data licenses."
+    },
+    {
+      "name": "3Dmol optional offline viewer",
+      "use": "bundled unmodified JS viewer; no scientific engine",
+      "origin": "https://github.com/3dmol/3Dmol.js",
+      "revision": "Exact bundled bytes retained in source manifest",
+      "license_reference": "BSD-3-Clause and incorporated MIT notices retained",
+      "our_role": "Optional source integration and rendering; original authorship and terms retained"
+    },
+    {
+      "name": "Liberation Sans fonts",
+      "use": "bundled unmodified licensed fonts; not a personal font",
+      "origin": "https://github.com/liberationfonts/liberation-fonts",
+      "revision": "Exact bundled bytes retained in source manifest",
+      "license_reference": "OFL-1.1; original reserved names/notices retained",
+      "our_role": "Optional source integration and rendering; original authorship and terms retained"
+    },
+    {
+      "name": "Public research kit",
+      "use": "reviewed adapters, source policies, QC/result contracts and blank templates; no external engines/weights/databases",
+      "origin": "research_kit/ATTRIBUTION.md",
+      "revision": "v2.17.0 source/index hashes",
+      "license_reference": "Apache-2.0 for original maintained integration; third-party terms remain separate",
+      "our_role": "Optional source integration and rendering; original authorship and terms retained"
     }
   ],
   "limits": [

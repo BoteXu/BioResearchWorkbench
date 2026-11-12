@@ -1,0 +1,32 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "totalvi_integrate",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "batch_key",
+    "modalities",
+    "layers",
+    "observation_scope",
+    "accelerator",
+    "n_latent",
+    "max_epochs",
+    "batch_size"
+  ],
+  "required_output_roles": [
+    "integrated_representation",
+    "cell_metadata",
+    "training_history",
+    "model_checkpoint",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native RNA+ADT MuData API, paired measured cells only; unpaired modality branch not implemented by this route",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

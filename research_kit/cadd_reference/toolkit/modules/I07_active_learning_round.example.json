@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I07",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "round_id",
+    "data_cutoff",
+    "pool_version",
+    "label_version",
+    "model_id",
+    "training_split_id",
+    "external_test_id",
+    "candidate_id",
+    "acquisition_rule",
+    "selection_reason",
+    "cost_definition",
+    "pending_status",
+    "selected_at",
+    "label_available_at"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "round_id": null,
+    "data_cutoff": null,
+    "pool_version": null,
+    "label_version": null,
+    "model_id": null,
+    "training_split_id": null,
+    "external_test_id": null,
+    "candidate_id": null,
+    "acquisition_rule": null,
+    "selection_reason": null,
+    "cost_definition": null,
+    "pending_status": null,
+    "selected_at": null,
+    "label_available_at": null
+  }
+}

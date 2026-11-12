@@ -1,0 +1,31 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cell2location_reference",
+  "required_inputs": [
+    "reference"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "count_layer",
+    "batch_key",
+    "accelerator",
+    "max_epochs",
+    "batch_size",
+    "celltype_key",
+    "learning_rate"
+  ],
+  "required_output_roles": [
+    "reference_signatures",
+    "reference_signature_uncertainty",
+    "model_checkpoint",
+    "training_history",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual native NB RegressionModel reference fit, q05/q50/q95; q50 is posterior median, not mean",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

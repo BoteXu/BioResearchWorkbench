@@ -1,0 +1,38 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "mixscape_classify",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "celltype_key",
+    "replicate_key",
+    "target_key",
+    "control",
+    "expression_layer",
+    "expression_scale",
+    "n_neighbors",
+    "representation_key",
+    "n_dims",
+    "min_de_genes",
+    "logfc_threshold",
+    "test_method",
+    "max_iterations",
+    "scale_signature",
+    "pvalue_cutoff",
+    "perturbation_type"
+  ],
+  "required_output_roles": [
+    "perturbation_classification",
+    "classification_by_unit",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native pertpy Mixscape; stratum=unit+celltype+replicate; classifications remain evidence, no automatic cell deletion",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

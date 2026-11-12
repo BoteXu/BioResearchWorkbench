@@ -1,0 +1,133 @@
+"""Step 13 — Word (.docx) + single-file self-contained HTML report.
+
+The HTML embeds every figure as a base64 data URI so the file has ZERO external dependencies.
+"""
+from __future__ import annotations
+import base64, io, os, glob
+from pathlib import Path
+from PIL import Image
+import pandas as pd
+import utils
+
+
+def _b64(path, maxw=1500):
+    im = Image.open(path).convert("RGB")
+    if im.width > maxw: im = im.resize((maxw, int(im.height * maxw / im.width)), Image.LANCZOS)
+    buf = io.BytesIO(); im.save(buf, "JPEG", quality=84, optimize=True)
+    return base64.b64encode(buf.getvalue()).decode()
+
+
+def run(cfg):
+    res = cfg["_outdir"] / "results"; fig = cfg["_outdir"] / "figures"
+    proj = cfg["project"]; case = cfg["case_label"]; ctrl = cfg["control_label"]
+
+    def n(key, default="-"):
+        f = res / key
+        if f.exists():
+            try: return str(open(f).read().strip())
+            except Exception: return default
+        return default
+
+    de = pd.read_csv(res / "de_results.csv") if (res / "de_results.csv").exists() else pd.DataFrame()
+    counts = {}
+    if (res / "de_counts.txt").exists():
+        counts = dict(l.split("\t") for l in (res / "de_counts.txt").read_text().strip().split("\n"))
+    ml = pd.read_csv(res / "ml_benchmark.csv") if (res / "ml_benchmark.csv").exists() else pd.DataFrame()
+    val = pd.read_csv(res / "external_validation.csv") if (res / "external_validation.csv").exists() else pd.DataFrame()
+    prog = pd.read_csv(res / "keygene_programs.csv") if (res / "keygene_programs.csv").exists() else pd.DataFrame()
+    cat = pd.read_csv(res / "wgcna_catalogue.csv") if (res / "wgcna_catalogue.csv").exists() else pd.DataFrame()
+
+    def tbl(df, cols=None, n_=15):
+        if not len(df): return "<p class='note'>（该步骤尚未运行）</p>"
+        d = df[cols] if cols else df
+        d = d.head(n_)
+        th = "".join(f"<th>{c}</th>" for c in d.columns)
+        tr = "".join("<tr>" + "".join(f"<td>{v}</td>" for v in r) + "</tr>" for r in d.itertuples(index=False))
+        return f"<table><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table>"
+
+    def fig_html(name, caption, maxw=1500):
+        p = fig / f"{name}.png"
+        if not p.exists(): return ""
+        return (f'<figure><img src="data:image/jpeg;base64,{_b64(p, maxw)}" alt="{caption}">'
+                f'<figcaption>{caption}</figcaption></figure>')
+
+    sections = [
+     ("摘要", f"<p class='lead'>本报告由 bulk-rnaseq-pipeline 自动生成。对比 <b>{case}</b> vs <b>{ctrl}</b>，"
+              f"共分析 {counts.get('n_tested','?')} 个基因；FDR&lt;{cfg['de']['fdr_threshold']} 显著 "
+              f"{counts.get('n_fdr','?')} 个，其中 |log2FC|&gt;{cfg['de']['fc_threshold']} 上调 "
+              f"{counts.get('n_up','?')} / 下调 {counts.get('n_down','?')} 个。</p>"),
+     ("一、质量控制", fig_html("F1_QC", "Figure 1 | 样本质控：PCA、样本相关性、文库大小、性别标记检查") +
+        "<p class='note'>标记为离群的样本需人工确认后写入配置的 drop_samples，再重跑下游。</p>"),
+     ("二、差异表达", fig_html("F2_Volcano_MA", "Figure 2 | 火山图与 MA 图") +
+        fig_html("F2b_heatmap", "Figure 2b | 前 N 个差异基因热图") +
+        f"<p>检验基因数 {counts.get('n_tested','-')}；FDR 显著 {counts.get('n_fdr','-')}。</p>"),
+     ("三、功能富集", fig_html("F3_GO_ORA", "Figure 3 | GO BP 富集（上/下调）") +
+        fig_html("F3_KEGG_ORA", "Figure 3b | KEGG 富集（上/下调）")),
+     ("四、通路层结构", fig_html("F4_pathway_map", "Figure 4 | 通路聚类（enrichment map）") +
+        fig_html("F4_pathway_crosstalk", "Figure 4b | 通路-通路串扰网络") +
+        fig_html("F4_pathway_dendrogram", "Figure 4c | 通路层次聚类")),
+     ("五、信号与转录因子", fig_html("F5_progeny", "Figure 5 | PROGENy 通路活性")),
+     ("六、共表达模块（WGCNA）", fig_html("F6_wgcna_modules", "Figure 6 | 模块目录") +
+        fig_html("F6_wgcna_eigengenes", "Figure 6b | 模块特征基因活性") +
+        tbl(cat, ["module", "n_genes", "case_r", "top_hubs"])),
+     ("七、蛋白互作与细胞组成", fig_html("F7_ppi_network", "Figure 7 | STRING PPI 网络") +
+        fig_html("F8_cell_composition", "Figure 7b | 细胞组成（marker 富集代理）") +
+        fig_html("F8_gene_celltype", "Figure 7c | 关键基因 × 细胞归属")),
+     ("八、关键基因与核心程序", fig_html("F9_keygene_clusters", "Figure 8 | 关键基因共表达聚类") +
+        tbl(prog, ["program", "n_genes", "mean_logFC", "top_GO"])),
+     ("九、机器学习与外部验证", fig_html("F10_ml_benchmark", "Figure 9 | 分类器基准") +
+        fig_html("F10_shap", "Figure 9b | SHAP 摘要") +
+        fig_html("F11_external_validation", "Figure 9c | 外部验证 ROC") +
+        tbl(ml, ["model", "auc", "accuracy"], 10) + tbl(val, ["cohort", "n", "auc", "accuracy"])),
+    ]
+
+    # ---------------- HTML (self-contained) ----------------
+    toc = "".join(f'<li><a href="#s{i}">{t}</a></li>' for i, (t, _) in enumerate(sections))
+    body = "".join(f'<section id="s{i}"><h2>{t}</h2>{c}</section>' for i, (t, c) in enumerate(sections))
+    html = f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>{proj} 分析报告</title>
+<style>
+body{{margin:0;font-family:-apple-system,"PingFang SC",Arial,sans-serif;color:#222;background:#fbfcfd;line-height:1.75;font-size:15px}}
+header{{background:linear-gradient(135deg,#1F2A44,#3A4A6B);color:#fff;padding:52px 40px 36px}}
+header h1{{margin:0 0 6px;font-size:28px}} header p{{margin:4px 0;opacity:.9}}
+.wrap{{max-width:1180px;margin:0 auto;padding:0 32px 70px}}
+nav{{background:#fff;border:1px solid #e3e8ee;border-radius:10px;padding:18px 26px;margin:30px 0}}
+nav ol{{columns:2;margin:0;padding-left:20px}} nav a{{color:#036EAD;text-decoration:none}}
+section{{background:#fff;border:1px solid #e3e8ee;border-radius:10px;padding:28px 32px;margin:24px 0}}
+h2{{font-size:22px;color:#1F2A44;border-bottom:3px solid #DD656D;padding-bottom:9px;margin:0 0 20px}}
+table{{border-collapse:collapse;width:100%;margin:14px 0;font-size:13.5px}}
+th{{background:#EEF3F8;text-align:left;padding:8px 10px;border:1px solid #dde5ee}}
+td{{padding:7px 10px;border:1px solid #e6ecf2}} tr:nth-child(even) td{{background:#fafcfe}}
+.note{{color:#6b7683;font-size:13.5px;font-style:italic}}
+.lead{{background:#F4F8FC;padding:16px 20px;border-radius:8px;border-left:4px solid #036EAD}}
+figure{{margin:20px 0;text-align:center}} figure img{{max-width:100%;border:1px solid #e3e8ee;border-radius:8px}}
+figcaption{{font-size:13px;color:#555;margin-top:8px}}
+footer{{text-align:center;color:#8a94a0;font-size:13px;padding:26px}}
+</style></head><body>
+<header><h1>{proj} 分析报告</h1><p>{case} vs {ctrl}</p>
+<p>由 bulk-rnaseq-pipeline 生成 · 含质控 / 差异表达 / 富集 / 通路 / 网络 / 核心程序 / 机器学习 / 外部验证</p></header>
+<div class="wrap"><nav><h3>目录</h3><ol>{toc}</ol></nav>{body}
+<footer>证据层级：Expression &lt; Association &lt; Regulatory inference &lt; Perturbation &lt; Rescue<br>
+本文件自包含（图片以 base64 内嵌），可离线打开。</footer></div></body></html>"""
+    p = cfg["_outdir"] / f"{proj}_report.html"
+    p.write_text(html, encoding="utf-8")
+    print(f"  -> {p.name}  ({len(html.encode())/1e6:.1f} MB)")
+
+    # ---------------- Word ----------------
+    try:
+        from docx import Document
+        from docx.shared import Pt
+        doc = Document()
+        doc.styles["Normal"].font.name = "Arial"; doc.styles["Normal"].font.size = Pt(10.5)
+        doc.add_heading(f"{proj} 分析报告", 0)
+        doc.add_paragraph(f"{case} vs {ctrl}")
+        for t, c in sections:
+            doc.add_heading(t, level=1)
+            for line in str(c).split("\n"):
+                if "<table" in line or "<figure" in line or "<p" in line or "</" in line: continue
+            if "n_up" in c or "n_tested" in c:
+                doc.add_paragraph(str(counts))
+        doc.save(cfg["_outdir"] / f"{proj}_report.docx")
+        print(f"  -> {proj}_report.docx")
+    except Exception as e:
+        print("[report] docx skipped:", str(e)[:80])

@@ -1,0 +1,153 @@
+{
+  "upstream_commit": "e0ce03ff80ce80115b1e0a3eb0b1fdba5943023b",
+  "functions": {
+    "generate": {
+      "positional_arguments": [
+        "self",
+        "batch_size",
+        "N_x1",
+        "N_x4",
+        "condition",
+        "condition_modalities",
+        "condition_center_of_mass",
+        "inpaint",
+        "scaffold_conditioning",
+        "pharmacophore_conditioning",
+        "pharmacophore_prioritization",
+        "num_steps",
+        "early_stop_edm",
+        "shepherd_pred",
+        "sigma_max",
+        "sigma_min",
+        "rho",
+        "use_stochastic",
+        "S_churn",
+        "S_noise",
+        "use_2nd_order_correction",
+        "verbose",
+        "store_trajectories",
+        "store_trajectories_x0"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "shepherd_model.py",
+      "line": 35
+    },
+    "generate_composition": {
+      "positional_arguments": [
+        "self",
+        "N_x1",
+        "N_x4",
+        "batch_size"
+      ],
+      "keyword_only_arguments": [
+        "profiles",
+        "weights_conditions",
+        "composition_mode",
+        "atom_condition",
+        "condition_modalities",
+        "pharmacophore_conditioning",
+        "scaffold_conditioning",
+        "condition_center_of_mass",
+        "inpaint",
+        "num_steps",
+        "use_stochastic",
+        "S_churn",
+        "S_noise",
+        "shepherd_pred",
+        "early_stop_edm",
+        "sigma_max",
+        "sigma_min",
+        "rho",
+        "store_trajectories",
+        "verbose",
+        "alignment_start_frac",
+        "alignment_interval",
+        "alignment_mode",
+        "alignment_ema_alpha"
+      ],
+      "author_source": "shepherd_model.py",
+      "line": 359
+    },
+    "extract_interaction_profile": {
+      "positional_arguments": [
+        "mol",
+        "xtb_optimize",
+        "partial_charges",
+        "center",
+        "solvent",
+        "condition_atom_inds",
+        "exit_vector_atom_inds",
+        "num_surf_points",
+        "probe_radius",
+        "neutralize_esp"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "interaction_profile.py",
+      "line": 751
+    },
+    "with_condition_atoms": {
+      "positional_arguments": [
+        "self",
+        "inds",
+        "exit_vector_inds"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "interaction_profile.py",
+      "line": 506
+    },
+    "pharm_prioritization_labels": {
+      "positional_arguments": [
+        "self",
+        "atom_inds",
+        "min_ring_priority_atoms"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "interaction_profile.py",
+      "line": 623
+    },
+    "subselection_pharm": {
+      "positional_arguments": [
+        "self",
+        "atom_inds",
+        "min_ring_priority_atoms",
+        "pharm_prioritization_labels"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "interaction_profile.py",
+      "line": 668
+    },
+    "from_condition_atoms": {
+      "positional_arguments": [
+        "cls",
+        "mol",
+        "inds",
+        "exit_vector_inds"
+      ],
+      "keyword_only_arguments": [],
+      "author_source": "interaction_profile.py",
+      "line": 700
+    }
+  },
+  "scope": "AST_extracted_API_metadata_not_runtime_validation",
+  "inpaint_dataclass_fields": [
+    "inpaint_x1_pos",
+    "inpaint_x1_x",
+    "inpaint_x1_bonds",
+    "inpaint_x1_formal_charge",
+    "stop_inpainting_at_time_x1_pos",
+    "stop_inpainting_at_time_x1_x",
+    "stop_inpainting_at_time_x1_bonds",
+    "inpaint_x3_pos",
+    "inpaint_x3_x",
+    "stop_inpainting_at_time_x3",
+    "add_noise_to_inpainted_x3_pos",
+    "add_noise_to_inpainted_x3_x",
+    "inpaint_x4_pos",
+    "inpaint_x4_direction",
+    "inpaint_x4_type",
+    "stop_inpainting_at_time_x4",
+    "add_noise_to_inpainted_x4_pos",
+    "add_noise_to_inpainted_x4_direction",
+    "add_noise_to_inpainted_x4_type"
+  ]
+}

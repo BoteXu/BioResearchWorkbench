@@ -1,0 +1,78 @@
+{
+  "schema": "private-native-project-template/1",
+  "template_not_executable": true,
+  "backend": "diann_quantify",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "executable": "REQUIRED_ACTUAL_EXECUTABLE",
+    "executable_sha256": "REQUIRED_ACTUAL_EXECUTABLE_SHA256",
+    "raw_input_ids": "REQUIRED_ACTUAL_RAW_INPUT_IDS",
+    "qvalue": "REQUIRED_ACTUAL_QVALUE",
+    "mass_accuracy_ms1_ppm": "REQUIRED_ACTUAL_MASS_ACCURACY_MS1_PPM",
+    "mass_accuracy_ms2_ppm": "REQUIRED_ACTUAL_MASS_ACCURACY_MS2_PPM",
+    "scan_window": "REQUIRED_ACTUAL_SCAN_WINDOW",
+    "threads": "REQUIRED_ACTUAL_THREADS",
+    "native_version": "REQUIRED_ACTUAL_NATIVE_VERSION",
+    "seed": "REQUIRED_ACTUAL_SEED",
+    "software_versions": {
+      "numpy": "REQUIRED_EXISTING_SERVER_VERSION",
+      "pandas": "REQUIRED_EXISTING_SERVER_VERSION",
+      "pyarrow": "REQUIRED_EXISTING_SERVER_VERSION"
+    },
+    "maximum_output_entries": "REQUIRED_ACTUAL_MAXIMUM_OUTPUT_ENTRIES"
+  },
+  "inputs": [
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "license_evidence",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "run_manifest",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "spectral_library",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "ACTUAL_RAW_INPUT_ROLE",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "upstream_qc": "REQUIRED_ACTUAL_BOUND_QC",
+  "statistical_plan": {
+    "estimand": "REQUIRED_ACTUAL_ESTIMAND",
+    "independent_unit": "REQUIRED_ACTUAL_INDEPENDENT_UNIT",
+    "missingness": "REQUIRED_ACTUAL_MISSINGNESS",
+    "multiplicity": "REQUIRED_ACTUAL_MULTIPLICITY",
+    "sensitivity": "REQUIRED_ACTUAL_SENSITIVITY"
+  },
+  "acceptance_rules": [
+    {
+      "id": "native_numeric_QC",
+      "role": "diagnostics",
+      "field": "metrics.REQUIRED_ACTUAL_METRIC",
+      "operator": "ge",
+      "bound": "REQUIRED_PRESPECIFIED_NUMBER",
+      "definition": "REQUIRED_MEASURE_DEFINITION",
+      "unit": "REQUIRED_ACTUAL_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_BASIS"
+    }
+  ],
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_CPUS",
+    "gpus": "REQUIRED_ALLOCATED_GPUS"
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE"
+}

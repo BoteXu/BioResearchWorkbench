@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I12",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "金属与辅因子及共价结合的专用模型",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "nonstandard_components": {
+      "rows": [],
+      "row_template": {
+        "component_id": null,
+        "identity": null,
+        "element": null,
+        "oxidation_state": null,
+        "formal_charge": null,
+        "spin_multiplicity": null,
+        "coordination_atoms": null,
+        "coordination_number": null,
+        "cofactor_state": null,
+        "bridging_atoms": null,
+        "key_waters": null,
+        "chemical_state_evidence": null
+      }
+    },
+    "covalent_connections": {
+      "rows": [],
+      "row_template": {
+        "adduct_id": null,
+        "pre_reaction_ligand_state_id": null,
+        "post_reaction_component_id": null,
+        "protein_atom": null,
+        "ligand_atom": null,
+        "bond_order": null,
+        "residue_name_after_connection": null,
+        "atom_addition_deletion_map": null,
+        "connection_evidence": null
+      }
+    },
+    "structure": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "atom_mapping": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "parameter_source_files": [],
+    "quantum_reference_outputs": []
+  },
+  "settings": {
+    "selected_route": null,
+    "route_choice_reason": null,
+    "bonded_metal_model": {
+      "enabled": false,
+      "builder_version": null,
+      "small_model_definition": null,
+      "large_charge_model_definition": null,
+      "caps": null,
+      "charge_and_spin_review": null,
+      "quantum_method": null,
+      "fitting_protocol": null
+    },
+    "nonbonded_ion_model": {
+      "enabled": false,
+      "potential_form": null,
+      "parameter_set_id": null,
+      "water_model": null,
+      "extra_terms_supported_by_engine": null,
+      "conversion_preservation_review": null
+    },
+    "qmmm": {
+      "enabled": false,
+      "qm_region_definition": null,
+      "boundary_treatment": null,
+      "net_charge": null,
+      "spin_multiplicity": null,
+      "electronic_structure_method": null,
+      "environment_representation": null,
+      "target_chemical_states_or_path": null,
+      "sampling_plan": null,
+      "region_and_method_sensitivity_plan": null
+    },
+    "analysis": {
+      "coordination_distance_rule": null,
+      "coordination_angle_definition": null,
+      "comparison_reference": null,
+      "independent_validation_target": null,
+      "endpoint_partition_review": null
+    }
+  },
+  "results": {
+    "parameter_provenance": {
+      "rows": [],
+      "row_template": {
+        "parameter_set_id": null,
+        "component_id": null,
+        "source_file": null,
+        "source_hash": null,
+        "fit_target": null,
+        "fit_method": null,
+        "independent_validation_evidence": null,
+        "review_status": null
+      }
+    },
+    "coordination_timeseries": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "time": null,
+        "time_unit": null,
+        "observable": null,
+        "value": null,
+        "unit": null,
+        "definition_version": null
+      }
+    },
+    "special_model_qc": {
+      "rows": [],
+      "row_template": {
+        "check_id": null,
+        "model_variant_id": null,
+        "evidence_artifact_id": null,
+        "status": null,
+        "reason": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "nonstandard_components.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "parameter_provenance.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "bond_connectivity_review.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "coordination_timeseries.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "special_model_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "氧化态自旋配位或共价连接改变需重建参数及采样",
+      "特殊势能项转换不同需重新核验",
+      "配位统计阈值改变可重分析"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I12-P1",
+      "title": "化学连接与参数来源",
+      "required_data": "组分及连接表",
+      "interpretation_boundary": "不能将PDB记录等同化学验证",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I12-P2",
+      "title": "配位距离角度与数目分布",
+      "required_data": "按重复的配位几何统计",
+      "interpretation_boundary": "阈值和适用模型需声明",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I12-P3",
+      "title": "局部结构差异",
+      "required_data": "可信参考和代表构象",
+      "interpretation_boundary": "拟合目标重现不是独立验证",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I12-P4",
+      "title": "化学态与模型敏感性",
+      "required_data": "合理模型分支的统一观测量",
+      "interpretation_boundary": "各分支作为不同物理模型",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I12-P5",
+      "title": "反应自由能剖面",
+      "required_data": "实际已完成的反应路径采样",
+      "interpretation_boundary": "无计算不预填能垒或反应方向",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

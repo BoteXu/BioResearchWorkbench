@@ -1,0 +1,33 @@
+{
+  "schema": "public-research-source-validation/1",
+  "package_version": "2.17.0",
+  "research_workflow_version": "3.4.0-public-source",
+  "scientific_visualization_version": "2.2.0-public-source",
+  "method_reviews": 71,
+  "contract_test_groups": {
+    "bulk_optional": 36,
+    "workflow_and_public_configuration": 197,
+    "virtual_perturbation": 78,
+    "interaction_profiles": 267,
+    "scientific_figure_consumers": 54
+  },
+  "contract_tests_total": 632,
+  "core_offline_checks": 352,
+  "local_engineering_status": "PASS",
+  "server_native_executions": 0,
+  "server_status": "NOT_PROBED_THIS_UPGRADE",
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "fresh_full_140_figure_review": false,
+  "frozen_real_display_exports_reviewed": 16,
+  "private_git_history_copied": false,
+  "private_inputs_or_runtime_materials_distributed": false,
+  "static_private_filename_aliases_normalized": true,
+  "saved_skill_id_and_original_attachment_fingerprints_removed": true,
+  "font_names_metadata_reviewed": 4,
+  "rights_scope": "Original maintained source authorized for publication; third-party engines/models not bundled; vendor font/viewer notices preserved",
+  "notes": [
+    "Source/contracts and exact frozen-display review are distinct from real scientific/HPC runtime acceptance.",
+    "Historical registry bytes and private-result naming/privacy gates are preserved.",
+    "No installation, model download, client-registration change or server dispatch was performed by this publication."
+  ]
+}

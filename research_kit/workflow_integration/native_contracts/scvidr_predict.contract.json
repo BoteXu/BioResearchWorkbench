@@ -1,0 +1,48 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "scvidr_predict",
+  "required_inputs": [
+    "object",
+    "source_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "celltype_key",
+    "control",
+    "expression_layer",
+    "expression_scale",
+    "n_latent",
+    "max_epochs",
+    "batch_size",
+    "optimization_train_fraction",
+    "early_stopping",
+    "target_celltype",
+    "treatment",
+    "n_hidden",
+    "n_layers",
+    "dropout_rate",
+    "kl_weight",
+    "use_gpu",
+    "regression",
+    "minimum_cells_per_arm",
+    "holdout_scope"
+  ],
+  "required_output_roles": [
+    "predicted_expression",
+    "heldout_expression",
+    "prediction_identity",
+    "heldout_identity",
+    "prediction_attrition",
+    "latent_shift_table",
+    "diagnostics",
+    "backend_versions",
+    "model_checkpoint",
+    "training_history"
+  ],
+  "method_scope": "Original legacy scVIDR discrete response prediction and optional native centroid regression; held out is celltype-treated response, controls remain in VAE training. Native balancing attrition/duplicates retained in explicit source mapping; not heldout donors or dose interpolation.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

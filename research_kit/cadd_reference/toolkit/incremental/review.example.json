@@ -1,0 +1,28 @@
+{
+  "task_id": "__FILL_TASK_ID__",
+  "status": "pending",
+  "reviewer": null,
+  "reviewed_at": null,
+  "execution": {
+    "run_id": null,
+    "fingerprint": null,
+    "exit_code": null,
+    "started_at": null,
+    "ended_at": null,
+    "log_path": null
+  },
+  "checks": [
+    {
+      "name": "input_identity_and_parameter_consistency",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "name": "module_specific_scientific_acceptance",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "reviewed_outputs": {},
+  "reviewed_evidence": []
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "__FILL_SNAPSHOT_ID__",
+  "comparison_key": "__FILL_TARGET_SITE_AND_SCOPE__",
+  "score_model": "__FILL_ENGINE_MODEL_SETTINGS__",
+  "score_name": "__FILL_SCORE_NAME__",
+  "unit": "__FILL_UNIT_OR_UNITLESS__",
+  "direction": "lower",
+  "rows": []
+}

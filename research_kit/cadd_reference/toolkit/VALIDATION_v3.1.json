@@ -1,0 +1,127 @@
+{
+  "state": "METADATA_AND_FILE_CONTRACT_TESTS_PASS",
+  "count": 29,
+  "passed": 29,
+  "tests": [
+    {
+      "case": "complete_declared_metadata_passes_only_metadata_scope",
+      "passed": true
+    },
+    {
+      "case": "empty_review_evidence_refused",
+      "passed": true
+    },
+    {
+      "case": "unbound_legacy_evidence_refused",
+      "passed": true
+    },
+    {
+      "case": "changed_review_evidence_refused",
+      "passed": true
+    },
+    {
+      "case": "evidence_outside_selected_root_refused",
+      "passed": true
+    },
+    {
+      "case": "legacy_ready_requires_explicit_migration",
+      "passed": true
+    },
+    {
+      "case": "empty_software_identity_refused",
+      "passed": true
+    },
+    {
+      "case": "pending_review_not_ready",
+      "passed": true
+    },
+    {
+      "case": "changed_input_hash_refused",
+      "passed": true
+    },
+    {
+      "case": "duplicate_run_refused",
+      "passed": true
+    },
+    {
+      "case": "project_report_does_not_overwrite",
+      "passed": true
+    },
+    {
+      "case": "environment_existing_report_rejected_before_probes",
+      "passed": true
+    },
+    {
+      "case": "nested_unknown_software_identity_blocks_reuse_plan",
+      "passed": true
+    },
+    {
+      "case": "existing_outputs_visible_without_dispatch_permission",
+      "passed": true
+    },
+    {
+      "case": "binding_is_pending_not_scientific_acceptance",
+      "passed": true
+    },
+    {
+      "case": "unchanged_exact_metadata_snapshots_reuse",
+      "passed": true
+    },
+    {
+      "case": "changed_evidence_invalidates_reuse",
+      "passed": true
+    },
+    {
+      "case": "dependency_cycle_refused",
+      "passed": true
+    },
+    {
+      "case": "project_path_escape_refused",
+      "passed": true
+    },
+    {
+      "case": "amber_input_render_only",
+      "passed": true
+    },
+    {
+      "case": "amber_template_and_render_hashes_bound",
+      "passed": true
+    },
+    {
+      "case": "amber_existing_input_directory_preserved",
+      "passed": true
+    },
+    {
+      "case": "gromacs_input_render_only",
+      "passed": true
+    },
+    {
+      "case": "gromacs_template_and_render_hashes_bound",
+      "passed": true
+    },
+    {
+      "case": "gromacs_existing_input_directory_preserved",
+      "passed": true
+    },
+    {
+      "case": "amber_missing_mask_rejected_before_writing",
+      "passed": true
+    },
+    {
+      "case": "common_member_ranking_not_library_insertion_artifact",
+      "passed": true
+    },
+    {
+      "case": "mixed_score_models_refused_by_default",
+      "passed": true
+    },
+    {
+      "case": "explicit_cross_model_rank_only_has_no_score_delta",
+      "passed": true
+    }
+  ],
+  "scientific_engines_executed": false,
+  "molecular_data_analyzed": false,
+  "server_backend_validated": false,
+  "scope": "Fictional text metadata and input-template rendering only; imports reviewed statically before tests."
+}

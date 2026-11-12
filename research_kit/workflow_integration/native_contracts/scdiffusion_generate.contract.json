@@ -1,0 +1,62 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "autoencoder_checkpoint",
+    "features"
+  ],
+  "required_parameters": [
+    "diffusion_config",
+    "n_samples",
+    "batch_size",
+    "latent_dim",
+    "accelerator",
+    "sampling_method",
+    "clip_denoised",
+    "guidance",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "prediction_matrix",
+    "latent_representation",
+    "prediction_identity"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "generated_expression_not_perturbation_effect",
+  "schema": "native-completion-contract/1",
+  "tool": "scDiffusion",
+  "source_commit": [
+    "EperLuo/scDiffusion",
+    "e20ee19090739a874fd8ae001d8337e4d480e52b"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "EperLuo/scDiffusion latent DDPM/DDIM plus strict autoencoder decode; empty, one- or two-classifier guidance with exact class and noise-schedule binding. Generated class-conditioned expression is not a perturbation effect; gradient interpolation from a real starting cell is a separate unimplemented scope.",
+  "figure_views": [
+    "matrix",
+    "scatter"
+  ]
+}

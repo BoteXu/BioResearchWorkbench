@@ -1,0 +1,49 @@
+{
+  "required_inputs": [
+    "context",
+    "structure_results",
+    "spectrum_identity",
+    "native_result_receipt",
+    "spectra"
+  ],
+  "required_parameters": [
+    "result_columns",
+    "seed",
+    "software_versions",
+    "maximum_output_entries"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "structure_candidates",
+    "spectrum_qc"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "imported_author_computed_structure_candidates",
+  "schema": "native-completion-contract/1",
+  "tool": "CSI:FingerID",
+  "source_commit": null,
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Actual author-result import implemented. Fresh proprietary online prediction remains outside current authorization; no private spectra upload, no claim of an offline CSI algorithm.",
+  "figure_views": [
+    "rank",
+    "scatter"
+  ]
+}

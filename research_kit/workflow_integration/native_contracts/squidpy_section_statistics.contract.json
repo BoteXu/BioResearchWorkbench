@@ -1,0 +1,40 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "squidpy_section_statistics",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "section_key",
+    "spatial_key",
+    "coordinate_unit",
+    "expression_layer",
+    "celltype_key",
+    "celltype_order",
+    "genes",
+    "maximum_spots_per_section",
+    "radius",
+    "maximum_island_fraction",
+    "n_perms",
+    "two_tailed",
+    "threads",
+    "nhood_normalization",
+    "distance_intervals"
+  ],
+  "required_output_roles": [
+    "spatial_autocorrelation",
+    "neighborhood_enrichment",
+    "neighborhood_counts",
+    "cooccurrence",
+    "spatial_graph",
+    "section_diagnostics",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native Squidpy >=1.8.4 radius/Moran/neighborhood/cooccurrence within each section; undefined values retained, actual distance units and RNG version explicit",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

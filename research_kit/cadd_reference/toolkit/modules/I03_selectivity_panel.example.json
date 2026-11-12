@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I03",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "parent_id",
+    "target_id",
+    "species",
+    "isoform_id",
+    "construct_id",
+    "site_id",
+    "method_validation_id",
+    "assay_id",
+    "endpoint",
+    "relation",
+    "value",
+    "unit",
+    "evidence_class",
+    "status",
+    "off_target_comparison_basis"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "parent_id": null,
+    "target_id": null,
+    "species": null,
+    "isoform_id": null,
+    "construct_id": null,
+    "site_id": null,
+    "method_validation_id": null,
+    "assay_id": null,
+    "endpoint": null,
+    "relation": null,
+    "value": null,
+    "unit": null,
+    "evidence_class": null,
+    "status": null,
+    "off_target_comparison_basis": null
+  }
+}

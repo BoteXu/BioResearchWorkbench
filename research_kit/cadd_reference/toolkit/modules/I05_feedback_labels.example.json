@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I05",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "parent_id",
+    "physical_batch_id",
+    "observation_id",
+    "assay_id",
+    "target_construct",
+    "method",
+    "endpoint",
+    "relation",
+    "value",
+    "unit",
+    "independent_unit_id",
+    "technical_replicate_id",
+    "measurement_validity",
+    "evidence_level",
+    "pending_reason",
+    "label_derivation_version"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "parent_id": null,
+    "physical_batch_id": null,
+    "observation_id": null,
+    "assay_id": null,
+    "target_construct": null,
+    "method": null,
+    "endpoint": null,
+    "relation": null,
+    "value": null,
+    "unit": null,
+    "independent_unit_id": null,
+    "technical_replicate_id": null,
+    "measurement_validity": null,
+    "evidence_level": null,
+    "pending_reason": null,
+    "label_derivation_version": null
+  }
+}

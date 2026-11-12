@@ -1,0 +1,30 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "snf_fusion",
+  "required_inputs": [
+    "metadata"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "view_ids",
+    "knn",
+    "sigma",
+    "iterations",
+    "n_clusters",
+    "standardize",
+    "symmetry_tolerance"
+  ],
+  "required_output_roles": [
+    "fused_similarity",
+    "cluster_assignments",
+    "model_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native SNFtool affinity/fusion/spectral clustering; measured matched independent units only",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,58 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "spectra",
+    "spectrum_identity"
+  ],
+  "required_parameters": [
+    "fragment_tolerance_da",
+    "minimum_matched_peaks",
+    "cosine_cutoff",
+    "top_k",
+    "maximum_spectra",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "spectral_edges",
+    "spectral_nodes",
+    "spectrum_qc"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "spectral_similarity_not_structure_identification",
+  "schema": "native-completion-contract/1",
+  "tool": "GNPS legacy alignment",
+  "source_commit": [
+    "mwang87/GNPS_Workflows",
+    "af4bd66d4faf00da8faa6f3dd6c7d023d39ff438"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Actual original legacy Python spectral alignment plus explicit mutual-top-K. This is not the complete GNPS2 FBMN workflow or a structure identification method; no upload.",
+  "figure_views": [
+    "edges",
+    "scatter",
+    "rank"
+  ]
+}

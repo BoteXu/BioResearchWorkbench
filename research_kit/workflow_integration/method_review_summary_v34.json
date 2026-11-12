@@ -1,0 +1,10 @@
+{
+  "reviewed_method_count": 71,
+  "scientific_methods_run_this_upgrade": 0,
+  "server_status": "NOT_PROBED_THIS_UPGRADE",
+  "source_fix_families": 11,
+  "methods_with_local_source_corrections": 13,
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "registry_sha256": "bf773dbd22a5b6b3059c753dd39da7886d34492ee5eec958025ac13c513d9116",
+  "public_upload": false
+}

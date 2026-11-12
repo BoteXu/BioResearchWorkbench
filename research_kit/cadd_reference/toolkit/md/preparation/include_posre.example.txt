@@ -1,0 +1,9 @@
+; This conditional include belongs within the relevant molecule definition:
+; [ moleculetype ] ... [ atoms ] ... [ bonds ] ... then:
+#ifdef POSRES_SOLUTE
+#include "posre_this_molecule.itp"
+#endif
+; Repeat with that molecule's OWN local-index file for each restrained molecule.
+; Do not place a single whole-system position-restraint file after [ molecules ].
+; Audit the grompp -pp expanded topology at each stage.
+

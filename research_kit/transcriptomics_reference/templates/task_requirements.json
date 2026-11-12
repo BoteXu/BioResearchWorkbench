@@ -1,0 +1,95 @@
+{
+  "version": "2.1.1-private",
+  "not_an_execution_authorization": true,
+  "always": [
+    "project_id",
+    "species_reference",
+    "input_manifest",
+    "identity_manifest",
+    "selected_modules",
+    "statistical_review",
+    "task_requests"
+  ],
+  "per_task_common": [
+    "request_id",
+    "module_id",
+    "task_type",
+    "input_layer",
+    "input_provenance",
+    "unit_manifest",
+    "parameters",
+    "sensitivity_plan",
+    "expected_outputs",
+    "server_method_acceptance"
+  ],
+  "tasks": {
+    "bulk_de": [
+      "count_layer",
+      "matrix_kind",
+      "model_id",
+      "contrasts",
+      "design_review"
+    ],
+    "celltype_de": [
+      "count_layer",
+      "matrix_kind",
+      "model_id",
+      "contrasts",
+      "design_review",
+      "annotation_version",
+      "eligibility_manifest"
+    ],
+    "enrichment": [
+      "enrichment_review_id",
+      "contrast_id",
+      "gene_universe",
+      "geneset_version",
+      "rank_or_foreground_definition"
+    ],
+    "trajectory_descriptive": [
+      "trajectory_review_id",
+      "root_lineage",
+      "topology_policy"
+    ],
+    "trajectory_population": [
+      "trajectory_review_id",
+      "model_id",
+      "design_review",
+      "root_lineage",
+      "topology_policy",
+      "dependence_policy",
+      "hypothesis",
+      "backend_readiness_id"
+    ],
+    "atlas": [
+      "integration_review_id",
+      "baseline",
+      "protected_factors",
+      "evaluation_set"
+    ],
+    "reference_mapping": [
+      "split_manifest",
+      "reference_model",
+      "adaptation_policy",
+      "unknown_rejection"
+    ],
+    "meta": [
+      "model_id",
+      "effect_scale",
+      "contrast_id",
+      "dependence_policy",
+      "analysis_variant_manifest"
+    ],
+    "deconvolution": [
+      "reference_review_id",
+      "reference_scale",
+      "bulk_scale",
+      "fraction_definition",
+      "validation_scope"
+    ],
+    "other_explicit": [
+      "dedicated_contract",
+      "dedicated_review"
+    ]
+  }
+}

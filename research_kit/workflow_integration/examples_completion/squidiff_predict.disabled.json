@@ -1,0 +1,92 @@
+{
+  "schema": "private-native-project-template/1",
+  "template_not_executable": true,
+  "backend": "squidiff_predict",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "diffusion_config": "REQUIRED_ACTUAL_DIFFUSION_CONFIG",
+    "direction_scale": "REQUIRED_ACTUAL_DIRECTION_SCALE",
+    "batch_size": "REQUIRED_ACTUAL_BATCH_SIZE",
+    "maximum_cases": "REQUIRED_ACTUAL_MAXIMUM_CASES",
+    "accelerator": "REQUIRED_ACTUAL_ACCELERATOR",
+    "clip_denoised": "REQUIRED_ACTUAL_CLIP_DENOISED",
+    "seed": "REQUIRED_ACTUAL_SEED",
+    "software_versions": {
+      "torch": "REQUIRED_EXISTING_SERVER_VERSION",
+      "numpy": "REQUIRED_EXISTING_SERVER_VERSION",
+      "pandas": "REQUIRED_EXISTING_SERVER_VERSION",
+      "scipy": "REQUIRED_EXISTING_SERVER_VERSION"
+    },
+    "maximum_output_entries": "REQUIRED_ACTUAL_MAXIMUM_OUTPUT_ENTRIES",
+    "repository": "REQUIRED_ACTUAL_REPOSITORY"
+  },
+  "inputs": [
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "license_evidence",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "model_manifest",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "checkpoint",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "features",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "query_expression",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "query_metadata",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "latent_direction",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "upstream_qc": "REQUIRED_ACTUAL_BOUND_QC",
+  "statistical_plan": {
+    "estimand": "REQUIRED_ACTUAL_ESTIMAND",
+    "independent_unit": "REQUIRED_ACTUAL_INDEPENDENT_UNIT",
+    "missingness": "REQUIRED_ACTUAL_MISSINGNESS",
+    "multiplicity": "REQUIRED_ACTUAL_MULTIPLICITY",
+    "sensitivity": "REQUIRED_ACTUAL_SENSITIVITY"
+  },
+  "acceptance_rules": [
+    {
+      "id": "native_numeric_QC",
+      "role": "diagnostics",
+      "field": "metrics.REQUIRED_ACTUAL_METRIC",
+      "operator": "ge",
+      "bound": "REQUIRED_PRESPECIFIED_NUMBER",
+      "definition": "REQUIRED_MEASURE_DEFINITION",
+      "unit": "REQUIRED_ACTUAL_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_BASIS"
+    }
+  ],
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_CPUS",
+    "gpus": "REQUIRED_ALLOCATED_GPUS"
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE"
+}

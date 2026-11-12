@@ -1,0 +1,40 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "baysor_segment",
+  "required_inputs": [
+    "molecules"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "baysor_executable",
+    "baysor_executable_sha256",
+    "baysor_version_output",
+    "implementation",
+    "dimensions",
+    "coordinate_unit",
+    "maximum_molecules",
+    "minimum_molecules",
+    "cell_radius",
+    "threads",
+    "cluster_method",
+    "n_clusters",
+    "prior_column",
+    "prior_confidence",
+    "coordinate_roundtrip_tolerance"
+  ],
+  "required_output_roles": [
+    "molecule_assignments",
+    "cell_segmentation_qc",
+    "segmented_counts",
+    "cell_polygons",
+    "native_parameters",
+    "native_segmentation_log",
+    "native_command",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual Baysor C++ CLI with exact binary/version; canonical actual transcript IDs, native count reconstruction from molecule assignments, preserved noise and polygon identities. Original Julia implementation/compartment segmentation excluded from this route.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

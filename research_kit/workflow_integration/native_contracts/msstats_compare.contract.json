@@ -1,0 +1,29 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "msstats_compare",
+  "required_inputs": [
+    "feature_table",
+    "contrast"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "normalization",
+    "feature_subset",
+    "summary_method",
+    "censored_int",
+    "mb_impute"
+  ],
+  "required_output_roles": [
+    "protein_differential",
+    "processed_object",
+    "model_object",
+    "missingness",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual MSstats feature-level comparisons; normalization and missingness decisions explicit, no fabricated intensities",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

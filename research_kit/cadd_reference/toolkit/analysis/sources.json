@@ -1,0 +1,282 @@
+[
+  {
+    "key": "C01",
+    "title": "GROMACS. gmx trjconv documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html",
+    "what_supports": "PBC whole/nojump/mol/cluster 与处理顺序；不同任务不能无条件套同一转换。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C02",
+    "title": "AMBER-hub. autoimage.",
+    "url": "https://amberhub.chpc.utah.edu/autoimage/",
+    "what_supports": "anchor/fixed/mobile 与默认 anchor 定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C03",
+    "title": "AMBER-hub. rmsd.",
+    "url": "https://amberhub.chpc.utah.edu/rmsd/",
+    "what_supports": "拟合、nofit 与 nomod 的不同含义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C04",
+    "title": "AMBER-hub. atomicfluct | rmsf.",
+    "url": "https://amberhub.chpc.utah.edu/atomicfluct-rmsf/",
+    "what_supports": "RMSF 不隐式拟合，输出单位及 byres 定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C05",
+    "title": "GROMACS. gmx dssp documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-dssp.html",
+    "what_supports": "当前二级结构工具入口，需固定实际版本。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C06",
+    "title": "GROMACS. gmx sasa documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-sasa.html",
+    "what_supports": "SASA 探针默认 0.14 nm、分子完整性要求。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C07",
+    "title": "MDAnalysis. Native contacts analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/contacts.html",
+    "what_supports": "参考接触与半径/软阈值区分，接触比例的定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C08",
+    "title": "MDAnalysis. Hydrogen Bond Analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/hydrogenbonds.html",
+    "what_supports": "默认 D–A 3.0 Å、D–H–A 150°；使用键拓扑识别 D–H；寿命分析。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C09",
+    "title": "Grossfield A, et al. Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations. Living Journal of Computational Molecular Science. 2018;1(1):5067.",
+    "url": "https://doi.org/10.33011/livecoms.1.1.5067",
+    "what_supports": "模拟采样、相关性与不确定性报告方法。",
+    "type": "methods_paper",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C10",
+    "title": "PyMBAR. The timeseries module.",
+    "url": "https://pymbar.readthedocs.io/en/stable/timeseries.html",
+    "what_supports": "detect_equilibration、统计低效因子与相关样本处理。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C11",
+    "title": "AMBER-hub. cluster.",
+    "url": "https://amberhub.chpc.utah.edu/cluster/",
+    "what_supports": "聚类方法、距离度量、筛帧、代表结构与状态人口输出。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C12",
+    "title": "MDAnalysis. Principal Component Analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/pca.html",
+    "what_supports": "共同基底投影、方差与原子对应。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C13",
+    "title": "deeptime. TICA.",
+    "url": "https://deeptime-ml.github.io/latest/notebooks/tica.html",
+    "what_supports": "滞后自相关特征、输入轨迹与可逆/平衡假设。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C14",
+    "title": "AMBER-hub. matrix.",
+    "url": "https://amberhub.chpc.utah.edu/matrix/",
+    "what_supports": "correl、covar 等矩阵类型区别。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C15",
+    "title": "deeptime. Implied timescales.",
+    "url": "https://deeptime-ml.github.io/latest/out/examples/plot_implied_timescales.html",
+    "what_supports": "MSM 滞后扫描和 implied timescales 示例。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C16",
+    "title": "deeptime. ck_test.",
+    "url": "https://deeptime-ml.github.io/latest/api/generated/deeptime.util.validation.ck_test.html",
+    "what_supports": "Chapman–Kolmogorov 检验的假设、实现与误差选项。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C17",
+    "title": "gmx_MMPBSA. Introduction.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/introduction/",
+    "what_supports": "端点能量组成与省略熵时的解释范围。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C18",
+    "title": "gmx_MMPBSA. The input file.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/",
+    "what_supports": "GB 模型/半径匹配；PB 包装器 istrng 以 M 输入、内部转 mM；参数记录。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C19",
+    "title": "Amber. Advanced Tutorial 3: Python Script MMPBSA.py.",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial3/py_script/index.htm",
+    "what_supports": "MMPBSA.py 模块、分解、熵及教程示例适用边界。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C20",
+    "title": "Mey ASJS, et al. Best Practices for Alchemical Free Energy Calculations. Living Journal of Computational Molecular Science. 2020;2(1):18378.",
+    "url": "https://doi.org/10.33011/livecoms.2.1.18378",
+    "what_supports": "相对/绝对自由能的热力学循环、采样、修正与复现原则。",
+    "type": "methods_paper",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C21",
+    "title": "PLUMED. Masterclass 21.3: Umbrella sampling.",
+    "url": "https://www.plumed.org/doc-v2.9/user-doc/html/masterclass-21-3.html",
+    "what_supports": "静态偏置、WHAM、重加权与自由能误差。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C22",
+    "title": "GROMACS. gmx wham documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-wham.html",
+    "what_supports": "窗口自相关和 bootstrap 选项，PMF 输出单位。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C23",
+    "title": "PLUMED. METAD.",
+    "url": "https://www.plumed.org/doc-v2.10/user-doc/html/_m_e_t_a_d.html",
+    "what_supports": "偏置、well-tempered、HILLS 和重加权输出。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C24",
+    "title": "Walker RC, Crowley MF, Case DA. The implementation of a fast and accurate QM/MM potential method in Amber. Journal of Computational Chemistry. 2008;29:1019–1031.",
+    "url": "https://doi.org/10.1002/jcc.20857",
+    "what_supports": "Amber QM/MM 方法实现与边界/电子结构处理。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C25",
+    "title": "BioExcel. QM/MM overview, GROMACS+CP2K QM/MM Best Practice Guide.",
+    "url": "https://docs.bioexcel.eu/qmmm_bpg/en/main/overview/overview.html",
+    "what_supports": "从建系、平衡、QM 区域选择到运行的工作流。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C26",
+    "title": "Squair JW, et al. Confronting false discoveries in single-cell differential expression. Nature Communications. 2021;12:5692.",
+    "url": "https://doi.org/10.1038/s41467-021-25960-2",
+    "what_supports": "生物重复层级和单细胞差异分析的假阳性。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C27",
+    "title": "Luecken MD, et al. Benchmarking atlas-level data integration in single-cell genomics. Nature Methods. 2022;19:41–50.",
+    "url": "https://doi.org/10.1038/s41592-021-01336-8",
+    "what_supports": "同时评价批次去除和生物学保留。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C28",
+    "title": "Dimitrov D, et al. LIANA+ provides an all-in-one framework for cell–cell communication inference. Nature Cell Biology. 2024;26:1613–1622.",
+    "url": "https://doi.org/10.1038/s41556-024-01469-w",
+    "what_supports": "单细胞、空间、多条件通信推断及其表达假设。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C29",
+    "title": "Osorio D, et al. scTenifoldKnk: An efficient virtual knockout tool for gene function predictions via single-cell gene regulatory network perturbation. Patterns. 2022;3:100434.",
+    "url": "https://doi.org/10.1016/j.patter.2022.100434",
+    "what_supports": "WT 单细胞网络上的虚拟扰动方法；版本输出需另核。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C30",
+    "title": "Zhang X, et al. Receptor specificity of the fibroblast growth factor family. The complete mammalian FGF family. Journal of Biological Chemistry. 2006;281:15694–15700.",
+    "url": "https://doi.org/10.1074/jbc.M601252200",
+    "what_supports": "FGF 家族受体特异性的标准化功能测定；不能等同全条件 Kd。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C31",
+    "title": "gmx_MMPBSA. Output files.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/output/",
+    "what_supports": "输出示例单位为 kcal/mol；SD/SEM 与块统计含义需按版本核对。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C32",
+    "title": "Souza PCT, et al. Martini 3: a general purpose force field for coarse-grained molecular dynamics. Nature Methods. 2021;18:382–388.",
+    "url": "https://doi.org/10.1038/s41592-021-01098-3",
+    "what_supports": "粗粒化模型的适用应用与映射思路。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C33",
+    "title": "GROMACS. Running membrane simulations in GROMACS.",
+    "url": "https://manual.gromacs.org/current/how-to/special.html",
+    "what_supports": "蛋白/脂质参数配套、插膜与平衡流程。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C34",
+    "title": "Shen S, et al. rMATS: Robust and flexible detection of differential alternative splicing from replicate RNA-Seq data. Proceedings of the National Academy of Sciences USA. 2014;111:E5593–E5601.",
+    "url": "https://doi.org/10.1073/pnas.1419161111",
+    "what_supports": "有重复的差异剪接事件分析与 PSI 的事件层级。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "C35",
+    "title": "MDAnalysis. Constants and unit conversion.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/units.html",
+    "what_supports": "MDAnalysis 默认 Å 与 ps，读取时自动转换及物理量单位。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  }
+]

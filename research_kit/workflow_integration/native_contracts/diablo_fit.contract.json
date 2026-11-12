@@ -1,0 +1,32 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "diablo_fit",
+  "required_inputs": [
+    "metadata"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "condition_key",
+    "view_ids",
+    "design",
+    "keepX",
+    "ncomp",
+    "standardize",
+    "max_iterations",
+    "parameter_selection"
+  ],
+  "required_output_roles": [
+    "factor_scores",
+    "factor_loadings",
+    "model_object",
+    "sample_metadata",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native DIABLO with externally prespecified parameters, fit only. No nested-validation performance claim",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I21",
+  "status": "draft",
+  "table_name": "exposure_evidence",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "exposure_id": null,
+    "parent_id": null,
+    "state_id": null,
+    "formulation_or_salt": null,
+    "species": null,
+    "matrix": null,
+    "route_or_assay_context": null,
+    "dose": null,
+    "dose_unit": null,
+    "time": null,
+    "time_unit": null,
+    "analyte": null,
+    "concentration": null,
+    "concentration_unit": null,
+    "concentration_relation": null,
+    "total_or_unbound": null,
+    "protein_binding_basis": null,
+    "evidence_origin": null,
+    "source": null,
+    "source_release": null,
+    "uncertainty_definition": null,
+    "qc_status": null,
+    "uncertainty": {
+      "kind": null,
+      "level": null,
+      "lower": null,
+      "upper": null
+    },
+    "missing_fields": {}
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "related_tables": {
+    "offtarget_evidence": {
+      "rows": [],
+      "row_template": {
+        "measurement_id": null,
+        "parent_id": null,
+        "state_id": null,
+        "analyte": null,
+        "target_id": null,
+        "target_form": null,
+        "assay_method": null,
+        "endpoint": null,
+        "value": null,
+        "value_unit": null,
+        "relation": null,
+        "test_conditions": null,
+        "maximum_test_concentration": null,
+        "maximum_test_concentration_unit": null,
+        "evidence_origin": null,
+        "source": null,
+        "source_release": null,
+        "model_id": null,
+        "model_version": null,
+        "applicability_domain": null,
+        "qc_status": null
+      }
+    },
+    "exposure_comparisons": {
+      "rows": [],
+      "row_template": {
+        "comparison_id": null,
+        "measurement_id": null,
+        "exposure_id": null,
+        "comparison_formula": null,
+        "unit_conversion_definition": null,
+        "free_fraction": null,
+        "free_fraction_source": null,
+        "comparable_entities_review": null,
+        "comparable_context_review": null,
+        "result": null,
+        "result_unit": null,
+        "uncertainty_definition": null,
+        "decision_scope": null
+      }
+    }
+  },
+  "review_plan": {
+    "question": null,
+    "intended_experimental_context": null,
+    "endpoint_panel_definition": null,
+    "measured_prediction_separation_rule": null,
+    "censored_data_rule": null,
+    "metabolite_handling_rule": null,
+    "priority_decision_rule": null
+  },
+  "module_version": "3.0.0"
+}

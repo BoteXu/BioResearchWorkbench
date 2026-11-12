@@ -1,0 +1,111 @@
+"""Step 3 — GO / KEGG over-representation, GSEA prerank and GSVA.
+
+Uses LOCAL gene-set libraries (downloaded once by utils.get_gene_sets). Never call the Enrichr
+API in a loop — see references/gotchas.md §3.
+"""
+from __future__ import annotations
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import gseapy
+import utils
+
+BG_FALLBACK = 18000
+
+
+def _clean(t):
+    return (t.replace(" - Homo sapiens (human)", "").replace(" - Homo sapiens", "")
+             .replace(" (GO:", " (GO:"))
+
+
+def run(cfg):
+    colors = utils.theme(cfg)
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    de = pd.read_csv(cfg["_outdir"] / "results" / "de_results.csv")
+    if de["symbol"].isna().all():
+        raise SystemExit("de_results has no symbols — run step2 first")
+    de = de[de["symbol"].notna()].copy()
+    bg = len(set(de["symbol"].astype(str)))
+
+    fc = cfg["de"]["fc_threshold"]; fdr = cfg["de"]["fdr_threshold"]
+    up = de.loc[(de["adj.P.Val"] < fdr) & (de["logFC"] > fc), "symbol"].astype(str).tolist()
+    dn = de.loc[(de["adj.P.Val"] < fdr) & (de["logFC"] < -fc), "symbol"].astype(str).tolist()
+    print(f"[enrich] up {len(up)}  down {len(dn)}  background {bg}")
+
+    libs = cfg["enrichment"]["libraries"]
+    top = cfg["enrichment"]["top_n_plot"]
+    sets = {l: utils.get_gene_sets(cfg, l) for l in libs}
+    kegg_lib = next((l for l in libs if "KEGG" in l), None)
+    go_lib = next((l for l in libs if l.startswith("GO")), None)
+
+    # ---------------- over-representation (up / down separately) ----------------
+    def ora(genes, lib):
+        if len(genes) < 5 or lib is None:
+            return pd.DataFrame()
+        r = gseapy.enrich(gene_list=genes, gene_sets=sets[lib], background=bg,
+                          outdir=None, verbose=False).results
+        return r.sort_values("Adjusted P-value") if len(r) else pd.DataFrame()
+
+    ora_all = []
+    for tag, genes in (("Up", up), ("Down", dn)):
+        for lib in (go_lib, kegg_lib):
+            r = ora(genes, lib)
+            if len(r):
+                r = r.copy(); r["dir"] = tag; r["lib"] = lib
+                ora_all.append(r)
+    if ora_all:
+        O = pd.concat(ora_all, ignore_index=True)
+        utils.save_table(O, cfg, "enrichment_ora.csv")
+        O["nlp"] = -np.log10(O["Adjusted P-value"].astype(float).clip(lower=1e-300))
+        for lib, axname in ((kegg_lib, "KEGG"), (go_lib, "GO")):
+            sub = O[O["lib"] == lib]
+            if not len(sub): continue
+            fig, axes = plt.subplots(1, 2, figsize=(15, 5.6), sharex=True)
+            xmax = sub["nlp"].max() * 1.08
+            for ax, d_, col, cmap in ((axes[0], "Up", colors["case"], "Reds"),
+                                      (axes[1], "Down", colors["control"], "Blues")):
+                q = sub[sub["dir"] == d_].sort_values("Adjusted P-value").head(top)
+                if not len(q): continue
+                q = q.iloc[::-1]
+                hits = q["Overlap"].str.split("/").str[0].astype(int)
+                ax.scatter(q["nlp"], _clean(q["Term"]), s=45 + hits * 9, c=q["nlp"], cmap=cmap,
+                           edgecolors="#333", linewidths=.5, vmin=0, vmax=xmax)
+                ax.set_xlim(0, xmax)
+                utils.strip_plot(ax, f"{axname} — {d_}-regulated (top {top})",
+                                 "−log10 adjusted P")
+            fig.tight_layout(); utils.save_fig(fig, cfg, f"F3_{axname}_ORA")
+
+    # ---------------- GSEA prerank (all genes, no threshold) ----------------
+    rnk = (de[["symbol", "t"]].dropna().drop_duplicates("symbol")
+             .set_index("symbol")["t"].sort_values(ascending=False))
+    print(f"[gsea] ranked genes: {len(rnk)}")
+    for lib in libs:
+        if lib not in sets: continue
+        g = gseapy.prerank(rnk=rnk, gene_sets=sets[lib], outdir=None, min_size=10, max_size=500,
+                           permutation_num=1000, seed=42, no_plot=True, threads=cfg["threads"])
+        r = g.res2d.copy()
+        r["NES"] = pd.to_numeric(r["NES"], errors="coerce")
+        r["FDR q-val"] = pd.to_numeric(r["FDR q-val"], errors="coerce")
+        utils.save_table(r, cfg, f"gsea_{lib}.csv")
+        s = r[r["FDR q-val"] < 0.25]
+        if not len(s): s = r
+        s = s.reindex(s["NES"].abs().sort_values(ascending=False).index).head(20).sort_values("NES")
+        if len(s):
+            fig, ax = plt.subplots(figsize=(8.6, 6.6))
+            ax.barh(_clean(s["Term"]), s["NES"],
+                    color=[colors["case"] if v > 0 else colors["control"] for v in s["NES"]])
+            ax.axvline(0, color="#666", lw=.9)
+            utils.strip_plot(ax, f"GSEA — {lib} (FDR<0.25, top 20 by |NES|)", "NES")
+            fig.tight_layout(); utils.save_fig(fig, cfg, f"F3_GSEA_{lib}")
+
+
+def gsva_scores(cfg, expr, samples, y):
+    """per-sample Hallmark activity (used by the pathway / ML / figure steps)."""
+    import gseapy as gp
+    hall = utils.get_gene_sets(cfg, "MSigDB_Hallmark_2020")
+    rnk_db = {k: v for k, v in hall.items()}
+    res = gp.gsva(data=expr[samples], gene_sets=rnk_db, outdir=None, verbose=False)
+    gs = res.res2d.pivot(index="Term", columns="Name", values="ES")
+    gs.to_csv(cfg["_outdir"] / "results" / "gsva_scores.csv")
+    print(f"[gsva] {gs.shape[0]} pathways x {gs.shape[1]} samples")
+    return gs

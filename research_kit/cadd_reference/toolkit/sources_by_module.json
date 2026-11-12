@@ -1,0 +1,1516 @@
+{
+  "A01": {
+    "key": "A01",
+    "title": "RCSB PDB. Assessing the Quality of 3D Structures.",
+    "url": "https://www.rcsb.org/docs/general-help/assessing-the-quality-of-3d-structures",
+    "what_supports": "实验及计算结构的整体/局部质量、验证报告与目标区域审查",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A02": {
+    "key": "A02",
+    "title": "RCSB PDB-101. Biological Assemblies.",
+    "url": "https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/biological-assemblies",
+    "what_supports": "非对称单元与生物学装配体的区别",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A03": {
+    "key": "A03",
+    "title": "Google DeepMind. AlphaFold 3 Output documentation.",
+    "url": "https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md",
+    "what_supports": "输出、pLDDT/PAE/ipTM、链对指标和ranking_score的含义",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A04": {
+    "key": "A04",
+    "title": "Sali Lab. MODELLER: Missing residues.",
+    "url": "https://salilab.org/modeller/resources/missing_residues.html",
+    "what_supports": "按完整序列/对齐修复缺失残基及局部模型审查",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A05": {
+    "key": "A05",
+    "title": "PROPKA authors. propka3 command documentation.",
+    "url": "https://propka.readthedocs.io/en/latest/command.html",
+    "what_supports": "结构依赖pKa预测、耦合残基及命令语义",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A06": {
+    "key": "A06",
+    "title": "AutoDock Vina. Docking with zinc metalloproteins.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/docking_zinc.html",
+    "what_supports": "锌配位需要适当的专用对接表示与参数",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A07": {
+    "key": "A07",
+    "title": "AutoDock Vina. Hydrated docking.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/docking_hydrated.html",
+    "what_supports": "显式水相关对接属于独立协议",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A08": {
+    "key": "A08",
+    "title": "AutoDock Vina. Basic docking.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/docking_basic.html",
+    "what_supports": "基本运行流程、box单位、exhaustiveness示例、评分/输出语义",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A09": {
+    "key": "A09",
+    "title": "RDKit. Getting Started with the RDKit in Python.",
+    "url": "https://www.rdkit.org/docs/GettingStartedInPython.html",
+    "what_supports": "分子读写与ETKDG构象生成",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A10": {
+    "key": "A10",
+    "title": "Meeko. Basic ligand preparation.",
+    "url": "https://meeko.readthedocs.io/en/develop/lig_prep_basic.html",
+    "what_supports": "显式氢、3D输入要求及mk_prepare_ligand.py命令",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A11": {
+    "key": "A11",
+    "title": "AutoDock Vina. Frequently Asked Questions.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/faq.html",
+    "what_supports": "目标依赖验证、随机搜索、空间大小、输出模式上限及模型局限",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A12": {
+    "key": "A12",
+    "title": "AutoDock Vina. Flexible docking.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/docking_flexible.html",
+    "what_supports": "刚性/柔性受体拆分和局部柔性概念；旧忽略残基参数不照搬",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A13": {
+    "key": "A13",
+    "title": "Buttenschoen M, Morris GM, Deane CM. PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences. Chemical Science. 2024;15:3130–3139.",
+    "url": "https://doi.org/10.1039/D3SC04185A",
+    "what_supports": "RMSD与物理合理性应分别评价",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "A14": {
+    "key": "A14",
+    "title": "Stein RM, Yang Y, Balius TE, et al. Property-Unmatched Decoys in Docking Benchmarks. Journal of Chemical Information and Modeling. 2021;61:699–714.",
+    "url": "https://doi.org/10.1021/acs.jcim.0c00598",
+    "what_supports": "decoy构造与物性偏差对基准评价的影响",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "A15": {
+    "key": "A15",
+    "title": "PoseBusters. Checks documentation.",
+    "url": "https://posebusters.readthedocs.io/en/latest/checks.html",
+    "what_supports": "几何、手性、碰撞、分子身份和有效性检查",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A16": {
+    "key": "A16",
+    "title": "Meeko. Options of mk_prepare_receptor.py.",
+    "url": "https://meeko.readthedocs.io/en/develop/rec_cli_options.html",
+    "what_supports": "--read_pdb、box、输出选项；忽略坏残基参数存在版本变化",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A17": {
+    "key": "A17",
+    "title": "Bouysset C, Fiorucci S. ProLIF: a library to encode molecular interactions as fingerprints. Journal of Cheminformatics. 2021;13:72.",
+    "url": "https://doi.org/10.1186/s13321-021-00548-6",
+    "what_supports": "对接和轨迹的相互作用指纹、可配置接触定义",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "A18": {
+    "key": "A18",
+    "title": "McNutt AT, Li Y, Meli R, et al. GNINA 1.3: the next increment in molecular docking with deep learning. Journal of Cheminformatics. 2025;17:28.",
+    "url": "https://doi.org/10.1186/s13321-025-00973-x",
+    "what_supports": "GNINA版本、CNN位姿/亲和力目标及数据/模型配置",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "A19": {
+    "key": "A19",
+    "title": "HADDOCK3. Introduction to restraints in HADDOCK.",
+    "url": "https://www.bonvinlab.org/haddock3-user-manual/intro_restraints.html",
+    "what_supports": "active/passive、模糊约束含义、原子选择与空选择风险",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A20": {
+    "key": "A20",
+    "title": "HADDOCK3. Ab-initio docking mode.",
+    "url": "https://www.bonvinlab.org/haddock3-user-manual/abinitio_docking.html",
+    "what_supports": "无先验模式的假设、采样需求及模式互斥",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A21": {
+    "key": "A21",
+    "title": "Mirabello C, Wallner B. DockQ v2: improved automatic quality measure for protein multimers, nucleic acids, and small molecules. Bioinformatics. 2024;40:btae586.",
+    "url": "https://doi.org/10.1093/bioinformatics/btae586",
+    "what_supports": "DockQ需要参考结构；多链接口评价",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "A22": {
+    "key": "A22",
+    "title": "Meeko. Exporting docking results.",
+    "url": "https://meeko.readthedocs.io/en/develop/export_usage.html",
+    "what_supports": "SMILES和原子映射恢复键级、氢、柔性受体坐标",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "A23": {
+    "key": "A23",
+    "title": "Bonvin Lab. Antibody-antigen modelling tutorial using a local version of HADDOCK3.",
+    "url": "https://www.bonvinlab.org/education/HADDOCK3/HADDOCK3-antibody-antigen/",
+    "what_supports": "采样规模作为特定体系公开示例，界面聚类及模型筛选",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "B01": {
+    "key": "B01",
+    "title": "Amber Force Fields",
+    "url": "https://ambermd.org/AmberModels.php",
+    "what_supports": "组件力场及混合参数兼容性；当前官方入口",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B02": {
+    "key": "B02",
+    "title": "Amber Protein Force Fields",
+    "url": "https://ambermd.org/AmberModels_proteins.php",
+    "what_supports": "ff19SB/OPC、ff14SB/TIP3P、CMAP及模型匹配",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B03": {
+    "key": "B03",
+    "title": "Amber tutorial: Simulating a pharmaceutical compound using antechamber and GAFF",
+    "url": "https://ambermd.org/tutorials/basic/tutorial4b/index.php",
+    "what_supports": "Antechamber电荷/原子类型/参数审查职责；本手册不复制旧教程的具体研究体系和旧力场",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B04": {
+    "key": "B04",
+    "title": "Amber tutorial: Building Bonded Model for a Ligand Binding Metalloprotein with MCPB.py",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial20/mcpbpy.php",
+    "what_supports": "成键金属中心参数化工具及适用分支",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B05": {
+    "key": "B05",
+    "title": "Amber tutorial: Simulating a Lipid Bilayer",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial16/index.php",
+    "what_supports": "膜体系单独建系、平衡和物理设置要求",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B06": {
+    "key": "B06",
+    "title": "GROMACS gmx genion",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-genion.html",
+    "what_supports": "-neutral追加中和离子；-conc按盒体积、不扣除已有离子",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B07": {
+    "key": "B07",
+    "title": "Amber 2026 Reference Manual",
+    "url": "https://ambermd.org/doc12/Amber26.pdf",
+    "what_supports": "官方手册2026-06-22版，印刷页431–433输入输出与位置限制，434 drms/dt，436 ig重启种子，437–438 NPT/MC，461 netfrc；从Manuals.php官方链接下载并本地核对",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B08": {
+    "key": "B08",
+    "title": "GROMACS Molecular dynamics parameters (.mdp options)",
+    "url": "https://manual.gromacs.org/current/user-guide/mdp-options.html",
+    "what_supports": "MDP字段、温压耦合、annealing、constraints与continuation；当前页面2026.4，实际运行需固定安装版本",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B09": {
+    "key": "B09",
+    "title": "GROMACS gmx grompp",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-grompp.html",
+    "what_supports": "-pp/-po/-t、警告审查与-maxwarn限制",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B10": {
+    "key": "B10",
+    "title": "GROMACS gmx genrestr",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-genrestr.html",
+    "what_supports": "位置限制局部moleculetype索引与include作用域",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B11": {
+    "key": "B11",
+    "title": "GROMACS Restraints",
+    "url": "https://manual.gromacs.org/current/reference-manual/functions/restraints.html",
+    "what_supports": "位置限制势含1/2；压力/virial与参考缩放",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B12": {
+    "key": "B12",
+    "title": "GROMACS Managing long simulations",
+    "url": "https://manual.gromacs.org/current/user-guide/managing-simulations.html",
+    "what_supports": "checkpoint、追加文件校验、convert-tpr、-cpi及连续性",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B13": {
+    "key": "B13",
+    "title": "ParmEd: The parmed.gromacs package",
+    "url": "https://parmed.github.io/ParmEd/html/gromacs.html",
+    "what_supports": "拓扑转换、moleculetype/原子顺序、能量力比较",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B14": {
+    "key": "B14",
+    "title": "Amber pmemd.cuda GPU Implementation",
+    "url": "https://ambermd.org/GPUFeatures.php",
+    "what_supports": "GPU功能范围需按版本核对",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "B15": {
+    "key": "B15",
+    "title": "GROMACS Getting good performance from mdrun",
+    "url": "https://manual.gromacs.org/current/user-guide/mdrun-performance.html",
+    "what_supports": "GPU与CPU任务分配、功能限制、必须实测性能",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "C01": {
+    "key": "C01",
+    "title": "GROMACS. gmx trjconv documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html",
+    "what_supports": "PBC whole/nojump/mol/cluster 与处理顺序；不同任务不能无条件套同一转换。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C02": {
+    "key": "C02",
+    "title": "AMBER-hub. autoimage.",
+    "url": "https://amberhub.chpc.utah.edu/autoimage/",
+    "what_supports": "anchor/fixed/mobile 与默认 anchor 定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C03": {
+    "key": "C03",
+    "title": "AMBER-hub. rmsd.",
+    "url": "https://amberhub.chpc.utah.edu/rmsd/",
+    "what_supports": "拟合、nofit 与 nomod 的不同含义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C04": {
+    "key": "C04",
+    "title": "AMBER-hub. atomicfluct | rmsf.",
+    "url": "https://amberhub.chpc.utah.edu/atomicfluct-rmsf/",
+    "what_supports": "RMSF 不隐式拟合，输出单位及 byres 定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C05": {
+    "key": "C05",
+    "title": "GROMACS. gmx dssp documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-dssp.html",
+    "what_supports": "当前二级结构工具入口，需固定实际版本。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C06": {
+    "key": "C06",
+    "title": "GROMACS. gmx sasa documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-sasa.html",
+    "what_supports": "SASA 探针默认 0.14 nm、分子完整性要求。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C07": {
+    "key": "C07",
+    "title": "MDAnalysis. Native contacts analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/contacts.html",
+    "what_supports": "参考接触与半径/软阈值区分，接触比例的定义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C08": {
+    "key": "C08",
+    "title": "MDAnalysis. Hydrogen Bond Analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/hydrogenbonds.html",
+    "what_supports": "默认 D–A 3.0 Å、D–H–A 150°；使用键拓扑识别 D–H；寿命分析。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C09": {
+    "key": "C09",
+    "title": "Grossfield A, et al. Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations. Living Journal of Computational Molecular Science. 2018;1(1):5067.",
+    "url": "https://doi.org/10.33011/livecoms.1.1.5067",
+    "what_supports": "模拟采样、相关性与不确定性报告方法。",
+    "type": "methods_paper",
+    "verified_on": "2026-10-24"
+  },
+  "C10": {
+    "key": "C10",
+    "title": "PyMBAR. The timeseries module.",
+    "url": "https://pymbar.readthedocs.io/en/stable/timeseries.html",
+    "what_supports": "detect_equilibration、统计低效因子与相关样本处理。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C11": {
+    "key": "C11",
+    "title": "AMBER-hub. cluster.",
+    "url": "https://amberhub.chpc.utah.edu/cluster/",
+    "what_supports": "聚类方法、距离度量、筛帧、代表结构与状态人口输出。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C12": {
+    "key": "C12",
+    "title": "MDAnalysis. Principal Component Analysis.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/analysis/pca.html",
+    "what_supports": "共同基底投影、方差与原子对应。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C13": {
+    "key": "C13",
+    "title": "deeptime. TICA.",
+    "url": "https://deeptime-ml.github.io/latest/notebooks/tica.html",
+    "what_supports": "滞后自相关特征、输入轨迹与可逆/平衡假设。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C14": {
+    "key": "C14",
+    "title": "AMBER-hub. matrix.",
+    "url": "https://amberhub.chpc.utah.edu/matrix/",
+    "what_supports": "correl、covar 等矩阵类型区别。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C15": {
+    "key": "C15",
+    "title": "deeptime. Implied timescales.",
+    "url": "https://deeptime-ml.github.io/latest/out/examples/plot_implied_timescales.html",
+    "what_supports": "MSM 滞后扫描和 implied timescales 示例。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C16": {
+    "key": "C16",
+    "title": "deeptime. ck_test.",
+    "url": "https://deeptime-ml.github.io/latest/api/generated/deeptime.util.validation.ck_test.html",
+    "what_supports": "Chapman–Kolmogorov 检验的假设、实现与误差选项。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C17": {
+    "key": "C17",
+    "title": "gmx_MMPBSA. Introduction.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/introduction/",
+    "what_supports": "端点能量组成与省略熵时的解释范围。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C18": {
+    "key": "C18",
+    "title": "gmx_MMPBSA. The input file.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/",
+    "what_supports": "GB 模型/半径匹配；PB 包装器 istrng 以 M 输入、内部转 mM；参数记录。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C19": {
+    "key": "C19",
+    "title": "Amber. Advanced Tutorial 3: Python Script MMPBSA.py.",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial3/py_script/index.htm",
+    "what_supports": "MMPBSA.py 模块、分解、熵及教程示例适用边界。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C20": {
+    "key": "C20",
+    "title": "Mey ASJS, et al. Best Practices for Alchemical Free Energy Calculations. Living Journal of Computational Molecular Science. 2020;2(1):18378.",
+    "url": "https://doi.org/10.33011/livecoms.2.1.18378",
+    "what_supports": "相对/绝对自由能的热力学循环、采样、修正与复现原则。",
+    "type": "methods_paper",
+    "verified_on": "2026-10-24"
+  },
+  "C21": {
+    "key": "C21",
+    "title": "PLUMED. Masterclass 21.3: Umbrella sampling.",
+    "url": "https://www.plumed.org/doc-v2.9/user-doc/html/masterclass-21-3.html",
+    "what_supports": "静态偏置、WHAM、重加权与自由能误差。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C22": {
+    "key": "C22",
+    "title": "GROMACS. gmx wham documentation.",
+    "url": "https://manual.gromacs.org/current/onlinehelp/gmx-wham.html",
+    "what_supports": "窗口自相关和 bootstrap 选项，PMF 输出单位。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C23": {
+    "key": "C23",
+    "title": "PLUMED. METAD.",
+    "url": "https://www.plumed.org/doc-v2.10/user-doc/html/_m_e_t_a_d.html",
+    "what_supports": "偏置、well-tempered、HILLS 和重加权输出。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C24": {
+    "key": "C24",
+    "title": "Walker RC, Crowley MF, Case DA. The implementation of a fast and accurate QM/MM potential method in Amber. Journal of Computational Chemistry. 2008;29:1019–1031.",
+    "url": "https://doi.org/10.1002/jcc.20857",
+    "what_supports": "Amber QM/MM 方法实现与边界/电子结构处理。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C25": {
+    "key": "C25",
+    "title": "BioExcel. QM/MM overview, GROMACS+CP2K QM/MM Best Practice Guide.",
+    "url": "https://docs.bioexcel.eu/qmmm_bpg/en/main/overview/overview.html",
+    "what_supports": "从建系、平衡、QM 区域选择到运行的工作流。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C26": {
+    "key": "C26",
+    "title": "Squair JW, et al. Confronting false discoveries in single-cell differential expression. Nature Communications. 2021;12:5692.",
+    "url": "https://doi.org/10.1038/s41467-021-25960-2",
+    "what_supports": "生物重复层级和单细胞差异分析的假阳性。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C27": {
+    "key": "C27",
+    "title": "Luecken MD, et al. Benchmarking atlas-level data integration in single-cell genomics. Nature Methods. 2022;19:41–50.",
+    "url": "https://doi.org/10.1038/s41592-021-01336-8",
+    "what_supports": "同时评价批次去除和生物学保留。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C28": {
+    "key": "C28",
+    "title": "Dimitrov D, et al. LIANA+ provides an all-in-one framework for cell–cell communication inference. Nature Cell Biology. 2024;26:1613–1622.",
+    "url": "https://doi.org/10.1038/s41556-024-01469-w",
+    "what_supports": "单细胞、空间、多条件通信推断及其表达假设。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C29": {
+    "key": "C29",
+    "title": "Osorio D, et al. scTenifoldKnk: An efficient virtual knockout tool for gene function predictions via single-cell gene regulatory network perturbation. Patterns. 2022;3:100434.",
+    "url": "https://doi.org/10.1016/j.patter.2022.100434",
+    "what_supports": "WT 单细胞网络上的虚拟扰动方法；版本输出需另核。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C30": {
+    "key": "C30",
+    "title": "Zhang X, et al. Receptor specificity of the fibroblast growth factor family. The complete mammalian FGF family. Journal of Biological Chemistry. 2006;281:15694–15700.",
+    "url": "https://doi.org/10.1074/jbc.M601252200",
+    "what_supports": "FGF 家族受体特异性的标准化功能测定；不能等同全条件 Kd。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C31": {
+    "key": "C31",
+    "title": "gmx_MMPBSA. Output files.",
+    "url": "https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/output/",
+    "what_supports": "输出示例单位为 kcal/mol；SD/SEM 与块统计含义需按版本核对。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C32": {
+    "key": "C32",
+    "title": "Souza PCT, et al. Martini 3: a general purpose force field for coarse-grained molecular dynamics. Nature Methods. 2021;18:382–388.",
+    "url": "https://doi.org/10.1038/s41592-021-01098-3",
+    "what_supports": "粗粒化模型的适用应用与映射思路。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C33": {
+    "key": "C33",
+    "title": "GROMACS. Running membrane simulations in GROMACS.",
+    "url": "https://manual.gromacs.org/current/how-to/special.html",
+    "what_supports": "蛋白/脂质参数配套、插膜与平衡流程。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "C34": {
+    "key": "C34",
+    "title": "Shen S, et al. rMATS: Robust and flexible detection of differential alternative splicing from replicate RNA-Seq data. Proceedings of the National Academy of Sciences USA. 2014;111:E5593–E5601.",
+    "url": "https://doi.org/10.1073/pnas.1419161111",
+    "what_supports": "有重复的差异剪接事件分析与 PSI 的事件层级。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "C35": {
+    "key": "C35",
+    "title": "MDAnalysis. Constants and unit conversion.",
+    "url": "https://docs.mdanalysis.org/stable/documentation_pages/units.html",
+    "what_supports": "MDAnalysis 默认 Å 与 ps，读取时自动转换及物理量单位。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB01": {
+    "key": "IB01",
+    "title": "Open Targets Platform Documentation. Target–disease evidence.",
+    "url": "https://platform-docs.opentargets.org/evidence",
+    "what_supports": "证据映射到 Ensembl 基因和 EFO，保留证据类别、来源与评分框架；综合索引不等同项目中的因果验证。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB02": {
+    "key": "IB02",
+    "title": "Ensembl. Stable IDs and versioning.",
+    "url": "https://www.ensembl.org/info/genome/stable_ids/index.html",
+    "what_supports": "稳定 ID 与版本；基因、转录本、蛋白版本递增的不同规则。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB03": {
+    "key": "IB03",
+    "title": "UniProt help. Sequence processing.",
+    "url": "https://www.uniprot.org/help/sequence_processing",
+    "what_supports": "显示序列可能是前体；成熟加工涉及信号肽、前肽或转运肽切除。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB04": {
+    "key": "IB04",
+    "title": "Ensembl. Ensembl Canonical transcript.",
+    "url": "https://www.ensembl.org/info/genome/genebuild/canonical.html",
+    "what_supports": "Canonical 是代表性转录本；准确分析可能需要同一基因多个转录本。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB05": {
+    "key": "IB05",
+    "title": "AnnData. anndata.AnnData API documentation.",
+    "url": "https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.html",
+    "what_supports": "X、obs、var、layers、obsm、uns 等对象结构和写入接口。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB06": {
+    "key": "IB06",
+    "title": "Squair JW et al. Confronting false discoveries in single-cell differential expression. Nature Communications 12, 5692 (2021).",
+    "url": "https://www.nature.com/articles/s41467-021-25960-2",
+    "what_supports": "差异表达中忽略生物重复间变异容易产生错误发现；生物重复汇总的依据。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB07": {
+    "key": "IB07",
+    "title": "Love MI, Anders S, Huber W. Analyzing RNA-seq data with DESeq2.",
+    "url": "https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html",
+    "what_supports": "计数模型、设计矩阵满秩、批次线性依赖、嵌套及配对设计；变换用于可视化而非替代原始计数模型。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB08": {
+    "key": "IB08",
+    "title": "Dimitrov D et al. LIANA+ provides an all-in-one framework for cell–cell communication inference. Nature Cell Biology 26, 1613–1622 (2024).",
+    "url": "https://www.nature.com/articles/s41556-024-01469-w",
+    "what_supports": "单细胞、空间、多模态通信推断的方法整合及下游证据连接。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB09": {
+    "key": "IB09",
+    "title": "scvi-tools. Reference mapping with SCVI-Tools.",
+    "url": "https://docs.scvi-tools.org/en/stable/tutorials/notebooks/multimodal/scarches_scvi_tools.html",
+    "what_supports": "scArches 查询到参考潜在空间映射、特征一致性和批次协变量。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB10": {
+    "key": "IB10",
+    "title": "Xinglab. rMATS-turbo official README.",
+    "url": "https://github.com/Xinglab/rmats-turbo/blob/master/README.md",
+    "what_supports": "生物重复输入、事件输出、JC 与 JCEC 口径、软件版本与参数核查。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB11": {
+    "key": "IB11",
+    "title": "PDBe and UniProt. SIFTS overview.",
+    "url": "https://www.ebi.ac.uk/pdbe/docs/sifts/overview.html",
+    "what_supports": "PDB 与 UniProt 的残基层映射和结构序列注释。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB12": {
+    "key": "IB12",
+    "title": "Subramanian A et al. A Next Generation Connectivity Map: L1000 Platform and the First 1,000,000 Profiles. Cell 171, 1437–1452.e17 (2017).",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5990023/",
+    "what_supports": "扰动签名连接、上下文、connectivity、FDR 与 tau 的不同含义。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB13": {
+    "key": "IB13",
+    "title": "CLUE Connectopedia. L1000 query tutorial.",
+    "url": "https://clue.io/connectopedia/l1000_query_tutorial",
+    "what_supports": "查询背景、特征空间、细胞上下文、剂量时间和输出矩阵含义。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB14": {
+    "key": "IB14",
+    "title": "Vitek Lab. MSstatsPTM official documentation.",
+    "url": "https://vitek-lab.github.io/MSstatsPTM/",
+    "what_supports": "PTM 和未修饰蛋白联合估计及蛋白丰度调整；具体搜索输出需经匹配转换器导入。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB15": {
+    "key": "IB15",
+    "title": "Badia-i-Mompel P et al. decoupleR: ensemble of computational methods to infer biological activities from omics data. Bioinformatics Advances 2, vbac016 (2022).",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9710656/",
+    "what_supports": "利用下游转录/磷酸化位点和先验网络推断 TF、激酶等活动；推断与直接测量的区分。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB16": {
+    "key": "IB16",
+    "title": "Argelaguet R et al. MOFA+: a statistical framework for comprehensive integration of multi-modal single-cell data. Genome Biology 21, 111 (2020).",
+    "url": "https://link.springer.com/article/10.1186/s13059-020-02015-1",
+    "what_supports": "多组和多模态潜在因子模型；因子/载荷/模态变异的解释。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB17": {
+    "key": "IB17",
+    "title": "Crumb WJ Jr et al. An evaluation of 30 clinical drugs against the comprehensive in vitro proarrhythmia assay (CiPA) proposed ion channel panel. Journal of Pharmacological and Toxicological Methods 81, 251–262 (2016).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/27060526/",
+    "what_supports": "多离子通道作用与自由暴露背景；单一 hERG 不能概括完整复极风险。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB18": {
+    "key": "IB18",
+    "title": "Li Z et al. Assessment of an In Silico Mechanistic Model for Proarrhythmia Risk Prediction Under the CiPA Initiative. Clinical Pharmacology and Therapeutics 105, 466–475 (2019).",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6492074/",
+    "what_supports": "多离子通道药理整合到心肌细胞机制模型并进行预测验证；本手册仅借鉴研究分层。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "IB19": {
+    "key": "IB19",
+    "title": "Mol* Viewer Documentation. Common actions and session/state saving.",
+    "url": "https://molstar.org/viewer-docs/common-actions/",
+    "what_supports": "会话/状态保存，molj 状态与外部输入依赖；三维视图复用需要保留数据。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IB20": {
+    "key": "IB20",
+    "title": "Cytoscape User Manual. Quick Tour of Cytoscape.",
+    "url": "https://manual.cytoscape.org/en/stable/Quick_Tour_of_Cytoscape.html",
+    "what_supports": "网络与属性面板、会话保存、图像/网页导出、原始网络和视图分离。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "IE01": {
+    "key": "IE01",
+    "title": "Snakemake. Command line interface and rerun triggers.",
+    "url": "https://snakemake.readthedocs.io/en/stable/executing/cli.html",
+    "what_supports": "代码、输入、参数、环境等重算触发以及dry run"
+  },
+  "IE02": {
+    "key": "IE02",
+    "title": "Nextflow. Caching and resuming.",
+    "url": "https://docs.seqera.io/nextflow/cache-and-resume",
+    "what_supports": "任务缓存、工作目录、输入、脚本和环境身份共同参与恢复"
+  },
+  "IE03": {
+    "key": "IE03",
+    "title": "Slurm Workload Manager. Job Array Support.",
+    "url": "https://slurm.schedmd.com/job_array.html",
+    "what_supports": "数组索引、并发上限、独立任务日志与调度依赖"
+  },
+  "IE04": {
+    "key": "IE04",
+    "title": "GROMACS. Managing long simulations.",
+    "url": "https://manual.gromacs.org/current/user-guide/managing-simulations.html",
+    "what_supports": "checkpoint恢复、append与noappend、输出一致性"
+  },
+  "IE05": {
+    "key": "IE05",
+    "title": "Amber. Reference manuals.",
+    "url": "https://ambermd.org/Manuals.php",
+    "what_supports": "重启状态、随机数和安装版本相应输入定义"
+  },
+  "IE06": {
+    "key": "IE06",
+    "title": "Grossfield A, et al. Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations. 2018.",
+    "url": "https://doi.org/10.33011/livecoms.1.1.5067",
+    "what_supports": "相关采样、独立运行与误差及收敛证据"
+  },
+  "IE07": {
+    "key": "IE07",
+    "title": "PyMBAR. Timeseries module.",
+    "url": "https://pymbar.readthedocs.io/en/stable/timeseries.html",
+    "what_supports": "统计低效与有效样本、平衡截断分析"
+  },
+  "IE08": {
+    "key": "IE08",
+    "title": "scikit-learn. Common pitfalls and recommended practices.",
+    "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+    "what_supports": "预处理泄漏、训练验证数据分离与随机性"
+  },
+  "IE09": {
+    "key": "IE09",
+    "title": "Matplotlib. matplotlib.pyplot.savefig.",
+    "url": "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html",
+    "what_supports": "可复现图形格式导出"
+  },
+  "IM01": {
+    "key": "IM01",
+    "title": "A Guide to the Continuous Constant pH Molecular Dynamics Methods in Amber and CHARMM",
+    "url": "https://livecomsjournal.org/index.php/livecoms/article/view/v4i1e1563",
+    "what_supports": "固定质子化与恒定pH的区别、具体实现的溶剂与采样要求",
+    "verified_on": "2026-10-24",
+    "type": "methods paper"
+  },
+  "IM02": {
+    "key": "IM02",
+    "title": "JanaShenLab CpHMD Tutorial official repository",
+    "url": "https://github.com/JanaShenLab/CpHMD-Tutorial",
+    "what_supports": "恒定pH教程实现和各方法环境边界，不能假设任意配体可自动滴定",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM03": {
+    "key": "IM03",
+    "title": "AMBER hub CPPTRAJ GIST documentation",
+    "url": "https://amberhub.chpc.utah.edu/gist/",
+    "what_supports": "GIST输入、构象参考、网格、体相参考及密度和按水归一化量的区别",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM04": {
+    "key": "IM04",
+    "title": "Solvation thermodynamic mapping of molecular surfaces in AmberTools GIST",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/27317094/",
+    "what_supports": "GIST局部溶剂结构和热力学映射的原始实现",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM05": {
+    "key": "IM05",
+    "title": "fpocket and mdpocket Getting Started official guide",
+    "url": "https://github.com/Discngine/fpocket/blob/master/doc/GETTINGSTARTED.md",
+    "what_supports": "静态及动态口袋检测、选择口袋和描述符输出",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM06": {
+    "key": "IM06",
+    "title": "Equilibrium fluctuations of a single folded protein reveal a multitude of potential cryptic allosteric sites",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22753506/",
+    "what_supports": "隐蔽位点的瞬态口袋与远端耦合探索",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM07": {
+    "key": "IM07",
+    "title": "Predicting locations of cryptic pockets from single protein structures using the PocketMiner graph neural network",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/36859488/",
+    "what_supports": "单结构预测隐蔽位点的位置，不将预测解释为实测结合或药效",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM08": {
+    "key": "IM08",
+    "title": "Amber Lipids Force Fields",
+    "url": "https://ambermd.org/AmberModels_lipids.php",
+    "what_supports": "Lipid21官方支持和膜建系入口",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM09": {
+    "key": "IM09",
+    "title": "Lipid21 Complex Lipid Membrane Simulations with AMBER",
+    "url": "https://pubs.acs.org/doi/10.1021/acs.jctc.1c01217",
+    "what_supports": "复杂脂质与带电脂质的离子和力场敏感性",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM10": {
+    "key": "IM10",
+    "title": "GROMACS Molecular dynamics parameters mdp options",
+    "url": "https://manual.gromacs.org/current/user-guide/mdp-options.html",
+    "what_supports": "压力耦合类型和针对膜体系的方向设置",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM11": {
+    "key": "IM11",
+    "title": "GLYCAM Naming",
+    "url": "https://glycam.org/docs/forcefield/glycam-naming-2/index.html",
+    "what_supports": "GLYCAM糖类残基命名包含连接与构型信息",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM12": {
+    "key": "IM12",
+    "title": "ACPYPE update for nonuniform 1–4 scale factors Conversion of the GLYCAM06 force field from AMBER to GROMACS",
+    "url": "https://escholarship.org/uc/item/9r9714c7",
+    "what_supports": "糖链和混合力场转换必须保留不统一的1–4缩放",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM13": {
+    "key": "IM13",
+    "title": "Amber tutorial Building Bonded Model for a Ligand Binding Metalloprotein with MCPB.py",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial20/mcpbpy.php",
+    "what_supports": "成键金属模型参数化步骤、总电荷与原子命名审查",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM14": {
+    "key": "IM14",
+    "title": "Taking into Account the Ion induced Dipole Interaction in the Nonbonded Model of Ions",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24659926/",
+    "what_supports": "12–6–4离子模型包含额外项且针对特定水模型参数化",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM15": {
+    "key": "IM15",
+    "title": "Amber tutorial A Simple Coupled Potential QM MM Simulation",
+    "url": "https://ambermd.org/tutorials/advanced/tutorial2/index.php",
+    "what_supports": "Amber存在QM/MM实现与专用体系准备；不引用旧教程作为现代生产参数默认值",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM16": {
+    "key": "IM16",
+    "title": "OpenFE Creating Atom Mappings",
+    "url": "https://docs.openfree.energy/en/stable/guide/setup/creating_atom_mappings_and_scores.html",
+    "what_supports": "原子映射、映射评分及相对自由能变换定义",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM17": {
+    "key": "IM17",
+    "title": "OpenFE Relative Hybrid Topology Protocol",
+    "url": "https://docs.openfree.energy/en/stable/guide/protocols/relativehybridtopology.html",
+    "what_supports": "两条腿的RBFE定义、OpenMM协议、dummy成键项潜在不可抵消限制及诊断",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM18": {
+    "key": "IM18",
+    "title": "OpenFE Absolute Binding Protocol",
+    "url": "https://docs.openfree.energy/en/stable/guide/protocols/absolutebinding.html",
+    "what_supports": "ABFE热力学循环、取向约束和解耦步骤",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM19": {
+    "key": "IM19",
+    "title": "Absolute Binding Free Energies A Quantitative Approach for Their Calculation",
+    "url": "https://pubs.acs.org/doi/10.1021/jp0217839",
+    "what_supports": "Boresch约束与标准态的原始方法",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM20": {
+    "key": "IM20",
+    "title": "On Analytical Corrections for Restraints in Absolute Binding Free Energy Calculations",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38640478/",
+    "what_supports": "解耦配体约束的解析修正及标准态一致性",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM21": {
+    "key": "IM21",
+    "title": "Calculating the binding free energies of charged species based on explicit solvent simulations employing lattice sum methods An accurate correction scheme for electrostatic finite size effects",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24320250/",
+    "what_supports": "带电变换的周期性静电有限尺寸效应及修正",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM22": {
+    "key": "IM22",
+    "title": "alchemlyb Assessing convergence",
+    "url": "https://alchemlyb.readthedocs.io/en/latest/convergence.html",
+    "what_supports": "时间分段与前后向收敛的自由能诊断",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM23": {
+    "key": "IM23",
+    "title": "GROMACS Free energy implementation",
+    "url": "https://manual.gromacs.org/current/reference-manual/special/free-energy-implementation.html",
+    "what_supports": "自由能参数插值、软核势与具体协议实现",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM24": {
+    "key": "IM24",
+    "title": "PLUMED METAD version 2.10",
+    "url": "https://www.plumed.org/doc-v2.10/user-doc/html/_m_e_t_a_d.html",
+    "what_supports": "Metadynamics偏置、HILLS、网格、well tempered和重启语义",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM25": {
+    "key": "IM25",
+    "title": "PLUMED REWEIGHT METAD version 2.10",
+    "url": "https://www.plumed.org/doc-v2.10/user-doc/html/_r_e_w_e_i_g_h_t__m_e_t_a_d.html",
+    "what_supports": "随时间变化的metadynamics偏置需相应重加权，区别于静态偏置",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM26": {
+    "key": "IM26",
+    "title": "From metadynamics to dynamics",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24476246/",
+    "what_supports": "Infrequent metadynamics重建动力学的专门方法与条件",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM27": {
+    "key": "IM27",
+    "title": "Assessing the Reliability of the Dynamics Reconstructed from Metadynamics",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26580360/",
+    "what_supports": "多次逃逸时间分布与Poisson假设的动力学可靠性诊断",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM28": {
+    "key": "IM28",
+    "title": "deeptime Markov state models",
+    "url": "https://deeptime-ml.github.io/latest/index_msm.html",
+    "what_supports": "转移计数、MSM方法、平均首达与多集合估计的实现范围",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM29": {
+    "key": "IM29",
+    "title": "ProDy Perturbation Response Scanning",
+    "url": "https://www.bahargroup.org/prody/manual/reference/dynamics/perturb.html",
+    "what_supports": "PRS由协方差或模式进行、扰动源与响应目标的矩阵方向",
+    "verified_on": "2026-10-24",
+    "type": "official documentation"
+  },
+  "IM30": {
+    "key": "IM30",
+    "title": "Weighted Implementation of Suboptimal Paths WISP An Optimized Algorithm and Tool for Dynamical Network Analysis",
+    "url": "https://pubs.acs.org/doi/10.1021/ct4008603",
+    "what_supports": "统计动态网络中的多条次优路径分析",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IM31": {
+    "key": "IM31",
+    "title": "Dynamical networks in tRNA protein complexes",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19351898/",
+    "what_supports": "动态接触网络、社区与潜在变构通路的原始方法；本手册只引用通用方法",
+    "verified_on": "2026-10-24",
+    "type": "primary research"
+  },
+  "IS01": {
+    "key": "IS01",
+    "title": "Pharmit official help",
+    "url": "https://pharmit.csb.pitt.edu/help.html",
+    "what_supports": "药效团与形状查询的输入、特征与受体配体坐标关系。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS02": {
+    "key": "IS02",
+    "title": "RDKit rdShapeHelpers module",
+    "url": "https://www.rdkit.org/docs/source/rdkit.Chem.rdShapeHelpers.html",
+    "what_supports": "形状距离基于预先对齐，参数与返回值定义。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS03": {
+    "key": "IS03",
+    "title": "Congreve M, et al. A rule of three for fragment-based lead discovery? Drug Discovery Today. 2003.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/14554012/",
+    "what_supports": "片段库经验规则的原始方法性短文；本 SOP 不把它当通用硬阈值。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS04": {
+    "key": "IS04",
+    "title": "Hopkins AL, Groom CR, Alex A. Ligand efficiency: a useful metric for lead selection. Drug Discovery Today. 2004;9:430–431.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15109945/",
+    "what_supports": "LE 指标的原始来源。标准态换算及使用边界由本 SOP 显式定义。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS05": {
+    "key": "IS05",
+    "title": "Davis MI, et al. Comprehensive analysis of kinase inhibitor selectivity. Nature Biotechnology. 2011;29:1046–1051.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22037378/",
+    "what_supports": "以大面板测定描述激酶抑制剂跨靶点相互作用；不用于为新候选赋予选择性。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS06": {
+    "key": "IS06",
+    "title": "Hussain J, Rea C. Computationally efficient algorithm to identify matched molecular pairs in large data sets. Journal of Chemical Information and Modeling. 2010;50:339–348.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20121045/",
+    "what_supports": "匹配分子对的系统识别。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS07": {
+    "key": "IS07",
+    "title": "Hu X, et al. MMP-Cliffs: systematic identification of activity cliffs on the basis of matched molecular pairs. Journal of Chemical Information and Modeling. 2012;52:1138–1145.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22489665/",
+    "what_supports": "MMP-cliffs、结构相似性定义与活性差的关系。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS08": {
+    "key": "IS08",
+    "title": "RDKit rdFMCS module",
+    "url": "https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html",
+    "what_supports": "MCS 匹配参数、手性、环、超时及 canceled 状态。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS09": {
+    "key": "IS09",
+    "title": "RDKit rdRGroupDecomposition module",
+    "url": "https://www.rdkit.org/docs/source/rdkit.Chem.rdRGroupDecomposition.html",
+    "what_supports": "R-group 分解、参数和 unmatched 返回值。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS10": {
+    "key": "IS10",
+    "title": "mmpdb official repository and documentation",
+    "url": "https://github.com/rdkit/mmpdb",
+    "what_supports": "分片、索引、性质变化与局部环境的数据组织。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS11": {
+    "key": "IS11",
+    "title": "ChEMBL Assay and Activity Questions",
+    "url": "https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions",
+    "what_supports": "assay 分类和 assay-to-target confidence score 的含义。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS12": {
+    "key": "IS12",
+    "title": "McGovern SL, et al. A common mechanism underlying promiscuous inhibitors from virtual and high-throughput screening. Journal of Medicinal Chemistry. 2002;45:1712–1722.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/11931626/",
+    "what_supports": "原始实验研究发现聚集相关非特异抑制，支持区分检测信号与预想机制。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS13": {
+    "key": "IS13",
+    "title": "OpenFE Setting up a relative binding free energy network",
+    "url": "https://docs.openfree.energy/en/stable/tutorials/rbfe_python_tutorial.html",
+    "what_supports": "RBFE ligand network、节点、边及结合和溶液支路组织；不用于暗示自动转 Amber 或 GROMACS。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS14": {
+    "key": "IS14",
+    "title": "Mey ASJS, et al. Best Practices for Alchemical Free Energy Calculations Article v1.0. Living Journal of Computational Molecular Science. 2020;2:18378.",
+    "url": "https://livecomsjournal.org/index.php/livecoms/article/view/v2i1e18378",
+    "what_supports": "相空间重叠、采样、估计器和重复等自由能方法检查。",
+    "accessed": "2026-10-24",
+    "source_type": "methodology_paper"
+  },
+  "IS15": {
+    "key": "IS15",
+    "title": "Graff DE, Shakhnovich EI, Coley CW. Accelerating high-throughput virtual screening through molecular pool-based active learning. Chemical Science. 2021.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34168840/",
+    "what_supports": "MolPAL 以对接标签开展池式主动学习；效能不自动等于实验命中率。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "IS16": {
+    "key": "IS16",
+    "title": "scikit-learn Common pitfalls and recommended practices",
+    "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+    "what_supports": "预处理、数据划分与泄漏。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "IS17": {
+    "key": "IS17",
+    "title": "BoTorch acquisition API",
+    "url": "https://botorch.readthedocs.io/en/stable/acquisition.html",
+    "what_supports": "X_pending 等接口表示已提交但尚未完成评价的点。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "M01": {
+    "key": "M01",
+    "title": "ChEMBL — Assay and Activity Questions",
+    "url": "https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions",
+    "what_supports": "实验类别、靶点映射置信度、标准化单位与 pChEMBL 的生成条件；不将不同终点混作同一标签。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M02": {
+    "key": "M02",
+    "title": "RDKit — Getting Started in Python",
+    "url": "https://www.rdkit.org/docs/GettingStartedInPython.html",
+    "what_supports": "化学结构解析、分子描述符、Morgan 指纹与可追溯化学表示。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M03": {
+    "key": "M03",
+    "title": "Wu Z et al. MoleculeNet: a benchmark for molecular machine learning. Chemical Science 2018;9:513–530. DOI: 10.1039/C7SC02664A",
+    "url": "https://doi.org/10.1039/C7SC02664A",
+    "what_supports": "分子机器学习任务、特征、数据拆分和评估；强调拆分应匹配任务。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "M04": {
+    "key": "M04",
+    "title": "scikit-learn — Common pitfalls and recommended practices",
+    "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+    "what_supports": "预处理泄漏、训练测试隔离及 Pipeline 的使用。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M05": {
+    "key": "M05",
+    "title": "scikit-learn — Nested versus non-nested cross-validation",
+    "url": "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html",
+    "what_supports": "内层模型选择与外层评估分离；避免调参后的乐观性能估计。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M06": {
+    "key": "M06",
+    "title": "scikit-learn — Cross-validation: evaluating estimator performance",
+    "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+    "what_supports": "分组交叉验证与时间相关数据拆分的工具行为；需显式选择符合任务的分区。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M07": {
+    "key": "M07",
+    "title": "scikit-learn — Metrics and scoring: quantifying the quality of predictions",
+    "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+    "what_supports": "分类与回归指标、average precision、PR/ROC、决策阈值以及评分尺度。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M08": {
+    "key": "M08",
+    "title": "scikit-learn — Probability calibration",
+    "url": "https://scikit-learn.org/stable/modules/calibration.html",
+    "what_supports": "概率校准、可靠性图、校准数据与模型训练数据的隔离。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M09": {
+    "key": "M09",
+    "title": "Heid E et al. Chemprop: A Machine Learning Package for Chemical Property Prediction. JCIM 2024;64(1):9–17. DOI: 10.1021/acs.jcim.3c01250",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38147829/",
+    "what_supports": "Chemprop 的分子性质预测框架及可作为对照的消息传递模型。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "M10": {
+    "key": "M10",
+    "title": "Chemprop — Official documentation",
+    "url": "https://chemprop.readthedocs.io/en/latest/",
+    "what_supports": "模型能力、拆分、训练、预测和不确定性相关接口以实际安装版本核对。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M11": {
+    "key": "M11",
+    "title": "Lanini J et al. UNIQUE: A Framework for Uncertainty Quantification Benchmarking. JCIM 2024;64(22):8379–8386. DOI: 10.1021/acs.jcim.4c01578",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11600502/",
+    "what_supports": "不确定性方法的排序、误差与校准比较；UQ 必须在任务数据上验证。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "M12": {
+    "key": "M12",
+    "title": "MAPIE — Conformal Prediction: Foundations",
+    "url": "https://mapie.readthedocs.io/en/v1.5.0/content/conformal-prediction/theory/",
+    "what_supports": "共形预测训练、校准与预测步骤；可交换性要求、边际覆盖和个体/子群保证的区别。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "M13": {
+    "key": "M13",
+    "title": "Graff DE, Shakhnovich EI, Coley CW. Accelerating high-throughput virtual screening through molecular pool-based active learning. Chemical Science 2021;12:7866–7881. DOI: 10.1039/D0SC06805E",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34168840/",
+    "what_supports": "MolPAL 池式主动学习加速计算筛选；区分对接代理标签与实验活性标签。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  "M14": {
+    "key": "M14",
+    "title": "SHAP — Be careful when interpreting predictive models in search of causal insights",
+    "url": "https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html",
+    "what_supports": "预测归因解释不等于因果解释；相关特征和背景数据影响模型归因。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  "R01": {
+    "key": "R01",
+    "title": "Wilson G, et al. Good enough practices in scientific computing. PLoS Computational Biology. 2017;13:e1005510.",
+    "url": "https://doi.org/10.1371/journal.pcbi.1005510",
+    "what_supports": "项目组织、数据与代码分离、版本和复现记录"
+  },
+  "R02": {
+    "key": "R02",
+    "title": "Snakemake documentation. Distribution and Reproducibility.",
+    "url": "https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html",
+    "what_supports": "工作流依赖环境、容器与可复现部署"
+  },
+  "R03": {
+    "key": "R03",
+    "title": "Zhang X, et al. Receptor specificity of the fibroblast growth factor family. The complete mammalian FGF family. Journal of Biological Chemistry. 2006;281:15694–15700.",
+    "url": "https://doi.org/10.1074/jbc.M601252200",
+    "what_supports": "具体FGF成员与FGFR组合的功能特异性"
+  },
+  "R04": {
+    "key": "R04",
+    "title": "Matplotlib. matplotlib.pyplot.barh API documentation.",
+    "url": "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.barh.html",
+    "what_supports": "水平分组与堆叠柱形图绘制接口"
+  },
+  "R05": {
+    "key": "R05",
+    "title": "Matplotlib. matplotlib.pyplot.savefig API documentation.",
+    "url": "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html",
+    "what_supports": "图像格式与分辨率导出接口"
+  },
+  "R06": {
+    "key": "R06",
+    "title": "Pettersen EF, et al. UCSF ChimeraX: Structure visualization for researchers, educators, and developers. Protein Science. 2021;30:70–82.",
+    "url": "https://doi.org/10.1002/pro.3943",
+    "what_supports": "结构场景、图像、动画及命令复现"
+  },
+  "R07": {
+    "key": "R07",
+    "title": "ProLIF. Plotting documentation.",
+    "url": "https://prolif.readthedocs.io/en/stable/source/modules/plotting.html",
+    "what_supports": "二维相互作用网络、时间条码与交互三维图"
+  },
+  "R08": {
+    "key": "R08",
+    "title": "VMD. Visual Molecular Dynamics official website.",
+    "url": "https://www.ks.uiuc.edu/Research/vmd/",
+    "what_supports": "分子结构显示、轨迹动画与脚本化分析"
+  },
+  "R09": {
+    "key": "R09",
+    "title": "Cytoscape. User Manual.",
+    "url": "https://manual.cytoscape.org/en/stable/",
+    "what_supports": "网络数据导入、节点边属性与可视化样式"
+  },
+  "R10": {
+    "key": "R10",
+    "title": "Scanpy. scanpy.pl.umap API documentation.",
+    "url": "https://scanpy.readthedocs.io/en/stable/api/generated/scanpy.pl.umap.html",
+    "what_supports": "单细胞嵌入图、颜色、分面与图例参数"
+  },
+  "S01": {
+    "key": "S01",
+    "title": "ChEMBL. Assay and Activity Questions.",
+    "url": "https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions",
+    "what_supports": "assay 类型、靶点置信、pChEMBL、relation 和数据有效性字段的意义。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "S02": {
+    "key": "S02",
+    "title": "Kim S, et al. PubChem 2023 update. Nucleic Acids Research. 2023;51(D1):D1373–D1380.",
+    "url": "https://academic.oup.com/nar/article/51/D1/D1373/6777787",
+    "what_supports": "PubChem 化学信息、来源记录、标准化和可编程数据获取；不用于证明采购或临床状态。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S03": {
+    "key": "S03",
+    "title": "Irwin JJ, et al. ZINC20—A Free Ultralarge-Scale Chemical Database for Ligand Discovery. Journal of Chemical Information and Modeling. 2020;60:6065–6073.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8284596/",
+    "what_supports": "ZINC 供配体发现的化学集合、可下载三维结构和供应相关信息；本章不把论文历史条目数当现况。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S04": {
+    "key": "S04",
+    "title": "TCMBank: bridges between the largest herbal medicines, chemical ingredients, target proteins, and associated diseases with intelligence text mining. RSC Advances. 2023.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10566508/",
+    "what_supports": "TCMBank 的成分、药材、靶点、疾病及文献关系和结构信息；关联与直接结合证据的区别是本 SOP 的审查要求。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S05": {
+    "key": "S05",
+    "title": "RDKit. rdkit.Chem.MolStandardize.rdMolStandardize module.",
+    "url": "https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html",
+    "what_supports": "FragmentParent/ChargeParent/TautomerParent/SuperParent 的不同含义；互变异构参数与立体信息处理。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "S06": {
+    "key": "S06",
+    "title": "RDKit. rdkit.Chem.rdFingerprintGenerator module.",
+    "url": "https://www.rdkit.org/docs/source/rdkit.Chem.rdFingerprintGenerator.html",
+    "what_supports": "Morgan 指纹半径、位长、手性和原子不变量等可配置项；数值范围为项目建议。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "S07": {
+    "key": "S07",
+    "title": "RDKit. Getting Started with the RDKit in Python.",
+    "url": "https://www.rdkit.org/docs/GettingStartedInPython.html",
+    "what_supports": "分子解析、构象、指纹、骨架/多样性与 FilterCatalog 的软件接口和功能。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "S08": {
+    "key": "S08",
+    "title": "Vidler LR, et al. Investigating the Behavior of Published PAINS Alerts Using a Pharmaceutical Company Data Set. ACS Medicinal Chemistry Letters. 2018;9(8):792–796.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6088356/",
+    "what_supports": "不同 PAINS 警报行为并不相同，支持警报后复核而非把所有命中视为确定假阳性。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S09": {
+    "key": "S09",
+    "title": "Irwin JJ, et al. An Aggregation Advisor for Ligand Discovery. Journal of Medicinal Chemistry. 2015;58(17):7076–7087.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4646424/",
+    "what_supports": "聚集风险依赖结构和实验条件；相似性警报与实际条件下的聚集/干扰验证不同。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S10": {
+    "key": "S10",
+    "title": "Sunseri J, Koes DR. Pharmit: interactive exploration of chemical space. Nucleic Acids Research. 2016;44(W1):W442–W448.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4987880/",
+    "what_supports": "药效团、形状和能量最小化组成的筛选方法例；不证明本文项目的筛选性能。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S11": {
+    "key": "S11",
+    "title": "ESPsim. Comparison of electrostatic potential and shape—official project repository.",
+    "url": "https://github.com/hesther/espsim",
+    "what_supports": "静电相似度需要对齐和电荷模型；Carbo/Tanimoto 范围、积分定义和归一化不同。",
+    "accessed": "2026-10-24",
+    "source_type": "official_software_documentation"
+  },
+  "S12": {
+    "key": "S12",
+    "title": "AutoDock Vina. Basic docking.",
+    "url": "https://autodock-vina.readthedocs.io/en/latest/docking_basic.html",
+    "what_supports": "Vina 搜索与输入/输出流程、exhaustiveness 等参数；本文快速/精细层数值是预算起点。",
+    "accessed": "2026-10-24",
+    "source_type": "official_documentation"
+  },
+  "S13": {
+    "key": "S13",
+    "title": "GNINA. Official repository and command-line documentation.",
+    "url": "https://github.com/gnina/gnina",
+    "what_supports": "CNN rescore/refinement/all 模式、模型集合与命令参数；需记录实际版本。",
+    "accessed": "2026-10-24",
+    "source_type": "official_software_documentation"
+  },
+  "S14": {
+    "key": "S14",
+    "title": "McNutt AT, et al. GNINA 1.3: the next increment in molecular docking with deep learning. Journal of Cheminformatics. 2025;17:28.",
+    "url": "https://link.springer.com/article/10.1186/s13321-025-00973-x",
+    "what_supports": "GNINA 模型/框架更新与知识蒸馏评分模型；不把原论文性能外推为当前目标效果。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S15": {
+    "key": "S15",
+    "title": "Buttenschoen M, Morris GM, Deane CM. PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences. Chemical Science. 2024.",
+    "url": "https://pubs.rsc.org/en/content/articlehtml/2024/sc/d3sc04185a",
+    "what_supports": "姿势化学一致性、键几何、平面性、立体及蛋白碰撞等物理合理性检查。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S16": {
+    "key": "S16",
+    "title": "Fu L, et al. ADMETlab 3.0: an updated comprehensive online ADMET prediction platform enhanced with broader coverage, improved performance, API functionality and decision support. Nucleic Acids Research. 2024;52(W1):W422–W431.",
+    "url": "https://academic.oup.com/nar/article/52/W1/W422/7640525",
+    "what_supports": "多种 ADMET 预测端点与不确定性输出；预测不能替代本项目实测暴露或安全性。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S17": {
+    "key": "S17",
+    "title": "Zhang X, et al. Receptor Specificity of the Fibroblast Growth Factor Family: The Complete Mammalian FGF Family. Journal of Biological Chemistry. 2006;281(23):15694–15700.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2080618/",
+    "what_supports": "FGFR 的胞外/跨膜/胞内结构域、b/c 剪接及 FGF18 等配体比较；原研究的促增殖读出不能当所有配对的直接 Kd。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S18": {
+    "key": "S18",
+    "title": "Mysinger MM, et al. Directory of Useful Decoys, Enhanced (DUD-E): Better Ligands and Decoys for Better Benchmarking. Journal of Medicinal Chemistry. 2012;55(14):6582–6594.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3405771/",
+    "what_supports": "性质匹配、拓扑不同的 decoy 设计；decoy 不等于逐个实验确认失活。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S19": {
+    "key": "S19",
+    "title": "Chen L, et al. Hidden bias in the DUD-E dataset leads to misleading performance of deep learning in structure-based virtual screening. PLOS ONE. 2019;14(8):e0220113.",
+    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0220113",
+    "what_supports": "类比物和诱饵偏差可能导致不可靠性能推断；支持独立划分和基线检查。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  },
+  "S20": {
+    "key": "S20",
+    "title": "Dunn I, et al. CACHE Challenge #1: Docking with GNINA Is All You Need. Journal of Chemical Information and Modeling. 2024.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11683865/",
+    "what_supports": "CNNscore 的姿势质量分类意义、CNNaffinity 的预测 pK 标度及 GNINA 前瞻应用例。",
+    "accessed": "2026-10-24",
+    "source_type": "primary_paper"
+  }
+}

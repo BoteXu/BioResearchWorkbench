@@ -1,0 +1,203 @@
+{
+  "schema": "private71-project-template/2",
+  "template_not_executable": true,
+  "analysis_id": "colocalization",
+  "backend": "omics71",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "analysis_id": "colocalization",
+    "implementation": "coloc_ABF_prior_sensitivity",
+    "seed": 20261025,
+    "trait1_type": "quant",
+    "trait2_type": "quant",
+    "n1": "REQUIRED_NUMBER",
+    "n2": "REQUIRED_NUMBER",
+    "p1": "REQUIRED_NUMBER",
+    "p2": "REQUIRED_NUMBER",
+    "p12": "REQUIRED_NUMBER",
+    "sensitivity_variants": [
+      {
+        "label": "alternative1",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      },
+      {
+        "label": "alternative2",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      }
+    ],
+    "min_shared_fraction": "REQUIRED_NUMBER",
+    "coloc_mode": "ABF",
+    "L": "REQUIRED_INTEGER",
+    "max_iter": "REQUIRED_INTEGER"
+  },
+  "inputs": [
+    {
+      "id": "trait1",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "trait2",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "expected_host": "REQUIRED_CURRENT_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_INTEGER",
+    "gpus": 0
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "upstream_qc": {
+    "requires": "ACTUAL_COMPLETED_HASH_BOUND_QC_RECEIPT_AND_NUMERICAL_MEASUREMENTS",
+    "is_evidence": false
+  },
+  "statistical_plan": {
+    "estimand": "REQUIRED_SCIENTIFIC_DECISION",
+    "independent_unit": "REQUIRED_SCIENTIFIC_DECISION",
+    "missingness": "REQUIRED_SCIENTIFIC_DECISION",
+    "multiplicity": "REQUIRED_SCIENTIFIC_DECISION",
+    "sensitivity": "REQUIRED_SCIENTIFIC_DECISION"
+  },
+  "acceptance_rules": [
+    {
+      "id": "required_actual_numerical_diagnostic",
+      "role": "analysis_diagnostics",
+      "field": "0.metrics.REQUIRED_ACTUAL_FIELD",
+      "operator": "ge",
+      "bound": "REQUIRED_NUMERIC_THRESHOLD",
+      "definition": "REQUIRED_DEFINITION",
+      "unit": "REQUIRED_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_JUSTIFICATION"
+    }
+  ],
+  "example_only": true,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+  "optional_input_roles": [],
+  "conditional_input_roles": {
+    "coloc_mode": {
+      "SuSiE": [
+        "ld1",
+        "ld2",
+        "ld1_variants",
+        "ld2_variants"
+      ]
+    }
+  },
+  "parameter_contracts": {
+    "trait1_type": {
+      "type": "string",
+      "enum": [
+        "quant",
+        "cc"
+      ]
+    },
+    "trait2_type": {
+      "type": "string",
+      "enum": [
+        "quant",
+        "cc"
+      ]
+    },
+    "n1": {
+      "type": "number"
+    },
+    "n2": {
+      "type": "number"
+    },
+    "p1": {
+      "type": "number"
+    },
+    "p2": {
+      "type": "number"
+    },
+    "p12": {
+      "type": "number"
+    },
+    "min_shared_fraction": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 1
+    },
+    "sdY1": {
+      "type": "number",
+      "minimum": 1e-05,
+      "optional": true
+    },
+    "sdY2": {
+      "type": "number",
+      "minimum": 1e-05,
+      "optional": true
+    },
+    "coloc_mode": {
+      "type": "string",
+      "enum": [
+        "ABF",
+        "SuSiE"
+      ]
+    },
+    "L": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "max_iter": {
+      "type": "integer",
+      "minimum": 100
+    },
+    "case_fraction1": {
+      "type": "number",
+      "minimum": 0.001,
+      "maximum": 0.999,
+      "optional": true
+    },
+    "case_fraction2": {
+      "type": "number",
+      "minimum": 0.001,
+      "maximum": 0.999,
+      "optional": true
+    }
+  },
+  "allowed_sensitivity_parameters": [
+    "p1",
+    "p2",
+    "p12"
+  ],
+  "required_scientific_output_roles": [
+    "coloc_hypotheses",
+    "shared_variant_set",
+    "signal_pairs",
+    "coloc_sensitivity"
+  ],
+  "required_proof_roles": [
+    "full_result_audit",
+    "actual_sensitivity_comparison"
+  ],
+  "context_QC_contract": {
+    "each_qc_evidence_row_requires": [
+      "input_id",
+      "sha256",
+      "criterion",
+      "observed",
+      "decision",
+      "operator",
+      "bound",
+      "unit",
+      "source_receipt_sha256",
+      "source_receipt_input",
+      "measurement_input",
+      "measurement_field"
+    ],
+    "missing_is_not_pass": true
+  }
+}

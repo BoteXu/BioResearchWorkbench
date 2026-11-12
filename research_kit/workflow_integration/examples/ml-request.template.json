@@ -1,0 +1,83 @@
+{
+  "run_id": "REPLACE_RUN_ID",
+  "backend": "ml",
+  "inputs": [
+    {
+      "id": "table",
+      "path": "selected_features.tsv",
+      "sha256": "REPLACE_WITH_REAL_SERVER_INPUT_SHA256"
+    }
+  ],
+  "parameters": {
+    "features": [
+      "feature1",
+      "feature2"
+    ],
+    "unit_key": "donor_id",
+    "sample_key": "sample_id",
+    "outcome": "outcome",
+    "task": "classification",
+    "train_units": [
+      "TRAIN_UNIT_ID"
+    ],
+    "calibration_units": [
+      "CALIBRATION_UNIT_ID"
+    ],
+    "test_units": [
+      "TEST_UNIT_ID"
+    ],
+    "models": {
+      "baseline": {},
+      "ridge": {
+        "model__C": [
+          0.1,
+          1.0
+        ]
+      },
+      "random_forest": {
+        "model__max_depth": [
+          3,
+          6
+        ]
+      }
+    },
+    "outer_folds": 4,
+    "inner_folds": 3,
+    "select_k": "all",
+    "seed": 2026,
+    "threads": 2,
+    "max_candidates": 4,
+    "probability_calibration": "sigmoid",
+    "bootstrap_repeats": 200
+  },
+  "expected_host": "CURRENT_VERIFIED_COMPUTE_HOST",
+  "node_role": "compute",
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "upstream_qc": {
+    "source": "REPLACE_WITH_SCOPED_REAL_QC_EVIDENCE"
+  },
+  "statistical_plan": {
+    "estimand": "REPLACE",
+    "independent_unit": "REPLACE",
+    "missingness": "REPLACE",
+    "multiplicity": "REPLACE",
+    "sensitivity": "REPLACE"
+  },
+  "acceptance_rules": [
+    {
+      "id": "bootstrap_support",
+      "role": "model_metrics",
+      "field": "ridge.test_bootstrap.valid",
+      "operator": "ge",
+      "bound": 150,
+      "definition": "Valid independent-unit bootstrap draws in this selected scenario",
+      "unit": "draws",
+      "threshold_basis": "EXAMPLE_ONLY_REPLACE_WITH_REVIEWED_STUDY_CRITERION"
+    }
+  ]
+}

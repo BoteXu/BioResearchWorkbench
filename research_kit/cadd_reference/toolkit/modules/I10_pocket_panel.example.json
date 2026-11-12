@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I10",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "受体构象与动态口袋及隐蔽口袋",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "sequence_and_residue_mapping": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "source_structures": {
+      "rows": [],
+      "row_template": {
+        "structure_id": null,
+        "source": null,
+        "file_path": null,
+        "sha256": null,
+        "apo_or_ligand_state": null,
+        "assembly_id": null,
+        "chemical_state_id": null,
+        "missing_regions": null,
+        "occluding_components": null
+      }
+    },
+    "trajectories": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "topology_path": null,
+        "topology_sha256": null,
+        "trajectory_path": null,
+        "trajectory_sha256": null,
+        "equilibrated_window": null,
+        "sampling_method": null,
+        "statistical_weight_source": null
+      }
+    },
+    "known_controls": {
+      "rows": [],
+      "row_template": {
+        "parent_id": null,
+        "ligand_state_id": null,
+        "assay_or_structure_evidence": null,
+        "split_role": null
+      }
+    }
+  },
+  "settings": {
+    "alignment_reference": null,
+    "alignment_selection": null,
+    "local_features": [],
+    "clustering": {
+      "method": null,
+      "metric": null,
+      "parameters": {},
+      "sensitivity_variants": [],
+      "representative_frame_rule": null
+    },
+    "pocket_detection": {
+      "tool": null,
+      "version": null,
+      "parameters": {},
+      "retained_components": []
+    },
+    "cross_frame_pocket_matching": {
+      "residue_overlap_rule": null,
+      "spatial_overlap_rule": null,
+      "entrance_definition": null,
+      "matching_reference": null
+    },
+    "pocket_state_definition": {
+      "open_rule": null,
+      "intermediate_rule": null,
+      "closed_rule": null,
+      "not_detected_encoding": null,
+      "missing_structure_encoding": null,
+      "occluded_encoding": null
+    },
+    "receptor_panel_validation": {
+      "control_set_id": null,
+      "metrics": [],
+      "selection_rule": null,
+      "training_test_separation": null
+    }
+  },
+  "results": {
+    "receptor_conformers": {
+      "rows": [],
+      "row_template": {
+        "receptor_conformer_id": null,
+        "parent_system_id": null,
+        "replicate_id": null,
+        "trajectory_hash": null,
+        "frame_index": null,
+        "time": null,
+        "time_unit": null,
+        "selection_method": null,
+        "cluster_id": null,
+        "statistical_weight": null,
+        "weight_source": null
+      }
+    },
+    "pocket_catalog": {
+      "rows": [],
+      "row_template": {
+        "pocket_id": null,
+        "receptor_conformer_id": null,
+        "detector_pocket_label": null,
+        "matched_residues": null,
+        "volume": null,
+        "volume_unit": null,
+        "entrance": null,
+        "occlusion_note": null,
+        "descriptor_definition": null
+      }
+    },
+    "pocket_timeseries": {
+      "rows": [],
+      "row_template": {
+        "pocket_id": null,
+        "replicate_id": null,
+        "time": null,
+        "time_unit": null,
+        "detection_status": null,
+        "volume": null,
+        "volume_unit": null,
+        "pocket_state": null
+      }
+    },
+    "panel_validation": {
+      "rows": [],
+      "row_template": {
+        "receptor_conformer_id": null,
+        "control_id": null,
+        "metric": null,
+        "value": null,
+        "unit": null,
+        "validation_set_id": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "receptor_conformer_manifest.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "pocket_catalog.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "pocket_timeseries.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "receptor_panel_validation.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "新增构象只需补该构象准备与对接但需重新汇总",
+      "改口袋定义需重算描述符与box",
+      "改序列装配体或化学态需新模型"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I10-P1",
+      "title": "口袋体积与门控时间线",
+      "required_data": "分重复口袋与距离表",
+      "interpretation_boundary": "未识别和真实关闭分开编码",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I10-P2",
+      "title": "口袋频率或空间密度",
+      "required_data": "统一参考系的空间统计",
+      "interpretation_boundary": "注明无偏有偏或重加权口径",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I10-P3",
+      "title": "口袋残基和构象状态矩阵",
+      "required_data": "映射后的口袋残基及聚类",
+      "interpretation_boundary": "软件pocket编号不代表跨帧同一口袋",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I10-P4",
+      "title": "受体构象与对照表现",
+      "required_data": "同一验证集上的位姿和富集结果",
+      "interpretation_boundary": "不能只汇报跨构象最优分数",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I10-P5",
+      "title": "候选位点证据层次",
+      "required_data": "几何采样结合功能四层记录",
+      "interpretation_boundary": "口袋预测不等于直接结合或功能",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

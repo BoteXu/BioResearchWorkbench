@@ -50,3 +50,5 @@ mcp-profiles.json
 codex.mcp.toml
 *.duckdb
 *.onnx
+*.local.json
+research_kit/**/qa/

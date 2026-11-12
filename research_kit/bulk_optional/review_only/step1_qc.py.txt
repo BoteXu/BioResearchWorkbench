@@ -1,0 +1,116 @@
+"""Step 1 — sample QC.
+
+Four independent outlier checks (4xMAD rule) + the sex-marker check, plus the PCA and
+sample-correlation views. Writes qc_metrics.csv with per-sample flags; nothing is removed
+automatically — feed the flagged IDs into config["drop_samples"] and re-run.
+"""
+from __future__ import annotations
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import median_abs_deviation as mad
+from sklearn.decomposition import PCA
+import utils
+
+SEX_GENES = {  # XIST = female, the rest are Y-linked = male
+    "XIST": "ENSG00000229807", "RPS4Y1": "ENSG00000129824", "DDX3Y": "ENSG00000067048",
+    "EIF1AY": "ENSG00000173928", "USP9Y": "ENSG00000114374", "UTY": "ENSG00000183878",
+    "KDM5D": "ENSG00000012817", "NLGN4Y": "ENSG00000165246"}
+Y_GENES = list(SEX_GENES)[1:]
+
+
+def flag(x, n_mad=4):
+    m, s = np.nanmedian(x), mad(x, nan_policy="omit")
+    s = s if s > 0 else 1e-6
+    return np.abs((x - m) / (1.4826 * s)) > n_mad
+
+
+def run(cfg):
+    colors = utils.theme(cfg)
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    log2 = expr.values
+
+    # ---- per-sample metrics ----
+    qc = pd.DataFrame({
+        "sample_id": expr.columns,
+        "libsize_proxy": (2 ** log2).sum(0),          # ~ total depth if values are log2(counts)
+        "median_log2": np.median(log2, 0),
+        "n_detected": (log2 > 0).sum(0),
+    })
+    qc = qc.merge(meta.reset_index(), on=cfg["sample_id_col"], how="left")
+
+    # ---- sex markers ----
+    for g, eid in SEX_GENES.items():
+        qc[g] = expr.loc[eid].values if eid in expr.index else np.nan
+    qc["y_mean"] = qc[Y_GENES].mean(axis=1) if qc[Y_GENES].notna().any().any() else np.nan
+    has = bool(qc["y_mean"].notna().any() and qc["XIST"].notna().any())
+    if has:
+        qc["predicted_sex"] = np.where(qc["RPS4Y1"] > 12, "Male", "Female")
+        meta_sex = meta.get("Sex")
+        if meta_sex is not None:
+            qc["sex_consistent"] = ~(
+                ((meta_sex.values == "Female") & (qc["RPS4Y1"].values > 12)) |
+                ((meta_sex.values == "Male") & (qc["XIST"].values > 12)) |
+                ((qc["RPS4Y1"].values > 12) & (qc["XIST"].values > 12)))
+        else:
+            qc["sex_consistent"] = True
+            print("[qc] no 'Sex' column in metadata — sex check skipped")
+
+    # ---- sample correlation + PCA ----
+    gvar = np.var(log2, axis=1)
+    X = log2[np.argsort(gvar)[::-1][:2000]].T
+    corr = np.corrcoef(X)
+    np.fill_diagonal(corr, np.nan)
+    qc["median_corr"] = np.nanmedian(corr, axis=1)
+    scores = PCA(n_components=min(10, X.shape[0] - 1)).fit_transform(X - X.mean(0))
+    z = np.abs((scores[:, :10] - np.median(scores[:, :10], 0)) /
+               (1.4826 * np.where(mad(scores[:, :10], axis=0) > 0, mad(scores[:, :10], axis=0), 1e-6)))
+    qc["pc_outlier_score"] = z.max(1)
+
+    # ---- flags ----
+    qc["flag_libsize"] = flag(qc["libsize_proxy"])
+    qc["flag_median"] = flag(qc["median_log2"])
+    qc["flag_corr"] = flag(qc["median_corr"])
+    qc["flag_pc"] = qc["pc_outlier_score"] > 6
+    qc["flag_sex"] = ~qc["sex_consistent"] if "sex_consistent" in qc else False
+    qc["n_flags"] = qc[["flag_libsize", "flag_median", "flag_corr", "flag_pc", "flag_sex"]].sum(1)
+    utils.save_table(qc, cfg, "qc_metrics.csv")
+
+    bad = qc[qc["n_flags"] > 0]
+    print(f"\n[qc] {len(bad)} flagged sample(s):")
+    if len(bad):
+        print(bad[["sample_id", "n_flags", "median_log2", "median_corr"]].to_string(index=False))
+        print("\n[qc] to exclude them, add to config: \"drop_samples\": "
+              f"{sorted(bad['sample_id'].astype(str))}")
+
+    # ---- figures ----
+    fig, axes = plt.subplots(2, 2, figsize=(13, 10))
+    ax = axes[0, 0]
+    for lab, col in [(False, colors["control"]), (True, colors["case"])]:
+        m = y == lab
+        ax.scatter(scores[m, 0], scores[m, 1], s=20, alpha=.75, color=col,
+                   label=cfg["case_label"] if lab else cfg["control_label"], ec="white", lw=.3)
+    utils.strip_plot(ax, "A  PCA (top 2000 variable genes)", "PC1", "PC2")
+    ax.legend(fontsize=8, frameon=False)
+    ax = axes[0, 1]
+    im = ax.imshow(corr, cmap="viridis", aspect="auto", vmin=np.nanpercentile(corr, 1), vmax=1)
+    ax.set_title("B  sample-sample Pearson r", fontsize=10.5, weight="bold", loc="left")
+    ax.set_xticks([]); ax.set_yticks([]); fig.colorbar(im, ax=ax, fraction=.04)
+    ax = axes[1, 0]
+    o = np.argsort(qc["libsize_proxy"].values)
+    ax.bar(range(len(qc)), qc["libsize_proxy"].values[o], width=1,
+           color=[colors["case"] if qc["flag_libsize"].values[i] else colors["control"] for i in o])
+    utils.strip_plot(ax, "C  library size (highlighted = outlier)", "samples", "sum 2^log2")
+    ax = axes[1, 1]
+    if has and "Sex" in meta:
+        for s, col in [("Male", colors["control"]), ("Female", colors["case"])]:
+            m = meta["Sex"].values == s
+            ax.scatter(qc["XIST"][m], qc["RPS4Y1"][m], s=18, alpha=.7, color=col, label=s, ec="none")
+        b = qc[qc["flag_sex"]]
+        ax.scatter(b["XIST"], b["RPS4Y1"], s=90, facecolors="none", edgecolors="red",
+                   linewidths=1.8, label="discordant")
+        ax.axhline(12, color="#BBB", ls=":"); ax.axvline(12, color="#BBB", ls=":")
+        utils.strip_plot(ax, "D  sex-marker check", "XIST", "RPS4Y1")
+        ax.legend(fontsize=8, frameon=False)
+    fig.tight_layout()
+    utils.save_fig(fig, cfg, "F1_QC")

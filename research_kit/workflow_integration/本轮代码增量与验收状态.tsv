@@ -1,0 +1,13 @@
+﻿route	change	source	implemented_scope	runtime
+edgeR_QL	new	server/omics.R	原始整数计数、现有矩阵QC/设计、filterByExpr、TMM类归一化、QL拟合和完整差异表；不补造系数CI	NOT_RUN_THIS_UPGRADE
+limma_voom	new	server/omics.R	同一计数设计、voom权重、经验贝叶斯和指定置信水平区间	NOT_RUN_THIS_UPGRADE
+cnmf_programs	new	server/teaching_extensions.py	真实cNMF包调用，K/初始化稳定性、usage/loadings/完整基因程序及供体描述表	NOT_RUN_THIS_UPGRADE
+composition_sccoda	new	server/teaching_extensions.py	真实独立样本计数、参考类型、NUTS独立链、逐链效应及Rhat/ESS	NOT_RUN_THIS_UPGRADE
+cellrank_multiview	new	server/teaching_extensions.py	明确速度/拟时序/连接/已有转移矩阵权重，实际GPCCA和概率验收；不伪造真实时间kernel	NOT_RUN_THIS_UPGRADE
+perturbation_baselines	new	server/teaching_extensions.py	训练内no-change及perturbed-mean；按unit/perturbation核查留出，不读取测试表达拟合	NOT_RUN_THIS_UPGRADE
+singlecell_QC	enhanced	server/omics_python.py	分样本阈值、每原因判定、原始层显式化、按样本耗损及已有注释筛选偏倚	NOT_RUN_THIS_UPGRADE
+pseudobulk	enhanced	server/omics_python.py	技术文库合并显式选择、完整类型分母和缺失群体台账；不造零表达样本	NOT_RUN_THIS_UPGRADE
+scvi	enhanced	server/omics_python.py	原始层保留与未整合PCA基线；训练损失不作为生物保留验收	NOT_RUN_THIS_UPGRADE
+fgsea	enhanced	server/omics.R	完整运行曲线、0起点rank、命中位置和源排名；明确gseaParam	NOT_RUN_THIS_UPGRADE
+WGCNA	enhanced	server/omics.R	样本树/基因树/模块/特征向量图对象；显式按块预算导出真实TOM	NOT_RUN_THIS_UPGRADE
+whole_workflow	new_orchestration	teaching_flow.py	43阶段输入、QC、结果和边界，拓扑顺序及前置缺失阻断；不派发任务	NOT_RUN_THIS_UPGRADE

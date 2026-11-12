@@ -1,0 +1,13 @@
+{
+  "schema": "private-generation-lineage-job/1",
+  "origin_request": "generation/request.private.json",
+  "origin_request_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "origin_return_root": "generation/returned",
+  "origin_receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "selected_return_files": [
+    "REQUIRED_COMPLETE_BOUNDED_GENERATION_SUMMARIES.private.json"
+  ],
+  "origin_variant": "primary",
+  "reference_id": "REFERENCE_REQUIRES_EXPLICIT_REVIEW",
+  "candidate_ids": []
+}

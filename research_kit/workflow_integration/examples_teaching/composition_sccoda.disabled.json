@@ -1,0 +1,38 @@
+{
+  "example_only": true,
+  "template_not_executable": true,
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "backend": "composition_sccoda",
+  "parameters": {
+    "unit_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "reference_cell_type": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "reference_basis": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "formula": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "covariates": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "chains": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "warmup": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "posterior_samples": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "seed": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "est_fdr": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "maximum_rhat": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "minimum_ess": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "diagnostic_var_names": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "software_versions": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "condition_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "condition_levels": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE"
+  },
+  "inputs": [
+    {
+      "id": "count_table",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    },
+    {
+      "id": "metadata",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  ],
+  "note": "Disabled source template. No scientific result or installed dependency is implied."
+}

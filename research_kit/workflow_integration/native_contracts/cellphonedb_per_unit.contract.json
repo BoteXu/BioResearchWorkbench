@@ -1,0 +1,38 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cellphonedb_per_unit",
+  "required_inputs": [
+    "object",
+    "database"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "expression_layer",
+    "expression_scale",
+    "condition_key",
+    "celltype_key",
+    "species",
+    "gene_identifier_type",
+    "minimum_cells_per_type",
+    "iterations",
+    "minimum_expression_fraction",
+    "threads",
+    "result_precision",
+    "pvalue_cutoff"
+  ],
+  "required_output_roles": [
+    "lr_means",
+    "lr_pvalues",
+    "lr_significant_means",
+    "stratum_eligibility",
+    "stratum_metadata",
+    "stratum_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native human CellPhoneDB permutation method within observed unit/condition; no pooled-cell population inference and no automated database download",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

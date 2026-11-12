@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I04",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "parent_id",
+    "series_id",
+    "core_definition",
+    "r_group_mapping",
+    "assay_id",
+    "endpoint",
+    "relation",
+    "value",
+    "unit",
+    "replicate_definition",
+    "matched_pair_id",
+    "transformation",
+    "chemical_context",
+    "comparison_uncertainty"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "parent_id": null,
+    "series_id": null,
+    "core_definition": null,
+    "r_group_mapping": null,
+    "assay_id": null,
+    "endpoint": null,
+    "relation": null,
+    "value": null,
+    "unit": null,
+    "replicate_definition": null,
+    "matched_pair_id": null,
+    "transformation": null,
+    "chemical_context": null,
+    "comparison_uncertainty": null
+  }
+}

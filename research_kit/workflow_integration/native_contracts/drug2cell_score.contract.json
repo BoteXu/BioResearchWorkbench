@@ -1,0 +1,30 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "drug2cell_score",
+  "required_inputs": [
+    "object",
+    "targets"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "expression_layer",
+    "expression_scale",
+    "method",
+    "minimum_targets",
+    "n_bins",
+    "ctrl_size"
+  ],
+  "required_output_roles": [
+    "drug_scores",
+    "target_coverage",
+    "unit_activity",
+    "scored_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native Drug2cell, explicit offline target set snapshot and coverage; expression score not drug inhibition/clinical response",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

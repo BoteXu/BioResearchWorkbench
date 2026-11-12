@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I20",
+  "status": "draft",
+  "table_name": "assay_manifest",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "assay_id": null,
+    "donor_id": null,
+    "sample_id": null,
+    "tissue_region": null,
+    "collection_time": null,
+    "collection_time_unit": null,
+    "condition": null,
+    "modality": null,
+    "batch": null,
+    "biological_replicate_id": null,
+    "technical_replicate_id": null,
+    "raw_path": null,
+    "raw_sha256": null,
+    "measurement_unit": null,
+    "transform": null,
+    "normalization": null,
+    "missingness_definition": null,
+    "identification_filter": null
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "related_tables": {
+    "pairing": {
+      "rows": [],
+      "row_template": {
+        "pair_id": null,
+        "donor_id": null,
+        "sample_id": null,
+        "assay_id_a": null,
+        "assay_id_b": null,
+        "pairing_basis": null,
+        "pairing_status": null,
+        "pairing_review_source": null
+      }
+    },
+    "feature_map": {
+      "rows": [],
+      "row_template": {
+        "feature_id": null,
+        "feature_type": null,
+        "gene_id_version": null,
+        "protein_group_id": null,
+        "protein_accession_isoform": null,
+        "protein_sequence_sha256": null,
+        "peptide_sequence": null,
+        "modified_sequence": null,
+        "site_residue": null,
+        "site_position": null,
+        "localization_probability": null,
+        "sequence_release": null,
+        "mapping_status": null,
+        "ambiguity_reason": null
+      }
+    },
+    "effects": {
+      "rows": [],
+      "row_template": {
+        "analysis_id": null,
+        "feature_id": null,
+        "contrast": null,
+        "effect": null,
+        "effect_unit": null,
+        "uncertainty_kind": null,
+        "uncertainty_level": null,
+        "standard_error": null,
+        "lower": null,
+        "upper": null,
+        "p_value": null,
+        "adjusted_p_value": null,
+        "n_biological_units": null,
+        "protein_abundance_adjusted": null,
+        "missing_reason": null
+      }
+    },
+    "prior_network": {
+      "rows": [],
+      "row_template": {
+        "edge_id": null,
+        "source_id": null,
+        "target_id": null,
+        "edge_type": null,
+        "direction": null,
+        "sign": null,
+        "weight": null,
+        "weight_definition": null,
+        "source_resource": null,
+        "source_release": null,
+        "evidence_url": null
+      }
+    }
+  },
+  "integration_plan": {
+    "model_id": null,
+    "paired_or_unpaired": null,
+    "integration_goal": null,
+    "included_assay_ids": [],
+    "input_transform_by_modality": null,
+    "missing_data_strategy": null,
+    "factor_number_selection": null,
+    "initialization_plan": null,
+    "training_split_id": null,
+    "heldout_split_id": null,
+    "confounder_checks": null,
+    "frozen_projection_or_refit": null,
+    "factor_alignment_method": null
+  },
+  "module_version": "3.0.0"
+}

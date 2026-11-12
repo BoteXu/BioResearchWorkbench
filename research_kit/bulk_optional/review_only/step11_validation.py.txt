@@ -1,0 +1,96 @@
+"""Step 11 — external validation: train on the discovery cohort, test on GEO series matrices.
+
+Platform probe mapping is the hard part — see references/gotchas.md §4 and external-cohorts.md.
+Genes are z-scored WITHIN each cohort to remove platform scale.
+"""
+from __future__ import annotations
+import gzip, re
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_curve, auc, accuracy_score
+import utils
+
+
+def read_series_matrix(path):
+    """GEO series matrix -> DataFrame(probe x sample). Strips quotes from row IDs (gotchas §4)."""
+    rows, header, intab = [], None, False
+    with gzip.open(path, "rt") as f:
+        for line in f:
+            if line.startswith("!series_matrix_table_begin"): intab = True; continue
+            if line.startswith("!series_matrix_table_end"): break
+            if intab:
+                p = line.rstrip("\n").split("\t")
+                if header is None: header = [x.strip('"') for x in p]; continue
+                rows.append([p[0].strip('"')] + p[1:])
+    df = pd.DataFrame(rows, columns=header).set_index(header[0])
+    for c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce")
+    return df
+
+
+def read_platform_table(path):
+    """GPL platform text table -> probe -> symbol (Gene Symbol is column 11)."""
+    m = {}
+    op = gzip.open if str(path).endswith(".gz") else open
+    with op(path, "rt", errors="ignore") as f:
+        for line in f:
+            if line.startswith(("^", "#", "ID\t")): continue
+            p = line.rstrip("\n").split("\t")
+            if len(p) > 10 and p[10].strip() and "///" not in p[10]:
+                m[p[0]] = p[10].strip()
+    return m
+
+
+def run(cfg):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    mapping = utils.attach_symbols(cfg, expr); s2e = utils.symbol_lookup(mapping)
+    de = pd.read_csv(res / "de_results.csv")
+    feats = de[de["adj.P.Val"] < cfg["de"]["fdr_threshold"]].sort_values("P.Value") \
+               .head(cfg["ml"]["n_features"])["gene_id"].tolist()
+    feats = [g for g in feats if mapping.get(g)]
+    feat_sym = [mapping[g] for g in feats]
+    print(f"[valid] {len(feat_sym)} features locked from the discovery cohort")
+
+    results = []
+    for coh in cfg.get("external_cohorts", []):
+        try:
+            g = read_series_matrix(coh["series_matrix"])
+            ann = read_platform_table(coh["platform_table"]) if coh.get("platform_table") else None
+            if ann:
+                g = g.assign(symbol=[ann.get(i) for i in g.index]).dropna(subset=["symbol"]).groupby("symbol").mean()
+            else:
+                g.index = g.index.astype(str)
+            titles = gzip.open(coh["series_matrix"], "rt").read().split("\n")
+            tl = [l for l in titles if l.startswith("!Sample_title")][0]
+            st = [x.strip('"') for x in tl.split("\t")[1:]]
+            cre = re.compile(coh["case_pattern"], re.I); nre = re.compile(coh["control_pattern"], re.I)
+            keep = [(c, 1) for c, t in zip(g.columns, st) if cre.search(t)] + \
+                   [(c, 0) for c, t in zip(g.columns, st) if nre.search(t) and not cre.search(t)]
+            if len(keep) < 8: print(f"[valid] {coh['name']}: too few labelled samples"); continue
+            cols = [c for c, _ in keep]; yv = np.array([v for _, v in keep])
+            sub = g[cols]
+            present = [s for s in feat_sym if s in sub.index]
+            if len(present) < 10: print(f"[valid] {coh['name']}: only {len(present)} features present"); continue
+            Xv = np.log2(sub.loc[present].T.astype(float) + 1).values if coh.get("log2_transform") else sub.loc[present].T.values
+            Xv = (Xv - Xv.mean(0)) / (Xv.std(0) + 1e-9)
+            Xtr = expr.loc[[s2e[s] for s in present], samples].T.values.astype(float)
+            Xtr = (Xtr - Xtr.mean(0)) / (Xtr.std(0) + 1e-9)
+            clf = LogisticRegression(max_iter=3000, C=.1).fit(Xtr, y)
+            p_ = clf.predict_proba(Xv)[:, 1]
+            fpr, tpr, _ = roc_curve(yv, p_); a_ = auc(fpr, tpr)
+            acc = accuracy_score(yv, (p_ >= .5).astype(int))
+            print(f"[valid] {coh['name']}: n={len(yv)} features={len(present)} AUC={a_:.3f} acc={acc:.3f}")
+            results.append(dict(cohort=coh["name"], n=len(yv), n_features=len(present),
+                                auc=a_, accuracy=acc, fpr=fpr, tpr=tpr))
+        except Exception as e:
+            print(f"[valid] {coh['name']} failed: {str(e)[:90]}")
+    if not results: print("[valid] no cohort validated — check external_cohorts in config"); return
+    utils.save_table(pd.DataFrame([{k: v for k, v in r.items() if k not in ("fpr", "tpr")} for r in results]),
+                     cfg, "external_validation.csv")
+    fig, ax = plt.subplots(figsize=(6.8, 6.2))
+    for r, c in zip(results, [colors["case"], colors["control"], colors["accent"], "#8172B3"]):
+        ax.plot(r["fpr"], r["tpr"], lw=2, color=c, label=f"{r['cohort']} (n={r['n']}) AUC={r['auc']:.3f}")
+    ax.plot([0, 1], [0, 1], "k--", lw=.8)
+    utils.strip_plot(ax, "External validation (train on discovery → test)", "False positive rate", "True positive rate")
+    ax.legend(fontsize=8, frameon=False, loc="lower right")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F11_external_validation")

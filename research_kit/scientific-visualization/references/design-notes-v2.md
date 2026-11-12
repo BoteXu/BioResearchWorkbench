@@ -1,0 +1,50 @@
+# Design choices in v2
+
+- **pca_samples**: Joint marginal observations/IQR and correctly paired covariance ellipse axes.
+- **pca_marginal**: Aligned main/marginal guides and shared identity colors.
+- **pca_outlier**: Configurable squared-Mahalanobis reference and matching score table; no deletion.
+- **volcano**: Stacked marginals, label rails, explicit source-zero triangles.
+- **volcano_marginal**: Separate guide lane and shared threshold/scales.
+- **contrast_grid**: Data-aware contrast grid, shared thresholds/axes, literal contrast labels.
+- **onevsrest_grid**: Actual multiple cluster contrast panels rather than embedding substitutes.
+- **gsea_running**: Separated ES, hit and rank tracks with supplied statistics.
+- **gsea_tracks**: Matched-rank ES overlays with individual hit lanes and full pathway key.
+- **sample_corr**: Visible trees, aligned condition strip and dedicated scale.
+- **qc_sample_corr**: QC identity isolated from main sample_corr; matched annotation/order.
+- **enrich_heatmap**: Unclipped two-way hierarchy; explicit fixed-condition alternative; saved orders.
+- **deg_heatmap**: Physical row height and full literal genes/sample labels.
+- **dot_plot**: Aligned cell count support, detection area key and expression colorbar.
+- **marker_strip**: Per-identity context plus multiple original marker-expression panels, expandable columns.
+- **umap_clusters**: Nearby labels/counts, indexed narrow view and abundance profile variants.
+- **dim_highlight**: Each identity remains in a gray matched-coordinate whole-object context.
+- **feature_grid**: Shared supplied-expression scale and flexible feature grid.
+- **feature_overlay**: Nonnegative bivariate expression color key, actual overlapping channels.
+- **batch_umap**: Exact duplicate stages collapse by default; explicit verification form retained.
+- **raincloud**: Frozen density, original observations and robust summary in separated lanes.
+- **stacked_violin**: Multiple marker/identity distribution lanes without a fixed panel matrix.
+- **split_violin**: Real two-category split densities; no invented category.
+- **ridge_expr**: Variable density row spacing and readable feature labels.
+- **forest**: Aligned interval table, row bands and optional actual density forest.
+- **effect_matrix**: Complete effect/lo/hi contract and aligned interval cells.
+- **enrich_dot**: Stem-free NES evidence bubbles with count/FDR guides.
+- **proportion_dots**: Count/fraction bars with complete identity labels; lollipop optional.
+- **proportion_stack**: Compact observed composition and complete count/fraction key.
+- **shap_summary**: Old class-swarm/rose/concentric-share form restored; full-denominator audit; 120-mm layout.
+- **calibration**: OOF calibration plus actual probability distributions.
+- **confusion**: Observed counts and within-row percentages with complete class labels.
+- **reg_diagnostics**: Real diagnostic panels separated from performance summaries.
+- **pose_grid_3d**: Shared camera, actual bonds/poses and explicit score units.
+- **score_heatmap**: Annotated negative source energy components on an explicit sequential scale.
+- **ifp_barcode**: Literal supplied contact/time identities and readable occupancy semantics.
+- **mmpbsa_stack**: Additive waterfall, exact total consistency check and source SEM label.
+- **contact_map**: Dense residue ticks and separate excluded-local-pair key.
+- **ir_spectrum**: Frozen envelope and sticks, correct units and narrow-label wrap.
+- **uvvis**: Signal focus plus retained complete-range overview; no new broadening fit.
+- **ecd**: Signed frozen envelope with a complete-range overview and wrapped units.
+- **nmr_spectrum**: Independent supplied shielding ranges in facets, no invented chemical shifts.
+- **orbitals**: Supplied level groups, occupations and exact frontier gap.
+- **missing_pattern**: Boolean matrix, literal row IDs, row/column missing-rate summaries and optional configurable reference.
+- **norm_density**: Explicit stage panels with shared coordinates and original sample order.
+- **cv_density**: Named stages/line styles; no unqualified filtering-success statement.
+
+The external gallery records 48 individually assessed author/source examples with exact links. Borrow design principles with attribution; do not redistribute third-party code or figures without an appropriate license. R and older variants remain references or explicit options. Visual acceptance belongs to an exact export, not to an entire method family.

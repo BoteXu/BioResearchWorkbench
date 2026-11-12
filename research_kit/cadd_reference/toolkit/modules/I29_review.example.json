@@ -1,0 +1,35 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I29",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "replica_protocol": [],
+    "state_table": [],
+    "hot_region_atom_mapping": [],
+    "unscaled_reference": [],
+    "engine_capability_receipts": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "protocol_review",
+    "exchange_counters",
+    "walker_state_history",
+    "reference_ensemble_summary",
+    "mixing_diagnostics"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "walker–state 轨迹及每状态驻留",
+    "邻接交换计数与构象状态覆盖并列",
+    "目标态观测量按独立 campaign 展示"
+  ]
+}

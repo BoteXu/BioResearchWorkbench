@@ -1,0 +1,90 @@
+{
+  "schema": "native-track-render/1",
+  "state": "PREPARED_NOT_DISPATCHED",
+  "backend": "Gviz",
+  "argv": [
+    "Rscript",
+    "--vanilla",
+    "native_tracks.R"
+  ],
+  "frozen_tracks": [
+    {
+      "id": "coverage_Control",
+      "kind": "coverage",
+      "unit": "provided CPM",
+      "limits": [
+        0,
+        12
+      ],
+      "path": "track_0.tsv",
+      "sha256": "78f8d1dc58dbb35646160c1ae147cf03fbcae7cc2e9a21875c3f1366d10b9bf1",
+      "normalization": "supplied CPM from upstream; no renderer normalization"
+    },
+    {
+      "id": "coverage_Treated",
+      "kind": "coverage",
+      "unit": "provided CPM",
+      "limits": [
+        0,
+        12
+      ],
+      "path": "track_1.tsv",
+      "sha256": "029d6cacaa601c4902b97721702a9d6428cd168b0c54c5a367f829dd8bc6f354",
+      "normalization": "supplied CPM from upstream; no renderer normalization"
+    },
+    {
+      "id": "peaks",
+      "kind": "peaks",
+      "unit": "called intervals",
+      "limits": null,
+      "path": "track_2.tsv",
+      "sha256": "8c3d5243b0d1ce6c50197da4ff96800aceb1322318651fb56253c7fec571645b",
+      "normalization": "none; supplied peak calls"
+    },
+    {
+      "id": "genes",
+      "kind": "genes",
+      "unit": "exons / strand",
+      "limits": null,
+      "path": "track_3.tsv",
+      "sha256": "ba2b7a154e8fe0c1caf9fbbbcd57c67e723ead36d02a374e6a576cc44ccf9cee",
+      "normalization": "none; supplied annotation"
+    }
+  ],
+  "native_assets": [],
+  "dispatch_authorized": false,
+  "expected_host": "REQUIRED_CURRENT_COMPUTE_HOST",
+  "node_role": "compute",
+  "expected_executable_sha256": "REQUIRED_EXISTING_SERVER_BINARY_SHA256",
+  "expected_versions": {},
+  "native_backend_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "analysis_performed": false,
+  "public_upload": false,
+  "generated_files": [
+    {
+      "path": "exons_3.tsv",
+      "sha256": "e7709b5855a6b904e3d890b51565c3c99d9b63a5aa01b9ffc1cc55523ad76a8f"
+    },
+    {
+      "path": "native_tracks.R",
+      "sha256": "86ed4cb05f85584fe5aeec6bf818bbdc6e9dbf47d0e660958d98f325de8e9299"
+    },
+    {
+      "path": "track_0.tsv",
+      "sha256": "78f8d1dc58dbb35646160c1ae147cf03fbcae7cc2e9a21875c3f1366d10b9bf1"
+    },
+    {
+      "path": "track_1.tsv",
+      "sha256": "029d6cacaa601c4902b97721702a9d6428cd168b0c54c5a367f829dd8bc6f354"
+    },
+    {
+      "path": "track_2.tsv",
+      "sha256": "8c3d5243b0d1ce6c50197da4ff96800aceb1322318651fb56253c7fec571645b"
+    },
+    {
+      "path": "track_3.tsv",
+      "sha256": "ba2b7a154e8fe0c1caf9fbbbcd57c67e723ead36d02a374e6a576cc44ccf9cee"
+    }
+  ],
+  "review_sha256": "7cefba97f994104ecb7be94d77821e0e7ce6d9119e92c87ae8b909b624e8179c"
+}

@@ -1,0 +1,87 @@
+{
+  "example_only": true,
+  "run_id": "example_singlecell_virtual_ko",
+  "method": "singlecell_virtual_ko",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "cell_type": "REPLACE_WITH_REVIEWED_cell_type",
+    "min_cells_per_unit": 200,
+    "min_gene_prevalence": 0.05,
+    "n_components": 3,
+    "n_networks": 10,
+    "cells_per_network": 100,
+    "cores": 1,
+    "expected_package_version": "REPLACE_WITH_EXISTING_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "GENETARGET"
+    ],
+    "evaluation_units": [
+      "UNIT_A",
+      "UNIT_B",
+      "UNIT_C"
+    ],
+    "seed": 41
+  },
+  "inputs": [
+    {
+      "id": "matrix",
+      "path": "inputs/matrix.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "samples",
+      "path": "inputs/samples.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "n_components": 4
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "cells_per_network": 80
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "independent_units",
+      "operator": "ge",
+      "bound": 3,
+      "unit": "REPLACE_WITH_ACTUAL_UNIT",
+      "definition": "Example of a measurable criterion; add method-specific fit/coverage/control/OOD gates before production",
+      "threshold_basis": "ILLUSTRATIVE_NOT_SCIENTIFICALLY_VALIDATED"
+    }
+  ]
+}

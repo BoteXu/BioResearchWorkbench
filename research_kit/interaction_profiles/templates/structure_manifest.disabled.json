@@ -1,0 +1,38 @@
+{
+  "example_only": true,
+  "molecules": [
+    {
+      "id": "REFERENCE_1",
+      "role": "reference",
+      "parent_id": "REQUIRED_PARENT_COMPOUND",
+      "microstate_id": "REQUIRED_EXACT_STATE",
+      "formal_charge": 0,
+      "frame_id": "REQUIRED_SOURCE_FRAME_ID",
+      "preparation_domain_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "sdf": {
+        "path": "structures/selected_reference.sdf",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "qc_measurements": {
+        "path": "evidence/reference_QC.json",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "qc_receipt": {
+        "path": "evidence/reference_QC_receipt.json",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "qc_rules": [
+        {
+          "field": "REQUIRED_ACTUAL_NUMERICAL_QC_FIELD",
+          "observed": "REQUIRED_NUMERICAL_VALUE",
+          "operator": "le",
+          "bound": "REQUIRED_SCIENTIFIC_THRESHOLD",
+          "definition": "REQUIRED_CRITERION_DEFINITION",
+          "unit": "REQUIRED_UNIT",
+          "threshold_basis": "REQUIRED_SOURCE_OR_PRESPECIFIED_SCIENTIFIC_RATIONALE"
+        }
+      ]
+    }
+  ],
+  "note": "Scoring adds candidate/negative_control records in the SAME frame/preparation; generation uses reference records only. All selected SDF/QC inputs are exact scoped paths and hashes."
+}

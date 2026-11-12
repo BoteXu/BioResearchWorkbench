@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I18",
+  "status": "draft",
+  "table_name": "splice_events",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "event_id": null,
+    "gene_id_version": null,
+    "genome_build": null,
+    "annotation_release": null,
+    "event_type": null,
+    "chromosome": null,
+    "strand": null,
+    "coordinate_convention": null,
+    "event_coordinates": null,
+    "junction_count_mode": null,
+    "condition_reference": null,
+    "condition_test": null,
+    "delta_psi": null,
+    "psi_scale": null,
+    "p_value": null,
+    "adjusted_p_value": null,
+    "test_family": null,
+    "coverage_rule": null,
+    "qc_status": null,
+    "qc_reason": null
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "analysis_context": {
+    "reads_type": null,
+    "strandedness": null,
+    "read_length_strategy": null,
+    "alignment_pipeline_version": null,
+    "reference_index_sha256": null,
+    "rmats_version": null,
+    "group_definition": null,
+    "paired_design": null,
+    "biological_unit": null
+  },
+  "related_tables": {
+    "event_by_sample": {
+      "rows": [],
+      "row_template": {
+        "event_id": null,
+        "donor_id": null,
+        "sample_id": null,
+        "condition": null,
+        "inclusion_count": null,
+        "exclusion_count": null,
+        "psi": null,
+        "psi_scale": null,
+        "coverage_status": null,
+        "missing_reason": null
+      }
+    },
+    "transcript_evidence": {
+      "rows": [],
+      "row_template": {
+        "event_id": null,
+        "transcript_id_version": null,
+        "transcript_sequence_sha256": null,
+        "full_transcript_support": null,
+        "support_source": null,
+        "reading_frame_status": null,
+        "premature_stop_status": null,
+        "protein_evidence_status": null,
+        "protein_accession_isoform": null,
+        "protein_form_id": null
+      }
+    },
+    "protein_forms": {
+      "rows": [],
+      "row_template": {
+        "protein_form_id": null,
+        "protein_accession_isoform": null,
+        "sequence_path": null,
+        "sequence_sha256": null,
+        "maturation_state": null,
+        "construct_range": null,
+        "signal_peptide_definition": null,
+        "transmembrane_definition": null,
+        "glycosylation_context": null,
+        "model_plan_id": null
+      }
+    },
+    "residue_map": {
+      "rows": [],
+      "row_template": {
+        "residue_map_id": null,
+        "protein_form_id": null,
+        "protein_accession_isoform": null,
+        "reference_residue_number": null,
+        "reference_residue_name": null,
+        "structure_id": null,
+        "chain_id": null,
+        "author_residue_number": null,
+        "insertion_code": null,
+        "model_residue_number": null,
+        "model_residue_name": null,
+        "mapping_status": null,
+        "mapping_notes": null
+      }
+    }
+  },
+  "model_plan": {
+    "model_plan_id": null,
+    "hypothesis_id": null,
+    "comparison_definition": null,
+    "common_fit_selection": null,
+    "pocket_definition": null,
+    "environment_branch": null,
+    "identity_review_status": null,
+    "structure_uncertainty_reason": null
+  },
+  "module_version": "3.0.0"
+}

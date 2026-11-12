@@ -1,0 +1,8 @@
+# Review the chemical state, atom mapping, formal net charge and multiplicity first.
+# Replace __NET_CHARGE__ and __MULTIPLICITY__; these placeholders deliberately do not run.
+# ligand_state.mol2 must contain one defined chemical component with checked bond orders.
+antechamber -i ligand_state.mol2 -fi mol2 -o ligand_gaff2.mol2 -fo mol2 -at gaff2 -c bcc -nc __NET_CHARGE__ -m __MULTIPLICITY__ -rn LIG -s 2
+parmchk2 -i ligand_gaff2.mol2 -f mol2 -o ligand_gaff2.frcmod -s gaff2
+# Inspect sqm.out, bond/atom typing, atom map, charge sum and every missing/analogy parameter.
+# Keep the selected bound pose via atom mapping; do not substitute an optimized free-ligand pose.
+

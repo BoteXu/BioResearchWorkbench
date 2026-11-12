@@ -1,0 +1,21 @@
+02_heat - illustrative soluble-system profile; review before running
+&cntrl
+  imin=0, irest=0, ntx=1,
+  nstlim=200000, dt=0.001,
+  ntb=1, ntp=0, igb=0,
+  ntt=3, gamma_ln=1.0, temp0=300.0, ig=__SEED__,
+  tempi=10.0, nmropt=1,
+  ntc=2, ntf=2, tol=0.0000001, cut=10.0,
+  ntpr=100, ntwx=1000, ntwr=50000,
+  ioutfm=1, ntxo=2, iwrap=0, nscm=1000,
+  ntr=1,
+  restraint_wt=2, restraintmask='__AMBER_MASK__',
+/
+&ewald
+  ew_type=0, order=4, dsum_tol=0.00001, vdwmeth=1,
+  netfrc=0,
+/
+&wt TYPE='TEMP0', istep1=0, istep2=150000, value1=10.0, value2=300.0 /
+&wt TYPE='TEMP0', istep1=150001, istep2=200000, value1=300.0, value2=300.0 /
+&wt TYPE='END' /
+

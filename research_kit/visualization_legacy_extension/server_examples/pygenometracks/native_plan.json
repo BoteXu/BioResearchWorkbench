@@ -1,0 +1,158 @@
+{
+  "schema": "native-track-render/1",
+  "state": "PREPARED_NOT_DISPATCHED",
+  "backend": "pyGenomeTracks",
+  "argv": [
+    "pyGenomeTracks",
+    "--tracks",
+    "tracks.ini",
+    "--region",
+    "chrExample:1000-2000",
+    "--outFileName",
+    "native_tracks.pdf",
+    "--width",
+    "17.8"
+  ],
+  "frozen_tracks": [
+    {
+      "id": "coverage_Control",
+      "kind": "coverage",
+      "unit": "provided CPM",
+      "limits": [
+        0,
+        12
+      ],
+      "path": "track_0.tsv",
+      "sha256": "78f8d1dc58dbb35646160c1ae147cf03fbcae7cc2e9a21875c3f1366d10b9bf1",
+      "normalization": "supplied CPM from upstream; no renderer normalization"
+    },
+    {
+      "id": "coverage_Treated",
+      "kind": "coverage",
+      "unit": "provided CPM",
+      "limits": [
+        0,
+        12
+      ],
+      "path": "track_1.tsv",
+      "sha256": "029d6cacaa601c4902b97721702a9d6428cd168b0c54c5a367f829dd8bc6f354",
+      "normalization": "supplied CPM from upstream; no renderer normalization"
+    },
+    {
+      "id": "peaks",
+      "kind": "peaks",
+      "unit": "called intervals",
+      "limits": null,
+      "path": "track_2.tsv",
+      "sha256": "8c3d5243b0d1ce6c50197da4ff96800aceb1322318651fb56253c7fec571645b",
+      "normalization": "none; supplied peak calls"
+    },
+    {
+      "id": "genes",
+      "kind": "genes",
+      "unit": "exons / strand",
+      "limits": null,
+      "path": "track_3.tsv",
+      "sha256": "ba2b7a154e8fe0c1caf9fbbbcd57c67e723ead36d02a374e6a576cc44ccf9cee",
+      "normalization": "none; supplied annotation"
+    },
+    {
+      "id": "loops",
+      "kind": "loops",
+      "unit": "supplied loop calls",
+      "limits": null,
+      "path": "track_4.tsv",
+      "sha256": "9f22f2656a5ccf891781b588844e54b74248ef67c65ad1f7c450d8c903e37463",
+      "normalization": "none"
+    },
+    {
+      "id": "hic",
+      "kind": "hic",
+      "unit": "supplied contact score",
+      "limits": [
+        0,
+        10
+      ],
+      "path": "track_5.tsv",
+      "sha256": "82f6edc5d36b66a79d742cef6b2e7c1fbdede49b2967fc7931477aa02cb06601",
+      "normalization": "frozen supplied matrix"
+    }
+  ],
+  "native_assets": [
+    {
+      "track_id": "coverage_Control",
+      "path": "assets/track_0.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "bigwig"
+    },
+    {
+      "track_id": "coverage_Treated",
+      "path": "assets/track_1.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "bigwig"
+    },
+    {
+      "track_id": "peaks",
+      "path": "assets/track_2.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "bed"
+    },
+    {
+      "track_id": "genes",
+      "path": "assets/track_3.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "gtf"
+    },
+    {
+      "track_id": "loops",
+      "path": "assets/track_4.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "links"
+    },
+    {
+      "track_id": "hic",
+      "path": "assets/track_5.example",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "file_type": "hic_matrix"
+    }
+  ],
+  "dispatch_authorized": false,
+  "expected_host": "REQUIRED_CURRENT_COMPUTE_HOST",
+  "node_role": "compute",
+  "expected_executable_sha256": "REQUIRED_EXISTING_SERVER_BINARY_SHA256",
+  "expected_versions": {},
+  "native_backend_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "analysis_performed": false,
+  "public_upload": false,
+  "generated_files": [
+    {
+      "path": "track_0.tsv",
+      "sha256": "78f8d1dc58dbb35646160c1ae147cf03fbcae7cc2e9a21875c3f1366d10b9bf1"
+    },
+    {
+      "path": "track_1.tsv",
+      "sha256": "029d6cacaa601c4902b97721702a9d6428cd168b0c54c5a367f829dd8bc6f354"
+    },
+    {
+      "path": "track_2.tsv",
+      "sha256": "8c3d5243b0d1ce6c50197da4ff96800aceb1322318651fb56253c7fec571645b"
+    },
+    {
+      "path": "track_3.tsv",
+      "sha256": "ba2b7a154e8fe0c1caf9fbbbcd57c67e723ead36d02a374e6a576cc44ccf9cee"
+    },
+    {
+      "path": "track_4.tsv",
+      "sha256": "9f22f2656a5ccf891781b588844e54b74248ef67c65ad1f7c450d8c903e37463"
+    },
+    {
+      "path": "track_5.tsv",
+      "sha256": "82f6edc5d36b66a79d742cef6b2e7c1fbdede49b2967fc7931477aa02cb06601"
+    },
+    {
+      "path": "tracks.ini",
+      "sha256": "a73d9ae180a3294f5aef25f270054e4f96344708ba427c0690619e639e004131"
+    }
+  ],
+  "review_sha256": "e77c59af5bf4bc36ad240d9b8ea08e1ae324518ab201d93cbdfbaf42e3d12672"
+}

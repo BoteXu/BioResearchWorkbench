@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "screening_plan_template",
+  "mode": "planning_only",
+  "data_status": "no_real_screening_performed",
+  "project_id": "__FILL_PROJECT_ID__",
+  "plan_version": "__FILL_PLAN_VERSION__",
+  "objective": {
+    "hypothesis": "__FILL_TESTABLE_SCREENING_QUESTION__",
+    "target_species": "__FILL_TARGET_SPECIES__",
+    "target_accession_isoform_construct": "__FILL_TARGET_IDENTITY__",
+    "target_domain_site": "__FILL_DOMAIN_AND_SITE__",
+    "desired_action": "__FILL_BINDING_OR_FUNCTIONAL_OBJECTIVE__",
+    "assay_endpoint": "__FILL_PRIMARY_ASSAY_ENDPOINT__",
+    "allowed_molecule_class": "__FILL_MOLECULE_CLASS__",
+    "experimental_context": "__FILL_PH_PURITY_EXPOSURE_AND_ASSAY_CONTEXT__"
+  },
+  "sources": [
+    {
+      "source_name": "__FILL_SOURCE_NAME__",
+      "release_or_snapshot_date": "__FILL_RELEASE_OR_DATE__",
+      "query_or_subset": "__FILL_QUERY_OR_SUBSET__",
+      "source_url": "__FILL_SOURCE_URL__",
+      "original_file": "__FILL_ORIGINAL_LIBRARY_PATH__",
+      "sha256": "__FILL_ORIGINAL_LIBRARY_SHA256__",
+      "usage_terms_checked_at": "__FILL_TERMS_REVIEW_DATE__"
+    }
+  ],
+  "identity_policy": {
+    "policy_version": "__FILL_IDENTITY_POLICY_VERSION__",
+    "software_versions": "__FILL_CHEMINFORMATICS_VERSIONS__",
+    "parent_unit": "defined_stereoisomer_with_documented_salt_and_state_grouping_policy",
+    "preserve_defined_stereochemistry": true,
+    "unresolved_stereochemistry": "hold_for_identity_review",
+    "salt_rules": "__FILL_APPROVED_SALT_REMOVAL_RULES__",
+    "permanent_charge_policy": "do_not_force_neutral",
+    "tautomer_grouping_rules": "__FILL_TAUTOMER_GROUPING_POLICY__",
+    "raw_records_retained": true,
+    "required_tables": [
+      "source_records",
+      "parents",
+      "states",
+      "conformers",
+      "atom_maps",
+      "runs",
+      "poses",
+      "decisions"
+    ],
+    "state_generation_ph": "__FILL_ASSAY_RELEVANT_PH_AND_SENSITIVITY_RANGE__",
+    "state_generation_tool": "__FILL_TOOL_VERSION_AND_STATE_EVIDENCE__",
+    "fingerprint": {
+      "type": "Morgan",
+      "radius": 2,
+      "fp_size": 2048,
+      "include_chirality": true,
+      "similarity": "Tanimoto",
+      "status": "project_starting_point_not_a_quality_standard"
+    }
+  },
+  "validation": {
+    "status": "__FILL_VALIDATED_OR_EXPLORATORY__",
+    "positive_control_table": "__FILL_POSITIVE_CONTROLS_PATH__",
+    "measured_inactive_table": "__FILL_MEASURED_INACTIVES_PATH_OR_EXPLICIT_ABSENCE__",
+    "decoy_table": "__FILL_DECOYS_PATH_OR_NOT_USED__",
+    "decoys_are_experimental_inactives": false,
+    "assay_evidence_table": "__FILL_ASSAY_EVIDENCE_PATH__",
+    "development_holdout_split": "__FILL_FROZEN_SPLIT_AND_GROUPING__",
+    "primary_budget_metric": "__FILL_PRECISION_OR_RECALL_AT_K_AND_K__",
+    "redocking_crossdocking_report": "__FILL_POSE_VALIDATION_PATH_OR_ABSENCE__",
+    "physical_qc_policy": "__FILL_CHEMICAL_AND_GEOMETRIC_CHECKS__"
+  },
+  "ranking": {
+    "counting_unit": "parent",
+    "raw_scores_keep_separate": [
+      "empirical_score_with_function_and_units",
+      "CNNscore",
+      "CNNaffinity_predicted_pK",
+      "similarity"
+    ],
+    "consensus_rule": "__FILL_FROZEN_AGGREGATION_RULE__",
+    "missing_score": "missing_not_zero",
+    "failed_task": "unknown_not_inactive",
+    "parent_state_aggregation": "__FILL_STATE_AGGREGATION_AND_MULTIPLICITY_POLICY__",
+    "receptor_aggregation": "__FILL_RECEPTOR_AGGREGATION_POLICY__",
+    "diversity_rule": "__FILL_SCAFFOLD_CLUSTER_QUOTA_POLICY__",
+    "ranking_sensitivity": "__FILL_PREDEFINED_PROTOCOL_PERTURBATIONS__",
+    "availability_checked_at": "__FILL_AVAILABILITY_CHECK_DATE__",
+    "admet_endpoint_definitions": "__FILL_ADMET_ENDPOINT_MODEL_UNITS_AND_DOMAIN__"
+  },
+  "budget_example": {
+    "hypothetical": true,
+    "starting_count_unit": "independent_parents_after_identity_registration",
+    "starting_parent_capacity": 10000,
+    "real_qc_pass_counts": null,
+    "controls_validation_retries_and_preparation_extra": true,
+    "all_numbers_are_capacities_not_observed_results": true,
+    "docking_stages": [
+      {
+        "stage_id": "fast",
+        "parent_capacity": 10000,
+        "assumed_mean_states": 2,
+        "assumed_mean_conformers_per_state": 1,
+        "receptor_count": 1,
+        "seeds": [
+          13901
+        ],
+        "suggested_exhaustiveness": 8,
+        "max_output_poses_per_task": 10,
+        "search_engine": "vina",
+        "parameter_status": "project_starting_point"
+      },
+      {
+        "stage_id": "fine",
+        "parent_capacity": 1000,
+        "assumed_mean_states": 2,
+        "assumed_mean_conformers_per_state": 2,
+        "receptor_count": 3,
+        "seeds": [
+          13901,
+          13902,
+          13903
+        ],
+        "suggested_exhaustiveness": 48,
+        "max_output_poses_per_task": 10,
+        "search_engine": "vina",
+        "parameter_status": "project_starting_point"
+      }
+    ],
+    "fine_entry_unique_parent_quotas": {
+      "main_rank": 600,
+      "other_evidence_routes": 200,
+      "diversity_exploration": 200
+    },
+    "manual_review_parent_capacity": 100,
+    "experimental_new_candidate_capacity": 24,
+    "experimental_candidate_quotas": {
+      "main_evidence": 12,
+      "alternative_chemotypes": 6,
+      "exploration": 6
+    },
+    "md_new_candidate_capacity": 6,
+    "controls_reserved_separately": true,
+    "measured_runtime_table": "__FILL_STRATIFIED_PILOT_RUNTIME_PATH__",
+    "illustrative_fast_timing": {
+      "hypothetical": true,
+      "minutes_per_task": 2,
+      "allocated_cpu_cores_per_task": 4,
+      "ideal_total_busy_cores": 64
+    },
+    "md_plan_path": "__FILL_SEPARATE_MD_PLAN_PATH__"
+  },
+  "execution": {
+    "automated_execution_enabled": false,
+    "external_paid_compute_enabled": false,
+    "input_hash_manifest": "__FILL_INPUT_MANIFEST_PATH__",
+    "new_output_root": "__FILL_NEW_NONEXISTING_OUTPUT_DIRECTORY__",
+    "never_overwrite_existing_outputs": true,
+    "software_and_model_versions": "__FILL_EXECUTABLE_VERSION_AND_CNN_MODEL_IDS__",
+    "per_stage_cpu_memory_gpu_limits": "__FILL_MEASURED_RESOURCE_LIMITS__",
+    "timeout_policy": "__FILL_PILOT_BASED_TIMEOUT_POLICY__",
+    "retry_policy": "__FILL_REASON_SPECIFIC_RETRY_LIMITS__",
+    "task_identity_fields": [
+      "parent_id",
+      "state_id",
+      "conformer_id",
+      "receptor_id",
+      "software_model_version",
+      "parameter_hash",
+      "seed"
+    ],
+    "attempt_identity": "task_id_plus_attempt_id",
+    "task_states": [
+      "planned",
+      "running",
+      "completed",
+      "failed",
+      "timeout",
+      "skipped"
+    ],
+    "parent_terminal_states": [
+      "advance",
+      "evaluated_not_selected",
+      "qc_failed",
+      "repair_pending",
+      "budget_not_computed"
+    ]
+  }
+}

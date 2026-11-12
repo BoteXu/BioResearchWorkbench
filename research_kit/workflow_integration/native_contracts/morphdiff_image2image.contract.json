@@ -1,0 +1,65 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "model_config",
+    "gene_condition",
+    "query_metadata",
+    "source_images"
+  ],
+  "required_parameters": [
+    "batch_size",
+    "maximum_cases",
+    "accelerator",
+    "steps",
+    "guidance_scale",
+    "eta",
+    "image_height",
+    "image_width",
+    "strength",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "predicted_images",
+    "prediction_identity",
+    "channel_summary"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "generated_morphology_conditioned_on_observed_image",
+  "schema": "native-completion-contract/1",
+  "tool": "MorphDiff",
+  "source_commit": [
+    "biomap-research/MorphDiff",
+    "80f79ca30a269599b7b10caa0c86fa9739496b0e"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Correct biomap-research/MorphDiff source, separate five-channel gene-to-image and image-to-image. The pinned native DDIM sampler forces CUDA; an existing server GPU is required, CPU is rejected. Not bowang-lab/MorphoDiff; generated morphology is not measured microscopy.",
+  "figure_views": [
+    "image_channels",
+    "rank"
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "filter_decisions_template",
+  "mode": "planning_only",
+  "contains_actual_compound_decisions": false,
+  "rulebook_version": "__FILL_RULEBOOK_VERSION__",
+  "rules": [
+    {
+      "rule_id": "CHEM_PARSE_FAIL",
+      "class": "hard_input_error",
+      "test": "structure cannot be parsed with the frozen chemistry tool",
+      "action": "hold_for_repair",
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "CHEM_IDENTITY_CHANGED",
+      "class": "hard_input_error",
+      "test": "unexplained stereochemistry, covalent graph, main fragment, or source-ID change",
+      "action": "hold_for_repair",
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "SPECIAL_CHEMISTRY_UNSUPPORTED",
+      "class": "method_scope",
+      "test": "metal complex, covalent mechanism, mixture, macrocycle or other chemistry unsupported by this protocol",
+      "action": "route_to_specialist_protocol_or_hold",
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "PAINS_ALERT",
+      "class": "soft_alert",
+      "catalog_version": "__FILL_PAINS_CATALOG_VERSION__",
+      "action": "annotate_and_review",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "REACTIVITY_ALERT",
+      "class": "soft_alert",
+      "catalog_version": "__FILL_REACTIVITY_CATALOG_VERSION__",
+      "action": "review_mechanism_and_counter_assay_plan",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "AGGREGATION_OR_SOLUBILITY_RISK",
+      "class": "soft_alert",
+      "evidence_definition": "__FILL_ASSAY_CONTEXT_AND_EXPERIMENTAL_OR_PREDICTED_EVIDENCE__",
+      "action": "prioritize_assay_relevance_review",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "ADMET_OUTSIDE_DOMAIN",
+      "class": "prediction_uncertainty",
+      "action": "retain_uncertainty_and_seek_relevant_evidence",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "AVAILABILITY_UNKNOWN",
+      "class": "experimental_feasibility",
+      "action": "verify_exact_salt_stereo_batch_cost_and_lead_time",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    },
+    {
+      "rule_id": "BUDGET_CAPACITY",
+      "class": "resource_decision",
+      "action": "record_as_budget_deferred",
+      "automatic_exclusion": false,
+      "is_biological_inactive_label": false
+    }
+  ],
+  "decision_records": [
+    {
+      "example_only": true,
+      "decision_id": "__FILL_UNIQUE_DECISION_ID__",
+      "parent_id": "__FILL_PARENT_ID__",
+      "source_record_ids": [
+        "__FILL_SOURCE_RECORD_ID__"
+      ],
+      "state_id_if_relevant": "__FILL_STATE_ID_OR_NOT_APPLICABLE__",
+      "stage_id": "__FILL_STAGE_ID__",
+      "rule_id": "__FILL_RULE_ID__",
+      "observation": "__FILL_OBSERVED_VALUE_OR_ALERT__",
+      "evidence_type": "__FILL_MEASURED_PREDICTED_OR_COMPUTATIONAL_QC__",
+      "units_or_endpoint_definition": "__FILL_UNITS_AND_ENDPOINT_OR_NOT_APPLICABLE__",
+      "matched_substructure_or_atom_ids": "__FILL_ALERT_SUBSTRUCTURE_OR_NOT_APPLICABLE__",
+      "source_file_sha256": "__FILL_EVIDENCE_FILE_SHA256__",
+      "tool_model_catalog_version": "__FILL_TOOL_MODEL_OR_RULE_VERSION__",
+      "decision": "__FILL_ADVANCE_HOLD_REPAIR_REJECT_OR_EXPLORE__",
+      "reason": "__FILL_SCIENTIFIC_OR_RESOURCE_REASON__",
+      "biological_activity_label": "unknown_until_supported_by_assay",
+      "reviewer": "__FILL_REVIEWER_OR_ANALYSIS_VERSION__",
+      "reviewed_at": "__FILL_REVIEW_TIMESTAMP__",
+      "supersedes_decision_id": "__FILL_PREVIOUS_DECISION_ID_OR_NONE__",
+      "next_action": "__FILL_NEXT_ACTION__"
+    }
+  ],
+  "accounting": {
+    "unit": "parent",
+    "terminal_states_are_mutually_exclusive": true,
+    "required_terminal_states": [
+      "advance",
+      "evaluated_not_selected",
+      "qc_failed",
+      "repair_pending",
+      "budget_not_computed"
+    ],
+    "sum_of_terminal_states_must_equal_stage_input": true,
+    "raw_task_failures_retained": true,
+    "missing_scores_are_not_zero": true
+  }
+}

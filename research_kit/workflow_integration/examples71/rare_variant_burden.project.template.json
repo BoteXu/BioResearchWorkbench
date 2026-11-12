@@ -1,0 +1,167 @@
+{
+  "schema": "private71-project-template/2",
+  "template_not_executable": true,
+  "analysis_id": "rare_variant_burden",
+  "backend": "omics71",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "analysis_id": "rare_variant_burden",
+    "implementation": "SKAT_independent_units",
+    "seed": 20261025,
+    "null_formula": "REQUIRED_STRING",
+    "outcome_type": "REQUIRED_STRING",
+    "min_mac": "REQUIRED_INTEGER",
+    "permutations": "REQUIRED_INTEGER",
+    "calibration_alpha": "REQUIRED_NUMBER",
+    "sensitivity_variants": [
+      {
+        "label": "alternative1",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      },
+      {
+        "label": "alternative2",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      }
+    ],
+    "skat_method": "davies",
+    "skat_test": "SKAT",
+    "max_maf": "REQUIRED_NUMBER"
+  },
+  "inputs": [
+    {
+      "id": "genotype",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "samples",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "variant_masks",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "relatedness_audit",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "expected_host": "REQUIRED_CURRENT_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_INTEGER",
+    "gpus": 0
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "upstream_qc": {
+    "requires": "ACTUAL_COMPLETED_HASH_BOUND_QC_RECEIPT_AND_NUMERICAL_MEASUREMENTS",
+    "is_evidence": false
+  },
+  "statistical_plan": {
+    "estimand": "REQUIRED_SCIENTIFIC_DECISION",
+    "independent_unit": "REQUIRED_SCIENTIFIC_DECISION",
+    "missingness": "REQUIRED_SCIENTIFIC_DECISION",
+    "multiplicity": "REQUIRED_SCIENTIFIC_DECISION",
+    "sensitivity": "REQUIRED_SCIENTIFIC_DECISION"
+  },
+  "acceptance_rules": [
+    {
+      "id": "required_actual_numerical_diagnostic",
+      "role": "analysis_diagnostics",
+      "field": "0.metrics.REQUIRED_ACTUAL_FIELD",
+      "operator": "ge",
+      "bound": "REQUIRED_NUMERIC_THRESHOLD",
+      "definition": "REQUIRED_DEFINITION",
+      "unit": "REQUIRED_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_JUSTIFICATION"
+    }
+  ],
+  "example_only": true,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+  "optional_input_roles": [],
+  "conditional_input_roles": {},
+  "parameter_contracts": {
+    "null_formula": {
+      "type": "string"
+    },
+    "outcome_type": {
+      "type": "string"
+    },
+    "min_mac": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "permutations": {
+      "type": "integer",
+      "minimum": 20
+    },
+    "calibration_alpha": {
+      "type": "number"
+    },
+    "skat_method": {
+      "type": "string",
+      "enum": [
+        "davies",
+        "liu",
+        "liu.mod"
+      ]
+    },
+    "skat_test": {
+      "type": "string",
+      "enum": [
+        "SKAT",
+        "burden",
+        "SKATO"
+      ]
+    },
+    "max_maf": {
+      "type": "number",
+      "minimum": 1e-05,
+      "maximum": 0.5
+    }
+  },
+  "allowed_sensitivity_parameters": [
+    "min_mac",
+    "permutations"
+  ],
+  "required_scientific_output_roles": [
+    "burden_results",
+    "variant_masks",
+    "carrier_counts",
+    "burden_calibration"
+  ],
+  "required_proof_roles": [
+    "full_result_audit",
+    "actual_sensitivity_comparison"
+  ],
+  "context_QC_contract": {
+    "each_qc_evidence_row_requires": [
+      "input_id",
+      "sha256",
+      "criterion",
+      "observed",
+      "decision",
+      "operator",
+      "bound",
+      "unit",
+      "source_receipt_sha256",
+      "source_receipt_input",
+      "measurement_input",
+      "measurement_field"
+    ],
+    "missing_is_not_pass": true
+  }
+}

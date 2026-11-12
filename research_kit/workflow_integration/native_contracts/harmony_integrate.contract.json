@@ -1,0 +1,39 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "harmony_integrate",
+  "required_inputs": [
+    "object",
+    "cell_qc"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "unit_key",
+    "sample_key",
+    "condition_key",
+    "assay",
+    "target_sum",
+    "hvg_count",
+    "n_pcs",
+    "neighbors",
+    "resolution",
+    "cluster_algorithm",
+    "minimum_retained_cells",
+    "batch_keys",
+    "theta",
+    "max_iterations"
+  ],
+  "required_output_roles": [
+    "processed_object",
+    "unintegrated_baseline",
+    "cell_metadata",
+    "embedding",
+    "integrated_representation",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": null,
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

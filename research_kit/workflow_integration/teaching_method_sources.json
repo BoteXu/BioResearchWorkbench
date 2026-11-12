@@ -1,0 +1,86 @@
+[
+  {
+    "method": "DESeq2",
+    "url": "https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html",
+    "review_scope": "输入计数、设计、重复和缺失p值语义",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "edgeR",
+    "url": "https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf",
+    "review_scope": "设计感知过滤、归一化和QL检验",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "Scanpy QC",
+    "url": "https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.calculate_qc_metrics.html",
+    "review_scope": "明确层参数、计数QC",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "Scanpy HVG",
+    "url": "https://scanpy.scverse.org/en/stable/generated/scanpy.pp.highly_variable_genes.html",
+    "review_scope": "HVG不同flavor输入层不同",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "muscat",
+    "url": "https://www.nature.com/articles/s41467-020-19894-4",
+    "review_scope": "多样本多条件的亚群差异状态",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "cNMF",
+    "url": "https://github.com/dylkot/cNMF/blob/main/src/cnmf/cnmf.py",
+    "review_scope": "prepare/factorize/combine/consensus/load_results及K稳定性接口",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "scCODA pertpy",
+    "url": "https://pertpy.readthedocs.io/en/latest/api/tools/pertpy.tools.Sccoda.html",
+    "review_scope": "组成参考类别、NUTS、每链可信效应和真实后验接口",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "CellRank2",
+    "url": "https://www.nature.com/articles/s41592-024-02303-9",
+    "review_scope": "多视图kernel与命运概率适用范围",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "CellRank pseudotime",
+    "url": "https://cellrank.readthedocs.io/en/latest/api/_autosummary/kernels/cellrank.kernels.PseudotimeKernel.html",
+    "review_scope": "time_key/backward/threshold_scheme/frac_to_keep接口",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "MOFA2",
+    "url": "https://github.com/bioFAM/MOFA2/blob/master/inst/scripts/template_script.py",
+    "review_scope": "显式缺失视图保留NA",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "Perturbation baseline",
+    "url": "https://www.nature.com/articles/s41592-025-02772-6",
+    "review_scope": "复杂扰动模型与简单基线的比较边界",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  },
+  {
+    "method": "Perturbation benchmark",
+    "url": "https://www.nature.com/articles/s41592-025-02980-0",
+    "review_scope": "不同细胞背景、条件与划分的评价",
+    "review_date": "2026-11-12",
+    "server_runtime_verified": false
+  }
+]

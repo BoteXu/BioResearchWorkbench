@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I08",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "change_id",
+    "old_snapshot_id",
+    "new_snapshot_id",
+    "new_parent_ids",
+    "changed_state_ids",
+    "changed_receptor_ids",
+    "changed_protocol_fields",
+    "label_updates",
+    "reusable_raw_outputs",
+    "required_aggregations",
+    "bridge_validation_set",
+    "ranking_comparison_report"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "change_id": null,
+    "old_snapshot_id": null,
+    "new_snapshot_id": null,
+    "new_parent_ids": null,
+    "changed_state_ids": null,
+    "changed_receptor_ids": null,
+    "changed_protocol_fields": null,
+    "label_updates": null,
+    "reusable_raw_outputs": null,
+    "required_aggregations": null,
+    "bridge_validation_set": null,
+    "ranking_comparison_report": null
+  }
+}

@@ -1,0 +1,1 @@
+estimate_id	analysis_variant_id	scope_id	model_id	run_id	contrast_id	feature_id	study_id	role	effect	sampling_se	interval_type_bounds	n_samples	n_independent_units	effective_k	dependence_policy	weight_tau2_I2_Q	method_test_family	heldout_or_subgroup	prediction_interval_scope	eligibility_reason

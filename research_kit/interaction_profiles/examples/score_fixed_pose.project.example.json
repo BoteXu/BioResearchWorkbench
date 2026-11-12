@@ -1,0 +1,82 @@
+{
+  "schema": "private-interaction-project/1",
+  "example_only": true,
+  "method": "score_fixed_pose",
+  "run_id": "DISABLED_EXAMPLE_NOT_A_SCIENTIFIC_RUN",
+  "expected_host": "REQUIRED_FRESH_ALLOCATED_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": 4,
+    "gpus": 0
+  },
+  "parameters": {
+    "device": "cpu",
+    "seed": 20261026,
+    "surface_points": 400,
+    "probe_radius": 1.2,
+    "esp_lambda": 0.3,
+    "solvent": "water",
+    "xtb_timeout": 120,
+    "expected_xtb_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expected_xtb_version": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+    "expected_versions": {
+      "numpy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "scipy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "torch": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "rdkit": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "open3d": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "shepherd-score": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION"
+    },
+    "max_atoms": 180,
+    "charge_sum_tolerance": 0.001
+  },
+  "inputs": [
+    {
+      "id": "structure_manifest",
+      "path": "inputs/structure_manifest.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "software",
+      "path": "inputs/software.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "seed_check_1",
+      "seed": 20261027
+    },
+    {
+      "label": "seed_check_2",
+      "seed": 20261028
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "metric": "self_shape_similarity",
+      "operator": "ge",
+      "bound": 0.9999,
+      "definition": "Actual native same-profile positive control",
+      "unit": "dimensionless similarity",
+      "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REQUIRES_REVIEW"
+    },
+    {
+      "metric": "self_esp_similarity",
+      "operator": "ge",
+      "bound": 0.9999,
+      "definition": "Actual native same-profile ESP control",
+      "unit": "dimensionless similarity",
+      "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REQUIRES_REVIEW"
+    }
+  ],
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "automatic_download": false,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE"
+}

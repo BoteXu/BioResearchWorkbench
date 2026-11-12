@@ -1,0 +1,57 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "run_manifest",
+    "spectral_library"
+  ],
+  "required_parameters": [
+    "executable",
+    "executable_sha256",
+    "raw_input_ids",
+    "qvalue",
+    "mass_accuracy_ms1_ppm",
+    "mass_accuracy_ms2_ppm",
+    "scan_window",
+    "threads",
+    "native_version",
+    "seed",
+    "software_versions",
+    "maximum_output_entries"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "quantification_report",
+    "run_qc"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "measured_DIA_intensity",
+  "schema": "native-completion-contract/1",
+  "tool": "DIA-NN Academia",
+  "source_commit": null,
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Academia limited non-profit edition only; Enterprise excluded. Native binary and its actual license must already be provisioned by owner.",
+  "figure_views": [
+    "matrix",
+    "scatter",
+    "rank"
+  ]
+}

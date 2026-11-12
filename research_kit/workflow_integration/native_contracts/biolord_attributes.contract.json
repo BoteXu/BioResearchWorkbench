@@ -1,0 +1,42 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "biolord_attributes",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "celltype_key",
+    "control",
+    "expression_layer",
+    "expression_scale",
+    "n_latent",
+    "max_epochs",
+    "batch_size",
+    "optimization_train_fraction",
+    "early_stopping",
+    "accelerator",
+    "categorical_attributes",
+    "ordered_attributes",
+    "module_parameters",
+    "training_plan",
+    "prediction_attributes",
+    "validation_scope"
+  ],
+  "required_output_roles": [
+    "attribute_representation",
+    "split_identity",
+    "predicted_expression",
+    "prediction_identity",
+    "diagnostics",
+    "backend_versions",
+    "model_checkpoint",
+    "training_history"
+  ],
+  "method_scope": "Native exact-source normal-likelihood biolord attribute fitting and counterfactual combinations on actual optimizer-trained controls; explicit source-cell IDs propagated, no suffix parsing. Random-cell monitoring is descriptive and not independent-donor generalization.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,4389 @@
+{
+  "schema": "teaching-tool-integration-audit/1",
+  "version": "3.4-private-review",
+  "generated_utc": "2026-11-12T04:16:43.055380+00:00",
+  "overall_status": "NAMED_NONCOMMERCIAL_SCOPES_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+  "commercial_software_excluded": true,
+  "explicit_named_tool_count": 87,
+  "native_dispatch_route_count_added_in_v33": 49,
+  "new_scientific_native_routes": 47,
+  "new_exact_exchange_routes": 1,
+  "new_receipt_bound_profile_handoffs": 1,
+  "new_ml_options": [
+    "native SHAP permutation explanation"
+  ],
+  "status_counts": {
+    "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED": 47,
+    "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED": 18,
+    "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING": 11,
+    "EXCLUDED_COMMERCIAL_BY_USER": 1,
+    "ACTUAL_RESULT_IMPORT_ONLY_NO_ONLINE_PREDICTION": 1,
+    "REUSE_EXISTING_BIOMNI_PUBLIC_DATABASE_TOOL_REQUIRES_SCOPED_RUNTIME_CHECK": 1,
+    "NEW_NATIVE_ML_OPTION_RUNTIME_UNVERIFIED": 1,
+    "OPEN_COMPONENT_INTEGRATION_NOT_COMPLETE_COMMERCIAL_ENGINE_EXCLUDED": 1,
+    "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE": 6
+  },
+  "raster_only_names_fully_inventoried": false,
+  "runtime": "NOT_RUN_THIS_UPGRADE",
+  "server_status": "NOT_PROBED_THIS_UPGRADE",
+  "all_scientific_engines_executed_locally": false,
+  "public_upload": false,
+  "tools": [
+    {
+      "tool": "hdWGCNA",
+      "family": "bulk_sc",
+      "slides": [
+        44
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching.R"
+      ],
+      "scope": "Within-sample/condition/unit metacells, selected celltype network and original TOM/eigengenes; no metacell-as-donor inference",
+      "missing_branches": [],
+      "route_contracts": {
+        "hdwgcna_network": {
+          "required_inputs": [
+            "object",
+            "network_genes"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "assay",
+            "celltype_key",
+            "celltype",
+            "max_network_genes",
+            "selected_by_de",
+            "metacell_k",
+            "minimum_cells",
+            "max_shared",
+            "reduction",
+            "n_pcs",
+            "target_metacells",
+            "powers",
+            "network_type",
+            "selected_power",
+            "max_block_size",
+            "tom_type",
+            "minimum_module_size",
+            "merge_cut_height"
+          ],
+          "result_roles": [
+            "processed_object",
+            "modules",
+            "module_eigengenes",
+            "soft_threshold",
+            "module_TOM",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "hdwgcna_network"
+      ]
+    },
+    {
+      "tool": "Seurat",
+      "family": "bulk_sc",
+      "slides": [
+        27,
+        28
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching.R"
+      ],
+      "scope": "Native normalization/PCA/graphs/UMAP, label transfer with confidence and exact observed-layer exchange",
+      "missing_branches": [
+        "Additional integrations/SCT/anchor variants outside these fixed routes not asserted covered"
+      ],
+      "route_contracts": {
+        "seurat_workflow": {
+          "required_inputs": [
+            "object",
+            "cell_qc"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "assay",
+            "target_sum",
+            "hvg_count",
+            "n_pcs",
+            "neighbors",
+            "resolution",
+            "cluster_algorithm",
+            "minimum_retained_cells"
+          ],
+          "result_roles": [
+            "processed_object",
+            "unintegrated_baseline",
+            "cell_metadata",
+            "embedding",
+            "diagnostics",
+            "backend_versions"
+          ]
+        },
+        "seurat_transfer": {
+          "required_inputs": [
+            "object",
+            "reference"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "assay",
+            "reference_label_key",
+            "target_sum",
+            "reference_assay",
+            "reference_reduction",
+            "n_pcs",
+            "transfer_features",
+            "minimum_prediction_score"
+          ],
+          "result_roles": [
+            "processed_object",
+            "annotation_scores",
+            "anchor_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        },
+        "seurat_to_anndata": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "r_software_versions",
+            "assay",
+            "normalization_scale",
+            "metadata_keys",
+            "categorical_keys",
+            "reduction_names",
+            "unit_key",
+            "sample_key",
+            "condition_key"
+          ],
+          "result_roles": [
+            "processed_object",
+            "exchange_source_material",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "seurat_workflow",
+        "seurat_transfer",
+        "seurat_to_anndata"
+      ]
+    },
+    {
+      "tool": "Harmony",
+      "family": "bulk_sc",
+      "slides": [
+        26
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching.R"
+      ],
+      "scope": "Native Harmony latent, unintegrated PCA retained; biological preservation needs separate acceptance",
+      "missing_branches": [],
+      "route_contracts": {
+        "harmony_integrate": {
+          "required_inputs": [
+            "object",
+            "cell_qc"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "assay",
+            "target_sum",
+            "hvg_count",
+            "n_pcs",
+            "neighbors",
+            "resolution",
+            "cluster_algorithm",
+            "minimum_retained_cells",
+            "batch_keys",
+            "theta",
+            "max_iterations"
+          ],
+          "result_roles": [
+            "processed_object",
+            "unintegrated_baseline",
+            "cell_metadata",
+            "embedding",
+            "integrated_representation",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "harmony_integrate"
+      ]
+    },
+    {
+      "tool": "scVI",
+      "family": "bulk_sc",
+      "slides": [
+        27
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/omics_python.py"
+      ],
+      "scope": "Native SCVI from actual count layer, unintegrated baseline",
+      "missing_branches": [],
+      "route_contracts": {
+        "scvi": {
+          "required_inputs": [
+            "object",
+            "mitochondrial_genes"
+          ],
+          "required_parameters": [
+            "count_layer",
+            "sample_key",
+            "unit_key",
+            "condition_key",
+            "batch_key",
+            "assay_contract",
+            "mitochondrial_namespace",
+            "qc_thresholds",
+            "threshold_basis",
+            "minimum_retained_cells",
+            "model",
+            "latent_dimensions",
+            "max_epochs",
+            "accelerator",
+            "seed",
+            "baseline_target_sum",
+            "baseline_hvg_count",
+            "baseline_n_pcs"
+          ],
+          "result_roles": [
+            "processed_object",
+            "cell_qc",
+            "attrition",
+            "diagnostics",
+            "training_history",
+            "qc_thresholds",
+            "unintegrated_baseline"
+          ]
+        }
+      },
+      "native_routes": [
+        "scvi"
+      ]
+    },
+    {
+      "tool": "SingleR",
+      "family": "bulk_sc",
+      "slides": [
+        32
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching.R"
+      ],
+      "scope": "Native reference scores and pruned unknown labels retained",
+      "missing_branches": [],
+      "route_contracts": {
+        "singler_annotate": {
+          "required_inputs": [
+            "object",
+            "reference"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "label_key",
+            "test_assay",
+            "reference_assay",
+            "de_method",
+            "minimum_reference_genes",
+            "species",
+            "feature_namespace"
+          ],
+          "result_roles": [
+            "annotation",
+            "annotation_scores",
+            "reference_coverage",
+            "annotation_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "singler_annotate"
+      ]
+    },
+    {
+      "tool": "Leiden",
+      "family": "bulk_sc",
+      "slides": [
+        25,
+        29
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/omics_python.py"
+      ],
+      "scope": "Actual Scanpy/Seurat graph clustering, not new biological evidence",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "singlecell / seurat_workflow algorithm=4"
+      ]
+    },
+    {
+      "tool": "Louvain",
+      "family": "bulk_sc",
+      "slides": [
+        25,
+        29
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching.R"
+      ],
+      "scope": "Native Seurat Louvain parameter branch cluster_algorithm=1; distinct from Leiden",
+      "missing_branches": [],
+      "route_contracts": {
+        "seurat_workflow": {
+          "required_inputs": [
+            "object",
+            "cell_qc"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "assay",
+            "target_sum",
+            "hvg_count",
+            "n_pcs",
+            "neighbors",
+            "resolution",
+            "cluster_algorithm",
+            "minimum_retained_cells"
+          ],
+          "result_roles": [
+            "processed_object",
+            "unintegrated_baseline",
+            "cell_metadata",
+            "embedding",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "seurat_workflow"
+      ]
+    },
+    {
+      "tool": "UMAP",
+      "family": "bulk_sc",
+      "slides": [
+        25,
+        26,
+        29,
+        30,
+        41,
+        46,
+        57,
+        68,
+        69,
+        70,
+        73,
+        75,
+        100,
+        101,
+        118,
+        147,
+        164,
+        202,
+        211,
+        238,
+        263,
+        277,
+        280,
+        286,
+        287,
+        300,
+        307
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/omics_python.py"
+      ],
+      "scope": "Actual declared UMAP, never used as physical coordinates or causal proof",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "singlecell / seurat_workflow"
+      ]
+    },
+    {
+      "tool": "Scanpy",
+      "family": "bulk_sc",
+      "slides": [
+        23,
+        258
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/omics_python.py"
+      ],
+      "scope": "Actual QC, PCA/neighbors/Leiden/UMAP and descriptive markers",
+      "missing_branches": [],
+      "route_contracts": {
+        "singlecell": {
+          "required_inputs": [
+            "object",
+            "mitochondrial_genes"
+          ],
+          "required_parameters": [
+            "count_layer",
+            "sample_key",
+            "unit_key",
+            "condition_key",
+            "assay_contract",
+            "mitochondrial_namespace",
+            "qc_thresholds",
+            "threshold_basis",
+            "minimum_retained_cells",
+            "min_cells_per_gene",
+            "target_sum",
+            "hvg_count",
+            "n_pcs",
+            "neighbors",
+            "resolution",
+            "seed"
+          ],
+          "result_roles": [
+            "processed_object",
+            "cell_qc",
+            "attrition",
+            "descriptive_markers",
+            "diagnostics",
+            "qc_thresholds"
+          ]
+        }
+      },
+      "native_routes": [
+        "singlecell"
+      ]
+    },
+    {
+      "tool": "scCODA",
+      "family": "bulk_sc",
+      "slides": [
+        36,
+        37
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/teaching_extensions.py"
+      ],
+      "scope": "Actual pertpy scCODA, independent-unit counts, explicit reference/FDR/multi-chain diagnostics",
+      "missing_branches": [],
+      "route_contracts": {
+        "composition_sccoda": {
+          "required_inputs": [
+            "count_table",
+            "metadata"
+          ],
+          "required_parameters": [
+            "unit_key",
+            "reference_cell_type",
+            "reference_basis",
+            "formula",
+            "covariates",
+            "chains",
+            "warmup",
+            "posterior_samples",
+            "seed",
+            "est_fdr",
+            "maximum_rhat",
+            "minimum_ess",
+            "diagnostic_var_names",
+            "software_versions",
+            "condition_key",
+            "condition_levels"
+          ],
+          "result_roles": [
+            "composition_effects",
+            "composition_diagnostics",
+            "composition_credible",
+            "observed_counts",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "composition_sccoda"
+      ]
+    },
+    {
+      "tool": "Milo",
+      "family": "bulk_sc",
+      "slides": [
+        38
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/analysis71.R"
+      ],
+      "scope": "Native MiloR neighborhood differential abundance with unit design",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:singlecell_abundance"
+      ]
+    },
+    {
+      "tool": "muscat",
+      "family": "bulk_sc",
+      "slides": [
+        34
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native raw-count aggregation and edgeR pseudobulk DS, actual per-cell QC, donor-pairing check and missing-population ledger",
+      "missing_branches": [],
+      "route_contracts": {
+        "muscat_pseudobulk": {
+          "required_inputs": [
+            "object",
+            "cell_qc",
+            "design",
+            "contrast"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "sample_key",
+            "condition_key",
+            "celltype_key",
+            "count_assay",
+            "celltype_universe",
+            "paired",
+            "minimum_cells",
+            "gene_filter"
+          ],
+          "result_roles": [
+            "singlecell_differential",
+            "population_eligibility",
+            "design_matrix",
+            "contrast_matrix",
+            "result_identity",
+            "pseudobulk_object",
+            "model_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "muscat_pseudobulk"
+      ]
+    },
+    {
+      "tool": "cNMF",
+      "family": "bulk_sc",
+      "slides": [
+        43
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/teaching_extensions.py"
+      ],
+      "scope": "Actual cNMF repeated factorization and consensus, K stability, usage/loadings",
+      "missing_branches": [],
+      "route_contracts": {
+        "cnmf_programs": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "unit_key",
+            "count_layer",
+            "components",
+            "selected_k",
+            "n_iter",
+            "seed",
+            "density_threshold",
+            "local_neighborhood_size",
+            "hvg_count",
+            "max_nmf_iterations",
+            "top_genes",
+            "software_versions"
+          ],
+          "result_roles": [
+            "program_usage",
+            "program_loadings",
+            "program_spectra",
+            "program_top_genes",
+            "donor_program_table",
+            "k_stability",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cnmf_programs"
+      ]
+    },
+    {
+      "tool": "Palantir",
+      "family": "bulk_sc",
+      "slides": [
+        41,
+        48
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching_python.py"
+      ],
+      "scope": "Native diffusion/Markov trajectory, literal root/terminal cells, fate-probability QC",
+      "missing_branches": [],
+      "route_contracts": {
+        "palantir_trajectory": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "representation_key",
+            "representation_kind",
+            "direction_evidence",
+            "root_cell",
+            "terminal_cells",
+            "n_components",
+            "knn",
+            "alpha",
+            "num_waypoints",
+            "n_eigs",
+            "scale_components",
+            "max_iterations"
+          ],
+          "result_roles": [
+            "pseudotime",
+            "fate_probabilities",
+            "diffusion_space",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "palantir_trajectory"
+      ]
+    },
+    {
+      "tool": "Monocle",
+      "family": "bulk_sc",
+      "slides": [
+        49
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Monocle3 graph on actual stored UMAP; not original 2014 Monocle or Monocle2 DDRTree",
+      "missing_branches": [
+        "Original 2014 Monocle / Monocle2 DDRTree not implemented by the Monocle3 route"
+      ],
+      "route_contracts": {
+        "monocle3_trajectory": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "knn",
+            "resolution",
+            "root_cells",
+            "direction_evidence",
+            "close_loop",
+            "minimal_branch_len"
+          ],
+          "result_roles": [
+            "pseudotime",
+            "principal_graph",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "monocle3_trajectory"
+      ]
+    },
+    {
+      "tool": "scVelo",
+      "family": "bulk_sc",
+      "slides": [
+        50,
+        51
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/cell71.py"
+      ],
+      "scope": "Native scVelo, actual spliced/unspliced channels and unit-aware review",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:kinetic_velocity"
+      ]
+    },
+    {
+      "tool": "CellRank",
+      "family": "bulk_sc",
+      "slides": [
+        51
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/teaching_extensions.py"
+      ],
+      "scope": "Actual kernels/GPCCA, explicit directional evidence and terminal sets",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "cellrank_multiview / omics71:fate_probabilities"
+      ]
+    },
+    {
+      "tool": "SCENIC",
+      "family": "bulk_sc",
+      "slides": [
+        52
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/cli71.py"
+      ],
+      "scope": "Actual pySCENIC GRN/ctx/AUCell fixed commands; not a new R-SCENIC implementation",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:scenic_regulons"
+      ]
+    },
+    {
+      "tool": "AUCell",
+      "family": "bulk_sc",
+      "slides": [
+        52
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/cli71.py"
+      ],
+      "scope": "Native pySCENIC AUCell stage, exact motif/resources and feature axis",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:scenic_regulons"
+      ]
+    },
+    {
+      "tool": "PROGENy",
+      "family": "bulk_sc",
+      "slides": [
+        72
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native responsive-footprint scores and observed gene coverage; perm=1 descriptive scope",
+      "missing_branches": [],
+      "route_contracts": {
+        "progeny_activity": {
+          "required_inputs": [
+            "expression",
+            "metadata"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "expression_scale",
+            "organism",
+            "top_genes",
+            "minimum_model_genes",
+            "scale_scores"
+          ],
+          "result_roles": [
+            "pathway_activity",
+            "pathway_coverage",
+            "sample_metadata",
+            "resource_model",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "progeny_activity"
+      ]
+    },
+    {
+      "tool": "MultiVI",
+      "family": "bulk_sc",
+      "slides": [
+        56,
+        71,
+        287
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching_python.py"
+      ],
+      "scope": "Reviewed >=1.4 MuData API, paired actual measured RNA/ATAC only",
+      "missing_branches": [
+        "Unpaired/missing-modality MuData route not yet integrated"
+      ],
+      "route_contracts": {
+        "multivi_integrate": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "batch_key",
+            "modalities",
+            "layers",
+            "observation_scope",
+            "accelerator",
+            "n_latent",
+            "max_epochs",
+            "batch_size"
+          ],
+          "result_roles": [
+            "integrated_representation",
+            "cell_metadata",
+            "training_history",
+            "model_checkpoint",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "multivi_integrate"
+      ]
+    },
+    {
+      "tool": "totalVI",
+      "family": "bulk_sc",
+      "slides": [
+        71
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching_python.py"
+      ],
+      "scope": "Reviewed MuData RNA/ADT API, paired observed modalities only",
+      "missing_branches": [
+        "Unpaired panels/reference query transfer not yet integrated"
+      ],
+      "route_contracts": {
+        "totalvi_integrate": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "batch_key",
+            "modalities",
+            "layers",
+            "observation_scope",
+            "accelerator",
+            "n_latent",
+            "max_epochs",
+            "batch_size"
+          ],
+          "result_roles": [
+            "integrated_representation",
+            "cell_metadata",
+            "training_history",
+            "model_checkpoint",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "totalvi_integrate"
+      ]
+    },
+    {
+      "tool": "MuSiC",
+      "family": "bulk_sc",
+      "slides": [
+        58
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/analysis71.R"
+      ],
+      "scope": "Native MuSiC with real independent-unit reference",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:bulk_deconvolution"
+      ]
+    },
+    {
+      "tool": "CellPhoneDB",
+      "family": "bulk_sc",
+      "slides": [
+        59,
+        74
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_gene_activity.py"
+      ],
+      "scope": "Actual human offline database, native cell-label permutations separately per unit/condition",
+      "missing_branches": [],
+      "route_contracts": {
+        "cellphonedb_per_unit": {
+          "required_inputs": [
+            "object",
+            "database"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "expression_layer",
+            "expression_scale",
+            "condition_key",
+            "celltype_key",
+            "species",
+            "gene_identifier_type",
+            "minimum_cells_per_type",
+            "iterations",
+            "minimum_expression_fraction",
+            "threads",
+            "result_precision",
+            "pvalue_cutoff"
+          ],
+          "result_roles": [
+            "lr_means",
+            "lr_pvalues",
+            "lr_significant_means",
+            "stratum_eligibility",
+            "stratum_metadata",
+            "stratum_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cellphonedb_per_unit"
+      ]
+    },
+    {
+      "tool": "LIANA",
+      "family": "bulk_sc",
+      "slides": [
+        59,
+        303
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/cell71.py"
+      ],
+      "scope": "Native LIANA resource/method consensus; per-unit condition contrasts separate",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:lr_consensus"
+      ]
+    },
+    {
+      "tool": "NicheNet",
+      "family": "bulk_sc",
+      "slides": [
+        60,
+        61
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/analysis71.R"
+      ],
+      "scope": "Native NicheNet matrix/resource activity, receiver target evidence",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:ligand_target"
+      ]
+    },
+    {
+      "tool": "Baysor",
+      "family": "spatial",
+      "slides": [
+        76
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_baysor.py"
+      ],
+      "scope": "Native C++ exact molecule identity/count reconstruction and preserved noise; not Julia or compartment segmentation",
+      "missing_branches": [
+        "Original Julia implementation, compartment segmentation and actual microscopy/visual acceptance are not provided by this C++ route"
+      ],
+      "route_contracts": {
+        "baysor_segment": {
+          "required_inputs": [
+            "molecules"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "baysor_executable",
+            "baysor_executable_sha256",
+            "baysor_version_output",
+            "implementation",
+            "dimensions",
+            "coordinate_unit",
+            "maximum_molecules",
+            "minimum_molecules",
+            "cell_radius",
+            "threads",
+            "cluster_method",
+            "n_clusters",
+            "prior_column",
+            "prior_confidence",
+            "coordinate_roundtrip_tolerance"
+          ],
+          "result_roles": [
+            "molecule_assignments",
+            "cell_segmentation_qc",
+            "segmented_counts",
+            "cell_polygons",
+            "native_parameters",
+            "native_segmentation_log",
+            "native_command",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "baysor_segment"
+      ]
+    },
+    {
+      "tool": "PASTE",
+      "family": "spatial",
+      "slides": [
+        80
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_statistics.py"
+      ],
+      "scope": "Native full-mass pairwise FGW transport with source/target masses and optional rigid stacking",
+      "missing_branches": [
+        "Center/partial-overlap alignment not yet integrated by the pairwise route"
+      ],
+      "route_contracts": {
+        "paste_pairwise": {
+          "required_inputs": [
+            "slice_a",
+            "slice_b"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "section_key",
+            "spatial_key",
+            "coordinate_unit",
+            "expression_layer",
+            "weight_key",
+            "maximum_coupling_entries",
+            "alpha",
+            "dissimilarity",
+            "normalize_distances",
+            "max_iterations",
+            "marginal_tolerance",
+            "align_coordinates"
+          ],
+          "result_roles": [
+            "spatial_coupling",
+            "coupling_source_identity",
+            "coupling_target_identity",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "paste_pairwise"
+      ]
+    },
+    {
+      "tool": "cell2location",
+      "family": "spatial",
+      "slides": [
+        70,
+        72,
+        74,
+        81,
+        93
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_perturbation.py"
+      ],
+      "scope": "Native NB reference plus mapping; real counts/coordinates/signatures and q05/q50/q95",
+      "missing_branches": [],
+      "route_contracts": {
+        "cell2location_reference": {
+          "required_inputs": [
+            "reference"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "count_layer",
+            "batch_key",
+            "accelerator",
+            "max_epochs",
+            "batch_size",
+            "celltype_key",
+            "learning_rate"
+          ],
+          "result_roles": [
+            "reference_signatures",
+            "reference_signature_uncertainty",
+            "model_checkpoint",
+            "training_history",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        },
+        "cell2location_map": {
+          "required_inputs": [
+            "object",
+            "reference_signatures"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "count_layer",
+            "batch_key",
+            "accelerator",
+            "max_epochs",
+            "batch_size",
+            "spatial_key",
+            "coordinate_unit",
+            "learning_rate",
+            "cells_per_location",
+            "detection_alpha",
+            "prior_basis"
+          ],
+          "result_roles": [
+            "celltype_abundance",
+            "abundance_uncertainty",
+            "model_checkpoint",
+            "training_history",
+            "spatial_identity",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cell2location_reference",
+        "cell2location_map"
+      ]
+    },
+    {
+      "tool": "DestVI",
+      "family": "spatial",
+      "slides": [
+        83
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_perturbation.py"
+      ],
+      "scope": "Native CondSCVI reference + DestVI, proportions and celltype-specific latent states",
+      "missing_branches": [],
+      "route_contracts": {
+        "destvi_deconvolution": {
+          "required_inputs": [
+            "object",
+            "reference"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "count_layer",
+            "batch_key",
+            "accelerator",
+            "max_epochs",
+            "batch_size",
+            "spatial_key",
+            "coordinate_unit",
+            "reference_count_layer",
+            "celltype_key",
+            "n_latent",
+            "reference_max_epochs",
+            "weight_reference_observations",
+            "vamp_prior_p"
+          ],
+          "result_roles": [
+            "celltype_proportions",
+            "celltype_latent_state",
+            "celltype_state_identity",
+            "model_checkpoint",
+            "training_history",
+            "spatial_identity",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "destvi_deconvolution"
+      ]
+    },
+    {
+      "tool": "BANKSY",
+      "family": "spatial",
+      "slides": [
+        84,
+        85,
+        86
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native neighborhoods/PCA/graph clustering per section; expression-only lambda=0 retained",
+      "missing_branches": [],
+      "route_contracts": {
+        "banksy_domains": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "rscript",
+            "seed",
+            "software_versions",
+            "unit_key",
+            "section_key",
+            "expression_assay",
+            "assay_scale",
+            "coordinate_unit",
+            "k_geom",
+            "use_agf",
+            "spatial_mode",
+            "lambda",
+            "n_pcs",
+            "knn",
+            "resolution",
+            "algorithm",
+            "standardize"
+          ],
+          "result_roles": [
+            "spatial_domains",
+            "spatial_representations",
+            "section_identity",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "banksy_domains"
+      ]
+    },
+    {
+      "tool": "SPARK",
+      "family": "spatial",
+      "slides": [
+        88
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Original native SPARK spatial count model, separate from existing SPARK-X",
+      "missing_branches": [],
+      "route_contracts": {
+        "spark_spatial": {
+          "required_inputs": [
+            "counts",
+            "metadata",
+            "covariates"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "section_key",
+            "x_key",
+            "y_key",
+            "coordinate_unit",
+            "minimum_spots",
+            "minimum_expression_fraction",
+            "minimum_library_counts",
+            "threads"
+          ],
+          "result_roles": [
+            "spatial_differential",
+            "spatial_filter",
+            "section_qc",
+            "model_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "spark_spatial"
+      ]
+    },
+    {
+      "tool": "Squidpy",
+      "family": "spatial",
+      "slides": [
+        89,
+        90,
+        99
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_statistics.py"
+      ],
+      "scope": "Native >=1.8.4 radius graph, Moran, neighborhood permutation, cooccurrence per actual section",
+      "missing_branches": [],
+      "route_contracts": {
+        "squidpy_section_statistics": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "section_key",
+            "spatial_key",
+            "coordinate_unit",
+            "expression_layer",
+            "celltype_key",
+            "celltype_order",
+            "genes",
+            "maximum_spots_per_section",
+            "radius",
+            "maximum_island_fraction",
+            "n_perms",
+            "two_tailed",
+            "threads",
+            "nhood_normalization",
+            "distance_intervals"
+          ],
+          "result_roles": [
+            "spatial_autocorrelation",
+            "neighborhood_enrichment",
+            "neighborhood_counts",
+            "cooccurrence",
+            "spatial_graph",
+            "section_diagnostics",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "squidpy_section_statistics"
+      ]
+    },
+    {
+      "tool": "SpatialGlue",
+      "family": "spatial",
+      "slides": [
+        105
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatialglue.py"
+      ],
+      "scope": "Native exact-source two measured modalities, same actual spots/coordinates, one section, explicit datatype defaults and attention QC",
+      "missing_branches": [
+        "Unpaired spots, cross-section joint fitting and full domain validation are not asserted covered"
+      ],
+      "route_contracts": {
+        "spatialglue_integrate": {
+          "required_inputs": [
+            "modality1",
+            "modality2",
+            "feature_preprocessing_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "section_key",
+            "coordinate_unit",
+            "datatype",
+            "accelerator",
+            "spatial_neighbors",
+            "learning_rate",
+            "weight_decay",
+            "max_epochs",
+            "n_latent",
+            "weight_factors",
+            "maximum_dense_graph_entries",
+            "attention_sum_tolerance"
+          ],
+          "result_roles": [
+            "integrated_representation",
+            "modality_representation",
+            "modality_attention",
+            "spatial_identity",
+            "training_diagnostics",
+            "processed_object",
+            "model_checkpoint",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "spatialglue_integrate"
+      ]
+    },
+    {
+      "tool": "MAGPIE",
+      "family": "spatial",
+      "slides": [
+        104
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "No top-level upstream license located in the reviewed tree; use only an owned checkout with actual permitted-use evidence. No author code is redistributed.",
+      "missing_branches": [],
+      "route_contracts": {
+        "magpie_coregister": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "registration_inputs",
+            "landmark_validation"
+          ],
+          "required_parameters": [
+            "cores",
+            "registration_scope",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "registration_outputs",
+            "registration_validation"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "registered_measured_MSI"
+        }
+      },
+      "native_routes": [
+        "magpie_coregister"
+      ]
+    },
+    {
+      "tool": "MSstats",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        108
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native feature processing and protein contrasts, declared normalization/missingness",
+      "missing_branches": [],
+      "route_contracts": {
+        "msstats_compare": {
+          "required_inputs": [
+            "feature_table",
+            "contrast"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "normalization",
+            "feature_subset",
+            "summary_method",
+            "censored_int",
+            "mb_impute"
+          ],
+          "result_roles": [
+            "protein_differential",
+            "processed_object",
+            "model_object",
+            "missingness",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "msstats_compare"
+      ]
+    },
+    {
+      "tool": "DIA-NN",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        107
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Academia limited non-profit edition only; Enterprise excluded. Native binary and its actual license must already be provisioned by owner.",
+      "missing_branches": [],
+      "route_contracts": {
+        "diann_quantify": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "run_manifest",
+            "spectral_library"
+          ],
+          "required_parameters": [
+            "executable",
+            "executable_sha256",
+            "raw_input_ids",
+            "qvalue",
+            "mass_accuracy_ms1_ppm",
+            "mass_accuracy_ms2_ppm",
+            "scan_window",
+            "threads",
+            "native_version",
+            "seed",
+            "software_versions",
+            "maximum_output_entries"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "quantification_report",
+            "run_qc"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "measured_DIA_intensity"
+        }
+      },
+      "native_routes": [
+        "diann_quantify"
+      ]
+    },
+    {
+      "tool": "Spectronaut",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        107
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXCLUDED_COMMERCIAL_BY_USER",
+      "scope_note": "User excluded commercial software",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [],
+      "scope": "Commercial software excluded by explicit user steering",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": []
+    },
+    {
+      "tool": "XCMS",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        109,
+        135
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_xcms.R"
+      ],
+      "scope": "Native centroid MS1 centWave/obiwarp/correspondence and measured peak integration, sample axes/blank/QC channels retained",
+      "missing_branches": [
+        "Other peak-picking/alignment algorithms, compound identification and normalization/inference are outside this fixed native MS1 route"
+      ],
+      "route_contracts": {
+        "xcms_preprocess": {
+          "required_inputs": [
+            "metadata"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "raw_input_ids",
+            "unit_key",
+            "condition_key",
+            "sample_role_key",
+            "injection_order_key",
+            "acquisition_mode",
+            "polarity",
+            "workers",
+            "ppm",
+            "peak_width_seconds",
+            "snr_threshold",
+            "prefilter",
+            "alignment_bin_mz",
+            "alignment_response",
+            "group_bandwidth_seconds",
+            "group_min_fraction",
+            "group_min_samples",
+            "group_bin_mz",
+            "feature_definition_roles",
+            "fill_peaks"
+          ],
+          "result_roles": [
+            "feature_intensities_detected",
+            "feature_intensities",
+            "feature_definitions",
+            "sample_axis_map",
+            "sample_metadata",
+            "chromatographic_peaks",
+            "run_qc",
+            "processed_object",
+            "processing_history",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "xcms_preprocess"
+      ]
+    },
+    {
+      "tool": "SIRIUS",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        136,
+        137
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Offline molecular-formula/fragmentation-tree route only; no fingerprint/structure prediction service is called.",
+      "missing_branches": [],
+      "route_contracts": {
+        "sirius_formulas": {
+          "required_inputs": [
+            "context",
+            "spectra",
+            "spectrum_identity"
+          ],
+          "required_parameters": [
+            "executable",
+            "executable_sha256",
+            "native_version",
+            "instrument",
+            "ppm_ms1",
+            "ppm_ms2",
+            "formula_candidates",
+            "seed",
+            "software_versions",
+            "maximum_output_entries"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "formula_candidates",
+            "spectrum_qc"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "computed_formula_candidates"
+        }
+      },
+      "native_routes": [
+        "sirius_formulas"
+      ]
+    },
+    {
+      "tool": "CSI:FingerID",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        136,
+        137
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "ACTUAL_RESULT_IMPORT_ONLY_NO_ONLINE_PREDICTION",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Actual author-result import implemented. Fresh proprietary online prediction remains outside current authorization; no private spectra upload, no claim of an offline CSI algorithm.",
+      "missing_branches": [
+        "Fresh CSI:FingerID web prediction is excluded pending exact public-data authorization and owned licensed account"
+      ],
+      "route_contracts": {
+        "csi_result_import": {
+          "required_inputs": [
+            "context",
+            "structure_results",
+            "spectrum_identity",
+            "native_result_receipt",
+            "spectra"
+          ],
+          "required_parameters": [
+            "result_columns",
+            "seed",
+            "software_versions",
+            "maximum_output_entries"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "structure_candidates",
+            "spectrum_qc"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "imported_author_computed_structure_candidates"
+        }
+      },
+      "native_routes": [
+        "csi_result_import"
+      ]
+    },
+    {
+      "tool": "GNPS",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        137
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Actual original legacy Python spectral alignment plus explicit mutual-top-K. This is not the complete GNPS2 FBMN workflow or a structure identification method; no upload.",
+      "missing_branches": [],
+      "route_contracts": {
+        "gnps_offline_network": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "spectra",
+            "spectrum_identity"
+          ],
+          "required_parameters": [
+            "fragment_tolerance_da",
+            "minimum_matched_peaks",
+            "cosine_cutoff",
+            "top_k",
+            "maximum_spectra",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "spectral_edges",
+            "spectral_nodes",
+            "spectrum_qc"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "spectral_similarity_not_structure_identification"
+        }
+      },
+      "native_routes": [
+        "gnps_offline_network"
+      ]
+    },
+    {
+      "tool": "MOFA2",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        164
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/omics.R"
+      ],
+      "scope": "Native MOFA2 scores/loadings/variance, measured missing-view contracts",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "r_omics:MOFA2"
+      ]
+    },
+    {
+      "tool": "DIABLO",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        165
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native matched-view block.splsda fit, parameters externally prespecified; not nested validation",
+      "missing_branches": [
+        "Native nested independent validation/tuning not yet implemented; fit is descriptive training output"
+      ],
+      "route_contracts": {
+        "diablo_fit": {
+          "required_inputs": [
+            "metadata"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "condition_key",
+            "view_ids",
+            "design",
+            "keepX",
+            "ncomp",
+            "standardize",
+            "max_iterations",
+            "parameter_selection"
+          ],
+          "result_roles": [
+            "factor_scores",
+            "factor_loadings",
+            "model_object",
+            "sample_metadata",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "diablo_fit"
+      ]
+    },
+    {
+      "tool": "SNF",
+      "family": "proteomics_metabolomics",
+      "slides": [
+        166
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_omics_expansion.R"
+      ],
+      "scope": "Native SNFtool affinity/fusion/spectral clustering, matched independent units",
+      "missing_branches": [],
+      "route_contracts": {
+        "snf_fusion": {
+          "required_inputs": [
+            "metadata"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "view_ids",
+            "knn",
+            "sigma",
+            "iterations",
+            "n_clusters",
+            "standardize",
+            "symmetry_tolerance"
+          ],
+          "result_roles": [
+            "fused_similarity",
+            "cluster_assignments",
+            "model_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "snf_fusion"
+      ]
+    },
+    {
+      "tool": "IGV",
+      "family": "genetics_ml",
+      "slides": [
+        172,
+        173
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_igv.py"
+      ],
+      "scope": "Native IGV scoped offline report from actual BAM/VCF/FASTA; browser/evidence acceptance not run, not IGV Desktop GUI automation",
+      "missing_branches": [
+        "Actual browser and IGV Desktop validation remain not run; generation is not variant-evidence/clinical acceptance"
+      ],
+      "route_contracts": {
+        "igv_scoped_report": {
+          "required_inputs": [
+            "variants",
+            "reference_fasta",
+            "reference_fai",
+            "bam",
+            "bam_index",
+            "asset_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "assembly",
+            "asset_scope",
+            "maximum_sites",
+            "maximum_variant_length",
+            "maximum_reads_per_site",
+            "flank_bp",
+            "initial_window_bp",
+            "exclude_flags"
+          ],
+          "result_roles": [
+            "genome_browser_report",
+            "genome_view_scope",
+            "native_command",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "igv_scoped_report"
+      ]
+    },
+    {
+      "tool": "VEP",
+      "family": "genetics_ml",
+      "slides": [
+        175
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_genetics.py"
+      ],
+      "scope": "Actual offline human VEP/cache; literal REF/ALT/record and multi-allele consequence checks",
+      "missing_branches": [
+        "Structural variants, nonhuman and compressed-reference branches excluded from this fixed route"
+      ],
+      "route_contracts": {
+        "vep_offline": {
+          "required_inputs": [
+            "variants",
+            "reference_fasta",
+            "reference_fai",
+            "cache_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "vep_executable",
+            "vep_executable_sha256",
+            "assembly",
+            "species",
+            "cache_version",
+            "threads",
+            "maximum_variants"
+          ],
+          "result_roles": [
+            "annotated_variants",
+            "variant_consequences",
+            "diagnostics",
+            "backend_versions",
+            "native_command"
+          ]
+        }
+      },
+      "native_routes": [
+        "vep_offline"
+      ]
+    },
+    {
+      "tool": "gnomAD",
+      "family": "genetics_ml",
+      "slides": [
+        175,
+        176
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "REUSE_EXISTING_BIOMNI_PUBLIC_DATABASE_TOOL_REQUIRES_SCOPED_RUNTIME_CHECK",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [],
+      "scope": "Do not duplicate a working database client; no private variants sent without specific authorization",
+      "missing_branches": [
+        "Current scoped source query not run in this upgrade"
+      ],
+      "route_contracts": {},
+      "native_routes": [
+        "Existing global biomni genetics/database tool; discover current catalog before query"
+      ]
+    },
+    {
+      "tool": "SuSiE",
+      "family": "genetics_ml",
+      "slides": [
+        187
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/analysis71.R"
+      ],
+      "scope": "Native susieR with LD/allele/summary-statistic contracts",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "omics71:fine_mapping"
+      ]
+    },
+    {
+      "tool": "SMR",
+      "family": "genetics_ml",
+      "slides": [
+        193
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_smr.py"
+      ],
+      "scope": "Native offline cis-SMR plus HEIDI, LD/frequency/allele QC and unassessed states preserved",
+      "missing_branches": [
+        "Multi-SNP/two-molecular-trait SMR, external replication and causal identification are not supplied by cis-SMR/HEIDI"
+      ],
+      "route_contracts": {
+        "smr_heidi": {
+          "required_inputs": [
+            "gwas",
+            "reference_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "smr_executable",
+            "smr_executable_sha256",
+            "assembly",
+            "ancestry",
+            "maximum_variants",
+            "minimum_ld_reference_units",
+            "heidi_method",
+            "maf",
+            "frequency_difference",
+            "maximum_frequency_exclusion_fraction",
+            "instrument_pvalue",
+            "heidi_instrument_pvalue",
+            "heidi_minimum_snps",
+            "heidi_maximum_snps",
+            "ld_lower",
+            "ld_upper",
+            "cis_window_kb",
+            "threads",
+            "smr_result_pvalue",
+            "heidi_result_pvalue"
+          ],
+          "result_roles": [
+            "native_smr_results",
+            "genetic_evidence",
+            "allele_qc",
+            "native_command",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "smr_heidi"
+      ]
+    },
+    {
+      "tool": "HEIDI",
+      "family": "genetics_ml",
+      "slides": [
+        193
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_smr.py"
+      ],
+      "scope": "Native explicitly selected HEIDI method, actual supported SNP counts and missing tests; non-rejection not causal proof",
+      "missing_branches": [
+        "Non-rejection is not proof of shared causality; low-support/missing tests remain unassessed"
+      ],
+      "route_contracts": {
+        "smr_heidi": {
+          "required_inputs": [
+            "gwas",
+            "reference_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "smr_executable",
+            "smr_executable_sha256",
+            "assembly",
+            "ancestry",
+            "maximum_variants",
+            "minimum_ld_reference_units",
+            "heidi_method",
+            "maf",
+            "frequency_difference",
+            "maximum_frequency_exclusion_fraction",
+            "instrument_pvalue",
+            "heidi_instrument_pvalue",
+            "heidi_minimum_snps",
+            "heidi_maximum_snps",
+            "ld_lower",
+            "ld_upper",
+            "cis_window_kb",
+            "threads",
+            "smr_result_pvalue",
+            "heidi_result_pvalue"
+          ],
+          "result_roles": [
+            "native_smr_results",
+            "genetic_evidence",
+            "allele_qc",
+            "native_command",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "smr_heidi"
+      ]
+    },
+    {
+      "tool": "LDSC",
+      "family": "genetics_ml",
+      "slides": [
+        182
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_genetics.py"
+      ],
+      "scope": "Actual author LDSC h2/intercept command, exact source and autosomal LD/M_5_50 resources",
+      "missing_branches": [
+        "Native genetic correlation/stratified/conditional branches not yet integrated"
+      ],
+      "route_contracts": {
+        "ldsc_h2": {
+          "required_inputs": [
+            "sumstats",
+            "reference_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "python_executable",
+            "ldsc_script",
+            "ldsc_script_sha256",
+            "assembly",
+            "ancestry",
+            "heritability_scale"
+          ],
+          "result_roles": [
+            "native_ldsc_log",
+            "heritability_estimates",
+            "diagnostics",
+            "backend_versions",
+            "native_command"
+          ]
+        }
+      },
+      "native_routes": [
+        "ldsc_h2"
+      ]
+    },
+    {
+      "tool": "XGBoost",
+      "family": "genetics_ml",
+      "slides": [
+        213,
+        216
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/ml.py"
+      ],
+      "scope": "Actual XGBoost in fold-contained grouped/nested model comparison, same-split baseline",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "ml:models.xgboost"
+      ]
+    },
+    {
+      "tool": "nestedcv",
+      "family": "genetics_ml",
+      "slides": [
+        215
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_nestedcv.R"
+      ],
+      "scope": "Actual R nestedcv/caret glmnet with independent-unit outer/inner folds and fold-local preprocessing; distinct from existing Python ML CV",
+      "missing_branches": [
+        "Other caret models, grouped repeated-measure outcomes and external validation remain separate supported-method choices"
+      ],
+      "route_contracts": {
+        "nestedcv_glmnet": {
+          "required_inputs": [
+            "features",
+            "metadata",
+            "folds",
+            "tuning_grid"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "rscript",
+            "unit_key",
+            "outcome_key",
+            "task",
+            "class_order",
+            "positive_class",
+            "workers"
+          ],
+          "result_roles": [
+            "oof_predictions",
+            "validation_metrics",
+            "split_identity",
+            "fold_provenance",
+            "model_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "nestedcv_glmnet"
+      ]
+    },
+    {
+      "tool": "SHAP",
+      "family": "genetics_ml",
+      "slides": [
+        217
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_ML_OPTION_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/shap_native.py",
+        "server/ml.py"
+      ],
+      "scope": "Native PermutationExplainer on actual fitted pipeline; training-only explicit background, selected test units, explicit output scale, additivity audit",
+      "missing_branches": [
+        "Other explainers are not claimed newly integrated"
+      ],
+      "route_contracts": {},
+      "native_routes": [
+        "ml:parameters.shap"
+      ]
+    },
+    {
+      "tool": "drug2cell",
+      "family": "genetics_ml",
+      "slides": [
+        70,
+        220,
+        221
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_gene_activity.py"
+      ],
+      "scope": "Native target-set score, exact offline target coverage and unit summaries; no potency claim",
+      "missing_branches": [],
+      "route_contracts": {
+        "drug2cell_score": {
+          "required_inputs": [
+            "object",
+            "targets"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "expression_layer",
+            "expression_scale",
+            "method",
+            "minimum_targets",
+            "n_bins",
+            "ctrl_size"
+          ],
+          "result_roles": [
+            "drug_scores",
+            "target_coverage",
+            "unit_activity",
+            "scored_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "drug2cell_score"
+      ]
+    },
+    {
+      "tool": "AutoDock Vina",
+      "family": "cadd",
+      "slides": [
+        227
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_NATIVE_SOURCE_RUNTIME_NOT_REVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/docking.py"
+      ],
+      "scope": "Actual docking and pose/QC routes; no measured affinity interpretation",
+      "missing_branches": [],
+      "route_contracts": {
+        "vina_docking": {
+          "required_inputs": [
+            "receptor",
+            "chemical_qc",
+            "campaign",
+            "receptor_qc",
+            "preparation_manifest"
+          ],
+          "required_parameters": [
+            "vina_executable",
+            "expected_version",
+            "center_angstrom",
+            "size_angstrom",
+            "seeds",
+            "cpu",
+            "exhaustiveness",
+            "num_modes"
+          ],
+          "result_roles": [
+            "docking_campaign",
+            "diagnostics"
+          ]
+        }
+      },
+      "native_routes": [
+        "vina_docking"
+      ]
+    },
+    {
+      "tool": "DOCKovalent",
+      "family": "cadd",
+      "slides": [
+        228
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Owner-provisioned licensed DOCKovalent 3.7 plus actual prepared DB2/grids. Not DOCK 3.8 or ordinary Vina. No licensed engine bundled.",
+      "missing_branches": [],
+      "route_contracts": {
+        "dockovalent": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "dock_inputs",
+            "reaction_mapping",
+            "receptor"
+          ],
+          "required_parameters": [
+            "executable",
+            "executable_sha256",
+            "native_version",
+            "prepared_input_ids",
+            "native_score_columns",
+            "pose_glob",
+            "score_file",
+            "bond_distance_angstrom",
+            "seed",
+            "software_versions",
+            "maximum_output_entries"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "docking_scores",
+            "covalent_geometry",
+            "ligand_coverage",
+            "pose_files"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "predicted_covalent_pose_not_affinity_or_reactivity"
+        }
+      },
+      "native_routes": [
+        "dockovalent"
+      ]
+    },
+    {
+      "tool": "DiffDock",
+      "family": "cadd",
+      "slides": [
+        229
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_cadd_models.py"
+      ],
+      "scope": "Native exact-source current single-complex docking with reviewed pre-existing ESM/score/confidence resources; confidence not affinity",
+      "missing_branches": [
+        "Original historical checkpoint and receptor-flexibility/affinity validation are not supplied by this native current pose route"
+      ],
+      "route_contracts": {
+        "diffdock_pose": {
+          "required_inputs": [
+            "source_manifest",
+            "model_manifest",
+            "receptor",
+            "ligand",
+            "structure_qc_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "model_loading_scope",
+            "python_executable",
+            "n_samples",
+            "torch_hub_directory",
+            "inference_steps",
+            "batch_size",
+            "native_software_versions"
+          ],
+          "result_roles": [
+            "docking_poses",
+            "molecular_qc",
+            "native_command",
+            "diagnostics",
+            "backend_versions",
+            "native_engine_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "diffdock_pose"
+      ]
+    },
+    {
+      "tool": "DiffSBDD",
+      "family": "cadd",
+      "slides": [
+        230
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_cadd_models.py"
+      ],
+      "scope": "Native conditional pocket-residue sampling, raw generated molecules and validity attrition preserved; no inpainting/optimization branch",
+      "missing_branches": [
+        "Substructure inpainting and property optimization not yet integrated by this conditional sampling route"
+      ],
+      "route_contracts": {
+        "diffsbdd_generate": {
+          "required_inputs": [
+            "source_manifest",
+            "model_manifest",
+            "receptor",
+            "structure_qc_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "model_loading_scope",
+            "python_executable",
+            "n_samples",
+            "pocket_residues",
+            "inference_steps",
+            "batch_size",
+            "ligand_atoms",
+            "native_software_versions"
+          ],
+          "result_roles": [
+            "generated_molecules",
+            "molecular_qc",
+            "native_command",
+            "diagnostics",
+            "backend_versions",
+            "native_engine_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "diffsbdd_generate"
+      ]
+    },
+    {
+      "tool": "Amber",
+      "family": "cadd",
+      "slides": [
+        226
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "OPEN_COMPONENT_INTEGRATION_NOT_COMPLETE_COMMERCIAL_ENGINE_EXCLUDED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/cadd.py"
+      ],
+      "scope": "Existing returned Amber-format trajectory analysis does not launch AmberTools/sander. Commercial Amber components are excluded",
+      "missing_branches": [
+        "Open AmberTools native engine/endpoint analysis routes require source review and actual implementation"
+      ],
+      "route_contracts": {},
+      "native_routes": []
+    },
+    {
+      "tool": "MACE",
+      "family": "cadd",
+      "slides": [
+        247,
+        248,
+        249
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_cadd_models.py"
+      ],
+      "scope": "Actual existing-model ASE molecular energy/forces with physical units/elements, not electronic ESP or affinity",
+      "missing_branches": [
+        "Training/periodic dynamics/electronic ESP and model-domain validation are not supplied by molecular single-point route"
+      ],
+      "route_contracts": {
+        "mace_singlepoint": {
+          "required_inputs": [
+            "structures",
+            "structure_identity",
+            "model_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "model_loading_scope",
+            "dtype",
+            "model_energy_unit",
+            "model_length_unit",
+            "energy_units_to_ev",
+            "length_units_to_angstrom",
+            "supported_elements",
+            "maximum_structures",
+            "maximum_atoms",
+            "model_head"
+          ],
+          "result_roles": [
+            "potential_energies",
+            "atomic_forces",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "mace_singlepoint"
+      ]
+    },
+    {
+      "tool": "RFdiffusion",
+      "family": "cadd",
+      "slides": [
+        229,
+        254,
+        255,
+        256
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_cadd_models.py"
+      ],
+      "scope": "Native original unconditional fixed-length backbone geometry only; not designed sequence/function or RFdiffusion2",
+      "missing_branches": [
+        "Binder/motif/symmetry/sequence-design and RFdiffusion2 branches not supplied by original unconditional backbone route"
+      ],
+      "route_contracts": {
+        "rfdiffusion_backbone": {
+          "required_inputs": [
+            "source_manifest",
+            "model_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "model_loading_scope",
+            "python_executable",
+            "n_samples",
+            "backbone_length",
+            "design_scope",
+            "native_software_versions"
+          ],
+          "result_roles": [
+            "protein_backbones",
+            "native_opaque_metadata",
+            "backbone_qc",
+            "native_command",
+            "diagnostics",
+            "backend_versions",
+            "native_engine_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "rfdiffusion_backbone"
+      ]
+    },
+    {
+      "tool": "Mixscape",
+      "family": "perturbation",
+      "slides": [
+        211,
+        261,
+        262
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_perturbation.py"
+      ],
+      "scope": "Native pertpy Mixscape within unit/celltype/replicate strata; no automatic NP-cell deletion",
+      "missing_branches": [],
+      "route_contracts": {
+        "mixscape_classify": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "celltype_key",
+            "replicate_key",
+            "target_key",
+            "control",
+            "expression_layer",
+            "expression_scale",
+            "n_neighbors",
+            "representation_key",
+            "n_dims",
+            "min_de_genes",
+            "logfc_threshold",
+            "test_method",
+            "max_iterations",
+            "scale_signature",
+            "pvalue_cutoff",
+            "perturbation_type"
+          ],
+          "result_roles": [
+            "perturbation_classification",
+            "classification_by_unit",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "mixscape_classify"
+      ]
+    },
+    {
+      "tool": "CellOracle",
+      "family": "perturbation",
+      "slides": [
+        266
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "celloracle"
+      ]
+    },
+    {
+      "tool": "scTenifoldKnk",
+      "family": "perturbation",
+      "slides": [
+        267
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "singlecell_virtual_ko"
+      ]
+    },
+    {
+      "tool": "scGen",
+      "family": "perturbation",
+      "slides": [
+        268,
+        277
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_teaching_python.py"
+      ],
+      "scope": "Native log-normalized scGen model/prediction, supported unit/celltype holdout and observed query controls",
+      "missing_branches": [],
+      "route_contracts": {
+        "scgen_predict": {
+          "required_inputs": [
+            "training_object",
+            "query_controls"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "celltype_key",
+            "representation",
+            "control",
+            "treatment",
+            "holdout_axis",
+            "shift_celltypes",
+            "n_hidden",
+            "n_latent",
+            "n_layers",
+            "dropout_rate",
+            "max_epochs",
+            "batch_size",
+            "early_stopping",
+            "accelerator"
+          ],
+          "result_roles": [
+            "predicted_expression",
+            "latent_shift",
+            "latent_shift_table",
+            "training_history",
+            "prediction_identity",
+            "model_checkpoint",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "scgen_predict"
+      ]
+    },
+    {
+      "tool": "CPA",
+      "family": "perturbation",
+      "slides": [
+        269,
+        272,
+        296
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "cpa"
+      ]
+    },
+    {
+      "tool": "CellOT",
+      "family": "perturbation",
+      "slides": [
+        270
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_spatial_perturbation.py"
+      ],
+      "scope": "Native exact-source ICNN checkpoint transport; safe state-dictionary loading; prediction only",
+      "missing_branches": [
+        "Full author training and compositional maps not yet integrated"
+      ],
+      "route_contracts": {
+        "cellot_predict": {
+          "required_inputs": [
+            "query_controls",
+            "checkpoint",
+            "model_config",
+            "checkpoint_lineage"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "control",
+            "treatment",
+            "representation",
+            "holdout_axis",
+            "batch_size"
+          ],
+          "result_roles": [
+            "predicted_expression",
+            "prediction_identity",
+            "prediction_summary",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cellot_predict"
+      ]
+    },
+    {
+      "tool": "GEARS",
+      "family": "perturbation",
+      "slides": [
+        271,
+        272,
+        273,
+        296
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "gears"
+      ]
+    },
+    {
+      "tool": "scGPT",
+      "family": "perturbation",
+      "slides": [
+        274,
+        296,
+        297
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "scgpt"
+      ]
+    },
+    {
+      "tool": "Geneformer",
+      "family": "perturbation",
+      "slides": [
+        275
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "EXISTING_PRIVATE_OPTIONAL_NATIVE_SOURCE",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "../virtual_perturbation_v1_2_20261026/catalog.json"
+      ],
+      "scope": "Reuse the existing reviewed optional native adapter; existing source/checkpoint/data/QC acceptance still mandatory; not copied or automatically activated here",
+      "missing_branches": [],
+      "route_contracts": {},
+      "native_routes": [
+        "geneformer"
+      ]
+    },
+    {
+      "tool": "biolord",
+      "family": "perturbation",
+      "slides": [
+        276
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_response_legacy.py"
+      ],
+      "scope": "Native attribute fitting and counterfactuals on exact optimizer-trained source controls; explicitly descriptive, not new-donor validation",
+      "missing_branches": [
+        "New-donor predictive generalization and full classify/attribute-retrieval branches not claimed by fitted-cell attribute model"
+      ],
+      "route_contracts": {
+        "biolord_attributes": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "celltype_key",
+            "control",
+            "expression_layer",
+            "expression_scale",
+            "n_latent",
+            "max_epochs",
+            "batch_size",
+            "optimization_train_fraction",
+            "early_stopping",
+            "accelerator",
+            "categorical_attributes",
+            "ordered_attributes",
+            "module_parameters",
+            "training_plan",
+            "prediction_attributes",
+            "validation_scope"
+          ],
+          "result_roles": [
+            "attribute_representation",
+            "split_identity",
+            "predicted_expression",
+            "prediction_identity",
+            "diagnostics",
+            "backend_versions",
+            "model_checkpoint",
+            "training_history"
+          ]
+        }
+      },
+      "native_routes": [
+        "biolord_attributes"
+      ]
+    },
+    {
+      "tool": "scVIDR",
+      "family": "perturbation",
+      "slides": [
+        277
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_response_legacy.py"
+      ],
+      "scope": "Native original legacy discrete response holdout with centroid regression, explicit source-cell sampling ledger; not unit holdout or dose interpolation",
+      "missing_branches": [
+        "Continuous-dose/low-dose branches and independent-donor validation not supplied by original discrete response holdout"
+      ],
+      "route_contracts": {
+        "scvidr_predict": {
+          "required_inputs": [
+            "object",
+            "source_manifest"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "celltype_key",
+            "control",
+            "expression_layer",
+            "expression_scale",
+            "n_latent",
+            "max_epochs",
+            "batch_size",
+            "optimization_train_fraction",
+            "early_stopping",
+            "target_celltype",
+            "treatment",
+            "n_hidden",
+            "n_layers",
+            "dropout_rate",
+            "kl_weight",
+            "use_gpu",
+            "regression",
+            "minimum_cells_per_arm",
+            "holdout_scope"
+          ],
+          "result_roles": [
+            "predicted_expression",
+            "heldout_expression",
+            "prediction_identity",
+            "heldout_identity",
+            "prediction_attrition",
+            "latent_shift_table",
+            "diagnostics",
+            "backend_versions",
+            "model_checkpoint",
+            "training_history"
+          ]
+        }
+      },
+      "native_routes": [
+        "scvidr_predict"
+      ]
+    },
+    {
+      "tool": "CINEMA-OT",
+      "family": "perturbation",
+      "slides": [
+        278,
+        279
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_response_programs.py"
+      ],
+      "scope": "Native maintained pertpy Sinkhorn per actual unit/treatment; literal matching identity and actual effect reconstruction",
+      "missing_branches": [
+        "Resampling-weighted and synergy branches are not claimed covered by this fixed native route"
+      ],
+      "route_contracts": {
+        "cinemaot_effects": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "control",
+            "treatments",
+            "expression_layer",
+            "expression_scale",
+            "representation_key",
+            "representation_kind",
+            "dimension",
+            "minimum_cells_per_arm",
+            "maximum_dense_expression_entries",
+            "maximum_coupling_entries",
+            "dependence_threshold",
+            "smoothness",
+            "solver_tolerance",
+            "preweight_label",
+            "effect_reconstruction_tolerance",
+            "causal_assumptions"
+          ],
+          "result_roles": [
+            "counterfactual_effect_object",
+            "effect_identity",
+            "control_identity",
+            "unit_effect_summary",
+            "pair_diagnostics",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cinemaot_effects"
+      ]
+    },
+    {
+      "tool": "CellCap",
+      "family": "perturbation",
+      "slides": [
+        280
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_response_programs.py"
+      ],
+      "scope": "Native exact-source CellCap observed-count response programs, descriptive optimizer monitoring only",
+      "missing_branches": [
+        "Independent-donor prediction/validation is not provided by upstream random-cell optimizer split"
+      ],
+      "route_contracts": {
+        "cellcap_programs": {
+          "required_inputs": [
+            "object"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "condition_key",
+            "control",
+            "target_order",
+            "count_layer",
+            "minimum_units",
+            "covariate_key",
+            "covariate_order",
+            "n_hidden",
+            "n_latent",
+            "n_layers",
+            "dropout_rate",
+            "n_programs",
+            "n_heads",
+            "adversarial_weight",
+            "ard_weight",
+            "reconstruction_weight",
+            "kl_weight",
+            "learning_rate",
+            "use_gpu",
+            "max_epochs",
+            "batch_size",
+            "optimization_train_fraction",
+            "early_stopping",
+            "validation_scope"
+          ],
+          "result_roles": [
+            "basal_representation",
+            "program_usage",
+            "program_relevance",
+            "program_gene_projection",
+            "training_history",
+            "model_checkpoint",
+            "processed_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "cellcap_programs"
+      ]
+    },
+    {
+      "tool": "MorphDiff",
+      "family": "perturbation",
+      "slides": [
+        281,
+        282
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Correct biomap-research/MorphDiff source, separate five-channel gene-to-image and image-to-image. The pinned native DDIM sampler forces CUDA; an existing server GPU is required, CPU is rejected. Not bowang-lab/MorphoDiff; generated morphology is not measured microscopy.",
+      "missing_branches": [],
+      "route_contracts": {
+        "morphdiff_gene2image": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "model_config",
+            "gene_condition",
+            "query_metadata"
+          ],
+          "required_parameters": [
+            "batch_size",
+            "maximum_cases",
+            "accelerator",
+            "steps",
+            "guidance_scale",
+            "eta",
+            "image_height",
+            "image_width",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "predicted_images",
+            "prediction_identity",
+            "channel_summary"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "generated_morphology_not_observed_image"
+        },
+        "morphdiff_image2image": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "model_config",
+            "gene_condition",
+            "query_metadata",
+            "source_images"
+          ],
+          "required_parameters": [
+            "batch_size",
+            "maximum_cases",
+            "accelerator",
+            "steps",
+            "guidance_scale",
+            "eta",
+            "image_height",
+            "image_width",
+            "strength",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "predicted_images",
+            "prediction_identity",
+            "channel_summary"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "generated_morphology_conditioned_on_observed_image"
+        }
+      },
+      "native_routes": [
+        "morphdiff_gene2image",
+        "morphdiff_image2image"
+      ]
+    },
+    {
+      "tool": "PRnet",
+      "family": "perturbation",
+      "slides": [
+        283,
+        284,
+        290
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Native Gaussian PGM inference with actual fixed drug/dose embeddings; no new training, no fabricated chemical embedding or independent-validation claim.",
+      "missing_branches": [],
+      "route_contracts": {
+        "prnet_predict": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "features",
+            "query_expression",
+            "condition_embeddings",
+            "query_metadata"
+          ],
+          "required_parameters": [
+            "architecture",
+            "batch_size",
+            "maximum_cases",
+            "accelerator",
+            "gaussian_sampling",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "prediction_matrix",
+            "prediction_mean",
+            "prediction_sd",
+            "prediction_identity"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "model_predicted_expression"
+        }
+      },
+      "native_routes": [
+        "prnet_predict"
+      ]
+    },
+    {
+      "tool": "scDiffusion",
+      "family": "perturbation",
+      "slides": [
+        286,
+        287
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "EperLuo/scDiffusion latent DDPM/DDIM plus strict autoencoder decode; empty, one- or two-classifier guidance with exact class and noise-schedule binding. Generated class-conditioned expression is not a perturbation effect; gradient interpolation from a real starting cell is a separate unimplemented scope.",
+      "missing_branches": [
+        "Gradient interpolation from a real starting-cell trajectory is not part of this generation route"
+      ],
+      "route_contracts": {
+        "scdiffusion_generate": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "autoencoder_checkpoint",
+            "features"
+          ],
+          "required_parameters": [
+            "diffusion_config",
+            "n_samples",
+            "batch_size",
+            "latent_dim",
+            "accelerator",
+            "sampling_method",
+            "clip_denoised",
+            "guidance",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "prediction_matrix",
+            "latent_representation",
+            "prediction_identity"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "generated_expression_not_perturbation_effect"
+        }
+      },
+      "native_routes": [
+        "scdiffusion_generate"
+      ]
+    },
+    {
+      "tool": "Squidiff",
+      "family": "perturbation",
+      "slides": [
+        289,
+        290,
+        291
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Native semantic encoder and DDIM with training-only frozen latent direction. Upstream license file contains unresolved merge markers; actual owned-use review required. No fake get_diffused_data noise helper.",
+      "missing_branches": [],
+      "route_contracts": {
+        "squidiff_predict": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "features",
+            "query_expression",
+            "query_metadata",
+            "latent_direction"
+          ],
+          "required_parameters": [
+            "diffusion_config",
+            "direction_scale",
+            "batch_size",
+            "maximum_cases",
+            "accelerator",
+            "clip_denoised",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "prediction_matrix",
+            "latent_representation",
+            "prediction_identity"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "model_predicted_expression_assumed_direction"
+        }
+      },
+      "native_routes": [
+        "squidiff_predict"
+      ]
+    },
+    {
+      "tool": "CausCell",
+      "family": "perturbation",
+      "slides": [
+        292
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_causcell.py"
+      ],
+      "scope": "Actual native observed-data fit/concept counterfactuals under a reviewed assumed DAG; stable labels/identity and generation-boundary repair, model reference output not observed truth",
+      "missing_branches": [
+        "Independent-unit prediction, learned causal identification and unknown concept-value extrapolation not supplied by descriptive assumed-DAG fit"
+      ],
+      "route_contracts": {
+        "causcell_counterfactual_fit": {
+          "required_inputs": [
+            "object",
+            "concept_mapping"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "unit_key",
+            "concepts",
+            "causal_dag",
+            "interventions",
+            "expression_layer",
+            "expression_scale",
+            "profile_size",
+            "maximum_dense_expression_entries",
+            "minimum_source_cells",
+            "minimum_units",
+            "training_steps",
+            "checkpoint_every",
+            "diffusion_steps",
+            "learning_rate",
+            "batch_size",
+            "validation_scope"
+          ],
+          "result_roles": [
+            "encoded_object",
+            "concept_mapping",
+            "model_checkpoint",
+            "predicted_expression",
+            "prediction_identity",
+            "observed_source_identity",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "causcell_counterfactual_fit"
+      ]
+    },
+    {
+      "tool": "ProteinTalks",
+      "family": "perturbation",
+      "slides": [
+        293,
+        294
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_proteintalks.py"
+      ],
+      "scope": "Actual original ppODE proteome/binary phenotype point prediction with exact checkpoint channels and trained time labels; not clinical efficacy or SWAG validation",
+      "missing_branches": [
+        "SWAG uncertainty/fine-tuning, new phenotype definitions and independent/clinical validation not supplied by point prediction"
+      ],
+      "route_contracts": {
+        "proteintalks_predict": {
+          "required_inputs": [
+            "source_manifest",
+            "model_manifest",
+            "baseline_profiles",
+            "perturbation_descriptors",
+            "drug_a_features",
+            "drug_b_features",
+            "case_metadata",
+            "channel_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "unit_key",
+            "expression_scale",
+            "phenotype_definition",
+            "state_dictionary_key",
+            "batch_size",
+            "maximum_cases"
+          ],
+          "result_roles": [
+            "proteome_predictions",
+            "phenotype_predictions",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "proteintalks_predict"
+      ]
+    },
+    {
+      "tool": "Systema",
+      "family": "perturbation",
+      "slides": [
+        296,
+        297
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_perturbation_evaluation.py"
+      ],
+      "scope": "Exact native centroid rank metric plus explicitly repaired Pearson helper, equal-unit profiles, full gene/scenario matching and training-only reference/panel",
+      "missing_branches": [
+        "Coarse phenotype ROC-AUC and the full author multi-model training suite are not yet integrated by this evaluation route"
+      ],
+      "route_contracts": {
+        "systema_evaluate": {
+          "required_inputs": [
+            "training_profiles",
+            "training_metadata",
+            "true_profiles",
+            "truth_metadata",
+            "predicted_profiles",
+            "prediction_metadata",
+            "evaluation_gene_panel",
+            "panel_selection_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "evaluation_directory",
+            "unit_key",
+            "condition_key",
+            "control",
+            "holdout_axis",
+            "analysis_scale"
+          ],
+          "result_roles": [
+            "centroid_accuracy",
+            "perturbation_metrics",
+            "observed_centroids",
+            "predicted_centroids",
+            "reference_profile",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "systema_evaluate"
+      ]
+    },
+    {
+      "tool": "CellNavi",
+      "family": "perturbation",
+      "slides": [
+        298,
+        299
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Native finite-tuned driver logits/ranks using exact vocabulary, graph and actual training class prefix. Not expression prediction, calibrated probability or causal driver confirmation.",
+      "missing_branches": [],
+      "route_contracts": {
+        "cellnavi_drivers": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "query_object",
+            "gene_vocabulary",
+            "adjacency",
+            "distance_graph",
+            "class_order"
+          ],
+          "required_parameters": [
+            "maximum_cases",
+            "accelerator",
+            "top_k",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "driver_logits",
+            "driver_ranking",
+            "prediction_identity"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "model_driver_ranking_not_expression_or_causality"
+        }
+      },
+      "native_routes": [
+        "cellnavi_drivers"
+      ]
+    },
+    {
+      "tool": "PRESCIENT",
+      "family": "perturbation",
+      "slides": [
+        304,
+        305,
+        306,
+        307,
+        308,
+        309
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_prescient.py"
+      ],
+      "scope": "Native trained potential-model stepping with exact starting identities, representation and model time calibration; not physical free energy or measured lineage",
+      "missing_branches": [
+        "Potential fitting/growth reweighting/interventions and independent biological lineage validation not supplied by fixed-start stepping"
+      ],
+      "route_contracts": {
+        "prescient_trajectories": {
+          "required_inputs": [
+            "object",
+            "model_manifest",
+            "model_config",
+            "representation_receipt"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "accelerator",
+            "unit_key",
+            "representation_key",
+            "representation_kind",
+            "initial_cells",
+            "n_simulations",
+            "n_steps",
+            "dt",
+            "noise_sd",
+            "model_time_unit",
+            "state_dictionary_key",
+            "maximum_trajectory_entries"
+          ],
+          "result_roles": [
+            "model_trajectories",
+            "trajectory_identity",
+            "trajectory_time",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "prescient_trajectories"
+      ]
+    },
+    {
+      "tool": "BATCHIE",
+      "family": "perturbation",
+      "slides": [
+        306,
+        310,
+        311,
+        312,
+        313
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NEW_NATIVE_SOURCE_SCOPED_RUNTIME_UNVERIFIED",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/native_batchie.py"
+      ],
+      "scope": "Native SparseDrugCombo multichain viability posterior with explicit masks/units and posterior diagnostics; not DBAL plate ranking or experimental execution",
+      "missing_branches": [
+        "Full DBAL active plate selection/prospective cycle and wet-lab dispatch not supplied by viability-posterior route"
+      ],
+      "route_contracts": {
+        "batchie_posterior": {
+          "required_inputs": [
+            "screen_table"
+          ],
+          "required_parameters": [
+            "seed",
+            "software_versions",
+            "unit_key",
+            "dose_unit",
+            "control_treatment_name",
+            "n_latent",
+            "minimum_units",
+            "n_chains",
+            "posterior_draws",
+            "burnin",
+            "thin",
+            "maximum_experiments",
+            "maximum_prediction_entries",
+            "maximum_rhat",
+            "minimum_ess"
+          ],
+          "result_roles": [
+            "combination_predictions",
+            "posterior_predictions",
+            "posterior_checkpoint",
+            "posterior_diagnostics_object",
+            "diagnostics",
+            "backend_versions"
+          ]
+        }
+      },
+      "native_routes": [
+        "batchie_posterior"
+      ]
+    },
+    {
+      "tool": "Stack",
+      "family": "perturbation",
+      "slides": [
+        314,
+        315
+      ],
+      "matching_basis": "PPT editable text and matching narration; raster-only labels not independently OCR-inventoried",
+      "private_native_status": "NATIVE_CODE_IMPLEMENTED_SOURCE_REVIEWED_RUNTIME_PENDING",
+      "runtime_status": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "private_only": true,
+      "commercial_software_excluded": true,
+      "implementation_files": [
+        "server/completion_models.py",
+        "server/completion_engines.py",
+        "server/completion_spectra.py"
+      ],
+      "scope": "Native StateICL in-context count prediction. Code and model/output licenses differ; no full-object pickle, missing-gene zero padding or context/target-unit leakage.",
+      "missing_branches": [],
+      "route_contracts": {
+        "stack_incontext": {
+          "required_inputs": [
+            "context",
+            "license_evidence",
+            "model_manifest",
+            "checkpoint",
+            "features",
+            "context_object",
+            "query_object"
+          ],
+          "required_parameters": [
+            "batch_size",
+            "maximum_cases",
+            "accelerator",
+            "mask_rate",
+            "prompt_ratio",
+            "context_ratio",
+            "seed",
+            "software_versions",
+            "maximum_output_entries",
+            "repository"
+          ],
+          "result_roles": [
+            "primary_results",
+            "qc_metrics",
+            "diagnostics",
+            "backend_versions",
+            "result_channel_proof",
+            "prediction_matrix",
+            "prediction_identity"
+          ],
+          "runtime_status": "NOT_RUN_THIS_UPGRADE",
+          "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+          "installation_policy": "reuse_owned_server_environment_no_install",
+          "local_execution": false,
+          "public_upload": false,
+          "data_kind": "incontext_model_prediction_not_independent_validation"
+        }
+      },
+      "native_routes": [
+        "stack_incontext"
+      ]
+    }
+  ],
+  "figure_policy": "workflow_channels.json",
+  "all_scientific_runtime_acceptance": "NOT_RUN_THIS_UPGRADE",
+  "new_completion_routes_in_v34": 13,
+  "native_dispatch_routes_total_added_in_v33_v34": 62,
+  "new_scientific_native_routes_v34": 12,
+  "new_result_import_routes_v34": 1,
+  "all_method_branches_implemented": false
+}

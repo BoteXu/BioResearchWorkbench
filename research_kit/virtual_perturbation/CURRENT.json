@@ -1,0 +1,16 @@
+{
+  "version": "1.2-private",
+  "source_state": "SOURCE_REVIEW_COMPLETE_FOR_DECLARED_SCOPE",
+  "declared_routes": 12,
+  "review_document": "新增四方法审阅.md",
+  "source_QA": "qa/verification.private.json",
+  "local_contract_test_methods": 78,
+  "scientific_methods_executed": 0,
+  "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "public_upload": false,
+  "local_scientific_execution": false,
+  "automatic_dispatch": false,
+  "previous_versions_preserved": true,
+  "prior_acceptance_expired_by_source_change": true
+}

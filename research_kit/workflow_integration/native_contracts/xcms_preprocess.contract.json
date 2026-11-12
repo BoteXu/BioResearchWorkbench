@@ -1,0 +1,48 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "xcms_preprocess",
+  "required_inputs": [
+    "metadata"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "raw_input_ids",
+    "unit_key",
+    "condition_key",
+    "sample_role_key",
+    "injection_order_key",
+    "acquisition_mode",
+    "polarity",
+    "workers",
+    "ppm",
+    "peak_width_seconds",
+    "snr_threshold",
+    "prefilter",
+    "alignment_bin_mz",
+    "alignment_response",
+    "group_bandwidth_seconds",
+    "group_min_fraction",
+    "group_min_samples",
+    "group_bin_mz",
+    "feature_definition_roles",
+    "fill_peaks"
+  ],
+  "required_output_roles": [
+    "feature_intensities_detected",
+    "feature_intensities",
+    "feature_definitions",
+    "sample_axis_map",
+    "sample_metadata",
+    "chromatographic_peaks",
+    "run_qc",
+    "processed_object",
+    "processing_history",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native centroid MS1 xcms centWave/obiwarp/correspondence and optional measured peak integration; explicit source-to-sample map, blanks excluded from feature definition, missingness preserved. Not metabolite identification, normalization or abundance inference.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

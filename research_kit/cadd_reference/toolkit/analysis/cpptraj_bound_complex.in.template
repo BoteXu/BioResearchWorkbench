@@ -1,0 +1,26 @@
+# TEMPLATE ONLY: not an executable project input until every __PLACEHOLDER__ is replaced.
+# Scope: a known bound protein-ligand model for conformational analysis.
+# Do not use this autoimage procedure to infer unbinding/diffusion kinetics.
+# Keep reference and trajectory atom order identical to the topology.
+# Prepare a whole reference before use; verify all selections and atom counts.
+
+parm __SOLVATED_PRMTOP__
+reference __WHOLE_MATCHING_REFERENCE__
+trajin __TRAJECTORY__ __START_FRAME__ __END_FRAME__ __FRAME_STRIDE__
+
+# Explicit anchor is mandatory in this template.
+autoimage anchor __ANCHOR_MASK__
+
+# Fit receptor core; this transforms current coordinates.
+rms CoreFit reference __CORE_MASK__ out core_rmsd_angstrom.dat
+
+# Measure ligand pose relative to receptor without fitting ligand again.
+rms LigPose reference __LIGAND_HEAVY_MASK__ nofit out ligand_pose_rmsd_angstrom.dat
+
+# Calculate ligand internal RMSD but do not modify receptor-aligned coordinates.
+rms LigInternal reference __LIGAND_HEAVY_MASK__ nomod out ligand_internal_rmsd_angstrom.dat
+
+# RMSF conditional on the receptor-core alignment above; not an implicit separate fit.
+atomicfluct ProteinCA out protein_ca_rmsf_angstrom.dat __PROTEIN_CA_MASK__ byres
+
+run

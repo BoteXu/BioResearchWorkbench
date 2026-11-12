@@ -1,0 +1,38 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "muscat_pseudobulk",
+  "required_inputs": [
+    "object",
+    "cell_qc",
+    "design",
+    "contrast"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "unit_key",
+    "sample_key",
+    "condition_key",
+    "celltype_key",
+    "count_assay",
+    "celltype_universe",
+    "paired",
+    "minimum_cells",
+    "gene_filter"
+  ],
+  "required_output_roles": [
+    "singlecell_differential",
+    "population_eligibility",
+    "design_matrix",
+    "contrast_matrix",
+    "result_identity",
+    "pseudobulk_object",
+    "model_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native muscat aggregation and edgeR pseudobulk DS with reviewed exact per-cell QC; paired design must span donor effects; no automatic sample-outlier deletion",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

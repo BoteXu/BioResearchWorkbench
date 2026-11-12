@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+"""Driver for the bulk RNA-seq pipeline.
+
+    python run.py --config config.json --steps qc,de,enrich,pathway,tf,wgcna,ppi,cell,key,ml,valid,figs,report
+    python run.py --config config.json --steps all
+    python run.py --config config.json --list
+
+Each step is independent and idempotent; outputs land in results/ and figures/ under config.outdir.
+Statistical results are frozen into tables by the analysis steps; the figure/report steps only READ
+those tables (never re-fit anything).
+"""
+from __future__ import annotations
+import argparse, importlib, sys, traceback
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import utils
+
+ALL_STEPS = ["qc", "de", "enrich", "pathway", "tf", "wgcna", "ppi",
+             "cell", "key", "ml", "valid", "figs", "report"]
+
+DESC = {
+    "qc":      "sample QC — library size, detection, correlation, PCA, sex-marker check",
+    "de":      "differential expression (limma, Rscript)",
+    "enrich":  "GO / KEGG over-representation + GSEA prerank + GSVA (local gene sets)",
+    "pathway": "pathway clustering (gene overlap) + pathway-pathway crosstalk network",
+    "tf":      "PROGENy pathway activity + DoRothEA TF activity (decoupler)",
+    "wgcna":   "co-expression modules (PyWGCNA, ONE etiology), module-trait, hubs",
+    "ppi":     "STRING PPI network + hub ranking",
+    "cell":    "marker-based cell deconvolution + key-gene compartment attribution",
+    "key":     "key-gene union -> co-expression clustering -> core programs + per-program enrichment",
+    "ml":      "35-classifier benchmark (feature selection inside folds) + SHAP",
+    "valid":   "external cohort validation (train on discovery, test on series matrices)",
+    "figs":    "story-ordered multi-panel paper figures + combined PDF",
+    "report":  "Word (.docx) + self-contained HTML report",
+}
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--config", required=False, help="path to config.json")
+    ap.add_argument("--steps", default="all",
+                    help="comma-separated step names, or 'all'")
+    ap.add_argument("--list", action="store_true", help="list available steps and exit")
+    a = ap.parse_args()
+
+    if a.list or not a.config:
+        print("available steps:")
+        for s in ALL_STEPS:
+            print(f"  {s:<8} {DESC[s]}")
+        return
+
+    cfg = utils.load_config(a.config)
+    steps = ALL_STEPS if a.steps == "all" else [s.strip() for s in a.steps.split(",") if s.strip()]
+    unknown = [s for s in steps if s not in ALL_STEPS]
+    if unknown:
+        sys.exit(f"unknown step(s): {unknown}. Use --list to see them.")
+
+    done, failed = [], []
+    for s in steps:
+        print(f"\n{'='*72}\n>>> {s}  —  {DESC[s]}\n{'='*72}")
+        try:
+            mod = importlib.import_module(f"step{ALL_STEPS.index(s)+1}_{s}" if False else _module_name(s))
+            mod.run(cfg)
+            utils.provenance(cfg, s)
+            done.append(s)
+        except Exception as e:
+            print(f"!! step '{s}' failed: {e}")
+            traceback.print_exc(limit=3)
+            failed.append((s, str(e)[:200]))
+            if s in ("qc", "de"):
+                sys.exit(f"aborting: '{s}' is a prerequisite for later steps")
+
+    print(f"\n{'='*72}\nfinished. ok={done}  failed={failed}")
+    if failed:
+        print("fix the failures (see references/gotchas.md) and re-run just those steps.")
+
+
+def _module_name(step: str) -> str:
+    """explicit step -> module map (file names differ from the short step names)"""
+    return {"qc": "step1_qc", "de": "step2_de", "enrich": "step3_enrichment",
+            "pathway": "step4_pathway", "tf": "step5_tf", "wgcna": "step6_wgcna",
+            "ppi": "step7_ppi", "cell": "step8_deconvolution", "key": "step9_key",
+            "ml": "step10_ml", "valid": "step11_validation",
+            "figs": "step12_figures", "report": "step13_report"}[step]
+
+
+if __name__ == "__main__":
+    main()

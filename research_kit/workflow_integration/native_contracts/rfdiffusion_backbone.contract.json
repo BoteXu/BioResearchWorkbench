@@ -1,0 +1,31 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "rfdiffusion_backbone",
+  "required_inputs": [
+    "source_manifest",
+    "model_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "model_loading_scope",
+    "python_executable",
+    "n_samples",
+    "backbone_length",
+    "design_scope",
+    "native_software_versions"
+  ],
+  "required_output_roles": [
+    "protein_backbones",
+    "native_opaque_metadata",
+    "backbone_qc",
+    "native_command",
+    "diagnostics",
+    "backend_versions",
+    "native_engine_versions"
+  ],
+  "method_scope": "Actual exact-source original RFdiffusion unconditional fixed-length backbone sampling; literal native design files/length checked, native TRB retained opaque without unpickling. Not a functional sequence, binder or RFdiffusion2 all-atom method.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": null,
+  "release_id": null,
+  "status": "draft",
+  "created_at": null,
+  "state_snapshot": null,
+  "input_file_hashes": {},
+  "code_hashes": {},
+  "results": [],
+  "figures": [],
+  "main_claims": [],
+  "limitations": [],
+  "unfinished_items": [],
+  "change_from_previous": []
+}

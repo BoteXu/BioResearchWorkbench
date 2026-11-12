@@ -1,0 +1,40 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "destvi_deconvolution",
+  "required_inputs": [
+    "object",
+    "reference"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "count_layer",
+    "batch_key",
+    "accelerator",
+    "max_epochs",
+    "batch_size",
+    "spatial_key",
+    "coordinate_unit",
+    "reference_count_layer",
+    "celltype_key",
+    "n_latent",
+    "reference_max_epochs",
+    "weight_reference_observations",
+    "vamp_prior_p"
+  ],
+  "required_output_roles": [
+    "celltype_proportions",
+    "celltype_latent_state",
+    "celltype_state_identity",
+    "model_checkpoint",
+    "training_history",
+    "spatial_identity",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual CondSCVI reference plus native DestVI fitting; matched ordered genes, measured spatial coordinates and counts",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

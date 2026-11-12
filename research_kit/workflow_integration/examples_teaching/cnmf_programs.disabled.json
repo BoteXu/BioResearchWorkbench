@@ -1,0 +1,29 @@
+{
+  "example_only": true,
+  "template_not_executable": true,
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "backend": "cnmf_programs",
+  "parameters": {
+    "unit_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "count_layer": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "components": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "selected_k": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "n_iter": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "seed": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "density_threshold": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "local_neighborhood_size": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "hvg_count": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "max_nmf_iterations": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "top_genes": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "software_versions": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE"
+  },
+  "inputs": [
+    {
+      "id": "object",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  ],
+  "note": "Disabled source template. No scientific result or installed dependency is implied."
+}

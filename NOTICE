@@ -9,3 +9,5 @@ Numerical, statistical, omics, chemistry, docking, document and library software
 remain the work of their respective upstream projects. Our adapters and workflow
 instructions do not transfer ownership or relicense those components.
 See ORIGINS.md and third_party_components.json for source and integration roles.
+
+Public research kit: original maintained integration/source policies are Apache-2.0. Scientific methods and separately provisioned engines/models retain original authorship and terms. Optional Liberation font files remain OFL-1.1 and optional 3Dmol viewer/incorporated libraries retain their BSD/MIT notices; they are not relicensed by this project. Source data is not permission to publish new private project inputs.

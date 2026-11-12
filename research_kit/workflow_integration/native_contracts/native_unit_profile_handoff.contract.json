@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "native_unit_profile_handoff",
+  "required_inputs": [
+    "object",
+    "producer_request",
+    "producer_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "scenario_columns",
+    "selected_scenarios",
+    "celltype_key",
+    "aggregation_scope",
+    "data_kind",
+    "minimum_cells_per_profile",
+    "maximum_cells"
+  ],
+  "required_output_roles": [
+    "unit_expression_profiles",
+    "profile_metadata",
+    "profile_eligibility",
+    "profile_membership",
+    "source_selection",
+    "crossflow_lineage",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual receipt/request/source-bound expression handoff into independent-unit mean profiles, unchanged feature axes, exact cell memberships, explicit source selection/low-support HOLD and observed-vs-decoded distinction. Preserves producer validation scope and every actual target/celltype stratum. Not a new scientific analysis method.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

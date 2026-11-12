@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I28",
+  "project_id": null,
+  "status": "draft",
+  "failure_events": [],
+  "module_upgrade": null,
+  "regression_evidence": [],
+  "release_manifest": null,
+  "module_version": "3.0.0"
+}

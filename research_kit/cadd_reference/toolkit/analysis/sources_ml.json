@@ -1,0 +1,114 @@
+[
+  {
+    "key": "M01",
+    "title": "ChEMBL — Assay and Activity Questions",
+    "url": "https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions",
+    "what_supports": "实验类别、靶点映射置信度、标准化单位与 pChEMBL 的生成条件；不将不同终点混作同一标签。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M02",
+    "title": "RDKit — Getting Started in Python",
+    "url": "https://www.rdkit.org/docs/GettingStartedInPython.html",
+    "what_supports": "化学结构解析、分子描述符、Morgan 指纹与可追溯化学表示。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M03",
+    "title": "Wu Z et al. MoleculeNet: a benchmark for molecular machine learning. Chemical Science 2018;9:513–530. DOI: 10.1039/C7SC02664A",
+    "url": "https://doi.org/10.1039/C7SC02664A",
+    "what_supports": "分子机器学习任务、特征、数据拆分和评估；强调拆分应匹配任务。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M04",
+    "title": "scikit-learn — Common pitfalls and recommended practices",
+    "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+    "what_supports": "预处理泄漏、训练测试隔离及 Pipeline 的使用。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M05",
+    "title": "scikit-learn — Nested versus non-nested cross-validation",
+    "url": "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html",
+    "what_supports": "内层模型选择与外层评估分离；避免调参后的乐观性能估计。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M06",
+    "title": "scikit-learn — Cross-validation: evaluating estimator performance",
+    "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+    "what_supports": "分组交叉验证与时间相关数据拆分的工具行为；需显式选择符合任务的分区。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M07",
+    "title": "scikit-learn — Metrics and scoring: quantifying the quality of predictions",
+    "url": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+    "what_supports": "分类与回归指标、average precision、PR/ROC、决策阈值以及评分尺度。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M08",
+    "title": "scikit-learn — Probability calibration",
+    "url": "https://scikit-learn.org/stable/modules/calibration.html",
+    "what_supports": "概率校准、可靠性图、校准数据与模型训练数据的隔离。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M09",
+    "title": "Heid E et al. Chemprop: A Machine Learning Package for Chemical Property Prediction. JCIM 2024;64(1):9–17. DOI: 10.1021/acs.jcim.3c01250",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38147829/",
+    "what_supports": "Chemprop 的分子性质预测框架及可作为对照的消息传递模型。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M10",
+    "title": "Chemprop — Official documentation",
+    "url": "https://chemprop.readthedocs.io/en/latest/",
+    "what_supports": "模型能力、拆分、训练、预测和不确定性相关接口以实际安装版本核对。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M11",
+    "title": "Lanini J et al. UNIQUE: A Framework for Uncertainty Quantification Benchmarking. JCIM 2024;64(22):8379–8386. DOI: 10.1021/acs.jcim.4c01578",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11600502/",
+    "what_supports": "不确定性方法的排序、误差与校准比较；UQ 必须在任务数据上验证。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M12",
+    "title": "MAPIE — Conformal Prediction: Foundations",
+    "url": "https://mapie.readthedocs.io/en/v1.5.0/content/conformal-prediction/theory/",
+    "what_supports": "共形预测训练、校准与预测步骤；可交换性要求、边际覆盖和个体/子群保证的区别。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M13",
+    "title": "Graff DE, Shakhnovich EI, Coley CW. Accelerating high-throughput virtual screening through molecular pool-based active learning. Chemical Science 2021;12:7866–7881. DOI: 10.1039/D0SC06805E",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34168840/",
+    "what_supports": "MolPAL 池式主动学习加速计算筛选；区分对接代理标签与实验活性标签。",
+    "type": "primary_research",
+    "verified_on": "2026-10-24"
+  },
+  {
+    "key": "M14",
+    "title": "SHAP — Be careful when interpreting predictive models in search of causal insights",
+    "url": "https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html",
+    "what_supports": "预测归因解释不等于因果解释；相关特征和背景数据影响模型归因。",
+    "type": "official_documentation",
+    "verified_on": "2026-10-24"
+  }
+]

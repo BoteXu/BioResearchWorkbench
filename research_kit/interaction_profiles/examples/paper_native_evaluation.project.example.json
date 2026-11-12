@@ -1,0 +1,78 @@
+{
+  "schema": "private-interaction-project/1",
+  "example_only": true,
+  "method": "paper_native_evaluation",
+  "run_id": "DISABLED_EXAMPLE_NOT_A_SCIENTIFIC_RUN",
+  "expected_host": "REQUIRED_FRESH_ALLOCATED_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": 4,
+    "gpus": 0
+  },
+  "parameters": {
+    "device": "cpu",
+    "seed": 20261029,
+    "solvent": "water",
+    "xtb_timeout_seconds": 120,
+    "expected_xtb_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expected_xtb_version": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+    "expected_versions": {
+      "numpy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "pandas": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "scipy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "torch": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "rdkit": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "open3d": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "shepherd-score": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION"
+    },
+    "max_atoms": 180,
+    "charge_sum_tolerance": 0.001,
+    "condition": "all",
+    "priority_policy": "origin_full_profile_mask",
+    "minimum_evaluable_fraction": 1.0,
+    "workers": 1,
+    "xtb_cores": 4,
+    "max_native_npz_bytes": 8000000
+  },
+  "inputs": [
+    {
+      "id": "structure_manifest",
+      "path": "inputs/paper_native_evaluation.lineage.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "software",
+      "path": "inputs/software.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "technical_recheck_1",
+      "seed": 20261030
+    },
+    {
+      "label": "technical_recheck_2",
+      "seed": 20261031
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "metric": "native_evaluation_audit_complete_fraction",
+      "operator": "ge",
+      "bound": 1.0,
+      "unit": "fraction of all requested attempts",
+      "definition": "Actual complete requested denominator; does not establish science",
+      "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REQUIRES_REVIEW"
+    }
+  ],
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "automatic_download": false,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE"
+}

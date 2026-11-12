@@ -1,0 +1,6 @@
+{
+  "provider": "uniprot",
+  "identifier": "REPLACE_APPROVED_PUBLIC_ACCESSION",
+  "sequence_type": "protein",
+  "approved_public_identifier": false
+}

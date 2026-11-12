@@ -1,0 +1,41 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "scgen_predict",
+  "required_inputs": [
+    "training_object",
+    "query_controls"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "celltype_key",
+    "representation",
+    "control",
+    "treatment",
+    "holdout_axis",
+    "shift_celltypes",
+    "n_hidden",
+    "n_latent",
+    "n_layers",
+    "dropout_rate",
+    "max_epochs",
+    "batch_size",
+    "early_stopping",
+    "accelerator"
+  ],
+  "required_output_roles": [
+    "predicted_expression",
+    "latent_shift",
+    "latent_shift_table",
+    "training_history",
+    "prediction_identity",
+    "model_checkpoint",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native scGen log-normalized decoded prediction; not observed counts or a generic linear substitute",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

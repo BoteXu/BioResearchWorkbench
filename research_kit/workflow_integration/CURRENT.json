@@ -1,0 +1,28 @@
+{
+  "version": "3.4-private-review",
+  "state": "NATIVE_SOURCE_AND_71_METHOD_REVIEW_RUNTIME_PENDING",
+  "commercial_software_excluded": true,
+  "active_stable_version": "3.2-private",
+  "native_dispatch_routes_added": 62,
+  "explicit_named_tools": 87,
+  "remaining_not_implemented": [
+    "scDiffusion real-start-cell gradient interpolation is not implemented by the declared v3.4 generation route"
+  ],
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "public_upload": false,
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "visualization_skill": "scientific-visualization",
+  "visualization_version": "2.2-private",
+  "working_copy_not_adopted": true,
+  "scope_exceptions": {
+    "CSI:FingerID": "Fresh online prediction excluded; actual-result import only",
+    "scDiffusion": "Generation supports classifier guidance; real-start-cell gradient interpolation remains a separate scope"
+  },
+  "excluded_proprietary_branches": [
+    "Fresh online CSI:FingerID prediction; only real-result import is included"
+  ],
+  "current_validation_summary": "VALIDATION_v3.4.json",
+  "publication_scope": "public_source_only",
+  "user_data_upload_authorized": false
+}

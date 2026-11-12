@@ -1,0 +1,106 @@
+{
+  "schema_version": "2.1",
+  "project_id": "__FILL_PROJECT_ID__",
+  "question": "__FILL_PRIMARY_RESEARCH_QUESTION__",
+  "scope": "soluble_fixed_charge_non_covalent",
+  "main_engine": null,
+  "identity": {
+    "species": null,
+    "target_accession": null,
+    "sequence_or_isoform": null,
+    "construct_and_assembly": null,
+    "residue_mapping_file": null
+  },
+  "software": {
+    "engine_version": null,
+    "parameterization_version": null,
+    "analysis_environment": null
+  },
+  "physical_model": {
+    "protein_force_field": null,
+    "ligand_force_field_or_not_applicable": null,
+    "water_and_ion_parameters": null,
+    "protonation_and_charge_decisions": null,
+    "temperature_K": 300.0,
+    "pressure_bar": 1.0,
+    "added_salt_mol_L": 0.15,
+    "timestep_ps": 0.002,
+    "constraints": "bonds_to_hydrogen",
+    "timestep_rationale": "__FILL_VALIDATED_TIMESTEP_SCHEME__"
+  },
+  "inputs": [
+    {
+      "role": "prepared_structure",
+      "path": "02_prepared/__FILL_SYSTEM__.pdb",
+      "sha256": null
+    },
+    {
+      "role": "engine_topology",
+      "path": "04_simulation/__FILL_TOPOLOGY__",
+      "sha256": null
+    }
+  ],
+  "systems": [
+    {
+      "system_id": "system01",
+      "model_id": "model01",
+      "state_id": "state01",
+      "role": "__FILL_REFERENCE_OR_CANDIDATE__",
+      "description": null
+    }
+  ],
+  "runs": [
+    {
+      "system_id": "system01",
+      "replicate_id": "rep01",
+      "seed": 140701,
+      "planned_production_ns": 100.0,
+      "equilibration_history": "__FILL_INDEPENDENT_HISTORY__"
+    },
+    {
+      "system_id": "system01",
+      "replicate_id": "rep02",
+      "seed": 140702,
+      "planned_production_ns": 100.0,
+      "equilibration_history": "__FILL_INDEPENDENT_HISTORY__"
+    },
+    {
+      "system_id": "system01",
+      "replicate_id": "rep03",
+      "seed": 140703,
+      "planned_production_ns": 100.0,
+      "equilibration_history": "__FILL_INDEPENDENT_HISTORY__"
+    }
+  ],
+  "primary_metrics": [
+    {
+      "metric_id": "metric01",
+      "definition": null,
+      "unit": null,
+      "selection_definition_file": null,
+      "comparison_and_uncertainty_method": null
+    }
+  ],
+  "scientific_reviews": [
+    {
+      "gate": "identity_and_structure",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "gate": "chemical_state_and_parameters",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "gate": "system_and_pilot",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "gate": "sampling_and_statistics",
+      "status": "pending",
+      "evidence": []
+    }
+  ]
+}

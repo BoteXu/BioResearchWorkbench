@@ -1,0 +1,40 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "spatialglue_integrate",
+  "required_inputs": [
+    "modality1",
+    "modality2",
+    "feature_preprocessing_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "section_key",
+    "coordinate_unit",
+    "datatype",
+    "accelerator",
+    "spatial_neighbors",
+    "learning_rate",
+    "weight_decay",
+    "max_epochs",
+    "n_latent",
+    "weight_factors",
+    "maximum_dense_graph_entries",
+    "attention_sum_tolerance"
+  ],
+  "required_output_roles": [
+    "integrated_representation",
+    "modality_representation",
+    "modality_attention",
+    "spatial_identity",
+    "training_diagnostics",
+    "processed_object",
+    "model_checkpoint",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native exact-source SpatialGlue two measured modalities on identical actual spots/coordinates, one section per fit. Explicit native datatype parameter overrides and source-bound preprocessing, embedding/attention/terminal losses. No batch-generalization or automatic cell-type claims.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

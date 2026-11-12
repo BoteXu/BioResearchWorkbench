@@ -1,0 +1,35 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "batchie_posterior",
+  "required_inputs": [
+    "screen_table"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "dose_unit",
+    "control_treatment_name",
+    "n_latent",
+    "minimum_units",
+    "n_chains",
+    "posterior_draws",
+    "burnin",
+    "thin",
+    "maximum_experiments",
+    "maximum_prediction_entries",
+    "maximum_rhat",
+    "minimum_ess"
+  ],
+  "required_output_roles": [
+    "combination_predictions",
+    "posterior_predictions",
+    "posterior_checkpoint",
+    "posterior_diagnostics_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual native BATCHIE SparseDrugCombo multichain viability posterior, exact experiment/unit/dose/mask identity and missing candidate outcomes preserved. Explicit legacy RNG streams, posterior intervals and rank Rhat/bulk ESS; DBAL batch selection and experimental dispatch remain separate.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

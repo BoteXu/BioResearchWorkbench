@@ -1,0 +1,240 @@
+"""Shared helpers for the bulk RNA-seq pipeline.
+
+Loads a project config, reads the expression matrix + metadata, subsets to ONE case/control
+contrast, maps Ensembl IDs to symbols, and provides the house plotting theme.
+
+Nothing here re-implements a scientific method — see the step modules for the analysis itself.
+"""
+from __future__ import annotations
+import json, os, re, time, hashlib
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import requests
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+# ---------------------------------------------------------------- config / IO
+DEFAULTS = dict(sample_id_col="sample_id", is_log2=True, drop_samples=[], threads=4,
+                outdir=".", covariates=[],
+                de=dict(fc_threshold=1.0, fdr_threshold=0.05, top_n_heatmap=50),
+                wgcna=dict(n_top_genes=8000, min_module_size=30,
+                           network_type="signed hybrid", tom_type="signed", rsquared_cut=0.85),
+                enrichment=dict(libraries=["GO_Biological_Process_2023", "KEGG_2021_Human",
+                                           "MSigDB_Hallmark_2020"], top_n_plot=12),
+                ml=dict(n_features=50, n_folds=5, seed=42),
+                external_cohorts=[],
+                figure_theme=dict(card="C03", font="Arial",
+                                  colors=dict(case="#DD656D", control="#036EAD",
+                                              accent="#F3962F", neutral="#A8ADB3")))
+
+
+def load_config(path) -> dict:
+    cfg = json.loads(Path(path).read_text(encoding="utf8"))
+    merged = {**DEFAULTS, **cfg}
+    for k, v in DEFAULTS.items():                       # merge nested dicts
+        if isinstance(v, dict) and isinstance(cfg.get(k), dict):
+            merged[k] = {**v, **cfg[k]}
+    out = Path(merged["outdir"]).resolve()
+    for sub in ("results", "figures", "logs", "extval"):
+        (out / sub).mkdir(parents=True, exist_ok=True)
+    merged["_outdir"] = out
+    print(f"[config] {merged['project']}  ->  {out}")
+    print(f"[config] contrast: {merged['case_label']}  vs  {merged['control_label']}")
+    return merged
+
+
+def R(cfg, *parts) -> Path:
+    """a path inside the project results/ dir"""
+    p = cfg["_outdir"].joinpath(*parts)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def save_table(df: pd.DataFrame, cfg, name: str):
+    p = R(cfg, "results", name)
+    df.to_csv(p, index=False)
+    print(f"  -> results/{name}  ({len(df)} rows)")
+    return p
+
+
+def provenance(cfg, step: str, extra: dict | None = None):
+    """write a receipt so every output can be traced back to its config + inputs"""
+    rec = dict(step=step, project=cfg["project"], config_sha256=hashlib.sha256(
+        json.dumps({k: v for k, v in cfg.items() if not k.startswith("_")},
+                   sort_keys=True, default=str).encode()).hexdigest(),
+        case=cfg["case_label"], control=cfg["control_label"],
+        timestamp=time.strftime("%Y-%m-%d %H:%M:%S"), **(extra or {}))
+    p = R(cfg, "logs", f"{step}_receipt.json")
+    p.write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding="utf8")
+    return rec
+
+
+# ---------------------------------------------------------------- expression / metadata
+def load_expression(cfg) -> pd.DataFrame:
+    """returns genes x samples, log2 scale."""
+    df = pd.read_csv(cfg["expr_matrix"], index_col=0)
+    meta = load_metadata(cfg)
+    ids = set(meta[cfg["sample_id_col"]].astype(str))
+    # auto-detect orientation: keep whichever axis looks like the sample IDs
+    if len(ids & set(map(str, df.columns))) >= len(ids & set(map(str, df.index))):
+        pass                                   # samples in columns  -> genes x samples (good)
+    else:
+        df = df.T                              # samples were rows
+        print("[expr] transposed to genes x samples")
+    if not cfg["is_log2"]:
+        df = np.log2(df.clip(lower=0) + 1)
+        print("[expr] log2(x+1) applied")
+    print(f"[expr] {df.shape[0]} genes x {df.shape[1]} samples")
+    return df
+
+
+def load_metadata(cfg) -> pd.DataFrame:
+    m = pd.read_csv(cfg["metadata"])
+    if cfg["sample_id_col"] not in m.columns:
+        raise SystemExit(f"metadata is missing column '{cfg['sample_id_col']}'")
+    return m
+
+
+def setup_contrast(cfg):
+    """Subset to ONE case group vs its control — the single most important step (gotchas §1).
+
+    returns (expr_genes_x_samples, meta_indexed, y_bool, sample_ids)
+    """
+    expr = load_expression(cfg)
+    meta = load_metadata(cfg).set_index(cfg["sample_id_col"])
+    keep = meta[cfg["group_col"]].isin([cfg["case_label"], cfg["control_label"]])
+    meta = meta[keep]
+    drop = set(map(str, cfg.get("drop_samples") or []))
+    if drop:
+        meta = meta[~meta.index.astype(str).isin(drop)]
+        print(f"[subset] dropped {len(drop)} user-specified samples")
+    samples = [s for s in expr.columns if s in meta.index]
+    expr, meta = expr[samples], meta.loc[samples]
+    y = (meta[cfg["group_col"]] == cfg["case_label"]).values
+    print(f"[subset] {len(samples)} samples  |  case {int(y.sum())}  control {int((~y).sum())}")
+    if len(np.unique(y)) < 2:
+        raise SystemExit("contrast has only one group — check case_label / control_label")
+    groups = meta[cfg["group_col"]].value_counts().to_dict()
+    if len(groups) != 2:
+        print(f"[warn] more than two groups survived subsetting: {groups} — network methods "
+              f"require ONE etiology (see references/gotchas.md#1)")
+    return expr, meta, y, samples
+
+
+def covariates_frame(cfg, meta: pd.DataFrame) -> pd.DataFrame:
+    """numeric/bool covariate frame for limma, honouring only columns that exist."""
+    cols = [c for c in cfg.get("covariates", []) if c in meta.columns]
+    if len(cols) != len(cfg.get("covariates", [])):
+        missing = set(cfg.get("covariates", [])) - set(cols)
+        print(f"[warn] covariates not found in metadata, ignored: {sorted(missing)}")
+    if not cols:
+        return pd.DataFrame(index=meta.index)
+    df = meta[cols].copy()
+    for c in df.columns:
+        if df[c].dtype == object:
+            try: df[c] = pd.to_numeric(df[c])
+            except Exception: pass
+    return df
+
+
+# ---------------------------------------------------------------- gene IDs
+def map_ensembl_to_symbol(ids, batch=1000, retries=5):
+    """mygene.info batch mapping with retries (the API throws intermittent SSL errors)."""
+    out = {}
+    for i in range(0, len(ids), batch):
+        chunk = list(ids)[i:i + batch]
+        for a in range(retries):
+            try:
+                r = requests.post("https://mygene.info/v3/query",
+                                  json={"q": chunk, "scopes": "ensembl.gene",
+                                        "fields": "symbol", "species": "human"}, timeout=90)
+                r.raise_for_status()
+                for h in r.json():
+                    if isinstance(h, dict) and h.get("symbol") and h.get("query"):
+                        out[h["query"]] = h["symbol"]
+                break
+            except Exception as e:
+                print(f"    mygene retry {a+1}/{retries}: {str(e)[:60]}")
+                time.sleep(3)
+    return out
+
+
+def attach_symbols(cfg, expr, de_table: pd.DataFrame | None = None) -> dict:
+    """return (ensembl -> symbol) for the matrix index, cached in results/."""
+    cache = R(cfg, "results", "symbol_map.json")
+    if cache.exists():
+        m = json.loads(cache.read_text())
+    else:
+        ids = [g for g in expr.index if str(g).startswith("ENSG")]
+        if not ids:
+            print("[symbols] index is not Ensembl — skipping mapping")
+            return {}
+        m = map_ensembl_to_symbol(ids)
+        cache.write_text(json.dumps(m))
+    print(f"[symbols] mapped {len(m)} / {len(expr.index)}")
+    return m
+
+
+def symbol_lookup(mapping: dict):
+    """symbol -> ensembl, keeping the first occurrence"""
+    s2e = {}
+    for e, s in (mapping or {}).items():
+        if isinstance(s, str) and s and s not in s2e:
+            s2e[s] = e
+    return s2e
+
+
+# ---------------------------------------------------------------- gene sets (local, fast)
+ENRICHR_LIB = "https://maayanlab.cloud/Enrichr/geneSetLibrary?libraryName="
+
+
+def get_gene_sets(cfg, library: str) -> dict:
+    """Download-once, then read a local Enrichr library. NEVER call the Enrichr API in a loop
+    (gotchas §3) — the library download takes seconds, the API takes ~2 min per query."""
+    d = Path(__file__).resolve().parent.parent / "assets" / "gene_sets"
+    d.mkdir(parents=True, exist_ok=True)
+    f = d / f"{library}.json"
+    if not f.exists():
+        print(f"  downloading gene set library {library} ...")
+        import subprocess, time
+        for attempt in range(4):                    # curl 35/56 are common — retry
+            p = subprocess.run(["curl", "-sL", "--retry", "3", "-m", "180",
+                                f"{ENRICHR_LIB}{library}", "-o", str(f)])
+            if p.returncode == 0 and f.exists() and f.stat().st_size > 1000:
+                break
+            print(f"    retry {attempt+1}/4 (curl exit {p.returncode})")
+            time.sleep(3)
+        else:
+            raise SystemExit(f"could not download '{library}'. Download it manually with:\n"
+                             f"  curl -sL '{ENRICHR_LIB}{library}' -o {f}")
+    terms = json.loads(f.read_text())[library]["terms"]
+    return {t: [g for g, v in gs.items() if v > 0] for t, gs in terms.items()}
+
+
+# ---------------------------------------------------------------- theme
+def theme(cfg):
+    t = cfg["figure_theme"]
+    matplotlib.rcParams["font.family"] = [t["font"], "DejaVu Sans"]
+    matplotlib.rcParams["axes.unicode_minus"] = False
+    return t["colors"]
+
+
+def save_fig(fig, cfg, name, dpi=250):
+    p = R(cfg, "figures", f"{name}.png")
+    fig.savefig(p, dpi=dpi, bbox_inches="tight")
+    fig.savefig(p.with_suffix(".pdf"), bbox_inches="tight")
+    plt.close(fig)
+    print(f"  -> figures/{name}.png/.pdf")
+    return p
+
+
+def strip_plot(ax, title=None, xlabel=None, ylabel=None):
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    if title: ax.set_title(title, fontsize=10.5, weight="bold", loc="left")
+    if xlabel: ax.set_xlabel(xlabel, fontsize=9)
+    if ylabel: ax.set_ylabel(ylabel, fontsize=9)
+    ax.tick_params(labelsize=8)
+    return ax

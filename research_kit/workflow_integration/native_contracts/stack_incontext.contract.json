@@ -1,0 +1,60 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "features",
+    "context_object",
+    "query_object"
+  ],
+  "required_parameters": [
+    "batch_size",
+    "maximum_cases",
+    "accelerator",
+    "mask_rate",
+    "prompt_ratio",
+    "context_ratio",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "prediction_matrix",
+    "prediction_identity"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "incontext_model_prediction_not_independent_validation",
+  "schema": "native-completion-contract/1",
+  "tool": "Stack",
+  "source_commit": [
+    "ArcInstitute/stack",
+    "cacc2e4b09435c3e536d46237d10b50f222dd144"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Native StateICL in-context count prediction. Code and model/output licenses differ; no full-object pickle, missing-gene zero padding or context/target-unit leakage.",
+  "figure_views": [
+    "matrix",
+    "scatter"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "example_only": true,
+  "run_id": "example_bulk_virtual_ko",
+  "method": "bulk_virtual_ko",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "training_units": [
+      "TRAIN_0",
+      "TRAIN_1",
+      "TRAIN_2",
+      "TRAIN_3",
+      "TRAIN_4",
+      "TRAIN_5",
+      "TRAIN_6",
+      "TRAIN_7",
+      "TRAIN_8",
+      "TRAIN_9"
+    ],
+    "control_genes": [
+      "CONTROL_GENE_0",
+      "CONTROL_GENE_1",
+      "CONTROL_GENE_2"
+    ],
+    "min_training_units": 10,
+    "n_features": 100,
+    "network_quantile": 0.95,
+    "cores": 1,
+    "pruning": "none",
+    "dpi_threshold": 0.01,
+    "alpha": 0.7,
+    "steps": 200,
+    "convergence_tolerance": 1e-07,
+    "expected_package_version": "REPLACE_WITH_EXISTING_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "GENETARGET"
+    ],
+    "evaluation_units": [
+      "UNIT_A",
+      "UNIT_B",
+      "UNIT_C"
+    ],
+    "seed": 41
+  },
+  "inputs": [
+    {
+      "id": "matrix",
+      "path": "inputs/matrix.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "samples",
+      "path": "inputs/samples.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "network_quantile": 0.9
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "network_quantile": 0.97
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "maximum_fixed_point_residual",
+      "operator": "le",
+      "bound": 1e-07,
+      "unit": "REPLACE_WITH_ACTUAL_UNIT",
+      "definition": "Example of a measurable criterion; add method-specific fit/coverage/control/OOD gates before production",
+      "threshold_basis": "ILLUSTRATIVE_NOT_SCIENTIFICALLY_VALIDATED"
+    }
+  ]
+}

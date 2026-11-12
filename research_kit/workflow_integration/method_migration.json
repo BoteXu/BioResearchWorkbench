@@ -1,0 +1,26 @@
+{
+  "old_baseline_preserved": true,
+  "method_identity_changes": {
+    "lr_differential": "donor_LR_explicit_Welch_paired_or_HC3_contrast",
+    "lipid_chain_patterns": "donor_chain_slope_explicit_contrast",
+    "methylation_gene_links": "predefined_methylation_regions_and_conditional_RNA_links",
+    "uorf_translation": "exon_aware_ORF_conditional_or_donor_controlled_periodicity"
+  },
+  "role_semantics_corrected": [
+    "enhancer_grn",
+    "longitudinal_effects",
+    "impulse_response",
+    "exon_usage",
+    "isoform_switch",
+    "microbe_network"
+  ],
+  "old_plan_hashes_expired": true,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "public_upload": false,
+  "new_analysis_branches": [
+    "colocalization: ABF / SuSiE with signed LD and convergence",
+    "uorf_translation: conditional_reads / donor_controlled with matched negative ORFs"
+  ],
+  "maximum_bounds_now_enforced": true,
+  "all71_templates_disabled_until_real_project_review": true
+}

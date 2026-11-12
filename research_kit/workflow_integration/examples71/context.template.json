@@ -1,0 +1,38 @@
+{
+  "public_upload": false,
+  "species": "REQUIRED",
+  "assembly": "REQUIRED",
+  "annotation_version": "REQUIRED",
+  "assay": "REQUIRED",
+  "scale": "REQUIRED_EXACT_SCALE",
+  "feature_unit": "REQUIRED",
+  "independent_unit": "REQUIRED_MATCH_STATISTICAL_PLAN",
+  "estimand": "REQUIRED_MATCH_STATISTICAL_PLAN",
+  "reference_versions": {
+    "REQUIRED_REFERENCE": "REQUIRED_VERSION"
+  },
+  "unit_map_reviewed": false,
+  "reference_identity_reviewed": false,
+  "resolved_decisions": {
+    "REQUIRED_BRANCH_DECISION": "REQUIRED"
+  },
+  "limitations": [
+    "REQUIRED_SCIENTIFIC_LIMITS"
+  ],
+  "qc_evidence": [
+    {
+      "input_id": "REQUIRED",
+      "sha256": "REQUIRED",
+      "criterion": "REQUIRED",
+      "observed": "REQUIRED_ACTUAL_NUMERIC",
+      "operator": "ge",
+      "bound": "REQUIRED_NUMERIC",
+      "unit": "REQUIRED",
+      "decision": "REQUIRES_REVIEW",
+      "source_receipt_input": "REQUIRED_ADDITIONAL_INPUT_ID",
+      "source_receipt_sha256": "REQUIRED",
+      "measurement_input": "REQUIRED_ADDITIONAL_INPUT_ID",
+      "measurement_field": "REQUIRED_DOTTED_JSON_FIELD"
+    }
+  ]
+}

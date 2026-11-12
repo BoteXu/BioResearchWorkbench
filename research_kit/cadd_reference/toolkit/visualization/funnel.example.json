@@ -1,0 +1,10 @@
+{
+  "title": "Screening stage accounting",
+  "counting_unit": "parent_compound",
+  "stages": [
+    {"label": "Structure standardization", "input_count": null, "retained_count": null, "filtered_count": null, "failed_count": null},
+    {"label": "Eligibility and alerts", "input_count": null, "retained_count": null, "filtered_count": null, "failed_count": null},
+    {"label": "Docking and pose review", "input_count": null, "retained_count": null, "filtered_count": null, "failed_count": null},
+    {"label": "Diversity and follow-up selection", "input_count": null, "retained_count": null, "filtered_count": null, "failed_count": null}
+  ]
+}

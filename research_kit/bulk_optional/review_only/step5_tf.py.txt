@@ -1,0 +1,34 @@
+"""Step 5 — PROGENy pathway activity + DoRothEA TF activity (decoupler, OmniPath networks)."""
+from __future__ import annotations
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+import decoupler as dc, utils
+
+
+def run(cfg):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    try: dc.get_progeny(organism="human", top=500).to_csv(res / "_progeny_net.csv", index=False)
+    except Exception as e: print("[tf] progeny net fetch failed:", str(e)[:80]); return
+    net = pd.read_csv(res / "_progeny_net.csv")
+    acts = []
+    for tag, sub in (("pathway", net),
+                     ("tf", None)):
+        pass
+    A = dc.run_mlm(mat=expr[samples], net=net, source="source", target="target", weight="weight",
+                   verbose=False, use_raw=False).obsm["mlm_estimate"] if hasattr(dc.run_mlm(mat=expr[samples], net=net, source="source", target="target", weight="weight", verbose=False), "obsm") else None
+    if A is None: return
+    A.to_csv(res / "progeny_activity.csv")
+    rows = []
+    for p in A.index:
+        v = A.loc[p].values.astype(float)
+        r = float(np.corrcoef(v, y.astype(float))[0, 1])
+        rows.append(dict(pathway=p, case_r=round(r, 3),
+                         case_mean=round(float(v[y].mean()), 3), control_mean=round(float(v[~y].mean()), 3)))
+    pr = pd.DataFrame(rows).sort_values("case_r")
+    utils.save_table(pr, cfg, "progeny_activity_summary.csv")
+    fig, ax = plt.subplots(figsize=(7.6, max(4, len(pr) * .36)))
+    ax.barh(pr["pathway"], pr["case_mean"] - pr["control_mean"],
+            color=[colors["case"] if v > 0 else colors["control"] for v in pr["case_r"]])
+    ax.axvline(0, color="#666", lw=.9)
+    utils.strip_plot(ax, "PROGENy pathway activity (case − control)", "activity difference")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F5_progeny")

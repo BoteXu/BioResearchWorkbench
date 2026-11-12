@@ -1,0 +1,8 @@
+{
+  "example_only": true,
+  "source_roots": {
+    "shepherd-score": "/REQUIRED_EXISTING_REVIEWED_SERVER_SOURCE/shepherd_score",
+    "shepherd2": "/REQUIRED_EXISTING_REVIEWED_SERVER_SOURCE/shepherd"
+  },
+  "automatic_install": false
+}

@@ -1,0 +1,30 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "progeny_activity",
+  "required_inputs": [
+    "expression",
+    "metadata"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "expression_scale",
+    "organism",
+    "top_genes",
+    "minimum_model_genes",
+    "scale_scores"
+  ],
+  "required_output_roles": [
+    "pathway_activity",
+    "pathway_coverage",
+    "sample_metadata",
+    "resource_model",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual native PROGENy responsive footprints, perm=1 descriptive scores and exact measured-feature coverage, not generic GSVA or protein activity",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

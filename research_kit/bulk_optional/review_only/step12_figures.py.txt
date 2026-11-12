@@ -1,0 +1,102 @@
+"""Step 12 — story-ordered multi-panel paper figures.
+
+Layout rule (gotchas §7): uniform grid — every row the same total width, panels fit into equal
+cells and centred, and **no more than two panels per row** so text stays legible.
+"""
+from __future__ import annotations
+import os, glob
+from PIL import Image, ImageDraw, ImageFont
+
+
+def _font(sz, bold=False):
+    for p in (f"/System/Library/Fonts/Supplemental/Arial{' Bold' if bold else ''}.ttf",
+              "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"):
+        try: return ImageFont.truetype(p, sz)
+        except Exception: pass
+    return ImageFont.load_default()
+
+
+def compose(out_path, title, caption, rows, row_w=4200, scale_ref=2600):
+    FL, FT, FC = _font(62, True), _font(46), _font(38)
+    PAD = GAP = 60; TOP = 50; LBL = 96; TITLE = 88; CAPH = 210
+    sc = row_w / scale_ref
+    rows = [(int(rh * sc), ps) for rh, ps in rows]
+    H = TOP + TITLE + sum(rh + LBL + GAP for rh, _ in rows) + CAPH + PAD
+    cv = Image.new("RGB", (PAD * 2 + row_w, H), "white"); d = ImageDraw.Draw(cv)
+    y = TOP; d.text((PAD, y), title, fill=(31, 42, 68), font=FT); y += TITLE
+    for rh, panels in rows:
+        n = len(panels); cw = (row_w - GAP * (n - 1)) / n; x = PAD
+        for lab, pt, path in panels:
+            if not os.path.exists(path): x += cw + GAP; continue
+            im = Image.open(path).convert("RGB")
+            s = min(cw / im.width, rh / im.height)
+            im = im.resize((max(1, int(im.width * s)), max(1, int(im.height * s))), Image.LANCZOS)
+            d.text((x, y), lab, fill=(31, 42, 68), font=FL)
+            d.text((x + 74, y + 10), pt, fill=(31, 42, 68), font=FT)
+            cv.paste(im, (int(x + (cw - im.width) / 2), y + LBL)); x += cw + GAP
+        y += rh + LBL + GAP
+    words, line, lines = caption.split(), "", []
+    for w in words:
+        if len(line + " " + w) > 175: lines.append(line); line = w
+        else: line = (line + " " + w).strip()
+    lines.append(line)
+    for i, ln in enumerate(lines[:4]):
+        d.text((PAD, y + i * 40), ln, fill=(90, 90, 90), font=FC)
+    cv.save(out_path + ".png", dpi=(300, 300)); cv.save(out_path + ".pdf", resolution=300)
+    print("  ", os.path.basename(out_path), cv.size)
+    return cv
+
+
+def run(cfg):
+    fig = cfg["_outdir"] / "figures"
+    def pick(*names):
+        for n in names:
+            p = fig / n
+            if p.exists(): return str(p)
+        return ""
+    panels = dict(
+        qc=pick("F1_QC.png"), volcano=pick("F2_Volcano_MA.png"), heatmap=pick("F2b_heatmap.png"),
+        go=pick("F3_GO_ORA.png"), kegg=pick("F3_KEGG_ORA.png"),
+        wgcna=pick("F6_wgcna_modules.png"), eig=pick("F6_wgcna_eigengenes.png"),
+        ppi=pick("F7_ppi_network.png"), hubs=pick("F7_ppi_hubs.png"),
+        cell=pick("F8_cell_composition.png"), cellmap=pick("F8_gene_celltype.png"),
+        key=pick("F9_keygene_clusters.png"), ml=pick("F10_ml_benchmark.png"),
+        shap=pick("F10_shap.png"), valid=pick("F11_external_validation.png"),
+        pmap=pick("F4_pathway_map.png"), pcross=pick("F4_pathway_crosstalk.png"),
+        pdend=pick("F4_pathway_dendrogram.png"), prog=pick("F5_progeny.png"))
+    od = cfg["_outdir"] / "figures" / "paper"; od.mkdir(parents=True, exist_ok=True)
+    spec = [
+      ("Figure1_QC", "Figure 1 | Cohort and quality control",
+       "Sample QC, correlation structure and the sex-marker check; flagged samples are removed before downstream analysis.",
+       [(880, [("A", "PCA", panels["qc"])])]),
+      ("Figure2_DE", "Figure 2 | Differential expression",
+       f"limma with covariates {cfg['covariates']}; thresholds |log2FC|>{cfg['de']['fc_threshold']}, FDR<{cfg['de']['fdr_threshold']}.",
+       [(820, [("A", "Volcano", panels["volcano"]), ("B", "Top DE genes", panels["heatmap"])])]),
+      ("Figure3_Enrichment", "Figure 3 | Functional enrichment",
+       "GO and KEGG over-representation, up and down separately, on a shared x-range.",
+       [(820, [("A", "GO BP", panels["go"]), ("B", "KEGG", panels["kegg"])])]),
+      ("Figure4_Pathways", "Figure 4 | Pathway organisation",
+       "Pathways group into clusters (shared genes) and crosstalk modules (activity correlation).",
+       [(880, [("A", "Enrichment map", panels["pmap"]), ("B", "Crosstalk network", panels["pcross"])]),
+        (820, [("C", "Pathway dendrogram", panels["pdend"]), ("D", "PROGENy activity", panels["prog"])])]),
+      ("Figure5_WGCNA", "Figure 5 | Co-expression modules",
+       "One etiology only. Modules are labelled by their size, case association and top hub genes.",
+       [(880, [("A", "Module catalogue", panels["wgcna"]), ("B", "Eigengene activity", panels["eig"])])]),
+      ("Figure6_Networks_cells", "Figure 6 | Protein network and cell composition",
+       "STRING PPI hubs and marker-based cell scores (deconvolution is a proxy, not absolute fractions).",
+       [(820, [("A", "PPI network", panels["ppi"]), ("B", "PPI hubs", panels["hubs"])]),
+        (820, [("C", "Cell composition", panels["cell"]), ("D", "Gene→compartment", panels["cellmap"])])]),
+      ("Figure7_KeyPrograms", "Figure 7 | Key genes and core programs",
+       "Union of the screening methods, clustered by co-expression into core programs.",
+       [(880, [("A", "Key-gene clusters", panels["key"])])]),
+      ("Figure8_ML", "Figure 8 | Machine learning and validation",
+       "Feature selection inside every CV fold; the locked model is applied to independent cohorts.",
+       [(880, [("A", "Classifier benchmark", panels["ml"]), ("B", "SHAP", panels["shap"])]),
+        (760, [("C", "External validation", panels["valid"])])]),
+    ]
+    for name, title, cap, rows in spec:
+        compose(str(od / name), title, cap, rows)
+    pages = [Image.open(f"{od}/{n}.png").convert("RGB") for n, *_ in spec if (od / f"{n}.png").exists()]
+    if pages:
+        pages[0].save(f"{od}/paper_figures.pdf", save_all=True, append_images=pages[1:], resolution=300)
+        print(f"  -> figures/paper/paper_figures.pdf ({len(pages)} pages)")

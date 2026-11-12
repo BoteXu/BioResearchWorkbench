@@ -1,0 +1,37 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "banksy_domains",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "unit_key",
+    "section_key",
+    "expression_assay",
+    "assay_scale",
+    "coordinate_unit",
+    "k_geom",
+    "use_agf",
+    "spatial_mode",
+    "lambda",
+    "n_pcs",
+    "knn",
+    "resolution",
+    "algorithm",
+    "standardize"
+  ],
+  "required_output_roles": [
+    "spatial_domains",
+    "spatial_representations",
+    "section_identity",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native BANKSY neighborhoods and graph clustering independently per actual section, lambda=0 expression baseline retained; cluster numbers not aligned across sections",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

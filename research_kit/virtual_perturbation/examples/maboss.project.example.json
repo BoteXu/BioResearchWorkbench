@@ -1,0 +1,96 @@
+{
+  "example_only": true,
+  "run_id": "example_maboss",
+  "method": "maboss",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "expected_binary_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "output_nodes": [
+      "NODE_A"
+    ],
+    "max_time": 100.0,
+    "time_tick": 1.0,
+    "trajectories": 10000,
+    "probability_tolerance": 0.0001,
+    "expected_package_version": "REPLACE_WITH_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "NODE_A"
+    ],
+    "evaluation_units": [
+      "MODEL_A"
+    ],
+    "seed": 17
+  },
+  "inputs": [
+    {
+      "id": "bnd",
+      "path": "inputs/bnd.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "cfg",
+      "path": "inputs/cfg.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "initial_probabilities",
+      "path": "inputs/initial_probabilities.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "logical_review",
+      "path": "inputs/logical_review.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "max_time": 200.0
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "trajectories": 20000
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "modeled_nodes",
+      "operator": "ge",
+      "bound": 2,
+      "definition": "Disabled illustrative configuration; replace with actual scientific acceptance gates",
+      "unit": "count",
+      "threshold_basis": "EXAMPLE_NOT_VALIDATED"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "method": "score_fixed_pose",
+    "description": "fixed_pose_ligand_profile_similarity",
+    "server_source": "server/worker.py",
+    "source_sha256": "192f256fbb8675881346f1865fb4269dfd66c3095ea2a37c89ad0f0132794f18",
+    "example": "examples/score_fixed_pose.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  },
+  {
+    "method": "align_profiles",
+    "description": "free_ligand_profile_alignment",
+    "server_source": "server/worker.py",
+    "source_sha256": "192f256fbb8675881346f1865fb4269dfd66c3095ea2a37c89ad0f0132794f18",
+    "example": "examples/align_profiles.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  },
+  {
+    "method": "shepherd2_generate",
+    "description": "native_shepherd2_interaction_conditioned_generation",
+    "server_source": "server/generation.py",
+    "source_sha256": "caa1e417d22a4cd3f44501bc33d12ae33de77e133a53b204a54fbe787b6d9bd2",
+    "example": "examples/shepherd2_generate.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  },
+  {
+    "method": "prepare_reference_profiles",
+    "description": "server_reference_axis_preparation_for_reviewed_constraints",
+    "server_source": "server/worker.py",
+    "source_sha256": "192f256fbb8675881346f1865fb4269dfd66c3095ea2a37c89ad0f0132794f18",
+    "example": "examples/prepare_reference_profiles.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  },
+  {
+    "method": "paper_native_evaluation",
+    "description": "native_relaxation_and_independent_modality_evaluation",
+    "server_source": "server/native_evaluation.py",
+    "source_sha256": "c35de14ea4f644b42d7f9794163f28654763b59dd8d223db8faa5855e41786c6",
+    "example": "examples/paper_native_evaluation.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  },
+  {
+    "method": "prepare_generated_identities",
+    "description": "computed_parent_groups_preserving_original_docking_state_and_coordinates",
+    "server_source": "server/identity_preparation.py",
+    "source_sha256": "eddc06a12cc0345ab2b11c52cd6884fa89c9779896e77cfa870df1f099db0f87",
+    "example": "examples/prepare_generated_identities.project.example.json",
+    "review": "METHOD_REVIEW_v1_2.md",
+    "actual_analysis_code_present": true,
+    "server_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+    "scientific_acceptance": "NOT_ESTABLISHED",
+    "private_only": true
+  }
+]

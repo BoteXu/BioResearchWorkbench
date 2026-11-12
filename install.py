@@ -92,6 +92,8 @@ def main():
     for provenance in ('LICENSE','NOTICE','third_party_components.json'):
         shutil.copy2(ROOT/provenance,local/provenance)
     shutil.copytree(ROOT/'skills',target/'skills',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+    if (ROOT/'research_kit').is_dir():
+        shutil.copytree(ROOT/'research_kit',target/'research_kit',ignore=shutil.ignore_patterns('__pycache__','*.pyc','*.local.json'))
     shutil.copy2(ROOT/'mcp_components.json',local/'mcp_components.json')
     shutil.copy2(ROOT/'mcp_embedding_model.json',local/'mcp_embedding_model.json')
     shutil.copy2(ROOT/'cadd_sources.json',local/'cadd_sources.json')

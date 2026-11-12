@@ -1,0 +1,14 @@
+{
+  "example_only": true,
+  "path": "owned_weights/REQUIRED_FROZEN_LOCAL_CHECKPOINT.ckpt",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "origin": "REQUIRED_EXACT_PUBLISHER_AND_WEIGHT_REVISION",
+  "license_review": "NOT_REVIEWED",
+  "trust_decision": "NOT_REVIEWED",
+  "license_document": {
+    "path": "evidence/REQUIRED_WEIGHT_LICENSE.txt",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "public_upload": false,
+  "note": "Native Lightning load uses unsafe deserialization. Code MIT is not a substitute for reviewing the actual checkpoint license and origin. No automatic weight download."
+}

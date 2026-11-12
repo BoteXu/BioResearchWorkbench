@@ -1,0 +1,33 @@
+# 这是逐条命令说明，不是可直接执行的批处理脚本。
+# 先完成结构状态、box、配体图和验证设计；填写所有 __FILL_*__。
+# 输出应位于新建的、专属于当前 receptor_state/ligand_state/conformer 的工作目录。
+
+mk_prepare_receptor.py \
+  --read_pdb "__FILL_RECEPTOR_H_PDB__" \
+  -o receptor -p -v \
+  --box_center __FILL_X_A__ __FILL_Y_A__ __FILL_Z_A__ \
+  --box_size __FILL_SX_A__ __FILL_SY_A__ __FILL_SZ_A__
+
+mk_prepare_ligand.py \
+  -i "__FILL_ONE_LIGAND_STATE_H_3D_SDF__" \
+  -o ligand.pdbqt
+
+# 数值为 SOP 搜索预算示例，依据对照验证调整。
+# 每个 seed 及输出文件应唯一，不能覆盖前一条搜索。
+vina \
+  --receptor receptor.pdbqt \
+  --ligand ligand.pdbqt \
+  --config receptor.box.txt \
+  --scoring vina \
+  --seed __FILL_NONZERO_SEED__ \
+  --exhaustiveness 32 \
+  --num_modes 20 \
+  --energy_range 5 \
+  --cpu 4 \
+  --out "__FILL_UNIQUE_POSES_PDBQT__"
+
+mk_export.py "__FILL_UNIQUE_POSES_PDBQT__" \
+  -s "__FILL_UNIQUE_POSES_SDF__"
+
+# 后续：化学身份/手性复核、物理有效性、对接验证、聚类、记录选择依据。
+# 分子动力学从已核对的 SDF/蛋白坐标重新参数化，不复用 PDBQT 为 MD 拓扑。

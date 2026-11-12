@@ -21,7 +21,22 @@ def scan_text(text, deny_terms=()):
     # The optional Open Babel distribution uses a four-component public package version.
     # Exempt only its complete requirements line; all other address text remains scanned.
     address_text = re.sub(r'(?m)^openbabel-wheel==[0-9]+(?:\.[0-9]+){3}\r?$', 'PUBLIC_PACKAGE_VERSION', text)
-    findings = [category for category,pattern in PATTERNS.items() if re.search(pattern,address_text if category=='address_literal' else text)]
+    path_text=text
+    try:
+        source_index=json.loads(text)
+        if isinstance(source_index,dict) and isinstance(source_index.get('files'),list):
+            source_index=dict(source_index);rows=[]
+            for entry in source_index['files']:
+                row=dict(entry) if isinstance(entry,dict) else entry
+                if isinstance(row,dict):
+                    name=row.get('path')
+                    if isinstance(name,str) and name and not name.startswith('/') and '\\' not in name and ':' not in name and all(p not in {'','.','..'} for p in name.split('/')) and re.fullmatch('[a-f0-9]{64}',str(row.get('sha256',''))):
+                        row['path']='CANONICAL_SOURCE_MEMBER'
+                rows.append(row)
+            source_index['files']=rows;path_text=json.dumps(source_index,ensure_ascii=False)
+    except (ValueError,TypeError):
+        pass
+    findings = [category for category,pattern in PATTERNS.items() if re.search(pattern,address_text if category=='address_literal' else path_text if category=='home_or_server_path' else text)]
     if any(term.casefold() in text.casefold() for term in deny_terms if term):
         findings.append('private_deny_term')
     return findings
@@ -32,8 +47,38 @@ def git(root, *args):
     return result.stdout
 
 
+def licensed_fonts(root):
+    """Only exact, metadata-reviewed OFL font bytes may bypass text decoding."""
+    path=root/'PUBLIC_ASSETS.json'
+    if not path.exists():return {}
+    data=json.loads(path.read_text(encoding='utf8'));result={}
+    for name,row in data['files'].items():
+        if not name.startswith('research_kit/scientific-visualization/assets/fonts/') or not name.endswith('.ttf') or row.get('license')!='OFL-1.1':raise ValueError('Unsupported binary publication scope')
+        license_path=root/row['license_file']
+        if not license_path.is_file() or hashlib.sha256(license_path.read_bytes()).hexdigest()!=row['license_sha256']:raise ValueError('Bundled font license changed')
+        result[name]=row['sha256']
+    return result
+
+
+def historical_blobs(root):
+    """Read all reachable HEAD objects without one process per historical blob."""
+    objects=list(dict.fromkeys(line.split(' ',1)[0] for line in git(root,'rev-list','--objects','HEAD').splitlines()))
+    proc=subprocess.Popen(['git','cat-file','--batch'],cwd=root,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+    try:
+        for oid in objects:
+            proc.stdin.write((oid+'\n').encode());proc.stdin.flush()
+            header=proc.stdout.readline().decode('ascii').split()
+            if len(header)!=3:raise ValueError('Unresolved history object')
+            size=int(header[2]);raw=proc.stdout.read(size)
+            if len(raw)!=size or proc.stdout.read(1)!=b'\n':raise ValueError('Incomplete history object')
+            if header[1]=='blob':yield raw
+    finally:
+        proc.stdin.close();proc.stdout.close();proc.wait()
+
+
 def review(root, manifest=False, history=False, deny_terms=()):
     root = Path(root).resolve()
+    fonts=licensed_fonts(root);font_hashes=set(fonts.values())
     if (root/'.git').exists():
         names = git(root,'ls-files','--cached','--others','--exclude-standard','-z').split('\0')
         paths = sorted({root/name for name in names if name})
@@ -42,8 +87,11 @@ def review(root, manifest=False, history=False, deny_terms=()):
     findings = []
     for path in paths:
         name = path.relative_to(root).as_posix()
-        if any(part in RUNTIME for part in path.relative_to(root).parts) or path.name.startswith('.env') or path.name.endswith(('.private.json','.private.txt','.private.toml','.private.lock')) or path.suffix.lower() in {'.env','.pem','.key','.sqlite3','.sqlite','.duckdb','.onnx','.log','.pfx','.p12','.zip'}:
+        if any(part in RUNTIME for part in path.relative_to(root).parts) or path.name.startswith('.env') or path.name.endswith(('.private.json','.private.txt','.private.toml','.private.lock','.local.json')) or ('research_kit' in path.parts and 'qa' in path.parts) or path.suffix.lower() in {'.env','.pem','.key','.sqlite3','.sqlite','.duckdb','.onnx','.log','.pfx','.p12','.zip'}:
             findings.append({'file':name,'category':'runtime_or_sensitive_file'})
+            continue
+        if name in fonts:
+            if hashlib.sha256(path.read_bytes()).hexdigest()!=fonts[name]:findings.append({'file':name,'category':'licensed_binary_checksum_mismatch'})
             continue
         for category in scan_text(path.read_text(encoding='utf8',errors='replace'),deny_terms):
             findings.append({'file':name,'category':category})
@@ -66,14 +114,10 @@ def review(root, manifest=False, history=False, deny_terms=()):
             if any(not stamp.endswith(' +0000') for stamp in line.split('|')):
                 findings.append({'category':'non_normalized_commit_timezone'})
         # Review historical blob content as well as current files and metadata.
-        objects = git(root,'rev-list','--objects','HEAD').splitlines()
-        blobs = set()
-        for line in objects:
-            object_id = line.split(' ',1)[0]
-            if object_id not in blobs and git(root,'cat-file','-t',object_id).strip() == 'blob':
-                blobs.add(object_id)
-                categories = scan_text(git(root,'cat-file','-p',object_id),deny_terms)
-                findings.extend({'category':'historical_'+category} for category in categories)
+        for raw in historical_blobs(root):
+            if hashlib.sha256(raw).hexdigest() in font_hashes:continue
+            categories=scan_text(raw.decode('utf8',errors='replace'),deny_terms)
+            findings.extend({'category':'historical_'+category} for category in categories)
     return {'files_reviewed':len(paths),'privacy_findings':findings,'pass':not findings,'limitations':['Pattern scanning is not proof of anonymity; manually review names, research context and account association.']}
 
 

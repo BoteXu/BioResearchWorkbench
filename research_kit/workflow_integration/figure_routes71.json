@@ -1,0 +1,1703 @@
+{
+  "schema": "scientific-figure-71-routes/1",
+  "methods": {
+    "apa_usage": {
+      "family": "usage",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "apa_usage",
+        "apa_sites",
+        "apa_coverage",
+        "apa_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "可变多聚腺苷酸化 APA",
+      "implementation": "DRIMSeq_site_usage",
+      "interpretation_boundary": "DRIMSeq 对已定量 poly(A) 位点的条件用量建模；位点/基因过滤与 stageR 分开，不等于 QAPA/DaPars 的新位点发现。 核对内部引物、末端协议、基因内分母、保留位点和拟合比例；显著用量不自动解释为 3′UTR 功能变化。"
+    },
+    "bulk_cnv": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "copy_segments",
+        "allele_copy_states",
+        "purity_ploidy_solutions",
+        "cnv_validation",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "DNA 拷贝数与等位基因状态",
+      "implementation": "CNVkit_call_purity_grid",
+      "interpretation_boundary": "CNVkit call 从已有分段 log2/VCF 推导等位拷贝；纯度/倍性网格是给定假设，不是自动可识别的后验最优解。 正常参考性别、测序偏差、BAF/深度及每个纯度点保留；缺少原始分段验收不能跳过。"
+    },
+    "bulk_deconvolution": {
+      "family": "composition",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "scatter",
+        "interval"
+      ],
+      "actual_roles": [
+        "cell_fraction_estimates",
+        "reference_coverage",
+        "reconstruction_residuals",
+        "reference_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "参考驱动的 bulk 细胞组成估计",
+      "implementation": "MuSiC_donor_reference",
+      "interpretation_boundary": "原生 MuSiC 使用供者标识的单细胞原始计数参考；重构相关性只是内部诊断，不是比例真值。 每类参考供者覆盖、RNA尺度、签名条件数、遗漏细胞类型与留供者敏感性同时审阅。"
+    },
+    "camera_sets": {
+      "family": "enrichment",
+      "allowed_views": [
+        "matrix",
+        "rank",
+        "edges",
+        "scatter"
+      ],
+      "actual_roles": [
+        "camera_table",
+        "camera_design",
+        "camera_diagnostics",
+        "camera_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "考虑基因间相关的集合检验",
+      "implementation": "limma_CAMERA",
+      "interpretation_boundary": "limma CAMERA 是考虑基因间相关的竞争性集合检验；集合方向与表达设计的显式对比一致。 保留全测试集合、覆盖分母、相关假设和对比；不要将 CAMERA P 值当 ssGSEA 活性或 GSEA ES。"
+    },
+    "cell_fraction_contrasts": {
+      "family": "composition",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "scatter",
+        "interval"
+      ],
+      "actual_roles": [
+        "cell_fraction_effects",
+        "cell_count_denominators",
+        "reference_group_audit",
+        "composition_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "细胞类型组成与差异比例",
+      "implementation": "limma_independent_unit_logit_proportions",
+      "interpretation_boundary": "在独立单位计数转出的显式 logit 比例上用 limma；不是完整 compositional multinomial 模型。 零/一比例的先验修正明确、各单位总数保留；比例变化受分母影响，不当作绝对细胞数变化。"
+    },
+    "clonal_phylogeny": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "clonal_fractions",
+        "candidate_phylogenies",
+        "clonality_uncertainty",
+        "phylogeny_constraints",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "亚克隆组成与演化树",
+      "implementation": "PyCloneVI_sum_rule_candidates",
+      "interpretation_boundary": "PyClone-VI 原生克隆聚类后枚举满足 sum-rule 的候选树；树候选不是进化树后验概率。 肿瘤纯度、局部拷贝、变异深度、聚类不确定性及多候选不可识别性保留。"
+    },
+    "clonotype_phenotype": {
+      "family": "repertoire",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "curve",
+        "rank"
+      ],
+      "actual_roles": [
+        "clone_state_associations",
+        "clone_state_counts",
+        "clone_dependence",
+        "clone_state_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "克隆型—细胞状态关联",
+      "implementation": "donor_clone_state_permutation",
+      "interpretation_boundary": "在供者内部做克隆与状态的置换，复合供者+克隆身份避免跨供者同名合并。 未分配克隆单独保留，供者/样本/细胞对齐；细胞置换不构成跨供者总体因果推断。"
+    },
+    "colocalization": {
+      "family": "genetics",
+      "allowed_views": [
+        "scatter",
+        "interval",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "coloc_hypotheses",
+        "shared_variant_set",
+        "signal_pairs",
+        "coloc_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "多信号共定位",
+      "implementation": "coloc_ABF_prior_sensitivity",
+      "interpretation_boundary": "coloc ABF 单因果假设与 coloc-SuSiE 多信号分支分开；后者要求真实 LD 和双侧等位轴。 频率、样本数/表型SD、病例比例、先验相容、SuSiE收敛与信号对齐同时验收；无CS是未解析。"
+    },
+    "cross_study_meta": {
+      "family": "interval",
+      "allowed_views": [
+        "interval",
+        "scatter",
+        "curve"
+      ],
+      "actual_roles": [
+        "meta_effects",
+        "heterogeneity",
+        "overlap_matrix",
+        "meta_influence",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "跨研究效应综合与异质性",
+      "implementation": "metafor_random_effects_sensitivity",
+      "interpretation_boundary": "metafor 随机效应只合并同一 estimand/效应尺度的独立研究；重叠样本不能按独立研究计。 效应/SE来源、Q/I²、留一研究、少研究区间与预定义敏感性保留。"
+    },
+    "differential_binding": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "differential_regions",
+        "consensus_peak_set",
+        "binding_normalization",
+        "binding_diagnostics",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "差异峰、结合与可及性",
+      "implementation": "edgeR_QL_peak_counts",
+      "interpretation_boundary": "edgeR QL 在共识峰计数上做负二项对比；不重新从 BAM 调峰，也不把每个 peak 当生物重复。 原始计数、峰坐标、文库大小、设计秩、独立单位和离散度/过滤分母全量验收。"
+    },
+    "differential_coexpression": {
+      "family": "association",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "interval"
+      ],
+      "actual_roles": [
+        "differential_edges",
+        "group_correlations",
+        "edge_uncertainty",
+        "rewiring_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "差异相关与网络重连",
+      "implementation": "independent_group_FisherZ",
+      "interpretation_boundary": "独立组 Pearson 采用 Fisher-z；秩相关的中心化 bootstrap 为声明的替代检验，不是 DGCA 原方法。 每组独立单位数、常量特征、有效/失败重采样和相关差的不确定性保留。"
+    },
+    "enhancer_grn": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "predictive_GRN_coefficients",
+        "heldout_predictions",
+        "candidate_link_support",
+        "coefficient_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "增强子—TF—基因候选网络",
+      "implementation": "motif_restricted_ridge_holdout",
+      "interpretation_boundary": "基于提供的 motif 候选边做 ridge 与留单位预测；图稀疏性来自先验和正则，不能推断真实调控因果。 训练/测试供者隔离、候选峰基因坐标、特征尺度、持出误差及零模型基线验收。"
+    },
+    "exon_usage": {
+      "family": "usage",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "exon_usage_effects",
+        "exon_counts_qc",
+        "exon_test_family",
+        "exon_diagnostics",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "外显子相对使用",
+      "implementation": "DEXSeq_DEU",
+      "interpretation_boundary": "原生 DEXSeq 针对 exon-bin×sample 的条件使用交互，不等于所有类型的剪接事件发现。 计数bin/基因映射、测序协议、sample blocking、全bin过滤和基因内多重检验范围核对。"
+    },
+    "fate_probabilities": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "fate_probabilities",
+        "terminal_states",
+        "kernel_diagnostics",
+        "fate_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "CellRank 状态与命运概率",
+      "implementation": "CellRank_velocity_kernel",
+      "interpretation_boundary": "CellRank velocity kernel 以提供的端状态为条件；每个断开的供者图必须包含全部声明端状态。 行概率和、不可达细胞、各供者终态支持、速度输入和方向证据验收；不是实验谱系追踪。"
+    },
+    "fine_mapping": {
+      "family": "genetics",
+      "allowed_views": [
+        "scatter",
+        "interval",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "variant_pip",
+        "credible_sets",
+        "ld_diagnostics",
+        "finemap_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "位点精细定位与可信集合",
+      "implementation": "susieR_RSS",
+      "interpretation_boundary": "susieR RSS 在已审阅的汇总Z和匹配LD上做可信集/PIP；不能把LD先验当个体基因型。 等位轴、祖源/样本重叠、LD对称/PSD、收敛、CS纯度及先验敏感性验收。"
+    },
+    "footprinting": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "footprint_profiles",
+        "footprint_scores",
+        "bias_profiles",
+        "footprint_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "ATAC footprint 与偏倚审查",
+      "implementation": "TOBIAS_ATACorrect_BINDetect",
+      "interpretation_boundary": "TOBIAS ATACorrect/BINDetect 原生路径使用提供的 ATAC/BAM/峰与 motif 资源，不把 motif 出现当占据。 切割位点偏差、足迹窗口、参考版本、独立单位和背景信号检查；活性推断需后续实验证据。"
+    },
+    "gsva_scores": {
+      "family": "matrix",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "gsva_scores",
+        "gsva_coverage",
+        "gsva_diagnostics",
+        "gsva_contrasts",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "GSVA 样本级集合分数",
+      "implementation": "GSVA_current_parameter_API",
+      "interpretation_boundary": "使用当前 GSVA 参数对象API；kcdf与真实表达尺度绑定，样本层分数不等于通路显著差异。 基因集来源/版本、交集、集合大小、常量和缺失处理核对，差异分数另走独立单位模型。"
+    },
+    "hic_compartments": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "compartment_scores",
+        "compartment_switches",
+        "orientation_evidence",
+        "compartment_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "A/B compartment 与切换",
+      "implementation": "cooltools_eigs_cis",
+      "interpretation_boundary": "cooltools eigs_cis 以真实balanced cooler计算区室；符号由所给phasing轨道确定，不随美化翻转。 分辨率、坏bin、平衡、覆盖、phasing来源和同染色体轴验收。"
+    },
+    "hic_loops_tads": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "chromatin_loops",
+        "tad_boundaries",
+        "contact_expected",
+        "hic_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "Hi-C 环与 TAD 边界",
+      "implementation": "cooltools_dots_insulation",
+      "interpretation_boundary": "cooltools dots与insulation各输出真实环候选及边界，两个分支的尺度与参数分别记录。 contact平衡、预期距离背景、核窗口/坏bin与边界强度检查；检出的边界不是机制因果。"
+    },
+    "impulse_response": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "nonlinear_time_tests",
+        "fitted_time_curves",
+        "time_coverage",
+        "nonlinear_fit_diagnostics",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "非线性时间响应",
+      "implementation": "limma_natural_spline",
+      "interpretation_boundary": "limma 自然样条时间模型是灵活时间效应检验，明确不是 ImpulseDE2 脉冲模型或峰时间参数。 真实时间单位、样条自由度、残差设计、零/全模型和时间覆盖敏感性验收。"
+    },
+    "isoform_switch": {
+      "family": "usage",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "isoform_switches",
+        "isoform_consequences",
+        "isoform_mapping",
+        "consequence_limits",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "异构体转换及功能后果候选",
+      "implementation": "DRIMSeq_CDS_domain_consequences",
+      "interpretation_boundary": "DRIMSeq 条件转录本用量加提供的CDS/domain后果；后果注释不是已验证蛋白异构体活性。 转录本/基因/注释版本、stageR、switch delta及阅读框/domain来源分开验收。"
+    },
+    "junction_events": {
+      "family": "usage",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "junction_effects",
+        "junction_coverage",
+        "event_definitions",
+        "splicing_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "剪接事件与 junction cluster",
+      "implementation": "junction_cluster_beta_binomial",
+      "interpretation_boundary": "junction cluster beta-binomial 对已定量事件/分母做显式组间检验；不是从reads自动发现LeafCutter事件。 事件总量、嵌套junction、独立单位、过度离散、退化拟合与FDR家族核对。"
+    },
+    "kinase_activity": {
+      "family": "matrix",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "kinase_scores",
+        "kinase_coverage",
+        "protein_adjustment",
+        "kinase_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "激酶—底物活性候选",
+      "implementation": "decoupleR_ULM_phosphosite",
+      "interpretation_boundary": "decoupleR ULM 针对有方向的磷酸化底物网络估计活性；无方向集合分数不能冒称激酶活性。 位点/蛋白命名空间、底物交集、网络权重和每个调控子覆盖验收。"
+    },
+    "kinetic_velocity": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "velocity_vectors",
+        "kinetic_parameters",
+        "phase_diagnostics",
+        "velocity_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "RNA velocity 动力学与相图",
+      "implementation": "scVelo_dynamical",
+      "interpretation_boundary": "scVelo dynamical 模型读取真实 spliced/unspliced；拟合速度和潜在时间为模型条件量。 层非负/计数语义、动力学拟合、邻域、跨供者边和方向独立证据验收；不虚构velocity。"
+    },
+    "leading_edge": {
+      "family": "enrichment",
+      "allowed_views": [
+        "matrix",
+        "rank",
+        "edges",
+        "scatter"
+      ],
+      "actual_roles": [
+        "leading_edge_members",
+        "term_overlap",
+        "representative_terms",
+        "full_term_index",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "Leading-edge 与集合冗余审查",
+      "implementation": "leading_edge_Jaccard_components",
+      "interpretation_boundary": "读取真实富集leading-edge成员做Jaccard与连通分组；不是重新运行GSEA或对共享成员做新的显著性检验。 显著集选择、成员ID、空集合及重叠定义保留；空结果不解释为通路无作用。"
+    },
+    "ligand_target_links": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "ligand_priorities",
+        "ligand_target_links",
+        "receiver_universe",
+        "ligand_controls",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "配体到受体细胞靶基因",
+      "implementation": "NicheNet_ligand_activity",
+      "interpretation_boundary": "原生 NicheNet ligand activity 使用receiver差异、真实表达ligand/receptor与配套先验。 receiver测试背景、候选覆盖、配体-受体与ligand-target版本及activity解释尺度核对。"
+    },
+    "lipid_chain_patterns": {
+      "family": "association",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "interval"
+      ],
+      "actual_roles": [
+        "chain_pattern_effects",
+        "chain_annotation",
+        "chain_denominators",
+        "chain_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "脂质链长与不饱和模式",
+      "implementation": "donor_chain_slope_explicit_contrast",
+      "interpretation_boundary": "每个独立单位内估计链长/不饱和度斜率，再做声明组间对比；不是把多个脂质当独立供者。 结构歧义、类内设计秩、链长/不饱和度共线、单位斜率和相应不确定性验收。"
+    },
+    "lipid_class_enrichment": {
+      "family": "enrichment",
+      "allowed_views": [
+        "matrix",
+        "rank",
+        "edges",
+        "scatter"
+      ],
+      "actual_roles": [
+        "lipid_set_results",
+        "lipid_universe",
+        "lipid_identity_audit",
+        "lipid_set_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "脂质类别与链特征富集",
+      "implementation": "fgsea_lipid_class_sets",
+      "interpretation_boundary": "fgsea 对冻结脂质排序统计量与类集合运行原生富集；脂质同分异构不能随意按名称合并。 全rank分母、ties、类大小/覆盖、方向和多重比较核对，不从显著脂质单独造rank。"
+    },
+    "longitudinal_effects": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "time_contrasts",
+        "time_design",
+        "time_diagnostics",
+        "time_fit_diagnostics",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "纵向、交互与重复测量效应",
+      "implementation": "limma_duplicateCorrelation_spline",
+      "interpretation_boundary": "limma duplicateCorrelation加时间样条为近似重复测量模型；不冒充任意随机斜率LMM。 配对单位/时间、协变量、设计秩、共识相关、残差与模型敏感性验收。"
+    },
+    "lr_consensus": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "lr_consensus",
+        "lr_method_scores",
+        "lr_coverage",
+        "lr_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "配体受体多方法共识",
+      "implementation": "LIANA_rank_aggregate_local_resource",
+      "interpretation_boundary": "LIANA 在每个供者内使用本地资源做rank aggregate；复合物可用性按所有实际亚基判断。 LR资源、复合物亚基、表达门槛、供者覆盖及每供者分数尺度验收；跨供者rank不可直接当丰度。"
+    },
+    "lr_differential": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "lr_contrasts",
+        "lr_donor_support",
+        "lr_missing_pairs",
+        "lr_contrast_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "供者层级的差异通信",
+      "implementation": "donor_LR_explicit_Welch_paired_or_HC3_contrast",
+      "interpretation_boundary": "以共同尺度 donor LR丰度做显式Welch/配对/HC3模型，不以细胞排列替代生物重复。 配对完整性、covariate兼容、LR分母和多重检验家族验收；不能接各供者独立归一的rank。"
+    },
+    "methylation_gene_links": {
+      "family": "association",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "interval"
+      ],
+      "actual_roles": [
+        "dmr_effects",
+        "dmr_gene_mapping",
+        "methylation_expression",
+        "methylation_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "DMR 与表达/注释整合",
+      "implementation": "predefined_methylation_regions_and_conditional_RNA_links",
+      "interpretation_boundary": "预定义区域甲基化变化与条件RNA秩残差关联；配对分支在供者差值上计算，自由度按配对数。 甲基化/total整数分母、区域覆盖、探针/基因映射、秩与常量检查；关联不等于中介机制。"
+    },
+    "microbe_differential": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "taxon_effects",
+        "structural_zero_audit",
+        "composition_diagnostics",
+        "taxon_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "微生物差异丰度与组成偏差",
+      "implementation": "ANCOMBC2",
+      "interpretation_boundary": "原生 ANCOM-BC2 检验声明的组成偏差修正差异；不把相对丰度直接塞进常规RNA计数模型。 污染/零处理、结构零、单位/批次、偏差诊断与全测试taxa验收。"
+    },
+    "microbe_diversity": {
+      "family": "composition",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "scatter",
+        "interval"
+      ],
+      "actual_roles": [
+        "alpha_diversity",
+        "beta_distances",
+        "diversity_tests",
+        "dispersion_audit",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "α/β 多样性与群落差异",
+      "implementation": "vegan_diversity_PERMANOVA",
+      "interpretation_boundary": "vegan alpha距离与PERMANOVA分开；离散度检验是组间距离解释的重要诊断。 测序深度、稀释/距离定义、限制置换单位、组内离散与重复样本核对。"
+    },
+    "microbe_gene_context": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "gene_function_annotations",
+        "gene_annotation_evidence",
+        "context_coverage",
+        "annotation_ambiguity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "微生物基因功能注释与上下文",
+      "implementation": "eggNOG_mapper_offline",
+      "interpretation_boundary": "eggNOG-mapper 离线真实基因注释；GO缺失符号“-”计为缺失而不是一个注释。 FASTA完整分母、唯一query、数据库版本、命中覆盖和注释来源验收；注释不证明功能活性。"
+    },
+    "microbe_network": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "microbe_edges",
+        "network_selection",
+        "microbe_network_stability",
+        "microbe_network_null",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "组成数据微生物关联网络",
+      "implementation": "SPIECEASI_StARS",
+      "interpretation_boundary": "SPIEC-EASI/StARS 条件依赖网络是组成数据统计网络，不是生物互作实验。 污染/零处理、prevalence、lambda路径、StARS稳定性和每个单位独立性验收。"
+    },
+    "microbe_pathways": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "microbe_function_effects",
+        "stratified_function",
+        "unclassified_fraction",
+        "function_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "微生物功能与通路丰度",
+      "implementation": "HUMAnN_export_CLR_donor_contrast",
+      "interpretation_boundary": "HUMAnN已导出通路丰度经显式CLR/单位对比；不是本包装器重新完成原始宏基因组功能定量。 stratified/unstratified定义、零处理、参考库、完整组成分母和单位设计验收。"
+    },
+    "microbe_strain": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "strain_profiles",
+        "strain_tree",
+        "strain_coverage",
+        "strain_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "菌株分辨与群体结构",
+      "implementation": "StrainPhlAn_local_markers",
+      "interpretation_boundary": "StrainPhlAn 使用真实本地标记建树；修复覆盖表不可达语句，逐文件保留长度和歧义率。 标记存在/完整度、空序列、N计数、参考版本及重复单位检查；树距离不是传播证明。"
+    },
+    "motif_deviation": {
+      "family": "matrix",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "motif_deviation_scores",
+        "motif_deviation_effects",
+        "chromvar_background",
+        "chromvar_diagnostics",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "chromVAR motif 可及性偏差",
+      "implementation": "chromVAR_GC_background",
+      "interpretation_boundary": "原生 chromVAR 根据计数、motif匹配和GC背景计算deviation；不是TF占据或因果活性。 峰/基因组、GC/可及性偏差、背景可用性、细胞单位与偏差分布验收。"
+    },
+    "motif_enrichment": {
+      "family": "enrichment",
+      "allowed_views": [
+        "matrix",
+        "rank",
+        "edges",
+        "scatter"
+      ],
+      "actual_roles": [
+        "motif_enrichment",
+        "motif_background",
+        "motif_matches",
+        "motif_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "匹配背景的 motif 富集",
+      "implementation": "GC_matched_motif_Fisher",
+      "interpretation_boundary": "GC/长度分层匹配后Fisher优势比是本地替代实现，不是HOMER/MEME完整搜索统计模型。 前景/背景互斥、分层支持、全搜索motif集合和预声明随机种子验收。"
+    },
+    "multiomics_mediation": {
+      "family": "interval",
+      "allowed_views": [
+        "interval",
+        "scatter",
+        "curve"
+      ],
+      "actual_roles": [
+        "mediation_estimands",
+        "mediation_effects",
+        "mediation_assumptions",
+        "mediation_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "有条件的中介分析审查",
+      "implementation": "mediation_linear_models",
+      "interpretation_boundary": "mediation线性模型依赖顺序可忽略性；bootstrap和medsens敏感性不能修复不可识别混杂。 暴露/中介/结局时间顺序、共同单位、协变量、模型兼容及敏感性曲线验收。"
+    },
+    "network_diffusion": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "diffusion_ranks",
+        "diffusion_seeds",
+        "diffusion_null",
+        "diffusion_holdout",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "网络传播与候选排序",
+      "implementation": "personalized_PageRank_holdout",
+      "interpretation_boundary": "personalized PageRank是网络传播优先级；使用固定持出标签做排序诊断，不是节点因果效应。 seed/holdout互斥、网络分量、权重、孤立点及持出基线检查。"
+    },
+    "peak_gene_links": {
+      "family": "association",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "interval"
+      ],
+      "actual_roles": [
+        "peak_gene_links",
+        "peak_gene_universe",
+        "link_covariates",
+        "link_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "峰—基因关联与顺式候选",
+      "implementation": "donor_adjusted_peak_gene_partialcorr",
+      "interpretation_boundary": "供者层残差相关用n-rank(X)-1自由度，已修复未定义变量；支持有限非完美相关。 候选坐标、RNA/ATAC同单位、协变量秩、残差常量及全候选边分母验收。"
+    },
+    "physical_ppi": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "physical_edges",
+        "interaction_sources",
+        "network_universe",
+        "network_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "物理 PPI 证据网络",
+      "implementation": "physical_evidence_network",
+      "interpretation_boundary": "只保留有物理实验标签的提供边，保留节点/证据；数据库功能关联不能自动升级为物理互作。 实验类别、物种、参考版本、重复边与自环政策及孤立节点验收。"
+    },
+    "polygenic_score": {
+      "family": "genetics",
+      "allowed_views": [
+        "scatter",
+        "interval",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "prs_weights",
+        "prs_predictions",
+        "prs_metrics",
+        "prs_overlap_audit",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "多基因评分与迁移性",
+      "implementation": "PLINK2_locked_weight_PRS",
+      "interpretation_boundary": "PLINK2用冻结权重与真实等位映射计算PRS；权重训练队列和目标队列需审查重叠。 基因组版本、效应等位、缺失变异、覆盖及群体结构核对；本分支不提供临床风险校准。"
+    },
+    "ppi_modules": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "network_modules",
+        "network_centrality",
+        "network_null",
+        "network_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "PPI 模块与中心性稳健性",
+      "implementation": "Louvain_degree_null",
+      "interpretation_boundary": "Louvain及degree-null诊断只针对图拓扑；全局transitivity/分量的零模型不是每个模块的显著性。 节点全分母、边权/多重边、分区分辨率、置换和模块稳定性检查。"
+    },
+    "protein_complexes": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "complex_effects",
+        "complex_coverage",
+        "member_effects",
+        "complex_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "复合体丰度与协调变化",
+      "implementation": "limma_complex_member_aggregate",
+      "interpretation_boundary": "供给成员的log2丰度先按复合物聚合再limma；聚合不是复合物组装证据。 分开报告聚合曲线样本间SD与样本内成员SD，覆盖和成员级结果都保留。"
+    },
+    "proteogenomic_links": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "variant_peptide_links",
+        "peptide_spectrum_index",
+        "search_space_fdr",
+        "proteogenomic_controls",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "蛋白基因组与变异肽证据",
+      "implementation": "target_decoy_variant_PSM",
+      "interpretation_boundary": "已竞争target/decoy PSM按样本与搜索类别分层估计FDR，并单独做肽级控制和唯一变异支持。 每类真实decoy、score并列、canonical/variant搜索空间、唯一肽与全PSM分母验收；无谱不等于无蛋白。"
+    },
+    "ptm_adjustment": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "adjusted_ptm_effects",
+        "total_protein_effects",
+        "ptm_mapping",
+        "ptm_uncertainty",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "PTM 相对总蛋白变化",
+      "implementation": "limma_matched_site_minus_protein",
+      "interpretation_boundary": "匹配位点减去其parent蛋白log2丰度后做limma是声明的线性校正，不是一般MSstatsPTM全部模型。 同样本同尺度、单一parent映射、缺失与校正权重保留；位点信号不直接证明酶活。"
+    },
+    "rare_variant_burden": {
+      "family": "genetics",
+      "allowed_views": [
+        "scatter",
+        "interval",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "burden_results",
+        "variant_masks",
+        "carrier_counts",
+        "burden_calibration",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "稀有变异聚合关联",
+      "implementation": "SKAT_independent_units",
+      "interpretation_boundary": "原生SKAT对预定义mask做核检验；独立/无近亲单位是本分支边界。 变异qual/MAF/mask、祖源/表型缺失、null模型及真实校准模拟结果验收。"
+    },
+    "repertoire_clonotypes": {
+      "family": "repertoire",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "curve",
+        "rank"
+      ],
+      "actual_roles": [
+        "clonotype_assignments",
+        "chain_qc",
+        "barcode_crosswalk",
+        "clonotype_definition",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "TCR/BCR 克隆型与配对",
+      "implementation": "Scirpy_exact_nt_donor_clonotypes",
+      "interpretation_boundary": "原生Scirpy以精确核苷酸定义、链QC和供者作用域生成克隆；不把跨供者同名当同一克隆。 cell/sample/unit映射、非生产/多链、未分配与完整细胞分母保留。"
+    },
+    "repertoire_diversity": {
+      "family": "repertoire",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "curve",
+        "rank"
+      ],
+      "actual_roles": [
+        "repertoire_diversity",
+        "expansion_summary",
+        "repertoire_sampling",
+        "diversity_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "受体谱多样性与克隆扩增",
+      "implementation": "donor_repertoire_rarefaction",
+      "interpretation_boundary": "在真实供者克隆计数上算Shannon/Simpson及不放回稀释；不是把bootstrap细胞当新供者。 稀释深度不得超过供者细胞数，完整克隆分母、扩增和未分配记录保留。"
+    },
+    "scenic_regulons": {
+      "family": "network",
+      "allowed_views": [
+        "edges",
+        "matrix",
+        "rank",
+        "scatter"
+      ],
+      "actual_roles": [
+        "regulon_edges",
+        "regulon_activity",
+        "motif_support",
+        "regulon_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "SCENIC 共表达与 motif 支持 regulon",
+      "implementation": "pySCENIC_GRN_CTX_AUCell",
+      "interpretation_boundary": "pySCENIC原生GRN/ctx/AUCell三阶段使用冻结motif/ranking资源；AUCell不是独立机制验证。 物种/基因轴、数据库版本、资源覆盖和供者层复核；网络训练与下游验证数据泄漏需审查。"
+    },
+    "signature_matching": {
+      "family": "enrichment",
+      "allowed_views": [
+        "matrix",
+        "rank",
+        "edges",
+        "scatter"
+      ],
+      "actual_roles": [
+        "signature_matches",
+        "signature_context",
+        "signature_null",
+        "signature_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "扰动签名相似与反向匹配",
+      "implementation": "signed_rank_connectivity_offline",
+      "interpretation_boundary": "离线signed-rank连接性和基因置换为声明的替代分数，不是原CMap全算法或药效证据。 查询全rank、参考模型/剂量/时间、映射交集和基因相关性限制保留。"
+    },
+    "singlecell_abundance": {
+      "family": "composition",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "scatter",
+        "interval"
+      ],
+      "actual_roles": [
+        "neighborhood_effects",
+        "neighborhood_counts",
+        "neighborhood_fdr",
+        "neighborhood_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "Milo 细胞邻域差异丰度",
+      "implementation": "miloR_neighborhood_NB",
+      "interpretation_boundary": "miloR邻域NB以sample计数和供者设计推断丰度；细胞/邻域重叠不算生物重复。 邻域覆盖、样本独立单位、设计秩、文库归一及SpatialFDR原列验收。"
+    },
+    "singlecell_cnv": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "inferred_cnv_profiles",
+        "normal_reference_audit",
+        "cnv_diagnostics",
+        "dna_concordance",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "表达推断的单细胞 CNV",
+      "implementation": "chromosome_smoothed_reference_RNA_CNV",
+      "interpretation_boundary": "染色体平滑RNA信号是相对CNV提示的替代实现，不是DNA CNV测量或完整inferCNV原算法。 正常参考审阅、基因坐标/染色体、中心化尺度、平滑窗口与批次/表达混杂验收。"
+    },
+    "spatial_deconvolution": {
+      "family": "composition",
+      "allowed_views": [
+        "proportions",
+        "matrix",
+        "scatter",
+        "interval"
+      ],
+      "actual_roles": [
+        "spatial_abundance",
+        "spatial_reference_fit",
+        "spatial_uncertainty",
+        "histology_checks",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "空间 spot 细胞丰度估计",
+      "implementation": "spacexr_RCTD",
+      "interpretation_boundary": "spacexr RCTD原生计数参考/空间映射，区分当前Bioconductor与legacy full接口。 参考供者/细胞类覆盖、count尺度、spot拒绝、真实坐标与可识别性保留；结果不是细胞实测数。"
+    },
+    "spatial_domains": {
+      "family": "spatial",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "rank",
+        "edges"
+      ],
+      "actual_roles": [
+        "spatial_domains",
+        "domain_parameters",
+        "histology_concordance",
+        "domain_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "空间域与组织学一致性",
+      "implementation": "spatial_neighbor_augmented_PCA_kmeans",
+      "interpretation_boundary": "空间邻域增强PCA+kmeans是声明的轻量替代，不冒称BANKSY或图深度模型。 section边界、邻域权、尺度、随机种子/分辨率及原始表示对照验收；聚类不是组织学真值。"
+    },
+    "spatial_gradients": {
+      "family": "spatial",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "rank",
+        "edges"
+      ],
+      "actual_roles": [
+        "distance_gradients",
+        "boundary_coordinates",
+        "spatial_residuals",
+        "gradient_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "组织边界距离与空间梯度",
+      "implementation": "per_section_radial_spline",
+      "interpretation_boundary": "每section按距指定边界的径向样条拟合，残差空间自相关为诊断；不是任意组织形态梯度模型。 物理单位、真实边界、section/供者层、样条与Moran残差保留。"
+    },
+    "spatial_lr": {
+      "family": "spatial",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "rank",
+        "edges"
+      ],
+      "actual_roles": [
+        "spatial_lr_scores",
+        "spatial_lr_pairs",
+        "spatial_null",
+        "spatial_lr_radius",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "空间约束的配体受体关系",
+      "implementation": "section_radius_LR_permutation",
+      "interpretation_boundary": "section内固定半径LR乘积与置换是共定位模型，不能称为已经发生的细胞通信。 距离单位、邻居数、section隔离、资源/亚基和完整置换分母验收。"
+    },
+    "spatial_niches": {
+      "family": "spatial",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "rank",
+        "edges"
+      ],
+      "actual_roles": [
+        "neighborhood_enrichment",
+        "spatial_graph",
+        "constrained_null",
+        "niche_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "邻域富集与组织生态位",
+      "implementation": "section_label_neighborhood_permutation",
+      "interpretation_boundary": "section内邻居标签计数置换检验局部组成；对边缘效应和细胞密度的限制明确。 坐标单位、邻居半径、section标签与供者层解释、置换覆盖保留。"
+    },
+    "spatial_variable_genes": {
+      "family": "spatial",
+      "allowed_views": [
+        "scatter",
+        "matrix",
+        "rank",
+        "edges"
+      ],
+      "actual_roles": [
+        "spatial_gene_tests",
+        "spatial_kernel",
+        "spatial_gene_qc",
+        "spatial_gene_replication",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "空间变异基因与空间零模型",
+      "implementation": "SPARKX_per_section",
+      "interpretation_boundary": "SPARK-X按section使用原生表达/坐标；合并证据不替代跨供者总体差异模型。 原始计数、坐标匹配、基因过滤、section独立性与测试家族核对。"
+    },
+    "ssgsea_scores": {
+      "family": "matrix",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "ssgsea_scores",
+        "ssgsea_coverage",
+        "ssgsea_parameters",
+        "ssgsea_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "ssGSEA 样本级排序分数",
+      "implementation": "GSVA_ssGSEA_parameter_API",
+      "interpretation_boundary": "原生GSVA ssGSEA参数对象给出样本分数，归一化选项冻结；分数不是NES或P值。 同版本基因集交集、大小、alpha/ties、样本集合依赖和后续单位对比核对。"
+    },
+    "temporal_modules": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "temporal_modules",
+        "temporal_centroids",
+        "temporal_uncertainty",
+        "temporal_stability",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "时间模式模块与稳定性",
+      "implementation": "spline_curve_consensus_modules",
+      "interpretation_boundary": "样条曲线聚类及单位bootstrap稳定性为本地替代；模块曲线现移除干扰协变量贡献。 完整拟合残差与仅时间/组曲线分开保存，保留失败重采样；不是Impulse/WGCNA同一模型。"
+    },
+    "tf_activity": {
+      "family": "matrix",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "tf_activity_scores",
+        "tf_target_coverage",
+        "tf_activity_effects",
+        "tf_activity_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "有符号调控靶集合的 TF 活性",
+      "implementation": "decoupleR_ULM_TF",
+      "interpretation_boundary": "decoupleR ULM结合有方向TF-target权重；target表达活性推断不等于TF蛋白活性实测。 物种/资源版本、符号映射、最少targets、覆盖和设计对比核对。"
+    },
+    "trajectory_dynamics": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "trajectory_gene_tests",
+        "trajectory_curves",
+        "trajectory_fit",
+        "trajectory_test_family",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "沿轨迹与分支的表达变化",
+      "implementation": "tradeSeq_conditional_GAM",
+      "interpretation_boundary": "tradeSeq条件GAM在冻结轨迹/权重上拟合；细胞条件模型不是跨供者纵向推断。 每细胞伪时间/lineage权重、count、knots、收敛和多重检验验收，不重新拟合嵌入。"
+    },
+    "trajectory_topology": {
+      "family": "trajectory",
+      "allowed_views": [
+        "curve",
+        "matrix",
+        "scatter",
+        "proportions"
+      ],
+      "actual_roles": [
+        "trajectory_topology",
+        "pseudotime_assignments",
+        "root_evidence",
+        "trajectory_resampling",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "轨迹拓扑与根节点稳健性",
+      "implementation": "Slingshot_root_locked",
+      "interpretation_boundary": "Slingshot在明确metric表示上、以冻结root/方向证据建轨迹；不是实验时间方向。 cluster/cell轴、root、分支不可达性与替代root敏感性保留；不使用UMAP距离作默认度量。"
+    },
+    "transcript_usage": {
+      "family": "usage",
+      "allowed_views": [
+        "matrix",
+        "scatter",
+        "rank"
+      ],
+      "actual_roles": [
+        "dtu_effects",
+        "transcript_mapping",
+        "dtu_diagnostics",
+        "dtu_hierarchical_tests",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "差异转录本使用 DTU",
+      "implementation": "DRIMSeq_DTU",
+      "interpretation_boundary": "DRIMSeq DTU+stageR控制保留特征与基因层；原始全转录本用量和模型过滤后比例必须分开读。 原始count、feature-gene映射、两个组单位、precision/fit与全测试分母验收。"
+    },
+    "translation_efficiency": {
+      "family": "differential",
+      "allowed_views": [
+        "volcano",
+        "matrix",
+        "scatter",
+        "rank",
+        "interval"
+      ],
+      "actual_roles": [
+        "translation_interactions",
+        "ribo_rna_pairs",
+        "periodicity_qc",
+        "translation_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "配对 Ribo/RNA 翻译效率",
+      "implementation": "edgeR_Ribo_RNA_interaction",
+      "interpretation_boundary": "edgeR QL以unit+assay+显式Ribo×treatment数值交互识别相对TE；修复与unit混淆的条件主效应。 每单位一RNA一Ribo、每条件至少两独立单位、两assay均有count支持、分别TMM、offset/周期性验收；绝对全局翻译不在可识别范围。"
+    },
+    "two_sample_mr": {
+      "family": "interval",
+      "allowed_views": [
+        "interval",
+        "scatter",
+        "curve"
+      ],
+      "actual_roles": [
+        "mr_estimates",
+        "instrument_audit",
+        "mr_assumption_checks",
+        "mr_sensitivity",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "工具变量与两样本 MR 审查",
+      "implementation": "TwoSampleMR_offline_harmonised",
+      "interpretation_boundary": "TwoSampleMR离线harmonise与冻结LD-clump证据；MR方向依赖工具变量假设，不能由显著性建立。 效应等位/回文处理、F强度、祖源/样本重叠、异质性/多效性和多方法敏感性保留。"
+    },
+    "uorf_translation": {
+      "family": "genome",
+      "allowed_views": [
+        "scatter",
+        "curve",
+        "matrix",
+        "rank"
+      ],
+      "actual_roles": [
+        "candidate_orfs",
+        "orf_periodicity",
+        "orf_mapping",
+        "orf_controls",
+        "source_metadata_snapshot",
+        "scientific_context"
+      ],
+      "no_new_fit": true,
+      "complete_CI_required_for_interval": true,
+      "original_embedded_axes_required_for_trajectory": true,
+      "source_receipt_and_input_hash_required": true,
+      "label": "uORF 与候选翻译 ORF",
+      "implementation": "exon_aware_ORF_conditional_or_donor_controlled_periodicity",
+      "interpretation_boundary": "外显子感知P-site三核苷周期性；条件binomial与供者配对控制两种推断分开，不由RNA丰度推翻译。 P-site offset、CDS阳性与ORF阴性对照、独立单位及exon/transcript坐标核对；零覆盖frame fraction保持NA。"
+    }
+  },
+  "source_registry_sha256": "bf773dbd22a5b6b3059c753dd39da7886d34492ee5eec958025ac13c513d9116",
+  "runtime": "NOT_RUN_THIS_UPGRADE",
+  "no_refitting": true
+}

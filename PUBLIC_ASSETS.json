@@ -1,0 +1,33 @@
+{
+  "schema": "public-licensed-binary-assets/1",
+  "files": {
+    "research_kit/scientific-visualization/assets/fonts/LiberationSans-Bold.ttf": {
+      "sha256": "d723d5a272970aedf296ef6fc628180df6074bce7769701ea9e0d222c052668c",
+      "license": "OFL-1.1",
+      "license_file": "research_kit/scientific-visualization/assets/fonts/OFL.txt",
+      "license_sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+      "metadata_review": "All font name records checked; no personal paths, addresses, credentials or private identifiers detected. Original licensed bytes retained."
+    },
+    "research_kit/scientific-visualization/assets/fonts/LiberationSans-BoldItalic.ttf": {
+      "sha256": "24b7cf0d06040c9a1b16efc528dc2966a407288938dfa169ee7fe584140a3393",
+      "license": "OFL-1.1",
+      "license_file": "research_kit/scientific-visualization/assets/fonts/OFL.txt",
+      "license_sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+      "metadata_review": "All font name records checked; no personal paths, addresses, credentials or private identifiers detected. Original licensed bytes retained."
+    },
+    "research_kit/scientific-visualization/assets/fonts/LiberationSans-Italic.ttf": {
+      "sha256": "e27e6da1f5bbba630d635b8cc2916f84f195735865ea539687df962ae5a98e72",
+      "license": "OFL-1.1",
+      "license_file": "research_kit/scientific-visualization/assets/fonts/OFL.txt",
+      "license_sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+      "metadata_review": "All font name records checked; no personal paths, addresses, credentials or private identifiers detected. Original licensed bytes retained."
+    },
+    "research_kit/scientific-visualization/assets/fonts/LiberationSans-Regular.ttf": {
+      "sha256": "e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49",
+      "license": "OFL-1.1",
+      "license_file": "research_kit/scientific-visualization/assets/fonts/OFL.txt",
+      "license_sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b",
+      "metadata_review": "All font name records checked; no personal paths, addresses, credentials or private identifiers detected. Original licensed bytes retained."
+    }
+  }
+}

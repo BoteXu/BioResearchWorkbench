@@ -1,0 +1,94 @@
+{
+  "example_only": true,
+  "run_id": "example_scgpt",
+  "method": "scgpt",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "cell_type": "REPLACE_WITH_REVIEWED_cell_type",
+    "min_cells_per_unit": 20,
+    "min_control_cells": 20,
+    "max_control_cells": 100,
+    "evaluation_scope": "heldout_donor",
+    "device": "cpu",
+    "batch_size": 1,
+    "max_control_reconstruction_rmse": 1.0,
+    "max_sequence_genes": 1500,
+    "expected_package_version": "REPLACE_WITH_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "NODE_A"
+    ],
+    "evaluation_units": [
+      "UNIT_A",
+      "UNIT_B",
+      "UNIT_C"
+    ],
+    "seed": 17
+  },
+  "inputs": [
+    {
+      "id": "asset_manifest",
+      "path": "inputs/asset_manifest.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "model_training_evidence",
+      "path": "inputs/model_training_evidence.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "model_training_receipt",
+      "path": "inputs/model_training_receipt.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "max_control_cells": 60
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "max_control_cells": 80
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "units",
+      "operator": "ge",
+      "bound": 3,
+      "definition": "Disabled illustrative configuration; replace with actual scientific acceptance gates",
+      "unit": "count",
+      "threshold_basis": "EXAMPLE_NOT_VALIDATED"
+    }
+  ]
+}

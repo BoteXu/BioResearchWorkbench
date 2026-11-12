@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "diffdock_pose",
+  "required_inputs": [
+    "source_manifest",
+    "model_manifest",
+    "receptor",
+    "ligand",
+    "structure_qc_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "model_loading_scope",
+    "python_executable",
+    "n_samples",
+    "torch_hub_directory",
+    "inference_steps",
+    "batch_size",
+    "native_software_versions"
+  ],
+  "required_output_roles": [
+    "docking_poses",
+    "molecular_qc",
+    "native_command",
+    "diagnostics",
+    "backend_versions",
+    "native_engine_versions"
+  ],
+  "method_scope": "Actual exact-source current DiffDock single-complex native CLI with pre-existing score/confidence/ESM resources, offline child inference, original graph/stereochemistry preserved and all actual native rank/confidence files retained. Not affinity scoring or original historical model.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

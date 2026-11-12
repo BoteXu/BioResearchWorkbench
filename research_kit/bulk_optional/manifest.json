@@ -1,0 +1,179 @@
+{
+  "schema": "public-source-files/1",
+  "files": [
+    {
+      "path": "addons/bulk_optional_ext.py",
+      "file": "addons/bulk_optional_ext.py",
+      "bytes": 24147,
+      "sha256": "7f70373cdd2147b36348927b22d384d2397042bd9946bf3dfe4084ba7e00aed0"
+    },
+    {
+      "path": "AUDIT.md",
+      "file": "AUDIT.md",
+      "bytes": 6596,
+      "sha256": "25ed59544fb7c5289c8ba5c4de26401119ff16d89a0caa86b0176d29a74cb8b9"
+    },
+    {
+      "path": "examples/config.template.json",
+      "file": "examples/config.template.json",
+      "bytes": 1698,
+      "sha256": "6f649e8e15e258ec12c0b62a3a3e3fc6f9e378839f736c0b52c3c6e101e888a4"
+    },
+    {
+      "path": "examples/returned-receipt.template.json",
+      "file": "examples/returned-receipt.template.json",
+      "bytes": 451,
+      "sha256": "f6fec14d0e35f09e8388dcbbcfafe1771f40b53e79e5d8fb7c7bea4f9bcffaa2"
+    },
+    {
+      "path": "install_private_addon.py",
+      "file": "install_private_addon.py",
+      "bytes": 5330,
+      "sha256": "a0988ef43332dd9757f5d65c49c3bd6d0845502532579847625805ed41ab2c9f"
+    },
+    {
+      "path": "LICENSE",
+      "file": "LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "maintain_manifest.py",
+      "file": "maintain_manifest.py",
+      "bytes": 1115,
+      "sha256": "7e7de93aa1bb7d8d28853bc75dff13dde1f74d19a57c5274614954a86d4e7dcc"
+    },
+    {
+      "path": "OPTIONAL_BULK.md",
+      "file": "OPTIONAL_BULK.md",
+      "bytes": 4535,
+      "sha256": "7730dc14b66e5fa83f7c177a95b7db92e5b3bb9ad4f6bb83f8fdd0f080bf5cc5"
+    },
+    {
+      "path": "README.md",
+      "file": "README.md",
+      "bytes": 2523,
+      "sha256": "569f1d951fdf5bc152ce28511e3aee7d4b31cca995743e08fa778655ec514ed4"
+    },
+    {
+      "path": "review_only/README.md",
+      "file": "review_only/README.md",
+      "bytes": 689,
+      "sha256": "931115f54b0a3ff74110e625b0d243ea13f7ba9e9fb79ffc49169fb372b99378"
+    },
+    {
+      "path": "review_only/run.py.txt",
+      "file": "review_only/run.py.txt",
+      "bytes": 4059,
+      "sha256": "dfa30385b1d3e8788bf7c05b954cc30df6fba60c4ac18b13f6f19a3ee3218b8a"
+    },
+    {
+      "path": "review_only/step10_ml.py.txt",
+      "file": "review_only/step10_ml.py.txt",
+      "bytes": 7896,
+      "sha256": "9e3e27d625c4a634d008de0e5defd6f6b45b52089f4088b72bc51671d6580b48"
+    },
+    {
+      "path": "review_only/step11_validation.py.txt",
+      "file": "review_only/step11_validation.py.txt",
+      "bytes": 5371,
+      "sha256": "877ad3d2051cb80a89a11943d08090cbb54156dbbd61967eeadf744dfae8045c"
+    },
+    {
+      "path": "review_only/step12_figures.py.txt",
+      "file": "review_only/step12_figures.py.txt",
+      "bytes": 5993,
+      "sha256": "6470aa6d96f5cbecaee0da3e9f5f37ada92d1646b9aadd658afa13553613989f"
+    },
+    {
+      "path": "review_only/step13_report.py.txt",
+      "file": "review_only/step13_report.py.txt",
+      "bytes": 8302,
+      "sha256": "d10e605ed9bfd2d94856bee52bf8cd7033a28317cb6f5d4840a6c02d0ebcf0bf"
+    },
+    {
+      "path": "review_only/step1_qc.py.txt",
+      "file": "review_only/step1_qc.py.txt",
+      "bytes": 5403,
+      "sha256": "c0f05ce0a66443ad09d65c08b73945434394a04ea37cc9efcc67ebbf131d3fde"
+    },
+    {
+      "path": "review_only/step2_de.py.txt",
+      "file": "review_only/step2_de.py.txt",
+      "bytes": 6037,
+      "sha256": "fc6f321f1d81da2a831db50fdd556b066831949655d2040f52c61f4f1f07a903"
+    },
+    {
+      "path": "review_only/step3_enrichment.py.txt",
+      "file": "review_only/step3_enrichment.py.txt",
+      "bytes": 5279,
+      "sha256": "cb93beb34e07f7be7e84b6838f3d4d249de8c568b1653436aebba8988f1beb26"
+    },
+    {
+      "path": "review_only/step4_pathway.py.txt",
+      "file": "review_only/step4_pathway.py.txt",
+      "bytes": 7941,
+      "sha256": "914f3bb9313f7ab4e695914c6d089ba01683d771b17a72ee98004c36ff2deb5b"
+    },
+    {
+      "path": "review_only/step5_tf.py.txt",
+      "file": "review_only/step5_tf.py.txt",
+      "bytes": 1892,
+      "sha256": "ba8129fe18d8a6ec162d838c6d3c41ff50eb23119f6f122049e2cfefbbc42dde"
+    },
+    {
+      "path": "review_only/step6_wgcna.py.txt",
+      "file": "review_only/step6_wgcna.py.txt",
+      "bytes": 5331,
+      "sha256": "01a0d86c24419a6eb70306277bfc1d920cf15342995fd9bb52257ebc7a16caff"
+    },
+    {
+      "path": "review_only/step7_ppi.py.txt",
+      "file": "review_only/step7_ppi.py.txt",
+      "bytes": 3708,
+      "sha256": "f9460dac2f62c7144af2b157573db88699d43ef358c5087d25e9249e3c1be468"
+    },
+    {
+      "path": "review_only/step8_deconvolution.py.txt",
+      "file": "review_only/step8_deconvolution.py.txt",
+      "bytes": 3684,
+      "sha256": "1233d04cd186df68d3d95786528e4e8c43b691a2dbe8f1ee66989d42cd25fb6d"
+    },
+    {
+      "path": "review_only/step9_key.py.txt",
+      "file": "review_only/step9_key.py.txt",
+      "bytes": 4781,
+      "sha256": "15a6da3e6eec272be36d70b2bfe806884ea12a13e59650af6a92cefedc1cf225"
+    },
+    {
+      "path": "review_only/utils.py.txt",
+      "file": "review_only/utils.py.txt",
+      "bytes": 10340,
+      "sha256": "b1807ad05e087ff3311e72917d49b26d34654bb3162e77b6826860313db83451"
+    },
+    {
+      "path": "skills/biomni-bulk-rnaseq-optional/SKILL.md",
+      "file": "skills/biomni-bulk-rnaseq-optional/SKILL.md",
+      "bytes": 3928,
+      "sha256": "b7954183eaea12a33312efbb7ed57250c47ddf6b0f1651887ea380b301b860e0"
+    },
+    {
+      "path": "source_review.json",
+      "file": "source_review.json",
+      "bytes": 5067,
+      "sha256": "a7c2c6bd4ef333d6fb085f6dd756e6eee567da8cd21af5d5d8c7be0a1e29e5e0"
+    },
+    {
+      "path": "tests/test_private_bulk.py",
+      "file": "tests/test_private_bulk.py",
+      "bytes": 10962,
+      "sha256": "c2118858e882798b37879446e7fe62e29ed4245d82aa02ad819d29e6dc04b840"
+    },
+    {
+      "path": "VALIDATION.md",
+      "file": "VALIDATION.md",
+      "bytes": 1986,
+      "sha256": "13e1d3334a3935f9545ea750e4e00a057d190e7d20d7f4ff34219254b4552fe4"
+    }
+  ]
+}

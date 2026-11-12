@@ -1,0 +1,35 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "paste_pairwise",
+  "required_inputs": [
+    "slice_a",
+    "slice_b"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "section_key",
+    "spatial_key",
+    "coordinate_unit",
+    "expression_layer",
+    "weight_key",
+    "maximum_coupling_entries",
+    "alpha",
+    "dissimilarity",
+    "normalize_distances",
+    "max_iterations",
+    "marginal_tolerance",
+    "align_coordinates"
+  ],
+  "required_output_roles": [
+    "spatial_coupling",
+    "coupling_source_identity",
+    "coupling_target_identity",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native full-mass PASTE pairwise transport and optional native rigid stacking; literal spot axes, known masses, explicit cost and marginal QC; not PASTE2 partial alignment",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

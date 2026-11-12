@@ -1,0 +1,163 @@
+{
+  "schema": "private-interaction-project/2",
+  "example_only": true,
+  "method": "shepherd2_generate",
+  "run_id": "DISABLED_EXAMPLE_NOT_A_SCIENTIFIC_RUN",
+  "expected_host": "REQUIRED_FRESH_ALLOCATED_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": 4,
+    "gpus": 0
+  },
+  "parameters": {
+    "device": "cpu",
+    "seed": 20261026,
+    "surface_points": 400,
+    "probe_radius": 1.2,
+    "esp_lambda": 0.3,
+    "solvent": "water",
+    "xtb_timeout": 120,
+    "expected_xtb_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expected_xtb_version": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+    "expected_versions": {
+      "numpy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "scipy": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "torch": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "rdkit": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "open3d": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "shepherd-score": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION",
+      "shepherd": "REQUIRED_ACTUAL_REVIEWED_SERVER_VERSION"
+    },
+    "max_atoms": 180,
+    "charge_sum_tolerance": 0.001,
+    "n_samples": 20,
+    "batch_size": 4,
+    "denoise_steps": 400,
+    "generated_formal_charge": 0,
+    "add_atoms": 0,
+    "add_pharms": 0,
+    "composition_mode": "single",
+    "profile_weights": [
+      1.0
+    ],
+    "min_valid_fraction": 0.8,
+    "generation_options": {
+      "schema": "private-shepherd2-generation/2",
+      "task": "profile",
+      "condition_modalities": [
+        "shape",
+        "esp",
+        "pharm"
+      ],
+      "condition_frame": "origin",
+      "reference_conditions": [
+        {
+          "reference_id": "REFERENCE",
+          "source_sdf_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "atom_axis_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "pharmacophore_axis_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "expected_atom_count": 24,
+          "expected_pharmacophore_count": 4,
+          "scaffold_mode": "none",
+          "scaffold_atom_indices": [],
+          "exit_vector_atom_indices": [],
+          "pharm_mode": "pharm-full",
+          "pharm_selection": {
+            "kind": "none",
+            "values": [],
+            "min_ring_atoms": 1
+          }
+        }
+      ],
+      "atom_condition_reference_id": null,
+      "sizes": {
+        "mode": "offset",
+        "atoms": null,
+        "pharms": null
+      },
+      "sampler": {
+        "early_stop_edm": -1,
+        "sigma_max": 3.0,
+        "sigma_min": 0.001,
+        "rho": 7.0,
+        "use_stochastic": false,
+        "S_churn": 40.0,
+        "S_noise": 1.0,
+        "use_2nd_order_correction": false
+      },
+      "advanced_inpaint": {},
+      "composition_alignment": {
+        "mode": "none",
+        "start_fraction": 0.0,
+        "interval": 10,
+        "ema_alpha": 1.0
+      },
+      "neutralize_esp": false,
+      "constraint_qc": {
+        "max_scaffold_displacement_angstrom": 0.05,
+        "max_priority_distance_angstrom": 0.5,
+        "min_direction_cosine": 0.8,
+        "min_constraint_pass_fraction": 0.8,
+        "require_scaffold_bonds": true,
+        "require_scaffold_stereochemistry": true,
+        "require_actual_pharmacophore_recovery": true,
+        "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REPLACE_WITH_PRESPECIFIED_JUSTIFIED_LIMITS"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "structure_manifest",
+      "path": "inputs/structure_manifest.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "software",
+      "path": "inputs/software.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "checkpoint_manifest",
+      "path": "inputs/checkpoint_manifest.private.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "seed_check_1",
+      "seed": 20261027
+    },
+    {
+      "label": "seed_check_2",
+      "seed": 20261028
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "metric": "self_shape_similarity",
+      "operator": "ge",
+      "bound": 0.9999,
+      "definition": "Actual native same-profile positive control",
+      "unit": "dimensionless similarity",
+      "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REQUIRES_REVIEW"
+    },
+    {
+      "metric": "self_esp_similarity",
+      "operator": "ge",
+      "bound": 0.9999,
+      "definition": "Actual native same-profile ESP control",
+      "unit": "dimensionless similarity",
+      "threshold_basis": "ILLUSTRATIVE_DISABLED_EXAMPLE_REQUIRES_REVIEW"
+    }
+  ],
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "automatic_download": false,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "branch_example": "pharm_full"
+}

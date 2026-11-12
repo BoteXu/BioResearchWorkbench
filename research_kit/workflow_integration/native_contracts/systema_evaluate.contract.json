@@ -1,0 +1,36 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "systema_evaluate",
+  "required_inputs": [
+    "training_profiles",
+    "training_metadata",
+    "true_profiles",
+    "truth_metadata",
+    "predicted_profiles",
+    "prediction_metadata",
+    "evaluation_gene_panel",
+    "panel_selection_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "evaluation_directory",
+    "unit_key",
+    "condition_key",
+    "control",
+    "holdout_axis",
+    "analysis_scale"
+  ],
+  "required_output_roles": [
+    "centroid_accuracy",
+    "perturbation_metrics",
+    "observed_centroids",
+    "predicted_centroids",
+    "reference_profile",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native exact-source Systema rank centroid accuracy plus explicitly repaired Pearson helper formula. Same full feature axis and actual independent-unit scenarios across methods; training-only custom reference and panel receipt",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

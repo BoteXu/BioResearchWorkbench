@@ -1,0 +1,20 @@
+{
+  "name": "SYNTHETIC_FORMAT_ONLY",
+  "dialect": "alphafold3",
+  "version": 3,
+  "modelSeeds": [
+    1,
+    2
+  ],
+  "sequences": [
+    {
+      "protein": {
+        "id": "A",
+        "sequence": "ACDE",
+        "unpairedMsa": "",
+        "pairedMsa": "",
+        "templates": []
+      }
+    }
+  ]
+}

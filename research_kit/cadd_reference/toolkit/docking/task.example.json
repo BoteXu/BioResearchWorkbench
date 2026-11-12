@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "receptor_id": "__FILL_RECEPTOR_STATE_ID__",
+  "ligand_parent_id": "__FILL_LIGAND_PARENT_ID__",
+  "ligand_state_id": "__FILL_LIGAND_STATE_ID__",
+  "conformer_id": "__FILL_CONFORMER_ID__",
+  "receptor_pdb": "__FILL_PATH_TO_PREPARED_RECEPTOR_H_PDB__",
+  "ligand_sdf": "__FILL_PATH_TO_ONE_LIGAND_STATE_H_3D_SDF__",
+  "site_definition": "__FILL_SITE_EVIDENCE_AND_BOX_REASON__",
+  "chemical_state_record": "__FILL_PROTONATION_STEREOCHEMISTRY_CHARGE_RECORD__",
+  "box": {
+    "center_A": null,
+    "size_A": null
+  },
+  "seeds": [
+    104729,
+    130363,
+    155921
+  ],
+  "exhaustiveness": 32,
+  "num_modes": 20,
+  "energy_range_kcal_mol": 5,
+  "cpu": 4,
+  "output_dir": "__FILL_NEW_OUTPUT_DIRECTORY__"
+}

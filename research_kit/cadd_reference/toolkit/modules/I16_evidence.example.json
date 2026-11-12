@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I16",
+  "status": "draft",
+  "table_name": "target_evidence",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "evidence_id": null,
+    "study_id": null,
+    "cohort_id": null,
+    "sample_overlap_group": null,
+    "target_id": null,
+    "hypothesis_id": null,
+    "evidence_class": null,
+    "measured_entity": null,
+    "intervention_or_exposure": null,
+    "outcome": null,
+    "effect": null,
+    "effect_unit": null,
+    "direction": null,
+    "context": null,
+    "source_url": null,
+    "source_release": null,
+    "limitations": null,
+    "uncertainty": {
+      "kind": null,
+      "level": null,
+      "lower": null,
+      "upper": null,
+      "standard_error": null,
+      "definition": null
+    },
+    "missing_fields": {}
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "related_tables": {
+    "entity_map": {
+      "rows": [],
+      "row_template": {
+        "target_id": null,
+        "species_taxon": null,
+        "gene_id_version": null,
+        "gene_symbol": null,
+        "disease_or_phenotype_id": null,
+        "tissue": null,
+        "cell_type": null,
+        "intended_direction": null,
+        "source_release": null,
+        "transcript_id_version": null,
+        "protein_accession_isoform": null,
+        "sequence_sha256": null,
+        "sequence_path": null,
+        "construct_range": null,
+        "maturation_state": null,
+        "structure_id_chain": null,
+        "mapping_status": null,
+        "mapping_notes": null
+      }
+    },
+    "hypothesis_register": {
+      "rows": [],
+      "row_template": {
+        "hypothesis_id": null,
+        "target_id": null,
+        "statement": null,
+        "intended_direction": null,
+        "tissue": null,
+        "cell_type": null,
+        "protein_form_id": null,
+        "primary_readout": null,
+        "competing_explanation": null,
+        "evidence_ids": [],
+        "decision_status": null,
+        "decision_reason": null
+      }
+    }
+  },
+  "module_version": "3.0.0"
+}

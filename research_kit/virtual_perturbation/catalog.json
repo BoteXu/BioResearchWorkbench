@@ -1,0 +1,1878 @@
+{
+  "version": "1.2-private",
+  "methods": {
+    "bulk_virtual_ko": {
+      "label": "bulkKnk：训练网络与逐个体 KO/空扰动配对",
+      "worker": "r",
+      "implementation": "bulkKnk_pinned_GENIE3_individual_anchor_RWR",
+      "inputs": [
+        "matrix",
+        "samples"
+      ],
+      "parameters": {
+        "training_units": {
+          "type": "strings",
+          "min_items": 10
+        },
+        "control_genes": {
+          "type": "strings",
+          "min_items": 3
+        },
+        "min_training_units": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "n_features": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "network_quantile": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 0.9999
+        },
+        "cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pruning": {
+          "type": "string",
+          "enum": [
+            "none",
+            "heuristic_dpi_fast"
+          ]
+        },
+        "dpi_threshold": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.99
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.99
+        },
+        "steps": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 10000
+        },
+        "convergence_tolerance": {
+          "type": "number",
+          "minimum": 1e-12,
+          "maximum": 0.01
+        }
+      },
+      "roles": [
+        "predicted_expression",
+        "frozen_network",
+        "convergence",
+        "control_perturbations"
+      ],
+      "output_rules": {
+        "predicted_expression": {
+          "required": [
+            "unit_id",
+            "sample_id",
+            "feature_id",
+            "observed_baseline",
+            "model_WT",
+            "model_KO",
+            "model_delta",
+            "biological_effect_observed"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "observed_baseline",
+            "model_WT",
+            "model_KO",
+            "model_delta"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "model_WT",
+              "right": "model_KO",
+              "result": "model_delta"
+            }
+          ]
+        },
+        "frozen_network": {
+          "required": [
+            "regulator",
+            "target",
+            "weight"
+          ],
+          "keys": [
+            "regulator",
+            "target"
+          ],
+          "numeric": [
+            "weight"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "convergence": {
+          "required": [
+            "unit_id",
+            "WT_residual",
+            "KO_residual",
+            "target_zero_verified"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "WT_residual",
+            "KO_residual"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "control_perturbations": {
+          "required": [
+            "unit_id",
+            "control_gene",
+            "out_degree",
+            "mean_training_expression",
+            "model_shift_L1"
+          ],
+          "keys": [
+            "unit_id",
+            "control_gene"
+          ],
+          "numeric": [
+            "out_degree",
+            "mean_training_expression",
+            "model_shift_L1"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "model_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "nonnegative_network_model_shift",
+      "sensitivity_parameters": [
+        "network_quantile",
+        "pruning",
+        "dpi_threshold",
+        "alpha",
+        "seed"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://github.com/fengsh27mail/bulkKnk/tree/c49b106a4383e44ee19d08a75d7edcc99a865ea7"
+      ],
+      "interpretation_limits": [
+        "API/source pinned to c49b106a4383e44ee19d08a75d7edcc99a865ea7; README and DESCRIPTION disagree on version; actual package version must be supplied",
+        "Per-individual null propagation and KO is an explicit adaptation; upstream cohort mean-shift and RF/survival extrapolation are not used",
+        "GENIE3 importance and heuristic DPI are not identified causal/signed regulation or ARACNE mutual-information DPI",
+        "Control targets are prespecified; their expression/outdegree are reported, not assumed matched"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "singlecell_virtual_ko": {
+      "label": "scTenifoldKnk：每个供者和细胞类型单独建网扰动",
+      "worker": "r",
+      "implementation": "scTenifoldKnk_native_per_donor",
+      "inputs": [
+        "matrix",
+        "samples"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "min_gene_prevalence": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.99
+        },
+        "n_components": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "n_networks": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "cells_per_network": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "cores": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "roles": [
+        "differential_regulation",
+        "donor_coverage",
+        "native_models",
+        "target_coverage"
+      ],
+      "output_rules": {
+        "differential_regulation": {
+          "required": [
+            "unit_id",
+            "gene",
+            "distance",
+            "p.adj"
+          ],
+          "keys": [
+            "unit_id",
+            "gene"
+          ],
+          "numeric": [
+            "distance",
+            "p.adj"
+          ],
+          "probabilities": [
+            "p.adj"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "donor_coverage": {
+          "required": [
+            "unit_id",
+            "cells",
+            "genes",
+            "networks",
+            "cells_per_network"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "cells",
+            "genes",
+            "networks",
+            "cells_per_network"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "native_models": {
+          "required": [
+            "unit_id",
+            "native_result_file"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "target_coverage": {
+          "required": [
+            "ko_gene",
+            "method",
+            "independent_donor_replication_established"
+          ],
+          "keys": [
+            "ko_gene"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "distance",
+      "comparison_keys": [
+        "unit_id",
+        "gene"
+      ],
+      "score_kind": "native_differential_regulation_distance",
+      "sensitivity_parameters": [
+        "n_components",
+        "n_networks",
+        "cells_per_network",
+        "seed"
+      ],
+      "signed_score": false,
+      "score_null": 0,
+      "sources": [
+        "https://github.com/cailab-tamu/scTenifoldKnk"
+      ],
+      "interpretation_limits": [
+        "Native p.adj is conditional gene-space/model inference; donor population replication is not established",
+        "FC is a native regulation metric, not RNA log2FC; multi-gene KO requires a compatible package API"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "genki": {
+      "label": "GenKI：VGAE 基因潜变量扰动",
+      "worker": "python",
+      "implementation": "GenKI_VGAE_native_KL_full_gene_denominator",
+      "inputs": [
+        "adata"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "max_genes": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "n_components": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "network_percentile": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "epochs": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "learning_rate": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 0.1
+        },
+        "beta": {
+          "type": "number",
+          "minimum": 1e-08,
+          "maximum": 1
+        },
+        "latent_dimensions": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 32
+        },
+        "resamples": {
+          "type": "integer",
+          "minimum": 20
+        }
+      },
+      "roles": [
+        "latent_gene_distances",
+        "donor_coverage",
+        "training_diagnostics",
+        "resampling_diagnostics"
+      ],
+      "output_rules": {
+        "latent_gene_distances": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "latent_KL",
+            "native_bootstrap_top5_frequency"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "latent_KL",
+            "native_bootstrap_top5_frequency"
+          ],
+          "probabilities": [
+            "native_bootstrap_top5_frequency"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "donor_coverage": {
+          "required": [
+            "unit_id",
+            "cells",
+            "genes"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "cells",
+            "genes"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "training_diagnostics": {
+          "required": [
+            "unit_id",
+            "epochs",
+            "training_loss",
+            "graph_edge_AUC",
+            "graph_edge_AP"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "epochs",
+            "training_loss",
+            "graph_edge_AUC",
+            "graph_edge_AP"
+          ],
+          "probabilities": [
+            "graph_edge_AUC",
+            "graph_edge_AP"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "resampling_diagnostics": {
+          "required": [
+            "unit_id",
+            "resample",
+            "mean_latent_KL",
+            "maximum_latent_KL"
+          ],
+          "keys": [
+            "unit_id",
+            "resample"
+          ],
+          "numeric": [
+            "mean_latent_KL",
+            "maximum_latent_KL"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "latent_KL",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "latent_distribution_KL",
+      "sensitivity_parameters": [
+        "network_percentile",
+        "n_components",
+        "latent_dimensions",
+        "seed"
+      ],
+      "signed_score": false,
+      "score_null": 0,
+      "sources": [
+        "https://github.com/yjgeno/GenKI",
+        "https://doi.org/10.1093/nar/gkad450"
+      ],
+      "interpretation_limits": [
+        "Native latent-distance and cell-bootstrap bagging frequency are not RNA change, gene p-values or FDR; native pmt is with-replacement sampling with internal seed=0",
+        "Complete gene denominator retained; native significant-only selection is not substituted for all tested genes",
+        "Per-donor CPU models and same-context inference; no held-out-donor generalization claimed"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "celloracle": {
+      "label": "CellOracle：已拟合细胞类型 GRN 的条件扰动",
+      "worker": "python",
+      "implementation": "CellOracle_simulate_shift_clipped",
+      "inputs": [
+        "asset_manifest",
+        "model_training_evidence",
+        "model_training_receipt"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "heldout_donor",
+            "in_sample_conditional"
+          ]
+        },
+        "clip_to_training_range": {
+          "type": "boolean"
+        },
+        "n_propagation": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      },
+      "roles": [
+        "conditional_expression",
+        "donor_coverage",
+        "target_expression",
+        "training_provenance"
+      ],
+      "output_rules": {
+        "conditional_expression": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "model_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "model_delta"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "donor_coverage": {
+          "required": [
+            "unit_id",
+            "cells"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "cells"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "target_expression": {
+          "required": [
+            "feature_id",
+            "modeled_target_mean"
+          ],
+          "keys": [
+            "feature_id"
+          ],
+          "numeric": [
+            "modeled_target_mean"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "training_provenance": {
+          "required": [
+            "training_unit",
+            "evaluation_scope"
+          ],
+          "keys": [
+            "training_unit"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "model_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "clipped_GRN_expression_shift",
+      "sensitivity_parameters": [
+        "n_propagation"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://morris-lab.github.io/CellOracle.documentation/modules/celloracle.html"
+      ],
+      "interpretation_limits": [
+        "Fitted GRN source, training and evaluation-unit overlap are checked",
+        "Clipping can prevent exact zero target expression; realized target means are returned",
+        "Model-conditional change does not establish a measured KO, actual trajectory or causal fate"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "gears": {
+      "label": "GEARS：真实扰动训练模型的单基因/组合预测",
+      "worker": "python",
+      "implementation": "GEARS_checkpoint_predict_donor_controls",
+      "inputs": [
+        "asset_manifest",
+        "model_training_evidence",
+        "model_training_receipt"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "heldout_donor",
+            "in_sample_conditional"
+          ]
+        },
+        "device": {
+          "type": "string",
+          "enum": [
+            "cpu",
+            "cuda"
+          ]
+        },
+        "min_control_cells": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 300
+        },
+        "max_control_cells": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 300
+        }
+      },
+      "roles": [
+        "predicted_expression",
+        "donor_controls",
+        "target_expression",
+        "native_uncertainty"
+      ],
+      "output_rules": {
+        "predicted_expression": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "predicted_expression",
+            "matched_control_mean",
+            "model_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "predicted_expression",
+            "matched_control_mean",
+            "model_delta"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "matched_control_mean",
+              "right": "predicted_expression",
+              "result": "model_delta"
+            }
+          ]
+        },
+        "donor_controls": {
+          "required": [
+            "unit_id",
+            "control_cells",
+            "genes"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "control_cells",
+            "genes"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "target_expression": {
+          "required": [
+            "unit_id",
+            "ko_gene",
+            "predicted_target_expression"
+          ],
+          "keys": [
+            "unit_id",
+            "ko_gene"
+          ],
+          "numeric": [
+            "predicted_target_expression"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "native_uncertainty": {
+          "required": [
+            "unit_id",
+            "uncertainty_kind",
+            "native_uncertainty_score"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "native_uncertainty_score"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": true
+        }
+      },
+      "comparison_score": "model_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "perturbation_trained_expression_prediction",
+      "sensitivity_parameters": [
+        "seed",
+        "max_control_cells"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://github.com/snap-stanford/GEARS",
+        "https://www.nature.com/articles/s41587-023-01905-6"
+      ],
+      "interpretation_limits": [
+        "Requires real CRISPR perturbation-trained checkpoint with saved graph tensors and complete existing GO/cache assets",
+        "Single-perturbation-only training is not accepted as validated combination response",
+        "Predictions use donor-matched control cells; source currently consumes one prediction batch, capped at 300",
+        "Native uncertainty is not an interval; CRISPRi and complete KO remain distinct"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "geneformer": {
+      "label": "Geneformer：删除基因 rank token 后的嵌入变化",
+      "worker": "python",
+      "implementation": "Geneformer_native_token_delete_cell_embedding",
+      "inputs": [
+        "asset_manifest"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "model_version": {
+          "type": "string",
+          "enum": [
+            "V1",
+            "V2"
+          ]
+        },
+        "embedding_layer": {
+          "type": "integer",
+          "enum": [
+            -1,
+            0
+          ]
+        },
+        "max_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "roles": [
+        "embedding_response",
+        "donor_token_coverage",
+        "native_output_index",
+        "target_tokens"
+      ],
+      "output_rules": {
+        "embedding_response": {
+          "required": [
+            "unit_id",
+            "perturbation_id",
+            "mean_cosine_similarity",
+            "mean_embedding_distance",
+            "cells"
+          ],
+          "keys": [
+            "unit_id",
+            "perturbation_id"
+          ],
+          "numeric": [
+            "mean_cosine_similarity",
+            "mean_embedding_distance",
+            "cells"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "donor_token_coverage": {
+          "required": [
+            "unit_id",
+            "input_cells",
+            "all_target_tokens_covered"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "input_cells",
+            "all_target_tokens_covered"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "native_output_index": {
+          "required": [
+            "unit_id",
+            "native_output",
+            "sha256"
+          ],
+          "keys": [
+            "unit_id",
+            "native_output"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "target_tokens": {
+          "required": [
+            "ko_gene",
+            "token"
+          ],
+          "keys": [
+            "ko_gene"
+          ],
+          "numeric": [
+            "token"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "mean_embedding_distance",
+      "comparison_keys": [
+        "unit_id",
+        "perturbation_id"
+      ],
+      "score_kind": "rank_token_embedding_distance",
+      "sensitivity_parameters": [
+        "embedding_layer",
+        "max_cells_per_unit",
+        "seed"
+      ],
+      "signed_score": false,
+      "score_null": 0,
+      "sources": [
+        "https://geneformer.readthedocs.io/en/latest/geneformer.in_silico_perturber.html"
+      ],
+      "interpretation_limits": [
+        "Explicit model/token version and local assets; all targets must occur in each tested token sequence",
+        "Delete is an input-token manipulation; no RNA fold change, KO direction or fate probability is produced",
+        "Gene list is perturbed jointly; not every combinatorial subset is silently enumerated"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "dynamo": {
+      "label": "Dynamo：已拟合向量场的 KO 动力学变化",
+      "worker": "python",
+      "implementation": "Dynamo_pd_KO_fitted_vectorfield",
+      "inputs": [
+        "asset_manifest",
+        "model_training_evidence",
+        "model_training_receipt"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "heldout_donor",
+            "in_sample_conditional"
+          ]
+        },
+        "model_entry": {
+          "type": "string"
+        }
+      },
+      "roles": [
+        "vectorfield_response",
+        "cell_velocity_change",
+        "embedding_velocity",
+        "training_provenance"
+      ],
+      "output_rules": {
+        "vectorfield_response": {
+          "required": [
+            "unit_id",
+            "component",
+            "mean_velocity_change"
+          ],
+          "keys": [
+            "unit_id",
+            "component"
+          ],
+          "numeric": [
+            "mean_velocity_change"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "cell_velocity_change": {
+          "required": [
+            "cell_id",
+            "unit_id",
+            "velocity_change_norm"
+          ],
+          "keys": [
+            "cell_id"
+          ],
+          "numeric": [
+            "velocity_change_norm"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "embedding_velocity": {
+          "required": [
+            "cell_id",
+            "delta_velocity_umap_1",
+            "delta_velocity_umap_2"
+          ],
+          "keys": [
+            "cell_id"
+          ],
+          "numeric": [
+            "delta_velocity_umap_1",
+            "delta_velocity_umap_2"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "training_provenance": {
+          "required": [
+            "training_unit",
+            "evaluation_scope"
+          ],
+          "keys": [
+            "training_unit"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "mean_velocity_change",
+      "comparison_keys": [
+        "unit_id",
+        "component"
+      ],
+      "score_kind": "PCA_velocity_change",
+      "sensitivity_parameters": [
+        "model_entry"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://dynamo-release.readthedocs.io/en/stable/api/reference/dynamo.pd.perturbation.html",
+        "https://raw.githubusercontent.com/aristoteleo/dynamo-release/master/dynamo/prediction/perturbation.py"
+      ],
+      "interpretation_limits": [
+        "Actual worker uses pd.KO, not a steady-state expression predictor",
+        "Needs an accepted fitted vector field and existing RNA dynamics/embedding evidence",
+        "Sensitivity requires separately reviewed, hash-bound fitted vector-field assets; changing an unused seed is not advertised as method robustness"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "metabolic_gene_deletion": {
+      "label": "COBRApy：基因/GPR 删除及代谢通量预测",
+      "worker": "python",
+      "implementation": "COBRApy_GPR_FBA_linear_MOMA_ROOM",
+      "inputs": [
+        "sbml_model",
+        "medium",
+        "model_review"
+      ],
+      "parameters": {
+        "objective_reaction": {
+          "type": "string"
+        },
+        "solver": {
+          "type": "string",
+          "enum": [
+            "glpk",
+            "cplex",
+            "gurobi"
+          ]
+        },
+        "solution_method": {
+          "type": "string",
+          "enum": [
+            "FBA",
+            "linear_MOMA",
+            "linear_ROOM"
+          ]
+        },
+        "control_genes": {
+          "type": "strings",
+          "min_items": 2
+        },
+        "minimum_WT_objective": {
+          "type": "number",
+          "minimum": 1e-12
+        },
+        "steady_state_tolerance": {
+          "type": "number",
+          "minimum": 1e-12,
+          "maximum": 0.001
+        },
+        "room_delta": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "room_epsilon": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "roles": [
+        "metabolic_effects",
+        "reaction_flux",
+        "gpr_constraints",
+        "control_deletions"
+      ],
+      "output_rules": {
+        "metabolic_effects": {
+          "required": [
+            "unit_id",
+            "perturbation_id",
+            "genes",
+            "solver_status",
+            "KO_objective_flux",
+            "WT_objective_flux",
+            "objective_ratio"
+          ],
+          "keys": [
+            "unit_id",
+            "perturbation_id"
+          ],
+          "numeric": [
+            "KO_objective_flux",
+            "WT_objective_flux",
+            "objective_ratio"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "reaction_flux": {
+          "required": [
+            "perturbation_id",
+            "reaction_id",
+            "KO_flux",
+            "WT_flux"
+          ],
+          "keys": [
+            "perturbation_id",
+            "reaction_id"
+          ],
+          "numeric": [
+            "KO_flux",
+            "WT_flux"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "gpr_constraints": {
+          "required": [
+            "perturbation_id",
+            "gene_id",
+            "reaction_id",
+            "gpr",
+            "lower_bound",
+            "upper_bound"
+          ],
+          "keys": [
+            "perturbation_id",
+            "gene_id",
+            "reaction_id"
+          ],
+          "numeric": [
+            "lower_bound",
+            "upper_bound"
+          ],
+          "probabilities": [],
+          "empty_valid": true,
+          "allow_missing": false
+        },
+        "control_deletions": {
+          "required": [
+            "perturbation_id",
+            "genes",
+            "solver_status",
+            "objective_flux"
+          ],
+          "keys": [
+            "perturbation_id"
+          ],
+          "numeric": [
+            "objective_flux"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "objective_ratio",
+      "comparison_keys": [
+        "unit_id",
+        "perturbation_id"
+      ],
+      "score_kind": "medium_and_GPR_conditional_objective_ratio",
+      "sensitivity_parameters": [
+        "solution_method",
+        "room_delta",
+        "room_epsilon"
+      ],
+      "signed_score": true,
+      "score_null": 1,
+      "sources": [
+        "https://cobrapy.readthedocs.io/en/latest/deletions.html"
+      ],
+      "interpretation_limits": [
+        "Exact SBML GPR, mass balance, medium, objective, solver and WT feasibility must be reviewed",
+        "MOMA/ROOM objective_value is not growth: worker reads the specified biological objective reaction flux",
+        "Joint KO and individual deletions retained; synthetic lethality needs a prespecified criterion and measured follow-up",
+        "One metabolic model is not independent biological replication"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    "cpa": {
+      "label": "CPA：扰动训练检查点的配对条件预测",
+      "worker": "python",
+      "implementation": "cpa_reviewed_native_adapter_v11",
+      "inputs": [
+        "asset_manifest",
+        "model_training_evidence",
+        "model_training_receipt"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "min_control_cells": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "max_control_cells": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "heldout_donor",
+            "in_sample_conditional"
+          ]
+        },
+        "device": {
+          "type": "string",
+          "enum": [
+            "cpu",
+            "cuda"
+          ]
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_control_reconstruction_rmse": {
+          "type": "number",
+          "minimum": 1e-12
+        },
+        "dose": {
+          "type": "number",
+          "minimum": 1e-12
+        },
+        "posterior_samples": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "roles": [
+        "predicted_expression",
+        "donor_controls",
+        "intervention_audit",
+        "inference_diagnostics"
+      ],
+      "output_rules": {
+        "predicted_expression": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "predicted_control",
+            "predicted_perturbation",
+            "model_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "predicted_control",
+            "predicted_perturbation",
+            "model_delta"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "predicted_control",
+              "right": "predicted_perturbation",
+              "result": "model_delta"
+            }
+          ]
+        },
+        "donor_controls": {
+          "required": [
+            "unit_id",
+            "control_cells",
+            "genes"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "control_cells",
+            "genes"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "intervention_audit": {
+          "required": [
+            "unit_id",
+            "control_label",
+            "target_label",
+            "dose",
+            "observed_counterfactual_truth_available"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "dose"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "inference_diagnostics": {
+          "required": [
+            "unit_id",
+            "evaluation_scope",
+            "matched_control_reconstruction_RMSE"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "matched_control_reconstruction_RMSE"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "model_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "checkpoint_expression_delta",
+      "sensitivity_parameters": [
+        "max_control_cells",
+        "seed",
+        "posterior_samples"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://cpa-tools.readthedocs.io/en/latest/api/reference/cpa.CPA.predict.html"
+      ],
+      "interpretation_limits": [
+        "Actual perturbation-fitted checkpoint with training provenance/ledger required; matched predicted-control subtraction removes reconstruction bias from the perturbation contrast",
+        "Dose/perturbation identity cannot change in a robustness rerun; no empirical accuracy without independent measured truth",
+        "Current API/architecture is fixed; prior pretrained-only models and unknown gene/category mappings are refused"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED",
+      "precision_only_parameters": [
+        "posterior_samples"
+      ]
+    },
+    "scgpt": {
+      "label": "SCGPT：扰动训练检查点的配对条件预测",
+      "worker": "python",
+      "implementation": "scgpt_reviewed_native_adapter_v11",
+      "inputs": [
+        "asset_manifest",
+        "model_training_evidence",
+        "model_training_receipt"
+      ],
+      "parameters": {
+        "cell_type": {
+          "type": "string"
+        },
+        "min_cells_per_unit": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "min_control_cells": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "max_control_cells": {
+          "type": "integer",
+          "minimum": 20
+        },
+        "evaluation_scope": {
+          "type": "string",
+          "enum": [
+            "heldout_donor",
+            "in_sample_conditional"
+          ]
+        },
+        "device": {
+          "type": "string",
+          "enum": [
+            "cpu",
+            "cuda"
+          ]
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_control_reconstruction_rmse": {
+          "type": "number",
+          "minimum": 1e-12
+        },
+        "max_sequence_genes": {
+          "type": "integer",
+          "minimum": 10
+        }
+      },
+      "roles": [
+        "predicted_expression",
+        "donor_controls",
+        "intervention_audit",
+        "inference_diagnostics"
+      ],
+      "output_rules": {
+        "predicted_expression": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "predicted_control",
+            "predicted_perturbation",
+            "model_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "predicted_control",
+            "predicted_perturbation",
+            "model_delta"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "predicted_control",
+              "right": "predicted_perturbation",
+              "result": "model_delta"
+            }
+          ]
+        },
+        "donor_controls": {
+          "required": [
+            "unit_id",
+            "control_cells",
+            "genes"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "control_cells",
+            "genes"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "intervention_audit": {
+          "required": [
+            "unit_id",
+            "perturbation_flags",
+            "all_frozen_genes_retained"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "inference_diagnostics": {
+          "required": [
+            "unit_id",
+            "evaluation_scope",
+            "control_reconstruction_RMSE"
+          ],
+          "keys": [
+            "unit_id"
+          ],
+          "numeric": [
+            "control_reconstruction_RMSE"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "model_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "checkpoint_expression_delta",
+      "sensitivity_parameters": [
+        "max_control_cells",
+        "seed"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://scgpt.readthedocs.io/en/latest/tutorial_perturbation.html",
+        "https://scgpt.readthedocs.io/en/latest/_modules/scgpt/model/generation_model.html"
+      ],
+      "interpretation_limits": [
+        "Actual perturbation-fitted checkpoint with training provenance/ledger required; matched predicted-control subtraction removes reconstruction bias from the perturbation contrast",
+        "Dose/perturbation identity cannot change in a robustness rerun; no empirical accuracy without independent measured truth",
+        "Current API/architecture is fixed; prior pretrained-only models and unknown gene/category mappings are refused"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED",
+      "precision_only_parameters": []
+    },
+    "boolnet": {
+      "label": "BoolNet：逻辑节点固定和状态/吸引子分析",
+      "worker": "r",
+      "implementation": "boolnet_reviewed_native_adapter_v11",
+      "inputs": [
+        "network",
+        "initial_states",
+        "logical_review"
+      ],
+      "parameters": {
+        "max_nodes": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "update_type": {
+          "type": "string",
+          "enum": [
+            "synchronous",
+            "asynchronous"
+          ]
+        },
+        "max_steps": {
+          "type": "integer",
+          "minimum": 10
+        },
+        "trajectories_per_initial": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "roles": [
+        "logical_response",
+        "terminal_node_states",
+        "initial_states",
+        "state_diagnostics"
+      ],
+      "output_rules": {
+        "logical_response": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "WT_activity",
+            "KO_activity",
+            "state_activity_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "WT_activity",
+            "KO_activity",
+            "state_activity_delta"
+          ],
+          "probabilities": [
+            "WT_activity",
+            "KO_activity"
+          ],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "WT_activity",
+              "right": "KO_activity",
+              "result": "state_activity_delta"
+            }
+          ]
+        },
+        "terminal_node_states": {
+          "required": [
+            "scenario",
+            "initial_id",
+            "trajectory",
+            "node",
+            "terminal_activity"
+          ],
+          "keys": [
+            "scenario",
+            "initial_id",
+            "trajectory",
+            "node"
+          ],
+          "numeric": [
+            "terminal_activity"
+          ],
+          "probabilities": [
+            "terminal_activity"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "initial_states": {
+          "required": [
+            "initial_id",
+            "weight"
+          ],
+          "keys": [
+            "initial_id"
+          ],
+          "numeric": [
+            "weight"
+          ],
+          "probabilities": [
+            "weight"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "state_diagnostics": {
+          "required": [
+            "scenario",
+            "initial_id",
+            "trajectory",
+            "steps",
+            "cycle_length",
+            "terminal_status",
+            "initial_weight",
+            "update_type"
+          ],
+          "keys": [
+            "scenario",
+            "initial_id",
+            "trajectory"
+          ],
+          "numeric": [
+            "steps",
+            "cycle_length",
+            "initial_weight"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "state_activity_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "logic_state_activity_change",
+      "sensitivity_parameters": [
+        "update_type",
+        "max_steps",
+        "trajectories_per_initial",
+        "seed"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://search.r-project.org/CRAN/refmans/BoolNet/html/fixGenes.html",
+        "https://search.r-project.org/CRAN/refmans/BoolNet/html/stateTransition.html"
+      ],
+      "interpretation_limits": [
+        "Native BooleanNetwork only, strict non-executable Boolean grammar and complete weighted binary initial states",
+        "Synchronous unresolved cycles fail; asynchronous endpoint activity is finite-horizon and not claimed stationary or an attractor proof",
+        "Initial states and simulation replicates are not independent biological units"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED",
+      "precision_only_parameters": [
+        "trajectories_per_initial"
+      ]
+    },
+    "maboss": {
+      "label": "MaBoSS：带速率随机逻辑网络 WT/KO 对照",
+      "worker": "python",
+      "implementation": "maboss_reviewed_native_adapter_v11",
+      "inputs": [
+        "bnd",
+        "cfg",
+        "initial_probabilities",
+        "logical_review"
+      ],
+      "parameters": {
+        "expected_binary_sha256": {
+          "type": "string"
+        },
+        "output_nodes": {
+          "type": "strings",
+          "min_items": 1
+        },
+        "max_time": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "time_tick": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "trajectories": {
+          "type": "integer",
+          "minimum": 100
+        },
+        "probability_tolerance": {
+          "type": "number",
+          "minimum": 1e-10,
+          "maximum": 0.01
+        }
+      },
+      "roles": [
+        "logical_response",
+        "node_time_probabilities",
+        "initial_probabilities",
+        "horizon_diagnostics"
+      ],
+      "output_rules": {
+        "logical_response": {
+          "required": [
+            "unit_id",
+            "feature_id",
+            "WT_probability",
+            "KO_probability",
+            "probability_delta"
+          ],
+          "keys": [
+            "unit_id",
+            "feature_id"
+          ],
+          "numeric": [
+            "WT_probability",
+            "KO_probability",
+            "probability_delta"
+          ],
+          "probabilities": [
+            "WT_probability",
+            "KO_probability"
+          ],
+          "empty_valid": false,
+          "allow_missing": false,
+          "algebra": [
+            {
+              "operation": "right_minus_left",
+              "left": "WT_probability",
+              "right": "KO_probability",
+              "result": "probability_delta"
+            }
+          ]
+        },
+        "node_time_probabilities": {
+          "required": [
+            "scenario",
+            "time",
+            "node",
+            "probability"
+          ],
+          "keys": [
+            "scenario",
+            "time",
+            "node"
+          ],
+          "numeric": [
+            "time",
+            "probability"
+          ],
+          "probabilities": [
+            "probability"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "initial_probabilities": {
+          "required": [
+            "node",
+            "p_on"
+          ],
+          "keys": [
+            "node"
+          ],
+          "numeric": [
+            "p_on"
+          ],
+          "probabilities": [
+            "p_on"
+          ],
+          "empty_valid": false,
+          "allow_missing": false
+        },
+        "horizon_diagnostics": {
+          "required": [
+            "scenario",
+            "time_points",
+            "terminal_last_step_change",
+            "maximum_native_MC_error"
+          ],
+          "keys": [
+            "scenario"
+          ],
+          "numeric": [
+            "time_points",
+            "terminal_last_step_change",
+            "maximum_native_MC_error"
+          ],
+          "probabilities": [],
+          "empty_valid": false,
+          "allow_missing": false
+        }
+      },
+      "comparison_score": "probability_delta",
+      "comparison_keys": [
+        "unit_id",
+        "feature_id"
+      ],
+      "score_kind": "continuous_time_logic_probability_change",
+      "sensitivity_parameters": [
+        "max_time",
+        "trajectories",
+        "seed"
+      ],
+      "signed_score": true,
+      "score_null": 0,
+      "sources": [
+        "https://pymaboss.readthedocs.io/en/latest/api/simulation.html",
+        "https://pymaboss.readthedocs.io/en/latest/api/result.html"
+      ],
+      "interpretation_limits": [
+        "Reviewed BND/CFG/rates, complete independent-Bernoulli initial probabilities, exact existing binary and package code",
+        "KO initial probability forced off as well as native OFF mutation; full unfiltered state mass and horizon checked",
+        "Native MC error is numerical simulation precision; last time point is not automatically stationary or a biological fate observation"
+      ],
+      "source_status": "IMPLEMENTED_ADAPTER_SOURCE_RUNTIME_UNVERIFIED",
+      "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+      "scientific_acceptance": "NOT_ESTABLISHED",
+      "precision_only_parameters": [
+        "trajectories"
+      ]
+    }
+  },
+  "candidates": [],
+  "local_scientific_execution": false,
+  "automatic_install": false,
+  "public_upload": false,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "method_count": 12,
+  "candidate_count": 0
+}

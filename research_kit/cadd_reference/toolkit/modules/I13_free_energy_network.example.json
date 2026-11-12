@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I13",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "相对与绝对结合自由能的项目化计算",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "ligand_endpoints": {
+      "rows": [],
+      "row_template": {
+        "ligand_state_id": null,
+        "parent_id": null,
+        "chemical_state": null,
+        "formal_charge": null,
+        "structure_path": null,
+        "structure_sha256": null,
+        "pose_id": null,
+        "parameter_set_id": null
+      }
+    },
+    "receptor_model": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "atom_mappings": {
+      "rows": [],
+      "row_template": {
+        "atom_map_id": null,
+        "ligand_A_state_id": null,
+        "ligand_B_state_id": null,
+        "map_path": null,
+        "sha256": null,
+        "ring_and_stereochemistry_review": null,
+        "dummy_bonded_terms_review": null
+      }
+    },
+    "edges": {
+      "rows": [],
+      "row_template": {
+        "edge_id": null,
+        "ligand_A_state_id": null,
+        "ligand_B_state_id": null,
+        "atom_map_id": null,
+        "atom_map_hash": null,
+        "complex_system_id": null,
+        "solvent_system_id": null,
+        "charge_change": null,
+        "protocol_version": null
+      }
+    },
+    "experimental_anchors": {
+      "rows": [],
+      "row_template": {
+        "anchor_id": null,
+        "ligand_state_or_parent_id": null,
+        "endpoint_type": null,
+        "raw_value": null,
+        "raw_unit": null,
+        "assay_conditions": null,
+        "conversion_assumptions": null,
+        "comparison_eligibility": null,
+        "reference": null
+      }
+    }
+  },
+  "settings": {
+    "method": null,
+    "sign_convention": "RBFE: delta_delta_G_A_to_B = delta_G_bind_B - delta_G_bind_A = delta_G_complex_A_to_B - delta_G_solvent_A_to_B; positive means B binding is less favorable",
+    "temperature_K": null,
+    "reported_energy_unit": null,
+    "standard_concentration_mol_L": null,
+    "lambda_protocol": {
+      "path_definition": null,
+      "complex_lambda_states": [],
+      "solvent_lambda_states": [],
+      "softcore_function": null,
+      "softcore_parameters": {},
+      "sampler": null,
+      "replica_exchange_settings": null
+    },
+    "sampling": {
+      "independent_repeat_count": null,
+      "complex_sampling_per_state": null,
+      "solvent_sampling_per_state": null,
+      "time_unit": null,
+      "equilibration_protocol": null,
+      "raw_energy_output_definition": null
+    },
+    "charge_changing_transformations": {
+      "enabled": false,
+      "handling_method": null,
+      "correction_definition": null,
+      "both_leg_review": null,
+      "validation_evidence": null
+    },
+    "abfe": {
+      "enabled": false,
+      "restraint_potential_definition": null,
+      "anchor_atoms": [],
+      "anchor_geometry_review": null,
+      "restraint_attachment_schedule": null,
+      "decoupling_schedule": null,
+      "analytical_release_definition": null,
+      "symmetry_treatment": null,
+      "multiple_binding_mode_treatment": null
+    },
+    "estimation": {
+      "estimator": null,
+      "parser_version": null,
+      "equilibration_detection": null,
+      "time_correlation_handling": null,
+      "overlap_review_rule": null,
+      "network_fitting_method": null,
+      "covariance_treatment": null,
+      "experimental_calibration_method": null
+    }
+  },
+  "results": {
+    "leg_results": {
+      "rows": [],
+      "row_template": {
+        "edge_id": null,
+        "leg_id": null,
+        "replicate_id": null,
+        "estimate": null,
+        "unit": null,
+        "uncertainty": null,
+        "uncertainty_method": null,
+        "raw_data_artifact_ids": null,
+        "qc_status": null
+      }
+    },
+    "edge_results": {
+      "rows": [],
+      "row_template": {
+        "edge_id": null,
+        "replicate_id": null,
+        "delta_delta_G": null,
+        "unit": null,
+        "uncertainty": null,
+        "uncertainty_method": null,
+        "sign_convention": null,
+        "qc_status": null
+      }
+    },
+    "cycle_closure": {
+      "rows": [],
+      "row_template": {
+        "cycle_id": null,
+        "directed_edges": null,
+        "closure_error": null,
+        "unit": null,
+        "uncertainty": null,
+        "covariance_assumptions": null,
+        "qc_status": null
+      }
+    },
+    "network_estimates": {
+      "rows": [],
+      "row_template": {
+        "ligand_state_id": null,
+        "connected_component_id": null,
+        "reference_state_id": null,
+        "relative_estimate": null,
+        "unit": null,
+        "uncertainty": null,
+        "uncertainty_method": null,
+        "replicate_count": null,
+        "qc_status": null,
+        "model_limitations": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "alchemical_edges.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "edge_results_by_replicate.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "overlap_matrices.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "cycle_closure.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "network_estimates.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "free_energy_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "新候选可复用协议一致且QC合格旧边并重拟合网络",
+      "端点参数状态映射受体或关键协议变更使相应边失效",
+      "修改锚点实验只重标定依赖结果"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I13-P1",
+      "title": "自由能变换网络",
+      "required_data": "有方向的边结果",
+      "interpretation_boundary": "未连通节点不能共享已标定尺度",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P2",
+      "title": "各腿重叠矩阵",
+      "required_data": "跨状态能量和估计器输出",
+      "interpretation_boundary": "重叠通过不代表化学模型正确",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P3",
+      "title": "交换与结构联合时间线",
+      "required_data": "副本lambda轨迹及构象",
+      "interpretation_boundary": "lambda往返不保证隐藏自由度采样",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P4",
+      "title": "前后向与累积收敛",
+      "required_data": "时间分段估计",
+      "interpretation_boundary": "同盆地一致不排除系统偏差",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P5",
+      "title": "环路闭合误差",
+      "required_data": "带方向的环路与协方差",
+      "interpretation_boundary": "闭合不证明绝对正确",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P6",
+      "title": "独立重复边结果",
+      "required_data": "每个重复的两腿差值",
+      "interpretation_boundary": "误差类型与统计层次明确",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P7",
+      "title": "预测实验散点和残差",
+      "required_data": "可比终点与预测",
+      "interpretation_boundary": "不混合未转换的Kd Ki IC50",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I13-P8",
+      "title": "ABFE约束与步骤示意",
+      "required_data": "实际锚点和热力学过程",
+      "interpretation_boundary": "标准态与势能定义一致",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

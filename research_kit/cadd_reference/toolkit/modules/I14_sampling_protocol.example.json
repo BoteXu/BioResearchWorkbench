@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I14",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "增强采样与动力学及停留时间",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "system_definition": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "baseline_trajectories": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "topology_path": null,
+        "topology_sha256": null,
+        "trajectory_path": null,
+        "trajectory_sha256": null,
+        "continuous_segment_ids": null,
+        "sampling_method": null
+      }
+    },
+    "sampling_bottleneck_evidence": [],
+    "target_states": {
+      "rows": [],
+      "row_template": {
+        "state_id": null,
+        "definition": null,
+        "entry_rule": null,
+        "exit_rule": null,
+        "recrossing_rule": null
+      }
+    },
+    "collective_variables": {
+      "rows": [],
+      "row_template": {
+        "cv_id": null,
+        "formula": null,
+        "atom_mapping": null,
+        "unit": null,
+        "periodicity": null,
+        "alignment_definition": null,
+        "pbc_treatment": null,
+        "expected_state_ranges": null,
+        "known_hidden_degrees_of_freedom": null
+      }
+    }
+  },
+  "settings": {
+    "primary_goal": null,
+    "method": null,
+    "temperature_K": null,
+    "umbrella": {
+      "enabled": false,
+      "path_definition": null,
+      "windows": [],
+      "bias_function": null,
+      "initialization_sources": [],
+      "orthogonal_relaxation_review": null,
+      "estimator": null,
+      "geometry_and_standard_state_treatment": null
+    },
+    "metadynamics": {
+      "enabled": false,
+      "plumed_version": null,
+      "bias_form": null,
+      "gaussian_widths": null,
+      "width_units": null,
+      "deposition_interval": null,
+      "interval_unit": null,
+      "initial_height_or_equivalent": null,
+      "height_unit": null,
+      "bias_factor": null,
+      "grid_definition": null,
+      "walls": null,
+      "hills_file": null,
+      "engine_checkpoint": null,
+      "restart_consistency_review": null
+    },
+    "reweighting": {
+      "method": null,
+      "bias_information_required": [],
+      "frame_bias_artifact_ids": [],
+      "analysis_window": null,
+      "log_weight_handling": null,
+      "coverage_mask": null,
+      "weight_concentration_check": null,
+      "time_correlation_handling": null
+    },
+    "kinetics": {
+      "enabled": false,
+      "unbiased_or_reconstruction_method": null,
+      "event_definition": null,
+      "initial_distribution": null,
+      "independent_event_design": null,
+      "left_censoring_rule": null,
+      "right_censoring_rule": null,
+      "acceleration_factor_definition": null,
+      "transition_region_bias_review": null,
+      "distribution_validation_plan": null
+    },
+    "msm": {
+      "enabled": false,
+      "features": [],
+      "dimensionality_reduction": null,
+      "clustering_definition": null,
+      "lagtime": null,
+      "lagtime_unit": null,
+      "trajectory_boundary_handling": null,
+      "connectivity_rule": null,
+      "implied_timescales_plan": null,
+      "chapman_kolmogorov_plan": null,
+      "holdout_validation_plan": null
+    }
+  },
+  "results": {
+    "window_or_bias_runs": {
+      "rows": [],
+      "row_template": {
+        "run_id": null,
+        "system_id": null,
+        "replicate_id": null,
+        "window_or_bias_id": null,
+        "sampling_amount": null,
+        "time_unit": null,
+        "raw_artifact_ids": null,
+        "qc_status": null
+      }
+    },
+    "reweighting_diagnostics": {
+      "rows": [],
+      "row_template": {
+        "run_id": null,
+        "analysis_window": null,
+        "weight_effective_sample_size": null,
+        "time_correlation_adjustment": null,
+        "coverage_status": null,
+        "qc_status": null
+      }
+    },
+    "state_events": {
+      "rows": [],
+      "row_template": {
+        "trajectory_id": null,
+        "replicate_id": null,
+        "event_id": null,
+        "initial_state": null,
+        "final_state": null,
+        "entry_time": null,
+        "exit_time": null,
+        "time_unit": null,
+        "left_censored": null,
+        "right_censored": null,
+        "reconstructed_time": null,
+        "reconstruction_method": null
+      }
+    },
+    "kinetic_model_qc": {
+      "rows": [],
+      "row_template": {
+        "model_id": null,
+        "check_id": null,
+        "evidence_artifact_id": null,
+        "status": null,
+        "limitations": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "cv_definition.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "biased_sampling_manifest.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "reweighting_diagnostics.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "state_events.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "kinetic_model_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "新同协议轨迹可加入但需重估统计",
+      "改CV偏置或物理模型需评估新采样",
+      "改状态边界或估计器需重分析",
+      "不同偏置历史不得连续拼接"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I14-P1",
+      "title": "CV与结构观测联合时间线",
+      "required_data": "CV及未加偏结构变量",
+      "interpretation_boundary": "防止CV往返掩盖结构破坏",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P2",
+      "title": "窗口分布和重叠",
+      "required_data": "各窗口分布",
+      "interpretation_boundary": "同时审查正交自由度",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P3",
+      "title": "自由能与覆盖并列图",
+      "required_data": "相应估计及采样权重",
+      "interpretation_boundary": "未采样区域明确遮蔽",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P4",
+      "title": "权重集中与分段结果",
+      "required_data": "权重及分块统计",
+      "interpretation_boundary": "权重ESS未自动扣除自相关",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P5",
+      "title": "多重复状态往返",
+      "required_data": "各起点的状态轨迹",
+      "interpretation_boundary": "保存独立轨迹边界",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P6",
+      "title": "逃逸分布与删失",
+      "required_data": "独立逃逸事件表",
+      "interpretation_boundary": "普通metad时间不作为物理时间",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I14-P7",
+      "title": "MSM验证和状态网络",
+      "required_data": "ITS CK及转移计数",
+      "interpretation_boundary": "返回MFPT不等于有足够数据支持",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

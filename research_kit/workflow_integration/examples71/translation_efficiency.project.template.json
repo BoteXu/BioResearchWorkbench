@@ -1,0 +1,147 @@
+{
+  "schema": "private71-project-template/2",
+  "template_not_executable": true,
+  "analysis_id": "translation_efficiency",
+  "backend": "omics71",
+  "run_id": "REQUIRED_FRESH_RUN_ID",
+  "parameters": {
+    "analysis_id": "translation_efficiency",
+    "implementation": "edgeR_Ribo_RNA_interaction",
+    "seed": 20261025,
+    "contrast": "REQUIRED_CONTRAST",
+    "design": "REQUIRED_STRING",
+    "min_count": "REQUIRED_INTEGER",
+    "min_samples": "REQUIRED_INTEGER",
+    "sensitivity_variants": [
+      {
+        "label": "alternative1",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      },
+      {
+        "label": "alternative2",
+        "parameters": {
+          "REQUIRED_WHITELIST_KEY": "REQUIRED_DIFFERENT_VALUE"
+        }
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "id": "matrix",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "samples",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "periodicity",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    },
+    {
+      "id": "context",
+      "path": "REQUIRED_PROJECT_RELATIVE_PATH",
+      "sha256": "REQUIRED_ACTUAL_SHA256"
+    }
+  ],
+  "expected_host": "REQUIRED_CURRENT_COMPUTE_HOST",
+  "node_role": "compute",
+  "resource_budget": {
+    "cpus": "REQUIRED_ALLOCATED_INTEGER",
+    "gpus": 0
+  },
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "upstream_qc": {
+    "requires": "ACTUAL_COMPLETED_HASH_BOUND_QC_RECEIPT_AND_NUMERICAL_MEASUREMENTS",
+    "is_evidence": false
+  },
+  "statistical_plan": {
+    "estimand": "REQUIRED_SCIENTIFIC_DECISION",
+    "independent_unit": "REQUIRED_SCIENTIFIC_DECISION",
+    "missingness": "REQUIRED_SCIENTIFIC_DECISION",
+    "multiplicity": "REQUIRED_SCIENTIFIC_DECISION",
+    "sensitivity": "REQUIRED_SCIENTIFIC_DECISION"
+  },
+  "acceptance_rules": [
+    {
+      "id": "required_actual_numerical_diagnostic",
+      "role": "analysis_diagnostics",
+      "field": "0.metrics.REQUIRED_ACTUAL_FIELD",
+      "operator": "ge",
+      "bound": "REQUIRED_NUMERIC_THRESHOLD",
+      "definition": "REQUIRED_DEFINITION",
+      "unit": "REQUIRED_UNIT",
+      "threshold_basis": "REQUIRED_SCIENTIFIC_JUSTIFICATION"
+    }
+  ],
+  "example_only": true,
+  "scientific_runtime": "NOT_RUN_THIS_UPGRADE",
+  "optional_input_roles": [],
+  "conditional_input_roles": {},
+  "parameter_contracts": {
+    "contrast": {
+      "type": "contrast"
+    },
+    "design": {
+      "type": "string"
+    },
+    "min_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "min_samples": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "allowed_sensitivity_parameters": [
+    "min_count",
+    "min_samples"
+  ],
+  "required_scientific_output_roles": [
+    "translation_interactions",
+    "ribo_rna_pairs",
+    "periodicity_qc",
+    "translation_sensitivity"
+  ],
+  "required_proof_roles": [
+    "full_result_audit",
+    "actual_sensitivity_comparison"
+  ],
+  "context_QC_contract": {
+    "each_qc_evidence_row_requires": [
+      "input_id",
+      "sha256",
+      "criterion",
+      "observed",
+      "decision",
+      "operator",
+      "bound",
+      "unit",
+      "source_receipt_sha256",
+      "source_receipt_input",
+      "measurement_input",
+      "measurement_field"
+    ],
+    "missing_is_not_pass": true
+  },
+  "design_guidance": {
+    "design": "~ unit_id + assay + te_interaction",
+    "contrast": {
+      "te_interaction": 1
+    },
+    "required_context_field": {
+      "te_contrast": {
+        "control": "REQUIRED_ACTUAL_CONTROL",
+        "treatment": "REQUIRED_ACTUAL_TREATMENT"
+      }
+    },
+    "meaning": "relative translation-efficiency interaction; subject fixed effects; within-assay TMM; no absolute global translation inference"
+  }
+}

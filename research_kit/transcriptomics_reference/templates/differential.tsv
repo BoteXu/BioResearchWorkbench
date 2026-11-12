@@ -1,0 +1,1 @@
+run_id	contrast_id	scope_id	feature_id	effect	effect_name	effect_scale	positive_direction	standard_error	ci_low	ci_high	interval_type	interval_level	statistic	pvalue	padj	p_adjust_method	test_family	n_samples_numerator	n_samples_denominator	n_donors_numerator	n_donors_denominator	test_status	missing_reason	shrunk_effect_file	model_input_versions

@@ -1,0 +1,35 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I33",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "chemical_state_and_atom_mapping": [],
+    "benchmark_split": [],
+    "pose_validation_rules": [],
+    "complete_campaign_denominator": [],
+    "score_domain": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "pose_validity_by_reason",
+    "redocking_crossdocking_summary",
+    "ranking_and_budget_evaluation",
+    "failure_denominator",
+    "prospective_scope"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "位姿物理检查和恢复率分层",
+    "固定预算累计实测命中与库覆盖",
+    "母体/状态/受体/失败的完整分流"
+  ]
+}

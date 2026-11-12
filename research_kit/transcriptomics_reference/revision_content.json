@@ -1,0 +1,136 @@
+{
+  "version": "2.1.1-private",
+  "sections": [
+    {
+      "heading": "U09 富集的选择偏倚和检验目标",
+      "issue": "R01",
+      "paragraphs": [
+        "本节补充 B07 和 E01。真实受检背景、稳定 ID 和完整有向排名仍是基础。另在服务器检查 DE 入选与基线丰度、检出支持和适配注释长度的关系；区分一般检测功效差异与样本特异的长度相关技术偏倚。保存技术类型、诊断集合、长度/丰度定义和依据，不从目标通路是否显著反推偏倚是否存在。[M01–M04]",
+        "常规片段计数、全长转录组、端标签 UMI 和芯片的测量机制不同。偏倚感知 ORA 可考虑 goseq/goana；样本特异技术偏倚必要时在原统计模型和合法 offset/归一化路线中处理后重新验收。不能把 TPM 除长度、对 UMI 机械除长度，或串联额外归一化当通用修复。无相关偏倚证据时可保留主方法并记录理由；敏感性改变通路解释时同时呈现结果。",
+        "预排序 fgsea 的随机基因集参照、ORA 的前景入选参照、表达/设计输入的竞争性检验、self-contained 检验和描述性 score 分开登记。前两者不产生新的独立供者重复。高共调控集合还需记录基因间相关政策；适用时可用 CAMERA 或其他匹配设计的基因集方法复核，但其零假设不同，不要求 P 值完全相同。[M02、M04]",
+        "若采用样本标签置换，先证明独立/配对/区组层面的可交换性；有混杂或重复时不得任意打乱细胞标签。可行置换很少、先验集合覆盖不足或严重偏倚尚未解释时，限制相应通路结论。M03 的特定基准支持一种预排序配置，不是任意数据的通用最优规则。所有替代方法在看到终测结果前冻结，不以最小 P 值选主方法。",
+        "新增 enrichment_review.tsv，逐 contrast×scope×方法记录测量机制、背景/排名哈希、选择偏倚诊断、相关结构、零模型、敏感性、检验家族和采用范围。规范完成此条款不表示已经在真实数据上完成诊断或安装相关软件。"
+      ]
+    },
+    {
+      "heading": "U10 身份实体和多对多关系",
+      "issue": "R02",
+      "paragraphs": [
+        "identity.tsv 每行表示一个来源中的 donor、sample、capture、library、run 或 cell 实体，使用不可变 identity_id；保留 dataset_id、original_id 和 record_level 的唯一组合。donor 可以对应多个组织/时间样本，capture 可以混合多个 donor，单个实体行不再强填唯一 sample、condition 或 time_region。",
+        "新增 identity_link.tsv 保存实体关系。sample_of_donor 为 sample→donor，sample_in_capture 为 sample→capture，library_from_capture 为 library→capture，library_from_sample 为 library→sample，sequencing_of_library 为 run→library，cell_from_capture 为 cell→capture，cell_assigned_sample 为 cell→sample，cell_assigned_donor 为 cell→donor。一个实体可以有多条有依据的关系。",
+        "source_identity_id 与 target_identity_id 必须回到 identity 表；关系类型与两端 record_level 一致。每条关系保留证据、来源版本和 confirmed/uncertain/rejected 状态。解混 confidence 仅保留算法原定义，不自动视为校准概率。uncertain 不能当作确认的 donor 身份进入群体比较。",
+        "sample 和 cell 的样本/条件映射在相应推断入口必须明确；donor、混样 capture 或技术实体上不适用的单值字段可以为 NA，并按实体规则解释。未知关系不自动生成，技术补测不创建新 donor，既有混池不能按细胞数拆成多个独立个体。"
+      ]
+    },
+    {
+      "heading": "U11 特征可测性和映射记录身份",
+      "issue": "R03",
+      "paragraphs": [
+        "availability.tsv 使用不可变 availability_record_id 作为记录主键，保留 original_feature_id 和 mapping_candidate_id。最终 feature_id 可以未知；多个未映射来源特征各保留一行，不能共享一个 NA 生物学主键，也不通过 make.unique 生成虚构基因。",
+        "一对多候选分别成行，mapping_candidate_id 标识候选，不等同最终已解析基因；多对一来源记录继续保留。resolution_status 为 resolved/unresolved/rejected。候选三元组 dataset_id×original_feature_id×mapping_candidate_id 不重复，最终解析与用于下游的资格另行审查。",
+        "unmapped 行的 feature_id 为 NA，candidate 使用 none 这一非生物学占位标识；unresolved 不因存在某个候选就自动进入计数汇总。去版本后碰撞、作者删行、真实零和 unknown 的来源语义继续按 W03/C03 保留。"
+      ]
+    },
+    {
+      "heading": "U12 汇总估计和分析变体",
+      "issue": "R04",
+      "paragraphs": [
+        "meta.tsv 改为每个 estimate_id 对应一项可追溯估计，增加 analysis_variant_id、scope_id 和 model_id。analysis_variant_id 标识主汇总、具体留一轮或具体亚组所采用的配置；scope_id 区分类型、组织或其他受检范围。run_id 不再被隐式要求承担所有变体身份。",
+        "run_id×contrast_id×scope_id×analysis_variant_id×role×study_id×feature_id 唯一。同一 variant 的 role、heldout/subgroup、scope 和 model 定义须一致；pooled 行使用 study_id=pooled，留一和亚组的被排除/分层定义明确，全部轮次保留。原始研究效应、合并估计、合并均值区间和预测区间继续分开解释。",
+        "增加记录 ID 只解决文件关系，不解决效应可比性和共享样本依赖。C10 的相容 estimand、未收缩效应与对应采样 SE、每基因有效 k、异质性、小 k 局限及复现边界均继续适用。"
+      ]
+    },
+    {
+      "heading": "U13 启动条件和新运行目录",
+      "issue": "R05",
+      "paragraphs": [
+        "project_template.json 为规划结构，execution_authorized 固定为 false；模板和元数据检查器均不派发任务。新增 task_requests 与 task_requirements.json，按任务核对计量层、模型、独立单位、输入/参考、方法配置和服务器准备证据。null、空数组、空字符串、TBD、NA 或一个未核实的路径均不能充当已满足的条件。",
+        "方法相关字段按任务条件必填；图谱结构不机械要求一个计数 DE 模型，而 bulk DE、pseudobulk、meta、反卷积和群体动态有各自额外条件。新增 method_readiness.tsv，分别记录静态检查、示例/项目执行、数值审查和科学采用；不得因目录中有方法名便声称其后端已验证。",
+        "本版对已定位代码输出增加新目录检查：R 示例在执行前以新的 RUN_ID 建目录，已存在的文件或目录即停止；输出写入该目录。I03 先创建新的 run 根，再让模型保存到其子路径。中途失败保留部分文件，不自动清空后重试。其余自编适配器也必须执行同等规则，不能只在正文写禁止覆盖。",
+        "目录防覆盖、字段类型/主键和模板一致性可在本地做有限元数据检查。科研矩阵审查、模型、训练、动态检验和下载仍在既有服务器环境。当前代码骨架仍为静态审阅版本；R/科学后端必须另做真实服务器验收，不将本版元数据测试冒充科学计算验收。"
+      ]
+    },
+    {
+      "heading": "U14 多样本轨迹的推断分流",
+      "issue": "R06",
+      "paragraphs": [
+        "本节补 E04。DYN01 为描述性状态/轨迹及同对象动态探索；DYN02 为跨独立样本的拓扑、沿程密度或条件表达动态。二者分开登记。多个 donor 上可见相似曲线、默认细胞层 P 值和多 seed 稳定性都不自动形成跨 donor 条件效应。",
+        "DYN02 先冻结目标分支、可比较状态范围、根依据及具体零假设：沿程变化、条件均值平移、条件曲线形状差异、拓扑差异或密度差异。记录真实 donor/sample/配对结构、缺失阶段、协变量、有效支持和可交换单位。不能将 condition 显著与否之差当作曲线差异。",
+        "Lamian 是可评估的多样本候选路线之一：论文在表达/细胞密度推断中显式处理样本变异，并把拓扑不确定性与条件于分支/拟时序的后续推断分开。它不是一次性消除所有不确定性的方法；输入为方法要求的归一化表达、共同表示和样本元数据，不应机械套用 tradeSeq 的 count 输入。嵌套重复、配对和实际安装接口仍须逐项目验证。[M05]",
+        "condiments 区分 topology、progression、fate selection 和 condition expression 等问题；不能仅因采用该包就宣称全部检验已处理 donor。核查的官方 1.20.0 手册中，topologyTest_multipleSamples、progressionTest_multipleSamples 与 fateSelectionTest_multipleSamples 要求 Samples 跨全部条件共享；不直接适配每个 donor 只属于一个条件的独立病例—对照设计。不得伪造共享 Samples、删除 donor 或把细胞当重复来满足接口。实际版本、函数、设计及交换单位须另验；未经核实的默认细胞检验仅作相应层面的探索。[M06]",
+        "默认 graph_test/tradeSeq 的同对象探索保留其条件解释。群体动态若改用其他合法层级/函数型模型或样本重采样方案，需说明如何处理相关、根/分支、拟时序范围、选择后的推断和多重检验；不能只写 donor-aware。没有匹配后端时，DYN02 保持 blocked/pending，DYN01 可在明确范围内继续。",
+        "新增 trajectory_review.tsv，记录 mode、hypothesis、input_scale、sample_design、topology_policy、root/lineage、dependency/交换性、方法版本、完整结果和适用限制。实际结果报告效应/曲线差异及其适配不确定性，不把细胞 bootstrap 或算法 seed 范围统称为供者总体置信区间。"
+      ]
+    },
+    {
+      "heading": "U15 私有规范采用和后端资格",
+      "issue": "integration",
+      "paragraphs": [
+        "本次私有派生版本用于 Biomni 组学设计、QC 规划、方法路由和返回结果审查。文档/模板的接入缺陷已作定位修订，元数据合同与防覆盖示例另有本地验收；这不表示任意项目已通过，或科学后端已经执行。",
+        "原 v2.1 DOCX 和模板 ZIP、原审查记录与哈希保留。v2.1.1 的父版本、修订映射、字段和机器约束分别版本化。37 类模板表只是记录结构；只有启用任务的相应表需要实际填写，不为凑齐表数生成虚假数据。",
+        "既有 Biomni/组学/统计/服务器工具继续复用。共享服务和私有 13 阶段 bulk 原合同不因这份参考被重命名、替换或重新启动。实际分析前仍补真实研究设计、输入 QC、方法适用性和后端/结果回执。",
+        "本材料仅在用户私有库和本机安装的私有引用中使用，不向公开仓库/公共服务分发。SciSpace 仅用于通用方法问题检索；其自动 limitations 字段的未报告内容不是没有限制。新方法条款以回查的原始论文/官方接口及本项目决定分别记录。"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "M01",
+      "title": "Gene ontology analysis for RNA-seq accounting for selection bias",
+      "doi": "10.1186/gb-2010-11-2-r14",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2872874/",
+      "scope": "RNA-seq DE入选偏倚与偏倚感知ORA；不推为所有技术必用同一修正"
+    },
+    {
+      "id": "M02",
+      "title": "Camera a competitive gene set test accounting for inter-gene correlation",
+      "doi": "10.1093/nar/gks461",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3458527/",
+      "scope": "竞争性基因集检验与相关结构，不与self-contained或fgsea混同零假设"
+    },
+    {
+      "id": "M03",
+      "title": "Assessment of Gene Set Enrichment Analysis using curated RNA-seq-based benchmarks",
+      "doi": "10.1371/journal.pone.0302696",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0302696",
+      "scope": "特定RNA-seq基准下的排列/统计量比较；不推出通用最优"
+    },
+    {
+      "id": "M04",
+      "title": "Recurrent functional misinterpretation of RNA-seq data caused by sample-specific gene length bias",
+      "doi": "10.1371/journal.pbio.3000481",
+      "url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000481",
+      "scope": "样本特异长度偏倚、富集解释与相关感知方法的权衡；按本项目风险采用诊断"
+    },
+    {
+      "id": "M05",
+      "title": "A statistical framework for differential pseudotime analysis with multiple single-cell RNA-seq samples",
+      "doi": "10.1038/s41467-023-42841-y",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10638410/",
+      "scope": "Results及Discussion中样本变异与顺序条件推断；不等于处理所有层级或全部不确定性"
+    },
+    {
+      "id": "M06",
+      "title": "Trajectory inference across multiple conditions with condiments",
+      "doi": "10.1038/s41467-024-44823-0",
+      "url": "https://www.nature.com/articles/s41467-024-44823-0",
+      "scope": "拓扑/进程/分支选择/表达问题分开；具体版本的sample感知接口需单独核对",
+      "api_url": "https://www.bioconductor.org/packages/release/bioc/manuals/condiments/man/condiments.pdf",
+      "api_version_reviewed": "1.20.0",
+      "api_review_date": "2026-10-24",
+      "api_sections": [
+        "fateSelectionTest_multipleSamples",
+        "progressionTest_multipleSamples",
+        "topologyTest_multipleSamples"
+      ],
+      "api_limit": "Samples are required to be shared across all conditions. This manual review does not validate an installed server version."
+    },
+    {
+      "id": "M07",
+      "title": "Gene dispersion is the key determinant of the read count bias in differential expression analysis of RNA-seq data",
+      "doi": "10.1186/s12864-017-3809-0",
+      "url": "https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3809-0",
+      "scope": "检索发现的不同重复类型条件；未用自动limitations的不完整上下文作普适推论"
+    }
+  ]
+}

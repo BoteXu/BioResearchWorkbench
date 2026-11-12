@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.1-private",
+  "project": "ExampleBulk",
+  "expr_matrix": "expression.csv",
+  "metadata": "metadata.csv",
+  "orientation": "genes_by_samples",
+  "matrix_kind": "log2_normalized",
+  "sample_id_col": "sample_id",
+  "group_col": "condition",
+  "unit_col": "donor_id",
+  "case_label": "Disease",
+  "control_label": "Control",
+  "covariates": [],
+  "paired": false,
+  "min_units": 3,
+  "stages": [
+    "qc",
+    "de",
+    "enrich"
+  ],
+  "context": {
+    "species": "Replace with source species",
+    "model": "Replace with study model",
+    "assay": "Replace with measured assay",
+    "biological_unit": "independent donor",
+    "contrast": "Disease minus Control",
+    "limitations": [
+      "Replace with source limitations; example is not a study"
+    ],
+    "input_source": "Replace with scoped source receipt",
+    "input_processing": "Replace with documented normalization or raw-count provenance"
+  },
+  "study": {
+    "question": "Replace with prespecified biological question",
+    "design": "observational",
+    "outcome_type": "expression",
+    "independent_unit": "independent donor",
+    "estimand": "Replace with target population and Disease minus Control effect",
+    "groups": 2,
+    "repeated": false,
+    "clustered": false,
+    "primary_endpoints": [
+      "prespecified gene-expression contrast"
+    ],
+    "missing_data": "No automatic omission; replace with actual missingness plan",
+    "covariates": []
+  },
+  "reference": {
+    "assembly": "Replace with source assembly",
+    "annotation_version": "Replace with source annotation version",
+    "gene_namespace": "Replace with gene ID namespace"
+  }
+}

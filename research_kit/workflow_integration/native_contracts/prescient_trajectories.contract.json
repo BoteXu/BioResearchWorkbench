@@ -1,0 +1,36 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "prescient_trajectories",
+  "required_inputs": [
+    "object",
+    "model_manifest",
+    "model_config",
+    "representation_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "unit_key",
+    "representation_key",
+    "representation_kind",
+    "initial_cells",
+    "n_simulations",
+    "n_steps",
+    "dt",
+    "noise_sd",
+    "model_time_unit",
+    "state_dictionary_key",
+    "maximum_trajectory_entries"
+  ],
+  "required_output_roles": [
+    "model_trajectories",
+    "trajectory_identity",
+    "trajectory_time",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual exact-source PRESCIENT AutoGenerator stepping with selected literal initial cells, safe exact state dictionary, unchanged checkpoint metric representation/dt/noise/time units and bounded stochastic replicas; not thermodynamic free energy or biological lineage.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

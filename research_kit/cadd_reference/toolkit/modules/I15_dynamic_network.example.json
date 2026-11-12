@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I15",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "动态网络与变构及界面敏感性",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "trajectories": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "model_variant_id": null,
+        "replicate_id": null,
+        "topology_path": null,
+        "topology_sha256": null,
+        "trajectory_path": null,
+        "trajectory_sha256": null,
+        "equilibrated_window": null,
+        "sampling_method": null
+      }
+    },
+    "residue_mapping": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "functional_evidence": [],
+    "source_regions": [],
+    "target_regions": [],
+    "source_target_independent_rationale": null,
+    "interface_definition": null
+  },
+  "settings": {
+    "alignment_reference": null,
+    "alignment_selection": null,
+    "alignment_sensitivity_plan": null,
+    "node_granularity": null,
+    "node_selection": null,
+    "cofactor_ligand_representation": null,
+    "contact_definition": {
+      "distance_metric": null,
+      "threshold": null,
+      "distance_unit": null,
+      "occupancy_threshold": null,
+      "sequence_neighbor_treatment": null
+    },
+    "correlation_definition": {
+      "type": null,
+      "variables": null,
+      "sign_preservation": null,
+      "finite_sample_handling": null
+    },
+    "edge_weight_definition": {
+      "formula": null,
+      "zero_correlation_treatment": null,
+      "missing_data_treatment": null,
+      "noncontact_treatment": null
+    },
+    "network_algorithms": {
+      "community_method": null,
+      "community_random_seed": null,
+      "community_matching_rule": null,
+      "centrality_definitions": [],
+      "path_method": null,
+      "suboptimal_path_parameters": {}
+    },
+    "perturbation_response": {
+      "enabled": false,
+      "model_source": null,
+      "covariance_definition": null,
+      "row_direction": "perturbation_source_node",
+      "column_direction": "response_target_node",
+      "normalization": null
+    },
+    "robustness": {
+      "replicate_comparison": null,
+      "time_blocks": null,
+      "reasonable_threshold_variants": [],
+      "null_model_definition": null,
+      "preserved_temporal_properties": null,
+      "multiple_comparison_handling": null
+    }
+  },
+  "results": {
+    "nodes": {
+      "rows": [],
+      "row_template": {
+        "node_id": null,
+        "chain_id": null,
+        "sequence_position": null,
+        "structure_residue_id": null,
+        "representative_atom_or_group": null,
+        "component_type": null
+      }
+    },
+    "edges_by_replicate": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "source_node_id": null,
+        "target_node_id": null,
+        "contact_occupancy": null,
+        "correlation": null,
+        "correlation_definition": null,
+        "edge_weight": null,
+        "edge_weight_definition": null
+      }
+    },
+    "community_mapping": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "raw_community_id": null,
+        "matched_community_id": null,
+        "node_ids": null,
+        "matching_evidence": null
+      }
+    },
+    "path_results": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "source_node_id": null,
+        "target_node_id": null,
+        "path_id": null,
+        "ordered_nodes": null,
+        "path_weight": null,
+        "path_definition": null
+      }
+    },
+    "network_qc": {
+      "rows": [],
+      "row_template": {
+        "check_id": null,
+        "system_id": null,
+        "replicate_id": null,
+        "evidence_artifact_id": null,
+        "status": null,
+        "interpretation_limit": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "nodes.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "edges_by_replicate.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "network_definition.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "community_mapping.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "path_results.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "network_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "改网络定义只需对原始轨迹重分析",
+      "新轨迹更新相关网络稳定性和报告",
+      "改化学态序列物理模型需新采样"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I15-P1",
+      "title": "相关矩阵和残基映射",
+      "required_data": "每重复相关统计",
+      "interpretation_boundary": "相关定义不能混用",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P2",
+      "title": "重复间边稳定性",
+      "required_data": "分块分重复接触图",
+      "interpretation_boundary": "考虑采样与阈值影响",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P3",
+      "title": "结构社区与多路径",
+      "required_data": "节点边及路径集合",
+      "interpretation_boundary": "路径不是已证实的信号流",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P4",
+      "title": "状态差异网络",
+      "required_data": "相同节点和分母的条件差别",
+      "interpretation_boundary": "社区编号需映射",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P5",
+      "title": "扰动响应矩阵",
+      "required_data": "PRS输出",
+      "interpretation_boundary": "区分扰动源和响应目标",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P6",
+      "title": "界面接触与取向",
+      "required_data": "分重复界面观测量",
+      "interpretation_boundary": "界面保持不证明生理互作",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I15-P7",
+      "title": "候选区域证据表",
+      "required_data": "结构统计功能证据记录",
+      "interpretation_boundary": "中心性不自动等同功能因果",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

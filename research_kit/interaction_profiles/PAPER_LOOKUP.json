@@ -1,0 +1,21 @@
+{
+  "service": "SciSpace",
+  "title": "Interaction Profiles as a Universal Language for Generative Molecular Design with ShEPhERD-2",
+  "DOI": "10.64898/2026.09.10.750648",
+  "record_id": "pg4b38tlry5v",
+  "year": 2026,
+  "authors": [
+    "Kento Abeywardane",
+    "Kenji Walker",
+    "Connor W. Coley"
+  ],
+  "retrieved_scope": "title_authors_DOI_abstract_and_secondary_methods_summary",
+  "crosscheck": "author_official_repository",
+  "full_text_methods_and_numbers_verified": false,
+  "paper_reproduced": false,
+  "private_inputs_sent": false,
+  "public_upload": false,
+  "reviewed_on": "2026-10-26",
+  "primary_full_text_review": "NOT_COMPLETED_ACCESS_RESTRICTED",
+  "methods_summary_has_located_primary_passages": false
+}

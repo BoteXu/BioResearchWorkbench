@@ -1,0 +1,269 @@
+{
+  "schema": "public-source-files/1",
+  "files": [
+    {
+      "path": "abundance.tsv",
+      "file": "abundance.tsv",
+      "bytes": 211,
+      "sha256": "ff3bc6dd759ee1b9d46255835ca0e6c8f3249c074afb0919fbc7a33fc95948dd"
+    },
+    {
+      "path": "acceptance.tsv",
+      "file": "acceptance.tsv",
+      "bytes": 156,
+      "sha256": "49cea5e5a084c68e9a714db7f024437e40994a13e68e9caf746822ba1869250c"
+    },
+    {
+      "path": "analysis_request.tsv",
+      "file": "analysis_request.tsv",
+      "bytes": 213,
+      "sha256": "ca000f1e0d0d5230dc1e54473f5617391baa298f9af425ea8a0d23c962438965"
+    },
+    {
+      "path": "annotation.tsv",
+      "file": "annotation.tsv",
+      "bytes": 225,
+      "sha256": "817e2e47690865228b3cbde9a2dbc8e810a01ef5b1a9e487d1dafd0ac4a97293"
+    },
+    {
+      "path": "availability.tsv",
+      "file": "availability.tsv",
+      "bytes": 231,
+      "sha256": "9e9c3a580366c21e873d3973c0500d9a6cdbb3a516827441cb8566a9de0fde05"
+    },
+    {
+      "path": "cell_qc.tsv",
+      "file": "cell_qc.tsv",
+      "bytes": 219,
+      "sha256": "86a6a82d99e3af990aa06b76ca96657540e8f06111d680a5343ff11f451b7eb6"
+    },
+    {
+      "path": "contrast.tsv",
+      "file": "contrast.tsv",
+      "bytes": 166,
+      "sha256": "d533f2071e94c6c0c47384f88a8de5b07206f5072835b246831024cf9e0917f0"
+    },
+    {
+      "path": "data_dictionary.json",
+      "file": "data_dictionary.json",
+      "bytes": 195961,
+      "sha256": "4a70c87197720c5d45559261e47ba041ec386579b3aff5c166ce04fbfff600fe"
+    },
+    {
+      "path": "dataset.tsv",
+      "file": "dataset.tsv",
+      "bytes": 175,
+      "sha256": "06874178a438b8978a525d3701ef4aa2b12a87eef15c368e5ee986265ee198f6"
+    },
+    {
+      "path": "deconv.tsv",
+      "file": "deconv.tsv",
+      "bytes": 185,
+      "sha256": "d7ef369c8b693b71e353d1e60c5296e1ae483a53af93c09ef19d1e39e491b1b8"
+    },
+    {
+      "path": "differential.tsv",
+      "file": "differential.tsv",
+      "bytes": 348,
+      "sha256": "afb310400ccf2074ad8de35d127aa205f106486e85c71bdef2d73c4d3c080cb6"
+    },
+    {
+      "path": "eligibility.tsv",
+      "file": "eligibility.tsv",
+      "bytes": 141,
+      "sha256": "1af1c47e91aba24781265186b6703c7eb0042493b37645d7e42496389df9fd21"
+    },
+    {
+      "path": "enrichment_review.tsv",
+      "file": "enrichment_review.tsv",
+      "bytes": 256,
+      "sha256": "b0d2461f7e9f1e329cb6b6b30db85f9bac7d8911b0a445cb24f9a353dc7d2ca0"
+    },
+    {
+      "path": "evidence_review_12_sources.json",
+      "file": "evidence_review_12_sources.json",
+      "bytes": 8049,
+      "sha256": "3a2bb8c9f3b48a4fd46e48ce1701bb15936f4f0334d017e414abd18bb50417d3"
+    },
+    {
+      "path": "evidence_revision_sources.json",
+      "file": "evidence_revision_sources.json",
+      "bytes": 3288,
+      "sha256": "1f46032d560e4da737879599d77442e7ce8a562a96a86e5017466e1c42068c64"
+    },
+    {
+      "path": "figure.tsv",
+      "file": "figure.tsv",
+      "bytes": 249,
+      "sha256": "d6b2332fb74b84221e577092c059a929f49266fc00ac5cd7f5e460805a6a086e"
+    },
+    {
+      "path": "file.tsv",
+      "file": "file.tsv",
+      "bytes": 128,
+      "sha256": "f7c0af6d6918113a14a07e3dbdf4fe668ec5c5e90fcce980395026e3ead9154f"
+    },
+    {
+      "path": "identity.tsv",
+      "file": "identity.tsv",
+      "bytes": 191,
+      "sha256": "1bae40d6b995d11ed1a5d30605b445d63e15da548d486874c2693f0d8ebe304d"
+    },
+    {
+      "path": "identity_link.tsv",
+      "file": "identity_link.tsv",
+      "bytes": 124,
+      "sha256": "1df2c3bc983211ed840b74e43b7d932e2288bb85a1fcc69e1ac201e93e49a734"
+    },
+    {
+      "path": "integration_review.tsv",
+      "file": "integration_review.tsv",
+      "bytes": 371,
+      "sha256": "670b9162f0abadf611dc98d59e9e091d107ccb4060c738442a870860282b7a9c"
+    },
+    {
+      "path": "issue.tsv",
+      "file": "issue.tsv",
+      "bytes": 170,
+      "sha256": "3d7f9bbe0136f1cd0a0cd470ac2b2e0dd33d9607a6ae5b83f2666ad5dca21b58"
+    },
+    {
+      "path": "joint.tsv",
+      "file": "joint.tsv",
+      "bytes": 206,
+      "sha256": "c8a5939afbbd515b03cbe15f3814635ec792ff3a1276e5f48ca052c615c588e8"
+    },
+    {
+      "path": "layer.tsv",
+      "file": "layer.tsv",
+      "bytes": 168,
+      "sha256": "2f74ac186458ee99adcd33c598ac3715efc691c3e549925973192000a0dd661a"
+    },
+    {
+      "path": "marker.tsv",
+      "file": "marker.tsv",
+      "bytes": 274,
+      "sha256": "0177616eebe7db3ef632ee035c1be4135b74d8d36edecd65597ca9eaa607e5f5"
+    },
+    {
+      "path": "meta.tsv",
+      "file": "meta.tsv",
+      "bytes": 295,
+      "sha256": "01d7b9d17b98252b9be8031ca32b78d07cc10a7ddf27ef6d4af31288568db6d9"
+    },
+    {
+      "path": "method_evidence.tsv",
+      "file": "method_evidence.tsv",
+      "bytes": 325,
+      "sha256": "b458b10a996347d8d8f2b99aec8173d731d93612dc5dece89092d9c7e279adb1"
+    },
+    {
+      "path": "method_readiness.tsv",
+      "file": "method_readiness.tsv",
+      "bytes": 204,
+      "sha256": "9a1daa14eb91772f5ec3c09dcd5764ec7beb34a8d7c0eefb44ad4e3348d4ac2b"
+    },
+    {
+      "path": "model.tsv",
+      "file": "model.tsv",
+      "bytes": 250,
+      "sha256": "39b644346aa064e3466c2b69c444c14db85d67a3f316c0fc755dadd753f2dc91"
+    },
+    {
+      "path": "object_intake.tsv",
+      "file": "object_intake.tsv",
+      "bytes": 195,
+      "sha256": "96a3a1d2eb0a5b8019b3499167d9e31d2d28ad156ad6878147dc3c34fb347339"
+    },
+    {
+      "path": "parameter.tsv",
+      "file": "parameter.tsv",
+      "bytes": 209,
+      "sha256": "8ec060f1d4061e1273ef1a6e17c8de1bc37d39d96a7923b8b06082fd0d8f5234"
+    },
+    {
+      "path": "pb_key.tsv",
+      "file": "pb_key.tsv",
+      "bytes": 199,
+      "sha256": "66db850daa8eec9c1910698918aaf56215fdbd88db64ac2dc6d13c86f9bc0e0f"
+    },
+    {
+      "path": "prediction.tsv",
+      "file": "prediction.tsv",
+      "bytes": 223,
+      "sha256": "8d2520a1807a9c5203d68dc77179f38cfeb445cc16a820591348335e584aa587"
+    },
+    {
+      "path": "project_template.json",
+      "file": "project_template.json",
+      "bytes": 970,
+      "sha256": "5b87957790382cfd94cd4e52e66ded191fee5eee2d24e43ec218cf7e43e755a4"
+    },
+    {
+      "path": "qc_threshold.tsv",
+      "file": "qc_threshold.tsv",
+      "bytes": 161,
+      "sha256": "964ed721a6a18fb956a6fde9a59ae805797f8c6f72083b98072f053505603572"
+    },
+    {
+      "path": "README.md",
+      "file": "README.md",
+      "bytes": 875,
+      "sha256": "aec162d5d6fa589769805075fa6447d5a14bc398e61318bf5794d461494d0333"
+    },
+    {
+      "path": "reference.tsv",
+      "file": "reference.tsv",
+      "bytes": 169,
+      "sha256": "7d6607e1ed7a0fb1c21d39043cdb827df1e870cc93eb444646be38205956d1ee"
+    },
+    {
+      "path": "reference_review.tsv",
+      "file": "reference_review.tsv",
+      "bytes": 476,
+      "sha256": "ca2526de1237e2e4d77c1b3863c0852535dd2bb7a9d5bd92a597d942d3046a7a"
+    },
+    {
+      "path": "release.tsv",
+      "file": "release.tsv",
+      "bytes": 251,
+      "sha256": "e81c49df7c077911b82ad9171a99482601ebf669d3dcab33b8a3300424679a10"
+    },
+    {
+      "path": "retention.tsv",
+      "file": "retention.tsv",
+      "bytes": 141,
+      "sha256": "d3382ee37726db77cadd3072f05ae873dfb22442783bda59ba1c11ea08ab05ea"
+    },
+    {
+      "path": "run.tsv",
+      "file": "run.tsv",
+      "bytes": 240,
+      "sha256": "89c9df050be7cce17303fae83991c1b87679373d7f1fddc104dcc6a02a8de5f7"
+    },
+    {
+      "path": "splits.tsv",
+      "file": "splits.tsv",
+      "bytes": 171,
+      "sha256": "63d24bcb2d99716166a2958735885accd16424bc4c38540944f983deced10a18"
+    },
+    {
+      "path": "task_requirements.json",
+      "file": "task_requirements.json",
+      "bytes": 2072,
+      "sha256": "38d15afac3a2ea948fbc0e73b6c00f9642715561c4c50e135ace774eeb701da9"
+    },
+    {
+      "path": "trajectory_review.tsv",
+      "file": "trajectory_review.tsv",
+      "bytes": 243,
+      "sha256": "ca2e69a069bc6e60793a42ce1a6d5d222b89cfa3c531759737cf2bf5bc2b4588"
+    },
+    {
+      "path": "本轮修订说明.md",
+      "file": "本轮修订说明.md",
+      "bytes": 270,
+      "sha256": "50d6c5a41471950380ac6a19e3ced186a00393ff71b89dbd7f8871d71652b5a8"
+    }
+  ]
+}

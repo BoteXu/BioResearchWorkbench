@@ -1,0 +1,13 @@
+00_min_solvent - illustrative soluble-system profile; review before running
+&cntrl
+  imin=1, ntmin=1, maxcyc=5000, ncyc=2500,
+  drms=0.1, ntb=1, igb=0, cut=10.0,
+  ntc=1, ntf=1, ntpr=100, ntxo=2,
+  ntr=1,
+  restraint_wt=5, restraintmask='__AMBER_MASK__',
+/
+&ewald
+  ew_type=0, order=4, dsum_tol=0.00001, vdwmeth=1,
+  netfrc=0,
+/
+

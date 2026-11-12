@@ -1,0 +1,36 @@
+{
+  "exact_title": "Interaction Profiles as a Universal Language for Generative Molecular Design with ShEPhERD-2",
+  "DOI": "10.64898/2026.09.10.750648",
+  "routes": [
+    {
+      "url": "https://www.biorxiv.org/content/10.64898/2026.09.10.750648v1.full",
+      "state": "INACCESSIBLE"
+    },
+    {
+      "url": "https://doi.org/10.64898/2026.09.10.750648",
+      "state": "INACCESSIBLE"
+    },
+    {
+      "url": "https://www.biorxiv.org/content/early/2026/09/12/2026.09.10.750648.full.pdf",
+      "state": "INACCESSIBLE"
+    },
+    {
+      "url": "https://www.biorxiv.org/content/10.64898/2026.09.10.750648v1.full.pdf",
+      "state": "HTTP_403"
+    },
+    {
+      "service": "SciSpace",
+      "scope": "metadata_abstract_generated_methods_summary",
+      "located_fulltext_context_map": false
+    },
+    {
+      "service": "GitHub_connector",
+      "state": "REAUTH_REQUIRED_USED_OFFICIAL_PUBLIC_SOURCE_FALLBACK"
+    }
+  ],
+  "primary_methods_numeric_claims_verified": false,
+  "performance_numbers_used": false,
+  "source_implementation_review": "pinned_author_code_independently_reviewed",
+  "private_inputs_sent": false,
+  "public_upload": false
+}

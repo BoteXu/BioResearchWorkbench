@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "project_id": "__FILL_PROJECT_ID__",
+  "tasks": [
+    {
+      "id": "prepare_L001",
+      "kind": "ligand_preparation",
+      "entity_id": "L001",
+      "inputs": {
+        "source": {
+          "path": "inputs/L001.sdf"
+        }
+      },
+      "outputs": {
+        "sdf": "results/L001/prepared.sdf"
+      },
+      "parameters": {
+        "standardization_policy": "__FILL_VERSION__",
+        "chemical_state_id": "__FILL_STATE__"
+      },
+      "software": {
+        "name": "__FILL_ACTUAL_TOOL__",
+        "version": "__FILL_ACTUAL_VERSION__",
+        "environment_digest": "__FILL_PINNED_ENVIRONMENT__"
+      },
+      "code": {
+        "adapter": "scripts/__FILL_ADAPTER__.py"
+      },
+      "depends_on": []
+    },
+    {
+      "id": "dock_L001",
+      "kind": "docking",
+      "entity_id": "L001",
+      "inputs": {
+        "ligand": {
+          "task": "prepare_L001",
+          "output": "sdf"
+        },
+        "receptor": {
+          "path": "inputs/receptor_R001.pdbqt"
+        },
+        "validation": {
+          "path": "reviews/docking_method_accepted.json"
+        }
+      },
+      "outputs": {
+        "poses": "results/L001/poses.sdf",
+        "scores": "results/L001/scores.json"
+      },
+      "parameters": {
+        "seed": null,
+        "grid": "__FILL_GRID_AND_UNIT__",
+        "search": "__FILL_SEARCH_POLICY__"
+      },
+      "software": {
+        "name": "__FILL_ACTUAL_TOOL__",
+        "version": "__FILL_ACTUAL_VERSION__",
+        "environment_digest": "__FILL_PINNED_ENVIRONMENT__"
+      },
+      "code": {
+        "adapter": "scripts/__FILL_ADAPTER__.py"
+      },
+      "depends_on": []
+    },
+    {
+      "id": "prepare_L002",
+      "kind": "ligand_preparation",
+      "entity_id": "L002",
+      "inputs": {
+        "source": {
+          "path": "inputs/L002.sdf"
+        }
+      },
+      "outputs": {
+        "sdf": "results/L002/prepared.sdf"
+      },
+      "parameters": {
+        "standardization_policy": "__FILL_VERSION__",
+        "chemical_state_id": "__FILL_STATE__"
+      },
+      "software": {
+        "name": "__FILL_ACTUAL_TOOL__",
+        "version": "__FILL_ACTUAL_VERSION__",
+        "environment_digest": "__FILL_PINNED_ENVIRONMENT__"
+      },
+      "code": {
+        "adapter": "scripts/__FILL_ADAPTER__.py"
+      },
+      "depends_on": []
+    },
+    {
+      "id": "dock_L002",
+      "kind": "docking",
+      "entity_id": "L002",
+      "inputs": {
+        "ligand": {
+          "task": "prepare_L002",
+          "output": "sdf"
+        },
+        "receptor": {
+          "path": "inputs/receptor_R001.pdbqt"
+        },
+        "validation": {
+          "path": "reviews/docking_method_accepted.json"
+        }
+      },
+      "outputs": {
+        "poses": "results/L002/poses.sdf",
+        "scores": "results/L002/scores.json"
+      },
+      "parameters": {
+        "seed": null,
+        "grid": "__FILL_GRID_AND_UNIT__",
+        "search": "__FILL_SEARCH_POLICY__"
+      },
+      "software": {
+        "name": "__FILL_ACTUAL_TOOL__",
+        "version": "__FILL_ACTUAL_VERSION__",
+        "environment_digest": "__FILL_PINNED_ENVIRONMENT__"
+      },
+      "code": {
+        "adapter": "scripts/__FILL_ADAPTER__.py"
+      },
+      "depends_on": []
+    },
+    {
+      "id": "rank_library",
+      "kind": "ranking",
+      "entity_id": "library_001",
+      "inputs": {
+        "l001": {
+          "task": "dock_L001",
+          "output": "scores"
+        },
+        "l002": {
+          "task": "dock_L002",
+          "output": "scores"
+        }
+      },
+      "outputs": {
+        "ranking": "results/library_001/ranking.json"
+      },
+      "parameters": {
+        "score_definition": "__FILL_SAME_SCORE_MODEL__",
+        "aggregation": "__FILL_PARENT_LEVEL_RULE__"
+      },
+      "software": {
+        "name": "__FILL_ACTUAL_TOOL__",
+        "version": "__FILL_ACTUAL_VERSION__",
+        "environment_digest": "__FILL_PINNED_ENVIRONMENT__"
+      },
+      "code": {
+        "adapter": "scripts/__FILL_ADAPTER__.py"
+      },
+      "depends_on": []
+    }
+  ]
+}

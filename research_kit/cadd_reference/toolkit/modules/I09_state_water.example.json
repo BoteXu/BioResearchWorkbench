@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I09",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "化学状态与参数及水网络的敏感性分析",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "chemical_states": {
+      "rows": [],
+      "row_template": {
+        "parent_id": null,
+        "ligand_state_id": null,
+        "receptor_state_id": null,
+        "formal_charge": null,
+        "protonation_sites": null,
+        "tautomer_definition": null,
+        "parameter_set_id": null,
+        "water_model": null,
+        "target_pH": null,
+        "state_evidence": null,
+        "population_estimate": null,
+        "population_source": null,
+        "system_id": null
+      }
+    },
+    "ligand_with_bond_orders": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "atom_mapping": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "receptor_state_definition": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "parameter_provenance": {
+      "path": "__FILL__",
+      "sha256": null,
+      "format": null,
+      "identity_review": "pending"
+    },
+    "trajectories": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "model_variant_id": null,
+        "replicate_id": null,
+        "topology_path": null,
+        "topology_sha256": null,
+        "trajectory_paths": null,
+        "trajectory_sha256s": null,
+        "continuous_segment_ids": null,
+        "time_unit": null,
+        "saved_interval": null,
+        "contains_water": null,
+        "contains_ions": null,
+        "equilibrated_window": null
+      }
+    },
+    "retained_crystal_waters": {
+      "rows": [],
+      "row_template": {
+        "source_structure_id": null,
+        "source_water_id": null,
+        "project_water_id": null,
+        "retain_reason": null
+      }
+    }
+  },
+  "settings": {
+    "analysis_temperature_K": null,
+    "fixed_state_comparison": {
+      "factor_definitions": [],
+      "main_model_variant_id": null,
+      "alternative_model_variant_ids": [],
+      "independent_replicates_per_model": null
+    },
+    "constant_pH_branch": {
+      "enabled": false,
+      "implementation": null,
+      "supported_titratable_components": [],
+      "pH_grid": [],
+      "calibration_evidence": null,
+      "state_definition_file": null,
+      "replica_exchange_protocol": null
+    },
+    "water_site_definition": {
+      "reference_structure": null,
+      "alignment_selection": null,
+      "site_definition_method": null,
+      "site_geometry_parameters": {},
+      "hydrogen_bond_definition": null,
+      "water_molecule_identity_mapping": null
+    },
+    "water_events": {
+      "entry_rule": null,
+      "exit_rule": null,
+      "gap_tolerance": null,
+      "time_unit": null,
+      "left_censoring_rule": null,
+      "right_censoring_rule": null
+    },
+    "gist": {
+      "enabled": false,
+      "implementation_version": null,
+      "solute_definition": null,
+      "ion_cosolute_treatment": null,
+      "grid_center_A": null,
+      "grid_dimensions_voxels": null,
+      "grid_spacing_A": null,
+      "reference_bulk_number_density_A_neg3": null,
+      "reference_bulk_energy_definition": null,
+      "density_vs_per_water_outputs": [],
+      "low_occupancy_mask_rule": null
+    },
+    "uncertainty": {
+      "replicate_level_method": null,
+      "block_definition": null
+    }
+  },
+  "results": {
+    "state_sensitivity": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "model_variant_id": null,
+        "replicate_id": null,
+        "observable": null,
+        "estimate": null,
+        "unit": null,
+        "uncertainty": null,
+        "uncertainty_method": null
+      }
+    },
+    "water_sites": {
+      "rows": [],
+      "row_template": {
+        "site_id": null,
+        "geometry": null,
+        "occupancy": null,
+        "definition_version": null,
+        "replicate_id": null
+      }
+    },
+    "water_events": {
+      "rows": [],
+      "row_template": {
+        "water_id": null,
+        "site_id": null,
+        "replicate_id": null,
+        "entry_time": null,
+        "exit_time": null,
+        "left_censored": null,
+        "right_censored": null,
+        "gap_tolerance": null,
+        "time_unit": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "state_sensitivity_results.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "water_sites.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "water_events.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "GIST网格及日志",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "chemical_state_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "改变质子化或互变异构需要新参数与新采样",
+      "改变力场电荷或水模型需要新物理模型",
+      "改水位点或网格可复用完整原轨迹重分析"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I09-P1",
+      "title": "状态和参数敏感性矩阵",
+      "required_data": "各模型各重复的统一观测量",
+      "interpretation_boundary": "状态不是独立随机重复，空缺不补零",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I09-P2",
+      "title": "接触与水桥分块占有率",
+      "required_data": "水桥事件、重复与时间块",
+      "interpretation_boundary": "声明几何判据和采样间隔",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I09-P3",
+      "title": "水密度与溶剂热力学等值面",
+      "required_data": "密度或GIST网格及结构参考",
+      "interpretation_boundary": "给单位和体相参考，低占有区遮蔽",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I09-P4",
+      "title": "水事件生存曲线或滴定曲线",
+      "required_data": "带删失事件或各pH状态轨迹",
+      "interpretation_boundary": "占有率不等于停留时间，拟合需覆盖转变区",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

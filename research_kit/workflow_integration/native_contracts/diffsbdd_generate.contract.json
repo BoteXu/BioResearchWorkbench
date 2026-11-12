@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "diffsbdd_generate",
+  "required_inputs": [
+    "source_manifest",
+    "model_manifest",
+    "receptor",
+    "structure_qc_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "model_loading_scope",
+    "python_executable",
+    "n_samples",
+    "pocket_residues",
+    "inference_steps",
+    "batch_size",
+    "ligand_atoms",
+    "native_software_versions"
+  ],
+  "required_output_roles": [
+    "generated_molecules",
+    "molecular_qc",
+    "native_command",
+    "diagnostics",
+    "backend_versions",
+    "native_engine_versions"
+  ],
+  "method_scope": "Actual exact-source native conditional DiffSBDD pocket-residue sampling; all raw fragments/molecules kept with chemistry/coordinate QC, no silent sanitization/resampling. Not inpainting, property optimization or measured activity.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

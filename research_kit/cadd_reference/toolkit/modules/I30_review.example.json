@@ -1,0 +1,35 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I30",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "source_and_target_models": [],
+    "exact_atom_map": [],
+    "parameter_manifest": [],
+    "representative_configurations": [],
+    "tolerance_plan": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "conversion_capability_matrix",
+    "component_energy_force_report",
+    "restraint_displacement_check",
+    "short_run_receipts",
+    "adoption_scope"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "参数能力与未支持项矩阵",
+    "分项误差与高差原子结构定位",
+    "短程诊断及独立运行观测量对照"
+  ]
+}

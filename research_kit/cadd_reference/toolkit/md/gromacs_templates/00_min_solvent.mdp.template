@@ -1,0 +1,24 @@
+; 00_min_solvent - illustrative soluble-system profile, not engine-tested
+define = -DPOSRES_SOLUTE -DPOSRES_FC=4184.00
+integrator = steep
+nsteps = 5000
+emtol = 1000
+emstep = 0.01
+constraints = none
+nstlist = 1
+nstlog = 100
+nstenergy = 100
+cutoff-scheme = Verlet
+verlet-buffer-tolerance = 0.005
+coulombtype = PME
+coulomb-modifier = None
+rcoulomb = 1.0
+vdwtype = Cut-off
+vdw-modifier = None
+rvdw = 1.0
+DispCorr = EnerPres
+fourierspacing = 0.12
+pme-order = 4
+ewald-rtol = 1e-5
+pbc = xyz
+

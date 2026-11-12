@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "igv_scoped_report",
+  "required_inputs": [
+    "variants",
+    "reference_fasta",
+    "reference_fai",
+    "bam",
+    "bam_index",
+    "asset_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "assembly",
+    "asset_scope",
+    "maximum_sites",
+    "maximum_variant_length",
+    "maximum_reads_per_site",
+    "flank_bp",
+    "initial_window_bp",
+    "exclude_flags"
+  ],
+  "required_output_roles": [
+    "genome_browser_report",
+    "genome_view_scope",
+    "native_command",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual exact-source native IGV reports from scoped VCF/BAM/FASTA; literal reference-allele/contig checks, bounded selected views and existing offline template/assets. Privacy CSP blocks remote connections; browser/read-evidence/clinical interpretation remain separate unverified acceptance.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

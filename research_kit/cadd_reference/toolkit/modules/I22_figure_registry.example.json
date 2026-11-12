@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I22",
+  "status": "draft",
+  "table_name": "figure_registry",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "figure_id": null,
+    "question": null,
+    "data_id": null,
+    "data_path": null,
+    "data_sha256": null,
+    "analysis_id": null,
+    "unit_of_analysis": null,
+    "filters": [],
+    "transform": null,
+    "units": null,
+    "uncertainty_definition": null,
+    "color_mapping": {},
+    "limits": {},
+    "created_from_release": null,
+    "caption": null,
+    "script_path": null,
+    "script_sha256": null,
+    "software_environment_id": null,
+    "static_svg_path": null,
+    "static_png_path": null,
+    "interactive_state_id": null
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "related_tables": {
+    "entity_links": {
+      "rows": [],
+      "row_template": {
+        "link_id": null,
+        "parent_id": null,
+        "state_id": null,
+        "pose_id": null,
+        "model_id": null,
+        "replicate_id": null,
+        "segment_id": null,
+        "frame_id": null,
+        "original_frame_index": null,
+        "time": null,
+        "time_unit": null,
+        "gene_id_version": null,
+        "transcript_id_version": null,
+        "protein_form_id": null,
+        "residue_map_id": null,
+        "donor_id": null,
+        "sample_id": null,
+        "section_id": null,
+        "cell_id": null,
+        "source_mapping_id": null
+      }
+    },
+    "decision_snapshots": {
+      "rows": [],
+      "row_template": {
+        "decision_id": null,
+        "parent_id": null,
+        "model_version": null,
+        "data_cutoff_at": null,
+        "prediction_endpoint": null,
+        "prediction": null,
+        "prediction_unit": null,
+        "prediction_interval_definition": null,
+        "selection_reason": null,
+        "hypothesis_id": null,
+        "source_release": null
+      }
+    },
+    "measurement_feedback": {
+      "rows": [],
+      "row_template": {
+        "measurement_id": null,
+        "decision_id": null,
+        "parent_id": null,
+        "state_id": null,
+        "assay_context": null,
+        "batch": null,
+        "biological_replicate_id": null,
+        "technical_replicate_id": null,
+        "endpoint": null,
+        "value": null,
+        "unit": null,
+        "relation": null,
+        "raw_result_path": null,
+        "raw_result_sha256": null,
+        "fit_model": null,
+        "qc_status": null,
+        "comparability_status": null,
+        "feedback_status": null,
+        "training_eligibility_reason": null
+      }
+    }
+  },
+  "view_state_template": {
+    "view_state_id": null,
+    "source_release": null,
+    "data_sha256": null,
+    "selected_entity_ids": [],
+    "filters": [],
+    "axis_limits": {},
+    "color_limits": {},
+    "camera_state_path": null,
+    "alignment_selection": null,
+    "external_input_dependencies": [],
+    "exported_at": null
+  },
+  "feedback_plan": {
+    "comparison_definition": null,
+    "assay_failure_handling": null,
+    "context_mismatch_handling": null,
+    "frozen_prediction_policy": null,
+    "independent_test_assignment_policy": null
+  },
+  "module_version": "3.0.0"
+}

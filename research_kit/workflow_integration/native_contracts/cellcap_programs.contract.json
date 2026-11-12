@@ -1,0 +1,50 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cellcap_programs",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "control",
+    "target_order",
+    "count_layer",
+    "minimum_units",
+    "covariate_key",
+    "covariate_order",
+    "n_hidden",
+    "n_latent",
+    "n_layers",
+    "dropout_rate",
+    "n_programs",
+    "n_heads",
+    "adversarial_weight",
+    "ard_weight",
+    "reconstruction_weight",
+    "kl_weight",
+    "learning_rate",
+    "use_gpu",
+    "max_epochs",
+    "batch_size",
+    "optimization_train_fraction",
+    "early_stopping",
+    "validation_scope"
+  ],
+  "required_output_roles": [
+    "basal_representation",
+    "program_usage",
+    "program_relevance",
+    "program_gene_projection",
+    "training_history",
+    "model_checkpoint",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual exact-source CellCap counts/program training; random-cell optimizer split explicitly descriptive, native response relevance and decoder-weight projection, no independent-donor validation claim",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

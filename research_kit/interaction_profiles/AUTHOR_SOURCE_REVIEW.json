@@ -1,0 +1,209 @@
+{
+  "reviewed_on": "2026-10-26",
+  "source_identity_verified": [
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "examples/experiments/README.md",
+      "git_blob": "422216ab4b0ab1752ab51863136f3fd164f3e0dc",
+      "bytes": 5282,
+      "sha256": "0b189cfc79494fc1bda0fbfc8f76c6ec612d9d5554427f9697b853a62876a927",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "examples/experiments/run_moses_benchmark.py",
+      "git_blob": "198f403b4e3a4129604183791d02eacb3ecb6840",
+      "bytes": 17642,
+      "sha256": "d3465e4e3ba53a3a3f566a75c9b9dbd6d94a1b693b619f005a70b43ba0877516",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "examples/experiments/run_moses_composition_evals.py",
+      "git_blob": "85da46c86cdd4e5648be9aca23b40aba094358cb",
+      "bytes": 26675,
+      "sha256": "e8d555474c628e41439d5d82b4c30ecc75c3ab4729c7029040ef1fce9ee10843",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "generate.py",
+      "git_blob": "509ed5b265205e72c91dea930f44645c410c3ea8",
+      "bytes": 57765,
+      "sha256": "f689eac261b5372cec00288dad382d1a368509b50d4e35f9a9a27bc174545284",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "LICENSE",
+      "git_blob": "afdadba9c248c4c1a3cef2107b0ee474b5393ff7",
+      "bytes": 1083,
+      "sha256": "c33cdc03d9b8017e6fce71a185ca434ac1534724a265df00db965b6ade2638db",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "pyproject.toml",
+      "git_blob": "6bec8cf91de144538ead7a5d1792a149d96a2eda",
+      "bytes": 5027,
+      "sha256": "d17d6febcbc9575efb98576001f21ab88220a14dad22ae1a734499a7a35290c4",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "README.md",
+      "git_blob": "606feb60f840a0680cc248cfd34bcd397fa2d692",
+      "bytes": 10759,
+      "sha256": "ad073dddb54bf143738a64918b15425183ac3924d377ac92a9a825d95e742444",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/__init__.py",
+      "git_blob": "5a55c26dd0b1a419a3faf09179d89dfa10dcc090",
+      "bytes": 1004,
+      "sha256": "f00d3ad4c6a7d25a2bb0a4e2bd2c37081357ad0c16aa0bbf80800e5e5d7b634a",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/comp_inference/sampler.py",
+      "git_blob": "5746d1f6df7ab494adcaa1b14a9c43f6fbc5fecc",
+      "bytes": 47182,
+      "sha256": "fd0ccf16d09bdb0d694cbc3b710479de6b57cecf8a8ebffae7f1f7ad41b1717b",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/comp_inference/utils.py",
+      "git_blob": "f10686ceea096dbca570f491a7800d308de23a29",
+      "bytes": 38534,
+      "sha256": "4e07d252e43a0ff4214d50c81976207c15738ee1cc912cb44f328fea1e5d10d3",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/extract.py",
+      "git_blob": "87d346bae140a15071abcac66f6a8f2fd274e345",
+      "bytes": 24051,
+      "sha256": "caed5da622208e7994df1eeb65f55ba84f3ccff0104618ad56dae5f56191eb04",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/generated_sample.py",
+      "git_blob": "47a21dd1b46c6357c0362d4616b6f1d7a431e05e",
+      "bytes": 4849,
+      "sha256": "422a3b75e5dfaea3dfcd11f15561caf828994b8237af0c74f8b37fd3f35fafa6",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/inference/edm_sampler.py",
+      "git_blob": "ec5a0096573fc7d046970c796070ce263814ae64",
+      "bytes": 70094,
+      "sha256": "1f4972876bc90f941e51919eb77ea1c65ab17f698317d8e6f5d177845ff4cb5b",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/inference/initialization.py",
+      "git_blob": "bc2c8f02140411604517b47ca2b7e63cc0e52597",
+      "bytes": 12569,
+      "sha256": "e34b31d9b3381f6f3deeebc73a8e82c0c370b88e9b696cee12b7d06e94a60da0",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/inference/sampler.py",
+      "git_blob": "771241466ac8cc0fad44d0b2100712755e523469",
+      "bytes": 43480,
+      "sha256": "0ac7d93d08da847bfcdbabf17e86a95cad576ebf60153a86781c290e6970e557",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/inference/steps.py",
+      "git_blob": "d5202cad2634860853f4d1c7be5f3694840fff05",
+      "bytes": 9351,
+      "sha256": "1e64137b4bcaa003d963f9f2a7b4288254927133236bc8b00051f367addc25a0",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/interaction_profile.py",
+      "git_blob": "2bac2411a5828176f4a345e6ad9f00733bfc8b0b",
+      "bytes": 38487,
+      "sha256": "d0c59e7f3f2d3708d907dd86eceeca67ed500d7b06f3a3b918799e3e3bb73514",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/lightning_module.py",
+      "git_blob": "45ce47f659cb52c3fac8a1bb53dfc2325add20a7",
+      "bytes": 42295,
+      "sha256": "eec965e706b18706fd891dd06db0b4186d54e8bc278bdcf1ceff3262aaf90b65",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/loader/checkpoint_manager.py",
+      "git_blob": "88ed36bf3e5993b31e229267c65cf91f05fd9ca1",
+      "bytes": 6796,
+      "sha256": "933052ed5199063476ae00d42bc2bd915512cac04f812ca6f53136ff568df0a8",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/loader/model_loader.py",
+      "git_blob": "ad126fa7677029abad323ebeaaf8c04be866f0a1",
+      "bytes": 4776,
+      "sha256": "fa936a864113e7005b7cbf0ff9b70fccb61e92aba89d9c04f0caabca0bd1a0b7",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "src/shepherd/shepherd_model.py",
+      "git_blob": "9796bb7553dd40956f5d5581bb8af333b56759e2",
+      "bytes": 32611,
+      "sha256": "bcccb79a1d228c4d11b99c34459c4137d9dc7265120973290309d6087d115b1e",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd2",
+      "path": "training/parameters/base.yaml",
+      "git_blob": "f629470b256599d9647688796f248a0c9efdf084",
+      "bytes": 8699,
+      "sha256": "187f4683133af7f7e2d924f55f35424ed07cf6c1a2ff0ca120a091fa051e1678",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd-score",
+      "path": "shepherd_score/pharm_utils/pharmacophore.py",
+      "git_blob": "e45dc1aa64412356be30550cb762ee18bf88721c",
+      "bytes": 42486,
+      "sha256": "761dfc5553526bfa6f9aadaaf31608fb1f2bd7ba65efb3be1c92631f4727b758",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd-score",
+      "path": "shepherd_score/score/constants.py",
+      "git_blob": "e4a45334e69dabf96a88eab961cfaaf5233cf0e5",
+      "bytes": 1017,
+      "sha256": "54ce1392407cdab05f3dadfa1d94b88020f3ca2d2239bffeecebc44e88fa72c3",
+      "review_scope": "selected_source_not_executed"
+    },
+    {
+      "repository": "coleygroup/shepherd-score",
+      "path": "shepherd_score/score/pharmacophore_scoring_np.py",
+      "git_blob": "55232fc342b6be2521d17bd7cc71fb3d1b9be6fe",
+      "bytes": 24358,
+      "sha256": "7aa3a3773987f2f655f582054d1af10c062c102e5ea64c2f14aa0164c9c4c58c",
+      "review_scope": "selected_source_not_executed"
+    }
+  ],
+  "source_files": 25,
+  "upstream_code_or_weights_redistributed": false,
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "scientific_acceptance": "NOT_ESTABLISHED"
+}

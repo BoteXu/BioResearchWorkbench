@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "seurat_transfer",
+  "required_inputs": [
+    "object",
+    "reference"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "unit_key",
+    "sample_key",
+    "condition_key",
+    "assay",
+    "reference_label_key",
+    "target_sum",
+    "reference_assay",
+    "reference_reduction",
+    "n_pcs",
+    "transfer_features",
+    "minimum_prediction_score"
+  ],
+  "required_output_roles": [
+    "processed_object",
+    "annotation_scores",
+    "anchor_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": null,
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

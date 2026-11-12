@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I06",
+  "status": "draft",
+  "project_id": null,
+  "module_version": "3.0",
+  "field_names": [
+    "network_id",
+    "node_id",
+    "parent_id",
+    "chemical_state_id",
+    "edge_id",
+    "source_node",
+    "target_node",
+    "atom_mapping_path",
+    "charge_change",
+    "pose_compatibility",
+    "edge_direction",
+    "qc_gate",
+    "estimated_cost",
+    "experimental_anchor"
+  ],
+  "rows": [],
+  "units_and_definitions": {},
+  "input_files": [],
+  "review": {
+    "status": "pending",
+    "reviewer": null,
+    "evidence_files": []
+  },
+  "row_template": {
+    "network_id": null,
+    "node_id": null,
+    "parent_id": null,
+    "chemical_state_id": null,
+    "edge_id": null,
+    "source_node": null,
+    "target_node": null,
+    "atom_mapping_path": null,
+    "charge_change": null,
+    "pose_compatibility": null,
+    "edge_direction": null,
+    "qc_gate": null,
+    "estimated_cost": null,
+    "experimental_anchor": null
+  }
+}

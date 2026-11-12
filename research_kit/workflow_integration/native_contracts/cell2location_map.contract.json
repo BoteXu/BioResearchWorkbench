@@ -1,0 +1,37 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cell2location_map",
+  "required_inputs": [
+    "object",
+    "reference_signatures"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "count_layer",
+    "batch_key",
+    "accelerator",
+    "max_epochs",
+    "batch_size",
+    "spatial_key",
+    "coordinate_unit",
+    "learning_rate",
+    "cells_per_location",
+    "detection_alpha",
+    "prior_basis"
+  ],
+  "required_output_roles": [
+    "celltype_abundance",
+    "abundance_uncertainty",
+    "model_checkpoint",
+    "training_history",
+    "spatial_identity",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native posterior mapping from real versioned reference signatures and counts; abundance prior not histological observation",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

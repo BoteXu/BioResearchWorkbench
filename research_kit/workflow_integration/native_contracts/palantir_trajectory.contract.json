@@ -1,0 +1,35 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "palantir_trajectory",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "representation_key",
+    "representation_kind",
+    "direction_evidence",
+    "root_cell",
+    "terminal_cells",
+    "n_components",
+    "knn",
+    "alpha",
+    "num_waypoints",
+    "n_eigs",
+    "scale_components",
+    "max_iterations"
+  ],
+  "required_output_roles": [
+    "pseudotime",
+    "fate_probabilities",
+    "diffusion_space",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native Palantir diffusion/Markov trajectory; not elapsed time or experimental ancestry",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

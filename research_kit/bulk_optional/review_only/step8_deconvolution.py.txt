@@ -1,0 +1,66 @@
+"""Step 8 — marker-based cell deconvolution (ssGSEA proxy) + key-gene compartment attribution.
+
+NOTE: this is a marker-enrichment PROXY, not absolute cell fractions. Always say so in captions.
+"""
+from __future__ import annotations
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+import gseapy, utils
+
+MARKERS = {   # extend / replace for the tissue under study
+ "Cardiomyocyte": ["MYH7","MYH6","TNNT2","NPPA","ACTC1","TTN","MYBPC3"],
+ "Fibroblast":    ["POSTN","COL1A1","COL1A2","COL3A1","LUM","FNDC1","DCN","FN1"],
+ "Endothelial":   ["PECAM1","VWF","CDH5","EGFL7","CLDN5"],
+ "Pericyte_SMC":  ["RGS5","ACTA2","MYH11","TAGLN","PDGFRB"],
+ "Macrophage":    ["CD163","CD68","MSR1","VSIG4","MRC1","RNASE2"],
+ "T_cell":        ["CD3E","CD2","CD247","IL2RB","CD48"],
+ "NK_cell":       ["NKG7","GZMB","GZMH","PRF1","KLRD1"],
+ "B_plasma":      ["MS4A1","CD79A","IGHM","IGKC","JCHAIN"],
+ "Adipocyte":     ["PLIN1","CIDEC","RBP4","ADIPOQ","LEP"],
+}
+
+
+def run(cfg):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    sets = {c: [g for g in gs] for c, gs in MARKERS.items()}
+    r = gseapy.ssgsea(data=expr[samples], gene_sets=sets, outdir=None, min_size=3,
+                      sample_norm_method="rank", no_plot=True, verbose=False)
+    sc = r.res2d.pivot(index="Term", columns="Name", values="ES")
+    utils.save_table(sc.reset_index().rename(columns={"Term": "cell_type"}), cfg, "cell_scores.csv")
+    diff = pd.Series({c: sc.loc[c, np.array(samples)[y]].mean() - sc.loc[c, np.array(samples)[~y]].mean()
+                      for c in sc.index}).sort_values()
+    fig, ax = plt.subplots(figsize=(6.4, 5))
+    ax.barh(diff.index, diff.values, color=[colors["case"] if v > 0 else colors["control"] for v in diff.values])
+    ax.axvline(0, color="#666", lw=.9)
+    utils.strip_plot(ax, "Cell-composition proxy (ssGSEA, case − control)",
+                     "difference", "marker-based proxy — not absolute fractions")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F8_cell_composition")
+
+    cons_f = res / "keygene_programs.csv"
+    if not cons_f.exists():
+        print("[cell] no keygene_programs.csv — run step9 then re-run cell for attribution"); return
+    pt = pd.read_csv(cons_f)
+    genes = []
+    for _, row in pt.iterrows():
+        genes += [g for g in str(row["genes"]).split(" | ") if g]
+    mapping = utils.attach_symbols(cfg, expr)
+    s2e = utils.symbol_lookup(mapping)
+    genes = [g for g in dict.fromkeys(genes) if g in s2e and s2e[g] in expr.columns]
+    R = np.zeros((len(genes), len(sc.index)))
+    for i, g in enumerate(genes):
+        v = expr.loc[s2e[g], samples].values.astype(float)
+        for j, ct in enumerate(sc.index):
+            R[i, j] = pearsonr(v, sc.loc[ct].values.astype(float))[0]
+    Rd = pd.DataFrame(R, index=genes, columns=sc.index)
+    utils.save_table(Rd.reset_index().rename(columns={"index": "gene"}), cfg, "gene_celltype_corr.csv")
+    order = Rd.abs().idxmax(1).sort_values().index
+    D = Rd.loc[order]
+    fig, ax = plt.subplots(figsize=(8.4, max(5, len(D) * .32)))
+    im = ax.imshow(D.values, cmap="RdBu_r", vmin=-.8, vmax=.8, aspect="auto")
+    ax.set_xticks(range(D.shape[1])); ax.set_xticklabels(D.columns, rotation=35, ha="right", fontsize=9)
+    ax.set_yticks(range(len(D))); ax.set_yticklabels(D.index, fontsize=8)
+    ax.set_title("Key genes × cell-type score (each gene assigned to its strongest compartment)",
+                 fontsize=10.5, weight="bold", loc="left")
+    fig.colorbar(im, ax=ax, fraction=.035, label="Pearson r")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F8_gene_celltype")

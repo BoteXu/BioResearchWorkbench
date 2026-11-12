@@ -1,0 +1,87 @@
+{
+  "example_only": true,
+  "run_id": "example_boolnet",
+  "method": "boolnet",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "max_nodes": 15,
+    "update_type": "synchronous",
+    "max_steps": 1000,
+    "trajectories_per_initial": 100,
+    "expected_package_version": "REPLACE_WITH_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "NODE_A"
+    ],
+    "evaluation_units": [
+      "MODEL_A"
+    ],
+    "seed": 17
+  },
+  "inputs": [
+    {
+      "id": "network",
+      "path": "inputs/network.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "initial_states",
+      "path": "inputs/initial_states.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "logical_review",
+      "path": "inputs/logical_review.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.SELECTED",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "update_type": "asynchronous"
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "max_steps": 2000
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "nodes",
+      "operator": "ge",
+      "bound": 2,
+      "definition": "Disabled illustrative configuration; replace with actual scientific acceptance gates",
+      "unit": "count",
+      "threshold_basis": "EXAMPLE_NOT_VALIDATED"
+    }
+  ]
+}

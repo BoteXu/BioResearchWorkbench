@@ -1,0 +1,14 @@
+{
+  "public_upload": false,
+  "protonation_reviewed": false,
+  "stereochemistry_reviewed": false,
+  "structure_source_reviewed": false,
+  "coordinates_unit": "angstrom",
+  "frame_id": "REQUIRED_SOURCE_FRAME_ID",
+  "frame_kind": "ligand_reference",
+  "preparation_domain_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "pH": 7.4,
+  "limitations": [
+    "DISABLED_TEMPLATE_REQUIRES_SOURCE_AND_CHEMICAL_REVIEW"
+  ]
+}

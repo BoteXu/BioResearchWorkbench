@@ -1,0 +1,47 @@
+; 02_heat - illustrative soluble-system profile, not engine-tested
+define = -DPOSRES_SOLUTE -DPOSRES_FC=1673.60
+integrator = md
+dt = 0.001
+nsteps = 200000
+continuation = no
+constraints = h-bonds
+constraint-algorithm = lincs
+lincs-order = 4
+lincs-iter = 1
+nstlist = 20
+tcoupl = v-rescale
+tc-grps = System
+tau-t = 0.5
+ref-t = 300
+ld-seed = __SEED__
+gen-vel = yes
+gen-temp = 10
+gen-seed = __VELOCITY_SEED__
+annealing = single
+annealing-npoints = 3
+annealing-time = 0 150 200
+annealing-temp = 10 300 300
+pcoupl = no
+comm-mode = None
+nstcalcenergy = 100
+nstenergy = 100
+nstlog = 100
+nstxout = 0
+nstvout = 0
+nstfout = 0
+nstxout-compressed = 1000
+compressed-x-grps = System
+cutoff-scheme = Verlet
+verlet-buffer-tolerance = 0.005
+coulombtype = PME
+coulomb-modifier = None
+rcoulomb = 1.0
+vdwtype = Cut-off
+vdw-modifier = None
+rvdw = 1.0
+DispCorr = EnerPres
+fourierspacing = 0.12
+pme-order = 4
+ewald-rtol = 1e-5
+pbc = xyz
+

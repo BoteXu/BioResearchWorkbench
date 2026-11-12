@@ -1,0 +1,2876 @@
+[
+  {
+    "id": "apa_usage",
+    "label": "可变多聚腺苷酸化 APA",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "QAPA",
+      "DaPars2"
+    ],
+    "decision_fields": [
+      "three_prime_protocol",
+      "site_definition",
+      "usage_denominator"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 three_prime_evidence、utr_annotation、library_protocol 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "协议适配、基因内分母与供者级对比；基因总量变化分开",
+        "id": "design"
+      },
+      {
+        "description": "检查 3′ 偏倚、内部引物、覆盖和末端注释",
+        "id": "diagnostics"
+      },
+      {
+        "description": "位点窗口、注释和覆盖敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "apa_usage",
+      "apa_sites",
+      "apa_coverage",
+      "apa_sensitivity"
+    ],
+    "interpretation_limit": "普通 RNA-seq 对 APA 的证据强度取决于协议。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "bulk_cnv",
+    "label": "DNA 拷贝数与等位基因状态",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "CNVkit",
+      "FACETS"
+    ],
+    "decision_fields": [
+      "normal_reference",
+      "purity_ploidy",
+      "segmentation_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 dna_depth_baf、matched_normal、purity_ploidy_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "平台、正常参考、纯度/倍性和分段模型明确",
+        "id": "design"
+      },
+      {
+        "description": "检查覆盖噪声、BAF、性染色体、分段与纯度可识别性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "纯度/倍性解、分段和正常参考敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "copy_segments",
+      "allele_copy_states",
+      "purity_ploidy_solutions",
+      "cnv_validation"
+    ],
+    "interpretation_limit": "模型整数状态存在纯度/倍性歧义。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "bulk_deconvolution",
+    "label": "参考驱动的 bulk 细胞组成估计",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "MuSiC",
+      "BisqueRNA"
+    ],
+    "decision_fields": [
+      "reference_population",
+      "proportion_definition",
+      "unknown_cell_policy"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 compatible_reference、donor_reference、expression_scale 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "参考与目标独立性、物种/组织/平台匹配；组成比较使用样本级设计",
+        "id": "design"
+      },
+      {
+        "description": "检查参考细胞覆盖、标记特异性、残差、负值与总和约束",
+        "id": "diagnostics"
+      },
+      {
+        "description": "留一参考供者、缺失细胞类型及不同参考敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "cell_fraction_estimates",
+      "reference_coverage",
+      "reconstruction_residuals",
+      "reference_sensitivity"
+    ],
+    "interpretation_limit": "RNA 贡献与细胞数比例需要区分。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "camera_sets",
+    "label": "考虑基因间相关的集合检验",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "limma camera"
+    ],
+    "decision_fields": [
+      "contrast_definition",
+      "correlation_model",
+      "set_size_range"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 expression_design、contrast_matrix、gene_sets 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "使用与表达模型相同的独立单位、设计和对比；声明竞争性检验族",
+        "id": "design"
+      },
+      {
+        "description": "检查设计秩、残差自由度、集合内相关及权重",
+        "id": "diagnostics"
+      },
+      {
+        "description": "比较相关估计、集合范围和离群样本影响",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "camera_table",
+      "camera_design",
+      "camera_diagnostics",
+      "camera_sensitivity"
+    ],
+    "interpretation_limit": "集合关联不能推出全部成员发生同方向变化。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "cell_fraction_contrasts",
+    "label": "细胞类型组成与差异比例",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "scCODA",
+      "propeller"
+    ],
+    "decision_fields": [
+      "reference_group",
+      "denominator_definition",
+      "annotation_resolution"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 sample_cell_counts、donor_structure、composition_denominator 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "以供者/样本为单位，参考群、分母及缺失群明确；估计组成需传播不确定性",
+        "id": "design"
+      },
+      {
+        "description": "检查供者支持、总细胞数、捕获偏差和参考群稳定性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "参考群、注释粒度、低丰度过滤与供者留出",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "cell_fraction_effects",
+      "cell_count_denominators",
+      "reference_group_audit",
+      "composition_sensitivity"
+    ],
+    "interpretation_limit": "捕获组成不等同于组织绝对细胞数。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "clonal_phylogeny",
+    "label": "亚克隆组成与演化树",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "PyClone-VI",
+      "PhyloWGS"
+    ],
+    "decision_fields": [
+      "mutation_multiplicity",
+      "purity_solution",
+      "tree_constraints"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 variant_allele_counts、copy_number_context、purity_estimates 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "多区域/时间对应、拷贝数、多重性及纯度不确定性明确",
+        "id": "design"
+      },
+      {
+        "description": "检查后验、克隆数、约束、低覆盖及替代树",
+        "id": "diagnostics"
+      },
+      {
+        "description": "克隆数、CNV/纯度解及抽样敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "clonal_fractions",
+      "candidate_phylogenies",
+      "clonality_uncertainty",
+      "phylogeny_constraints"
+    ],
+    "interpretation_limit": "一棵拟合树不证明唯一演化历史或传播路线。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "clonotype_phenotype",
+    "label": "克隆型—细胞状态关联",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Scirpy"
+    ],
+    "decision_fields": [
+      "state_definition",
+      "clone_dependence",
+      "permutation_unit"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 clonotype_assignments、frozen_cell_states、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "供者内克隆和细胞依赖需控制；不能把同克隆细胞当独立受试者",
+        "id": "design"
+      },
+      {
+        "description": "检查状态注释、条码匹配、克隆大小及供者覆盖",
+        "id": "diagnostics"
+      },
+      {
+        "description": "注释、克隆规则和供者/克隆重采样",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "clone_state_associations",
+      "clone_state_counts",
+      "clone_dependence",
+      "clone_state_sensitivity"
+    ],
+    "interpretation_limit": "状态关联不证明抗原特异性或谱系转换。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "colocalization",
+    "label": "多信号共定位",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "coloc",
+      "coloc.susie"
+    ],
+    "decision_fields": [
+      "prior_grid",
+      "signal_model",
+      "overlap_definition"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 harmonized_trait_qtl、locus_definition、ancestry_matched_ld 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "共享变异全集、样本重叠、信号数和先验明确",
+        "id": "design"
+      },
+      {
+        "description": "检查等位基因、缺失变异、LD、QTL 强度及全部假设后验",
+        "id": "diagnostics"
+      },
+      {
+        "description": "先验、位点窗口、单/多信号及 LD 敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "coloc_hypotheses",
+      "shared_variant_set",
+      "signal_pairs",
+      "coloc_sensitivity"
+    ],
+    "interpretation_limit": "共定位不自动证明基因介导、方向或 MR 假设成立。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "cross_study_meta",
+    "label": "跨研究效应综合与异质性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "metafor"
+    ],
+    "decision_fields": [
+      "effect_scale",
+      "overlap_policy",
+      "heterogeneity_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 study_effect_uncertainty、cohort_independence、comparable_estimands 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "确认效应尺度、方向、重复队列和目标人群；研究数限制元回归",
+        "id": "design"
+      },
+      {
+        "description": "检查 SE/CI、效应方向、队列重叠、影响点与选择性报告",
+        "id": "diagnostics"
+      },
+      {
+        "description": "留一研究、模型/尺度选择及小样本稳健性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "meta_effects",
+      "heterogeneity",
+      "overlap_matrix",
+      "meta_influence"
+    ],
+    "interpretation_limit": "综合不可比对象不会创造共同估计目标。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "differential_binding",
+    "label": "差异峰、结合与可及性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "DiffBind",
+      "csaw"
+    ],
+    "decision_fields": [
+      "consensus_regions",
+      "normalization_basis",
+      "control_definition"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 consensus_peak_counts、library_controls、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "独立重复、输入/IgG、共识区域和归一化假设明确；全局变化需外源依据",
+        "id": "design"
+      },
+      {
+        "description": "检查 FRiP、复杂度、片段、spike-in、重复一致性及背景",
+        "id": "diagnostics"
+      },
+      {
+        "description": "峰集、归一化与低计数过滤敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "differential_regions",
+      "consensus_peak_set",
+      "binding_normalization",
+      "binding_diagnostics"
+    ],
+    "interpretation_limit": "峰强度与蛋白结合/可及性含义依协议而异。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "differential_coexpression",
+    "label": "差异相关与网络重连",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "diffcoexp"
+    ],
+    "decision_fields": [
+      "correlation_metric",
+      "permutation_unit",
+      "edge_test_family"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 independent_expression、replicate_design、network_background 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "独立单位内置换或分层重采样；区分均值变化与相关变化",
+        "id": "design"
+      },
+      {
+        "description": "检查组内 n、方差范围、离群点、批次及边数检验族",
+        "id": "diagnostics"
+      },
+      {
+        "description": "稳健相关、分层置换与重采样稳定性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "differential_edges",
+      "group_correlations",
+      "edge_uncertainty",
+      "rewiring_stability"
+    ],
+    "interpretation_limit": "网络差异不等同于新的直接物理互作。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "enhancer_grn",
+    "label": "增强子—TF—基因候选网络",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "SCENIC+"
+    ],
+    "decision_fields": [
+      "pairing_definition",
+      "enhancer_scope",
+      "validation_split"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 matched_rna_atac、enhancer_candidates、motif_database 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "匹配/非匹配模态必须声明；先验和验证不重用同一证据",
+        "id": "design"
+      },
+      {
+        "description": "检查供者对齐、区域/基因映射、eRegulon 覆盖和平台",
+        "id": "diagnostics"
+      },
+      {
+        "description": "区域窗口、链接阈值和供者留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "enhancer_tf_gene_links",
+      "eregulon_scores",
+      "link_support",
+      "grn_holdout"
+    ],
+    "interpretation_limit": "相关链接不是增强子扰动或调控因果证明。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "exon_usage",
+    "label": "外显子相对使用",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "DEXSeq"
+    ],
+    "decision_fields": [
+      "exon_definition",
+      "filtering_rule",
+      "hierarchical_testing"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 exon_counts、exon_annotation、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "外显子/基因层级检验、独立单位及批次设计明确",
+        "id": "design"
+      },
+      {
+        "description": "检查覆盖、可比外显子边界、模型拟合及离群样本",
+        "id": "diagnostics"
+      },
+      {
+        "description": "过滤、注释与高影响样本敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "exon_usage_effects",
+      "exon_counts_qc",
+      "exon_test_family",
+      "exon_diagnostics"
+    ],
+    "interpretation_limit": "相对使用不同于基因总量变化。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "fate_probabilities",
+    "label": "CellRank 状态与命运概率",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "CellRank"
+    ],
+    "decision_fields": [
+      "kernel_definition",
+      "terminal_rule",
+      "state_count_basis"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 transition_kernel、terminal_state_evidence、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "区分 velocity/pseudotime/实测时间核；终末状态需外部依据",
+        "id": "design"
+      },
+      {
+        "description": "检查核归一化、宏状态稳定性、不可达状态和吸收假设",
+        "id": "diagnostics"
+      },
+      {
+        "description": "核权重、状态数及终末状态敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "fate_probabilities",
+      "terminal_states",
+      "kernel_diagnostics",
+      "fate_sensitivity"
+    ],
+    "interpretation_limit": "模型命运概率不是实际追踪到的细胞命运。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "fine_mapping",
+    "label": "位点精细定位与可信集合",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "SuSiE",
+      "susieR"
+    ],
+    "decision_fields": [
+      "ld_population",
+      "signal_prior",
+      "locus_window"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 harmonized_summary、ancestry_matched_ld、locus_definition 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "LD、祖源、样本量、等位基因与参考构建一致；允许多信号",
+        "id": "design"
+      },
+      {
+        "description": "检查 LD/统计量一致性、等位基因、收敛与集合纯度",
+        "id": "diagnostics"
+      },
+      {
+        "description": "LD 来源、信号数与先验敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "variant_pip",
+      "credible_sets",
+      "ld_diagnostics",
+      "finemap_sensitivity"
+    ],
+    "interpretation_limit": "PIP 是模型条件下概率，不直接指定效应基因。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "footprinting",
+    "label": "ATAC footprint 与偏倚审查",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "TOBIAS"
+    ],
+    "decision_fields": [
+      "bias_model",
+      "site_selection",
+      "depth_matching"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 insertion_profiles、tagmentation_bias、motif_sites 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "独立重复及区域匹配；深度和细胞混合影响需分开",
+        "id": "design"
+      },
+      {
+        "description": "检查 Tn5 偏倚、链方向、覆盖、峰定义和核小体背景",
+        "id": "diagnostics"
+      },
+      {
+        "description": "覆盖下采样、窗口与偏倚模型敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "footprint_profiles",
+      "footprint_scores",
+      "bias_profiles",
+      "footprint_sensitivity"
+    ],
+    "interpretation_limit": "footprint 不足以证明单个 TF 的直接结合。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "gsva_scores",
+    "label": "GSVA 样本级集合分数",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "GSVA"
+    ],
+    "decision_fields": [
+      "expression_scale",
+      "kernel_choice",
+      "score_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 expression_scale、gene_sets、sample_metadata 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "打分与分数上的组间推断分开；分数模型沿用独立单位与重复结构",
+        "id": "design"
+      },
+      {
+        "description": "检查输入分布、核分布选择、常量特征及集合覆盖",
+        "id": "diagnostics"
+      },
+      {
+        "description": "比较核设置、集合覆盖和队列构成的影响",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "gsva_scores",
+      "gsva_coverage",
+      "gsva_diagnostics",
+      "gsva_contrasts"
+    ],
+    "interpretation_limit": "分数不是绝对通路活性，也不能任意跨队列比较。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "hic_compartments",
+    "label": "A/B compartment 与切换",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "cooltools eigs-cis"
+    ],
+    "decision_fields": [
+      "orientation_signal",
+      "bin_resolution",
+      "eigenvector_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 balanced_contact_maps、compartment_orientation、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "PC 符号需外部信号定向；按样本检验并保留不确定区",
+        "id": "design"
+      },
+      {
+        "description": "检查距离背景、染色体、特征向量选择及低覆盖 bins",
+        "id": "diagnostics"
+      },
+      {
+        "description": "分辨率、定向信号与PC选择敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "compartment_scores",
+      "compartment_switches",
+      "orientation_evidence",
+      "compartment_sensitivity"
+    ],
+    "interpretation_limit": "PC 符号可任意翻转，未经定向不能称 A/B 切换。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "hic_loops_tads",
+    "label": "Hi-C 环与 TAD 边界",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "cooltools",
+      "HiCExplorer"
+    ],
+    "decision_fields": [
+      "bin_resolution",
+      "distance_background",
+      "boundary_definition"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 balanced_contact_maps、resolution_metadata、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "样本级重复、距离衰减和可比 bin 分辨率；bin 对不视为独立生物学重复",
+        "id": "design"
+      },
+      {
+        "description": "检查平衡收敛、覆盖、距离、低可映射区域和边界",
+        "id": "diagnostics"
+      },
+      {
+        "description": "分辨率、窗口及归一化敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "chromatin_loops",
+      "tad_boundaries",
+      "contact_expected",
+      "hic_sensitivity"
+    ],
+    "interpretation_limit": "空间接触不证明调控作用。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "impulse_response",
+    "label": "非线性时间响应",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "maSigPro"
+    ],
+    "decision_fields": [
+      "response_family",
+      "time_hypothesis",
+      "extrapolation_policy"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 time_metadata、sufficient_time_coverage、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "核对时间点覆盖和有效重复；明确条件/时间零假设",
+        "id": "design"
+      },
+      {
+        "description": "检查拟合收敛、外推、低计数与时间覆盖",
+        "id": "diagnostics"
+      },
+      {
+        "description": "函数形式、异常时间点和留出时间验证",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "nonlinear_time_tests",
+      "fitted_time_curves",
+      "time_coverage",
+      "nonlinear_sensitivity"
+    ],
+    "interpretation_limit": "稀疏时间点不能可靠恢复任意动力学。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "isoform_switch",
+    "label": "异构体转换及功能后果候选",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "IsoformSwitchAnalyzeR"
+    ],
+    "decision_fields": [
+      "orf_evidence",
+      "consequence_scope",
+      "isoform_filter"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 transcript_usage、isoform_sequences、domain_annotation 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "先验与观测结构分开；DTU 及后果筛选的比较族明确",
+        "id": "design"
+      },
+      {
+        "description": "检查 ORF、NMD、结构域映射、异构体覆盖与版本",
+        "id": "diagnostics"
+      },
+      {
+        "description": "ORF/结构域注释及最低使用量敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "isoform_switches",
+      "isoform_consequences",
+      "isoform_mapping",
+      "consequence_limits"
+    ],
+    "interpretation_limit": "RNA 注释后果不能直接推断蛋白表达或活性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "junction_events",
+    "label": "剪接事件与 junction cluster",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "rMATS",
+      "LeafCutter"
+    ],
+    "decision_fields": [
+      "event_model",
+      "psi_unit",
+      "coverage_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 junction_counts、library_protocol、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "声明事件/簇、delta PSI 单位、配对关系和 FDR 族",
+        "id": "design"
+      },
+      {
+        "description": "检查唯一比对、链特异性、读长、覆盖与事件可估计性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "覆盖阈值、注释与模型选择敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "junction_effects",
+      "junction_coverage",
+      "event_definitions",
+      "splicing_sensitivity"
+    ],
+    "interpretation_limit": "不同事件模型的效应与检验全集不能直接混用。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "kinase_activity",
+    "label": "激酶—底物活性候选",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "decoupleR",
+      "KSEA"
+    ],
+    "decision_fields": [
+      "substrate_resource",
+      "localization_rule",
+      "protein_adjustment"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 localized_phosphosites、kinase_substrate_reference、protein_abundance 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "位点定位、底物覆盖和总蛋白调整明确，按生物学单位检验",
+        "id": "design"
+      },
+      {
+        "description": "检查位点映射、缺失机制、总蛋白与底物方向",
+        "id": "diagnostics"
+      },
+      {
+        "description": "资源/覆盖/总量调整敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "kinase_scores",
+      "kinase_coverage",
+      "protein_adjustment",
+      "kinase_sensitivity"
+    ],
+    "interpretation_limit": "底物模式不是激酶直接活性测定。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "kinetic_velocity",
+    "label": "RNA velocity 动力学与相图",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "scVelo"
+    ],
+    "decision_fields": [
+      "kinetic_model",
+      "layer_definition",
+      "confidence_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 spliced_unspliced、kinetic_model_review、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "声明模型、层来源、适用细胞范围；不得把细胞数作为生物学重复",
+        "id": "design"
+      },
+      {
+        "description": "检查相图、基因拟合、层定义、速度置信度及批次",
+        "id": "diagnostics"
+      },
+      {
+        "description": "模型、邻域、基因集与供者留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "velocity_vectors",
+      "kinetic_parameters",
+      "phase_diagnostics",
+      "velocity_sensitivity"
+    ],
+    "interpretation_limit": "二维箭头展示不验证分化方向或命运。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "leading_edge",
+    "label": "Leading-edge 与集合冗余审查",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "fgsea leadingEdge"
+    ],
+    "decision_fields": [
+      "representative_rule",
+      "overlap_definition",
+      "retained_test_family"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 gsea_results、complete_signed_ranks、gene_sets 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "保留原检验族；展示代表项不得改写原 FDR 或只保留支持故事的集合",
+        "id": "design"
+      },
+      {
+        "description": "检查成员集合、rank 位置和 ES 方向与原始结果一致",
+        "id": "diagnostics"
+      },
+      {
+        "description": "比较预先说明的冗余阈值并保留未合并原表",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "leading_edge_members",
+      "term_overlap",
+      "representative_terms",
+      "full_term_index"
+    ],
+    "interpretation_limit": "共享成员不证明共享独立机制。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "ligand_target_links",
+    "label": "配体到受体细胞靶基因",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "NicheNet"
+    ],
+    "decision_fields": [
+      "receiver_target_definition",
+      "sender_scope",
+      "prior_version"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 sender_receiver_definition、receiver_target_genes、ligand_target_prior 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "响应基因选择与可测背景明确；训练先验与验证证据分离",
+        "id": "design"
+      },
+      {
+        "description": "检查受体表达、靶基因覆盖、先验来源和方向",
+        "id": "diagnostics"
+      },
+      {
+        "description": "背景/候选配体/先验覆盖的敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "ligand_priorities",
+      "ligand_target_links",
+      "receiver_universe",
+      "ligand_controls"
+    ],
+    "interpretation_limit": "先验一致性不是配体扰动的因果验证。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "lipid_chain_patterns",
+    "label": "脂质链长与不饱和模式",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "lipidr"
+    ],
+    "decision_fields": [
+      "chain_resolution",
+      "class_stratification",
+      "abundance_unit"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 lipid_chain_annotation、lipid_abundance、internal_standard_qc 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "总碳/总双键与精确酰链分辨率分开；同分异构不可伪拆",
+        "id": "design"
+      },
+      {
+        "description": "检查链注释等级、离子加合、内标及单位",
+        "id": "diagnostics"
+      },
+      {
+        "description": "注释等级、类别分层和缺失处理敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "chain_pattern_effects",
+      "chain_annotation",
+      "chain_denominators",
+      "chain_sensitivity"
+    ],
+    "interpretation_limit": "总和注释不能定位具体脂肪酸或酶活性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "lipid_class_enrichment",
+    "label": "脂质类别与链特征富集",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "lipidr LSEA"
+    ],
+    "decision_fields": [
+      "identity_level",
+      "lipid_background",
+      "class_definition"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 lipid_identifications、tested_lipid_universe、lipid_effects 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "鉴定等级、同分异构和受检脂质背景明确；避免同一分子重复计数",
+        "id": "design"
+      },
+      {
+        "description": "检查命名、类映射、链解析、检测覆盖和 FDR族",
+        "id": "diagnostics"
+      },
+      {
+        "description": "鉴定等级、背景和类别粒度敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "lipid_set_results",
+      "lipid_universe",
+      "lipid_identity_audit",
+      "lipid_set_sensitivity"
+    ],
+    "interpretation_limit": "类别富集不是脂代谢通量。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "longitudinal_effects",
+    "label": "纵向、交互与重复测量效应",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "limma",
+      "variancePartition dream"
+    ],
+    "decision_fields": [
+      "time_scale",
+      "time_function",
+      "covariance_structure"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 time_metadata、dependence_structure、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "区分纵向和横断面时间；随机效应、时间尺度和估计目标预先明确",
+        "id": "design"
+      },
+      {
+        "description": "检查设计秩、时间覆盖、协方差结构、缺失与残差",
+        "id": "diagnostics"
+      },
+      {
+        "description": "时间函数、缺失假设与协方差结构敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "time_contrasts",
+      "time_design",
+      "time_diagnostics",
+      "time_sensitivity"
+    ],
+    "interpretation_limit": "时间先后关联不建立因果次序。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "lr_consensus",
+    "label": "配体受体多方法共识",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "LIANA+"
+    ],
+    "decision_fields": [
+      "resource_version",
+      "complex_rule",
+      "expression_support_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 ligand_receptor_reference、expression_support、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "完整供者和细胞群分母；复合物亚基、物种和数据库版本固定",
+        "id": "design"
+      },
+      {
+        "description": "检查表达覆盖、群大小、亚基、方法分数方向与缺失组合",
+        "id": "diagnostics"
+      },
+      {
+        "description": "数据库/表达阈值/方法集合与供者稳定性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "lr_consensus",
+      "lr_method_scores",
+      "lr_coverage",
+      "lr_sensitivity"
+    ],
+    "interpretation_limit": "表达兼容不证明分泌、接触或结合。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "lr_differential",
+    "label": "供者层级的差异通信",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "LIANA+ differential workflows"
+    ],
+    "decision_fields": [
+      "donor_model",
+      "missing_pair_policy",
+      "contrast_family"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 per_donor_lr、replicate_design、comparable_cell_types 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "供者级重复、缺失细胞群和组成差异分开处理；固定 LR 检验族",
+        "id": "design"
+      },
+      {
+        "description": "检查每组供者覆盖、缺失对、群丰度及分数可比性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "组成调整、供者重采样和数据库敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "lr_contrasts",
+      "lr_donor_support",
+      "lr_missing_pairs",
+      "lr_contrast_sensitivity"
+    ],
+    "interpretation_limit": "通信得分差异不等同于信号传递效应。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "methylation_gene_links",
+    "label": "DMR 与表达/注释整合",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "DMRcate",
+      "bsseq"
+    ],
+    "decision_fields": [
+      "methylation_scale",
+      "region_definition",
+      "composition_adjustment"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 methylation_qc、region_mapping、expression_context 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "beta/M 值、覆盖权重、细胞组成和区域层级检验分开；匹配单位明确",
+        "id": "design"
+      },
+      {
+        "description": "检查探针交叉反应、SNP、覆盖、构建、区域及效应尺度",
+        "id": "diagnostics"
+      },
+      {
+        "description": "区域定义、组成调整和注释敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "dmr_effects",
+      "dmr_gene_mapping",
+      "methylation_expression",
+      "methylation_sensitivity"
+    ],
+    "interpretation_limit": "甲基化方向不普遍等同于表达抑制或因果。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_differential",
+    "label": "微生物差异丰度与组成偏差",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "ANCOM-BC2",
+      "ALDEx2"
+    ],
+    "decision_fields": [
+      "zero_policy",
+      "prevalence_filter",
+      "sampling_fraction_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 taxon_counts、sampling_fraction_design、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "零值/结构零、测序深度、协变量和重复测量处理明确",
+        "id": "design"
+      },
+      {
+        "description": "检查污染、低流行率、零值、库大小与模型校准",
+        "id": "diagnostics"
+      },
+      {
+        "description": "过滤、零值、偏差模型和批次敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "taxon_effects",
+      "structural_zero_audit",
+      "composition_diagnostics",
+      "taxon_sensitivity"
+    ],
+    "interpretation_limit": "相对丰度不等于绝对菌量或定植因果。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_diversity",
+    "label": "α/β 多样性与群落差异",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "vegan",
+      "phyloseq"
+    ],
+    "decision_fields": [
+      "distance_metric",
+      "depth_policy",
+      "permutation_blocks"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 taxon_counts、distance_definition、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "度量/深度处理明确；PERMANOVA 配合离散度审查及受限置换",
+        "id": "design"
+      },
+      {
+        "description": "检查测序深度、距离、树映射、离散度与置换单位",
+        "id": "diagnostics"
+      },
+      {
+        "description": "距离、过滤和深度处理敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "alpha_diversity",
+      "beta_distances",
+      "diversity_tests",
+      "dispersion_audit"
+    ],
+    "interpretation_limit": "显著 PERMANOVA 可能受组间离散度差异影响。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_gene_context",
+    "label": "微生物基因功能注释与上下文",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "HUMAnN",
+      "eggNOG-mapper"
+    ],
+    "decision_fields": [
+      "annotation_threshold",
+      "reference_version",
+      "ambiguity_policy"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 assembled_gene_evidence、functional_reference、contamination_controls 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "同源阈值、数据库版本、拷贝/丰度单位及可比背景明确",
+        "id": "design"
+      },
+      {
+        "description": "检查污染、覆盖、同源歧义和上下文完整性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "参考版本、同源阈值和映射完整性敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "gene_function_annotations",
+      "gene_annotation_evidence",
+      "context_coverage",
+      "annotation_ambiguity"
+    ],
+    "interpretation_limit": "同源注释不证明功能表达、致病性或实验表型。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_network",
+    "label": "组成数据微生物关联网络",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "SPIEC-EASI"
+    ],
+    "decision_fields": [
+      "zero_transform",
+      "regularization_selection",
+      "edge_stability"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 taxon_counts、prevalence_design、resampling_plan 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "零值、稀疏性及独立样本量先审；边不是独立生物学重复",
+        "id": "design"
+      },
+      {
+        "description": "检查流行率、正则化、网络稀疏度及批次",
+        "id": "diagnostics"
+      },
+      {
+        "description": "过滤、正则化和重采样稳定性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "microbe_edges",
+      "network_selection",
+      "microbe_network_stability",
+      "microbe_network_null"
+    ],
+    "interpretation_limit": "统计关联边不是生态互作或因果。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_pathways",
+    "label": "微生物功能与通路丰度",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "HUMAnN"
+    ],
+    "decision_fields": [
+      "abundance_unit",
+      "pathway_coverage",
+      "stratification_policy"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 functional_abundance、taxon_stratification、reference_database 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "基因/通路长度、单位、未比对比例和组成模型明确",
+        "id": "design"
+      },
+      {
+        "description": "检查数据库版本、覆盖、未归类及物种分层贡献",
+        "id": "diagnostics"
+      },
+      {
+        "description": "数据库、归一化、检测阈值和分类分层敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "microbe_function_effects",
+      "stratified_function",
+      "unclassified_fraction",
+      "function_sensitivity"
+    ],
+    "interpretation_limit": "功能基因丰度不等于实际代谢通量。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "microbe_strain",
+    "label": "菌株分辨与群体结构",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "StrainPhlAn"
+    ],
+    "decision_fields": [
+      "marker_coverage",
+      "mixed_strain_policy",
+      "tree_reference"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 species_marker_coverage、strain_reference、cohort_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "混合菌株、覆盖和样本独立性明确；不自动推断传播方向",
+        "id": "design"
+      },
+      {
+        "description": "检查标记覆盖、缺失、比对和系统树支持",
+        "id": "diagnostics"
+      },
+      {
+        "description": "覆盖阈值、标记集合与参考敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "strain_profiles",
+      "strain_tree",
+      "strain_coverage",
+      "strain_sensitivity"
+    ],
+    "interpretation_limit": "遗传相似不能单独证明宿主间直接传播。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "motif_deviation",
+    "label": "chromVAR motif 可及性偏差",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "chromVAR"
+    ],
+    "decision_fields": [
+      "background_rule",
+      "motif_resource",
+      "comparison_unit"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 peak_counts、motif_matches、gc_background 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "样本/供者级比较；声明深度和 GC 背景校正及检验族",
+        "id": "design"
+      },
+      {
+        "description": "检查片段深度、偏差分布、背景峰与稀疏群覆盖",
+        "id": "diagnostics"
+      },
+      {
+        "description": "背景峰、低深度过滤及供者聚合敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "motif_deviation_scores",
+      "motif_deviation_effects",
+      "chromvar_background",
+      "chromvar_diagnostics"
+    ],
+    "interpretation_limit": "偏差分数不是直接结合或转录激活。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "motif_enrichment",
+    "label": "匹配背景的 motif 富集",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "motifmatchr",
+      "HOMER"
+    ],
+    "decision_fields": [
+      "background_matching",
+      "region_window",
+      "motif_version"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 peak_sequences、matched_peak_background、motif_database 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "背景匹配长度/GC/可及性且固定受检 TF 族",
+        "id": "design"
+      },
+      {
+        "description": "检查坐标构建、序列、GC、黑名单及相似 motif 冗余",
+        "id": "diagnostics"
+      },
+      {
+        "description": "不同匹配背景、窗口和 motif 库敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "motif_enrichment",
+      "motif_background",
+      "motif_matches",
+      "motif_sensitivity"
+    ],
+    "interpretation_limit": "motif 匹配不等同于真实结合或 TF 身份唯一。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "multiomics_mediation",
+    "label": "有条件的中介分析审查",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "mediation"
+    ],
+    "decision_fields": [
+      "causal_estimand",
+      "temporal_order",
+      "confounding_assumptions"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 temporal_order、confounder_design、mediation_identifiability 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "定义直接/间接效应、时序、暴露后混杂、测量误差及可识别性",
+        "id": "design"
+      },
+      {
+        "description": "检查模型、支持域、缺失、交互和未测混杂假设",
+        "id": "diagnostics"
+      },
+      {
+        "description": "未测混杂、模型形式与测量误差敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "mediation_estimands",
+      "mediation_effects",
+      "mediation_assumptions",
+      "mediation_sensitivity"
+    ],
+    "interpretation_limit": "横断面多组学相关不能直接建立中介因果链。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "network_diffusion",
+    "label": "网络传播与候选排序",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "igraph personalized PageRank"
+    ],
+    "decision_fields": [
+      "seed_selection",
+      "restart_rule",
+      "validation_split"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 reviewed_network、seed_evidence、heldout_evidence 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "隔离构建种子与验证来源；用度匹配基线评估先验泄漏",
+        "id": "design"
+      },
+      {
+        "description": "检查种子覆盖、传播参数、网络连通性与度偏倚",
+        "id": "diagnostics"
+      },
+      {
+        "description": "留一种子/留一来源与重启参数敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "diffusion_ranks",
+      "diffusion_seeds",
+      "diffusion_null",
+      "diffusion_holdout"
+    ],
+    "interpretation_limit": "传播得分是优先级，不是作用效应或药效。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "peak_gene_links",
+    "label": "峰—基因关联与顺式候选",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Signac LinkPeaks",
+      "ArchR"
+    ],
+    "decision_fields": [
+      "pairing_definition",
+      "cis_window",
+      "background_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 matched_rna_atac、genomic_mapping、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "匹配单位、距离窗口和受检峰基因全集明确，控制深度与组成",
+        "id": "design"
+      },
+      {
+        "description": "检查构建、TSS、窗口、GC/深度及供者混杂",
+        "id": "diagnostics"
+      },
+      {
+        "description": "距离、背景和供者留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "peak_gene_links",
+      "peak_gene_universe",
+      "link_covariates",
+      "link_stability"
+    ],
+    "interpretation_limit": "相关不等于增强子因果靶基因。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "physical_ppi",
+    "label": "物理 PPI 证据网络",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "IntAct",
+      "STRING physical network"
+    ],
+    "decision_fields": [
+      "relation_type",
+      "evidence_channels",
+      "confidence_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 interaction_evidence、identifier_mapping、tested_universe 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "指定物理/功能关系、物种、来源通道及网络受检背景",
+        "id": "design"
+      },
+      {
+        "description": "检查重复边、自环、同源映射、置信度通道及实验来源",
+        "id": "diagnostics"
+      },
+      {
+        "description": "比较证据门槛及去除文本挖掘/预测通道后的网络",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "physical_edges",
+      "interaction_sources",
+      "network_universe",
+      "network_sensitivity"
+    ],
+    "interpretation_limit": "数据库边不自动证明当前细胞模型中的结合。 STRING physical 也含预测支持，不能全部标成实验物理结合。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "polygenic_score",
+    "label": "多基因评分与迁移性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "PRSice-2",
+      "LDpred2"
+    ],
+    "decision_fields": [
+      "discovery_overlap",
+      "ancestry_scope",
+      "calibration_target"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 discovery_gwas、target_genotypes、ancestry_matched_ld 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "发现/训练/验证无重叠；祖源、LD、协变量及绝对风险校准分开",
+        "id": "design"
+      },
+      {
+        "description": "检查等位基因、重叠、群体结构、基线及校准",
+        "id": "diagnostics"
+      },
+      {
+        "description": "祖源、LD、阈值和外部验证敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "prs_weights",
+      "prs_predictions",
+      "prs_metrics",
+      "prs_overlap_audit"
+    ],
+    "interpretation_limit": "PRS 不是个体诊断或因果效应估计。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "ppi_modules",
+    "label": "PPI 模块与中心性稳健性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Cytoscape",
+      "igraph"
+    ],
+    "decision_fields": [
+      "edge_weight_definition",
+      "module_method",
+      "null_network"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 reviewed_network、network_background、resampling_plan 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "声明方向、边权及匹配度分布的零模型；选择规则不能用结局反复调参",
+        "id": "design"
+      },
+      {
+        "description": "检查孤立点、连通分量、中心性定义与模块大小",
+        "id": "diagnostics"
+      },
+      {
+        "description": "边删减/证据通道/随机种子敏感性；报告模块稳定性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "network_modules",
+      "network_centrality",
+      "network_null",
+      "network_stability"
+    ],
+    "interpretation_limit": "高度节点不等于因果靶点。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "protein_complexes",
+    "label": "复合体丰度与协调变化",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "MSstats",
+      "CORUM membership review"
+    ],
+    "decision_fields": [
+      "complex_resource",
+      "coverage_rule",
+      "aggregation_definition"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 protein_abundance、complex_membership、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "复合体定义、成员覆盖及缺失结构明确；蛋白共享肽不可重复计数",
+        "id": "design"
+      },
+      {
+        "description": "检查成员数、方向不一致、共享肽与批次",
+        "id": "diagnostics"
+      },
+      {
+        "description": "成员覆盖、汇总方法和资源版本敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "complex_effects",
+      "complex_coverage",
+      "member_effects",
+      "complex_sensitivity"
+    ],
+    "interpretation_limit": "共丰度不证明复合体组装或直接互作。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "proteogenomic_links",
+    "label": "蛋白基因组与变异肽证据",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "OpenMS proteogenomics review"
+    ],
+    "decision_fields": [
+      "search_database",
+      "decoy_definition",
+      "peptide_uniqueness"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 matched_variant_transcript、peptide_spectrum_evidence、decoy_strategy 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "搜索空间、target-decoy 和分层 FDR明确；转录和肽证据独立报告",
+        "id": "design"
+      },
+      {
+        "description": "检查谱图、独特性、蛋白推断、序列版本及污染",
+        "id": "diagnostics"
+      },
+      {
+        "description": "数据库扩展、竞争肽和独立谱图验证",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "variant_peptide_links",
+      "peptide_spectrum_index",
+      "search_space_fdr",
+      "proteogenomic_controls"
+    ],
+    "interpretation_limit": "扩展数据库命中不是功能或表达量证明。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "ptm_adjustment",
+    "label": "PTM 相对总蛋白变化",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "MSstatsPTM"
+    ],
+    "decision_fields": [
+      "paired_protein_definition",
+      "ptm_scale",
+      "missingness_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 matched_ptm_protein、localized_phosphosites、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "配对映射、尺度和缺失机制明确；调整后不自动代表位点占有率",
+        "id": "design"
+      },
+      {
+        "description": "检查定位概率、蛋白组映射、重复肽及调整不确定性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "蛋白汇总、缺失和定位阈值敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "adjusted_ptm_effects",
+      "total_protein_effects",
+      "ptm_mapping",
+      "ptm_uncertainty"
+    ],
+    "interpretation_limit": "没有占有率测量时不能声称绝对磷酸化比例。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "rare_variant_burden",
+    "label": "稀有变异聚合关联",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "SKAT",
+      "SAIGE-GENE+"
+    ],
+    "decision_fields": [
+      "mask_definition",
+      "frequency_reference",
+      "relatedness_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 variant_qc、ancestry_kinship、functional_masks 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "频率/功能掩膜预先定义；亲缘、病例失衡和祖源受控",
+        "id": "design"
+      },
+      {
+        "description": "检查可调用区域、携带者数、批次、掩膜及校准",
+        "id": "diagnostics"
+      },
+      {
+        "description": "频率阈值、掩膜、单变异驱动与祖源分层",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "burden_results",
+      "variant_masks",
+      "carrier_counts",
+      "burden_calibration"
+    ],
+    "interpretation_limit": "聚合关联不说明所有变异作用方向一致。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "repertoire_clonotypes",
+    "label": "TCR/BCR 克隆型与配对",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Scirpy"
+    ],
+    "decision_fields": [
+      "receptor_type",
+      "chain_pairing",
+      "clonotype_rule"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 vdj_contigs、cell_barcode_mapping、receptor_protocol 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "TCR/BCR、链配对、productive 和多链规则明确，供者分开",
+        "id": "design"
+      },
+      {
+        "description": "检查条码、链数、doublet、序列完整性及测序深度",
+        "id": "diagnostics"
+      },
+      {
+        "description": "核苷酸/氨基酸、链配对和距离定义敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "clonotype_assignments",
+      "chain_qc",
+      "barcode_crosswalk",
+      "clonotype_definition"
+    ],
+    "interpretation_limit": "相似受体序列不自动证明相同抗原特异性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "repertoire_diversity",
+    "label": "受体谱多样性与克隆扩增",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Scirpy"
+    ],
+    "decision_fields": [
+      "diversity_metric",
+      "depth_matching",
+      "biological_unit"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 clonotype_counts、donor_structure、sampling_depth 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "测序深度、抽样单位、克隆定义和检验族明确",
+        "id": "design"
+      },
+      {
+        "description": "检查每供者细胞/克隆数、覆盖、稀有克隆和批次",
+        "id": "diagnostics"
+      },
+      {
+        "description": "深度匹配、克隆规则和供者重采样",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "repertoire_diversity",
+      "expansion_summary",
+      "repertoire_sampling",
+      "diversity_sensitivity"
+    ],
+    "interpretation_limit": "捕获频率不是整体机体克隆频率。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "scenic_regulons",
+    "label": "SCENIC 共表达与 motif 支持 regulon",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "pySCENIC"
+    ],
+    "decision_fields": [
+      "ranking_database",
+      "region_definition",
+      "donor_validation"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 independent_expression、motif_rank_database、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "声明细胞与供者抽样、数据库版本及训练/验证分离",
+        "id": "design"
+      },
+      {
+        "description": "检查基因覆盖、共表达稳定性、motif 物种/基因区域和 regulon 覆盖",
+        "id": "diagnostics"
+      },
+      {
+        "description": "随机种子、细胞抽样、供者留出与数据库敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "regulon_edges",
+      "regulon_activity",
+      "motif_support",
+      "regulon_stability"
+    ],
+    "interpretation_limit": "共表达加 motif 支持不等于直接调控实验证据。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "signature_matching",
+    "label": "扰动签名相似与反向匹配",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "CLUE Connectivity Map offline exports"
+    ],
+    "decision_fields": [
+      "matching_direction",
+      "reference_context",
+      "public_query_scope"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 approved_public_signature、perturbation_reference、direction_definition 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "细胞系、剂量、时间和签名方向匹配；未知/私有签名不得自动外发",
+        "id": "design"
+      },
+      {
+        "description": "检查映射、参考覆盖、排序统计、基线和细胞背景",
+        "id": "diagnostics"
+      },
+      {
+        "description": "签名定义、细胞系/剂量/时间和候选稳定性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "signature_matches",
+      "signature_context",
+      "signature_null",
+      "signature_sensitivity"
+    ],
+    "interpretation_limit": "反向表达签名不是疾病逆转、药效或安全性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "singlecell_abundance",
+    "label": "Milo 细胞邻域差异丰度",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "miloR"
+    ],
+    "decision_fields": [
+      "neighborhood_definition",
+      "sample_offset",
+      "graph_parameters"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 cell_neighborhoods、donor_counts、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "以供者计数和设计检验；邻域重叠需适用的多重比较处理",
+        "id": "design"
+      },
+      {
+        "description": "检查图结构、邻域覆盖、供者支持及批次",
+        "id": "diagnostics"
+      },
+      {
+        "description": "邻域参数、图构建与供者留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "neighborhood_effects",
+      "neighborhood_counts",
+      "neighborhood_fdr",
+      "neighborhood_stability"
+    ],
+    "interpretation_limit": "相对丰度变化不证明细胞绝对增殖或死亡。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "singlecell_cnv",
+    "label": "表达推断的单细胞 CNV",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "inferCNV",
+      "CopyKAT"
+    ],
+    "decision_fields": [
+      "normal_reference",
+      "genomic_smoothing",
+      "dna_validation"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 ordered_expression、normal_reference、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "正常参考、肿瘤纯度及供者边界明确；表达程序偏倚单独审查",
+        "id": "design"
+      },
+      {
+        "description": "检查参考污染、染色体排序、平滑尺度和周期程序",
+        "id": "diagnostics"
+      },
+      {
+        "description": "正常参考、平滑、低表达与独立 DNA 验证",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "inferred_cnv_profiles",
+      "normal_reference_audit",
+      "cnv_diagnostics",
+      "dna_concordance"
+    ],
+    "interpretation_limit": "RNA 推断不是 DNA CNV 测量，不能单凭此认定恶性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_deconvolution",
+    "label": "空间 spot 细胞丰度估计",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "cell2location",
+      "RCTD"
+    ],
+    "decision_fields": [
+      "abundance_unit",
+      "reference_scope",
+      "spatial_validation"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 compatible_reference、registered_coordinates、tissue_metadata 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "切片/供者嵌套；训练参考和验证组织学独立，保留单位和分辨率",
+        "id": "design"
+      },
+      {
+        "description": "检查参考覆盖、后验/拟合诊断、组织边界和空间残差",
+        "id": "diagnostics"
+      },
+      {
+        "description": "参考、超参数及分辨率敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "spatial_abundance",
+      "spatial_reference_fit",
+      "spatial_uncertainty",
+      "histology_checks"
+    ],
+    "interpretation_limit": "spot 不是独立受试者；空间丰度仍为估计。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_domains",
+    "label": "空间域与组织学一致性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "BayesSpace",
+      "BANKSY"
+    ],
+    "decision_fields": [
+      "domain_count",
+      "spatial_weight",
+      "histology_validation"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 registered_coordinates、expression_scale、independent_histology 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "聚类与独立验证分开；域数选择不能依期望结论",
+        "id": "design"
+      },
+      {
+        "description": "检查配准、图结构、批次、域覆盖及组织学一致性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "域数、空间权重、分辨率和切片留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "spatial_domains",
+      "domain_parameters",
+      "histology_concordance",
+      "domain_stability"
+    ],
+    "interpretation_limit": "域边界不自动等于细胞谱系或病理诊断。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_gradients",
+    "label": "组织边界距离与空间梯度",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Squidpy spatial graph",
+      "mgcv"
+    ],
+    "decision_fields": [
+      "boundary_definition",
+      "physical_unit",
+      "spatial_dependence"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 registered_coordinates、reviewed_tissue_boundaries、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "边界独立定义、物理单位和供者内空间相关；避免用表达先选边界再检验",
+        "id": "design"
+      },
+      {
+        "description": "检查配准、边界误差、距离方向、采样密度和残差",
+        "id": "diagnostics"
+      },
+      {
+        "description": "边界扰动、距离窗口与供者留出",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "distance_gradients",
+      "boundary_coordinates",
+      "spatial_residuals",
+      "gradient_sensitivity"
+    ],
+    "interpretation_limit": "距离梯度不是时间进程或因果暴露。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_lr",
+    "label": "空间约束的配体受体关系",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "LIANA+ spatial"
+    ],
+    "decision_fields": [
+      "distance_unit",
+      "neighborhood_definition",
+      "spatial_null"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 registered_coordinates、ligand_receptor_reference、tissue_boundaries 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "组织掩膜、切片/供者内空间零模型；避免跨供者坐标拼接",
+        "id": "design"
+      },
+      {
+        "description": "检查距离单位、邻域、边界、稀疏性及混合 spot",
+        "id": "diagnostics"
+      },
+      {
+        "description": "距离半径、掩膜与空间置换敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "spatial_lr_scores",
+      "spatial_lr_pairs",
+      "spatial_null",
+      "spatial_lr_radius"
+    ],
+    "interpretation_limit": "共定位不能证明接触或实际分泌作用。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_niches",
+    "label": "邻域富集与组织生态位",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Squidpy neighborhood enrichment"
+    ],
+    "decision_fields": [
+      "neighborhood_definition",
+      "permutation_constraint",
+      "density_control"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 registered_coordinates、frozen_cell_states、tissue_boundaries 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "按供者/切片分层，组织分区内置换并保留密度/边界约束",
+        "id": "design"
+      },
+      {
+        "description": "检查邻域构建、半径、密度、掩膜及稀有类型",
+        "id": "diagnostics"
+      },
+      {
+        "description": "半径、kNN/距离、注释粒度和受限置换敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "neighborhood_enrichment",
+      "spatial_graph",
+      "constrained_null",
+      "niche_stability"
+    ],
+    "interpretation_limit": "邻近不证明通信或功能依赖。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "spatial_variable_genes",
+    "label": "空间变异基因与空间零模型",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "SPARK-X",
+      "SpatialDE"
+    ],
+    "decision_fields": [
+      "spatial_kernel",
+      "tissue_mask",
+      "sample_replication"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 registered_coordinates、expression_scale、tissue_boundaries 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "切片内空间相关、供者重复及受检全集明确",
+        "id": "design"
+      },
+      {
+        "description": "检查坐标单位、表达深度、组织掩膜、边界和模型校准",
+        "id": "diagnostics"
+      },
+      {
+        "description": "空间核、尺度、组织分区与切片复现",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "spatial_gene_tests",
+      "spatial_kernel",
+      "spatial_gene_qc",
+      "spatial_gene_replication"
+    ],
+    "interpretation_limit": "空间变异不等于条件差异或细胞特异性。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "ssgsea_scores",
+    "label": "ssGSEA 样本级排序分数",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "GSVA ssGSEA"
+    ],
+    "decision_fields": [
+      "normalization_definition",
+      "rank_weight",
+      "score_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 expression_scale、gene_sets、sample_metadata 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "保留打分归一化规则及后续分数模型；细胞打分不增加独立 n",
+        "id": "design"
+      },
+      {
+        "description": "检查秩并列、低覆盖、集合大小及归一化范围",
+        "id": "diagnostics"
+      },
+      {
+        "description": "比较归一化开关及参考集合覆盖",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "ssgsea_scores",
+      "ssgsea_coverage",
+      "ssgsea_parameters",
+      "ssgsea_sensitivity"
+    ],
+    "interpretation_limit": "不同算法的分数不能当作同一单位直接合并。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "temporal_modules",
+    "label": "时间模式模块与稳定性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "maSigPro",
+      "WGCNA"
+    ],
+    "decision_fields": [
+      "curve_scaling",
+      "module_selection",
+      "block_resampling"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 frozen_time_effects、time_metadata、resampling_plan 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "模块生成与显著性推断分开；按供者/时间块重采样",
+        "id": "design"
+      },
+      {
+        "description": "检查缩放定义、曲线不确定性、模块大小和缺测",
+        "id": "diagnostics"
+      },
+      {
+        "description": "模块数、距离度量和时间块留出敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "temporal_modules",
+      "temporal_centroids",
+      "temporal_uncertainty",
+      "temporal_stability"
+    ],
+    "interpretation_limit": "聚类相似时间曲线不是共同调控证明。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "tf_activity",
+    "label": "有符号调控靶集合的 TF 活性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "decoupleR",
+      "decoupler"
+    ],
+    "decision_fields": [
+      "regulon_resource",
+      "coverage_rule",
+      "activity_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 signed_regulon、expression_scale、tested_universe 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "固定 regulon 版本/置信度及供者级模型；表达量与推断活性分开",
+        "id": "design"
+      },
+      {
+        "description": "检查靶覆盖、符号、最低靶数与方法间一致性",
+        "id": "diagnostics"
+      },
+      {
+        "description": "资源、置信度、覆盖阈值和方法敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "tf_activity_scores",
+      "tf_target_coverage",
+      "tf_activity_effects",
+      "tf_activity_sensitivity"
+    ],
+    "interpretation_limit": "推断活性不证明 TF 蛋白量、结合或磷酸化。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "trajectory_dynamics",
+    "label": "沿轨迹与分支的表达变化",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "tradeSeq"
+    ],
+    "decision_fields": [
+      "hypothesis_family",
+      "knot_selection",
+      "dependence_model"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 frozen_pseudotime、lineage_weights、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "声明关联/起终点/分支差异的不同假设；供者相关与轨迹不确定性须审核",
+        "id": "design"
+      },
+      {
+        "description": "检查拟合收敛、结点、有效样本覆盖及分支权重",
+        "id": "diagnostics"
+      },
+      {
+        "description": "结点数、轨迹替代及供者重采样",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "trajectory_gene_tests",
+      "trajectory_curves",
+      "trajectory_fit",
+      "trajectory_test_family"
+    ],
+    "interpretation_limit": "同一数据的轨迹选择和检验可能存在选择偏差。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "trajectory_topology",
+    "label": "轨迹拓扑与根节点稳健性",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "Slingshot",
+      "Monocle3"
+    ],
+    "decision_fields": [
+      "root_definition",
+      "branch_selection",
+      "donor_sampling"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 frozen_cell_states、root_evidence、donor_structure 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "根节点依据独立生物学信息；不以期望结论选择分支",
+        "id": "design"
+      },
+      {
+        "description": "检查供者覆盖、批次混合、断裂群及分支支持",
+        "id": "diagnostics"
+      },
+      {
+        "description": "替代根、供者留出和参数敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "trajectory_topology",
+      "pseudotime_assignments",
+      "root_evidence",
+      "trajectory_resampling"
+    ],
+    "interpretation_limit": "拟时序不是实测时间或谱系追踪。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "transcript_usage",
+    "label": "差异转录本使用 DTU",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "DRIMSeq",
+      "satuRn"
+    ],
+    "decision_fields": [
+      "usage_denominator",
+      "annotation_version",
+      "stagewise_testing"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 transcript_abundance、transcript_gene_map、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "区分 DTU 和 DTE；基因/转录本层级检验及不确定性需明确",
+        "id": "design"
+      },
+      {
+        "description": "检查可识别异构体、映射、低使用过滤及离散度",
+        "id": "diagnostics"
+      },
+      {
+        "description": "定量/注释/过滤敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "dtu_effects",
+      "transcript_mapping",
+      "dtu_diagnostics",
+      "dtu_hierarchical_tests"
+    ],
+    "interpretation_limit": "短读长异构体可识别性限制解释。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "translation_efficiency",
+    "label": "配对 Ribo/RNA 翻译效率",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "RiboDiff",
+      "DESeq2 interaction design"
+    ],
+    "decision_fields": [
+      "interaction_estimand",
+      "psite_definition",
+      "matched_samples"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 paired_ribo_rna、psite_qc、replicate_design 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "配对样本、assay×condition 交互；不能直接比较两次显著性或简单比值检验",
+        "id": "design"
+      },
+      {
+        "description": "检查读长、三核苷酸周期、P-site、rRNA、CDS 覆盖和 RNA 匹配",
+        "id": "diagnostics"
+      },
+      {
+        "description": "读长过滤、CDS 范围、低计数及模型敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "translation_interactions",
+      "ribo_rna_pairs",
+      "periodicity_qc",
+      "translation_sensitivity"
+    ],
+    "interpretation_limit": "Ribo 占据不直接等于蛋白生成速率。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "two_sample_mr",
+    "label": "工具变量与两样本 MR 审查",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "TwoSampleMR"
+    ],
+    "decision_fields": [
+      "instrument_selection",
+      "overlap_policy",
+      "pleiotropy_plan"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 instrument_evidence、harmonized_trait_qtl、ancestry_matched_ld 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "预先审相关性、独立性、排除限制、样本重叠、弱工具与祖源",
+        "id": "design"
+      },
+      {
+        "description": "检查 F 统计、回文位点、方向、异质性、多效性及共定位证据",
+        "id": "diagnostics"
+      },
+      {
+        "description": "留一、稳健估计、方向与工具选择敏感性；方法选择取决于工具数",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "mr_estimates",
+      "instrument_audit",
+      "mr_assumption_checks",
+      "mr_sensitivity"
+    ],
+    "interpretation_limit": "多个估计器一致不能证明排除限制成立。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  },
+  {
+    "id": "uorf_translation",
+    "label": "uORF 与候选翻译 ORF",
+    "backend": "existing_server_adapter_required",
+    "method_candidates": [
+      "RiboTaper",
+      "RiboCode"
+    ],
+    "decision_fields": [
+      "orf_universe",
+      "periodicity_rule",
+      "annotation_scope"
+    ],
+    "required_qc": [
+      {
+        "description": "核对 ribo_periodicity、transcript_annotation、start_site_context 的选定来源、尺度、完整分母及版本",
+        "id": "input"
+      },
+      {
+        "description": "固定受检 ORF 集及多重比较；异构体映射和可识别性审查",
+        "id": "design"
+      },
+      {
+        "description": "检查 frame、周期、起止覆盖与重复支持",
+        "id": "diagnostics"
+      },
+      {
+        "description": "注释、ORF边界、读长和周期阈值敏感性",
+        "id": "sensitivity"
+      }
+    ],
+    "required_results": [
+      "candidate_orfs",
+      "orf_periodicity",
+      "orf_mapping",
+      "orf_controls"
+    ],
+    "interpretation_limit": "翻译迹象不证明稳定蛋白或功能。",
+    "acceptance_policy": "Actual result tables/diagnostics plus exact branch/parameter/source/runtime bindings; caller pass flags are insufficient",
+    "scientific_backend_validation": "not_run"
+  }
+]

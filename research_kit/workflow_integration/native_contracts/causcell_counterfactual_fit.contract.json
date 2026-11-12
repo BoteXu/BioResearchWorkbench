@@ -1,0 +1,42 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "causcell_counterfactual_fit",
+  "required_inputs": [
+    "object",
+    "concept_mapping"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "unit_key",
+    "concepts",
+    "causal_dag",
+    "interventions",
+    "expression_layer",
+    "expression_scale",
+    "profile_size",
+    "maximum_dense_expression_entries",
+    "minimum_source_cells",
+    "minimum_units",
+    "training_steps",
+    "checkpoint_every",
+    "diffusion_steps",
+    "learning_rate",
+    "batch_size",
+    "validation_scope"
+  ],
+  "required_output_roles": [
+    "encoded_object",
+    "concept_mapping",
+    "model_checkpoint",
+    "predicted_expression",
+    "prediction_identity",
+    "observed_source_identity",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual exact-source original CausCell observed-data fit and within-vocabulary assumed-DAG intervention. Stable concept coding, preserved cell/gene axes and nonempty sampler batches repair original serialization defects. Both native Original/Generated halves are model outputs; no independent-unit predictive validation or causal identification.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

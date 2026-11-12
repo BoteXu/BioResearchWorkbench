@@ -1,0 +1,142 @@
+{
+  "schema": "native-completion-review/1",
+  "version": "3.4-private-review",
+  "tools": [
+    {
+      "tool": "MAGPIE",
+      "routes": [
+        "magpie_coregister"
+      ],
+      "method_scope_and_difference": "No top-level upstream license located in the reviewed tree; use only an owned checkout with actual permitted-use evidence. No author code is redistributed.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "DIA-NN",
+      "routes": [
+        "diann_quantify"
+      ],
+      "method_scope_and_difference": "Academia limited non-profit edition only; Enterprise excluded. Native binary and its actual license must already be provisioned by owner.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "SIRIUS",
+      "routes": [
+        "sirius_formulas"
+      ],
+      "method_scope_and_difference": "Offline molecular-formula/fragmentation-tree route only; no fingerprint/structure prediction service is called.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "CSI:FingerID",
+      "routes": [
+        "csi_result_import"
+      ],
+      "method_scope_and_difference": "Actual author-result import implemented. Fresh proprietary online prediction remains outside current authorization; no private spectra upload, no claim of an offline CSI algorithm.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "GNPS",
+      "routes": [
+        "gnps_offline_network"
+      ],
+      "method_scope_and_difference": "Actual original legacy Python spectral alignment plus explicit mutual-top-K. This is not the complete GNPS2 FBMN workflow or a structure identification method; no upload.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "DOCKovalent",
+      "routes": [
+        "dockovalent"
+      ],
+      "method_scope_and_difference": "Owner-provisioned licensed DOCKovalent 3.7 plus actual prepared DB2/grids. Not DOCK 3.8 or ordinary Vina. No licensed engine bundled.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "MorphDiff",
+      "routes": [
+        "morphdiff_gene2image",
+        "morphdiff_image2image"
+      ],
+      "method_scope_and_difference": "Correct biomap-research/MorphDiff source, separate five-channel gene-to-image and image-to-image. The pinned native DDIM sampler forces CUDA; an existing server GPU is required, CPU is rejected. Not bowang-lab/MorphoDiff; generated morphology is not measured microscopy.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "PRnet",
+      "routes": [
+        "prnet_predict"
+      ],
+      "method_scope_and_difference": "Native Gaussian PGM inference with actual fixed drug/dose embeddings; no new training, no fabricated chemical embedding or independent-validation claim.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "scDiffusion",
+      "routes": [
+        "scdiffusion_generate"
+      ],
+      "method_scope_and_difference": "EperLuo/scDiffusion latent DDPM/DDIM plus strict autoencoder decode; empty, one- or two-classifier guidance with exact class and noise-schedule binding. Generated class-conditioned expression is not a perturbation effect; gradient interpolation from a real starting cell is a separate unimplemented scope.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "Squidiff",
+      "routes": [
+        "squidiff_predict"
+      ],
+      "method_scope_and_difference": "Native semantic encoder and DDIM with training-only frozen latent direction. Upstream license file contains unresolved merge markers; actual owned-use review required. No fake get_diffused_data noise helper.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "CellNavi",
+      "routes": [
+        "cellnavi_drivers"
+      ],
+      "method_scope_and_difference": "Native finite-tuned driver logits/ranks using exact vocabulary, graph and actual training class prefix. Not expression prediction, calibrated probability or causal driver confirmation.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    },
+    {
+      "tool": "Stack",
+      "routes": [
+        "stack_incontext"
+      ],
+      "method_scope_and_difference": "Native StateICL in-context count prediction. Code and model/output licenses differ; no full-object pickle, missing-gene zero padding or context/target-unit leakage.",
+      "source_review": "REVIEWED_FOR_DECLARED_SCOPE",
+      "native_runtime": "NOT_RUN_THIS_UPGRADE",
+      "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+      "scientific_acceptance": "NOT_ESTABLISHED"
+    }
+  ],
+  "commercial_software_excluded": true,
+  "third_party_code_or_weights_redistributed": false,
+  "public_upload": false
+}

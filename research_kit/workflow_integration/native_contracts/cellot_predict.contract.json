@@ -1,0 +1,31 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cellot_predict",
+  "required_inputs": [
+    "query_controls",
+    "checkpoint",
+    "model_config",
+    "checkpoint_lineage"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "control",
+    "treatment",
+    "representation",
+    "holdout_axis",
+    "batch_size"
+  ],
+  "required_output_roles": [
+    "predicted_expression",
+    "prediction_identity",
+    "prediction_summary",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native gradient ICNN prediction using exact reviewed CellOT source and existing checkpoint; no new CellOT training",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,65 @@
+"""Step 7 — STRING PPI network of the top DE genes + hub ranking."""
+from __future__ import annotations
+import numpy as np, pandas as pd, networkx as nx, requests
+from io import StringIO
+import matplotlib.pyplot as plt
+from matplotlib.colors import TwoSlopeNorm
+import utils
+
+
+def run(cfg, top_n=300, score=400):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    de = pd.read_csv(res / "de_results.csv"); de = de[de["symbol"].notna()].copy()
+    fc = cfg["de"]["fc_threshold"]; fdr = cfg["de"]["fdr_threshold"]
+    cand = de[(de["adj.P.Val"] < fdr) & (de["logFC"].abs() > fc)].sort_values("P.Value").head(top_n)
+    genes = cand["symbol"].astype(str).tolist()
+    print(f"[ppi] querying STRING for {len(genes)} genes")
+    r = requests.post("https://string-db.org/api/tsv/network",
+                      data={"identifiers": "\r".join(genes), "species": 9606,
+                            "required_score": score, "caller_identity": "bulk-rnaseq-pipeline"},
+                      timeout=180)
+    r.raise_for_status()
+    e = pd.read_csv(StringIO(r.text), sep="\t")
+    if not len(e): print("[ppi] no interactions"); return
+    utils.save_table(e, cfg, "ppi_edges.csv")
+    G = nx.Graph()
+    lfc = de.set_index("symbol")["logFC"].to_dict()
+    for _, x in e.iterrows():
+        if x["preferredName_A"] != x["preferredName_B"]:
+            G.add_edge(x["preferredName_A"], x["preferredName_B"], weight=float(x["score"]))
+    G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    print(f"[ppi] {G.number_of_nodes()} nodes / {G.number_of_edges()} edges")
+    deg = pd.Series(dict(G.degree())).sort_values(ascending=False)
+    btw = pd.Series(nx.betweenness_centrality(G))
+    hub = pd.DataFrame({"gene": deg.index, "degree": deg.values,
+                        "betweenness": btw.reindex(deg.index).values})
+    hub["logFC"] = hub["gene"].map(lfc)
+    utils.save_table(hub, cfg, "ppi_hubs.csv")
+
+    pos = nx.spring_layout(G, k=.35, seed=42, iterations=150)
+    fig, ax = plt.subplots(figsize=(10, 8.6))
+    nx.draw_networkx_edges(G, pos, ax=ax,
+                           edge_color="#D5DBE1", width=[1 + 1.2 * G[u][v]["weight"] for u, v in G.edges()], alpha=.5)
+    vmax = float(np.nanmax(np.abs(hub["logFC"])))
+    ax.scatter([pos[n][0] for n in G], [pos[n][1] for n in G],
+               s=[30 + G.degree(n) * 12 for n in G], c=[lfc.get(n, 0) for n in G],
+               cmap="RdBu_r", norm=TwoSlopeNorm(0, -vmax, vmax), edgecolors="white", lw=.4, zorder=3)
+    try: from adjustText import adjust_text
+    except Exception: adjust_text = None
+    texts = [ax.text(pos[n][0], pos[n][1], n, fontsize=8, weight="bold", zorder=5,
+                     bbox=dict(boxstyle="round,pad=.15", fc="white", ec="none", alpha=.8))
+             for n in deg.head(12).index]
+    if adjust_text:
+        adjust_text(texts, x=[pos[n][0] for n in G], y=[pos[n][1] for n in G],
+                    expand=(1.5, 1.8), force_text=.4, arrowprops=dict(arrowstyle="-", color="#999", lw=.6))
+    cb = fig.colorbar(plt.cm.ScalarMappable(norm=TwoSlopeNorm(0, -vmax, vmax), cmap="RdBu_r"), ax=ax, fraction=.03)
+    cb.set_label("log2 fold change")
+    ax.set_title(f"STRING PPI network ({G.number_of_nodes()} nodes, {G.number_of_edges()} edges)",
+                 fontsize=10.5, weight="bold", loc="left")
+    ax.axis("off"); fig.tight_layout(); utils.save_fig(fig, cfg, "F7_ppi_network")
+
+    h = hub.head(20).iloc[::-1]
+    fig, ax = plt.subplots(figsize=(6.4, 6))
+    ax.barh(h["gene"], h["degree"], color=[colors["case"] if v > 0 else colors["control"] for v in h["logFC"]])
+    utils.strip_plot(ax, "Top 20 PPI hub genes", "degree")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F7_ppi_hubs")

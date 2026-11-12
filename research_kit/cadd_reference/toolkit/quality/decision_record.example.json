@@ -1,0 +1,15 @@
+{
+  "gate_id": "Q04",
+  "system_id": "__FILL_SYSTEM_ID__",
+  "status": "pending",
+  "scope": "Chemical identity and state before parameterization",
+  "input_hashes": {},
+  "observations": [],
+  "evidence_files": [],
+  "remaining_uncertainties": [],
+  "changed_parameters": [],
+  "invalidated_downstream_outputs": [],
+  "next_action": "__FILL_REPAIR_OR_PROCEED_ACTION__",
+  "reviewed_by": null,
+  "reviewed_at": null
+}

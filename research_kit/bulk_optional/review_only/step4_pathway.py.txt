@@ -1,0 +1,130 @@
+"""Step 4 — pathway-level structure: clustering by shared genes + crosstalk by activity correlation."""
+from __future__ import annotations
+import numpy as np, pandas as pd, networkx as nx
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, dendrogram
+from scipy.spatial.distance import squareform
+from scipy.stats import pearsonr
+import textwrap, utils
+
+
+def run(cfg):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    ora = res / "enrichment_ora.csv"
+    if not ora.exists():
+        print("[pathway] no enrichment_ora.csv — run step3 first"); return
+    O = pd.read_csv(ora)
+
+    # ---------- A. gene-overlap enrichment map ----------
+    k = O[O["lib"].str.contains("KEGG")].copy()
+    k["nlp"] = -np.log10(k["Adjusted P-value"].astype(float).clip(lower=1e-300))
+    k["genes"] = k["Genes"].fillna("").apply(lambda s: set(str(s).split(";")))
+    up = k[k["dir"] == "Up"].sort_values("Adjusted P-value").head(35)
+    dn = k[k["dir"] == "Down"].sort_values("Adjusted P-value").head(20)
+    sub = pd.concat([up, dn]).drop_duplicates("Term")
+    if len(sub) < 5:
+        print("[pathway] too few KEGG terms for a map"); return
+    clean = lambda t: t.replace(" - Homo sapiens (human)", "").strip()
+    G = nx.Graph()
+    for _, r in sub.iterrows():
+        G.add_node(clean(r["Term"]), genes=r["genes"], nlp=r["nlp"], dir=r["dir"])
+    names = list(G.nodes)
+    OV = np.zeros((len(names), len(names)))
+    for i in range(len(names)):
+        for j in range(i + 1, len(names)):
+            a, b = G.nodes[names[i]]["genes"], G.nodes[names[j]]["genes"]
+            ov = len(a & b) / min(len(a), len(b)) if min(len(a), len(b)) else 0
+            OV[i, j] = OV[j, i] = ov
+            if ov >= 0.25: G.add_edge(names[i], names[j], weight=ov)
+    comms = sorted(nx.community.louvain_communities(G, weight="weight", seed=42, resolution=1.1),
+                   key=len, reverse=True)
+    print(f"[pathway] {len(names)} pathways, {G.number_of_edges()} edges, {len(comms)} clusters")
+    rows = []
+    for i, c in enumerate(comms):
+        cc = sub[sub["Term"].map(clean).isin(c)]
+        rows.append(dict(cluster=f"C{i+1}", n=len(c),
+                         n_up=int((cc["dir"] == "Up").sum()), n_down=int((cc["dir"] == "Down").sum()),
+                         top=" | ".join(clean(t) for t in cc.sort_values("Adjusted P-value").head(3)["Term"])))
+    utils.save_table(pd.DataFrame(rows), cfg, "pathway_clusters.csv")
+
+    pos = nx.spring_layout(G, k=.95, seed=7, iterations=400, weight="weight")
+    nc = {n: i for i, c in enumerate(comms) for n in c}
+    pal = plt.cm.tab10.colors
+    try: from adjustText import adjust_text
+    except Exception: adjust_text = None
+    fig, ax = plt.subplots(figsize=(12.2, 8.8))
+    nx.draw_networkx_edges(G, pos, ax=ax, edge_color="#CFD6DC",
+                           width=[1 + 4 * G[u][v]["weight"] for u, v in G.edges()], alpha=.6)
+    ax.scatter([pos[n][0] for n in names], [pos[n][1] for n in names],
+               s=[60 + len(G.nodes[n]["genes"]) * 16 for n in names],
+               c=[pal[nc[n] % 10] for n in names],
+               edgecolors=[colors["case"] if G.nodes[n]["dir"] == "Up" else colors["control"] for n in names],
+               linewidths=2.2, zorder=3)
+    lab = set()
+    for c in comms:
+        cc = sub[sub["Term"].map(clean).isin(c)].sort_values("Adjusted P-value")
+        if len(cc): lab.add(clean(cc["Term"].iloc[0]))
+    lab |= set(sorted(names, key=lambda x: -len(G.nodes[x]["genes"]))[:8])
+    texts = [ax.text(pos[n][0], pos[n][1], n[:40], fontsize=7.6, weight="bold", zorder=5,
+                     bbox=dict(boxstyle="round,pad=.18", fc="white", ec="#DDD", alpha=.88)) for n in lab]
+    if adjust_text:                                 # gotchas §7: keep dense network labels readable
+        adjust_text(texts, x=[pos[n][0] for n in names], y=[pos[n][1] for n in names],
+                    expand=(1.5, 1.9), force_text=.4,
+                    arrowprops=dict(arrowstyle="-", color="#999", lw=.6))
+    ax.margins(.08); ax.axis("off")
+    ax.set_title("Pathway clustering (enrichment map) — node = pathway, edge = shared genes",
+                 fontsize=10.5, weight="bold", loc="left")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F4_pathway_map")
+
+    # ---------- B. crosstalk by activity correlation ----------
+    gs_f = res / "gsva_scores.csv"
+    if not gs_f.exists(): return
+    gs = pd.read_csv(gs_f, index_col=0)
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    gs = gs[[c for c in gs.columns if c in samples]]
+    eff = pd.Series({p: gs.loc[p, np.array(samples)[y]].mean() - gs.loc[p, np.array(samples)[~y]].mean()
+                     for p in gs.index})
+    C = np.corrcoef(gs.values); P = list(gs.index)
+    Gc = nx.Graph()
+    for p in P: Gc.add_node(p, effect=eff[p])
+    for i in range(len(P)):
+        for j in range(i + 1, len(P)):
+            if abs(C[i, j]) >= .6: Gc.add_edge(P[i], P[j], weight=abs(C[i, j]), sign=np.sign(C[i, j]))
+    gc = sorted(nx.community.louvain_communities(Gc, weight="weight", seed=42), key=len, reverse=True)
+    print(f"[crosstalk] {Gc.number_of_nodes()} nodes, {Gc.number_of_edges()} edges, {len(gc)} modules")
+    utils.save_table(pd.DataFrame([dict(module=f"M{i+1}", n=len(c), mean_effect=round(float(eff[list(c)].mean()), 3),
+                                        up=" | ".join(eff[list(c)].sort_values(ascending=False).head(3).index),
+                                        down=" | ".join(eff[list(c)].sort_values().head(3).index))
+                                   for i, c in enumerate(gc)]), cfg, "pathway_crosstalk_modules.csv")
+    pos2 = nx.spring_layout(Gc, k=.9, seed=3, iterations=300, weight="weight")
+    ncc = {n: i for i, c in enumerate(gc) for n in c}
+    fig, ax = plt.subplots(figsize=(12.6, 9.2))
+    nx.draw_networkx_edges(Gc, pos2, ax=ax,
+                           edge_color=[colors["case"] if Gc[u][v]["sign"] > 0 else colors["control"] for u, v in Gc.edges()],
+                           width=[1 + 4 * Gc[u][v]["weight"] for u, v in Gc.edges()], alpha=.5)
+    vmax = float(np.abs(eff.values).max())
+    ax.scatter([pos2[n][0] for n in Gc.nodes], [pos2[n][1] for n in Gc.nodes],
+               s=[120 + 700 * abs(eff[n]) / max(vmax, 1e-9) for n in Gc.nodes],
+               c=[pal[ncc[n] % 10] for n in Gc.nodes], edgecolors="#333", linewidths=1.2, zorder=3)
+    texts = [ax.text(pos2[n][0], pos2[n][1], n[:34], fontsize=7, zorder=5,
+                     bbox=dict(boxstyle="round,pad=.15", fc="white", ec="#DDD", alpha=.86)) for n in Gc.nodes]
+    if adjust_text:
+        adjust_text(texts, x=[pos2[n][0] for n in Gc.nodes], y=[pos2[n][1] for n in Gc.nodes],
+                    expand=(1.4, 1.8), force_text=.35, arrowprops=dict(arrowstyle="-", color="#999", lw=.6))
+    ax.margins(.1); ax.axis("off")
+    ax.set_title("Pathway–pathway crosstalk (activity correlation |r|≥0.6)", fontsize=10.5, weight="bold", loc="left")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F4_pathway_crosstalk")
+
+    D = 1 - np.abs(C); np.fill_diagonal(D, 0)
+    Z = linkage(squareform(D, checks=False), "average")
+    wrap = lambda t, w: "\n".join(textwrap.wrap(t, w))
+    fig, axes = plt.subplots(1, 2, figsize=(18, 10), gridspec_kw={"width_ratios": [1, 1.05]})
+    dn = dendrogram(Z, labels=[wrap(p, 30) for p in P], orientation="left", ax=axes[0],
+                    color_threshold=.55, above_threshold_color="#AAA")
+    axes[0].tick_params(labelsize=7)
+    o = dn["leaves"]
+    im = axes[1].imshow(C[np.ix_(o, o)], cmap="RdBu_r", vmin=-1, vmax=1, aspect="auto")
+    axes[1].set_xticks(range(len(P))); axes[1].set_xticklabels([wrap(P[i], 22) for i in o], rotation=90, fontsize=6.5)
+    axes[1].set_yticks(range(len(P))); axes[1].set_yticklabels([wrap(P[i], 30) for i in o], fontsize=6.5)
+    fig.colorbar(im, ax=axes[1], fraction=.028, label="Pearson r")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F4_pathway_dendrogram")

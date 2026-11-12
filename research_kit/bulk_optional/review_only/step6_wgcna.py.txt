@@ -1,0 +1,102 @@
+"""Step 6 — WGCNA co-expression modules (official PyWGCNA package).
+
+TWO hard requirements (references/gotchas.md §1, §2):
+  * ONE etiology only  — mixing diseases destroys the scale-free fit
+  * geneExp must be SAMPLES x GENES — otherwise PyWGCNA clusters the samples
+"""
+from __future__ import annotations
+import shutil
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import PyWGCNA
+import utils
+
+
+def run(cfg):
+    colors = utils.theme(cfg)
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    w = cfg["wgcna"]; out = cfg["_outdir"]; res = out / "results"
+
+    # ---- genes x samples -> top variable -> transpose to samples x genes ----
+    top = expr.var(axis=1).sort_values(ascending=False).head(w["n_top_genes"]).index
+    geneExp = expr.loc[top].T                      # <-- SAMPLES x GENES (critical)
+    print(f"[wgcna] geneExp {geneExp.shape} (samples x genes)")
+
+    traits = pd.DataFrame(index=geneExp.index)
+    traits["Case"] = y.astype(bool)
+    for c in meta.columns:
+        if c in cfg.get("covariates", []):
+            v = meta[c]
+            traits[c] = (v.astype(bool) if v.dtype == object and v.nunique() == 2
+                         else pd.to_numeric(v, errors="coerce"))
+    traits = traits.drop(columns=[c for c in traits.columns if traits[c].isna().all()])
+    print(f"[wgcna] traits: {list(traits.columns)}")
+
+    wd = out / "wgcna_run"
+    shutil.rmtree(wd, ignore_errors=True); wd.mkdir(parents=True)
+    traits.to_csv(wd / "sampleInfo.csv")
+
+    pw = PyWGCNA.WGCNA(name=cfg["project"], species="Homo sapiens", geneExp=geneExp,
+                       outputPath=str(wd), networkType=w["network_type"], TOMType=w["tom_type"],
+                       minModuleSize=w["min_module_size"], RsquaredCut=w["rsquared_cut"])
+    pw.updateSampleInfo(path=str(wd / "sampleInfo.csv"))
+    pw.preprocess()
+    pw.findModules()
+    pw.analyseWGCNA()
+
+    mods = pw.datExpr.var
+    mods.to_csv(res / "wgcna_modules.csv")
+    names = [m for m in mods["moduleColors"].dropna().unique() if m != "grey"]
+    print(f"[wgcna] {len(names)} modules: {pd.Series(mods['moduleColors']).value_counts().to_dict()}")
+
+    # ---- module catalogue: size, case association, top hubs ----
+    mapping = utils.attach_symbols(cfg, expr)
+    lfc = pd.read_csv(res / "de_results.csv").set_index("gene_id")["logFC"].to_dict()
+    rows = []
+    for m in names:
+        g = mods.index[mods["moduleColors"] == m]
+        if len(g) < 10: continue
+        sub = expr.loc[g, samples]
+        Z = ((sub.T - sub.T.mean()) / sub.T.std()).fillna(0).values
+        u, s_, vt = np.linalg.svd(Z - Z.mean(0), full_matrices=False)
+        me = u[:, 0] * s_[0]
+        if np.corrcoef(me, Z.mean(1))[0, 1] < 0: me = -me
+        r = float(np.corrcoef(me, y.astype(float))[0, 1])
+        kme = pd.Series({gid: float(np.corrcoef(Z[i], me)[0, 1]) for i, gid in enumerate(g)})
+        kme = kme.sort_values(ascending=False)
+        hubs = " | ".join(f"{mapping.get(gid, gid)}({lfc.get(gid, np.nan):+.1f})"
+                          for gid in kme.head(5).index)
+        rows.append(dict(module=m, n_genes=len(g), case_r=round(r, 2), top_hubs=hubs))
+        pd.DataFrame({"gene_id": kme.index, "symbol": [mapping.get(g) for g in kme.index],
+                      "kME": kme.values, "logFC": [lfc.get(g) for g in kme.index]}
+                     ).to_csv(res / f"wgcna_module_{m}_hubs.csv", index=False)
+        pd.Series(me, index=samples, name=m).to_csv(res / f"wgcna_ME_{m}.csv")
+    cat = pd.DataFrame(rows).sort_values("case_r")
+    utils.save_table(cat, cfg, "wgcna_catalogue.csv")
+
+    # ---- figure: module catalogue + eigengene heatmap ----
+    fig, ax = plt.subplots(figsize=(11, max(3.6, len(cat) * .55)))
+    ax.barh(cat["module"], cat["case_r"],
+            color=[colors["case"] if v > 0 else colors["control"] for v in cat["case_r"]])
+    for i, r_ in enumerate(cat.itertuples()):
+        ax.text(r_.case_r + (.015 if r_.case_r > 0 else -.015), i,
+                f"n={r_.n_genes}  {r_.top_hubs[:52]}", va="center", fontsize=7.5,
+                ha="left" if r_.case_r > 0 else "right")
+    ax.axvline(0, color="#666", lw=.9); ax.set_xlim(-0.95, 1.15)
+    utils.strip_plot(ax, "WGCNA modules — size, case association and top hubs", "module eigengene vs case (r)")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F6_wgcna_modules")
+
+    ME = pd.DataFrame({m: pd.read_csv(res / f"wgcna_ME_{m}.csv", index_col=0).iloc[:, 0]
+                       for m in cat["module"]})
+    so = list(np.array(samples)[~y]) + list(np.array(samples)[y])
+    Z = ((ME.T - ME.T.mean(1).values[:, None]) / ME.T.std(1).values[:, None])
+    fig, ax = plt.subplots(figsize=(12, max(3.2, len(cat) * .42)))
+    im = ax.imshow(Z[cat["module"]].values[:, [samples.index(s) for s in so]],
+                   cmap="RdBu_r", vmin=-2.5, vmax=2.5, aspect="auto")
+    ax.set_yticks(range(len(cat)))
+    ax.set_yticklabels([f"{m} ({c:+0.2f})" for m, c in zip(cat["module"], cat["case_r"])], fontsize=8)
+    ax.set_xticks([]); ax.set_title(f"Module eigengene activity (left {cfg['control_label']}, "
+                                    f"right {cfg['case_label']})", fontsize=10.5, weight="bold", loc="left")
+    fig.colorbar(im, ax=ax, fraction=.03, label="ME z-score")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F6_wgcna_eigengenes")

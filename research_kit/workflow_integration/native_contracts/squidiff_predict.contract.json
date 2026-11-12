@@ -1,0 +1,62 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "features",
+    "query_expression",
+    "query_metadata",
+    "latent_direction"
+  ],
+  "required_parameters": [
+    "diffusion_config",
+    "direction_scale",
+    "batch_size",
+    "maximum_cases",
+    "accelerator",
+    "clip_denoised",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "prediction_matrix",
+    "latent_representation",
+    "prediction_identity"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "model_predicted_expression_assumed_direction",
+  "schema": "native-completion-contract/1",
+  "tool": "Squidiff",
+  "source_commit": [
+    "siyuh/Squidiff",
+    "abdfc27d84947dcccd745d1067c0840a41d32eb8"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Native semantic encoder and DDIM with training-only frozen latent direction. Upstream license file contains unresolved merge markers; actual owned-use review required. No fake get_diffused_data noise helper.",
+  "figure_views": [
+    "matrix",
+    "scatter"
+  ]
+}

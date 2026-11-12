@@ -1,0 +1,33 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "nestedcv_glmnet",
+  "required_inputs": [
+    "features",
+    "metadata",
+    "folds",
+    "tuning_grid"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "outcome_key",
+    "task",
+    "class_order",
+    "positive_class",
+    "workers"
+  ],
+  "required_output_roles": [
+    "oof_predictions",
+    "validation_metrics",
+    "split_identity",
+    "fold_provenance",
+    "model_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual R nestedcv/caret glmnet, one row per real independent unit, exact outer and nested inner fold assignments, fold-local preprocessing, explicit second-level probability event and no full-data final fit or global supervised filter.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

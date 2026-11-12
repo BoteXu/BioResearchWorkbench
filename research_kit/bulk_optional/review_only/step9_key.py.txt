@@ -1,0 +1,83 @@
+"""Step 9 — key-gene union -> co-expression clustering -> core programs + per-program enrichment."""
+from __future__ import annotations
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, fcluster
+from scipy.spatial.distance import squareform
+import gseapy, utils
+
+
+def run(cfg, k_programs=4, per_source=20):
+    colors = utils.theme(cfg); res = cfg["_outdir"] / "results"
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    mapping = utils.attach_symbols(cfg, expr); s2e = utils.symbol_lookup(mapping)
+    de = pd.read_csv(res / "de_results.csv")
+    lfc = de.set_index("gene_id")["logFC"].to_dict()
+
+    # ---- union of the screening methods available so far ----
+    src = {}
+    def add(gs, tag):
+        for g in gs:
+            if isinstance(g, str) and g: src.setdefault(g, []).append(tag)
+    add(de[de["adj.P.Val"] < cfg["de"]["fdr_threshold"]].sort_values("P.Value").head(100)["symbol"].dropna(), "DE")
+    for f, col in ((res / "shap_importance.csv", "gene"), (res / "ppi_hubs.csv", "gene"),
+                   (res / "wgcna_catalogue.csv", None)):
+        if f.exists():
+            d = pd.read_csv(f)
+            if col and col in d.columns:
+                add(d[col].head(per_source), f.stem.split("_")[0].upper())
+    for f in res.glob("wgcna_module_*_hubs.csv"):
+        d = pd.read_csv(f)
+        if "symbol" in d.columns: add(d["symbol"].dropna().head(10), "WGCNA")
+    genes = [g for g in src if g in s2e and s2e[g] in expr.columns]
+    n_multi = sum(1 for g in genes if len(set(src[g])) >= 2)
+    print(f"[key] {len(genes)} key genes ({n_multi} nominated by >=2 methods)")
+    if len(genes) < 8: print("[key] too few — run de/shap/ppi/wgcna first"); return
+
+    V = expr.loc[[s2e[g] for g in genes], samples]; V.index = genes
+    Vz = ((V.T - V.T.mean()) / V.T.std()).T.values
+    C = np.corrcoef(Vz); np.fill_diagonal(C, 1)
+    Z = linkage(squareform(1 - C, checks=False), "average")
+    cl = pd.Series(fcluster(Z, k_programs, criterion="maxclust"), index=genes)
+    strength = {c: np.mean([abs(lfc.get(s2e[g], 0)) for g in cl[cl == c].index]) for c in cl.unique()}
+    cl = cl.map({c: i + 1 for i, c in enumerate(sorted(strength, key=lambda c: -strength[c]))})
+
+    # ---- per-program enrichment ----
+    sets = utils.get_gene_sets(cfg, "GO_Biological_Process_2023")
+    ks = utils.get_gene_sets(cfg, "KEGG_2021_Human")
+    bg = len(set(de["symbol"].dropna().astype(str)))
+    prog_rows, enr_rows = [], []
+    for c in sorted(cl.unique()):
+        gl = cl[cl == c].index.tolist()
+        mfc = float(np.mean([lfc.get(s2e[g], np.nan) for g in gl]))
+        best = {}
+        for tag, lib in (("GO", sets), ("KEGG", ks)):
+            if len(gl) < 3: continue
+            r = gseapy.enrich(gene_list=gl, gene_sets=lib, background=bg, outdir=None, verbose=False).results
+            if len(r):
+                for _, x in r.sort_values("Adjusted P-value").head(5).iterrows():
+                    enr_rows.append(dict(cluster=f"P{c}", lib=tag, term=x["Term"], overlap=x["Overlap"],
+                                         padj=float(x["Adjusted P-value"]), genes=x["Genes"]))
+                best[tag] = r.sort_values("Adjusted P-value").iloc[0]["Term"]
+        prog_rows.append(dict(program=f"P{c}", n_genes=len(gl), mean_logFC=round(mfc, 2),
+                              top_GO=best.get("GO", "-"), top_KEGG=best.get("KEGG", "-"),
+                              genes=" | ".join(gl)))
+    prog = pd.DataFrame(prog_rows); utils.save_table(prog, cfg, "keygene_programs.csv")
+    if enr_rows: utils.save_table(pd.DataFrame(enr_rows), cfg, "keygene_enrichment.csv")
+    print("\n" + prog[["program", "n_genes", "mean_logFC", "top_GO"]].to_string(index=False))
+
+    pal = [colors["case"], colors["control"], colors["accent"], "#55A868", "#8172B3"]
+    order = []
+    for c in sorted(cl.unique()):
+        sub = cl[cl == c].index
+        order += pd.Series({g: abs(lfc.get(s2e[g], 0)) for g in sub}).sort_values(ascending=False).index.tolist()
+    M = Vz[[genes.index(g) for g in order]]
+    fig, ax = plt.subplots(figsize=(11, max(8, len(order) * .22)))
+    im = ax.imshow(M, cmap="RdBu_r", vmin=-2.5, vmax=2.5, aspect="auto")
+    ax.set_yticks(range(len(order))); ax.set_yticklabels(order, fontsize=6)
+    ax.set_xticks([]); ax.set_title("Key-gene co-expression clustering (blocks = core programs)",
+                                    fontsize=10.5, weight="bold", loc="left")
+    for c in np.cumsum([int((cl == x).sum()) for x in sorted(cl.unique())])[:-1]:
+        ax.axhline(c - .5, color="#111", lw=1.6)
+    fig.colorbar(im, ax=ax, fraction=.03, label="Pearson r")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F9_keygene_clusters")
+    prog.to_csv(res / "keygene_programs.csv", index=False)

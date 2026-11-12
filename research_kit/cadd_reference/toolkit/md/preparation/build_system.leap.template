@@ -1,0 +1,29 @@
+# Illustrative noncovalent soluble-protein/ligand profile only.
+# Review loading order and model compatibility. No ligands? Remove BOTH LIG-loading lines.
+source leaprc.protein.ff14SB
+source leaprc.gaff2
+source leaprc.water.tip3p
+
+LIG = loadmol2 ligand_gaff2.mol2
+loadamberparams ligand_gaff2.frcmod
+sys = loadpdb complex_md.pdb
+
+# Add only explicitly reviewed nonstandard bonds before this check.
+check sys
+charge sys
+saveamberparm sys dry.prmtop dry.rst7
+savepdb sys dry.pdb
+
+solvateOct sys TIP3PBOX 12.0
+check sys
+saveamberparm sys solvated_before_ions.prmtop solvated_before_ions.rst7
+
+# Replace this whole line with reviewed positive-count addIonsRand commands, or delete it when no ions are to be added.
+__ION_COMMANDS__
+
+check sys
+charge sys
+saveamberparm sys system.prmtop system.rst7
+savepdb sys system.pdb
+quit
+

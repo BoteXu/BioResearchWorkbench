@@ -1,0 +1,7 @@
+{
+  "bridge_root": null,
+  "instructions": "Copy to ignored deployment.local.json and select an owned existing bridge, or set BIORESEARCH_BRIDGE_ROOT. Never commit the selected local path.",
+  "public_upload": false,
+  "local_scientific_execution": false,
+  "automatic_server_dispatch": false
+}

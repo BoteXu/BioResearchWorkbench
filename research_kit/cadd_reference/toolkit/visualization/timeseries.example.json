@@ -1,0 +1,8 @@
+{
+  "title": "Per-replicate ligand pose RMSD",
+  "metric": "Ligand pose RMSD",
+  "unit": "angstrom",
+  "time_unit": "ns",
+  "selection_definition": "__FILL_RECEPTOR_FIT_AND_LIGAND_MEASUREMENT_SELECTION__",
+  "records": []
+}

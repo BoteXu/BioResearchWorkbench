@@ -1,0 +1,29 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "monocle3_trajectory",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "rscript",
+    "unit_key",
+    "knn",
+    "resolution",
+    "root_cells",
+    "direction_evidence",
+    "close_loop",
+    "minimal_branch_len"
+  ],
+  "required_output_roles": [
+    "pseudotime",
+    "principal_graph",
+    "processed_object",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Monocle3 on actual reviewed stored UMAP. Not Monocle 2014, Monocle2 DDRTree or Slingshot",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

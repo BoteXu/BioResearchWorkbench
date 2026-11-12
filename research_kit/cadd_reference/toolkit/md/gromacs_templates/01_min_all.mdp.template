@@ -1,0 +1,23 @@
+; 01_min_all - illustrative soluble-system profile, not engine-tested
+integrator = steep
+nsteps = 10000
+emtol = 500
+emstep = 0.01
+constraints = none
+nstlist = 1
+nstlog = 100
+nstenergy = 100
+cutoff-scheme = Verlet
+verlet-buffer-tolerance = 0.005
+coulombtype = PME
+coulomb-modifier = None
+rcoulomb = 1.0
+vdwtype = Cut-off
+vdw-modifier = None
+rvdw = 1.0
+DispCorr = EnerPres
+fourierspacing = 0.12
+pme-order = 4
+ewald-rtol = 1e-5
+pbc = xyz
+

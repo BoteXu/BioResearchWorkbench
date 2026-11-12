@@ -1,0 +1,118 @@
+{
+  "version": "3.1-private",
+  "review_scope": "targeted scientific and engineering supplement; original sources preserved; no engine execution",
+  "modules": [
+    {
+      "id": "I29", "chapter": 73, "title": "tREMD 与 REST2 的协议及交换谱系",
+      "trigger": "普通 MD 对目标状态覆盖不足，且项目能承担多状态联合采样及专用方法验证",
+      "inputs": ["replica_protocol", "state_table", "hot_region_atom_mapping", "unscaled_reference", "engine_capability_receipts"],
+      "outputs": ["protocol_review", "exchange_counters", "walker_state_history", "reference_ensemble_summary", "mixing_diagnostics"],
+      "steps": [
+        "先决定采样的是温度还是 Hamiltonian。tREMD 使用各状态实际热浴温度；本节多拓扑 REST2 路线的实际热浴维持参考温度，effective temperature 是缩放标签，不能再把全部热浴同时升到该标签温度。记录系综、压力项、约束/自由度、原子顺序及交换实现；不同体系不能仅因原子数相同就交换。[N01、N02]",
+        "REST2 区分 hot–hot、hot–cold 与 cold–cold 相互作用。经典缩放记为 λ、√λ 与 1，其中 λ=Tref/Teff；实际工具对哪些项缩放必须逐项核实。PLUMED partial_tempering 的具体实现有力场依赖，不能把理想分区公式当作全部键角、CMAP 或特殊项都已自动正确处理的证明。[N02、N03]",
+        "按精确原子映射标记 hot 区，保留共价边界、配体、辅因子、金属和周期排除项的决定。使用展开拓扑；先比较 scale=1 与未缩放参考，再用受控缩放核对预期项及未缩放项。保存分项能量/力与工具版本；发现不支持的项时返回主引擎或专用已验证适配，不删除物理项换取运行成功。",
+        "用试跑能量分布、实际交换日志和主要构象观测量调整状态梯度与交换间隔。相邻接受率、端到端往返及 state 驻留共同检查，没有适用所有体系的固定接受率或往返次数。还要核对构象盆地是否真正互通；温度标签往返不能代替构象混合。",
+        "分别保留连续 walker 与固定 thermodynamic state 的轨迹/时间轴；交换会改变两种索引的对应关系。目标态统计使用目标热力学态或合法重加权；状态轨迹不能当无偏连续动力学轨迹用于普通速率推断。相互交换的 replicas 不是额外独立重复，独立启动的完整交换批次另记 campaign_id。",
+        "每次恢复核对整组检查点、相同交换步/状态指派、每状态拓扑及共同协议版本。单个状态落后或丢失时不能无记录拼接；保留恢复分支。资源按状态数×完整批次数估算，同时记录实际 MPI/GPU 分配和队列回执；本模板只规划，不启动 replica exchange。"
+      ],
+      "acceptance": "参考缩放和状态映射通过服务器核查，交换与构象混合诊断完整，目标态统计和恢复谱系可追溯；否则 pending 或 restricted，不凭交换率宣布收敛。",
+      "figures": ["walker–state 轨迹及每状态驻留", "邻接交换计数与构象状态覆盖并列", "目标态观测量按独立 campaign 展示"],
+      "recompute_when": ["hot 区、缩放项、梯度、交换算法或状态拓扑改变"]
+    },
+    {
+      "id": "I30", "chapter": 74, "title": "跨引擎资格矩阵与可审计的转换试验",
+      "trigger": "将 Amber 模型转换到 GROMACS，或升级转换器/力场/关键求解设置",
+      "inputs": ["source_and_target_models", "exact_atom_map", "parameter_manifest", "representative_configurations", "tolerance_plan"],
+      "outputs": ["conversion_capability_matrix", "component_energy_force_report", "restraint_displacement_check", "short_run_receipts", "adoption_scope"],
+      "steps": [
+        "本模块深化第 23 章，保持其 836.8 位置限制换算及逐项比较原则。把资格限定到精确的引擎版本/构建、转换器、力场文件、溶剂/离子、特殊成分和所用功能。工具成功读写 topology 只证明接口的一部分，不证明它保留了全部势函数。[N04]",
+        "列出原子映射和所有 include/参数文件及宏，逐项登记 proper/improper、1–4 排除与缩放、LJ 组合规则、CMAP、虚拟位点、质量重分配、约束、金属和跨残基连接。转换后 moleculetype 划分与原子顺序要回到坐标逐项核对，不能为方便合并而重排后失去对应。",
+        "同一坐标/盒和相容求解精度下，按受控试验分离键合、非键合、偏置与参考缩放；报告各分项及逐原子力差。去掉虚拟位点或约束来强行比对会改变模型；力比较应采用方法规定的可比表示。GRO 舍入误差、势零点与真实力差分别解释，不用大量水的总能百分比掩盖局部错误。",
+        "原文已说明位置限制的势函数差异。本版把已知位移试验列为单独验收记录：相同原子、参考点和方向，在统一单位下检查单项能量与力；NPT 参考缩放/virial 作为另一问题核对。该项通过不表示其他约束或拉伸势也可套用同一系数。",
+        "短程数值/积分检查与系综性质检查分开。匹配物理设置后可按项目设计检查适合的能量/温度/密度和局部观测量；步长与约束方案的敏感性有单独记录。长期坐标分离不能单独判转换失败，但温控、压力耦合或 Hamiltonian 不同也不能仅用混沌解释。",
+        "容差在看目标结果前按数值精度、代表构型和关键化学项定义，保留失败原子及未支持项。SciSpace 检索到的最新 ff14SB/ff19SB 移植预印本只作候选线索；本轮未完整核验其全部实现与服务器版本，不以检索摘要代替移植验收。升级后仅复用资格矩阵明确覆盖的路线。"
+      ],
+      "acceptance": "接口、参数语义、静态能量/力与适用的短程试验分别有真实记录；任何一层未验收均明确，不设通用总能百分比阈值。",
+      "figures": ["参数能力与未支持项矩阵", "分项误差与高差原子结构定位", "短程诊断及独立运行观测量对照"],
+      "recompute_when": ["引擎、转换器、参数、宏、特殊组分或参考缩放改变"]
+    },
+    {
+      "id": "I31", "chapter": 75, "title": "化学微态、标准态与自由能账本",
+      "trigger": "解释 RBFE/ABFE 或需要连接多化学状态与实验亲和力",
+      "inputs": ["defined_binding_process", "chemical_state_registry", "signed_cycle_ledger", "lambda_data_manifest", "correction_policy"],
+      "outputs": ["signed_thermodynamic_ledger", "state_coverage_review", "correction_evidence", "network_uncertainty", "comparison_scope"],
+      "steps": [
+        "保留 I13 已有的净电荷与约束要求，本模块增加逐项账本。每项写 quantity_id、起/终状态、符号、原生/报告单位、温度、标准浓度、化学态、run 与来源哈希；区分计算得到、解析修正、经验假设及未评估。没有值不填零，not_applicable 需要理由。[N05]",
+        "RBFE 保持 ΔΔG(B−A)=ΔGbind(B)−ΔGbind(A) 的方向，结合态和溶液态变换的账本方向一一对应。ABFE 将约束添加/释放、结合态与溶液态去耦、标准态、对称性及所需电荷修正分别列出，并注明实际是否已经由软件包含；不能重复添加同一修正。",
+        "多质子化、互变异构体、结合模式和受体构象分清可互变微态与不同化学实体。若组合状态，先定义 pH/质子库、游离态权重、结合过程和枚举是否互斥/完整；以适合该热力学定义的配分或结合多项式处理。不能把 ΔG 直接作算术平均，也不能用 Vina 分数作 Boltzmann 权重。未知微态权重保留为模型敏感性，不伪造总体亲和力。",
+        "保留每条腿每个 λ 的采样/评估态、能量或导数轴、单位及温度。u_kln/u_nk 等数据命名本身不证明维度正确；需要建立样本—采样态—能量评估态映射，并记录去相关和排除区间。完整数据缺失时不得假装可重新运行 MBAR 或重加权。",
+        "把估计器内部误差、独立完整运行差异和模型敏感性分开。网络共享节点/轨迹或联合估计产生的协方差需说明；闭环残差的误差不能无条件把相关边当独立平方求和。小闭环误差不排除共同偏差，少数已测化合物的高相关不保证对新系列准确。",
+        "与实验比较时保留 Kd/Ki/IC50 类型、构建体、温度、盐/pH、检测误差及删失界限。计算合格状态、当前数据的预测准确性及对新候选的应用资格分开；只合成/测试预测最优分子时，不能用它们估计全候选库的无偏准确性。[N06]"
+      ],
+      "acceptance": "所有必需项有来源与符号，适用修正无遗漏/重复，采样和状态定义明确；缺项仅能给限定状态/模型的结果，不转为完整标准亲和力。",
+      "figures": ["带方向的热力学循环与逐项账本", "λ 重叠、采样支持及独立运行差异", "微态/修正敏感性和实验对照分层"],
+      "recompute_when": ["化学态、标准态、修正、锚点、λ 方案或实验比较集合改变"]
+    },
+    {
+      "id": "I32", "chapter": 76, "title": "解离事件、删失与动力学推断资格",
+      "trigger": "拟报告寿命、停留时间、转变率或用未解离轨迹比较候选",
+      "inputs": ["kinetic_state_definitions", "trajectory_and_campaign_lineage", "event_table", "censoring_policy", "kinetic_method_assumptions"],
+      "outputs": ["event_and_risk_set_audit", "censoring_summary", "rate_inference_scope", "recrossing_sensitivity", "unsupported_claims"],
+      "steps": [
+        "本模块落实 I14 的事件要求。先冻结进入/离开状态、核心集合、持续判定或回穿政策、起始分布与保存分辨率；定义时间原点，区分从人为 docked pose 出发的首次离开与平衡条件下的解离过程。两者不自动具有同一速率解释。",
+        "逐轨迹/独立启动记录 event_id、起点、是否发生目标事件、事件时刻或区间、观察终点、右/左/区间删失及原因。作业失败、轨迹丢失和按行为提前停算可能形成信息性删失，不按行政截尾自动处理。多段接续先还原同一运行，不能制造新的独立生存对象。",
+        "不对多个分子复用同一水 ID 或对回穿逐帧计成独立事件。方法允许多个事件时，交代重返后的再初始化、事件依赖和真实风险时间；候选层、独立运行层及同一运行中的事件层分别保留。输出间隔限制事件时间精度，不能报告比保存分辨率更精细的寿命。",
+        "经验生存图同时显示风险集、事件数、删失和观察窗口；未观察到离开只表示当前模型/起点/窗口的观察限制。若提出区间或速率，说明估计器、初始分布、平稳性/无记忆或其他模型假设及小事件数限制，不能自动把轨迹长度当作寿命或将零事件当作零速率。",
+        "对 metadynamics、加速动力学或交换轨迹，先判断是否有合法的动力学恢复方法及其适用条件。普通平衡重加权不恢复动力学；状态-demultiplexed REMD 的交换跳变不适用普通无偏转变计数。特殊速率法需专门的偏置、过渡态、统计分布和独立验证，不从模拟加速倍数直接换算实验分钟。",
+        "预先记录审查点、最大预算和停止规则，保留每次决定。增加无事件轨迹、延长相同运行与增加有信息的初态并非同一操作。正式顺序推断需匹配设计；探索性事件分析以效应及限制报告，不反复试定义直到产生显著候选差异。[N07]"
+      ],
+      "acceptance": "事件/删失表与来源一致，风险时间和依赖可重建，方法假设可辩护；无足够事件或合法时间恢复时不报告精确总体速率。",
+      "figures": ["事件/删失时间线及风险集", "不同状态定义与回穿规则敏感性", "独立启动和初始模型分层的事件摘要"],
+      "recompute_when": ["状态定义、时间原点、输出分辨率、删失或动力学恢复方法改变"]
+    },
+    {
+      "id": "I33", "chapter": 77, "title": "对接验证的位姿、检索与前瞻分层",
+      "trigger": "选择新对接/重评分方案或准备把候选排序用于后续验证",
+      "inputs": ["chemical_state_and_atom_mapping", "benchmark_split", "pose_validation_rules", "complete_campaign_denominator", "score_domain"],
+      "outputs": ["pose_validity_by_reason", "redocking_crossdocking_summary", "ranking_and_budget_evaluation", "failure_denominator", "prospective_scope"],
+      "steps": [
+        "把三件事分开：重对接能否恢复已知姿势，cross-docking/新构象上的适用性，以及库排序能否找回真实可比较活性。已知晶体配体重对接通过并不验证任意新骨架，更不验证真实亲和力；有些项目没有对应晶体参考，应明确验证范围而不虚构对照。",
+        "先核对分子图、立体、质子化和原子映射，再评估合理几何、碰撞、环/扭转和位点覆盖。PoseBusters 的化学/物理检查可提供一组检查，需保留具体失败原因及目标系统适用性；通过检查不等于该位姿真实结合。[N08]",
+        "对称性校正 RMSD 的原子等价集合必须保留键图和立体化学，采用同一受体对齐与明确比较原子。局部极小化可评估局部松弛，但松弛前后结果分别保存，不能把严重错误姿势经改变原子映射后伪装为成功重对接。",
+        "筛选评价保留所有预期 parent、state、receptor 和技术 seed 的分母，失败/未运行/无合法输出不当作实测阴性。受体集合和状态聚合先冻结，再在独立母体/化学系列层报告。不同评分域不相加；不能事后按最有利状态挑分数，却不对照同样状态枚举策略。",
+        "有标签时评价固定预算下的实测命中、早期富集和恰当总体指标，区分真实实验阴性与人工 decoy。开发/方法挑选和最后检验分离；来源、骨架、时间和相似性泄漏按未来用途审查。全套方法都在同一个小基准上调到最好后，该基准不再是独立验证。[N06]",
+        "下一轮候选名单带数据截止时间、理由、未解决问题和选择规则。技术失败保留，后续实验标签按新 measurement_id 回流，不把 MD 稳定或端点能量回填为实验活性。预算可优先支持少量有区分力的对照/替代模型，而非为所有高分姿势机械增加 MD。"
+      ],
+      "acceptance": "位姿、检索与前瞻用途分别有证据；比较域、标签、分母及失败完整，不能用单一低 RMSD 或更负分数替代全链路验收。",
+      "figures": ["位姿物理检查和恢复率分层", "固定预算累计实测命中与库覆盖", "母体/状态/受体/失败的完整分流"],
+      "recompute_when": ["准备、受体、评分域、聚合、验证标签或选择规则改变"]
+    },
+    {
+      "id": "I34", "chapter": 78, "title": "审查证据绑定与 Biomni 私有交接",
+      "trigger": "规范入库、项目就绪审查、辅助脚本升级或恢复已有任务",
+      "inputs": ["selected_project_metadata", "hash_bound_review_evidence", "tool_runtime_receipts", "private_source_manifest"],
+      "outputs": ["metadata_audit", "review_scope_record", "existing_output_review", "private_adoption_manifest"],
+      "steps": [
+        "本次发现原 project schema 2.0 的 --ready 可接受空 evidence 列表；这与证据要求不一致。修订为 2.1：passed 关卡提供非空的 {path, sha256, bytes} 列表，并核对选择范围内的真实文件；旧 schema 可作草稿检查，进入新版就绪检查前需显式迁移。哈希只绑定字节，不验证审查意见的科学真伪。",
+        "quality 与 environment 报告改为拒绝覆盖，先确认已有任务与文件。MD 输入生成记录生成器、每个模板和实际输出的哈希；文本按确定的换行方式写出，避免平台换行使记录与实际字节不符。新报告用新路径，保留旧日志和失败路线。",
+        "增量计划器递归拒绝未填写的软件身份，并显示已有输出；run 仍是规划状态，绝不授权覆盖或提交。已有产物先审查/合法恢复，确需重算则采用新路径和任务版本。unknown 提交先查真实调度与共享终端，不自动重试。",
+        "接入复用现有 cadd.guide_cadd_workflow、audit_simulation_protocol、audit_restart_manifest、audit_replica_exchange、audit_docking_campaign、audit_restraint_mapping、audit_af3_records 和 audit_mmgbsa_summary。严格按当前 catalog 参数准备选定摘要，不直接把整份模板 JSON 传给这些不同合同。工具 success 或 qc_gate_pass 只说明其声明合同检查结果。",
+        "本轮虚构文本/元数据及输入文件生成回归通过，与真实 LEaP/grompp/Amber/GROMACS/Vina 执行分开。原 VALIDATION.md 中的历史验证属于来源作者的记录，本轮没有把它们全数当作已独立重现；新增验证有单独回执。环境版本探测也不是 GPU/力场/采样验收。",
+        "本文与工具包仅存入用户私有库及已安装技能的私有引用，不公开分发，不修改共享服务或启用本地科研引擎。组学分支若选择已采用的私有转录组 v2.1.1，继续使用其独立单位/QC/富集与轨迹补充；两套 project schema 不能互换。公共检索只发送通用方法词，不发送私有模型、草稿、路径或结果。"
+      ],
+      "acceptance": "文档/模板/代码变更与测试可追溯，私有引用可定位，实际后端状态明确；采用范围仅为规范与有限元数据辅助，不代表项目科学通过。",
+      "figures": ["来源—配置—执行—审查分层谱系", "历史成功、当前验证与未运行状态矩阵", "新旧版本受影响文件与任务范围"],
+      "recompute_when": ["源文件、代码、字段合同、证据或环境身份改变"]
+    }
+  ],
+  "sources": [
+    {"id":"N01","title":"GROMACS replica exchange manual","url":"https://manual.gromacs.org/current/reference-manual/algorithms/replica-exchange.html","scope":"tREMD/原生自由能路径 HREX 的算法区别；current 在线页面不代表服务器安装版本"},
+    {"id":"N02","title":"Replica Exchange with Solute Scaling: REST2","doi":"10.1021/jp204407d","url":"https://pmc.ncbi.nlm.nih.gov/articles/PMC3172817/","scope":"REST2 缩放及采样；不能当作全部实现/复杂体系的保证"},
+    {"id":"N03","title":"PLUMED partial_tempering manual","url":"https://www.plumed.org/doc-v2.10/user-doc/html/partial_tempering.html","scope":"展开拓扑、hot 标记及缩放测试；官方明确力场依赖风险"},
+    {"id":"N04","title":"ParmEd GROMACS topology documentation","url":"https://parmed.github.io/ParmEd/html/gromacs.html","scope":"转换接口、moleculetype 和原子顺序；物理验收为本规范项目要求"},
+    {"id":"N05","title":"Best Practices for Alchemical Free Energy Calculations","doi":"10.33011/livecoms.2.1.18378","url":"https://livecomsjournal.org/index.php/livecoms/article/view/v2i1e18378","scope":"平衡 alchemical 方法与适用修正；不外推到所有速率或 QM/MM 方法"},
+    {"id":"N06","title":"Best Practices for Constructing, Preparing, and Evaluating Protein-Ligand Binding Affinity Benchmarks","doi":"10.33011/livecoms.4.1.1497","url":"https://livecomsjournal.org/index.php/livecoms/article/download/v4i1e1497/1399/5059","scope":"validation、benchmark 与应用区别，实验数据/评价质量；非通用对接验证器"},
+    {"id":"N07","title":"Best Practices for Quantification of Uncertainty and Sampling Quality in Molecular Simulations","doi":"10.33011/livecoms.1.1.5067","url":"https://livecomsjournal.org/index.php/livecoms/article/view/v1i1e5067","scope":"相关采样与不确定性；不包含力场系统误差的全面验证"},
+    {"id":"N08","title":"PoseBusters checks and original paper","doi":"10.1039/D3SC04185A","url":"https://posebusters.readthedocs.io/en/latest/checks.html","scope":"几何、立体、化学与碰撞检查；不证明活性或真实位姿"}
+  ]
+}

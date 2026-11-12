@@ -1,0 +1,151 @@
+{
+  "selected_skills": 9,
+  "selected_implementation_references": 3,
+  "files": [
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/circos-plots/SKILL.md",
+      "sha256": "dcc09528d069c9c6ee3a939c4de156624db4582bae55b704d109204f8ac1f02c",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/color-palettes/SKILL.md",
+      "sha256": "68ce99c5bd025f7c50e8367177e0a7976d0adacee68754b93bb9c254c09ebce9",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/genome-tracks/SKILL.md",
+      "sha256": "dde0573d15536ead32755b2541579ebaa580fefc3d50aeb12d66023a083f5d02",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/heatmaps-clustering/SKILL.md",
+      "sha256": "4bc6f5c1a572d9c931ca314c44e9f5961f266b5fc795aa1a10fa6b33d24b7d74",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/interactive-visualization/SKILL.md",
+      "sha256": "b90cd6496a5bc5295599b900eb2111c9cc588ee26d9a85f6a38513d5061dc12e",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "data-visualization/oncoprint-mutation-matrices/SKILL.md",
+      "sha256": "fd10f1730e2063e2f2978230aa598301bbd793dc1277e7bcf3f9908d78fc7e26",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "GPTomics/bioSkills",
+      "commit": "d91ed3d563019e649dc854c56ccd62551359488a",
+      "path": "spatial-transcriptomics/spatial-visualization/SKILL.md",
+      "sha256": "5e597bbffc2456873008f62591325aaa1baf07669c350aba75c4a16e5174e959",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": true,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "path": "skills/scanpy/SKILL.md",
+      "sha256": "4a59f87933a1e9ed49eac603719af1b0c606dd99050fe59ffa1c1bf807900cb8",
+      "repository_license": "MIT",
+      "file_license": "BSD-3-Clause",
+      "archived": false,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "path": "skills/scientific-visualization/scripts/figure_export.py",
+      "sha256": "fe9c77878da61297ce55224b67282d128631deb628d930aa1929c9eb7330bf79",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": false,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "path": "skills/scientific-visualization/scripts/image_metadata.py",
+      "sha256": "45f79cefd99b8e5dabcbfd1a29b7346363f383411cc43540bf9f73e67fed634e",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": false,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "path": "skills/scientific-visualization/scripts/palette_audit.py",
+      "sha256": "3a90b3c9a4a39dde6a341dc3de7b99cd2bca4773c66564fc90cdc2706a5a8165",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": false,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "path": "skills/scientific-visualization/SKILL.md",
+      "sha256": "8cbde7cdc10d959cf72cfd08335cc8ce996247eee6ebdb900eb64a4cb0ff34a3",
+      "repository_license": "MIT",
+      "file_license": "MIT",
+      "archived": false,
+      "adoption": "design_reference_only_original_local_implementation",
+      "executed": false,
+      "redistributed": false
+    }
+  ],
+  "public_upload": false
+}

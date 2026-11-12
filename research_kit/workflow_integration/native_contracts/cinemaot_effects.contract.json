@@ -1,0 +1,41 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "cinemaot_effects",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "unit_key",
+    "condition_key",
+    "control",
+    "treatments",
+    "expression_layer",
+    "expression_scale",
+    "representation_key",
+    "representation_kind",
+    "dimension",
+    "minimum_cells_per_arm",
+    "maximum_dense_expression_entries",
+    "maximum_coupling_entries",
+    "dependence_threshold",
+    "smoothness",
+    "solver_tolerance",
+    "preweight_label",
+    "effect_reconstruction_tolerance",
+    "causal_assumptions"
+  ],
+  "required_output_roles": [
+    "counterfactual_effect_object",
+    "effect_identity",
+    "control_identity",
+    "unit_effect_summary",
+    "pair_diagnostics",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Native maintained pertpy CINEMA-OT unweighted/label-preweighted Sinkhorn per actual unit/contrast; actual OT matrix identity and effect reconstruction, observed missing arms preserved; not experimental pairing",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

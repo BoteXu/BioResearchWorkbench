@@ -1,0 +1,288 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I11",
+  "status": "draft",
+  "contract_id": "__FILL__",
+  "project_id": "__FILL__",
+  "title": "膜蛋白与脂质及糖基化体系",
+  "research_question": null,
+  "decision_to_support": null,
+  "comparison_definition": null,
+  "implementation_status": "fillable_scientific_contract_not_validated_engine_input",
+  "execution": {
+    "enabled": false,
+    "engine": null,
+    "engine_version": null,
+    "protocol_version": null,
+    "environment_manifest": null
+  },
+  "provenance": {
+    "source_records": [],
+    "software_versions": [],
+    "reference_keys": []
+  },
+  "inputs": {
+    "protein_construct": {
+      "sequence_id": null,
+      "isoform_id": null,
+      "assembly_id": null,
+      "included_domains": [],
+      "omitted_regions_and_reasons": [],
+      "structure": {
+        "path": "__FILL__",
+        "sha256": null,
+        "format": null,
+        "identity_review": "pending"
+      }
+    },
+    "membrane_definition": {
+      "membrane_normal": null,
+      "coordinate_frame": null,
+      "protein_orientation": null,
+      "composition_evidence": null,
+      "simplification_rationale": null,
+      "leaflets": {
+        "rows": [],
+        "row_template": {
+          "leaflet_id": null,
+          "lipid_species": null,
+          "target_fraction": null,
+          "molecule_count": null,
+          "parameter_set_id": null
+        }
+      }
+    },
+    "glycoforms": {
+      "rows": [],
+      "row_template": {
+        "glycoform_id": null,
+        "protein_site": null,
+        "site_mapping": null,
+        "occupancy_evidence": null,
+        "glycan_identity": null,
+        "glycosidic_linkages": null,
+        "anomeric_configuration": null,
+        "branching": null,
+        "terminal_modifications": null,
+        "structure_path": null,
+        "sha256": null
+      }
+    },
+    "force_field_components": {
+      "rows": [],
+      "row_template": {
+        "component": null,
+        "force_field": null,
+        "version": null,
+        "water_model_compatibility": null,
+        "ion_model_compatibility": null,
+        "special_interaction_terms": null,
+        "parameter_source": null
+      }
+    },
+    "systems": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "membrane_model_id": null,
+        "glycoform_id": null,
+        "replicate_id": null,
+        "topology_path": null,
+        "topology_sha256": null,
+        "trajectory_paths": null,
+        "trajectory_sha256s": null
+      }
+    }
+  },
+  "settings": {
+    "temperature_K": null,
+    "salt_definition": null,
+    "pressure_or_tension_ensemble": {
+      "coupling_type": null,
+      "plane_definition": null,
+      "pressure_targets": null,
+      "compressibility": null,
+      "surface_tension_target": null,
+      "membrane_potential_definition": null
+    },
+    "equilibration": {
+      "stages": [],
+      "restraint_groups": [],
+      "release_rule": null,
+      "production_acceptance_observables": []
+    },
+    "cross_engine_conversion": {
+      "source_engine": null,
+      "destination_engine": null,
+      "converter_version": null,
+      "one_four_scaling_review": null,
+      "special_terms_review": null,
+      "energy_comparison_definition": null
+    },
+    "analysis": {
+      "area_method": null,
+      "protein_area_treatment": null,
+      "local_normal_definition": null,
+      "thickness_definition": null,
+      "density_normalization": null,
+      "chain_order_formula": null,
+      "glycan_torsion_definitions": [],
+      "occlusion_probe_definition": null,
+      "occlusion_reference_surface": null,
+      "representative_conformer_rule": null
+    }
+  },
+  "results": {
+    "membrane_metrics": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "replicate_id": null,
+        "time": null,
+        "time_unit": null,
+        "metric": null,
+        "value": null,
+        "unit": null,
+        "method_version": null
+      }
+    },
+    "glycan_occlusion": {
+      "rows": [],
+      "row_template": {
+        "system_id": null,
+        "glycoform_id": null,
+        "replicate_id": null,
+        "surface_or_pocket_id": null,
+        "probe_definition": null,
+        "occupancy": null,
+        "uncertainty": null,
+        "uncertainty_method": null
+      }
+    },
+    "conversion_energy_qc": {
+      "rows": [],
+      "row_template": {
+        "coordinate_hash": null,
+        "energy_term": null,
+        "source_value": null,
+        "destination_value": null,
+        "unit": null,
+        "comparison_assumptions": null,
+        "review_status": null
+      }
+    }
+  },
+  "output_artifacts": [
+    {
+      "name": "membrane_model_manifest.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "glycan_linkage_map.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "conversion_energy_qc.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "membrane_metrics.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    },
+    {
+      "name": "glycan_occlusion.json",
+      "artifact_id": null,
+      "path": null,
+      "sha256": null,
+      "status": "not_generated"
+    }
+  ],
+  "qc": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewed_at": null,
+    "checks": [],
+    "unresolved_issues": []
+  },
+  "incremental": {
+    "parent_contract_id": null,
+    "changed_fields": [],
+    "reusable_artifact_ids": [],
+    "invalidated_artifact_ids": [],
+    "decision_reason": null,
+    "sop_recompute_rules": [
+      "新糖型或膜组成触发新建系与采样",
+      "改遮挡分析定义可重分析原始轨迹",
+      "改力场或特殊相互作用处理触发新模型"
+    ]
+  },
+  "plots": [
+    {
+      "plot_id": "I11-P1",
+      "title": "膜蛋白横截面和脂质组成",
+      "required_data": "完整结构和组成表",
+      "interpretation_boundary": "注明简化模型和真实证据范围",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I11-P2",
+      "title": "面积厚度及倾角时间线",
+      "required_data": "分重复膜指标",
+      "interpretation_boundary": "面积算法须适合混合膜和膜蛋白",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I11-P3",
+      "title": "膜法向密度剖面",
+      "required_data": "分物种分膜叶密度",
+      "interpretation_boundary": "固定法向和归一化",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I11-P4",
+      "title": "脂链有序度",
+      "required_data": "按脂质原子映射的有序度",
+      "interpretation_boundary": "公式与参考法向一致",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I11-P5",
+      "title": "糖链构象云与遮挡",
+      "required_data": "代表构象和遮挡统计",
+      "interpretation_boundary": "不能选择最开阔姿势代表整体",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    },
+    {
+      "plot_id": "I11-P6",
+      "title": "环境分层接触图",
+      "required_data": "蛋白脂质糖链及配体接触",
+      "interpretation_boundary": "重复单位和分母一致",
+      "data_artifact_ids": [],
+      "output_path": null,
+      "status": "not_generated"
+    }
+  ],
+  "module_version": "3.0.0"
+}

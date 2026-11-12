@@ -1,0 +1,17 @@
+{
+  "schema": "bulk-returned-v1",
+  "configuration_sha256": "replace-with-exact-configuration-hash",
+  "input_hashes": {
+    "matrix": "replace-with-independently-reviewed-matrix-hash",
+    "metadata": "replace-with-independently-reviewed-metadata-hash"
+  },
+  "backend_versions": {
+    "backend": "replace-with-actual-version"
+  },
+  "stages": {
+    "qc": "not_run",
+    "de": "not_run",
+    "enrich": "not_run"
+  },
+  "outputs": []
+}

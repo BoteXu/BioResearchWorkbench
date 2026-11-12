@@ -1,0 +1,33 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "mace_singlepoint",
+  "required_inputs": [
+    "structures",
+    "structure_identity",
+    "model_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "model_loading_scope",
+    "dtype",
+    "model_energy_unit",
+    "model_length_unit",
+    "energy_units_to_ev",
+    "length_units_to_angstrom",
+    "supported_elements",
+    "maximum_structures",
+    "maximum_atoms",
+    "model_head"
+  ],
+  "required_output_roles": [
+    "potential_energies",
+    "atomic_forces",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual native MACE ASE molecular single-point energies/forces from exact existing trusted model, declared units/elements and fixed nonperiodic geometries. Not docking affinity, electronic ESP, periodic MD or scientific validation.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

@@ -1,0 +1,24 @@
+{
+  "example_only": true,
+  "template_not_executable": true,
+  "public_upload": false,
+  "server_execution_authorized": false,
+  "backend": "cellrank_multiview",
+  "parameters": {
+    "unit_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "kernels": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "direction_evidence": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "cluster_key": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "terminal_states": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "seed": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE",
+    "software_versions": "REPLACE_WITH_REVIEWED_ACTUAL_VALUE"
+  },
+  "inputs": [
+    {
+      "id": "object",
+      "path": "REPLACE_WITH_ACTUAL_SERVER_RELATIVE_PATH",
+      "sha256": "REPLACE_WITH_ACTUAL_SHA256"
+    }
+  ],
+  "note": "Disabled source template. No scientific result or installed dependency is implied."
+}

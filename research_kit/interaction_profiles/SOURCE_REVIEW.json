@@ -1,0 +1,34 @@
+{
+  "paper_title": "Interaction Profiles as a Universal Language for Generative Molecular Design with ShEPhERD-2",
+  "DOI_from_author_repository": "10.64898/2026.09.10.750648",
+  "authors_from_repository": [
+    "Kento A. Abeywardane",
+    "Kenji Walker",
+    "Connor W. Coley"
+  ],
+  "paper_full_text_review": "NOT_COMPLETED_ACCESS_RESTRICTED",
+  "paper_performance_numbers_extracted": false,
+  "implementation_basis": "pinned_author_source_and_official_shepherd_score_API",
+  "source_pins": {
+    "shepherd2": {
+      "repository": "coleygroup/shepherd2",
+      "commit": "e0ce03ff80ce80115b1e0a3eb0b1fdba5943023b",
+      "license": "MIT_code_only_weights_require_separate_review",
+      "source_url": "https://github.com/coleygroup/shepherd2/tree/e0ce03ff80ce80115b1e0a3eb0b1fdba5943023b",
+      "pinned_on": "2026-10-25",
+      "scope": "public_Git_tree_source_identity_not_scientific_validation"
+    },
+    "shepherd-score": {
+      "repository": "coleygroup/shepherd-score",
+      "commit": "20ebed761e055b55a31f4fb1e3c849b86d6ae5e5",
+      "license": "MIT_code_only_weights_require_separate_review",
+      "source_url": "https://github.com/coleygroup/shepherd-score/tree/20ebed761e055b55a31f4fb1e3c849b86d6ae5e5",
+      "pinned_on": "2026-10-25",
+      "scope": "public_Git_tree_source_identity_not_scientific_validation"
+    }
+  },
+  "scientific_runtime": "NOT_RUN_SERVER_UNAVAILABLE",
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "third_party_source_or_weights_redistributed": false,
+  "public_upload": false
+}

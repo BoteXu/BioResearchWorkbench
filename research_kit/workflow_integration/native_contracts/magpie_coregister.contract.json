@@ -1,0 +1,54 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "registration_inputs",
+    "landmark_validation"
+  ],
+  "required_parameters": [
+    "cores",
+    "registration_scope",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "registration_outputs",
+    "registration_validation"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "registered_measured_MSI",
+  "schema": "native-completion-contract/1",
+  "tool": "MAGPIE",
+  "source_commit": [
+    "Core-Bioinformatics/magpie",
+    "51bf32f999ff30e7fff7d12bd3cb0f33b9d2acc1"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "No top-level upstream license located in the reviewed tree; use only an owned checkout with actual permitted-use evidence. No author code is redistributed.",
+  "figure_views": [
+    "scatter",
+    "matrix",
+    "rank"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I19",
+  "status": "draft",
+  "table_name": "query_signature",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "query_id": null,
+    "gene_id_version": null,
+    "gene_symbol": null,
+    "effect": null,
+    "effect_unit": null,
+    "rank_statistic": null,
+    "rank_statistic_definition": null,
+    "direction": null,
+    "p_value": null,
+    "adjusted_p_value": null,
+    "detection_status": null,
+    "source_analysis_id": null
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "query_context": {
+    "query_id": null,
+    "disease_or_phenotype_id": null,
+    "cell_type": null,
+    "condition_reference": null,
+    "condition_test": null,
+    "direction_definition": null,
+    "donor_count": null,
+    "source_dataset_ids": [],
+    "input_gene_space": null,
+    "reference_gene_space": null,
+    "mapping_release": null,
+    "signature_rule": null,
+    "signature_size_rule": null,
+    "primary_or_sensitivity": null,
+    "query_sha256": null
+  },
+  "related_tables": {
+    "reference_context": {
+      "rows": [],
+      "row_template": {
+        "reference_signature_id": null,
+        "parent_id": null,
+        "state_id": null,
+        "perturbation_type": null,
+        "cell_line": null,
+        "dose": null,
+        "dose_unit": null,
+        "time": null,
+        "time_unit": null,
+        "replicate_definition": null,
+        "qc_metric_name": null,
+        "qc_metric_value": null,
+        "qc_status": null,
+        "database_release": null,
+        "feature_space": null,
+        "reference_file_sha256": null
+      }
+    },
+    "connectivity_results": {
+      "rows": [],
+      "row_template": {
+        "query_id": null,
+        "reference_signature_id": null,
+        "score_name": null,
+        "score": null,
+        "score_definition": null,
+        "normalization_background_id": null,
+        "p_value": null,
+        "adjusted_p_value": null,
+        "test_family": null,
+        "algorithm_version": null,
+        "computation_id": null
+      }
+    },
+    "repurposing_decision": {
+      "rows": [],
+      "row_template": {
+        "decision_id": null,
+        "query_id": null,
+        "parent_id": null,
+        "aggregation_rule": null,
+        "context_consistency": null,
+        "stress_or_cytotoxicity_review": null,
+        "coverage_review": null,
+        "decision_reason": null,
+        "next_question": null
+      }
+    }
+  },
+  "control_plan": {
+    "direction_check": null,
+    "matched_background_rule": null,
+    "known_direction_control": null,
+    "external_query_dataset": null,
+    "frozen_analysis_rule": null
+  },
+  "module_version": "3.0.0"
+}

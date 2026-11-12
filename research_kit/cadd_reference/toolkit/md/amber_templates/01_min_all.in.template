@@ -1,0 +1,11 @@
+01_min_all - illustrative soluble-system profile; review before running
+&cntrl
+  imin=1, ntmin=1, maxcyc=10000, ncyc=5000,
+  drms=0.05, ntb=1, igb=0, cut=10.0,
+  ntc=1, ntf=1, ntpr=100, ntxo=2,
+  ntr=0,
+/
+&ewald
+  ew_type=0, order=4, dsum_tol=0.00001, vdwmeth=1,
+/
+

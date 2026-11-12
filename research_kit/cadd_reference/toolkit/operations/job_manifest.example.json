@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "manifest_version": null,
+  "project_id": null,
+  "jobs": [],
+  "row_template": {
+    "task_id": null,
+    "run_id": null,
+    "attempt_id": null,
+    "scheduler_array_index": null,
+    "engine": null,
+    "software_identity": null,
+    "input_fingerprint": null,
+    "work_directory": null,
+    "cpus": null,
+    "gpus": null,
+    "memory_gb": null,
+    "wall_time_limit": null,
+    "observed_speed_and_unit": null,
+    "checkpoint_path": null,
+    "stdout_path": null,
+    "stderr_path": null,
+    "completion_review": null
+  }
+}

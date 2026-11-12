@@ -1,0 +1,46 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "hdwgcna_network",
+  "required_inputs": [
+    "object",
+    "network_genes"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "unit_key",
+    "sample_key",
+    "condition_key",
+    "assay",
+    "celltype_key",
+    "celltype",
+    "max_network_genes",
+    "selected_by_de",
+    "metacell_k",
+    "minimum_cells",
+    "max_shared",
+    "reduction",
+    "n_pcs",
+    "target_metacells",
+    "powers",
+    "network_type",
+    "selected_power",
+    "max_block_size",
+    "tom_type",
+    "minimum_module_size",
+    "merge_cut_height"
+  ],
+  "required_output_roles": [
+    "processed_object",
+    "modules",
+    "module_eigengenes",
+    "soft_threshold",
+    "module_TOM",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": null,
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

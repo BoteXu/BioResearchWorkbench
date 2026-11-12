@@ -1,0 +1,7 @@
+start	end	gene	transcript	symbol	strand	exon
+1101	1180	gene_0	transcript_0	GENE_A	+	exon_0_0
+1301	1350	gene_0	transcript_0	GENE_A	+	exon_0_1
+1401	1450	gene_0	transcript_0	GENE_A	+	exon_0_2
+1501	1580	gene_1	transcript_1	GENE_B	-	exon_1_0
+1701	1760	gene_1	transcript_1	GENE_B	-	exon_1_1
+1851	1910	gene_1	transcript_1	GENE_B	-	exon_1_2

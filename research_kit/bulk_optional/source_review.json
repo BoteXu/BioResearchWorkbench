@@ -1,0 +1,130 @@
+{
+  "schema": "private-source-review-v1",
+  "source_version": "bulk-rnaseq-pipeline-v1.0",
+  "code_snapshots": [
+    {
+      "original_relative_path": "scripts/run.py",
+      "snapshot": "review_only/run.py.txt",
+      "sha256": "dfa30385b1d3e8788bf7c05b954cc30df6fba60c4ac18b13f6f19a3ee3218b8a",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step10_ml.py",
+      "snapshot": "review_only/step10_ml.py.txt",
+      "sha256": "9e3e27d625c4a634d008de0e5defd6f6b45b52089f4088b72bc51671d6580b48",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step11_validation.py",
+      "snapshot": "review_only/step11_validation.py.txt",
+      "sha256": "877ad3d2051cb80a89a11943d08090cbb54156dbbd61967eeadf744dfae8045c",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step12_figures.py",
+      "snapshot": "review_only/step12_figures.py.txt",
+      "sha256": "6470aa6d96f5cbecaee0da3e9f5f37ada92d1646b9aadd658afa13553613989f",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step13_report.py",
+      "snapshot": "review_only/step13_report.py.txt",
+      "sha256": "d10e605ed9bfd2d94856bee52bf8cd7033a28317cb6f5d4840a6c02d0ebcf0bf",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step1_qc.py",
+      "snapshot": "review_only/step1_qc.py.txt",
+      "sha256": "c0f05ce0a66443ad09d65c08b73945434394a04ea37cc9efcc67ebbf131d3fde",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step2_de.py",
+      "snapshot": "review_only/step2_de.py.txt",
+      "sha256": "fc6f321f1d81da2a831db50fdd556b066831949655d2040f52c61f4f1f07a903",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step3_enrichment.py",
+      "snapshot": "review_only/step3_enrichment.py.txt",
+      "sha256": "cb93beb34e07f7be7e84b6838f3d4d249de8c568b1653436aebba8988f1beb26",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step4_pathway.py",
+      "snapshot": "review_only/step4_pathway.py.txt",
+      "sha256": "914f3bb9313f7ab4e695914c6d089ba01683d771b17a72ee98004c36ff2deb5b",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step5_tf.py",
+      "snapshot": "review_only/step5_tf.py.txt",
+      "sha256": "ba8129fe18d8a6ec162d838c6d3c41ff50eb23119f6f122049e2cfefbbc42dde",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step6_wgcna.py",
+      "snapshot": "review_only/step6_wgcna.py.txt",
+      "sha256": "01a0d86c24419a6eb70306277bfc1d920cf15342995fd9bb52257ebc7a16caff",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step7_ppi.py",
+      "snapshot": "review_only/step7_ppi.py.txt",
+      "sha256": "f9460dac2f62c7144af2b157573db88699d43ef358c5087d25e9249e3c1be468",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step8_deconvolution.py",
+      "snapshot": "review_only/step8_deconvolution.py.txt",
+      "sha256": "1233d04cd186df68d3d95786528e4e8c43b691a2dbe8f1ee66989d42cd25fb6d",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/step9_key.py",
+      "snapshot": "review_only/step9_key.py.txt",
+      "sha256": "15a6da3e6eec272be36d70b2bfe806884ea12a13e59650af6a92cefedc1cf225",
+      "executable_in_addon": false
+    },
+    {
+      "original_relative_path": "scripts/utils.py",
+      "snapshot": "review_only/utils.py.txt",
+      "sha256": "b1807ad05e087ff3311e72917d49b26d34654bb3162e77b6826860313db83451",
+      "executable_in_addon": false
+    }
+  ],
+  "gene_sets_metadata_only": [
+    {
+      "name": "GO_Biological_Process_2023",
+      "bytes": 2452507,
+      "sha256": "33be5bc49654d8d5f6f5013fb18f5f0944e9ab50ed25f9e12f7bdb80716b306d",
+      "redistributed": false,
+      "provenance": "User-provided local library snapshot; source/version/license require independent review",
+      "top_level_keys": [
+        "GO_Biological_Process_2023"
+      ]
+    },
+    {
+      "name": "KEGG_2021_Human",
+      "bytes": 404096,
+      "sha256": "0b333a0cedfaac026c3606f380906b53f6882b6d1ffc6f580ec4a1e055bc7142",
+      "redistributed": false,
+      "provenance": "User-provided local library snapshot; source/version/license require independent review",
+      "top_level_keys": [
+        "KEGG_2021_Human"
+      ]
+    },
+    {
+      "name": "MSigDB_Hallmark_2020",
+      "bytes": 88401,
+      "sha256": "15b7009896284abe53b00c2cd0a5447d529df936479679ea27925855155ebc64",
+      "redistributed": false,
+      "provenance": "User-provided local library snapshot; source/version/license require independent review",
+      "top_level_keys": [
+        "MSigDB_Hallmark_2020"
+      ]
+    }
+  ],
+  "source_docx_included": false,
+  "machine_notes_included": false
+}

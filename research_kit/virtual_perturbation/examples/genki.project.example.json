@@ -1,0 +1,85 @@
+{
+  "example_only": true,
+  "run_id": "example_genki",
+  "method": "genki",
+  "measurement_state": "predicted",
+  "estimand": "REPLACE_WITH_MODEL_CONDITIONAL_ESTIMAND",
+  "expected_host": "REPLACE_WITH_CURRENT_COMPUTE_HOST_AT_DISPATCH",
+  "node_role": "compute",
+  "server_execution_authorized": false,
+  "public_upload": false,
+  "resource_budget": {
+    "cpus": 2,
+    "gpus": 0
+  },
+  "parameters": {
+    "cell_type": "REPLACE_WITH_REVIEWED_cell_type",
+    "min_cells_per_unit": 20,
+    "max_genes": 3000,
+    "n_components": 3,
+    "network_percentile": 85,
+    "epochs": 100,
+    "learning_rate": 0.0007,
+    "beta": 0.0001,
+    "latent_dimensions": 2,
+    "resamples": 100,
+    "expected_package_version": "REPLACE_WITH_EXISTING_SERVER_VERSION",
+    "expected_backend_code_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "ko_genes": [
+      "GENETARGET"
+    ],
+    "evaluation_units": [
+      "UNIT_A",
+      "UNIT_B",
+      "UNIT_C"
+    ],
+    "seed": 41
+  },
+  "inputs": [
+    {
+      "id": "adata",
+      "path": "inputs/adata.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "context",
+      "path": "inputs/context.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_receipt",
+      "path": "inputs/qc_receipt.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "qc_measurements",
+      "path": "inputs/qc_measurements.REPLACE_WITH_ACTUAL_EXTENSION",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "sensitivity_variants": [
+    {
+      "label": "alternate_1",
+      "parameters": {
+        "network_percentile": 80
+      }
+    },
+    {
+      "label": "alternate_2",
+      "parameters": {
+        "network_percentile": 90
+      }
+    }
+  ],
+  "acceptance_rules": [
+    {
+      "variant": "primary",
+      "metric": "units",
+      "operator": "ge",
+      "bound": 3,
+      "unit": "REPLACE_WITH_ACTUAL_UNIT",
+      "definition": "Example of a measurable criterion; add method-specific fit/coverage/control/OOD gates before production",
+      "threshold_basis": "ILLUSTRATIVE_NOT_SCIENTIFICALLY_VALIDATED"
+    }
+  ]
+}

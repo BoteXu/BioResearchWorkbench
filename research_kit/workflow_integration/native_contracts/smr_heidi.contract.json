@@ -1,0 +1,43 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "smr_heidi",
+  "required_inputs": [
+    "gwas",
+    "reference_manifest"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "smr_executable",
+    "smr_executable_sha256",
+    "assembly",
+    "ancestry",
+    "maximum_variants",
+    "minimum_ld_reference_units",
+    "heidi_method",
+    "maf",
+    "frequency_difference",
+    "maximum_frequency_exclusion_fraction",
+    "instrument_pvalue",
+    "heidi_instrument_pvalue",
+    "heidi_minimum_snps",
+    "heidi_maximum_snps",
+    "ld_lower",
+    "ld_upper",
+    "cis_window_kb",
+    "threads",
+    "smr_result_pvalue",
+    "heidi_result_pvalue"
+  ],
+  "required_output_roles": [
+    "native_smr_results",
+    "genetic_evidence",
+    "allele_qc",
+    "native_command",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual native cis-SMR/HEIDI with full selected offline PLINK/BESD references, exact literal intersecting variants, explicit native frequency/LD thresholds and unassessed HEIDI retained. Not multi-SNP SMR, proof of colocalization or causal mediation.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

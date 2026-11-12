@@ -1,0 +1,30 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "seurat_to_anndata",
+  "required_inputs": [
+    "object"
+  ],
+  "required_parameters": [
+    "rscript",
+    "seed",
+    "software_versions",
+    "r_software_versions",
+    "assay",
+    "normalization_scale",
+    "metadata_keys",
+    "categorical_keys",
+    "reduction_names",
+    "unit_key",
+    "sample_key",
+    "condition_key"
+  ],
+  "required_output_roles": [
+    "processed_object",
+    "exchange_source_material",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Observed-layer Seurat-to-AnnData exchange with real R extraction, exact literal axes, count/normalized layer checks and full server write/read equality; no statistical fitting or embedding replacement",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

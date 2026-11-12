@@ -1,0 +1,8 @@
+; Include inside the correct moleculetype, before the next moleculetype begins.
+; Replace the example row with ALL reviewed local heavy-atom indices for THIS molecule.
+; Do not use global atom indices from a complete solvated system.
+; POSRES_FC must be defined through the stage's mdp define field.
+[ position_restraints ]
+; local_atom_index  funct  fcx         fcy         fcz
+__LOCAL_INDEX__    1      POSRES_FC   POSRES_FC   POSRES_FC
+

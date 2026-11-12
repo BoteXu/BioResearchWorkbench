@@ -1,0 +1,63 @@
+{
+  "sources": [
+    {
+      "id": "M01",
+      "title": "Gene ontology analysis for RNA-seq accounting for selection bias",
+      "doi": "10.1186/gb-2010-11-2-r14",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2872874/",
+      "scope": "RNA-seq DE入选偏倚与偏倚感知ORA；不推为所有技术必用同一修正"
+    },
+    {
+      "id": "M02",
+      "title": "Camera a competitive gene set test accounting for inter-gene correlation",
+      "doi": "10.1093/nar/gks461",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3458527/",
+      "scope": "竞争性基因集检验与相关结构，不与self-contained或fgsea混同零假设"
+    },
+    {
+      "id": "M03",
+      "title": "Assessment of Gene Set Enrichment Analysis using curated RNA-seq-based benchmarks",
+      "doi": "10.1371/journal.pone.0302696",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0302696",
+      "scope": "特定RNA-seq基准下的排列/统计量比较；不推出通用最优"
+    },
+    {
+      "id": "M04",
+      "title": "Recurrent functional misinterpretation of RNA-seq data caused by sample-specific gene length bias",
+      "doi": "10.1371/journal.pbio.3000481",
+      "url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000481",
+      "scope": "样本特异长度偏倚、富集解释与相关感知方法的权衡；按本项目风险采用诊断"
+    },
+    {
+      "id": "M05",
+      "title": "A statistical framework for differential pseudotime analysis with multiple single-cell RNA-seq samples",
+      "doi": "10.1038/s41467-023-42841-y",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10638410/",
+      "scope": "Results及Discussion中样本变异与顺序条件推断；不等于处理所有层级或全部不确定性"
+    },
+    {
+      "id": "M06",
+      "title": "Trajectory inference across multiple conditions with condiments",
+      "doi": "10.1038/s41467-024-44823-0",
+      "url": "https://www.nature.com/articles/s41467-024-44823-0",
+      "scope": "拓扑/进程/分支选择/表达问题分开；具体版本的sample感知接口需单独核对",
+      "api_url": "https://www.bioconductor.org/packages/release/bioc/manuals/condiments/man/condiments.pdf",
+      "api_version_reviewed": "1.20.0",
+      "api_review_date": "2026-10-24",
+      "api_sections": [
+        "fateSelectionTest_multipleSamples",
+        "progressionTest_multipleSamples",
+        "topologyTest_multipleSamples"
+      ],
+      "api_limit": "Samples are required to be shared across all conditions. This manual review does not validate an installed server version."
+    },
+    {
+      "id": "M07",
+      "title": "Gene dispersion is the key determinant of the read count bias in differential expression analysis of RNA-seq data",
+      "doi": "10.1186/s12864-017-3809-0",
+      "url": "https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-017-3809-0",
+      "scope": "检索发现的不同重复类型条件；未用自动limitations的不完整上下文作普适推论"
+    }
+  ],
+  "use": "Primary-source-bounded methodological supplement; SciSpace raw discovery and automatic limitations remain private audit evidence, not source truth."
+}

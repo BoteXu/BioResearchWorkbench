@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "I17",
+  "status": "draft",
+  "table_name": "sample_manifest",
+  "project_id": null,
+  "release_id": null,
+  "rows": [],
+  "row_template": {
+    "dataset_id": null,
+    "donor_id": null,
+    "sample_id": null,
+    "technical_library_id": null,
+    "condition": null,
+    "tissue_region": null,
+    "assay_type": null,
+    "batch": null,
+    "sex": null,
+    "age_or_age_group": null,
+    "age_unit": null,
+    "paired_id": null,
+    "collection_context": null,
+    "raw_accession": null,
+    "counts_path": null,
+    "counts_sha256": null,
+    "gene_annotation_release": null,
+    "library_relation_to_sample": null,
+    "missing_fields": {}
+  },
+  "missing_fields": {},
+  "template_notes": "数据契约草稿；rows 为空，无观测值。row_template 仅示意字段，不能当作一条观测。未提供自动科学验收或 JSON Schema 验证器。",
+  "analysis_plan": {
+    "question": null,
+    "outcome_type": null,
+    "biological_unit": null,
+    "design_formula": null,
+    "contrast_reference": null,
+    "contrast_test": null,
+    "pairing_definition": null,
+    "tissue_region_strategy": null,
+    "pseudobulk_grouping_definition": null,
+    "counts_layer": null,
+    "qc_release": null,
+    "annotation_release": null,
+    "feature_order_sha256": null,
+    "frozen_reference_model_id": null,
+    "integration_role": null,
+    "covariates": [],
+    "required_comparisons": []
+  },
+  "related_tables": {
+    "cell_metadata": {
+      "rows": [],
+      "row_template": {
+        "cell_id": null,
+        "sample_id": null,
+        "donor_id": null,
+        "barcode": null,
+        "cell_type": null,
+        "annotation_confidence": null,
+        "qc_status": null,
+        "qc_reason": null,
+        "doublet_status": null,
+        "ambient_rna_processing": null,
+        "annotation_release": null
+      }
+    },
+    "spatial_metadata": {
+      "rows": [],
+      "row_template": {
+        "location_id": null,
+        "sample_id": null,
+        "donor_id": null,
+        "section_id": null,
+        "x": null,
+        "y": null,
+        "coordinate_unit": null,
+        "image_path": null,
+        "image_sha256": null,
+        "coordinate_transform_id": null,
+        "region_label": null,
+        "segmentation_or_spot_definition": null
+      }
+    }
+  },
+  "module_version": "3.0.0"
+}

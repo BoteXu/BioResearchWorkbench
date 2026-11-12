@@ -1,0 +1,33 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I34",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "selected_project_metadata": [],
+    "hash_bound_review_evidence": [],
+    "tool_runtime_receipts": [],
+    "private_source_manifest": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "metadata_audit",
+    "review_scope_record",
+    "existing_output_review",
+    "private_adoption_manifest"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "来源—配置—执行—审查分层谱系",
+    "历史成功、当前验证与未运行状态矩阵",
+    "新旧版本受影响文件与任务范围"
+  ]
+}

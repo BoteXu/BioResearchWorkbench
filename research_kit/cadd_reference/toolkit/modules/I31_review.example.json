@@ -1,0 +1,35 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I31",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "defined_binding_process": [],
+    "chemical_state_registry": [],
+    "signed_cycle_ledger": [],
+    "lambda_data_manifest": [],
+    "correction_policy": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "signed_thermodynamic_ledger",
+    "state_coverage_review",
+    "correction_evidence",
+    "network_uncertainty",
+    "comparison_scope"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "带方向的热力学循环与逐项账本",
+    "λ 重叠、采样支持及独立运行差异",
+    "微态/修正敏感性和实验对照分层"
+  ]
+}

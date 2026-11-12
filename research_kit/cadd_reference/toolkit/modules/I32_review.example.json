@@ -1,0 +1,35 @@
+{
+  "schema_version": "3.1-private",
+  "module_id": "I32",
+  "document_type": "planning_and_review_contract_not_engine_input",
+  "execution_authorized": false,
+  "project_id": null,
+  "purpose": null,
+  "independent_unit_definition": null,
+  "input_references": {
+    "kinetic_state_definitions": [],
+    "trajectory_and_campaign_lineage": [],
+    "event_table": [],
+    "censoring_policy": [],
+    "kinetic_method_assumptions": []
+  },
+  "exact_method_and_version": null,
+  "decisions": [],
+  "observations": [],
+  "server_receipts": [],
+  "outputs_expected": [
+    "event_and_risk_set_audit",
+    "censoring_summary",
+    "rate_inference_scope",
+    "recrossing_sensitivity",
+    "unsupported_claims"
+  ],
+  "review_status": "pending",
+  "scientific_validity": "not_established",
+  "limitations": [],
+  "figure_source_specifications": [
+    "事件/删失时间线及风险集",
+    "不同状态定义与回穿规则敏感性",
+    "独立启动和初始模型分层的事件摘要"
+  ]
+}

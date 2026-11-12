@@ -1,0 +1,122 @@
+"""Step 2 — differential expression with limma (delegates to Rscript).
+
+Writes a self-contained R script next to the results, runs it, and returns the DE table
+(gene_id, logFC, AveExpr, t, P.Value, adj.P.Val, B, symbol).
+
+Only valid for an already-normalised log2 matrix. If your matrix is raw integer counts, switch the
+R body to voom/edgeR — see references/methods.md §2.
+"""
+from __future__ import annotations
+import subprocess
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import utils
+
+RSCRIPT = str(Path.home() / "micromamba/envs/r-env/bin/Rscript")
+
+R_BODY = r"""
+suppressMessages(library(limma))
+a <- commandArgs(trailingOnly=TRUE)
+expr <- read.csv(a[1], row.names=1, check.names=FALSE)     # samples x genes
+meta <- read.csv(a[2], stringsAsFactors=FALSE)
+covs <- if (nzchar(a[4])) strsplit(a[4], ",")[[1]] else character(0)
+expr <- t(as.matrix(expr))                                  # genes x samples
+# IMPORTANT: assign the factor BACK into the frame — model.matrix(data=meta) looks the term up
+# inside `meta`, so a standalone `group` variable is ignored and the character column is used
+# (which sorts alphabetically and silently flips the reference level).
+meta$group <- factor(meta$group, levels=c("control","case"))
+covs <- covs[covs %in% colnames(meta)]
+terms <- "~ group"
+for (cv in covs) terms <- paste(terms, "+", cv)
+design <- model.matrix(as.formula(terms), data=meta)
+fit <- lmFit(expr, design)
+fit <- eBayes(fit, trend=TRUE)
+coef_name <- grep("^group", colnames(design), value=TRUE)[1]
+res <- topTable(fit, coef=coef_name, number=Inf, sort.by="none")
+cat(sprintf("contrast coefficient: %s  (positive logFC = higher in %s)\n", coef_name, levels(meta$group)[2]))
+res$gene_id <- rownames(res)
+write.csv(res, a[3], row.names=FALSE)
+cat(sprintf("tested %d genes; FDR<0.05: %d\n", nrow(res), sum(res$adj.P.Val<0.05, na.rm=TRUE)))
+"""
+
+
+def run(cfg):
+    colors = utils.theme(cfg)
+    expr, meta, y, samples = utils.setup_contrast(cfg)
+    out = cfg["_outdir"]; res = out / "results"
+
+    # hand R a plain samples x genes matrix + a 2-col metadata frame
+    X = expr[samples].T
+    X.index.name = "sample_id"
+    X.to_csv(res / "_de_input.csv")
+    cov = utils.covariates_frame(cfg, meta)
+    rmeta = pd.DataFrame({"group": np.where(y, "case", "control")})
+    rmeta = pd.concat([rmeta, cov.reset_index(drop=True)], axis=1)
+    rmeta.to_csv(res / "_de_meta.csv", index=False)
+
+    script = res / "_de_limma.R"
+    script.write_text(R_BODY)
+    cov_names = ",".join([c for c in cfg.get("covariates", []) if c in meta.columns])
+    cmd = [RSCRIPT, str(script), str(res / "_de_input.csv"), str(res / "_de_meta.csv"),
+           str(res / "de_results.csv"), cov_names]
+    print("  running limma ...")
+    p = subprocess.run(cmd, capture_output=True, text=True)
+    print(" ", (p.stdout or p.stderr).strip()[:400])
+    if p.returncode != 0:
+        raise RuntimeError("limma failed:\n" + p.stderr[-1500:])
+
+    de = pd.read_csv(res / "de_results.csv")
+    mapping = utils.attach_symbols(cfg, expr)
+    de["symbol"] = de["gene_id"].map(mapping)
+    de.to_csv(res / "de_results.csv", index=False)
+
+    fc = cfg["de"]["fc_threshold"]; fdr = cfg["de"]["fdr_threshold"]
+    up = (de["adj.P.Val"] < fdr) & (de["logFC"] > fc)
+    dn = (de["adj.P.Val"] < fdr) & (de["logFC"] < -fc)
+    print(f"\n[de] FDR<{fdr}: {int((de['adj.P.Val']<fdr).sum())} genes  |  "
+          f"|logFC|>{fc}: up {int(up.sum())} / down {int(dn.sum())}")
+    (res / "de_counts.txt").write_text(
+        f"n_tested\t{len(de)}\nn_fdr\t{int((de['adj.P.Val']<fdr).sum())}\n"
+        f"n_up\t{int(up.sum())}\nn_down\t{int(dn.sum())}\n")
+
+    # ---- volcano + MA ----
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5.4))
+    ax = axes[0]; ns = ~(up | dn)
+    ax.scatter(de.loc[ns, "logFC"], -np.log10(de.loc[ns, "adj.P.Val"].clip(lower=1e-300)),
+               s=5, c="#CCC", alpha=.5, lw=0, label="ns")
+    ax.scatter(de.loc[up, "logFC"], -np.log10(de.loc[up, "adj.P.Val"].clip(lower=1e-300)),
+               s=5, c=colors["case"], alpha=.7, lw=0, label=f"up ({int(up.sum())})")
+    ax.scatter(de.loc[dn, "logFC"], -np.log10(de.loc[dn, "adj.P.Val"].clip(lower=1e-300)),
+               s=5, c=colors["control"], alpha=.7, lw=0, label=f"down ({int(dn.sum())})")
+    for v in (fc, -fc): ax.axvline(v, color="#888", ls="--", lw=.8)
+    ax.axhline(-np.log10(fdr), color="#888", ls="--", lw=.8)
+    utils.strip_plot(ax, "A  volcano", "log2 fold change", "-log10 adjusted P")
+    ax.legend(fontsize=8, frameon=False, loc="upper right")
+    ax = axes[1]
+    ax.scatter(de.loc[ns, "AveExpr"], de.loc[ns, "logFC"], s=5, c="#CCC", alpha=.5, lw=0)
+    ax.scatter(de.loc[up, "AveExpr"], de.loc[up, "logFC"], s=5, c=colors["case"], alpha=.7, lw=0)
+    ax.scatter(de.loc[dn, "AveExpr"], de.loc[dn, "logFC"], s=5, c=colors["control"], alpha=.7, lw=0)
+    ax.axhline(0, color="#666", lw=.8)
+    utils.strip_plot(ax, "B  MA plot", "average expression (log2)", "log2 fold change")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F2_Volcano_MA")
+
+    # ---- top-N heatmap ----
+    n = cfg["de"]["top_n_heatmap"]
+    sig = de[de["adj.P.Val"] < fdr]
+    top = sig.reindex(sig["logFC"].abs().sort_values(ascending=False).index).head(n)["gene_id"]
+    M = expr.loc[top, samples]
+    Mz = ((M.T - M.T.mean()) / M.T.std()).T.values
+    order = np.argsort(~y, kind="stable")
+    fig, ax = plt.subplots(figsize=(11, 8))
+    im = ax.imshow(Mz[:, order], cmap="RdBu_r", vmin=-2.5, vmax=2.5, aspect="auto")
+    labs = [de.set_index("gene_id")["symbol"].get(g, g) for g in top]
+    ax.set_yticks(range(len(top)))
+    ax.set_yticklabels([l if isinstance(l, str) else g for l, g in zip(labs, top)], fontsize=6)
+    ax.set_xticks([])
+    ax.set_title(f"C  top {n} DE genes (z-scored; left {cfg['control_label']}, right {cfg['case_label']})",
+                 fontsize=10.5, weight="bold", loc="left")
+    fig.colorbar(im, ax=ax, fraction=.03, label="z-score")
+    fig.tight_layout(); utils.save_fig(fig, cfg, "F2b_heatmap")
+    return de

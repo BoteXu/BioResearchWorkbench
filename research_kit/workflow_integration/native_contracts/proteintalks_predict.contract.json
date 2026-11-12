@@ -1,0 +1,34 @@
+{
+  "template_not_executable": true,
+  "example_only": true,
+  "backend": "proteintalks_predict",
+  "required_inputs": [
+    "source_manifest",
+    "model_manifest",
+    "baseline_profiles",
+    "perturbation_descriptors",
+    "drug_a_features",
+    "drug_b_features",
+    "case_metadata",
+    "channel_receipt"
+  ],
+  "required_parameters": [
+    "seed",
+    "software_versions",
+    "accelerator",
+    "unit_key",
+    "expression_scale",
+    "phenotype_definition",
+    "state_dictionary_key",
+    "batch_size",
+    "maximum_cases"
+  ],
+  "required_output_roles": [
+    "proteome_predictions",
+    "phenotype_predictions",
+    "diagnostics",
+    "backend_versions"
+  ],
+  "method_scope": "Actual exact-source original ProteinTalks ppODE point prediction, exact protein/molecular-descriptor/case/baseline/checkpoint axes and fixed trained 6/24/48-hour labels on internal ticks 1/2/3. Binary phenotype definition stays explicit; not continuous synergy, SWAG uncertainty or clinical response.",
+  "runtime_status": "NOT_RUN_THIS_UPGRADE"
+}

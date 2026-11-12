@@ -1,0 +1,60 @@
+{
+  "required_inputs": [
+    "context",
+    "license_evidence",
+    "model_manifest",
+    "checkpoint",
+    "query_object",
+    "gene_vocabulary",
+    "adjacency",
+    "distance_graph",
+    "class_order"
+  ],
+  "required_parameters": [
+    "maximum_cases",
+    "accelerator",
+    "top_k",
+    "seed",
+    "software_versions",
+    "maximum_output_entries",
+    "repository"
+  ],
+  "result_roles": [
+    "primary_results",
+    "qc_metrics",
+    "diagnostics",
+    "backend_versions",
+    "result_channel_proof",
+    "driver_logits",
+    "driver_ranking",
+    "prediction_identity"
+  ],
+  "runtime_status": "NOT_RUN_THIS_UPGRADE",
+  "server_live_status": "NOT_PROBED_THIS_UPGRADE",
+  "installation_policy": "reuse_owned_server_environment_no_install",
+  "local_execution": false,
+  "public_upload": false,
+  "data_kind": "model_driver_ranking_not_expression_or_causality",
+  "schema": "native-completion-contract/1",
+  "tool": "CellNavi",
+  "source_commit": [
+    "DLS5-Omics/CellNavi",
+    "ea1660fc3057c63ecd849d506f24241bdc4b3f33"
+  ],
+  "scientific_acceptance": "NOT_ESTABLISHED",
+  "source_files": [
+    "server/completion_contracts.py",
+    "server/completion_common.py",
+    "server/completion_runtime.py",
+    "server/completion_child.py",
+    "server/completion_models.py",
+    "server/completion_spectra.py",
+    "server/completion_engines.py",
+    "completion_acceptance.py"
+  ],
+  "license_and_scope": "Native finite-tuned driver logits/ranks using exact vocabulary, graph and actual training class prefix. Not expression prediction, calibrated probability or causal driver confirmation.",
+  "figure_views": [
+    "rank",
+    "matrix"
+  ]
+}
